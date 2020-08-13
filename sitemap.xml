@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://iuming.github.io/categories/index.html</loc>
+    
+    <lastmod>2020-08-13</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://iuming.github.io/tags/index.html</loc>
+    
+    <lastmod>2020-08-13</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://iuming.github.io/2020/08/13/2006%E8%80%83%E7%A0%94%E8%8B%B1%E8%AF%ADText4/</loc>
     
     <lastmod>2020-08-13</lastmod>
@@ -19,20 +33,6 @@
     <loc>http://iuming.github.io/schedule/index.html</loc>
     
     <lastmod>2020-08-13</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://iuming.github.io/tags/index.html</loc>
-    
-    <lastmod>2020-08-12</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://iuming.github.io/categories/index.html</loc>
-    
-    <lastmod>2020-08-12</lastmod>
     
   </url>
   
