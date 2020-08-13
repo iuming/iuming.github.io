@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://iuming.github.io/categories/index.html</loc>
+    <loc>http://iuming.github.io/schedule/index.html</loc>
     
     <lastmod>2020-08-13</lastmod>
     
@@ -10,6 +10,13 @@
   
   <url>
     <loc>http://iuming.github.io/tags/index.html</loc>
+    
+    <lastmod>2020-08-13</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://iuming.github.io/categories/index.html</loc>
     
     <lastmod>2020-08-13</lastmod>
     
@@ -24,13 +31,6 @@
   
   <url>
     <loc>http://iuming.github.io/about/index.html</loc>
-    
-    <lastmod>2020-08-13</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://iuming.github.io/schedule/index.html</loc>
     
     <lastmod>2020-08-13</lastmod>
     
