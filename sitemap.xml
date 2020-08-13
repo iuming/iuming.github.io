@@ -2,6 +2,48 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://iuming.github.io/lib/bookmark/renovate.json</loc>
+    
+    <lastmod>2020-08-13</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://iuming.github.io/lib/bookmark/package.json</loc>
+    
+    <lastmod>2020-08-13</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://iuming.github.io/lib/bookmark/README.html</loc>
+    
+    <lastmod>2020-08-13</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://iuming.github.io/lib/reading_progress/renovate.json</loc>
+    
+    <lastmod>2020-08-13</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://iuming.github.io/lib/reading_progress/package.json</loc>
+    
+    <lastmod>2020-08-13</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://iuming.github.io/lib/reading_progress/README.html</loc>
+    
+    <lastmod>2020-08-13</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://iuming.github.io/schedule/index.html</loc>
     
     <lastmod>2020-08-13</lastmod>
