@@ -34,7 +34,7 @@
 <meta property="og:description" content="原子核的组成为质子和中子，它们统称为核子。原子核的电荷全部来自质子。原子核的质量可以通过质谱仪来测定，为了减小误差，通常将质量双线作为质谱仪的标准质量线。原子核的半径通过不同的方式测量可以得到不同的半径，例如电子半径和库伦半径。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-08-14T12:38:50.000Z">
-<meta property="article:modified_time" content="2020-08-14T12:54:51.849Z">
+<meta property="article:modified_time" content="2020-08-14T13:38:26.912Z">
 <meta property="article:author" content="Liu Ming">
 <meta property="article:tag" content="原子核物理">
 <meta property="article:tag" content="核力">
@@ -263,7 +263,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-08-14 20:38:50 / Modified: 20:54:51" itemprop="dateCreated datePublished" datetime="2020-08-14T20:38:50+08:00">2020-08-14</time>
+              <time title="Created: 2020-08-14 20:38:50 / Modified: 21:38:26" itemprop="dateCreated datePublished" datetime="2020-08-14T20:38:50+08:00">2020-08-14</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -378,7 +378,7 @@
 <p>$$M(Z,A)=m(Z,A)+Z \cdot m_e$$</p>
 </li>
 <li><p>质谱仪测量粒子质量的原理：</p>
-<p>$$\left{\begin{matrix}\frac{1}{2}Mv^2=q{\color{Red}V} \qvB=\frac{Mv^2}{R}\end{matrix}\right.\Longrightarrow M=\frac{qB^2R^2}{2{\color{red}V}}$$</p>
+<p>$$\left \ { \begin{matrix} \frac{1}{2} Mv^2 = q{ \color{Red} V } \ qvB = \frac{Mv^2}{R} \end{matrix} \right. \Longrightarrow M = \frac{qB^2R^2}{2{\color{red} V }}$$</p>
 </li>
 </ul>
 <p>####原子核质量的精确测量</p>
@@ -968,6 +968,59 @@ if (document.querySelectorAll('pre.mermaid').length) {
   
 
   
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 
