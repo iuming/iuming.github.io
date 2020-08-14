@@ -101,11 +101,12 @@
 <p>$$M(Z,A)=m(Z,A)+Z \cdot m_e$$</p>
 </li>
 <li><p>质谱仪测量粒子质量的原理：</p>
-<p>$$\left \ { \begin{matrix} \frac{1}{2} Mv^2 = q{ \color{Red} V } \ qvB = \frac{Mv^2}{R} \end{matrix} \right. \Longrightarrow M = \frac{qB^2R^2}{2{\color{red} V }}$$</p>
+<p>$$\frac{1}{2} Mv^2 = q{ \color{Red} V }$$<br>$$qvB = \frac{Mv^2}{R}$$<br>得到：<br>$$M = \frac{qB^2R^2}{2{\color{red} V }}$$</p>
+<!-- $$\left \ { \begin{matrix} \frac{1}{2} Mv^2 = q{ \color{Red} V } \\ qvB = \frac{Mv^2}{R} \end{matrix} \right. \Longrightarrow M = \frac{qB^2R^2}{2{\color{red} V }}$$ -->
+
 </li>
 </ul>
-<p>####原子核质量的精确测量</p>
-<ul>
+<h4 id="原子核质量的精确测量"><a href="#原子核质量的精确测量" class="headerlink" title="原子核质量的精确测量"></a>原子核质量的精确测量</h4><ul>
 <li>实际当中，由于测量系统的误差，因此常利用高分辨率的质谱仪对一些质量双线的测量结果作为标准质量谱。</li>
 <li>质量双线是两个荷质比$q_1/M_1$和$q_2/M_2$很接近的离子在质谱仪上所产生的谱线。</li>
 <li>由于荷质比很接近，在测量时，系统误差可以相互抵消，从而提高测量精度。</li>
