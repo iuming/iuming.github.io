@@ -1,69 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>2006考研英语Text4</title>
-    <url>/2020/08/13/2006%E8%80%83%E7%A0%94%E8%8B%B1%E8%AF%ADText4/</url>
-    <content><![CDATA[<h2 id="单词"><a href="#单词" class="headerlink" title="单词"></a>单词</h2><p><strong>onward</strong>:向前、前进、前进的</p>
-<p><strong>phony</strong>:假、虚假、伪造</p>
-<p><strong>daffodil</strong>:水仙花</p>
-<p><strong>evil</strong>:罪恶</p>
-<p><strong>skeptical</strong>:怀疑的</p>
-<p><strong>misery</strong>:痛苦</p>
-<p><strong>perpetual</strong>:连绵不断的</p>
-<p><strong>massacre</strong>:屠杀</p>
-<p><strong>innocent</strong>:无辜</p>
-<p><strong>dedicate</strong>:专用</p>
-<p><strong>depicting</strong>:描绘</p>
-<p><strong>ideology</strong>:思想</p>
-<p><strong>worshipper</strong>:崇拜者</p>
-<p><strong>worm</strong>:蛆虫</p>
-<p><strong>bummer</strong>:坏蛋</p>
-<p><strong>anchor</strong>:主持人</p>
-<p><strong>agenda</strong>:任务</p>
-<p><strong>lure</strong>:引诱</p>
-<p><strong>depend on</strong>:指望</p>
-<p><strong>disappointment</strong>:失望</p>
-<p><strong>Memento Mori</strong>:死亡的提醒</p>
-<p><strong>clove</strong>:丁香</p>
-<p><strong>illusion</strong>:错觉</p>
-<p><strong>in the wake of</strong>：在…之后</p>
-<h2 id="句子"><a href="#句子" class="headerlink" title="句子"></a>句子</h2><p><strong>happiness is more than pleasure without pain.</strong></p>
-<p>幸福远不止是没有痛苦的快乐</p>
-<p><strong>you will die, that everything ends, and that happiness comes not in denying this but in living with it.</strong></p>
-<p>你终将死去，一切都会结束，只有接受这一现实，而非一味逃避，才会有幸福。</p>
-<p><strong>It’s a message even more bitter than a clove cigarette, yet, somehow, a breath of fresh air.</strong></p>
-<p>这一启示甚至比叶子烟还苦，但它却是一股清新的气息。</p>
-]]></content>
-      <categories>
-        <category>学习笔记</category>
-        <category>考研复习</category>
-      </categories>
-      <tags>
-        <tag>英语</tag>
-        <tag>考研</tag>
-        <tag>单词</tag>
-        <tag>句子</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2020/08/14/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvLw==">Hexo<i class="fa fa-external-link-alt"></i></span>! This is your very first post. Check <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL2RvY3Mv">documentation<i class="fa fa-external-link-alt"></i></span> for more info. If you get any problems when using Hexo, you can find the answer in <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL2RvY3MvdHJvdWJsZXNob290aW5nLmh0bWw=">troubleshooting<i class="fa fa-external-link-alt"></i></span> or you can ask me on <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hleG9qcy9oZXhvL2lzc3Vlcw==">GitHub<i class="fa fa-external-link-alt"></i></span>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL2RvY3Mvd3JpdGluZy5odG1s">Writing<i class="fa fa-external-link-alt"></i></span></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL2RvY3Mvc2VydmVyLmh0bWw=">Server<i class="fa fa-external-link-alt"></i></span></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL2RvY3MvZ2VuZXJhdGluZy5odG1s">Generating<i class="fa fa-external-link-alt"></i></span></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL2RvY3Mvb25lLWNvbW1hbmQtZGVwbG95bWVudC5odG1s">Deployment<i class="fa fa-external-link-alt"></i></span></p>
-]]></content>
-  </entry>
-  <entry>
     <title>初识MySQL</title>
     <url>/2020/08/11/%E5%88%9D%E8%AF%86MySQL/</url>
     <content><![CDATA[<h2 id="什么是数据库？"><a href="#什么是数据库？" class="headerlink" title="什么是数据库？"></a>什么是数据库？</h2><p>数据库（Database）是按照数据结构来组织、存储和管理数据的仓库。</p>
@@ -325,6 +262,69 @@
         <tag>同位素</tag>
         <tag>原子核</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>2006考研英语Text4</title>
+    <url>/2020/08/13/2006%E8%80%83%E7%A0%94%E8%8B%B1%E8%AF%ADText4/</url>
+    <content><![CDATA[<h2 id="单词"><a href="#单词" class="headerlink" title="单词"></a>单词</h2><p><strong>onward</strong>:向前、前进、前进的</p>
+<p><strong>phony</strong>:假、虚假、伪造</p>
+<p><strong>daffodil</strong>:水仙花</p>
+<p><strong>evil</strong>:罪恶</p>
+<p><strong>skeptical</strong>:怀疑的</p>
+<p><strong>misery</strong>:痛苦</p>
+<p><strong>perpetual</strong>:连绵不断的</p>
+<p><strong>massacre</strong>:屠杀</p>
+<p><strong>innocent</strong>:无辜</p>
+<p><strong>dedicate</strong>:专用</p>
+<p><strong>depicting</strong>:描绘</p>
+<p><strong>ideology</strong>:思想</p>
+<p><strong>worshipper</strong>:崇拜者</p>
+<p><strong>worm</strong>:蛆虫</p>
+<p><strong>bummer</strong>:坏蛋</p>
+<p><strong>anchor</strong>:主持人</p>
+<p><strong>agenda</strong>:任务</p>
+<p><strong>lure</strong>:引诱</p>
+<p><strong>depend on</strong>:指望</p>
+<p><strong>disappointment</strong>:失望</p>
+<p><strong>Memento Mori</strong>:死亡的提醒</p>
+<p><strong>clove</strong>:丁香</p>
+<p><strong>illusion</strong>:错觉</p>
+<p><strong>in the wake of</strong>：在…之后</p>
+<h2 id="句子"><a href="#句子" class="headerlink" title="句子"></a>句子</h2><p><strong>happiness is more than pleasure without pain.</strong></p>
+<p>幸福远不止是没有痛苦的快乐</p>
+<p><strong>you will die, that everything ends, and that happiness comes not in denying this but in living with it.</strong></p>
+<p>你终将死去，一切都会结束，只有接受这一现实，而非一味逃避，才会有幸福。</p>
+<p><strong>It’s a message even more bitter than a clove cigarette, yet, somehow, a breath of fresh air.</strong></p>
+<p>这一启示甚至比叶子烟还苦，但它却是一股清新的气息。</p>
+]]></content>
+      <categories>
+        <category>学习笔记</category>
+        <category>考研复习</category>
+      </categories>
+      <tags>
+        <tag>英语</tag>
+        <tag>考研</tag>
+        <tag>单词</tag>
+        <tag>句子</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2020/08/14/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvLw==">Hexo<i class="fa fa-external-link-alt"></i></span>! This is your very first post. Check <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL2RvY3Mv">documentation<i class="fa fa-external-link-alt"></i></span> for more info. If you get any problems when using Hexo, you can find the answer in <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL2RvY3MvdHJvdWJsZXNob290aW5nLmh0bWw=">troubleshooting<i class="fa fa-external-link-alt"></i></span> or you can ask me on <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hleG9qcy9oZXhvL2lzc3Vlcw==">GitHub<i class="fa fa-external-link-alt"></i></span>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL2RvY3Mvd3JpdGluZy5odG1s">Writing<i class="fa fa-external-link-alt"></i></span></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL2RvY3Mvc2VydmVyLmh0bWw=">Server<i class="fa fa-external-link-alt"></i></span></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL2RvY3MvZ2VuZXJhdGluZy5odG1s">Generating<i class="fa fa-external-link-alt"></i></span></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL2RvY3Mvb25lLWNvbW1hbmQtZGVwbG95bWVudC5odG1s">Deployment<i class="fa fa-external-link-alt"></i></span></p>
+]]></content>
   </entry>
   <entry>
     <title>安装MySQL</title>
