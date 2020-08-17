@@ -886,4 +886,209 @@
         <tag>自旋</tag>
       </tags>
   </entry>
+  <entry>
+    <title>原子核的基本性质（四）</title>
+    <url>/2020/08/17/%E5%8E%9F%E5%AD%90%E6%A0%B8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%80%A7%E8%B4%A8%EF%BC%88%E5%9B%9B%EF%BC%89/</url>
+    <content><![CDATA[<h2 id="原子核的磁矩"><a href="#原子核的磁矩" class="headerlink" title="原子核的磁矩"></a>原子核的磁矩</h2><h3 id="电子的磁矩"><a href="#电子的磁矩" class="headerlink" title="电子的磁矩"></a>电子的磁矩</h3><ul>
+<li><p>电子的磁矩由轨道磁矩和自旋磁矩构成：</p>
+<p>$$\hat{\vec \mu}=\hat{\vec \mu_l}+\hat{\vec \mu_s}$$</p>
+</li>
+<li><p>其中，轨道磁矩和自旋磁矩的表达式为：</p>
+<p>$$\hat{\vec \mu_l}=-\frac{e}{2m_e}\hat{\vec l}=g_l(\frac{e}{2m_e})\hat{\vec l}$$</p>
+<p>$$\hat{\vec \mu_S}=-\frac{e}{2m_e}\hat{\vec S}=g_S(\frac{e}{2m_e})\hat{\vec S}$$</p>
+<p>上式中，$g_l＝-1$，$g_S＝-2$，称为电子的$g$因数。</p>
+</li>
+<li><p>如果记：</p>
+<p>$$\mu_B=\frac{e\hbar}{2m_e}=9.2740*10^{-24}A\cdot m^2$$</p>
+<p>并且$\hat{\vec l}$和$\hat{\vec S}$均以$\hbar$为单位，那么有：</p>
+<p>$$\hat{\vec \mu_l}=g_l\mu_B\hat{\vec l}$$</p>
+<p>$$\hat{\vec \mu_S}=g_S\mu_B\hat{\vec S}$$</p>
+</li>
+<li><p>从而电子的磁矩可以写为：</p>
+<p>$$\hat{\vec \mu}=g_l\mu_l\hat{\vec l}+g_S\mu_B\hat{\vec S}$$</p>
+</li>
+</ul>
+<h3 id="核子的磁矩"><a href="#核子的磁矩" class="headerlink" title="核子的磁矩"></a>核子的磁矩</h3><ul>
+<li><p>对于核子，将其和电子对应，也应当具有各自的磁矩。参照电子自旋磁矩的形式，可得：</p>
+<p>$$\hat{\vec \mu_p}=g_p(\frac{e}{2m_p})\hat{\vec P_S}$$</p>
+<p>$$\hat{\vec \mu_n}=g_n(\frac{e}{2m_n})\hat{\vec P_S}$$</p>
+<p>其中，$g_p$和$g_n$分别称为质子和中子的$g$因子。</p>
+</li>
+<li><p>将$g_p$和$g_n$的值与电子的自旋磁矩对比：</p>
+<ul>
+<li>质子电量为$+e$，可猜测$g_p＝+2$；</li>
+<li>中子不带电，可猜测$g_n＝0$。</li>
+</ul>
+</li>
+<li><p>但根据实验测量结果却为：</p>
+<p>$$g_p＝+5.586$$</p>
+<p>$$g_n＝-3.826$$</p>
+</li>
+<li><p>这种现象称为质子和中子具有反常磁矩。</p>
+</li>
+</ul>
+<h3 id="原子核的磁矩-1"><a href="#原子核的磁矩-1" class="headerlink" title="原子核的磁矩"></a>原子核的磁矩</h3><ul>
+<li><p>对于原子核，其由于自旋所具有的磁矩也可以按照前面的方法进行类比：</p>
+<p>$$\hat{\vec \mu_I}=g_I(\frac{e}{2m_N})\hat{\vec P_I}$$</p>
+<p>其中$g_I$称为原子核的$g$因数，对于不同的原子核，其值是不同的，既可能为正，也可能为负。</p>
+</li>
+<li><p>如果上式中$\hat{\vec P_I}$以$\hbar$为单位，上式可写为：</p>
+<p>$$\hat{\vec \mu_I}=g_I(\frac{e\hbar}{2m_p})\hat{\vec P_I}=g_I\mu_N\hat{\vec P_I}$$</p>
+<p>上式中$μ_N$称为核磁子，其表达式为：</p>
+<p>$$\mu_N=\frac{e\hbar}{2m_p}=5.0508 \times 10^{-27}A \cdot m^2$$</p>
+</li>
+</ul>
+<h2 id="原子核磁矩的测量"><a href="#原子核磁矩的测量" class="headerlink" title="原子核磁矩的测量"></a>原子核磁矩的测量</h2><h3 id="在磁场中的附加能量"><a href="#在磁场中的附加能量" class="headerlink" title="在磁场中的附加能量"></a>在磁场中的附加能量</h3><ul>
+<li><p>对于具有磁矩的系统，当其处于磁场时，将和磁场发生相互作用，从而具有一定的附加能量：</p>
+<p>$$E=-\vec \mu \cdot \vec B$$</p>
+</li>
+<li><p>对于原子核则有：</p>
+<p>$$E=-g_I\mu_N(\vec P \cdot \vec B)$$</p>
+</li>
+<li><p>如果$\hat{\vec P}$的量子数为$I$，那么其在空间给定方向上的投影$\hat{\vec P_{Iz}}$的量子数$m_I$可以取$2I＋1$个值：</p>
+<p>$$m_I=-I,-I+1,\dots,I-1,I$$</p>
+</li>
+<li><p>原子核在磁场中的附加能量可写为：</p>
+<p>$$E=-g_I \cdot \mu_N \cdot m_I \cdot B$$</p>
+</li>
+<li><p>由于原子核自旋的方向不同，其在磁场中将具有不同的附加能量。原来的一个能级将分裂为$2I＋1$个能级。</p>
+</li>
+</ul>
+<h3 id="选择定则"><a href="#选择定则" class="headerlink" title="选择定则"></a>选择定则</h3><ul>
+<li><p>当原子核的一个能级分裂为$2I＋1$个能级时，原子核便有可能在这些能级间跃迁。</p>
+</li>
+<li><p>但并非所有的能级之间的跃迁都是允许的。只有当满足下述条件时，跃迁才是能够发生的：</p>
+<p>$$\bigtriangleup m_I=0,\pm 1$$</p>
+<p>上式即选择定则。可见原子核只能在相邻的两个能级之间发生跃迁。</p>
+</li>
+</ul>
+<h3 id="核磁共振法测量原子核的磁矩"><a href="#核磁共振法测量原子核的磁矩" class="headerlink" title="核磁共振法测量原子核的磁矩"></a>核磁共振法测量原子核的磁矩</h3><ul>
+<li><p>当原子核在允许的能级之间跃迁时，能量的变化量为：</p>
+<p>$$\bigtriangleup E=-g_I \cdot \mu_N \cdot B$$</p>
+</li>
+<li><p>对于给定的外场$\vec B$，如果能够测得$\bigtriangleup E$，便可得到$g_I$值，继而便可知道原子核的磁矩。</p>
+</li>
+<li><p>在外场$\vec B$的基础上再加上一个高频的外加磁场，使其频率满足：</p>
+<p>$$h\nu=\bigtriangleup E=g_I\cdot\mu_I\cdot B$$</p>
+</li>
+<li><p>此时将会发生强烈的共振吸收，频率$\nu$则称为共振频率。从而有：</p>
+<p>$$g_I=\frac{h\nu}{\mu_NB}$$</p>
+</li>
+<li><p>在实验时，调节$\nu$和$B$，即可得到$g_I$。这就是核磁共振法（NMR）的原理。</p>
+</li>
+</ul>
+<h2 id="电四极矩"><a href="#电四极矩" class="headerlink" title="电四极矩"></a>电四极矩</h2><h3 id="电多极矩的展开"><a href="#电多极矩的展开" class="headerlink" title="电多极矩的展开"></a>电多极矩的展开</h3><h4 id="空间任意带电体电势的多极矩展开"><a href="#空间任意带电体电势的多极矩展开" class="headerlink" title="空间任意带电体电势的多极矩展开"></a>空间任意带电体电势的多极矩展开</h4><ul>
+<li><p>现在考虑一个任意形状的均匀带电体，其在空间某一点$\vec r_0$处产生的电势为：</p>
+<p>$$\phi=\int_{V^{\prime}} \frac{1}{4 \pi \varepsilon_{0}} \cdot \frac{\rho\left(\vec{r}^{\prime}\right)}{|\vec{r}|} d V^{\prime}$$</p>
+</li>
+<li><p>考虑到电荷是均匀分布的，上式可写为：</p>
+<p>$$\phi=\frac{\rho}{4 \pi \varepsilon_{0}} \int_{V} \frac{1}{|\bar{r}|} d V^{\prime}$$</p>
+<p><img src="..%5CMarkdown_images%5C%E7%94%B5%E5%9B%9B%E6%9E%81%E7%9F%A9.png" alt="电四极矩"></p>
+</li>
+<li><p>根据$\vec r$、$\vec{r}_{0}$和$\vec{r}^{\prime}$之间的关系：</p>
+<p>$$\vec{r}=\vec{r}_{0}-\vec{r}^{\prime}$$</p>
+</li>
+<li><p>从而可得：</p>
+<p>$$\phi=\frac{\rho}{4 \pi \varepsilon_{0}} \int_{V^{\prime}} \frac{1}{\left|\vec{r}_{0}-\vec{r}^{\prime}\right|} d V^{\prime}$$</p>
+</li>
+<li><p>现在考虑将电势$\phi$在（坐标原点）处展开可得：</p>
+<p>$$\phi=\frac{\rho}{4 \pi \varepsilon_{0}} \int_{V}\left[\frac{1}{\left|\vec{r}<em>{0}\right|}+\left(-\vec{r}^{\prime}\right) \cdot\left(\left.\nabla^{\prime} \frac{1}{\left|\vec{r}</em>{0}-\vec{r}\right|}\right|<em>{r=0}+\left(-\vec{r}^{\prime}\right)\left(-\vec{r}^{\prime}\right):\left.\left(\nabla^{\prime} \nabla^{\prime} \frac{1}{\left|\vec{r}</em>{0}-\vec{r}^{\prime}\right|}\right)\right|_{r=0}+\cdots\right] d V^{\prime}\right.$$</p>
+</li>
+</ul>
+<h4 id="电偶极矩与电四极矩"><a href="#电偶极矩与电四极矩" class="headerlink" title="电偶极矩与电四极矩"></a>电偶极矩与电四极矩</h4><ul>
+<li><p>假设原子核中的电荷分布是关于z轴对称分布的（一个椭球）。</p>
+</li>
+<li><p>原子核在$z$轴上$z_0$点产生的电势可以写为：</p>
+<p>$$\phi=\frac{\rho}{4 \pi \varepsilon_{0}} \int_{V^{\prime}} \frac{1}{R} d V^{\prime}=\frac{\rho}{4 \pi \varepsilon_{0}} \int_{V^{\prime}} \frac{d V^{\prime}}{\sqrt{z_{0}^{2}+r^{\prime 2}-2 z_{0} r^{\prime} \cdot \cos \theta}}$$</p>
+<p><img src="..%5CMarkdown_images%5C%E7%94%B5%E5%81%B6%E6%9E%81%E7%9F%A9.png" alt="电偶极矩"></p>
+</li>
+<li><p>积分号内的根式可用Legendre多项式展开：</p>
+<p>$$\frac{1}{R}=\frac{1}{\sqrt{z_{0}^{2}+r^{\prime 2}-2 z_{0} r^{\prime} \cdot \cos \theta}}=\sum_{i=0}^{\infty} \frac{r^{\prime 2}}{z_{0}^{i+1}} P_{l}(\cos \theta)$$</p>
+</li>
+<li><p>上式中$P_l(\cosθ)$即为Legendre函数，其前项的具体表达式为：</p>
+<p>$$P_{0}(\cos \theta)=1$$</p>
+<p>$$P_{1}(\cos \theta)=\cos \theta$$</p>
+<p>$$P_{2}(\cos \theta)=\frac{1}{2}\left(3 \cos ^{2} \theta-1\right)$$</p>
+</li>
+<li><p>将$1/R$的展开式代入电势的表达式中，可得：</p>
+<p>$$\phi=\frac{1}{4 \pi \varepsilon_{0}}\left{\frac{1}{2_{0}} \rho \int_{V} d V^{\prime}+\frac{1}{z_{0}^{2}} \rho \int_{V^{\prime}} r^{\prime} \cos \theta d V^{\prime}+\frac{1}{2 z_{0}^{3}} \rho \int_{V} r^{\prime 2}\left(3 \cos ^{2} \theta-1\right) d V^{\prime}+\mathrm{L}\right} =\frac{1}{4 \pi \varepsilon_{0}}\left{\frac{Z e}{z_{0}}+\frac{1}{z_{0}^{2}} \rho \int_{V^{\prime}} z^{\prime} d V^{\prime}+\frac{1}{2 z_{0}^{3}} \rho \int_{V^{\prime}}\left(3 z^{\prime 2}-r^{\prime 2}\right) d V^{\prime}+\mathrm{L}\right}$$</p>
+</li>
+<li><p>分析上式可以发现：</p>
+<ul>
+<li>第一项正是一个电量为$z_e$的点电荷在$z$轴$z_0$处产生的电势；</li>
+<li>第二项则是电偶极子在$z_0$处产生的电势；</li>
+<li>第三项则称为电四极子在$z_0$处产生的电势。</li>
+</ul>
+</li>
+<li><p>电偶极矩和电四极矩可定义如下：</p>
+<p>$$P:=\int_{V} \rho z^{\prime} d V^{\prime}$$</p>
+<p>$$Q:=\frac{1}{e} \int_{V} \rho\left(3 z^{\prime 2}-r^{\prime 2}\right) d V^{\prime}$$</p>
+</li>
+<li><p>从上式可以看出电四极矩具有面积的量纲。</p>
+</li>
+<li><p>对于电偶极矩：</p>
+<p>$$P=\int_{V^{\prime}} \rho z^{\prime} d V^{\prime}=\int_{V^{\prime}} \rho r^{\prime} \cos \theta \cdot r^{\prime 2} \sin \theta \cdot d r^{\prime} d \theta d \varphi =2 \pi \int r^{\prime 3} d r^{\prime} \int \sin \theta \cos \theta d \theta$$</p>
+</li>
+<li><p>考虑到积分区域具有对称性，因此上式积分最后的结果为：</p>
+<p>$$P=\int_{V^{\prime}} \rho z^{\prime} d V^{\prime}=0$$</p>
+</li>
+<li><p>对于电四极矩有：</p>
+<p>$$Q=\frac{1}{e} \int_{V} \rho\left(3 z^{\prime 2}-r^{\prime 2}\right) d V^{\prime}$$</p>
+</li>
+<li><p>选择柱坐标系有：</p>
+<p>$$Q=\frac{Z}{V^{\prime}} \int_{V^{\prime}}\left[2 z^{\prime 2}-\left(x^{\prime 2}+y^{\prime 2}\right)\right] d V^{\prime}=\frac{2}{5} Z\left(c^{2}-a^{2}\right)$$</p>
+</li>
+</ul>
+<h3 id="原子核的形状与电四极矩的关系"><a href="#原子核的形状与电四极矩的关系" class="headerlink" title="原子核的形状与电四极矩的关系"></a>原子核的形状与电四极矩的关系</h3><h4 id="电四极矩与原子核形状的关系"><a href="#电四极矩与原子核形状的关系" class="headerlink" title="电四极矩与原子核形状的关系"></a>电四极矩与原子核形状的关系</h4><ul>
+<li><p>从原子核的电四极矩可以看出：</p>
+<ul>
+<li>如果$c＝a$，原子核为球形，那么将有：$Q＝0$；</li>
+<li>如果$Q\ne0$，那么必然有：$c\ne a$，即原子核不为球形。<ul>
+<li>如果$Q &gt; 0$，那么必然有：$c &gt; a$，此时原子核为一个长椭球形；</li>
+<li>如果$Q &lt; 0$，那么必然有：$c &lt; a$，此时原子核为一个扁椭球形。</li>
+</ul>
+</li>
+</ul>
+<p><img src="..%5CMarkdown_images%5C%E7%94%B5%E5%9B%9B%E6%9E%81%E7%9F%A9%E4%B8%8E%E6%A0%B8%E5%BD%A2%E7%8A%B6%E7%9A%84%E5%85%B3%E7%B3%BB.png" alt="电四极矩与核形状的关系"></p>
+</li>
+</ul>
+<h4 id="形变参量ε"><a href="#形变参量ε" class="headerlink" title="形变参量ε"></a>形变参量ε</h4><ul>
+<li><p>为了定量的考察原子核偏离球形的程度，可引入形变参量$\varepsilon $，其定义为：</p>
+<p>$$\varepsilon:=\frac{\Delta R}{R}$$</p>
+</li>
+<li><p>上式中：</p>
+<ul>
+<li>$R$为与椭球同体积的球的半径；</li>
+<li>$\bigtriangleup R$为椭球半径$c$与$R$的差值。</li>
+</ul>
+</li>
+<li><p>根据$\varepsilon$的定义可得：</p>
+<p>$$c=R(1+\varepsilon)$$</p>
+</li>
+<li><p>根据$R$的定义有：</p>
+<p>$$\frac{4}{3} \pi R^{3}=\frac{4}{3} \pi a^{2} c$$</p>
+</li>
+<li><p>从而可得：</p>
+<p>$$a=\frac{R}{\sqrt{1+\varepsilon}}$$</p>
+</li>
+<li><p>将上面的各式代入电四极矩$Q$的表达式可得：</p>
+<p>$$Q=\frac{2}{5} Z\left[R^{2}\left(1+2 \varepsilon+\varepsilon^{2}\right)-\frac{R^{2}}{1+\varepsilon}\right] \approx \frac{6}{5} Z \cdot r_{0}^{2} A^{2 / 3} \varepsilon$$</p>
+</li>
+<li><p>根据实验发现：</p>
+<ul>
+<li>对大多数原子核，$\varepsilon \ne 0$，其值一般为百分之几，这说明大多数原子核是非球形的，但偏离球形的程度不大；</li>
+<li>电四极矩有正有负，大多数为正值，即大多数原子核是长椭球形的。</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>复习笔记</category>
+      </categories>
+      <tags>
+        <tag>原子核物理</tag>
+        <tag>磁矩</tag>
+        <tag>电四极矩</tag>
+      </tags>
+  </entry>
 </search>
