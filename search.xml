@@ -376,199 +376,6 @@
       </tags>
   </entry>
   <entry>
-    <title>原子核的基本性质（二）</title>
-    <url>/2020/08/15/%E5%8E%9F%E5%AD%90%E6%A0%B8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%80%A7%E8%B4%A8%EF%BC%88%E4%BA%8C%EF%BC%89/</url>
-    <content><![CDATA[<h2 id="角动量"><a href="#角动量" class="headerlink" title="角动量"></a>角动量</h2><h3 id="磁偶极子在磁场中的能量"><a href="#磁偶极子在磁场中的能量" class="headerlink" title="磁偶极子在磁场中的能量"></a>磁偶极子在磁场中的能量</h3><h4 id="磁矩与角动量的关系"><a href="#磁矩与角动量的关系" class="headerlink" title="磁矩与角动量的关系"></a>磁矩与角动量的关系</h4><ul>
-<li><p>一个电量为$+q$的粒子做匀速圆周运动，其相当于一个磁偶极子。</p>
-</li>
-<li><p>做匀速圆周运动的粒子可以等效为一个电流，其大小为：</p>
-<p>$$I=\frac{q}{T}=\frac{qv}{2\pi R}$$</p>
-<p>相应的，其磁矩为：</p>
-<p>$$\vec \mu =I\vec S=\frac{q}{2m}\cdot \vec l$$</p>
-<p>根据量子力学计算得到的电子轨道运动的磁矩与轨道角动量的关系为：</p>
-<p>$$\vec \mu =-\frac{e}{2m_e}\vec l=g_l(\frac{e}{2m_e})\vec l$$</p>
-<p>$g_l$称为电子的$g$因子，脚标$l$表示其与角动量相关。</p>
-</li>
-</ul>
-<h4 id="磁偶极子在磁场中的能量-1"><a href="#磁偶极子在磁场中的能量-1" class="headerlink" title="磁偶极子在磁场中的能量"></a>磁偶极子在磁场中的能量</h4><ul>
-<li><p>处于磁场中的磁偶极子，其将受到力矩的作用，<br>力矩的大小为：</p>
-<p>$$\vec M=\vec \mu \times \vec B=-\mu B\cdot \sin \theta \cdot \vec e_\theta$$</p>
-<p>如果选取$θ＝\pi /2$为平衡位置，那么其在磁场的势能为：</p>
-<p>$$U=-\int_{\pi /2}^{\theta}\vec M\cdot d\vec \theta=-\vec \mu \cdot \vec B$$</p>
-<p>根据前面的分析，磁矩与角动量是相关的，从而有：</p>
-<p>$$U=-\frac{q}{2m}\vec l\cdot \vec B$$</p>
-</li>
-</ul>
-<h3 id="量子力学中的角动量"><a href="#量子力学中的角动量" class="headerlink" title="量子力学中的角动量"></a>量子力学中的角动量</h3><h4 id="力学量的取值"><a href="#力学量的取值" class="headerlink" title="力学量的取值"></a>力学量的取值</h4><ul>
-<li><p>在经典力学中：</p>
-<ul>
-<li>对物体的运动状态通过各力学量来描述；</li>
-<li>每个力学量的取值可以直接计算得到。</li>
-</ul>
-</li>
-<li><p>在量子力学中：</p>
-<ul>
-<li>物体的运动通过体系的态函数来描述的；</li>
-<li>力学量的取值（分布）通过力学量算符对态函数的运算得到。</li>
-</ul>
-</li>
-<li><p>例如对于能量，其算符为$\hat H$，即体系的Hamilton算符。将其作用在体系的态函数上，如果下式成立：</p>
-<p>$$\hat H \left | \psi_n  \right \rangle =E_n \left | \psi_n  \right \rangle$$</p>
-</li>
-<li><p>便称是$\left | \psi_n  \right \rangle$能量算符的一个本征态，此时体系的能量为$E_n$。</p>
-</li>
-<li><p>脚标$n$则称为量子数，其决定了力学量（即能量）的取值。</p>
-</li>
-<li><p>例如对于无限深方势阱中的粒子，其能量的取值为：</p>
-<p>$$E_n=\frac{n^2\pi^2\hbar^2}{2ma^2}$$</p>
-</li>
-<li><p>总结</p>
-<p>在量子力学中，力学量的取值是通过算符来计算的。对于一个力学量$F$，其算符为$\hat F$，其作用在本征态$\left | F_n  \right \rangle$上：</p>
-<p>$$\hat F \left | F_n  \right \rangle=f_n \left | F_n  \right \rangle$$</p>
-<p>通过求解上式（本征方程），可以得到一系列满足（边界）条件的量子数$n$。</p>
-<p>力学量$F$的取值，则由量子数$n$来决定。</p>
-</li>
-</ul>
-<h4 id="轨道角动量"><a href="#轨道角动量" class="headerlink" title="轨道角动量"></a>轨道角动量</h4><ul>
-<li><p>对于轨道角动量$\vec l$，其力学量算符的表达式为：</p>
-<p>$$\hat{\vec l}=\hat{l_x}\cdot\hat{e_x}+\hat{l_y}\cdot\hat{e_y}+\hat{l_z}\cdot\hat{e_z}$$</p>
-<p>其本征方程为：</p>
-<p>$$\hat{\vec l^2}\left | l,m \right \rangle =l(l+1)\hbar^2 \left | l,m \right \rangle$$</p>
-<p>上式中，$l$称为轨道角动量量子数；$m$则称为磁量子数。</p>
-<p>根据轨道角动量量子数便可确定轨道角动量的大小：</p>
-<p>$$\sqrt{l(l+1)}\hbar$$</p>
-<p>对于$\hat{\vec l}$在$z$轴方向上的分量$\hat{l_z}$，其本征方程为：</p>
-<p>$$\hat{l_z} \left |l,m \right \rangle = m\hbar \left |l,m \right \rangle$$</p>
-<p>从而$\hat{l_z}$的取值为：</p>
-<p>$$m\hbar$$</p>
-<p>磁量子数$m$的取值范围为：</p>
-<p>$$m=-l,-l+1,\dots,0,\dots,l-1,l$$</p>
-</li>
-</ul>
-<h4 id="角动量的定义"><a href="#角动量的定义" class="headerlink" title="角动量的定义"></a>角动量的定义</h4><ul>
-<li><p>对于轨道角动量，可以得到如下关系式：</p>
-<p>$$\left [ \hat{l_{\alpha}},\hat{l_{\beta}} \right]=\hat{l_\alpha}\hat{l_\beta}-\hat{l_\beta}\hat{l_\alpha}=\varepsilon_{\alpha\beta\gamma}i\hbar\hat{l_\gamma} \ (\alpha,\beta,\gamma=x,y,z)$$</p>
-</li>
-<li><p>在量子力学中，如果力学量$\hat{\vec F}$的三个分量满足以下关系式，则称$\hat{\vec F}$为角动量：</p>
-<p>$$\left [ \hat{F_{\alpha}},\hat{F_{\beta}} \right] = \varepsilon_{\alpha\beta\gamma}i\hbar\hat{F_\gamma} \ (\alpha,\beta,\gamma=x,y,z$$</p>
-</li>
-</ul>
-<h4 id="角动量的耦合"><a href="#角动量的耦合" class="headerlink" title="角动量的耦合"></a>角动量的耦合</h4><ul>
-<li><p>现在考虑两个角动量耦合的情况下，假设：</p>
-<p>$$\hat{\vec l} = \hat{\vec l_1}+\hat{\vec l_2}$$</p>
-<p>那么$\hat{\vec l}$的取值则由其本征方程确定：</p>
-<p>$$\hat{\vec l^2} \left | l_1m_1l_2m_2 \right \rangle = l(l+1)\hbar^2 \left | l_1m_1l_2m_2 \right \rangle$$</p>
-<p>其大小为：</p>
-<p>$$\sqrt{l(l+1)}\hbar$$</p>
-<p>其中，$l$的取值范围为：</p>
-<p>$$l=l_1+l_2,l_1+l_2-1,\dots,\left | l_1-l_2 \right |$$</p>
-<p>相应的，$\hat{\vec l}$在$z$轴方向上的分量的取值也由其本征方程确定：</p>
-<p>$$\hat{l_z} \left | l_1m_1l_2m_2 \right \rangle = m\hbar \left | l_1m_1l_2m_2 \right \rangle$$</p>
-<p>$\hat{l_z}$的大小为：</p>
-<p>$$m\hbar$$</p>
-<p>$m$的取值范围为：</p>
-<p>$$m=-l,-l+1,\dots,0,\dots,l-1,l$$</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>学习笔记</category>
-      </categories>
-      <tags>
-        <tag>原子核物理</tag>
-        <tag>角动量</tag>
-        <tag>量子力学</tag>
-        <tag>算符</tag>
-        <tag>本征态</tag>
-        <tag>哈密顿量</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>安装MySQL</title>
-    <url>/2020/08/12/%E5%AE%89%E8%A3%85MySQL/</url>
-    <content><![CDATA[<h3 id="MySQL下载地址"><a href="#MySQL下载地址" class="headerlink" title="MySQL下载地址"></a>MySQL下载地址</h3><p><span class="exturl" data-url="aHR0cHM6Ly9kZXYubXlzcWwuY29tL2Rvd25sb2Fkcy9teXNxbC8=">MySQL下载<i class="fa fa-external-link-alt"></i></span></p>
-<blockquote>
-<p>注意：安装过程需要通过开启管理员权限来安装，否则会由于权限不足导致无法安装。</p>
-</blockquote>
-<h2 id="Linux-UNIX-上安装-MySQL"><a href="#Linux-UNIX-上安装-MySQL" class="headerlink" title="Linux/UNIX 上安装 MySQL"></a>Linux/UNIX 上安装 MySQL</h2><p>Linux平台上推荐使用RPM包来安装Mysql,MySQL AB提供了以下RPM包的下载地址：</p>
-<ul>
-<li>MySQL - MySQL服务器。需要该选项，除非只想连接运行在另一台机器上的MySQL服务器。</li>
-<li>MySQL-client - MySQL 客户端程序，用于连接并操作Mysql服务器。</li>
-<li>MySQL-devel - 库和包含文件，如果想要编译其它MySQL客户端，例如Perl模块，则需要安装该RPM包。</li>
-<li>MySQL-shared - 该软件包包含某些语言和应用程序需要动态装载的共享库(libmysqlclient.so*)，使用MySQL。</li>
-<li>MySQL-bench - MySQL数据库服务器的基准和性能测试工具。</li>
-</ul>
-<p>安装前，可以检测系统是否自带安装 MySQL:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">rpm -qa | grep mysql</span><br></pre></td></tr></table></figure>
-<p>如果系统有安装，那可以选择进行卸载:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">rpm -e mysql　　&#x2F;&#x2F; 普通删除模式</span><br><span class="line">rpm -e --nodeps mysql　　&#x2F;&#x2F; 强力删除模式，如果使用上面命令删除时，提示有依赖的其它文件，则用该命令可以对其进行强力删除</span><br></pre></td></tr></table></figure>
-<h4 id="安装-MySQL："><a href="#安装-MySQL：" class="headerlink" title="安装 MySQL："></a>安装 MySQL：</h4><p>接下来在 Centos7 系统下使用 yum 命令安装 MySQL，需要注意的是 CentOS 7 版本中 MySQL数据库已从默认的程序列表中移除，所以在安装前我们需要先去官网下载 Yum 资源包，下载地址为：<span class="exturl" data-url="aHR0cHM6Ly9kZXYubXlzcWwuY29tL2Rvd25sb2Fkcy9yZXBvL3l1bS8=">https://dev.mysql.com/downloads/repo/yum/<i class="fa fa-external-link-alt"></i></span></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">wget http:&#x2F;&#x2F;repo.mysql.com&#x2F;mysql-community-release-el7-5.noarch.rpm</span><br><span class="line">rpm -ivh mysql-community-release-el7-5.noarch.rpm</span><br><span class="line">yum update</span><br><span class="line">yum install mysql-server</span><br></pre></td></tr></table></figure>
-<p>权限设置：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chown mysql:mysql -R &#x2F;var&#x2F;lib&#x2F;mysql</span><br></pre></td></tr></table></figure>
-<p>初始化 MySQL：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mysqld --initialize</span><br></pre></td></tr></table></figure>
-<p>启动 MySQL：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">systemctl start mysqld</span><br></pre></td></tr></table></figure>
-<p>查看 MySQL 运行状态：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">systemctl status mysqld</span><br></pre></td></tr></table></figure>
-<p><strong>注意</strong>：如果是第一次启动 mysql 服务，mysql 服务器首先会进行初始化的配置。</p>
-<blockquote>
-<p>此外,可以使用 MariaDB 代替，MariaDB 数据库管理系统是 MySQL 的一个分支，主要由开源社区在维护，采用 GPL 授权许可。开发这个分支的原因之一是：甲骨文公司收购了 MySQL 后，有将 MySQL 闭源的潜在风险，因此社区采用分支的方式来避开这个风险。<br>MariaDB的目的是完全兼容MySQL，包括API和命令行，使之能轻松成为MySQL的代替品。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yum install mariadb-server mariadb </span><br></pre></td></tr></table></figure>
-<p>mariadb数据库的相关命令是：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">systemctl start mariadb  #启动MariaDB</span><br><span class="line">systemctl stop mariadb  #停止MariaDB</span><br><span class="line">systemctl restart mariadb  #重启MariaDB</span><br><span class="line">systemctl enable mariadb  #设置开机启动</span><br></pre></td></tr></table></figure>
-</blockquote>
-<h2 id="验证-MySQL-安装"><a href="#验证-MySQL-安装" class="headerlink" title="验证 MySQL 安装"></a>验证 MySQL 安装</h2><p>在成功安装 MySQL 后，一些基础表会表初始化，在服务器启动后，你可以通过简单的测试来验证 MySQL 是否工作正常。<br>使用 mysqladmin 工具来获取服务器状态：<br>使用 mysqladmin 命令来检查服务器的版本, 在 linux 上该二进制文件位于 /usr/bin 目录，在 Windows 上该二进制文件位于C:\mysql\bin 。           </p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@host]# mysqladmin --version</span><br></pre></td></tr></table></figure>
-<p>linux上该命令将输出以下结果，该结果基于你的系统信息：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mysqladmin  Ver 8.23 Distrib 5.0.9-0, for redhat-linux-gnu on i386</span><br></pre></td></tr></table></figure>
-<p>如果以上命令执行后未输出任何信息，说明你的Mysql未安装成功。</p>
-<h2 id="使用-MySQL-Client-Mysql客户端-执行简单的SQL命令"><a href="#使用-MySQL-Client-Mysql客户端-执行简单的SQL命令" class="headerlink" title="使用 MySQL Client(Mysql客户端) 执行简单的SQL命令"></a>使用 MySQL Client(Mysql客户端) 执行简单的SQL命令</h2><p>可以在 MySQL Client(Mysql客户端) 使用 mysql 命令连接到 MySQL 服务器上，默认情况下 MySQL 服务器的登录密码为空，所以本实例不需要输入密码。<br>命令如下：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@host]# mysql</span><br></pre></td></tr></table></figure>
-<p>以上命令执行后会输出 mysql&gt;提示符，这说明你已经成功连接到Mysql服务器上，你可以在 mysql&gt; 提示符执行SQL命令：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mysql&gt; SHOW DATABASES;</span><br><span class="line">+----------+</span><br><span class="line">| Database |</span><br><span class="line">+----------+</span><br><span class="line">| mysql    |</span><br><span class="line">| test     |</span><br><span class="line">+----------+</span><br><span class="line">2 rows in set (0.13 sec)</span><br></pre></td></tr></table></figure>
-<h2 id="Mysql安装后需要做的"><a href="#Mysql安装后需要做的" class="headerlink" title="Mysql安装后需要做的"></a>Mysql安装后需要做的</h2><p>Mysql安装成功后，默认的root用户密码为空，你可以使用以下命令来创建root用户的密码：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@host]# mysqladmin -u root password &quot;new_password&quot;;</span><br></pre></td></tr></table></figure>
-<p>现在可以通过以下命令来连接到Mysql服务器：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@host]# mysql -u root -p</span><br><span class="line">Enter password:*******</span><br></pre></td></tr></table></figure>
-<p><strong>注意</strong>：在输入密码时，密码是不会显示了，你正确输入即可。</p>
-<h2 id="Windows-上安装-MySQL"><a href="#Windows-上安装-MySQL" class="headerlink" title="Windows 上安装 MySQL"></a>Windows 上安装 MySQL</h2><p>Windows 上安装 MySQL 相对来说会较为简单，最新版本可以在<span class="exturl" data-url="aHR0cHM6Ly9kZXYubXlzcWwuY29tL2Rvd25sb2Fkcy9teXNxbC8=">MySQL下载<i class="fa fa-external-link-alt"></i></span>中下载中查看。<br>下载完后，我们将 zip 包解压到相应的目录，这里我将解压后的文件夹放在 C:\web\mysql 下。<br>接下来我们需要配置下 MySQL 的配置文件<br>打开刚刚解压的文件夹 C:\web\mysql ，在该文件夹下创建 my.ini 配置文件，编辑 my.ini 配置以下基本信息：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[client]</span><br><span class="line"># 设置mysql客户端默认字符集</span><br><span class="line">default-character-set&#x3D;utf8</span><br><span class="line"> </span><br><span class="line">[mysqld]</span><br><span class="line"># 设置3306端口</span><br><span class="line">port &#x3D; 3306</span><br><span class="line"># 设置mysql的安装目录</span><br><span class="line">basedir&#x3D;C:\\web\\mysql</span><br><span class="line"># 设置 mysql数据库的数据的存放目录，MySQL 8+ 不需要以下配置，系统自己生成即可，否则有可能报错</span><br><span class="line"># datadir&#x3D;C:\\web\\sqldata</span><br><span class="line"># 允许最大连接数</span><br><span class="line">max_connections&#x3D;20</span><br><span class="line"># 服务端使用的字符集默认为8比特编码的latin1字符集</span><br><span class="line">character-set-server&#x3D;utf8</span><br><span class="line"># 创建新表时将使用的默认存储引擎</span><br><span class="line">default-storage-engine&#x3D;INNODB</span><br></pre></td></tr></table></figure>
-<p><strong>接下来我们来启动下 MySQL 数据库：</strong><br>以管理员身份打开 cmd 命令行工具，切换目录：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd C:\web\mysql-8.0.11\bin</span><br></pre></td></tr></table></figure>
-<p>初始化数据库：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mysqld --initialize --console</span><br></pre></td></tr></table></figure>
-<p>执行完成后，会输出 root 用户的初始默认密码，如：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">2018-04-20T02:35:05.464644Z 5 [Note] [MY-010454] [Server] A temporary password is generated for root@localhost: APWCY5ws&amp;hjQ</span><br></pre></td></tr></table></figure>
-<p><code>APWCY5ws&amp;hjQ</code>就是初始密码，后续登录需要用到，你也可以在登陆后修改密码。<br>输入以下安装命令：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mysqld install</span><br></pre></td></tr></table></figure>
-<p>启动输入以下命令即可：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">net start mysql</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>注意: 在 5.7 需要初始化 data 目录：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd C:\web\mysql-8.0.11\bin </span><br><span class="line">mysqld --initialize-insecure </span><br></pre></td></tr></table></figure>
-<p>初始化后再运行 net start mysql 即可启动 mysql。</p>
-</blockquote>
-<h2 id="登录-MySQL"><a href="#登录-MySQL" class="headerlink" title="登录 MySQL"></a>登录 MySQL</h2><p>当 MySQL 服务已经运行时, 我们可以通过 MySQL 自带的客户端工具登录到 MySQL 数据库中, 首先打开命令提示符, 输入以下格式的命名:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mysql -h 主机名 -u 用户名 -p</span><br></pre></td></tr></table></figure>
-<p>参数说明：</p>
-<ul>
-<li><strong>-h</strong>: 指定客户端所要登录的 MySQL 主机名, 登录本机(localhost 或 127.0.0.1)该参数可以省略;</li>
-<li><strong>-u</strong> : 登录的用户名;</li>
-<li><strong>-p</strong> : 告诉服务器将会使用一个密码来登录, 如果所要登录的用户名密码为空, 可以忽略此选项。<br>如果我们要登录本机的 MySQL 数据库，只需要输入以下命令即可：<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure>
-按回车确认, 如果安装正确且 MySQL 正在运行, 会得到以下响应:<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Enter password:</span><br></pre></td></tr></table></figure>
-若密码存在, 输入密码登录, 不存在则直接按回车登录。登录成功后你将会看到 Welcome to the MySQL monitor… 的提示语。<br>然后命令提示符会一直以<code>mysq&gt;</code>加一个闪烁的光标等待命令的输入, 输入 <strong>exit</strong> 或 <strong>quit</strong> 退出登录。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>MySQL</category>
-      </categories>
-      <tags>
-        <tag>学习笔记</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>原子核的基本性质（三）</title>
     <url>/2020/08/16/%E5%8E%9F%E5%AD%90%E6%A0%B8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%80%A7%E8%B4%A8%EF%BC%88%E4%B8%89%EF%BC%89/</url>
     <content><![CDATA[<h2 id="自旋"><a href="#自旋" class="headerlink" title="自旋"></a>自旋</h2><h3 id="Stern-Gerlach实验"><a href="#Stern-Gerlach实验" class="headerlink" title="Stern-Gerlach实验"></a>Stern-Gerlach实验</h3><h4 id="实验原理"><a href="#实验原理" class="headerlink" title="实验原理"></a>实验原理</h4><ul>
@@ -881,9 +688,202 @@
       </categories>
       <tags>
         <tag>原子核物理</tag>
+        <tag>自旋</tag>
         <tag>量子力学</tag>
         <tag>算符</tag>
-        <tag>自旋</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>原子核的基本性质（二）</title>
+    <url>/2020/08/15/%E5%8E%9F%E5%AD%90%E6%A0%B8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%80%A7%E8%B4%A8%EF%BC%88%E4%BA%8C%EF%BC%89/</url>
+    <content><![CDATA[<h2 id="角动量"><a href="#角动量" class="headerlink" title="角动量"></a>角动量</h2><h3 id="磁偶极子在磁场中的能量"><a href="#磁偶极子在磁场中的能量" class="headerlink" title="磁偶极子在磁场中的能量"></a>磁偶极子在磁场中的能量</h3><h4 id="磁矩与角动量的关系"><a href="#磁矩与角动量的关系" class="headerlink" title="磁矩与角动量的关系"></a>磁矩与角动量的关系</h4><ul>
+<li><p>一个电量为$+q$的粒子做匀速圆周运动，其相当于一个磁偶极子。</p>
+</li>
+<li><p>做匀速圆周运动的粒子可以等效为一个电流，其大小为：</p>
+<p>$$I=\frac{q}{T}=\frac{qv}{2\pi R}$$</p>
+<p>相应的，其磁矩为：</p>
+<p>$$\vec \mu =I\vec S=\frac{q}{2m}\cdot \vec l$$</p>
+<p>根据量子力学计算得到的电子轨道运动的磁矩与轨道角动量的关系为：</p>
+<p>$$\vec \mu =-\frac{e}{2m_e}\vec l=g_l(\frac{e}{2m_e})\vec l$$</p>
+<p>$g_l$称为电子的$g$因子，脚标$l$表示其与角动量相关。</p>
+</li>
+</ul>
+<h4 id="磁偶极子在磁场中的能量-1"><a href="#磁偶极子在磁场中的能量-1" class="headerlink" title="磁偶极子在磁场中的能量"></a>磁偶极子在磁场中的能量</h4><ul>
+<li><p>处于磁场中的磁偶极子，其将受到力矩的作用，<br>力矩的大小为：</p>
+<p>$$\vec M=\vec \mu \times \vec B=-\mu B\cdot \sin \theta \cdot \vec e_\theta$$</p>
+<p>如果选取$θ＝\pi /2$为平衡位置，那么其在磁场的势能为：</p>
+<p>$$U=-\int_{\pi /2}^{\theta}\vec M\cdot d\vec \theta=-\vec \mu \cdot \vec B$$</p>
+<p>根据前面的分析，磁矩与角动量是相关的，从而有：</p>
+<p>$$U=-\frac{q}{2m}\vec l\cdot \vec B$$</p>
+</li>
+</ul>
+<h3 id="量子力学中的角动量"><a href="#量子力学中的角动量" class="headerlink" title="量子力学中的角动量"></a>量子力学中的角动量</h3><h4 id="力学量的取值"><a href="#力学量的取值" class="headerlink" title="力学量的取值"></a>力学量的取值</h4><ul>
+<li><p>在经典力学中：</p>
+<ul>
+<li>对物体的运动状态通过各力学量来描述；</li>
+<li>每个力学量的取值可以直接计算得到。</li>
+</ul>
+</li>
+<li><p>在量子力学中：</p>
+<ul>
+<li>物体的运动通过体系的态函数来描述的；</li>
+<li>力学量的取值（分布）通过力学量算符对态函数的运算得到。</li>
+</ul>
+</li>
+<li><p>例如对于能量，其算符为$\hat H$，即体系的Hamilton算符。将其作用在体系的态函数上，如果下式成立：</p>
+<p>$$\hat H \left | \psi_n  \right \rangle =E_n \left | \psi_n  \right \rangle$$</p>
+</li>
+<li><p>便称是$\left | \psi_n  \right \rangle$能量算符的一个本征态，此时体系的能量为$E_n$。</p>
+</li>
+<li><p>脚标$n$则称为量子数，其决定了力学量（即能量）的取值。</p>
+</li>
+<li><p>例如对于无限深方势阱中的粒子，其能量的取值为：</p>
+<p>$$E_n=\frac{n^2\pi^2\hbar^2}{2ma^2}$$</p>
+</li>
+<li><p>总结</p>
+<p>在量子力学中，力学量的取值是通过算符来计算的。对于一个力学量$F$，其算符为$\hat F$，其作用在本征态$\left | F_n  \right \rangle$上：</p>
+<p>$$\hat F \left | F_n  \right \rangle=f_n \left | F_n  \right \rangle$$</p>
+<p>通过求解上式（本征方程），可以得到一系列满足（边界）条件的量子数$n$。</p>
+<p>力学量$F$的取值，则由量子数$n$来决定。</p>
+</li>
+</ul>
+<h4 id="轨道角动量"><a href="#轨道角动量" class="headerlink" title="轨道角动量"></a>轨道角动量</h4><ul>
+<li><p>对于轨道角动量$\vec l$，其力学量算符的表达式为：</p>
+<p>$$\hat{\vec l}=\hat{l_x}\cdot\hat{e_x}+\hat{l_y}\cdot\hat{e_y}+\hat{l_z}\cdot\hat{e_z}$$</p>
+<p>其本征方程为：</p>
+<p>$$\hat{\vec l^2}\left | l,m \right \rangle =l(l+1)\hbar^2 \left | l,m \right \rangle$$</p>
+<p>上式中，$l$称为轨道角动量量子数；$m$则称为磁量子数。</p>
+<p>根据轨道角动量量子数便可确定轨道角动量的大小：</p>
+<p>$$\sqrt{l(l+1)}\hbar$$</p>
+<p>对于$\hat{\vec l}$在$z$轴方向上的分量$\hat{l_z}$，其本征方程为：</p>
+<p>$$\hat{l_z} \left |l,m \right \rangle = m\hbar \left |l,m \right \rangle$$</p>
+<p>从而$\hat{l_z}$的取值为：</p>
+<p>$$m\hbar$$</p>
+<p>磁量子数$m$的取值范围为：</p>
+<p>$$m=-l,-l+1,\dots,0,\dots,l-1,l$$</p>
+</li>
+</ul>
+<h4 id="角动量的定义"><a href="#角动量的定义" class="headerlink" title="角动量的定义"></a>角动量的定义</h4><ul>
+<li><p>对于轨道角动量，可以得到如下关系式：</p>
+<p>$$\left [ \hat{l_{\alpha}},\hat{l_{\beta}} \right]=\hat{l_\alpha}\hat{l_\beta}-\hat{l_\beta}\hat{l_\alpha}=\varepsilon_{\alpha\beta\gamma}i\hbar\hat{l_\gamma} \ (\alpha,\beta,\gamma=x,y,z)$$</p>
+</li>
+<li><p>在量子力学中，如果力学量$\hat{\vec F}$的三个分量满足以下关系式，则称$\hat{\vec F}$为角动量：</p>
+<p>$$\left [ \hat{F_{\alpha}},\hat{F_{\beta}} \right] = \varepsilon_{\alpha\beta\gamma}i\hbar\hat{F_\gamma} \ (\alpha,\beta,\gamma=x,y,z$$</p>
+</li>
+</ul>
+<h4 id="角动量的耦合"><a href="#角动量的耦合" class="headerlink" title="角动量的耦合"></a>角动量的耦合</h4><ul>
+<li><p>现在考虑两个角动量耦合的情况下，假设：</p>
+<p>$$\hat{\vec l} = \hat{\vec l_1}+\hat{\vec l_2}$$</p>
+<p>那么$\hat{\vec l}$的取值则由其本征方程确定：</p>
+<p>$$\hat{\vec l^2} \left | l_1m_1l_2m_2 \right \rangle = l(l+1)\hbar^2 \left | l_1m_1l_2m_2 \right \rangle$$</p>
+<p>其大小为：</p>
+<p>$$\sqrt{l(l+1)}\hbar$$</p>
+<p>其中，$l$的取值范围为：</p>
+<p>$$l=l_1+l_2,l_1+l_2-1,\dots,\left | l_1-l_2 \right |$$</p>
+<p>相应的，$\hat{\vec l}$在$z$轴方向上的分量的取值也由其本征方程确定：</p>
+<p>$$\hat{l_z} \left | l_1m_1l_2m_2 \right \rangle = m\hbar \left | l_1m_1l_2m_2 \right \rangle$$</p>
+<p>$\hat{l_z}$的大小为：</p>
+<p>$$m\hbar$$</p>
+<p>$m$的取值范围为：</p>
+<p>$$m=-l,-l+1,\dots,0,\dots,l-1,l$$</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>学习笔记</category>
+      </categories>
+      <tags>
+        <tag>原子核物理</tag>
+        <tag>量子力学</tag>
+        <tag>算符</tag>
+        <tag>角动量</tag>
+        <tag>本征态</tag>
+        <tag>哈密顿量</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>安装MySQL</title>
+    <url>/2020/08/12/%E5%AE%89%E8%A3%85MySQL/</url>
+    <content><![CDATA[<h3 id="MySQL下载地址"><a href="#MySQL下载地址" class="headerlink" title="MySQL下载地址"></a>MySQL下载地址</h3><p><span class="exturl" data-url="aHR0cHM6Ly9kZXYubXlzcWwuY29tL2Rvd25sb2Fkcy9teXNxbC8=">MySQL下载<i class="fa fa-external-link-alt"></i></span></p>
+<blockquote>
+<p>注意：安装过程需要通过开启管理员权限来安装，否则会由于权限不足导致无法安装。</p>
+</blockquote>
+<h2 id="Linux-UNIX-上安装-MySQL"><a href="#Linux-UNIX-上安装-MySQL" class="headerlink" title="Linux/UNIX 上安装 MySQL"></a>Linux/UNIX 上安装 MySQL</h2><p>Linux平台上推荐使用RPM包来安装Mysql,MySQL AB提供了以下RPM包的下载地址：</p>
+<ul>
+<li>MySQL - MySQL服务器。需要该选项，除非只想连接运行在另一台机器上的MySQL服务器。</li>
+<li>MySQL-client - MySQL 客户端程序，用于连接并操作Mysql服务器。</li>
+<li>MySQL-devel - 库和包含文件，如果想要编译其它MySQL客户端，例如Perl模块，则需要安装该RPM包。</li>
+<li>MySQL-shared - 该软件包包含某些语言和应用程序需要动态装载的共享库(libmysqlclient.so*)，使用MySQL。</li>
+<li>MySQL-bench - MySQL数据库服务器的基准和性能测试工具。</li>
+</ul>
+<p>安装前，可以检测系统是否自带安装 MySQL:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">rpm -qa | grep mysql</span><br></pre></td></tr></table></figure>
+<p>如果系统有安装，那可以选择进行卸载:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">rpm -e mysql　　&#x2F;&#x2F; 普通删除模式</span><br><span class="line">rpm -e --nodeps mysql　　&#x2F;&#x2F; 强力删除模式，如果使用上面命令删除时，提示有依赖的其它文件，则用该命令可以对其进行强力删除</span><br></pre></td></tr></table></figure>
+<h4 id="安装-MySQL："><a href="#安装-MySQL：" class="headerlink" title="安装 MySQL："></a>安装 MySQL：</h4><p>接下来在 Centos7 系统下使用 yum 命令安装 MySQL，需要注意的是 CentOS 7 版本中 MySQL数据库已从默认的程序列表中移除，所以在安装前我们需要先去官网下载 Yum 资源包，下载地址为：<span class="exturl" data-url="aHR0cHM6Ly9kZXYubXlzcWwuY29tL2Rvd25sb2Fkcy9yZXBvL3l1bS8=">https://dev.mysql.com/downloads/repo/yum/<i class="fa fa-external-link-alt"></i></span></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">wget http:&#x2F;&#x2F;repo.mysql.com&#x2F;mysql-community-release-el7-5.noarch.rpm</span><br><span class="line">rpm -ivh mysql-community-release-el7-5.noarch.rpm</span><br><span class="line">yum update</span><br><span class="line">yum install mysql-server</span><br></pre></td></tr></table></figure>
+<p>权限设置：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chown mysql:mysql -R &#x2F;var&#x2F;lib&#x2F;mysql</span><br></pre></td></tr></table></figure>
+<p>初始化 MySQL：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mysqld --initialize</span><br></pre></td></tr></table></figure>
+<p>启动 MySQL：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">systemctl start mysqld</span><br></pre></td></tr></table></figure>
+<p>查看 MySQL 运行状态：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">systemctl status mysqld</span><br></pre></td></tr></table></figure>
+<p><strong>注意</strong>：如果是第一次启动 mysql 服务，mysql 服务器首先会进行初始化的配置。</p>
+<blockquote>
+<p>此外,可以使用 MariaDB 代替，MariaDB 数据库管理系统是 MySQL 的一个分支，主要由开源社区在维护，采用 GPL 授权许可。开发这个分支的原因之一是：甲骨文公司收购了 MySQL 后，有将 MySQL 闭源的潜在风险，因此社区采用分支的方式来避开这个风险。<br>MariaDB的目的是完全兼容MySQL，包括API和命令行，使之能轻松成为MySQL的代替品。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yum install mariadb-server mariadb </span><br></pre></td></tr></table></figure>
+<p>mariadb数据库的相关命令是：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">systemctl start mariadb  #启动MariaDB</span><br><span class="line">systemctl stop mariadb  #停止MariaDB</span><br><span class="line">systemctl restart mariadb  #重启MariaDB</span><br><span class="line">systemctl enable mariadb  #设置开机启动</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="验证-MySQL-安装"><a href="#验证-MySQL-安装" class="headerlink" title="验证 MySQL 安装"></a>验证 MySQL 安装</h2><p>在成功安装 MySQL 后，一些基础表会表初始化，在服务器启动后，你可以通过简单的测试来验证 MySQL 是否工作正常。<br>使用 mysqladmin 工具来获取服务器状态：<br>使用 mysqladmin 命令来检查服务器的版本, 在 linux 上该二进制文件位于 /usr/bin 目录，在 Windows 上该二进制文件位于C:\mysql\bin 。           </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@host]# mysqladmin --version</span><br></pre></td></tr></table></figure>
+<p>linux上该命令将输出以下结果，该结果基于你的系统信息：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mysqladmin  Ver 8.23 Distrib 5.0.9-0, for redhat-linux-gnu on i386</span><br></pre></td></tr></table></figure>
+<p>如果以上命令执行后未输出任何信息，说明你的Mysql未安装成功。</p>
+<h2 id="使用-MySQL-Client-Mysql客户端-执行简单的SQL命令"><a href="#使用-MySQL-Client-Mysql客户端-执行简单的SQL命令" class="headerlink" title="使用 MySQL Client(Mysql客户端) 执行简单的SQL命令"></a>使用 MySQL Client(Mysql客户端) 执行简单的SQL命令</h2><p>可以在 MySQL Client(Mysql客户端) 使用 mysql 命令连接到 MySQL 服务器上，默认情况下 MySQL 服务器的登录密码为空，所以本实例不需要输入密码。<br>命令如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@host]# mysql</span><br></pre></td></tr></table></figure>
+<p>以上命令执行后会输出 mysql&gt;提示符，这说明你已经成功连接到Mysql服务器上，你可以在 mysql&gt; 提示符执行SQL命令：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mysql&gt; SHOW DATABASES;</span><br><span class="line">+----------+</span><br><span class="line">| Database |</span><br><span class="line">+----------+</span><br><span class="line">| mysql    |</span><br><span class="line">| test     |</span><br><span class="line">+----------+</span><br><span class="line">2 rows in set (0.13 sec)</span><br></pre></td></tr></table></figure>
+<h2 id="Mysql安装后需要做的"><a href="#Mysql安装后需要做的" class="headerlink" title="Mysql安装后需要做的"></a>Mysql安装后需要做的</h2><p>Mysql安装成功后，默认的root用户密码为空，你可以使用以下命令来创建root用户的密码：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@host]# mysqladmin -u root password &quot;new_password&quot;;</span><br></pre></td></tr></table></figure>
+<p>现在可以通过以下命令来连接到Mysql服务器：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@host]# mysql -u root -p</span><br><span class="line">Enter password:*******</span><br></pre></td></tr></table></figure>
+<p><strong>注意</strong>：在输入密码时，密码是不会显示了，你正确输入即可。</p>
+<h2 id="Windows-上安装-MySQL"><a href="#Windows-上安装-MySQL" class="headerlink" title="Windows 上安装 MySQL"></a>Windows 上安装 MySQL</h2><p>Windows 上安装 MySQL 相对来说会较为简单，最新版本可以在<span class="exturl" data-url="aHR0cHM6Ly9kZXYubXlzcWwuY29tL2Rvd25sb2Fkcy9teXNxbC8=">MySQL下载<i class="fa fa-external-link-alt"></i></span>中下载中查看。<br>下载完后，我们将 zip 包解压到相应的目录，这里我将解压后的文件夹放在 C:\web\mysql 下。<br>接下来我们需要配置下 MySQL 的配置文件<br>打开刚刚解压的文件夹 C:\web\mysql ，在该文件夹下创建 my.ini 配置文件，编辑 my.ini 配置以下基本信息：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[client]</span><br><span class="line"># 设置mysql客户端默认字符集</span><br><span class="line">default-character-set&#x3D;utf8</span><br><span class="line"> </span><br><span class="line">[mysqld]</span><br><span class="line"># 设置3306端口</span><br><span class="line">port &#x3D; 3306</span><br><span class="line"># 设置mysql的安装目录</span><br><span class="line">basedir&#x3D;C:\\web\\mysql</span><br><span class="line"># 设置 mysql数据库的数据的存放目录，MySQL 8+ 不需要以下配置，系统自己生成即可，否则有可能报错</span><br><span class="line"># datadir&#x3D;C:\\web\\sqldata</span><br><span class="line"># 允许最大连接数</span><br><span class="line">max_connections&#x3D;20</span><br><span class="line"># 服务端使用的字符集默认为8比特编码的latin1字符集</span><br><span class="line">character-set-server&#x3D;utf8</span><br><span class="line"># 创建新表时将使用的默认存储引擎</span><br><span class="line">default-storage-engine&#x3D;INNODB</span><br></pre></td></tr></table></figure>
+<p><strong>接下来我们来启动下 MySQL 数据库：</strong><br>以管理员身份打开 cmd 命令行工具，切换目录：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd C:\web\mysql-8.0.11\bin</span><br></pre></td></tr></table></figure>
+<p>初始化数据库：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mysqld --initialize --console</span><br></pre></td></tr></table></figure>
+<p>执行完成后，会输出 root 用户的初始默认密码，如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">2018-04-20T02:35:05.464644Z 5 [Note] [MY-010454] [Server] A temporary password is generated for root@localhost: APWCY5ws&amp;hjQ</span><br></pre></td></tr></table></figure>
+<p><code>APWCY5ws&amp;hjQ</code>就是初始密码，后续登录需要用到，你也可以在登陆后修改密码。<br>输入以下安装命令：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mysqld install</span><br></pre></td></tr></table></figure>
+<p>启动输入以下命令即可：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">net start mysql</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意: 在 5.7 需要初始化 data 目录：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd C:\web\mysql-8.0.11\bin </span><br><span class="line">mysqld --initialize-insecure </span><br></pre></td></tr></table></figure>
+<p>初始化后再运行 net start mysql 即可启动 mysql。</p>
+</blockquote>
+<h2 id="登录-MySQL"><a href="#登录-MySQL" class="headerlink" title="登录 MySQL"></a>登录 MySQL</h2><p>当 MySQL 服务已经运行时, 我们可以通过 MySQL 自带的客户端工具登录到 MySQL 数据库中, 首先打开命令提示符, 输入以下格式的命名:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mysql -h 主机名 -u 用户名 -p</span><br></pre></td></tr></table></figure>
+<p>参数说明：</p>
+<ul>
+<li><strong>-h</strong>: 指定客户端所要登录的 MySQL 主机名, 登录本机(localhost 或 127.0.0.1)该参数可以省略;</li>
+<li><strong>-u</strong> : 登录的用户名;</li>
+<li><strong>-p</strong> : 告诉服务器将会使用一个密码来登录, 如果所要登录的用户名密码为空, 可以忽略此选项。<br>如果我们要登录本机的 MySQL 数据库，只需要输入以下命令即可：<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure>
+按回车确认, 如果安装正确且 MySQL 正在运行, 会得到以下响应:<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Enter password:</span><br></pre></td></tr></table></figure>
+若密码存在, 输入密码登录, 不存在则直接按回车登录。登录成功后你将会看到 Welcome to the MySQL monitor… 的提示语。<br>然后命令提示符会一直以<code>mysq&gt;</code>加一个闪烁的光标等待命令的输入, 输入 <strong>exit</strong> 或 <strong>quit</strong> 退出登录。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>MySQL</category>
+      </categories>
+      <tags>
+        <tag>学习笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -1095,7 +1095,7 @@
     <title>聚变研究发展专题报告</title>
     <url>/2020/08/22/%E8%81%9A%E5%8F%98%E7%A0%94%E7%A9%B6%E5%8F%91%E5%B1%95%E4%B8%93%E9%A2%98%E6%8A%A5%E5%91%8A/</url>
     <content><![CDATA[<h2 id="核聚变发展情况"><a href="#核聚变发展情况" class="headerlink" title="核聚变发展情况"></a>核聚变发展情况</h2><p>核聚变反应堆是一项综合了多学科和技术领域的大型工程。核聚变的发展也不像核裂变一样从军事用途转变为可控能源用途仅花了几年时间，而是从20实际50年代初，各国就开始研究，但是直至今日，也还未有一项能够稳定持续提供聚变能的装置诞生，可以想象，核聚变的发展是具有重重难关的。</p>
-<p>早期，美国在Livermore进行Magnetic mirror(磁镜)研究，在Los Alamos进行$\theta -pinch$(环形箍缩)研究，在Princeton进行Stdtarator(仿星器)研究，也就是著名的“Sherwood Project”（希伍德计划）；；英国的哈威尔核研究中心则从事Z-pinch的研究；苏联在库尔恰托夫和阿尔奇摩维奇领导下进行Z—pinch和Tokamak(有极放电和无极环形放电)的研究。在这些早期的研究中，各个国家由于意识形态的原因，都是在极其保密的情况下进行的。</p>
+<p>早期，美国在Livermore进行Magnetic mirror(磁镜)研究，在Los Alamos进行$\theta -pinch$(环形箍缩)研究，在Princeton进行Stdtarator(仿星器)研究，也就是著名的“Sherwood Project”（希伍德计划）；英国的哈威尔核研究中心则从事Z-pinch的研究；苏联在库尔恰托夫和阿尔奇摩维奇领导下进行Z—pinch和Tokamak(有极放电和无极环形放电)的研究。在这些早期的研究中，各个国家由于意识形态的原因，都是在极其保密的情况下进行的。</p>
 <p>但是，在经过几年的研究发现，可控热核反应并不想裂变堆一样那么成功的研制，于是在1958年的日内瓦召开的国际第二届和平利用原子能会议上公开了所有研究成果，并在此之后，聚变研究成为一个国际合作的主题。</p>
 <p>又经过几十年的发展，托卡马克类型的磁约束聚变装置上取得了突破性进展：日本最大的托卡马克JT-60U上表征聚变反应率的最重要参数，温度×密度×能量约束时间(即聚变三重积)已达到$1.5 \times 10^{21}KeV \cdot m^{-3} \cdot s$，这一参数比20年前以提高了10000倍，距离聚变堆的理论要求仅差20倍，且聚变输出功率与输入功率的比值Q已经超过1，达到1.25！</p>
 <p>美、苏、欧、日四方1987 年开始ITER的设计，1990年完成ITER概念设计，1998年完成了工程设计及部分技术预研。当时的聚变功率设计值为1000MW，等离子体持续燃烧时间大于1000s，估计造价为100亿美元。由于美国国内聚变政策调整并基于对技术和经济风险的考虑，美国于1998年退出ITER计划。随后，ITER《工程设计最终报告》于2001年7月完成。2006年11月21日，参与ITER计划的7方(欧盟、俄罗斯、中国、印度、美国、韩国、日本)签署了《联合实施国际热核聚变实验堆计划建立国际聚变能组织的协定》和《联合实施国际热核聚变实验堆计划国际聚变能组织特权和豁免协定》，ITER计划正式实施。今年7月28日，国际热核聚变实验堆（ITER）计划重大工程安装启动仪式7月28日在法国该组织总部举行。</p>
@@ -1124,7 +1124,7 @@
 <p>JT-60SA主要参数：等离子体电流：$5.5MA$；持续脉冲时间：$100s$。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>受控聚变反应是人类解决能源问题的一大关键，一旦受控热核反应研制成功，人类的能源储备将至少能够生存百亿年。从核反应理论提出不久后，各国科学研究人员便开始研究如何安全稳定实现热核反应，但是主要由于其困难重重，加之受到国际上其他问题的困扰，至今还没有一个能够稳定运行的聚变反应堆。</p>
 <p>虽然在聚变研究的道路上困难重重，但是各国还是有许多科研人员从事这项研究，从20世纪50年代至今六七十年中，也取得了不少阶段性成果。虽然主要的目标还未实现，但是通过研究热核反应，从而催生出其他技术的成果，已经开始造福人类了，例如研究初期，科研人员为了高效传递信息，欧洲原子能机构的科研工作者发明了HTML来交流信息，现如今这一技术已经离不开我们的日常生活了。</p>
-<p>在聚变装置上，各国国家通力合作，也建设了许多大型装置，其中最著名的就是ITER项目中的装置，汇聚了多国科研技术与研究成果。相信在不久的将来，ITER建成之后，能够未人类带来突破性的进展。</p>
+<p>在聚变装置上，各国国家通力合作，也建设了许多大型装置，其中最著名的就是ITER项目中的装置，汇聚了多国科研技术与研究成果。相信在不久的将来，ITER建成之后，能够为人类带来突破性的进展。</p>
 ]]></content>
       <categories>
         <category>专题报告</category>
