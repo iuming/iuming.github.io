@@ -6,7 +6,7 @@
   <link href="http://iuming.github.io/atom.xml" rel="self"/>
   
   <link href="http://iuming.github.io/"/>
-  <updated>2020-08-25T08:03:42.457Z</updated>
+  <updated>2020-08-25T11:47:35.868Z</updated>
   <id>http://iuming.github.io/</id>
   
   <author>
@@ -15,6 +15,43 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>船舶核动力装置的技术经济指标</title>
+    <link href="http://iuming.github.io/2020/08/25/%E8%88%B9%E8%88%B6%E6%A0%B8%E5%8A%A8%E5%8A%9B%E8%A3%85%E7%BD%AE%E7%9A%84%E6%8A%80%E6%9C%AF%E7%BB%8F%E6%B5%8E%E6%8C%87%E6%A0%87/"/>
+    <id>http://iuming.github.io/2020/08/25/%E8%88%B9%E8%88%B6%E6%A0%B8%E5%8A%A8%E5%8A%9B%E8%A3%85%E7%BD%AE%E7%9A%84%E6%8A%80%E6%9C%AF%E7%BB%8F%E6%B5%8E%E6%8C%87%E6%A0%87/</id>
+    <published>2020-08-25T10:03:31.000Z</published>
+    <updated>2020-08-25T11:47:35.868Z</updated>
+    
+    <content type="html"><![CDATA[<p>由于运行环境和使用条件的特殊性，船舶核动力装置在设计、制造和运行管理等方面的技术要求与陆地核电站相比大不相同，由于评价船舶核动力装置性能的经济技术指标，大都是根据船用条件的要求提出的，主要包括安全性、装置功率、经济性、重量尺寸、可靠性、机动性、生命力、适航性、隐蔽性等。</p><h2 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h2><p>反应堆运行时，堆芯核燃料在裂变，放出能量的同时会产生强烈的放射性辐照，如果没有有效的屏蔽和防护措施，将对反应堆周的工作人员和环境产生严重的危害。因此，核动力装置的安全性的主要指的是核安全。</p><h3 id="安全要求"><a href="#安全要求" class="headerlink" title="安全要求"></a>安全要求</h3><p>核动力装置的安全性是船舶安全的基础，保证核动力装置的安全使出指标中<strong>最基本的要求</strong>。</p><p>核动力装置的安全性，是指对<strong>船上所有人员</strong>的健康和对<strong>船外周围环境</strong>的清洁与安全有切实可靠的保证。</p><ul><li>在<strong>正常工作条件</strong>下，对舱外的放射性辐射以及向外排放的放射性废料，对反应堆操纵人员、船上人员以及对周围居民造成的<strong>放射性辐照，应该小于法定的最大容许剂量</strong>；</li><li>在<strong>事故情况</strong>下，不论是内部还是外部原因引起的灾难性事故，<strong>安全系统</strong>应迅速投入，以保证反应堆的安全，并防止大量放射性物质泄漏到周环境中。</li></ul><h3 id="安全设计准则"><a href="#安全设计准则" class="headerlink" title="安全设计准则"></a>安全设计准则</h3><p>为了保证安全性来要求核动力装置，在设计师普遍采用<strong>多道屏障</strong>和<strong>纵深防御</strong>的设计原则</p><h4 id="多道屏障"><a href="#多道屏障" class="headerlink" title="多道屏障"></a>多道屏障</h4><ul><li><strong>燃料元件包壳</strong></li><li><strong>反应堆及一回路系统构成的压力边界</strong></li><li><strong>安全壳或反应堆舱</strong></li></ul><h4 id="纵深防御"><a href="#纵深防御" class="headerlink" title="纵深防御"></a>纵深防御</h4><ul><li><strong>对事故的预防</strong></li><li><strong>防止运行中出现偏差而发展成为事故</strong></li><li><strong>限制事故引起的放射性后果</strong></li></ul><h2 id="装置功率"><a href="#装置功率" class="headerlink" title="装置功率"></a>装置功率</h2><p>动力装置的<strong>功率</strong>与<strong>推进器的直径的2/3次方</strong>和<strong>航速的立方</strong>成<strong>正比</strong></p><p>船舶核动力装置的主机为汽轮机，而汽轮机是不能反向转动的涡轮机械。为了使船舶能够在一定行速下长时间倒航，需单独设置倒车汽轮机提供一定的倒车功率，倒车汽轮机的功率必须满足以下的要求：</p><ul><li>应保证船舶在从全速正车转为全速倒车的过程中，从开始倒航至船舶完全停止运动时，<strong>船舶向前滑动的距离足够小</strong>；</li><li>应保证船舶长时间倒航时具有一定的速度，在此速度上，<strong>船舶不应该丧失操纵性</strong>。</li></ul><h2 id="经济性"><a href="#经济性" class="headerlink" title="经济性"></a>经济性</h2><p>装置经济性用于评价动力装置能量利用的有效性和合理性，常用的评价指标是<strong>装置效率</strong>和<strong>装置的总效率</strong>。</p><h3 id="装置效率"><a href="#装置效率" class="headerlink" title="装置效率"></a>装置效率</h3><p>装置效率定义为核动力装置输出至<strong>推进器的有效功率</strong>与<strong>反应堆热功率</strong>的比值。</p><h3 id="装置总效率"><a href="#装置总效率" class="headerlink" title="装置总效率"></a>装置总效率</h3><p>反应堆输出的热功率，除了满足推进器所需的推进功率之外，还有一部分能量供全船使用，如全船用电及其他消耗等装置。装置总功率是指<strong>核动力装置输出有效功率</strong>和<strong>全船性的能量消耗</strong>之和与<strong>反应堆热功率</strong>之比。</p><h2 id="重量尺寸"><a href="#重量尺寸" class="headerlink" title="重量尺寸"></a>重量尺寸</h2><p>由于舰船尤其是核潜艇空间和载重有限，为提高传播的有效载荷、航速和机动性能。要求核动力装置体积小、重量轻、布置紧凑。</p><h3 id="动力装置的重量"><a href="#动力装置的重量" class="headerlink" title="动力装置的重量"></a>动力装置的重量</h3><h4 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h4><ul><li>装置干重</li><li>装置湿重</li><li>装置储备质量</li><li>装置总重量</li></ul><h4 id="评价指标"><a href="#评价指标" class="headerlink" title="评价指标"></a>评价指标</h4><ul><li>单位功率的重量</li><li>装置相对重量</li></ul><h3 id="动力装置的尺寸"><a href="#动力装置的尺寸" class="headerlink" title="动力装置的尺寸"></a>动力装置的尺寸</h3><ul><li>容积饱和度</li><li>面积饱和度</li><li>长度饱和度</li></ul><h2 id="可靠性"><a href="#可靠性" class="headerlink" title="可靠性"></a>可靠性</h2><p>动力装置的可靠性是指装置在<strong>规定的使用条件</strong>下和<strong>规定的时间内</strong>完成<strong>规定功能</strong>的<strong>能力</strong>，表示系统、机器、设备等工作和性能的时间稳定性的程度。</p><p>故障发生率随时间的变化可分为：</p><ul><li>早期故障期</li><li>偶发故障期</li><li>损耗故障期</li></ul><h3 id="衡量指标"><a href="#衡量指标" class="headerlink" title="衡量指标"></a>衡量指标</h3><ul><li>可靠度</li><li>失效率</li><li>平均寿命</li><li>设备可用率和事故停运率</li><li>维修度</li></ul><h2 id="适航性"><a href="#适航性" class="headerlink" title="适航性"></a>适航性</h2><p>船舶在海洋上航行，不可避免地要受到海洋条件的影响。船舶核动力装置<strong>在受到某种限定海洋条件下影响，仍然能够保证安全运行的能力，称为装置的适航性</strong>。</p><h2 id="机动性"><a href="#机动性" class="headerlink" title="机动性"></a>机动性</h2><p>机动性是指动力装置在一定时间内改变运行工况的能力，主要包括以下基本内容：</p><ul><li><strong>启动时间</strong>：核动力装置从冷态到热态所需的时间</li><li><strong>变速能力</strong>：核动力装置改变功率水平的时间</li><li><strong>变向能力</strong>：核动力装置正、倒车转换时间及倒航时间</li><li><strong>续航力</strong>：潜艇装载一次燃燃料所能持续航行的距离</li></ul><h2 id="生命力"><a href="#生命力" class="headerlink" title="生命力"></a>生命力</h2><p>生命力是指<strong>在遭到战斗破损或事故破损时，动力装置能够保证或者能够恢复其功能的能力</strong>，是舰船总生命力的重要组成部分。</p><p>保证生命力的主要措施：</p><ul><li><strong>主动力分组布置</strong></li><li><strong>应急储备</strong></li><li><strong>采用互换性好的设备和仪表</strong></li><li><strong>重要设备单独供应，设置应急供电系统</strong></li><li><strong>重要消耗品分散布置</strong></li><li><strong>具有破损报警装置及隔离装置</strong></li></ul><h2 id="隐蔽性"><a href="#隐蔽性" class="headerlink" title="隐蔽性"></a>隐蔽性</h2><p>隐蔽性是指核动力装置<strong>在运行过程中发出的物理场不被外界探测到的能力</strong>，对于核动力潜艇而言，影响屏蔽性的主要因素是<strong>噪声</strong>和<strong>放射性</strong>。</p><h3 id="噪声"><a href="#噪声" class="headerlink" title="噪声"></a>噪声</h3><h4 id="来源"><a href="#来源" class="headerlink" title="来源"></a>来源</h4><ul><li>主汽轮机的齿轮减速器</li><li>反应堆冷却剂泵</li><li>螺旋桨</li></ul><h4 id="降低噪声的主要措施"><a href="#降低噪声的主要措施" class="headerlink" title="降低噪声的主要措施"></a>降低噪声的主要措施</h4><ul><li>提高反应堆的自然循环能力，低速工况下主泵不需要运行，可消除其运行噪声</li><li>采用全电力推进取消齿轮减速器，彻底消除齿轮减速器产生的噪声</li><li>改进螺旋桨设计，提高其加工精度，或者采用新型推进器，减小推进器的运行噪声</li><li>在结构上使动力机械与船体分离，采用弹性减震基座和其他减震消音措施，减小或消除，通过船体传出的辐射噪声</li></ul><h3 id="放射性"><a href="#放射性" class="headerlink" title="放射性"></a>放射性</h3><h4 id="来源-1"><a href="#来源-1" class="headerlink" title="来源"></a>来源</h4><ul><li>放射性污水、气体</li><li>逃逸中子的活化产物</li></ul><h4 id="降低放射性的主要措施"><a href="#降低放射性的主要措施" class="headerlink" title="降低放射性的主要措施"></a>降低放射性的主要措施</h4><ul><li>提高放射性废物的处理水平</li><li>控制排放</li><li>加强屏蔽</li></ul>]]></content>
+    
+    
+    <summary type="html">由于运行环境和使用条件的特殊性，船舶核动力装置在设计、制造和运行管理等方面的技术要求与陆地核电站相比大不相同，由于评价船舶核动力装置性能的经济技术指标，大都是根据船用条件的要求提出的，主要包括安全性、装置功率、经济性、重量尺寸、可靠性、机动性、生命力、适航性、隐蔽性等。</summary>
+    
+    
+    
+    <category term="学习笔记" scheme="http://iuming.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="船舶核动力装置" scheme="http://iuming.github.io/tags/%E8%88%B9%E8%88%B6%E6%A0%B8%E5%8A%A8%E5%8A%9B%E8%A3%85%E7%BD%AE/"/>
+    
+    <category term="安全性" scheme="http://iuming.github.io/tags/%E5%AE%89%E5%85%A8%E6%80%A7/"/>
+    
+    <category term="装置功率" scheme="http://iuming.github.io/tags/%E8%A3%85%E7%BD%AE%E5%8A%9F%E7%8E%87/"/>
+    
+    <category term="经济性" scheme="http://iuming.github.io/tags/%E7%BB%8F%E6%B5%8E%E6%80%A7/"/>
+    
+    <category term="可靠性" scheme="http://iuming.github.io/tags/%E5%8F%AF%E9%9D%A0%E6%80%A7/"/>
+    
+    <category term="机动性" scheme="http://iuming.github.io/tags/%E6%9C%BA%E5%8A%A8%E6%80%A7/"/>
+    
+    <category term="生命力" scheme="http://iuming.github.io/tags/%E7%94%9F%E5%91%BD%E5%8A%9B/"/>
+    
+    <category term="适航性" scheme="http://iuming.github.io/tags/%E9%80%82%E8%88%AA%E6%80%A7/"/>
+    
+    <category term="隐蔽性" scheme="http://iuming.github.io/tags/%E9%9A%90%E8%94%BD%E6%80%A7/"/>
+    
+  </entry>
   
   <entry>
     <title>A Python program for Simulating a WaterTank problem based on a Dynamic Event Tree</title>
