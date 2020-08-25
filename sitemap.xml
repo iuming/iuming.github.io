@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://iuming.github.io/2020/08/25/%E8%88%B9%E8%88%B6%E6%A0%B8%E5%8A%A8%E5%8A%9B%E7%9A%84%E5%8F%91%E5%B1%95%E8%B6%8B%E5%8A%BF/</loc>
+    
+    <lastmod>2020-08-25</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://iuming.github.io/2020/08/25/%E8%88%B9%E8%88%B6%E6%A0%B8%E5%8A%A8%E5%8A%9B%E8%A3%85%E7%BD%AE%E7%9A%84%E6%8A%80%E6%9C%AF%E7%BB%8F%E6%B5%8E%E6%8C%87%E6%A0%87/</loc>
     
     <lastmod>2020-08-25</lastmod>
@@ -607,6 +614,20 @@
   
   <url>
     <loc>http://iuming.github.io/tags/%E9%9A%90%E8%94%BD%E6%80%A7/</loc>
+    <lastmod>2020-08-25</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://iuming.github.io/tags/%E5%8F%91%E5%B1%95/</loc>
+    <lastmod>2020-08-25</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://iuming.github.io/tags/%E8%87%AA%E7%84%B6%E5%BE%AA%E7%8E%AF%E8%83%BD%E5%8A%9B/</loc>
     <lastmod>2020-08-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
