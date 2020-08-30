@@ -2482,4 +2482,35 @@ int print(CNode* root, ofstream &amp;cout, ull&amp; temp_counts)
         <tag>除氧</tag>
       </tags>
   </entry>
+  <entry>
+    <title>循环冷却水系统</title>
+    <url>/2020/08/30/%E5%BE%AA%E7%8E%AF%E5%86%B7%E5%8D%B4%E6%B0%B4%E7%B3%BB%E7%BB%9F/</url>
+    <content><![CDATA[<h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><ul>
+<li>向主、辅冷凝器供给冷却水</li>
+<li>冷凝主、辅冷凝器内的蒸汽</li>
+<li>供给其他辅助设备所需的冷却、冲洗用水</li>
+</ul>
+<h2 id="工作方式"><a href="#工作方式" class="headerlink" title="工作方式"></a>工作方式</h2><p>循环冷却水来自舷外的<strong>海水</strong>。舷外的海水通过船体上的<strong>吸水孔和进水管</strong>进入系统内，经<strong>循环水泵</strong>增压，一部分进入主<strong>冷凝器</strong>作为<em>循环冷却水</em>，吸热后通过<strong>出水管和出水孔</strong>排入大海；另一部分由循环水泵出口的支管送到<strong>滑油冷却器及其他设备</strong>作为<em>冷却、冲洗用水</em>，然后由<strong>排水管和通海口</strong>排回大海。</p>
+<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><h3 id="泵流式循环冷却水系统"><a href="#泵流式循环冷却水系统" class="headerlink" title="泵流式循环冷却水系统"></a>泵流式循环冷却水系统</h3><p>完全依靠循环水泵为海水在系统中的流动提供驱动压头。采用<strong>大流量、低扬程</strong>的轴流泵，采用汽轮机或电动机作为原动机。</p>
+<h3 id="自流式循环冷却水系统"><a href="#自流式循环冷却水系统" class="headerlink" title="自流式循环冷却水系统"></a>自流式循环冷却水系统</h3><p>依靠舰船前进时船体与海水之间相对运动所产生的动压头流经主冷凝器。</p>
+<h4 id="形式"><a href="#形式" class="headerlink" title="形式"></a>形式</h4><ul>
+<li>并联式</li>
+<li>串联式</li>
+</ul>
+<h2 id="流量调节方式"><a href="#流量调节方式" class="headerlink" title="流量调节方式"></a>流量调节方式</h2><ul>
+<li>节流调节</li>
+<li>旁通调节</li>
+<li>变速调节</li>
+<li>变特性调节</li>
+</ul>
+]]></content>
+      <categories>
+        <category>学习笔记</category>
+      </categories>
+      <tags>
+        <tag>船舶核动力装置</tag>
+        <tag>冷凝器</tag>
+        <tag>二回路辅助系统</tag>
+      </tags>
+  </entry>
 </search>
