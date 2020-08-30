@@ -2296,4 +2296,79 @@ int print(CNode* root, ofstream &amp;cout, ull&amp; temp_counts)
         <tag>齿轮减速器</tag>
       </tags>
   </entry>
+  <entry>
+    <title>蒸汽系统</title>
+    <url>/2020/08/30/%E8%92%B8%E6%B1%BD%E7%B3%BB%E7%BB%9F/</url>
+    <content><![CDATA[<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><p><strong>主蒸汽系统</strong>：从蒸汽发生器向主汽轮机输送蒸汽的系统；</p>
+<p><strong>辅蒸汽系统</strong>：供给辅机用气及辅助换热设备用气的系统；</p>
+<p><strong>乏汽系统</strong>：收集辅机乏汽的系统。</p>
+<h2 id="设计要求"><a href="#设计要求" class="headerlink" title="设计要求"></a>设计要求</h2><ul>
+<li>系统应具有尽可能高的生命力</li>
+<li>系统工作可靠性高</li>
+<li>蒸汽在管道内的流动阻力应尽量小</li>
+<li>尽量减小蒸汽在管道内的散热损失</li>
+</ul>
+<h2 id="主蒸汽系统"><a href="#主蒸汽系统" class="headerlink" title="主蒸汽系统"></a>主蒸汽系统</h2><h3 id="布置方式"><a href="#布置方式" class="headerlink" title="布置方式"></a>布置方式</h3><h4 id="单线布置"><a href="#单线布置" class="headerlink" title="单线布置"></a>单线布置</h4><h5 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h5><ul>
+<li>布置简单</li>
+<li>管道和阀件较少</li>
+<li>流体阻力小</li>
+<li>重量尺寸轻小</li>
+</ul>
+<h5 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h5><ul>
+<li>工作可靠性低</li>
+<li>管道任意处损坏，主机均不能工作</li>
+</ul>
+<h4 id="双线布置"><a href="#双线布置" class="headerlink" title="双线布置"></a>双线布置</h4><h5 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h5><ul>
+<li>管道热应力减轻</li>
+<li>增强了管道自身热补偿的可靠性</li>
+</ul>
+<h5 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h5><ul>
+<li>蒸汽发生器工作压力不等时，可能会使蒸汽发生器负荷不均</li>
+</ul>
+<h4 id="环形布置"><a href="#环形布置" class="headerlink" title="环形布置"></a>环形布置</h4><h5 id="优点-2"><a href="#优点-2" class="headerlink" title="优点"></a>优点</h5><ul>
+<li>提高了系统生命力</li>
+</ul>
+<h5 id="缺点-2"><a href="#缺点-2" class="headerlink" title="缺点"></a>缺点</h5><p>管道热应力复杂</p>
+<h2 id="辅蒸汽系统"><a href="#辅蒸汽系统" class="headerlink" title="辅蒸汽系统"></a>辅蒸汽系统</h2><h3 id="布置方式-1"><a href="#布置方式-1" class="headerlink" title="布置方式"></a>布置方式</h3><h4 id="单线布置-1"><a href="#单线布置-1" class="headerlink" title="单线布置"></a>单线布置</h4><h5 id="优点-3"><a href="#优点-3" class="headerlink" title="优点"></a>优点</h5><ul>
+<li>布置简单</li>
+<li>可与主蒸汽管道共用</li>
+</ul>
+<h5 id="缺点-3"><a href="#缺点-3" class="headerlink" title="缺点"></a>缺点</h5><ul>
+<li>可靠性及生命力较差</li>
+</ul>
+<h4 id="环形布置-1"><a href="#环形布置-1" class="headerlink" title="环形布置"></a>环形布置</h4><h5 id="优点-4"><a href="#优点-4" class="headerlink" title="优点"></a>优点</h5><ul>
+<li>可靠性好</li>
+<li>生命力高</li>
+</ul>
+<h5 id="缺点-4"><a href="#缺点-4" class="headerlink" title="缺点"></a>缺点</h5><ul>
+<li>布置复杂</li>
+<li>占空间位置多</li>
+</ul>
+<h4 id="独立式布置"><a href="#独立式布置" class="headerlink" title="独立式布置"></a>独立式布置</h4><h5 id="优点-5"><a href="#优点-5" class="headerlink" title="优点"></a>优点</h5><ul>
+<li>安全可靠</li>
+<li>管路集中</li>
+</ul>
+<h5 id="缺点-5"><a href="#缺点-5" class="headerlink" title="缺点"></a>缺点</h5><ul>
+<li>管道较多</li>
+</ul>
+<h4 id="实际采用布置方式"><a href="#实际采用布置方式" class="headerlink" title="实际采用布置方式"></a>实际采用布置方式</h4><p>混合式辅蒸汽系统</p>
+<h3 id="乏汽系统"><a href="#乏汽系统" class="headerlink" title="乏汽系统"></a>乏汽系统</h3><h4 id="布置方式-2"><a href="#布置方式-2" class="headerlink" title="布置方式"></a>布置方式</h4><p>贯穿机舱的一根总管</p>
+<h2 id="管道变形补偿措施"><a href="#管道变形补偿措施" class="headerlink" title="管道变形补偿措施"></a>管道变形补偿措施</h2><h3 id="管道自补偿"><a href="#管道自补偿" class="headerlink" title="管道自补偿"></a>管道自补偿</h3><p>利用管道布置使管道自身的弯曲和扭转变形来达到补偿的目的</p>
+<h3 id="补偿装置"><a href="#补偿装置" class="headerlink" title="补偿装置"></a>补偿装置</h3><h4 id="波形补偿器"><a href="#波形补偿器" class="headerlink" title="波形补偿器"></a>波形补偿器</h4><p>补偿器呈波纹管状，常见的单铰链式波形补偿器。</p>
+<h4 id="弯管补偿器"><a href="#弯管补偿器" class="headerlink" title="弯管补偿器"></a>弯管补偿器</h4><p>将管子弯曲成特定的形状，用以增加其挠性，而起补偿器热膨胀的作用。</p>
+<h5 id="缺点-6"><a href="#缺点-6" class="headerlink" title="缺点"></a>缺点</h5><ul>
+<li>尺寸大</li>
+<li>流动阻力大</li>
+</ul>
+]]></content>
+      <categories>
+        <category>学习笔记</category>
+      </categories>
+      <tags>
+        <tag>对比</tag>
+        <tag>船舶核动力装置</tag>
+        <tag>布置方式</tag>
+        <tag>蒸汽</tag>
+      </tags>
+  </entry>
 </search>
