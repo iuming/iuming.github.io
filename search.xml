@@ -2371,4 +2371,26 @@ int print(CNode* root, ofstream &amp;cout, ull&amp; temp_counts)
         <tag>蒸汽</tag>
       </tags>
   </entry>
+  <entry>
+    <title>蒸汽排放系统</title>
+    <url>/2020/08/30/%E8%92%B8%E6%B1%BD%E6%8E%92%E6%94%BE%E7%B3%BB%E7%BB%9F/</url>
+    <content><![CDATA[<h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><p>把蒸汽发生器产生的多余蒸汽，经减温减压后排入主或辅冷凝器中，防止主蒸汽管内压力超过允许值。</p>
+<p><strong>机动排放工况</strong>：负荷大幅度变化时</p>
+<p><strong>安全排放工况</strong>：事故工况下的排放</p>
+<p>安全排放工况是指动力装置在事故时，因为蒸汽压力增高，此时排放一部分蒸汽至主冷凝器中，以降低蒸汽压力。实际上，安全排放起安全保护作用。</p>
+<h2 id="组成"><a href="#组成" class="headerlink" title="组成"></a>组成</h2><ul>
+<li>一支分管</li>
+<li>主排放阀</li>
+<li>四级节流减压器</li>
+</ul>
+<h2 id="减温减压装置"><a href="#减温减压装置" class="headerlink" title="减温减压装置"></a>减温减压装置</h2><p>节流孔板</p>
+]]></content>
+      <categories>
+        <category>学习笔记</category>
+      </categories>
+      <tags>
+        <tag>船舶核动力装置</tag>
+        <tag>蒸汽</tag>
+      </tags>
+  </entry>
 </search>
