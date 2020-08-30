@@ -2394,20 +2394,6 @@ int print(CNode* root, ofstream &amp;cout, ull&amp; temp_counts)
       </tags>
   </entry>
   <entry>
-    <title>中国近代史纲要思维导图</title>
-    <url>/2020/08/30/%E4%B8%AD%E5%9B%BD%E8%BF%91%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/</url>
-    <content><![CDATA[<h2 id="思维导图"><a href="#思维导图" class="headerlink" title="思维导图"></a>思维导图</h2><p><img src="https://github.com/iuming/iuming.github.io/blob/master/Markdown_images/%E4%B8%AD%E5%9B%BD%E8%BF%91%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81.svg" alt="中国近代史纲要思维导图"></p>
-]]></content>
-      <categories>
-        <category>思维导图</category>
-      </categories>
-      <tags>
-        <tag>近代史纲要</tag>
-        <tag>历史</tag>
-        <tag>中国</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>凝水-给水系统</title>
     <url>/2020/08/30/%E5%87%9D%E6%B0%B4-%E7%BB%99%E6%B0%B4%E7%B3%BB%E7%BB%9F/</url>
     <content><![CDATA[<p>在汽水循环中使用的水，均为高纯度的蒸馏水。将主冷凝器中的凝水输送到给水系统中去的管路和设备，称为凝水系统；将符合给水要求的水，可靠均匀地向蒸汽发生器输送所使用地管道和设备，称为给水系统。</p>
