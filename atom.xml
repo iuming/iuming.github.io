@@ -6,7 +6,7 @@
   <link href="http://iuming.github.io/atom.xml" rel="self"/>
   
   <link href="http://iuming.github.io/"/>
-  <updated>2020-08-27T06:52:59.104Z</updated>
+  <updated>2020-08-30T08:22:31.875Z</updated>
   <id>http://iuming.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>主汽轮机组</title>
+    <link href="http://iuming.github.io/2020/08/27/%E4%B8%BB%E6%B1%BD%E8%BD%AE%E6%9C%BA%E7%BB%84/"/>
+    <id>http://iuming.github.io/2020/08/27/%E4%B8%BB%E6%B1%BD%E8%BD%AE%E6%9C%BA%E7%BB%84/</id>
+    <published>2020-08-27T07:51:03.000Z</published>
+    <updated>2020-08-30T08:22:31.875Z</updated>
+    
+    <content type="html"><![CDATA[<p>核动力舰船大部分采用<strong>齿轮减速器直接推进</strong>方式，主汽轮机组由<strong>主汽轮机、冷凝器和齿轮减速器</strong>三大部分组成，称为汽轮-齿轮机组。</p><h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><ul><li>单机双缸</li><li>单缸双机<ul><li>提高了主汽轮机的生命力</li></ul></li></ul><h2 id="主汽轮机"><a href="#主汽轮机" class="headerlink" title="主汽轮机"></a>主汽轮机</h2><p>汽轮机以蒸汽为工质，通过蒸汽在汽轮机内的膨胀做功，将蒸汽的热能转变为机械能，用于产生推进船舶前进所需的动力。</p><h3 id="组成"><a href="#组成" class="headerlink" title="组成"></a>组成</h3><ul><li>气缸</li><li>转轴</li><li>构成蒸汽流动通道的动、静叶栅</li></ul><h3 id="最基本工作单元"><a href="#最基本工作单元" class="headerlink" title="最基本工作单元"></a>最基本工作单元</h3><p><strong>级</strong>：由固定在气缸的一列喷嘴叶珊和其后紧邻的固定在叶轮上的一列动叶栅组成。</p><h3 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h3><p>汽轮机的即将蒸汽的<strong>热能转变为汽轮机的轴的动能是分两部分完成</strong>的。首先，具有一定压力和温度的蒸汽在喷嘴通道内进行膨胀，蒸汽压力降低、温度下降、气流速度增加，蒸汽自身具有的热能转化为蒸汽的动能。然后高速流动的气流离开分水后进入其后紧邻的动叶栅气流速度发生变化，对动叶片产生冲动力，一般情况下，气流在动叶栅中继续膨胀，当气流离开动叶栅式对动叶栅产生反动力。这两个力在与轴垂直方向上的合力推动动叶片，并带动动叶轮和轴的旋转，最终实现热能转化为机械能。</p><p><strong>冲动级</strong>：对于反动度等于零的纯冲动级，蒸汽所具有的可以被利用的绝热焓降全部在喷嘴通道内转化为使气流高速流动的动能。喷嘴出口的高速气流进入工作叶轮，推动动叶栅转动做功，工作叶栅内气流不在膨胀，前后压力相同。工作叶片通道为近似等截面工作，叶片的截面形状也近似对称。</p><p>冲动式汽轮机由多个冲动级串联组成，在喷嘴中实现蒸汽的热能转化为动能，在动叶通道内实现动能转化为机械能，采用转式轮子。小型腹肌可能采用单级冲动式汽轮机。</p><p><strong>反动级</strong>：蒸汽在级内可以用来做工的绝热焓降，只有一部分在喷嘴叶片通道内进行膨胀，转化为气流的动能。而另一部分焓降是气流进入工作叶栅通道内转换。</p><p>反动级因工作叶片前后存在压差，为了避免过大的级内损失，不能采用局部进汽。</p><p>反动式汽轮机有多个反动机串联组成，以静叶代替喷嘴。在动叶栅通道内实现热能转化为动能与动能转换为机械能的过程。采用鼓式转子。</p><p><strong>速度级</strong>：速度级是指气流的焓降在一列喷嘴内转化为动能。由喷嘴流出的高速气流要在两列以上的工作叶栅中进行功的转换。一般采用双列速度级，喷嘴装在喷嘴箱或气缸上，两列工作叶片装在一个轮盘上，两列工作叶片之间设有一系列导向叶片以改变气流方向，导向叶栅固定在气缸内壁，只改变气流方向而蒸汽不在其中膨胀。</p><p>只有在对尺寸，重量要求较为严格，而对效率要求不高的场合才会用到速度级。</p><p>主汽轮机均为多级汽轮机，由若干个单级串联而成。蒸汽一次流过各个单级膨胀做功，汽轮机既可以布置在一个汽缸内，也可以分工布置。将汽轮机分为<strong>高压缸</strong>和<strong>低压缸</strong>。真气容量流量太大时，可采用双流路。</p><h3 id="汽轮机的结构"><a href="#汽轮机的结构" class="headerlink" title="汽轮机的结构"></a>汽轮机的结构</h3><h4 id="组成-1"><a href="#组成-1" class="headerlink" title="组成"></a>组成</h4><ul><li><p><strong>流通部分</strong>：蒸汽在其中流过并实现能量转换的部分，由<strong>喷嘴和动叶</strong>构成。</p><p>汽轮机内主汽流的通道称为流通部分。包括使蒸汽实现能量转换的叶栅通道，进汽阀件和排气通道等。狭义的流通部分，仅指汽轮机各级的叶栅通道，是汽轮机结构的核心。</p><p>喷嘴的功用是使蒸汽膨胀加速，将蒸汽的热能转变成动能，并引导高速气流按一定方向进入动叶通道之中。</p><p>隔板用来按级分隔器缸的内腔由中间级喷嘴、板缘和板体三部分组成，按照喷嘴的制造方法以及与板缘、板体的连接方式，隔板可分为装配式、装配-焊接式、焊接式、铸造式四种。但无论哪种隔板，都由两个半圆隔板组成。</p></li><li><p><strong>定子</strong>：包括气缸及其上所固定的零件，如喷嘴箱，隔板等所有静止部分的总称。</p></li><li><p><strong>转子</strong>：所有转动部分的总称，包括<strong>叶轮和机轴</strong>。</p></li><li><p><strong>两端部分</strong>：位于汽轮机轴的两端，包括<strong>汽封、推力轴承、轴承</strong>等为保证汽轮机正常工作所必需的各种零件。</p></li></ul><h4 id="倒车汽轮机"><a href="#倒车汽轮机" class="headerlink" title="倒车汽轮机"></a>倒车汽轮机</h4><p>由于回转式叶片机械的功能特点，喷嘴和工作叶片在安装后，汽轮机转子只能单向转动。但是，由于舰船及机动航行的需要，例如进出港口，复杂的航行通道，恶劣的海洋条件航行，以及执行作战任务等情况下，舰船主汽轮机必须保证提供倒车功率，以保证舰船的航行安全。因此舰船主汽轮机通常需要配置导倒车汽轮机或倒车级。</p><p>倒车级的布置，依据正车汽轮机的布置而定。<strong>如果正车汽轮机室是单缸，倒车级布置在正车汽轮机的低压端，如果正车汽轮机是双缸，则倒车级布置在<u>低压缸最末级的后面</u></strong>。倒车级一般安装在主汽轮机的转子上，工作叶片的安装方向与正车汽轮机的工作叶片的安装方向相反，向倒车级通入工作蒸汽时可使汽轮机转子转动，但是由于主汽轮机绝大部分时间是正车运行，倒车级随正车级空转而产生摩擦鼓风损失。消耗正车汽轮机发出的功率因而会影响正车汽轮机运行的经济性。</p><p>核动力舰船在短时间倒车机动航行时，为了尽量减小一回路参数波动，倒车汽轮机最好用掉蒸汽发生器产生的全部蒸汽，因此倒车汽轮机的结构设计上主要考虑的是<strong>结构简单、布置方面以及工作安全可靠</strong>。经济方面的考虑放在次要的位置。</p><h4 id="核汽轮机的特点"><a href="#核汽轮机的特点" class="headerlink" title="核汽轮机的特点"></a>核汽轮机的特点</h4><ul><li><strong>饱和蒸汽参数低</strong></li><li><strong>蒸汽容量流量大</strong></li><li><strong>蒸汽湿度较大</strong></li></ul><h2 id="齿轮减速器"><a href="#齿轮减速器" class="headerlink" title="齿轮减速器"></a>齿轮减速器</h2><p>主汽轮机采用较高转速，是<strong>提高运行效率，减少重量尺寸</strong>的有效措施。对于提高舰船的续航力和机动性都具有重要意义。</p><p>中间传动设备应该<strong>工作可靠、传动效率高、减速比大，而且尺寸小、重量轻，能适应主汽轮机和推进器对最佳工作转速的选择，能将多缸汽轮机的功率会及传递到推进轴上，能满足正车和倒车转向变化的需要</strong>。</p><p>齿轮减速器是舰船汽轮机组普遍采用的一种传动设备，分为<strong>单级减速器</strong>和<strong>双级减速器</strong>，单级减速器多用于较小功率的辅汽轮机组。舰船主汽轮机多采用双级减速器。</p><p>齿轮减速器的主要性能指标为减速比，也称为传动比。定义为<strong>输入转速除以输出转速</strong>。</p><p>单级减速器的传动比可达14到20，而双级减速器的传动比可达40到100。</p><p>主汽轮机组的大功率齿轮减速器都采用<strong>渐开线人字形斜齿轮</strong>。具有传动平稳、可自动平衡齿轮上的轴向力以及加工技术成熟的优点。辅汽轮机组的小功率齿轮减速器多采用<strong>渐开线</strong>。斜齿轮也有部分采用<strong>圆弧齿轮</strong>。</p><h2 id="冷凝器"><a href="#冷凝器" class="headerlink" title="冷凝器"></a>冷凝器</h2><p>冷凝汽式汽轮机组的重要组成部分，其功用是<strong>接受来自汽轮机和旁路系统的蒸汽，回收启动时的疏水和给水加热系统的疏水，使之冷凝成水，建立并保持汽轮机运行所需的背压</strong>。</p><h3 id="抽气器"><a href="#抽气器" class="headerlink" title="抽气器"></a>抽气器</h3><h4 id="任务"><a href="#任务" class="headerlink" title="任务"></a>任务</h4><p>将冷凝器内的不凝结气体抽出，以维持冷凝器的真空度。</p><h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ul><li>结构简单</li><li>工作可靠</li><li>布置紧凑</li><li>使用和维护方便</li></ul><h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><ul><li>经济性能较差</li></ul><h4 id="组成-2"><a href="#组成-2" class="headerlink" title="组成"></a>组成</h4><ul><li>缩放式工作喷嘴</li><li>混合室</li><li>扩压管</li></ul>]]></content>
+    
+    
+    <summary type="html">汽轮机具有单机功率大、连续回转工作平稳、可靠性好等优点，在20世纪50年代以前被广泛应用在大、中型舰船上。随着舰用燃气轮机的发展及广泛使用，目前汽轮机主要用于核动力舰船以及部分常规动力大型水面舰船。</summary>
+    
+    
+    
+    <category term="船舶核动力装置" scheme="http://iuming.github.io/categories/%E8%88%B9%E8%88%B6%E6%A0%B8%E5%8A%A8%E5%8A%9B%E8%A3%85%E7%BD%AE/"/>
+    
+    
+    <category term="汽轮机" scheme="http://iuming.github.io/tags/%E6%B1%BD%E8%BD%AE%E6%9C%BA/"/>
+    
+    <category term="冷凝器" scheme="http://iuming.github.io/tags/%E5%86%B7%E5%87%9D%E5%99%A8/"/>
+    
+    <category term="齿轮减速器" scheme="http://iuming.github.io/tags/%E9%BD%BF%E8%BD%AE%E5%87%8F%E9%80%9F%E5%99%A8/"/>
+    
+  </entry>
   
   <entry>
     <title>二回路系统</title>
@@ -575,27 +600,6 @@
     
     
     <summary type="html">MySQL Community Server</summary>
-    
-    
-    
-    <category term="MySQL" scheme="http://iuming.github.io/categories/MySQL/"/>
-    
-    
-    <category term="学习笔记" scheme="http://iuming.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>初识MySQL</title>
-    <link href="http://iuming.github.io/2020/08/11/%E5%88%9D%E8%AF%86MySQL/"/>
-    <id>http://iuming.github.io/2020/08/11/%E5%88%9D%E8%AF%86MySQL/</id>
-    <published>2020-08-11T13:27:00.000Z</published>
-    <updated>2020-08-12T10:01:03.388Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="什么是数据库？"><a href="#什么是数据库？" class="headerlink" title="什么是数据库？"></a>什么是数据库？</h2><p>数据库（Database）是按照数据结构来组织、存储和管理数据的仓库。</p><p>每个数据库都有一个或多个不同的 API 用于创建，访问，管理，搜索和复制所保存的数据。</p><p>我们也可以将数据存储在文件中，但是在文件中读写数据速度相对较慢。</p><p>所以，现在我们使用关系型数据库管理系统（RDBMS）来存储和管理大数据量。所谓的关系型数据库，是建立在关系模型基础上的数据库，借助于集合代数等数学概念和方法来处理数据库中的数据。</p><p>RDBMS 即关系数据库管理系统(Relational Database Management System)的特点：</p><ul><li>数据以表格的形式出现</li><li>每行为各种记录名称</li><li>每列为记录名称所对应的数据域</li><li>许多的行和列组成一张表单</li><li>若干的表单组成database</li></ul><h2 id="RDBMS-术语"><a href="#RDBMS-术语" class="headerlink" title="RDBMS 术语"></a>RDBMS 术语</h2><p><strong>数据库</strong>: 数据库是一些关联表的集合。<br><strong>数据表</strong>: 表是数据的矩阵。在一个数据库中的表看起来像一个简单的电子表格。<br><strong>列</strong>: 一列(数据元素) 包含了相同类型的数据, 例如邮政编码的数据。<br><strong>行</strong>：一行（=元组，或记录）是一组相关的数据，例如一条用户订阅的数据。<br><strong>冗余</strong>：存储两倍数据，冗余降低了性能，但提高了数据的安全性。<br><strong>主键</strong>：主键是唯一的。一个数据表中只能包含一个主键。你可以使用主键来查询数据。<br><strong>外键</strong>：外键用于关联两个表。<br><strong>复合键</strong>：复合键（组合键）将多个列作为一个索引键，一般用于复合索引。<br><strong>索引</strong>：使用索引可快速访问数据库表中的特定信息。索引是对数据库表中一列或多列的值进行排序的一种结构。类似于书籍的目录。<br><strong>参照完整性</strong>: 参照的完整性要求关系中不允许引用不存在的实体。与实体完整性是关系模型必须满足的完整性约束条件，目的是保证数据的一致性。</p><p>MySQL 为关系型数据库(Relational Database Management System), 这种所谓的”关系型”可以理解为”表格”的概念, 一个关系型数据库由一个或数个表格组成, 如图所示的一个表格:</p><ul><li>表头(header): 每一列的名称;</li><li>列(col): 具有相同数据类型的数据的集合;</li><li>行(row): 每一行用来描述某条记录的具体信息;</li><li>值(value): 行的具体信息, 每个值必须与该列的数据类型相同;</li><li>键(key): 键的值在当前列中具有唯一性。</li></ul><h2 id="MySQL数据库"><a href="#MySQL数据库" class="headerlink" title="MySQL数据库"></a>MySQL数据库</h2><p>MySQL 是一个关系型数据库管理系统，由瑞典 MySQL AB 公司开发，目前属于 Oracle 公司。MySQL 是一种关联数据库管理系统，关联数据库将数据保存在不同的表中，而不是将所有数据放在一个大仓库内，这样就增加了速度并提高了灵活性。</p><ul><li>MySQL 是开源的，所以你不需要支付额外的费用。</li><li>MySQL 支持大型的数据库。可以处理拥有上千万条记录的大型数据库。</li><li>MySQL 使用标准的 SQL 数据语言形式。</li><li>MySQL 可以运行于多个系统上，并且支持多种语言。这些编程语言包括 C、C++、Python、Java、Perl、PHP、Eiffel、Ruby 和 Tcl 等。</li><li>MySQL 对PHP有很好的支持，PHP 是目前最流行的 Web 开发语言。</li><li>MySQL 支持大型数据库，支持 5000 万条记录的数据仓库，32 位系统表文件最大可支持 4GB，64 位系统支持最大的表文件为8TB。</li><li>MySQL 是可以定制的，采用了 GPL 协议，你可以修改源码来开发自己的 MySQL 系统。</li></ul>]]></content>
-    
-    
-    <summary type="html">MySQL 是最流行的关系型数据库管理系统，在 WEB 应用方面 MySQL 是最好的 RDBMS(Relational Database Management System：关系数据库管理系统)应用软件之一。</summary>
     
     
     
