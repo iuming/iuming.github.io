@@ -2405,7 +2405,72 @@ int print(CNode* root, ofstream &amp;cout, ull&amp; temp_counts)
 <li>给水泵应有直接自水柜吸水打入蒸汽发生器应急吸水管</li>
 <li>在正常条件下必须保证给水的水质</li>
 </ul>
-<h2 id="凝水的净化"><a href="#凝水的净化" class="headerlink" title="凝水的净化"></a>凝水的净化</h2>]]></content>
+<h2 id="凝水的净化"><a href="#凝水的净化" class="headerlink" title="凝水的净化"></a>凝水的净化</h2><h3 id="凝水被污染的原因"><a href="#凝水被污染的原因" class="headerlink" title="凝水被污染的原因"></a>凝水被污染的原因</h3><ul>
+<li>空气、海水从冷凝器不严密处漏入凝水中</li>
+<li>因冷凝器系统及疏水系统的设备和管道腐蚀，使腐蚀产物进入凝水</li>
+</ul>
+<h3 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h3><ul>
+<li>除去离子状态的物质<ul>
+<li>离子交换</li>
+</ul>
+</li>
+<li>除去悬浮状态的物质<ul>
+<li>过滤</li>
+</ul>
+</li>
+</ul>
+<h3 id="过滤器的类型和特点"><a href="#过滤器的类型和特点" class="headerlink" title="过滤器的类型和特点"></a>过滤器的类型和特点</h3><ul>
+<li>微孔滤芯过滤器</li>
+<li>磁性过滤器</li>
+<li>超细过滤器</li>
+</ul>
+<h2 id="给水除氧"><a href="#给水除氧" class="headerlink" title="给水除氧"></a>给水除氧</h2><h3 id="引起腐蚀的原因"><a href="#引起腐蚀的原因" class="headerlink" title="引起腐蚀的原因"></a>引起腐蚀的原因</h3><ul>
+<li>水中溶有氧气<ul>
+<li>主要部位是给水管道和疏水系统</li>
+</ul>
+</li>
+<li>水中溶有二氧化碳<ul>
+<li>主要部位为凝水系统</li>
+</ul>
+</li>
+</ul>
+<h2 id="除氧方法"><a href="#除氧方法" class="headerlink" title="除氧方法"></a>除氧方法</h2><h3 id="物理（热力）除氧"><a href="#物理（热力）除氧" class="headerlink" title="物理（热力）除氧"></a>物理（热力）除氧</h3><ul>
+<li><p><strong>Herry定律</strong>：任何气体在水中的溶解度$b$与该气体在气水界面上的分压$p_b$成正比，与水的温度成反比，即：</p>
+<p>$$b=\frac{p_b}{\Psi}$$</p>
+</li>
+<li><p><strong>Dalton定律</strong>：混合气体全压力$p$等于各组成气体分压力$p_{b,i}$之和，即：</p>
+<p>$$p=\sum_{i=1}^{n}p_{b,i}$$</p>
+</li>
+</ul>
+<h3 id="化学除氧"><a href="#化学除氧" class="headerlink" title="化学除氧"></a>化学除氧</h3><h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>利用一些易和氧发生化学反应的药剂，如亚硫酸钠$(Na_2SO_3)$和联氨$(N_2H_4)$，使之和水中溶氧化合生成一种物质而除去氧气。</p>
+<p>通常，热力(物理)除氧与化学除氧结合使用，以达到更高的除氧要求。</p>
+<h2 id="热力除氧的条件"><a href="#热力除氧的条件" class="headerlink" title="热力除氧的条件"></a>热力除氧的条件</h2><ul>
+<li>水必须加热至相应压力下的饱和温度</li>
+<li>创造气体自水中离析的条件</li>
+</ul>
+<h3 id="基本原则"><a href="#基本原则" class="headerlink" title="基本原则"></a>基本原则</h3><ul>
+<li>采用较大的汽水接触面积以利于传热和传质，常用的手段是将水均匀分散成雾滴、液膜或细水柱。</li>
+<li>为使水能充分加热到饱和温度，加热蒸汽与水一般取逆向流动，这样可以在所有汽水接触点上都形成最大的不平衡压差，又有利于排走离析出的气体。</li>
+<li>要有足够的分离时间保证气体能够彻底析出，除氧设备尺寸的选择应该保证水在其中停留的时间足够长。</li>
+<li>采取强化深度除氧的措施，如减小水的表面张力，使水呈湍流状态，采用蒸汽在水箱中鼓泡等，以尽可能减小水中剩余含氧量。</li>
+<li>及时排除水中分离出的气体，以减小这些气体在气水界面上的分压。</li>
+</ul>
+<h2 id="常用的除氧器形式"><a href="#常用的除氧器形式" class="headerlink" title="常用的除氧器形式"></a>常用的除氧器形式</h2><ul>
+<li>混合式除氧器</li>
+</ul>
+<h3 id="除氧器的基本类型"><a href="#除氧器的基本类型" class="headerlink" title="除氧器的基本类型"></a>除氧器的基本类型</h3><ul>
+<li>喷雾式</li>
+<li>填料式</li>
+<li>淋水盘式</li>
+<li>旋膜式</li>
+</ul>
+<h2 id="冷凝器的真空除氧"><a href="#冷凝器的真空除氧" class="headerlink" title="冷凝器的真空除氧"></a>冷凝器的真空除氧</h2><ul>
+<li>使凝水处于饱和温度</li>
+<li>持续、顺畅地排出分离出来的气体</li>
+<li>保持真空系统凝水部分的气密性</li>
+<li>组织好补水的补入</li>
+</ul>
+]]></content>
       <categories>
         <category>学习笔记</category>
       </categories>
