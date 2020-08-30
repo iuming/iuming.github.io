@@ -33,15 +33,15 @@
 <meta property="og:site_name" content="REALIUMING&#39;BLOG">
 <meta property="og:description" content="思维导图">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://iuming.github.io/2020/08/30/%E4%B8%AD%E5%9B%BD%E8%BF%91%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/..%5CMarkdown_images%5C%E4%B8%AD%E5%9B%BD%E8%BF%91%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81.svg">
+<meta property="og:image" content="https://github.com/iuming/iuming.github.io/blob/master/Markdown_images/%E4%B8%AD%E5%9B%BD%E8%BF%91%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81.svg">
 <meta property="article:published_time" content="2020-08-30T11:33:45.000Z">
-<meta property="article:modified_time" content="2020-08-30T11:35:49.877Z">
+<meta property="article:modified_time" content="2020-08-30T11:41:18.279Z">
 <meta property="article:author" content="Liu Ming">
 <meta property="article:tag" content="近代史纲要">
 <meta property="article:tag" content="历史">
 <meta property="article:tag" content="中国">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://iuming.github.io/2020/08/30/%E4%B8%AD%E5%9B%BD%E8%BF%91%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/..%5CMarkdown_images%5C%E4%B8%AD%E5%9B%BD%E8%BF%91%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81.svg">
+<meta name="twitter:image" content="https://github.com/iuming/iuming.github.io/blob/master/Markdown_images/%E4%B8%AD%E5%9B%BD%E8%BF%91%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81.svg">
 
 <link rel="canonical" href="http://iuming.github.io/2020/08/30/%E4%B8%AD%E5%9B%BD%E8%BF%91%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/">
 
@@ -262,7 +262,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-08-30 19:33:45 / Modified: 19:35:49" itemprop="dateCreated datePublished" datetime="2020-08-30T19:33:45+08:00">2020-08-30</time>
+              <time title="Created: 2020-08-30 19:33:45 / Modified: 19:41:18" itemprop="dateCreated datePublished" datetime="2020-08-30T19:33:45+08:00">2020-08-30</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -320,7 +320,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="思维导图"><a href="#思维导图" class="headerlink" title="思维导图"></a>思维导图</h2><p><img src="..%5CMarkdown_images%5C%E4%B8%AD%E5%9B%BD%E8%BF%91%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81.svg" alt="中国近代史纲要思维导图"></p>
+        <h2 id="思维导图"><a href="#思维导图" class="headerlink" title="思维导图"></a>思维导图</h2><p><img src="https://github.com/iuming/iuming.github.io/blob/master/Markdown_images/%E4%B8%AD%E5%9B%BD%E8%BF%91%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81.svg" alt="中国近代史纲要思维导图"></p>
 
     </div>
 
@@ -463,13 +463,13 @@
           
       <div class="tabs tabs-comment">
         <ul class="nav-tabs">
-            <li class="tab"><a href="#comment-valine">valine</a></li>
-            <li class="tab"><a href="#comment-livere">livere</a></li>
             <li class="tab"><a href="#comment-gitalk">gitalk</a></li>
+            <li class="tab"><a href="#comment-livere">livere</a></li>
+            <li class="tab"><a href="#comment-valine">valine</a></li>
         </ul>
         <div class="tab-content">
-            <div class="tab-pane valine" id="comment-valine">
-              <div class="comments" id="valine-comments"></div>
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments" id="gitalk-container"></div>
             </div>
             <div class="tab-pane livere" id="comment-livere">
               
@@ -478,8 +478,8 @@
   </div>
   
             </div>
-            <div class="tab-pane gitalk" id="comment-gitalk">
-              <div class="comments" id="gitalk-container"></div>
+            <div class="tab-pane valine" id="comment-valine">
+              <div class="comments" id="valine-comments"></div>
             </div>
         </div>
       </div>
@@ -816,6 +816,42 @@ if (document.querySelectorAll('pre.mermaid').length) {
 
   
 
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '16a5ec98f88d0606fc6c',
+      clientSecret: '4d7c245233b1fb48caaf42b5bc67380e8f46ab7e',
+      repo        : 'iuming.github.io',
+      owner       : 'iuming',
+      admin       : ['iuming'],
+      id          : '3752d1edbb5540fec5a3ef4e3230d2a4',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
 
 <script>
 NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
@@ -842,42 +878,6 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
       serverURLs : ''
     });
   }, window.Valine);
-});
-</script>
-
-<script>
-NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
-  window.livereOptions = {
-    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
-  };
-  (function(d, s) {
-    var j, e = d.getElementsByTagName(s)[0];
-    if (typeof LivereTower === 'function') { return; }
-    j = d.createElement(s);
-    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-    j.async = true;
-    e.parentNode.insertBefore(j, e);
-  })(document, 'script');
-});
-</script>
-
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
-
-<script>
-NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
-    var gitalk = new Gitalk({
-      clientID    : '16a5ec98f88d0606fc6c',
-      clientSecret: '4d7c245233b1fb48caaf42b5bc67380e8f46ab7e',
-      repo        : 'iuming.github.io',
-      owner       : 'iuming',
-      admin       : ['iuming'],
-      id          : '3752d1edbb5540fec5a3ef4e3230d2a4',
-        language: 'zh-CN',
-      distractionFreeMode: true
-    });
-    gitalk.render('gitalk-container');
-  }, window.Gitalk);
 });
 </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 

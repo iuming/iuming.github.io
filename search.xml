@@ -2396,7 +2396,7 @@ int print(CNode* root, ofstream &amp;cout, ull&amp; temp_counts)
   <entry>
     <title>中国近代史纲要思维导图</title>
     <url>/2020/08/30/%E4%B8%AD%E5%9B%BD%E8%BF%91%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/</url>
-    <content><![CDATA[<h2 id="思维导图"><a href="#思维导图" class="headerlink" title="思维导图"></a>思维导图</h2><p><img src="..%5CMarkdown_images%5C%E4%B8%AD%E5%9B%BD%E8%BF%91%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81.svg" alt="中国近代史纲要思维导图"></p>
+    <content><![CDATA[<h2 id="思维导图"><a href="#思维导图" class="headerlink" title="思维导图"></a>思维导图</h2><p><img src="https://github.com/iuming/iuming.github.io/blob/master/Markdown_images/%E4%B8%AD%E5%9B%BD%E8%BF%91%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81.svg" alt="中国近代史纲要思维导图"></p>
 ]]></content>
       <categories>
         <category>思维导图</category>
