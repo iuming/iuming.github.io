@@ -6,7 +6,7 @@
   <link href="http://iuming.github.io/atom.xml" rel="self"/>
   
   <link href="http://iuming.github.io/"/>
-  <updated>2020-08-30T13:04:07.368Z</updated>
+  <updated>2020-08-30T13:19:50.953Z</updated>
   <id>http://iuming.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>润滑油系统</title>
+    <link href="http://iuming.github.io/2020/08/30/%E6%B6%A6%E6%BB%91%E6%B2%B9%E7%B3%BB%E7%BB%9F/"/>
+    <id>http://iuming.github.io/2020/08/30/%E6%B6%A6%E6%BB%91%E6%B2%B9%E7%B3%BB%E7%BB%9F/</id>
+    <published>2020-08-30T13:07:51.000Z</published>
+    <updated>2020-08-30T13:19:50.953Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><ul><li>向主、辅设备的摩擦部件提供润滑和冷却所需的润滑油</li><li>向主机遥控系统及保安设备提供工作用的压力油</li></ul><h2 id="设计要求"><a href="#设计要求" class="headerlink" title="设计要求"></a>设计要求</h2><ul><li>当系统中润滑油中断、油压下降或油温过度升高时，应及时发出信号，并能及时停止需供应滑油机械的工作。</li><li>为保证系统中润滑油的品质，系统设计应保持润滑油在航行或停泊期间，均能对润滑油进行净化处理。</li><li>循环润滑油要有足够的沉淀时间。</li></ul><h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><h3 id="重力式"><a href="#重力式" class="headerlink" title="重力式"></a>重力式</h3><h3 id="压力式"><a href="#压力式" class="headerlink" title="压力式"></a>压力式</h3><h4 id="组成"><a href="#组成" class="headerlink" title="组成"></a>组成</h4><ul><li><strong>主滑油系统</strong>：为汽轮机齿轮机组的轴承、齿轮减速器等摩擦部件提供润滑和冷却所需的润滑油；</li><li><strong>辅助润滑系统</strong>：为辅助设备提供润滑和冷却所需的润滑油；</li><li><strong>滑油分离系统</strong>：对滑油进行净化和分离；</li><li><strong>滑油驳运系统</strong>：<ul><li>在补给时从码头、补给船向舱室内各储油柜装载润滑油</li><li>在维修时将舱室内各储油柜中的润滑油排到码头上的油柜</li><li>舱室内各油柜之间润滑油的驳运</li></ul></li></ul><h2 id="滑油的特性"><a href="#滑油的特性" class="headerlink" title="滑油的特性"></a>滑油的特性</h2><ul><li>粘度</li><li>闪点</li><li>酸值</li><li>灰分</li><li>抗乳化性</li><li>抗氧化性</li><li>机械杂质</li><li>外观（色度）</li></ul>]]></content>
+    
+    
+    <summary type="html">在船舶核动力装置中，润滑油系统的主要功能是向主、辅设备的摩擦部件提供润滑和冷却所需的润滑油，同时向主机遥控系统及保安设备提供工作用的压力油。</summary>
+    
+    
+    
+    <category term="学习笔记" scheme="http://iuming.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="船舶核动力装置" scheme="http://iuming.github.io/tags/%E8%88%B9%E8%88%B6%E6%A0%B8%E5%8A%A8%E5%8A%9B%E8%A3%85%E7%BD%AE/"/>
+    
+    <category term="润滑油" scheme="http://iuming.github.io/tags/%E6%B6%A6%E6%BB%91%E6%B2%B9/"/>
+    
+    <category term="压力油" scheme="http://iuming.github.io/tags/%E5%8E%8B%E5%8A%9B%E6%B2%B9/"/>
+    
+  </entry>
   
   <entry>
     <title>循环冷却水系统</title>
@@ -572,37 +597,6 @@
     <category term="量子力学" scheme="http://iuming.github.io/tags/%E9%87%8F%E5%AD%90%E5%8A%9B%E5%AD%A6/"/>
     
     <category term="算符" scheme="http://iuming.github.io/tags/%E7%AE%97%E7%AC%A6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>原子核的基本性质（二）</title>
-    <link href="http://iuming.github.io/2020/08/15/%E5%8E%9F%E5%AD%90%E6%A0%B8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%80%A7%E8%B4%A8%EF%BC%88%E4%BA%8C%EF%BC%89/"/>
-    <id>http://iuming.github.io/2020/08/15/%E5%8E%9F%E5%AD%90%E6%A0%B8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%80%A7%E8%B4%A8%EF%BC%88%E4%BA%8C%EF%BC%89/</id>
-    <published>2020-08-15T11:28:54.000Z</published>
-    <updated>2020-08-15T12:28:37.489Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="角动量"><a href="#角动量" class="headerlink" title="角动量"></a>角动量</h2><h3 id="磁偶极子在磁场中的能量"><a href="#磁偶极子在磁场中的能量" class="headerlink" title="磁偶极子在磁场中的能量"></a>磁偶极子在磁场中的能量</h3><h4 id="磁矩与角动量的关系"><a href="#磁矩与角动量的关系" class="headerlink" title="磁矩与角动量的关系"></a>磁矩与角动量的关系</h4><ul><li><p>一个电量为$+q$的粒子做匀速圆周运动，其相当于一个磁偶极子。</p></li><li><p>做匀速圆周运动的粒子可以等效为一个电流，其大小为：</p><p>$$I=\frac{q}{T}=\frac{qv}{2\pi R}$$</p><p>相应的，其磁矩为：</p><p>$$\vec \mu =I\vec S=\frac{q}{2m}\cdot \vec l$$</p><p>根据量子力学计算得到的电子轨道运动的磁矩与轨道角动量的关系为：</p><p>$$\vec \mu =-\frac{e}{2m_e}\vec l=g_l(\frac{e}{2m_e})\vec l$$</p><p>$g_l$称为电子的$g$因子，脚标$l$表示其与角动量相关。</p></li></ul><h4 id="磁偶极子在磁场中的能量-1"><a href="#磁偶极子在磁场中的能量-1" class="headerlink" title="磁偶极子在磁场中的能量"></a>磁偶极子在磁场中的能量</h4><ul><li><p>处于磁场中的磁偶极子，其将受到力矩的作用，<br>力矩的大小为：</p><p>$$\vec M=\vec \mu \times \vec B=-\mu B\cdot \sin \theta \cdot \vec e_\theta$$</p><p>如果选取$θ＝\pi /2$为平衡位置，那么其在磁场的势能为：</p><p>$$U=-\int_{\pi /2}^{\theta}\vec M\cdot d\vec \theta=-\vec \mu \cdot \vec B$$</p><p>根据前面的分析，磁矩与角动量是相关的，从而有：</p><p>$$U=-\frac{q}{2m}\vec l\cdot \vec B$$</p></li></ul><h3 id="量子力学中的角动量"><a href="#量子力学中的角动量" class="headerlink" title="量子力学中的角动量"></a>量子力学中的角动量</h3><h4 id="力学量的取值"><a href="#力学量的取值" class="headerlink" title="力学量的取值"></a>力学量的取值</h4><ul><li><p>在经典力学中：</p><ul><li>对物体的运动状态通过各力学量来描述；</li><li>每个力学量的取值可以直接计算得到。</li></ul></li><li><p>在量子力学中：</p><ul><li>物体的运动通过体系的态函数来描述的；</li><li>力学量的取值（分布）通过力学量算符对态函数的运算得到。</li></ul></li><li><p>例如对于能量，其算符为$\hat H$，即体系的Hamilton算符。将其作用在体系的态函数上，如果下式成立：</p><p>$$\hat H \left | \psi_n  \right \rangle =E_n \left | \psi_n  \right \rangle$$</p></li><li><p>便称是$\left | \psi_n  \right \rangle$能量算符的一个本征态，此时体系的能量为$E_n$。</p></li><li><p>脚标$n$则称为量子数，其决定了力学量（即能量）的取值。</p></li><li><p>例如对于无限深方势阱中的粒子，其能量的取值为：</p><p>$$E_n=\frac{n^2\pi^2\hbar^2}{2ma^2}$$</p></li><li><p>总结</p><p>在量子力学中，力学量的取值是通过算符来计算的。对于一个力学量$F$，其算符为$\hat F$，其作用在本征态$\left | F_n  \right \rangle$上：</p><p>$$\hat F \left | F_n  \right \rangle=f_n \left | F_n  \right \rangle$$</p><p>通过求解上式（本征方程），可以得到一系列满足（边界）条件的量子数$n$。</p><p>力学量$F$的取值，则由量子数$n$来决定。</p></li></ul><h4 id="轨道角动量"><a href="#轨道角动量" class="headerlink" title="轨道角动量"></a>轨道角动量</h4><ul><li><p>对于轨道角动量$\vec l$，其力学量算符的表达式为：</p><p>$$\hat{\vec l}=\hat{l_x}\cdot\hat{e_x}+\hat{l_y}\cdot\hat{e_y}+\hat{l_z}\cdot\hat{e_z}$$</p><p>其本征方程为：</p><p>$$\hat{\vec l^2}\left | l,m \right \rangle =l(l+1)\hbar^2 \left | l,m \right \rangle$$</p><p>上式中，$l$称为轨道角动量量子数；$m$则称为磁量子数。</p><p>根据轨道角动量量子数便可确定轨道角动量的大小：</p><p>$$\sqrt{l(l+1)}\hbar$$</p><p>对于$\hat{\vec l}$在$z$轴方向上的分量$\hat{l_z}$，其本征方程为：</p><p>$$\hat{l_z} \left |l,m \right \rangle = m\hbar \left |l,m \right \rangle$$</p><p>从而$\hat{l_z}$的取值为：</p><p>$$m\hbar$$</p><p>磁量子数$m$的取值范围为：</p><p>$$m=-l,-l+1,\dots,0,\dots,l-1,l$$</p></li></ul><h4 id="角动量的定义"><a href="#角动量的定义" class="headerlink" title="角动量的定义"></a>角动量的定义</h4><ul><li><p>对于轨道角动量，可以得到如下关系式：</p><p>$$\left [ \hat{l_{\alpha}},\hat{l_{\beta}} \right]=\hat{l_\alpha}\hat{l_\beta}-\hat{l_\beta}\hat{l_\alpha}=\varepsilon_{\alpha\beta\gamma}i\hbar\hat{l_\gamma} \ (\alpha,\beta,\gamma=x,y,z)$$</p></li><li><p>在量子力学中，如果力学量$\hat{\vec F}$的三个分量满足以下关系式，则称$\hat{\vec F}$为角动量：</p><p>$$\left [ \hat{F_{\alpha}},\hat{F_{\beta}} \right] = \varepsilon_{\alpha\beta\gamma}i\hbar\hat{F_\gamma} \ (\alpha,\beta,\gamma=x,y,z$$</p></li></ul><h4 id="角动量的耦合"><a href="#角动量的耦合" class="headerlink" title="角动量的耦合"></a>角动量的耦合</h4><ul><li><p>现在考虑两个角动量耦合的情况下，假设：</p><p>$$\hat{\vec l} = \hat{\vec l_1}+\hat{\vec l_2}$$</p><p>那么$\hat{\vec l}$的取值则由其本征方程确定：</p><p>$$\hat{\vec l^2} \left | l_1m_1l_2m_2 \right \rangle = l(l+1)\hbar^2 \left | l_1m_1l_2m_2 \right \rangle$$</p><p>其大小为：</p><p>$$\sqrt{l(l+1)}\hbar$$</p><p>其中，$l$的取值范围为：</p><p>$$l=l_1+l_2,l_1+l_2-1,\dots,\left | l_1-l_2 \right |$$</p><p>相应的，$\hat{\vec l}$在$z$轴方向上的分量的取值也由其本征方程确定：</p><p>$$\hat{l_z} \left | l_1m_1l_2m_2 \right \rangle = m\hbar \left | l_1m_1l_2m_2 \right \rangle$$</p><p>$\hat{l_z}$的大小为：</p><p>$$m\hbar$$</p><p>$m$的取值范围为：</p><p>$$m=-l,-l+1,\dots,0,\dots,l-1,l$$</p></li></ul>]]></content>
-    
-    
-    <summary type="html">在量子力学中，电子的轨道角动量与磁矩的关系，磁偶极矩在磁场中能量的表达式。量子力学力学量的表达方式，轨道角动量算符的表达式，量子力学中角动量的定义以及两个电子角动量耦合的本征方程。</summary>
-    
-    
-    
-    <category term="学习笔记" scheme="http://iuming.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-    <category term="原子核物理" scheme="http://iuming.github.io/tags/%E5%8E%9F%E5%AD%90%E6%A0%B8%E7%89%A9%E7%90%86/"/>
-    
-    <category term="量子力学" scheme="http://iuming.github.io/tags/%E9%87%8F%E5%AD%90%E5%8A%9B%E5%AD%A6/"/>
-    
-    <category term="算符" scheme="http://iuming.github.io/tags/%E7%AE%97%E7%AC%A6/"/>
-    
-    <category term="角动量" scheme="http://iuming.github.io/tags/%E8%A7%92%E5%8A%A8%E9%87%8F/"/>
-    
-    <category term="本征态" scheme="http://iuming.github.io/tags/%E6%9C%AC%E5%BE%81%E6%80%81/"/>
-    
-    <category term="哈密顿量" scheme="http://iuming.github.io/tags/%E5%93%88%E5%AF%86%E9%A1%BF%E9%87%8F/"/>
     
   </entry>
   

@@ -2513,4 +2513,47 @@ int print(CNode* root, ofstream &amp;cout, ull&amp; temp_counts)
         <tag>二回路辅助系统</tag>
       </tags>
   </entry>
+  <entry>
+    <title>润滑油系统</title>
+    <url>/2020/08/30/%E6%B6%A6%E6%BB%91%E6%B2%B9%E7%B3%BB%E7%BB%9F/</url>
+    <content><![CDATA[<h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><ul>
+<li>向主、辅设备的摩擦部件提供润滑和冷却所需的润滑油</li>
+<li>向主机遥控系统及保安设备提供工作用的压力油</li>
+</ul>
+<h2 id="设计要求"><a href="#设计要求" class="headerlink" title="设计要求"></a>设计要求</h2><ul>
+<li>当系统中润滑油中断、油压下降或油温过度升高时，应及时发出信号，并能及时停止需供应滑油机械的工作。</li>
+<li>为保证系统中润滑油的品质，系统设计应保持润滑油在航行或停泊期间，均能对润滑油进行净化处理。</li>
+<li>循环润滑油要有足够的沉淀时间。</li>
+</ul>
+<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><h3 id="重力式"><a href="#重力式" class="headerlink" title="重力式"></a>重力式</h3><h3 id="压力式"><a href="#压力式" class="headerlink" title="压力式"></a>压力式</h3><h4 id="组成"><a href="#组成" class="headerlink" title="组成"></a>组成</h4><ul>
+<li><strong>主滑油系统</strong>：为汽轮机齿轮机组的轴承、齿轮减速器等摩擦部件提供润滑和冷却所需的润滑油；</li>
+<li><strong>辅助润滑系统</strong>：为辅助设备提供润滑和冷却所需的润滑油；</li>
+<li><strong>滑油分离系统</strong>：对滑油进行净化和分离；</li>
+<li><strong>滑油驳运系统</strong>：<ul>
+<li>在补给时从码头、补给船向舱室内各储油柜装载润滑油</li>
+<li>在维修时将舱室内各储油柜中的润滑油排到码头上的油柜</li>
+<li>舱室内各油柜之间润滑油的驳运</li>
+</ul>
+</li>
+</ul>
+<h2 id="滑油的特性"><a href="#滑油的特性" class="headerlink" title="滑油的特性"></a>滑油的特性</h2><ul>
+<li>粘度</li>
+<li>闪点</li>
+<li>酸值</li>
+<li>灰分</li>
+<li>抗乳化性</li>
+<li>抗氧化性</li>
+<li>机械杂质</li>
+<li>外观（色度）</li>
+</ul>
+]]></content>
+      <categories>
+        <category>学习笔记</category>
+      </categories>
+      <tags>
+        <tag>船舶核动力装置</tag>
+        <tag>润滑油</tag>
+        <tag>压力油</tag>
+      </tags>
+  </entry>
 </search>
