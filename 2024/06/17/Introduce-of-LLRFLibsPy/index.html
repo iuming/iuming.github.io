@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="msvalidate.01" content="51e1af81d64aca9267da5a0ef40d417f">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"iuming.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":true,"sidebar":{"position":"left","width":300,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="对于LLRF system书本中开源的LLRFLibsPy库进行学习，学习其整体框架！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Introduce of LLRFLibsPy">
+<meta property="og:url" content="http://iuming.github.io/2024/06/17/Introduce-of-LLRFLibsPy/index.html">
+<meta property="og:site_name" content="REALIUMING&#39;BLOG">
+<meta property="og:description" content="对于LLRF system书本中开源的LLRFLibsPy库进行学习，学习其整体框架！">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://iuming.github.io/images/image.png">
+<meta property="og:image" content="http://iuming.github.io/images/lib_arc.png">
+<meta property="article:published_time" content="2024-06-17T07:29:50.000Z">
+<meta property="article:modified_time" content="2024-06-17T08:07:14.327Z">
+<meta property="article:author" content="Liu Ming">
+<meta property="article:tag" content="LLRF">
+<meta property="article:tag" content="cavity">
+<meta property="article:tag" content="SRF">
+<meta property="article:tag" content="accelerator">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://iuming.github.io/images/image.png">
+
+<link rel="canonical" href="http://iuming.github.io/2024/06/17/Introduce-of-LLRFLibsPy/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Introduce of LLRFLibsPy | REALIUMING'BLOG</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">REALIUMING'BLOG</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">95</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">12</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">29</span></a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+      
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL2l1bWluZw==" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://iuming.github.io/2024/06/17/Introduce-of-LLRFLibsPy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Liu Ming">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="REALIUMING'BLOG">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Introduce of LLRFLibsPy
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2024-06-17 15:29:50 / Modified: 16:07:14" itemprop="dateCreated datePublished" datetime="2024-06-17T15:29:50+08:00">2024-06-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/note/" itemprop="url" rel="index"><span itemprop="name">note</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/note/framewwork/" itemprop="url" rel="index"><span itemprop="name">framewwork</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2024/06/17/Introduce-of-LLRFLibsPy/" class="post-meta-item leancloud_visitors" data-flag-title="Introduce of LLRFLibsPy" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2024/06/17/Introduce-of-LLRFLibsPy/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2024/06/17/Introduce-of-LLRFLibsPy/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">对于LLRF system书本中开源的LLRFLibsPy库进行学习，学习其整体框架！</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="LLRFLibsPy-Introduction"><a href="#LLRFLibsPy-Introduction" class="headerlink" title="LLRFLibsPy Introduction"></a>LLRFLibsPy Introduction</h1><p>LLRFLibsPy是一个用 Python 实现的 LLRF 领域算法库。它的主要目的是实现常见的 LLRF 算法，有利于开发 LLRF 高级应用程序、自动化和测试软件。</p>
+<p>该代码来自<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FhcWlhby9MTFJGTGlic1B5">Github<i class="fa fa-external-link-alt"></i></span>，目录如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br></pre></td><td class="code"><pre><span class="line">LLRFLibsPy</span><br><span class="line">├── doc</span><br><span class="line">│   ├── LLRFLibsPy_document.pdf</span><br><span class="line">│   └── LLRFLibsPy_intro.pdf</span><br><span class="line">├── docs</span><br><span class="line">│   ├── algorithms.html</span><br><span class="line">│   ├── architecture.html</span><br><span class="line">│   ├── generated</span><br><span class="line">│   │   ├── rf_calib.html</span><br><span class="line">│   │   ├── rf_control.html</span><br><span class="line">│   │   ├── rf_det_act.html</span><br><span class="line">│   │   ├── rf_fit.html</span><br><span class="line">│   │   ├── rf_misc.html</span><br><span class="line">│   │   ├── rf_noise.html</span><br><span class="line">│   │   ├── rf_plot.html</span><br><span class="line">│   │   ├── rf_sim.html</span><br><span class="line">│   │   └── rf_sysid.html</span><br><span class="line">│   ├── genindex.html</span><br><span class="line">│   ├── index.html</span><br><span class="line">│   ├── introduction.html</span><br><span class="line">│   ├── module_index.html</span><br><span class="line">│   ├── _modules</span><br><span class="line">│   │   ├── index.html</span><br><span class="line">│   │   ├── rf_calib.html</span><br><span class="line">│   │   ├── rf_control.html</span><br><span class="line">│   │   ├── rf_det_act.html</span><br><span class="line">│   │   ├── rf_fit.html</span><br><span class="line">│   │   ├── rf_misc.html</span><br><span class="line">│   │   ├── rf_noise.html</span><br><span class="line">│   │   ├── rf_plot.html</span><br><span class="line">│   │   ├── rf_sim.html</span><br><span class="line">│   │   └── rf_sysid.html</span><br><span class="line">│   ├── objects.inv</span><br><span class="line">│   ├── py-modindex.html</span><br><span class="line">│   ├── search.html</span><br><span class="line">│   ├── searchindex.js</span><br><span class="line">│   └── _static</span><br><span class="line">│       ├── basic.css</span><br><span class="line">│       ├── bode_plot.png</span><br><span class="line">│       ├── custom_aaqiao.css</span><br><span class="line">│       ├── doctools.js</span><br><span class="line">│       ├── documentation_options.js</span><br><span class="line">│       ├── file.png</span><br><span class="line">│       ├── language_data.js</span><br><span class="line">│       ├── lib_arc.png</span><br><span class="line">│       ├── llrf_logical_arc.png</span><br><span class="line">│       ├── minus.png</span><br><span class="line">│       ├── module_diagram.png</span><br><span class="line">│       ├── noniq_demod.png</span><br><span class="line">│       ├── plus.png</span><br><span class="line">│       ├── psi_logo.png</span><br><span class="line">│       ├── pygments.css</span><br><span class="line">│       ├── rf_gun.png</span><br><span class="line">│       ├── scripts</span><br><span class="line">│       │   ├── bootstrap.js</span><br><span class="line">│       │   ├── bootstrap.js.LICENSE.txt</span><br><span class="line">│       │   ├── bootstrap.js.map</span><br><span class="line">│       │   ├── pydata-sphinx-theme.js</span><br><span class="line">│       │   └── pydata-sphinx-theme.js.map</span><br><span class="line">│       ├── searchtools.js</span><br><span class="line">│       ├── sphinx_highlight.js</span><br><span class="line">│       ├── styles</span><br><span class="line">│       │   ├── bootstrap.css</span><br><span class="line">│       │   ├── bootstrap.css.map</span><br><span class="line">│       │   ├── pydata-sphinx-theme.css</span><br><span class="line">│       │   ├── pydata-sphinx-theme.css.map</span><br><span class="line">│       │   └── theme.css</span><br><span class="line">│       ├── vendor</span><br><span class="line">│       │   └── fontawesome</span><br><span class="line">│       │       └── 6.1.2</span><br><span class="line">│       │           ├── css</span><br><span class="line">│       │           │   └── all.min.css</span><br><span class="line">│       │           ├── js</span><br><span class="line">│       │           │   ├── all.min.js</span><br><span class="line">│       │           │   └── all.min.js.LICENSE.txt</span><br><span class="line">│       │           ├── LICENSE.txt</span><br><span class="line">│       │           └── webfonts</span><br><span class="line">│       │               ├── fa-brands-400.ttf</span><br><span class="line">│       │               ├── fa-brands-400.woff2</span><br><span class="line">│       │               ├── fa-regular-400.ttf</span><br><span class="line">│       │               ├── fa-regular-400.woff2</span><br><span class="line">│       │               ├── fa-solid-900.ttf</span><br><span class="line">│       │               ├── fa-solid-900.woff2</span><br><span class="line">│       │               ├── fa-v4compatibility.ttf</span><br><span class="line">│       │               └── fa-v4compatibility.woff2</span><br><span class="line">│       ├── vprobe_stability.png</span><br><span class="line">│       └── webpack-macros.html</span><br><span class="line">├── example</span><br><span class="line">│   ├── data_adcraw_wfs.mat</span><br><span class="line">│   ├── data_cavid_beam.mat</span><br><span class="line">│   ├── data_dac_offs.mat</span><br><span class="line">│   ├── data_directivity.mat</span><br><span class="line">│   ├── data_Gun_wfs.mat</span><br><span class="line">│   ├── data_iqm_imbal.mat</span><br><span class="line">│   ├── data_ref_sample.mat</span><br><span class="line">│   ├── example_aff_ilc.py</span><br><span class="line">│   ├── example_aff_timerev_lpf.py</span><br><span class="line">│   ├── example_calib_dac_offs.py</span><br><span class="line">│   ├── example_calib_for_ref_nc_cavity.py</span><br><span class="line">│   ├── example_calib_for_ref_sc_cavity.py</span><br><span class="line">│   ├── example_calib_iqm.py</span><br><span class="line">│   ├── example_calib_sys_gain_phase.py</span><br><span class="line">│   ├── example_calib_virtual_probe.py</span><br><span class="line">│   ├── example_demod.py</span><br><span class="line">│   ├── example_feedback_adrc.py</span><br><span class="line">│   ├── example_feedback_analysis.py</span><br><span class="line">│   ├── example_feedback_basic.py</span><br><span class="line">│   ├── example_fit_funcs.py</span><br><span class="line">│   ├── example_noise_psd.py</span><br><span class="line">│   ├── example_noise_time_series.py</span><br><span class="line">│   ├── example_power_req2.py</span><br><span class="line">│   ├── example_power_req.py</span><br><span class="line">│   ├── example_power_to_vacc.py</span><br><span class="line">│   ├── example_rand_sine.py</span><br><span class="line">│   ├── example_resp_matrix_inv.py</span><br><span class="line">│   ├── example_sim_cavity_basic_passband.py</span><br><span class="line">│   ├── example_sim_cavity_basic.py</span><br><span class="line">│   ├── example_sim_cavity_mech2.py</span><br><span class="line">│   ├── example_sim_cavity_mech.py</span><br><span class="line">│   ├── example_sp_ff.py</span><br><span class="line">│   ├── example_sysid_caveq.py</span><br><span class="line">│   ├── example_sysid_prbs_etfe.py</span><br><span class="line">│   ├── __pycache__</span><br><span class="line">│   │   └── set_path.cpython-311.pyc</span><br><span class="line">│   └── set_path.py</span><br><span class="line">├── LICENSE</span><br><span class="line">├── Makefile</span><br><span class="line">├── README.md</span><br><span class="line">└── src</span><br><span class="line">    ├── __pycache__</span><br><span class="line">    │   ├── rf_calib.cpython-311.pyc</span><br><span class="line">    │   ├── rf_det_act.cpython-311.pyc</span><br><span class="line">    │   ├── rf_fit.cpython-311.pyc</span><br><span class="line">    │   ├── rf_misc.cpython-311.pyc</span><br><span class="line">    │   ├── rf_noise.cpython-311.pyc</span><br><span class="line">    │   └── rf_sysid.cpython-311.pyc</span><br><span class="line">    ├── rf_calib.py</span><br><span class="line">    ├── rf_control.py</span><br><span class="line">    ├── rf_det_act.py</span><br><span class="line">    ├── rf_fit.py</span><br><span class="line">    ├── rf_misc.py</span><br><span class="line">    ├── rf_noise.py</span><br><span class="line">    ├── rf_plot.py</span><br><span class="line">    ├── rf_sim.py</span><br><span class="line">    └── rf_sysid.py</span><br><span class="line"></span><br><span class="line">18 directories, 127 files</span><br></pre></td></tr></table></figure>
+
+<p>数字 LLRF 系统经过多年的发展，其架构现已相当成熟，模式也大体相似。尽管将 RF 场稳定性推向极致并应用现代控制算法和机器学习等先进算法仍在指导研发，但 LLRF 硬件、固件和软件的标准化已经开始。DESY 正在提前标准化基于 MicroTCA 平台的 LLRF 硬件。DESY 和 PSI 已经开发了一些基本的固件&#x2F;软件库：</p>
+<ol>
+<li><p>PSI 固件&#x2F;软件库</p>
+<ul>
+<li>psi_fix：标准信号处理组件的 VHDL（用于合成）和 Python（用于快速模拟）中的 bittrue 实现。</li>
+<li>psi_common：包含通用 VHDL 代码，该代码不是针对特定应用的，可以轻松重复使用。</li>
+<li>psi_tb：包含对测试台有用的 VHDL 代码。</li>
+<li>PsiSim：TCL 框架允许使用 modelsim、VHDL 和 Vivado-Simulator 轻松创建回归测试。</li>
+<li>LLRFLibs：用C语言实现的LLRF算法库。</li>
+<li>LLRFLibsPy：用Python实现的LLRF算法库。</li>
+<li>ooEpics：用于 EPICS 模块开发的 C++ 框架。</li>
+<li>ooPye：用于 EPICS 软 IOC 开发的 Python 框架。</li>
+</ul>
+</li>
+<li><p>DESY 固件&#x2F;软件库</p>
+<ul>
+<li>FWK：固件框架库。</li>
+<li>ChimeraTK：一个软件框架库</li>
+</ul>
+</li>
+</ol>
+<p>这些库用于构建固件&#x2F;软件的架构、框架和基础架构，或用于实现与 LLRF 和加速器控制相关的域算法。为了了解开发这些库的动机，首先看看这些库在 LLRF 系统中的作用和位置。</p>
+<p><img data-src="/images/image.png" alt="LLRF系统的功能框架"></p>
+<p>FPGA 和 CPU（LLRF 站可能有多个 FPGA 和 CPU）是承载固件和软件实体的数字处理单元。</p>
+<p><img data-src="/images/lib_arc.png" alt="LLRF 固件和软件以及库的一般功能架构"></p>
+<p>LLRF固件库分为：</p>
+<ol>
+<li><strong>固件框架库</strong>：此类库有助于构建固件项目结构、模拟固件代码并自动执行固件合成。当然，用于访问广泛使用的硬件组件（例如流行的 ADC 芯片、DAC 芯片、PCI express 驱动程序）的平台支持模块也可以编译到库中。</li>
+<li><strong>基本固件库</strong>：此库收集了可用于任何固件实现的固件构建组件（例如，FIFO，过滤器……）。</li>
+<li><strong>RF 控制固件库</strong>：该库旨在实现通用的高级可配置 LLRF 控制模块。这些模块可以组装和配置，以快速获得有效的 LLRF 控制器。</li>
+</ol>
+<p>RF 控制固件库：该库旨在实现通用的高级可配置 LLRF 控制模块。这些模块可以组装和配置，以快速获得有效的 LLRF 控制器。</p>
+<p>软件架构为：</p>
+<ul>
+<li><p>构建了分层架构，底层是“OS &amp; Drivers”层，是针对特定平台的，而“Platform Control Interface”是平台与应用软件分离的封装，作用类似于固件中的“Application Interface”。</p>
+</li>
+<li><p>“低级应用程序”通常是软实时的，用于快速处理。在大多数 LLRF 系统中，这一层很薄，因为大多数实时功能都可以在 FPGA 固件中实现，因此这一层很小，仅实现必要的基于软件的实时功能，如数据流、快速（复杂）诊断&#x2F;保护和脉冲到脉冲反馈（用于脉冲机器）。</p>
+</li>
+<li><p>“高级应用程序”是执行 LLRF 系统操作自动化的非实时功能。这部分需要大量的 LLRF 领域知识（例如腔模型、控制理论、信号处理理论等），因为高级应用程序需要将 FPGA 的原始结果解释为具有物理意义的值。</p>
+</li>
+</ul>
+<p>将软件库细化可以分为：</p>
+<ol>
+<li><p><strong>软件框架库</strong>：该库定义了通用的软件架构并实现了多线程、硬件访问和网络通信的基础架构。</p>
+</li>
+<li><p>**LLRF 算法库 (C&#x2F;C++)**：该库实现了 RF 控制域算法。如果用 C&#x2F;C++ 语言编写，该库可用于“低级应用程序”以实现快速处理。</p>
+</li>
+<li><p><strong>LLRF 算法库（Python）</strong>：该库适用于实现“高级应用程序”，包括 RF 测试和调节自动化软件。Python 是此类应用程序的绝佳语言。除了与 C&#x2F;C++ 库相同的算法外，Python 库还可以实现噪声分析、反馈控制器设计、分析和仿真的功能。有了这些功能，我们可以进一步减少对 Matlab 进行控制器设计的依赖。</p>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>Donate comment here.</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="Liu Ming WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="Liu Ming Alipay">
+        <p>Alipay</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Liu Ming
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://iuming.github.io/2024/06/17/Introduce-of-LLRFLibsPy/" title="Introduce of LLRFLibsPy">http://iuming.github.io/2024/06/17/Introduce-of-LLRFLibsPy/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/realiuming">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+U5yo-Zxuw1OgbU6P">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/images/wechat_channel.jpg">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/LLRF/" rel="tag"><i class="fa fa-tag"></i> LLRF</a>
+              <a href="/tags/cavity/" rel="tag"><i class="fa fa-tag"></i> cavity</a>
+              <a href="/tags/SRF/" rel="tag"><i class="fa fa-tag"></i> SRF</a>
+              <a href="/tags/accelerator/" rel="tag"><i class="fa fa-tag"></i> accelerator</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/08/30/%E9%80%A0%E6%B0%B4%E7%B3%BB%E7%BB%9F/" rel="prev" title="造水系统">
+      <i class="fa fa-chevron-left"></i> 造水系统
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#LLRFLibsPy-Introduction"><span class="nav-number">1.</span> <span class="nav-text">LLRFLibsPy Introduction</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Liu Ming"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Liu Ming</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">95</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element">
+    <a onclick="Chatra('openChat', true);"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2l1bWluZw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;iuming"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOjUyMDBsaXVtaW5nQGdtYWlsLmNvbQ==" title="E-Mail → mailto:5200liuming@gmail.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vdS8zMTQ3OTEyODky" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;3147912892"><i class="fab fa-weibo fa-fw"></i>Weibo</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9yZWFsaXVtaW5n" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;realiuming"><i class="fab fa-twitter fa-fw"></i>Twitter</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL3JlYWxpdW1pbmc=" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;realiuming"><i class="fab fa-facebook fa-fw"></i>FB Page</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8xMjE4NTI3My9pdW1pbmc=" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;12185273&#x2F;iuming"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly95b3V0dWJlLmNvbS9jaGFubmVsL1VDaUNCSHJ4cDJ4Tlc3T1ZaTlFzZHROdw==" title="YouTube → https:&#x2F;&#x2F;youtube.com&#x2F;channel&#x2F;UCiCBHrxp2xNW7OVZNQsdtNw"><i class="fab fa-youtube fa-fw"></i>YouTube</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9pbnN0YWdyYW0uY29tL3JlYWxpdW1pbmc=" title="Instagram → https:&#x2F;&#x2F;instagram.com&#x2F;realiuming"><i class="fab fa-instagram fa-fw"></i>Instagram</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="c2t5cGU6ODQyNjczNTU2P2NhbGx8Y2hhdA==" title="Skype → skype:842673556?call|chat"><i class="fab fa-skype fa-fw"></i>Skype</span>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://iuming.github.io/" title="https:&#x2F;&#x2F;iuming.github.io&#x2F;">Title</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ming Liu. All rights reserved.</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/three-waves.min.js"></script>
+    <script defer src="/lib/three/canvas_lines.min.js"></script>
+    <script defer src="/lib/three/canvas_sphere.min.js"></script>
+
+
+  
+  <script data-pjax>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/js/algolia-search.js"></script>
+
+
+
+
+
+  <script>
+    (function(d, w, c) {
+      w.ChatraID = 'gTXKphrmKGf5QSb5L';
+      var s = d.createElement('script');
+      w[c] = w[c] || function() {
+        (w[c].q = w[c].q || []).push(arguments);
+      };
+      s.async = true;
+      s.src = 'https://call.chatra.io/chatra.js';
+      if (d.head) d.head.appendChild(s);
+    })(document, window, 'Chatra');
+  </script>
+
+
+
+
+
+<script data-pjax>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+<script data-pjax>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+    <div id="pjax">
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink({
+        timeout : 3000,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'http://iuming.github.io/2024/06/17/Introduce-of-LLRFLibsPy/',]
+      });
+      });
+  </script>
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : true,
+      notify     : true,
+      appId      : 'JVYbABtynE3HmooKzd0mwfN4-gzGzoHsz',
+      appKey     : 'KuLQwv33J92vlcFXyx0L7Asd',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+</body>
+</html>
