@@ -35,15 +35,15 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://iuming.github.io/images/gain_gc.png">
 <meta property="article:published_time" content="2024-06-18T02:55:18.000Z">
-<meta property="article:modified_time" content="2024-06-18T03:22:09.191Z">
+<meta property="article:modified_time" content="2024-06-18T06:25:09.464Z">
 <meta property="article:author" content="Liu Ming">
 <meta property="article:tag" content="LLRF">
 <meta property="article:tag" content="cavity">
 <meta property="article:tag" content="SRF">
 <meta property="article:tag" content="accelerator">
 <meta property="article:tag" content="python">
-<meta property="article:tag" content="stable-space">
 <meta property="article:tag" content="model">
+<meta property="article:tag" content="stable-space">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://iuming.github.io/images/gain_gc.png">
 
@@ -140,7 +140,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">102</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">104</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -150,7 +150,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">32</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">33</span></a>
 
   </li>
         <li class="menu-item menu-item-schedule">
@@ -244,7 +244,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2024-06-18 10:55:18 / Modified: 11:22:09" itemprop="dateCreated datePublished" datetime="2024-06-18T10:55:18+08:00">2024-06-18</time>
+              <time title="Created: 2024-06-18 10:55:18 / Modified: 14:25:09" itemprop="dateCreated datePublished" datetime="2024-06-18T10:55:18+08:00">2024-06-18</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -339,9 +339,10 @@
 <li><p><strong>定义基本模式参数</strong>:<br>计算基本模式的增益和传递函数系数。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">b0 = <span class="number">2</span> * beta * half_bw / (beta + <span class="number">1</span>)</span><br><span class="line">b1 = <span class="number">2</span> * half_bw</span><br><span class="line"></span><br><span class="line">rf_num = [b0]</span><br><span class="line">rf_den = [<span class="number">1</span>, half_bw - <span class="number">1j</span>*detuning]</span><br><span class="line">bm_num = [b1]</span><br><span class="line">bm_den = [<span class="number">1</span>, half_bw - <span class="number">1j</span>*detuning]</span><br></pre></td></tr></table></figure>
 </li>
-<li><p><strong>处理通过带模式</strong>:<br>  <br>  通带的空间状态方程：<br>  $$<br>  \lambda_{k}&#x3D;-\omega_{1 &#x2F; 2, k}+j \Delta \omega_{k}, k&#x3D;1, \ldots, N<br>  $$<br>  本征值的实部表示相应通带模式的半带宽，而虚部表示其与载波频率$ \omega_{c} $相比的频率偏移。对于特定的多胞腔，我们可以公式化矩阵$ A $，并用数值方法计算其特征值和特征向量。</p>
+<li><p><strong>处理通过带模式</strong>:</p>
 </li>
 </ol>
+<p>  通带的空间状态方程：<br>  $$<br>  \lambda_{k}&#x3D;-\omega_{1 &#x2F; 2, k}+j \Delta \omega_{k}, k&#x3D;1, \ldots, N<br>  $$<br>  本征值的实部表示相应通带模式的半带宽，而虚部表示其与载波频率$ \omega_{c} $相比的频率偏移。对于特定的多胞腔，我们可以公式化矩阵$ A $，并用数值方法计算其特征值和特征向量。</p>
 <p>  我们使用从中导出的相量传递函数来计算多单元腔的频率响应：<br>  $$<br>  \mathbf{X}(\hat{s})&#x3D;\left(\hat{s} \mathbf{I}_{N}-\mathbf{A}\right)^{-1} \mathbf{B U}(\hat{s})<br>  $$<br>  其中$X$和$U$分别是时域相量矢量$x$和$u$的相量拉普拉斯变换。</p>
 <p>  多cell腔的相量传递函数具有多个极点，每个极点对应于通带模式。从单细胞腔的相量传递函数，包括所有通带模式的多单元腔的相量传递函数可以写成：<br>  $$<br>  \mathbf{G}<em>{C,multi-cell(\hat{s})} &#x3D; \sum</em>{k&#x3D;1}^{N} \frac{\omega_{1&#x2F;2} \mathbf{G}<em>{k}}{\hat{s}+\omega</em>{1&#x2F;2}-j \Delta\omega_{k}}<br>  $$</p>
 <p>   如果存在通过带模式，将其参数添加到传递函数中。</p>
@@ -503,8 +504,8 @@
               <a href="/tags/SRF/" rel="tag"><i class="fa fa-tag"></i> SRF</a>
               <a href="/tags/accelerator/" rel="tag"><i class="fa fa-tag"></i> accelerator</a>
               <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
-              <a href="/tags/stable-space/" rel="tag"><i class="fa fa-tag"></i> stable-space</a>
               <a href="/tags/model/" rel="tag"><i class="fa fa-tag"></i> model</a>
+              <a href="/tags/stable-space/" rel="tag"><i class="fa fa-tag"></i> stable-space</a>
           </div>
 
         
@@ -516,7 +517,10 @@
     <a href="/2024/06/17/%E5%9F%BA%E4%BA%8ELLRFLibsPy%E5%BA%93%E7%9A%84%E8%BF%9E%E7%BB%AD%E5%92%8C%E7%A6%BB%E6%95%A3%E8%B6%85%E5%AF%BC%E8%85%94%E6%A8%A1%E5%9E%8B%E7%A4%BA%E4%BE%8B/" rel="prev" title="基于LLRFLibsPy库的连续和离散超导腔模型示例">
       <i class="fa fa-chevron-left"></i> 基于LLRFLibsPy库的连续和离散超导腔模型示例
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2024/06/19/LLRFLibsPy%E5%BA%93%E4%B8%ADcas-ss-mech%E5%87%BD%E6%95%B0%E8%A7%A3%E8%AF%BB/" rel="next" title="LLRFLibsPy库中cas_ss_mech函数解读">
+      LLRFLibsPy库中cas_ss_mech函数解读 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -592,7 +596,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -605,7 +609,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">102</span>
+        <span class="site-state-item-count">104</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
