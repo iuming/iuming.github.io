@@ -26,28 +26,28 @@
     var CONFIG = {"hostname":"iuming.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":true,"sidebar":{"position":"left","width":300,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="cav_ss函数功能：根据超导腔半带宽和失谐量求解超导腔空间状态方程参数">
+  <meta name="description" content="LLRFLibsPy中用于将空间状态模型参数转换为离散模型参数的函数">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LLRFLibsPy库中cav_ss函数解读">
-<meta property="og:url" content="http://iuming.github.io/2024/06/18/LLRFLibsPy%E5%BA%93%E4%B8%ADcav-ss%E5%87%BD%E6%95%B0%E8%A7%A3%E8%AF%BB/index.html">
+<meta property="og:title" content="LLRFLibsPy库中ss_discrete函数解读">
+<meta property="og:url" content="http://iuming.github.io/2024/06/19/LLRFLibsPy%E5%BA%93%E4%B8%ADss-discrete%E5%87%BD%E6%95%B0%E8%A7%A3%E8%AF%BB/index.html">
 <meta property="og:site_name" content="REALIUMING&#39;BLOG">
-<meta property="og:description" content="cav_ss函数功能：根据超导腔半带宽和失谐量求解超导腔空间状态方程参数">
+<meta property="og:description" content="LLRFLibsPy中用于将空间状态模型参数转换为离散模型参数的函数">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://iuming.github.io/images/gain_gc.png">
-<meta property="article:published_time" content="2024-06-18T02:55:18.000Z">
-<meta property="article:modified_time" content="2024-06-18T06:25:09.464Z">
+<meta property="og:image" content="https://i.postimg.cc/bvSYr9m6/Detuning-By-Mech.png">
+<meta property="article:published_time" content="2024-06-19T08:17:52.000Z">
+<meta property="article:modified_time" content="2024-06-19T09:37:47.792Z">
 <meta property="article:author" content="Liu Ming">
 <meta property="article:tag" content="LLRF">
-<meta property="article:tag" content="cavity">
 <meta property="article:tag" content="SRF">
 <meta property="article:tag" content="accelerator">
 <meta property="article:tag" content="python">
+<meta property="article:tag" content="state-space">
 <meta property="article:tag" content="model">
-<meta property="article:tag" content="stable-space">
+<meta property="article:tag" content="discrete">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://iuming.github.io/images/gain_gc.png">
+<meta name="twitter:image" content="https://i.postimg.cc/bvSYr9m6/Detuning-By-Mech.png">
 
-<link rel="canonical" href="http://iuming.github.io/2024/06/18/LLRFLibsPy%E5%BA%93%E4%B8%ADcav-ss%E5%87%BD%E6%95%B0%E8%A7%A3%E8%AF%BB/">
+<link rel="canonical" href="http://iuming.github.io/2024/06/19/LLRFLibsPy%E5%BA%93%E4%B8%ADss-discrete%E5%87%BD%E6%95%B0%E8%A7%A3%E8%AF%BB/">
 
 
 <script id="page-configurations">
@@ -60,7 +60,7 @@
   };
 </script>
 
-  <title>LLRFLibsPy库中cav_ss函数解读 | REALIUMING'BLOG</title>
+  <title>LLRFLibsPy库中ss_discrete函数解读 | REALIUMING'BLOG</title>
   
 
 
@@ -220,7 +220,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://iuming.github.io/2024/06/18/LLRFLibsPy%E5%BA%93%E4%B8%ADcav-ss%E5%87%BD%E6%95%B0%E8%A7%A3%E8%AF%BB/">
+    <link itemprop="mainEntityOfPage" href="http://iuming.github.io/2024/06/19/LLRFLibsPy%E5%BA%93%E4%B8%ADss-discrete%E5%87%BD%E6%95%B0%E8%A7%A3%E8%AF%BB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -233,7 +233,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          LLRFLibsPy库中cav_ss函数解读
+          LLRFLibsPy库中ss_discrete函数解读
         </h1>
 
         <div class="post-meta">
@@ -244,7 +244,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2024-06-18 10:55:18 / Modified: 14:25:09" itemprop="dateCreated datePublished" datetime="2024-06-18T10:55:18+08:00">2024-06-18</time>
+              <time title="Created: 2024-06-19 16:17:52 / Modified: 17:37:47" itemprop="dateCreated datePublished" datetime="2024-06-19T16:17:52+08:00">2024-06-19</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -257,7 +257,7 @@
             </span>
 
           
-            <span id="/2024/06/18/LLRFLibsPy%E5%BA%93%E4%B8%ADcav-ss%E5%87%BD%E6%95%B0%E8%A7%A3%E8%AF%BB/" class="post-meta-item leancloud_visitors" data-flag-title="LLRFLibsPy库中cav_ss函数解读" title="Views">
+            <span id="/2024/06/19/LLRFLibsPy%E5%BA%93%E4%B8%ADss-discrete%E5%87%BD%E6%95%B0%E8%A7%A3%E8%AF%BB/" class="post-meta-item leancloud_visitors" data-flag-title="LLRFLibsPy库中ss_discrete函数解读" title="Views">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -279,13 +279,13 @@
       </span>
       <span class="post-meta-item-text">Valine: </span>
     
-    <a title="valine" href="/2024/06/18/LLRFLibsPy%E5%BA%93%E4%B8%ADcav-ss%E5%87%BD%E6%95%B0%E8%A7%A3%E8%AF%BB/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2024/06/18/LLRFLibsPy%E5%BA%93%E4%B8%ADcav-ss%E5%87%BD%E6%95%B0%E8%A7%A3%E8%AF%BB/" itemprop="commentCount"></span>
+    <a title="valine" href="/2024/06/19/LLRFLibsPy%E5%BA%93%E4%B8%ADss-discrete%E5%87%BD%E6%95%B0%E8%A7%A3%E8%AF%BB/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2024/06/19/LLRFLibsPy%E5%BA%93%E4%B8%ADss-discrete%E5%87%BD%E6%95%B0%E8%A7%A3%E8%AF%BB/" itemprop="commentCount"></span>
     </a>
   </span>
   
   
-            <div class="post-description">cav_ss函数功能：根据超导腔半带宽和失谐量求解超导腔空间状态方程参数</div>
+            <div class="post-description">LLRFLibsPy中用于将空间状态模型参数转换为离散模型参数的函数</div>
 
         </div>
       </header>
@@ -296,113 +296,39 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="cav-ss-函数解读"><a href="#cav-ss-函数解读" class="headerlink" title="cav_ss 函数解读"></a><code>cav_ss</code> 函数解读</h3><p><code>cav_ss</code> 函数用于导出腔体的连续状态空间方程，包含通过状态空间方法计算射频（RF）驱动和束流驱动的响应。以下是对该函数的详细解读。</p>
-<h4 id="超导腔模型"><a href="#超导腔模型" class="headerlink" title="超导腔模型"></a>超导腔模型</h4><ol>
-<li><p><strong>驱动电压定义</strong>：定义了束流驱动电压$ V_{bo}  $与束流$  i_{bo} $的关系，其中$ V_{bo} &#x3D; R_{z}i_{bo} $。</p>
-</li>
-<li><p><strong>输入-输出关系</strong>：描述了输入电流 $ i_{for} $ 与射频驱动电压 $ V_{for} $ 之间的关系，公式为 $ i_{for} &#x3D; \frac{\beta}{\beta + 1} - \frac{V_{for}}{R_{L}} $。</p>
-</li>
-<li><p><strong>腔体微分方程</strong>：在忽略某些小项的情况下，腔体的微分方程可以表示为:<br>$$<br>\dot{\mathbf{v}}<em>{C}+\left(\omega</em>{1 &#x2F; 2}-j \Delta \omega\right) \mathbf{v}<em>{C}&#x3D;2 \omega</em>{1 &#x2F; 2} R_{L}\left(\mathbf{i}<em>{\text {for }}+\mathbf{i}</em>{b 0}\right)<br>$$</p>
-</li>
-<li><p><strong>超导腔体特性</strong>：对于超导腔体，输入耦合因子 $ \beta $ 远大于1，因为腔体壁的射频功率耗散远小于腔体发出的射频功率。例如，TESLA腔体的 $ \beta $ 大于3000，这允许简化上述方程。</p>
-</li>
-<li><p><strong>增益和反射因子</strong>：定义了复数增益 $ g_{c} $ 作为稳态腔体电压 $ V_{c} $ 与射频驱动电压 $ V_{for} $ 之间的关系，以及复数反射因子 $ Y_{c} $ 作为腔体对射频功率传输线的反射特性。</p>
-</li>
-<li><p><strong>复平面上的表示</strong>：$ g_{c} $ 和 $ Y_{c} $ 在复平面上以圆的形式表示，这些圆随着 $ \beta $ 和失谐量 $ \Delta $ 的变化而变化。当失谐量 $ \Delta $ 趋向无穷大时，所有正向射频功率都会从腔体输入耦合器反射回来，并且反射信号的相位与正向信号的相位相差180°。<br><img data-src="/images/gain_gc.png" alt="不同耦合因子和失谐的复增益gc"></p>
-</li>
-</ol>
-<h4 id="函数定义"><a href="#函数定义" class="headerlink" title="函数定义"></a>函数定义</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">cav_ss</span>(<span class="params">half_bw, detuning = <span class="number">0.0</span>, beta = <span class="number">1e4</span>, passband_modes = <span class="literal">None</span>, plot = <span class="literal">False</span>, plot_pno = <span class="number">1000</span></span>):</span><br></pre></td></tr></table></figure>
+        <p>source code：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FhcWlhby9MTFJGTGlic1B5L2Jsb2IvNDE2NzdiNmJlODYwZmVmMTU1ZTQ3NWFmZWMyMzYyNGEyMDQ1ZmIwMS9zcmMvcmZfY29udHJvbC5weSNMNDk=">Github<i class="fa fa-external-link-alt"></i></span></p>
+<p>这段代码定义了一个名为 <code>ss_discrete</code> 的函数，该函数用于将连续状态空间模型转换为离散状态空间模型，并比较它们的频率响应。以下是对这段代码的详细解读：</p>
+<h3 id="函数定义"><a href="#函数定义" class="headerlink" title="函数定义"></a>函数定义</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">ss_discrete</span>(<span class="params">Ac, Bc, Cc, Dc, Ts, method = <span class="string">&#x27;zoh&#x27;</span>, alpha = <span class="number">0.3</span>, plot = <span class="literal">False</span>, plot_pno = <span class="number">1000</span>, spec_data = <span class="literal">False</span></span>):</span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">    Derive the discrete state-space equation from a continous one and compare </span></span><br><span class="line"><span class="string">    their frequency responses.</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Parameters:</span></span><br><span class="line"><span class="string">        Ac, Bc, Cc, Dc: numpy matrix (complex), continous state-space model</span></span><br><span class="line"><span class="string">        Ts:             float, sampling time, s</span></span><br><span class="line"><span class="string">        method:         string, ``gbt``, ``bilinear``, ``euler``, ``backward_diff``, ``zoh``, </span></span><br><span class="line"><span class="string">                         ``foh`` or ``impulse`` (see document of signal.cont2discrete)</span></span><br><span class="line"><span class="string">        alpha:          float, 0 to 1 (see document of signal.cont2discrete) </span></span><br><span class="line"><span class="string">        plot:           boolean, enable the plot of frequency responses</span></span><br><span class="line"><span class="string">        plot_pno:       int, number of point in the plot</span></span><br><span class="line"><span class="string">        spec_data:      boolean, return spectra data or not</span></span><br><span class="line"><span class="string">        </span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">        status:         boolean, success (True) or fail (False)</span></span><br><span class="line"><span class="string">        Ad, Bd, Cd, Dd: numpy matrix (complex), discrete state-space model</span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
 
+<p>函数接受以下参数：</p>
 <ul>
-<li><p><strong>参数说明</strong>:</p>
-<ul>
-<li><code>half_bw</code>: 腔体的半带宽（单位：弧度&#x2F;秒）。</li>
-<li><code>detuning</code>: 腔体的失谐（单位：弧度&#x2F;秒）。</li>
-<li><code>beta</code>: 输入耦合因子。</li>
-<li><code>passband_modes</code>: 字典，包含通过带模式的参数（频率偏移、相对增益和半带宽）。</li>
-<li><code>plot</code>: 布尔值，是否绘制频率响应图。</li>
-<li><code>plot_pno</code>: 绘图点数。</li>
+<li><code>Ac, Bc, Cc, Dc</code>：连续状态空间模型的矩阵。</li>
+<li><code>Ts</code>：采样时间，单位为秒。</li>
+<li><code>method</code>：离散化方法，可以是 <code>&#39;gbt&#39;</code>, <code>&#39;bilinear&#39;</code>, <code>&#39;euler&#39;</code>, <code>&#39;backward_diff&#39;</code>, <code>&#39;zoh&#39;</code>, <code>&#39;foh&#39;</code> 或 <code>&#39;impulse&#39;</code>（详细信息见 <code>scipy.signal.cont2discrete</code> 文档）。</li>
+<li><code>alpha</code>：在 <code>0</code> 到 <code>1</code> 之间的浮点数，某些离散化方法（如 <code>&#39;gbt&#39;</code>）使用的参数。</li>
+<li><code>plot</code>：布尔值，是否绘制频率响应图。</li>
+<li><code>plot_pno</code>：绘图时的点数。</li>
+<li><code>spec_data</code>：布尔值，是否返回频谱数据。</li>
 </ul>
-</li>
-<li><p><strong>返回值</strong>:</p>
-<ul>
-<li><code>status</code>: 布尔值，表示计算是否成功。</li>
-<li><code>Arf, Brf, Crf, Drf</code>: RF驱动的连续状态空间模型矩阵。</li>
-<li><code>Abm, Bbm, Cbm, Dbm</code>: 束流驱动的连续状态空间模型矩阵。</li>
-</ul>
-</li>
-</ul>
-<h4 id="函数逻辑"><a href="#函数逻辑" class="headerlink" title="函数逻辑"></a>函数逻辑</h4><ol>
-<li><p><strong>参数检查</strong>:<br>检查 <code>half_bw</code> 和 <code>beta</code> 是否为正值，<code>passband_modes</code> 是否为包含正确键值的字典。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (half_bw &lt;= <span class="number">0</span>) <span class="keyword">or</span> (beta &lt;= <span class="number">0</span>):</span><br><span class="line">    <span class="keyword">return</span> (<span class="literal">False</span>,) + (<span class="literal">None</span>,)*<span class="number">8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> passband_modes <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">not</span> <span class="built_in">isinstance</span>(passband_modes, <span class="built_in">dict</span>)) <span class="keyword">or</span> \</span><br><span class="line">       (<span class="string">&#x27;freq_offs&#x27;</span> <span class="keyword">not</span> <span class="keyword">in</span> passband_modes.keys()) <span class="keyword">or</span> \</span><br><span class="line">       (<span class="string">&#x27;gain_rel&#x27;</span> <span class="keyword">not</span> <span class="keyword">in</span> passband_modes.keys()) <span class="keyword">or</span> \</span><br><span class="line">       (<span class="string">&#x27;half_bw&#x27;</span> <span class="keyword">not</span> <span class="keyword">in</span> passband_modes.keys()): </span><br><span class="line">        <span class="keyword">return</span> (<span class="literal">False</span>,) + (<span class="literal">None</span>,)*<span class="number">8</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>定义基本模式参数</strong>:<br>计算基本模式的增益和传递函数系数。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">b0 = <span class="number">2</span> * beta * half_bw / (beta + <span class="number">1</span>)</span><br><span class="line">b1 = <span class="number">2</span> * half_bw</span><br><span class="line"></span><br><span class="line">rf_num = [b0]</span><br><span class="line">rf_den = [<span class="number">1</span>, half_bw - <span class="number">1j</span>*detuning]</span><br><span class="line">bm_num = [b1]</span><br><span class="line">bm_den = [<span class="number">1</span>, half_bw - <span class="number">1j</span>*detuning]</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>处理通过带模式</strong>:</p>
-</li>
-</ol>
-<p>  通带的空间状态方程：<br>  $$<br>  \lambda_{k}&#x3D;-\omega_{1 &#x2F; 2, k}+j \Delta \omega_{k}, k&#x3D;1, \ldots, N<br>  $$<br>  本征值的实部表示相应通带模式的半带宽，而虚部表示其与载波频率$ \omega_{c} $相比的频率偏移。对于特定的多胞腔，我们可以公式化矩阵$ A $，并用数值方法计算其特征值和特征向量。</p>
-<p>  我们使用从中导出的相量传递函数来计算多单元腔的频率响应：<br>  $$<br>  \mathbf{X}(\hat{s})&#x3D;\left(\hat{s} \mathbf{I}_{N}-\mathbf{A}\right)^{-1} \mathbf{B U}(\hat{s})<br>  $$<br>  其中$X$和$U$分别是时域相量矢量$x$和$u$的相量拉普拉斯变换。</p>
-<p>  多cell腔的相量传递函数具有多个极点，每个极点对应于通带模式。从单细胞腔的相量传递函数，包括所有通带模式的多单元腔的相量传递函数可以写成：<br>  $$<br>  \mathbf{G}<em>{C,multi-cell(\hat{s})} &#x3D; \sum</em>{k&#x3D;1}^{N} \frac{\omega_{1&#x2F;2} \mathbf{G}<em>{k}}{\hat{s}+\omega</em>{1&#x2F;2}-j \Delta\omega_{k}}<br>  $$</p>
-<p>   如果存在通过带模式，将其参数添加到传递函数中。</p>
-   <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> passband_modes <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">    pb_f  = passband_modes[<span class="string">&#x27;freq_offs&#x27;</span>]</span><br><span class="line">    pb_g  = passband_modes[<span class="string">&#x27;gain_rel&#x27;</span>]</span><br><span class="line">    pb_wh = passband_modes[<span class="string">&#x27;half_bw&#x27;</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(pb_f)):</span><br><span class="line">        rf_num, rf_den = add_tf(rf_num, rf_den, </span><br><span class="line">                                [b0 * pb_g[i] * pb_wh[i] / half_bw], </span><br><span class="line">                                [<span class="number">1</span>, pb_wh[i] - <span class="number">1j</span>*<span class="number">2</span>*np.pi*pb_f[i]])</span><br></pre></td></tr></table></figure>
+<p>返回值包括一个布尔值 <code>status</code>（表示成功与否），离散状态空间模型的四个矩阵 <code>Ad</code>, <code>Bd</code>, <code>Cd</code>, <code>Dd</code>，以及可选的频谱数据 <code>spec</code>。</p>
+<h3 id="参数检查"><a href="#参数检查" class="headerlink" title="参数检查"></a>参数检查</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># check the input</span></span><br><span class="line"><span class="keyword">if</span> (Ts &lt;= <span class="number">0</span>):</span><br><span class="line">    <span class="keyword">return</span> (<span class="literal">False</span>,) + (<span class="literal">None</span>,)*<span class="number">5</span></span><br><span class="line"></span><br><span class="line">plot_pno = <span class="number">1000</span> <span class="keyword">if</span> (plot_pno &lt;= <span class="number">0</span>) <span class="keyword">else</span> plot_pno</span><br></pre></td></tr></table></figure>
 
-<h3 id="add-tf-函数解释"><a href="#add-tf-函数解释" class="headerlink" title="add_tf 函数解释"></a><code>add_tf</code> 函数解释</h3><p><code>add_tf</code> 函数用于将两个传递函数相加。这通常用于将多个模式的传递函数合并成一个总的传递函数。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">add_tf</span>(<span class="params">num1, den1, num2, den2</span>):</span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">    Add two transfer functions</span></span><br><span class="line"><span class="string">    Parameters:</span></span><br><span class="line"><span class="string">        num1, den1: numerator and denominator of the first transfer function</span></span><br><span class="line"><span class="string">        num2, den2: numerator and denominator of the second transfer function</span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">        num, den: numerator and denominator of the resulting transfer function</span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span></span><br><span class="line">    <span class="comment"># 将两个传递函数的分子和分母进行卷积以实现相加</span></span><br><span class="line">    num = np.polyadd(np.polymul(num1, den2), np.polymul(num2, den1))</span><br><span class="line">    den = np.polymul(den1, den2)</span><br><span class="line">    <span class="keyword">return</span> num, den</span><br></pre></td></tr></table></figure>
+<p>检查采样时间 <code>Ts</code> 是否大于 0。如果不满足条件，函数返回 <code>False</code> 和五个 <code>None</code>。设置绘图点数 <code>plot_pno</code> 为至少 1000 点。</p>
+<h3 id="离散化"><a href="#离散化" class="headerlink" title="离散化"></a>离散化</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># discretize it</span></span><br><span class="line">Ad, Bd, Cd, Dd, _ = signal.cont2discrete((Ac, Bc, Cc, Dc), Ts, method = method, alpha = alpha)</span><br></pre></td></tr></table></figure>
 
-<h4 id="add-tf-函数的工作原理"><a href="#add-tf-函数的工作原理" class="headerlink" title="add_tf 函数的工作原理"></a><code>add_tf</code> 函数的工作原理</h4><ul>
-<li><p><strong>参数</strong>：</p>
-<ul>
-<li><code>num1</code>, <code>den1</code>: 第一个传递函数的分子和分母多项式系数。</li>
-<li><code>num2</code>, <code>den2</code>: 第二个传递函数的分子和分母多项式系数。</li>
-</ul>
-</li>
-<li><p><strong>返回值</strong>：</p>
-<ul>
-<li><code>num</code>, <code>den</code>: 合并后的传递函数的分子和分母多项式系数。</li>
-</ul>
-</li>
-<li><p><strong>实现</strong>：</p>
-<ul>
-<li>使用多项式的卷积（<code>np.polymul</code>）计算合并后的分子和分母。</li>
-<li>使用多项式的相加（<code>np.polyadd</code>）将两个传递函数相加。</li>
-</ul>
-</li>
-</ul>
-<ol start="4">
-<li><p><strong>获得状态空间模型</strong>:<br>使用传递函数系数计算状态空间模型矩阵。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Arf, Brf, Crf, Drf = signal.tf2ss(rf_num, rf_den)</span><br><span class="line">Abm, Bbm, Cbm, Dbm = signal.tf2ss(bm_num, bm_den)</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h3 id="tf2ss-函数解释"><a href="#tf2ss-函数解释" class="headerlink" title="tf2ss 函数解释"></a><code>tf2ss</code> 函数解释</h3><p><code>tf2ss</code> 函数用于将传递函数（传递函数的分子和分母多项式表示）转换为状态空间表示。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> signal</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">tf2ss</span>(<span class="params">num, den</span>):</span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">    Transfer function to state-space conversion</span></span><br><span class="line"><span class="string">    Parameters:</span></span><br><span class="line"><span class="string">        num: numerator of the transfer function</span></span><br><span class="line"><span class="string">        den: denominator of the transfer function</span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">        A, B, C, D: state-space representation matrices</span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">return</span> signal.tf2ss(num, den)</span><br></pre></td></tr></table></figure>
+<p>使用 <code>scipy.signal.cont2discrete</code> 函数将连续状态空间模型转换为离散状态空间模型。</p>
+<h3 id="计算频率响应"><a href="#计算频率响应" class="headerlink" title="计算频率响应"></a>计算频率响应</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># calculate the responses of both continous and discrete versions</span></span><br><span class="line"><span class="keyword">if</span> plot <span class="keyword">or</span> spec_data:</span><br><span class="line">    sc, fc, Ac_dB, Pc_deg, _ = ss_freqresp(Ac, Bc, Cc, Dc, plot_pno = plot_pno, plot_maxf = <span class="number">1.0</span> / Ts)</span><br><span class="line">    sd, fd, Ad_dB, Pd_deg, _ = ss_freqresp(Ad, Bd, Cd, Dd, plot_pno = plot_pno, Ts = Ts)</span><br><span class="line"></span><br><span class="line">    spec = &#123;<span class="string">&#x27;fc&#x27;</span>: fc, <span class="string">&#x27;Ac_dB&#x27;</span>: Ac_dB, <span class="string">&#x27;Pc_deg&#x27;</span>: Pc_deg,</span><br><span class="line">            <span class="string">&#x27;fd&#x27;</span>: fd, <span class="string">&#x27;Ad_dB&#x27;</span>: Ad_dB, <span class="string">&#x27;Pd_deg&#x27;</span>: Pd_deg&#125;</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    spec = <span class="literal">None</span></span><br></pre></td></tr></table></figure>
 
-<h4 id="tf2ss-函数的工作原理"><a href="#tf2ss-函数的工作原理" class="headerlink" title="tf2ss 函数的工作原理"></a><code>tf2ss</code> 函数的工作原理</h4><ul>
-<li><p><strong>参数</strong>：</p>
-<ul>
-<li><code>num</code>: 传递函数的分子多项式系数。</li>
-<li><code>den</code>: 传递函数的分母多项式系数。</li>
-</ul>
-</li>
-<li><p><strong>返回值</strong>：</p>
-<ul>
-<li><code>A</code>, <code>B</code>, <code>C</code>, <code>D</code>: 状态空间表示的矩阵。</li>
-</ul>
-</li>
-<li><p><strong>实现</strong>：</p>
-<ul>
-<li>使用 <code>scipy.signal.tf2ss</code> 函数，将传递函数的多项式系数转换为状态空间表示矩阵。</li>
-</ul>
-</li>
-</ul>
-<ol start="5">
-<li><p><strong>绘制频率响应图</strong>:<br>如果 <code>plot</code> 为 <code>True</code>，计算并绘制频率响应图。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> plot:</span><br><span class="line">    max_wrange = ...</span><br><span class="line">    wrf, hrf = signal.freqs(rf_num, rf_den, worN = np.linspace(-<span class="number">2</span>*max_wrange, <span class="number">2</span>*max_wrange, plot_pno))</span><br><span class="line">    wbm, hbm = signal.freqs(bm_num, bm_den, worN = np.linspace(-<span class="number">2</span>*max_wrange, <span class="number">2</span>*max_wrange, plot_pno))</span><br><span class="line">    <span class="keyword">from</span> rf_plot <span class="keyword">import</span> plot_cav_ss</span><br><span class="line">    plot_cav_ss(wrf, hrf, wbm, hbm)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>返回结果</strong>:<br>返回状态空间模型矩阵和成功状态。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> <span class="literal">True</span>, Arf, Brf, Crf, Drf, Abm, Bbm, Cbm, Dbm</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><code>cav_ss</code> 函数通过状态空间方法计算腔体的动态响应，包括基本模式和通过带模式的影响，并可以选择性地绘制频率响应图。通过传递函数转换为状态空间模型，函数返回用于进一步分析和仿真的状态空间矩阵。</p>
+<p>如果 <code>plot</code> 或 <code>spec_data</code> 为 <code>True</code>，则使用 <code>ss_freqresp</code> 函数计算连续和离散状态空间模型的频率响应，并存储频谱数据到 <code>spec</code> 字典中。</p>
+<h3 id="绘制频率响应图"><a href="#绘制频率响应图" class="headerlink" title="绘制频率响应图"></a>绘制频率响应图</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># plot the responses</span></span><br><span class="line"><span class="keyword">if</span> plot:</span><br><span class="line">    <span class="comment"># make the plot</span></span><br><span class="line">    <span class="keyword">if</span> sc <span class="keyword">and</span> sd:</span><br><span class="line">        <span class="keyword">from</span> rf_plot <span class="keyword">import</span> plot_ss_discrete</span><br><span class="line">        plot_ss_discrete(fc, Ac_dB, Pc_deg, fd, Ad_dB, Pd_deg, Ts)</span><br></pre></td></tr></table></figure>
+
+<p>如果 <code>plot</code> 为 <code>True</code>，并且 <code>sc</code> 和 <code>sd</code> 都为 <code>True</code>，则使用 <code>plot_ss_discrete</code> 函数绘制频率响应图。</p>
+<h3 id="返回结果"><a href="#返回结果" class="headerlink" title="返回结果"></a>返回结果</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># return the results</span></span><br><span class="line"><span class="keyword">return</span> <span class="literal">True</span>, Ad, Bd, Cd, Dd, spec</span><br></pre></td></tr></table></figure>
+
+<p>返回成功状态 <code>True</code>，离散状态空间模型的四个矩阵 <code>Ad</code>, <code>Bd</code>, <code>Cd</code>, <code>Dd</code>，以及频谱数据 <code>spec</code>（如果 <code>spec_data</code> 为 <code>True</code>）。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><code>ss_discrete</code> 函数的作用是将给定的连续状态空间模型转换为离散状态空间模型，并根据需要比较它们的频率响应。函数首先检查输入参数的有效性，然后进行离散化处理，并根据需要计算和绘制频率响应图。最后返回离散状态空间模型和频谱数据。</p>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p>source code：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FhcWlhby9MTFJGTGlic1B5L2Jsb2IvNDE2NzdiNmJlODYwZmVmMTU1ZTQ3NWFmZWMyMzYyNGEyMDQ1ZmIwMS9leGFtcGxlL2V4YW1wbGVfc2ltX2Nhdml0eV9tZWNoLnB5I0wyOQ==">Github<i class="fa fa-external-link-alt"></i></span></p>
+<p><a target="_blank" rel="noopener" href="https://postimg.cc/jWKYkP0N"><img data-src="https://i.postimg.cc/bvSYr9m6/Detuning-By-Mech.png" alt="Detuning-By-Mech.png"></a></p>
 
     </div>
 
@@ -438,7 +364,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>Post link: </strong>
-    <a href="http://iuming.github.io/2024/06/18/LLRFLibsPy%E5%BA%93%E4%B8%ADcav-ss%E5%87%BD%E6%95%B0%E8%A7%A3%E8%AF%BB/" title="LLRFLibsPy库中cav_ss函数解读">http://iuming.github.io/2024/06/18/LLRFLibsPy库中cav-ss函数解读/</a>
+    <a href="http://iuming.github.io/2024/06/19/LLRFLibsPy%E5%BA%93%E4%B8%ADss-discrete%E5%87%BD%E6%95%B0%E8%A7%A3%E8%AF%BB/" title="LLRFLibsPy库中ss_discrete函数解读">http://iuming.github.io/2024/06/19/LLRFLibsPy库中ss-discrete函数解读/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> unless stating additionally.
@@ -500,12 +426,12 @@
           
           <div class="post-tags">
               <a href="/tags/LLRF/" rel="tag"><i class="fa fa-tag"></i> LLRF</a>
-              <a href="/tags/cavity/" rel="tag"><i class="fa fa-tag"></i> cavity</a>
               <a href="/tags/SRF/" rel="tag"><i class="fa fa-tag"></i> SRF</a>
               <a href="/tags/accelerator/" rel="tag"><i class="fa fa-tag"></i> accelerator</a>
               <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
+              <a href="/tags/state-space/" rel="tag"><i class="fa fa-tag"></i> state-space</a>
               <a href="/tags/model/" rel="tag"><i class="fa fa-tag"></i> model</a>
-              <a href="/tags/stable-space/" rel="tag"><i class="fa fa-tag"></i> stable-space</a>
+              <a href="/tags/discrete/" rel="tag"><i class="fa fa-tag"></i> discrete</a>
           </div>
 
         
@@ -514,13 +440,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2024/06/17/%E5%9F%BA%E4%BA%8ELLRFLibsPy%E5%BA%93%E7%9A%84%E8%BF%9E%E7%BB%AD%E5%92%8C%E7%A6%BB%E6%95%A3%E8%B6%85%E5%AF%BC%E8%85%94%E6%A8%A1%E5%9E%8B%E7%A4%BA%E4%BE%8B/" rel="prev" title="基于LLRFLibsPy库的连续和离散超导腔模型示例">
-      <i class="fa fa-chevron-left"></i> 基于LLRFLibsPy库的连续和离散超导腔模型示例
+    <a href="/2024/06/19/LLRFLibsPy%E5%BA%93%E4%B8%ADcas-ss-mech%E5%87%BD%E6%95%B0%E8%A7%A3%E8%AF%BB/" rel="prev" title="LLRFLibsPy库中cas_ss_mech函数解读">
+      <i class="fa fa-chevron-left"></i> LLRFLibsPy库中cas_ss_mech函数解读
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2024/06/19/LLRFLibsPy%E5%BA%93%E4%B8%ADcas-ss-mech%E5%87%BD%E6%95%B0%E8%A7%A3%E8%AF%BB/" rel="next" title="LLRFLibsPy库中cas_ss_mech函数解读">
-      LLRFLibsPy库中cas_ss_mech函数解读 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -580,7 +503,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#cav-ss-%E5%87%BD%E6%95%B0%E8%A7%A3%E8%AF%BB"><span class="nav-number">1.</span> <span class="nav-text">cav_ss 函数解读</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B6%85%E5%AF%BC%E8%85%94%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.1.</span> <span class="nav-text">超导腔模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89"><span class="nav-number">1.2.</span> <span class="nav-text">函数定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E9%80%BB%E8%BE%91"><span class="nav-number">1.3.</span> <span class="nav-text">函数逻辑</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#add-tf-%E5%87%BD%E6%95%B0%E8%A7%A3%E9%87%8A"><span class="nav-number">2.</span> <span class="nav-text">add_tf 函数解释</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#add-tf-%E5%87%BD%E6%95%B0%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-number">2.1.</span> <span class="nav-text">add_tf 函数的工作原理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tf2ss-%E5%87%BD%E6%95%B0%E8%A7%A3%E9%87%8A"><span class="nav-number">3.</span> <span class="nav-text">tf2ss 函数解释</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#tf2ss-%E5%87%BD%E6%95%B0%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-number">3.1.</span> <span class="nav-text">tf2ss 函数的工作原理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89"><span class="nav-number">1.</span> <span class="nav-text">函数定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E6%A3%80%E6%9F%A5"><span class="nav-number">2.</span> <span class="nav-text">参数检查</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A6%BB%E6%95%A3%E5%8C%96"><span class="nav-number">3.</span> <span class="nav-text">离散化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E9%A2%91%E7%8E%87%E5%93%8D%E5%BA%94"><span class="nav-number">4.</span> <span class="nav-text">计算频率响应</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E9%A2%91%E7%8E%87%E5%93%8D%E5%BA%94%E5%9B%BE"><span class="nav-number">5.</span> <span class="nav-text">绘制频率响应图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C"><span class="nav-number">6.</span> <span class="nav-text">返回结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B"><span class="nav-number">8.</span> <span class="nav-text">示例</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -977,7 +900,7 @@ if (document.querySelectorAll('pre.mermaid').length) {
       quicklink({
         timeout : 3000,
         priority: true,
-        ignores : [uri => uri.includes('#'),uri => uri === 'http://iuming.github.io/2024/06/18/LLRFLibsPy%E5%BA%93%E4%B8%ADcav-ss%E5%87%BD%E6%95%B0%E8%A7%A3%E8%AF%BB/',]
+        ignores : [uri => uri.includes('#'),uri => uri === 'http://iuming.github.io/2024/06/19/LLRFLibsPy%E5%BA%93%E4%B8%ADss-discrete%E5%87%BD%E6%95%B0%E8%A7%A3%E8%AF%BB/',]
       });
       });
   </script>
