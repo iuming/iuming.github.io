@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.2.0">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/manifest.json">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"iuming.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.20.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":null},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":true,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="该函数用于模拟脉冲射频驱动和束流电流对腔体的响应">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LLRFLibsPy库中sim_ncav_pulse函数解读">
+<meta property="og:url" content="http://iuming.github.io/2024/06/20/LLRFLibsPy%E5%BA%93%E4%B8%ADsim-ncav-pulse%E5%87%BD%E6%95%B0%E8%A7%A3%E8%AF%BB/index.html">
+<meta property="og:site_name" content="REALIUMING&#39;BLOG">
+<meta property="og:description" content="该函数用于模拟脉冲射频驱动和束流电流对腔体的响应">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.postimg.cc/CL54v3HP/example-sim-ncav-pulse.png">
+<meta property="article:published_time" content="2024-06-20T05:57:46.000Z">
+<meta property="article:modified_time" content="2024-06-20T12:40:13.268Z">
+<meta property="article:author" content="Liu Ming">
+<meta property="article:tag" content="LLRF">
+<meta property="article:tag" content="SRF">
+<meta property="article:tag" content="accelerator">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="simulation">
+<meta property="article:tag" content="pulse">
+<meta name="twitter:card" content="&lt;twitter:card&gt;">
+<meta name="twitter:image" content="http://iuming.github.io/2024/06/20/LLRFLibsPy%E5%BA%93%E4%B8%ADsim-ncav-pulse%E5%87%BD%E6%95%B0%E8%A7%A3%E8%AF%BB/%3Ctwitter:image%3E">
+<meta name="twitter:creator" content="@&lt;twitter:creator&gt;">
+<meta name="twitter:site" content="<twitter:site>">
+<meta property="fb:admins" content="&lt;fb:admin_id&gt;">
+<meta property="fb:app_id" content="&lt;fb:app_id&gt;">
+
+
+<link rel="canonical" href="http://iuming.github.io/2024/06/20/LLRFLibsPy%E5%BA%93%E4%B8%ADsim-ncav-pulse%E5%87%BD%E6%95%B0%E8%A7%A3%E8%AF%BB/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://iuming.github.io/2024/06/20/LLRFLibsPy%E5%BA%93%E4%B8%ADsim-ncav-pulse%E5%87%BD%E6%95%B0%E8%A7%A3%E8%AF%BB/","path":"2024/06/20/LLRFLibsPy库中sim-ncav-pulse函数解读/","title":"LLRFLibsPy库中sim_ncav_pulse函数解读"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>LLRFLibsPy库中sim_ncav_pulse函数解读 | REALIUMING'BLOG</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">REALIUMING'BLOG</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">106</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">13</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">35</span></a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fab fa-algolia fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89"><span class="nav-number">1.</span> <span class="nav-text">函数定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E6%A3%80%E6%9F%A5"><span class="nav-number">2.</span> <span class="nav-text">参数检查</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E6%8B%9F%E8%BF%9E%E7%BB%AD%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%93%8D%E5%BA%94"><span class="nav-number">3.</span> <span class="nav-text">模拟连续系统的响应</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E8%85%94%E4%BD%93%E5%8F%8D%E5%B0%84%E7%94%B5%E5%8E%8B"><span class="nav-number">4.</span> <span class="nav-text">计算腔体反射电压</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C"><span class="nav-number">5.</span> <span class="nav-text">返回结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%E4%BB%A3%E7%A0%81"><span class="nav-number">7.</span> <span class="nav-text">示例代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%E8%A7%A3%E9%87%8A"><span class="nav-number">8.</span> <span class="nav-text">示例解释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E8%A7%A3%E9%87%8A"><span class="nav-number">9.</span> <span class="nav-text">输出解释</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Liu Ming"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Liu Ming</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">106</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button animated">
+    <button><i class="fa fa-comment"></i>
+      Chat
+    </button>
+  </div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2l1bWluZw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;iuming"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOjUyMDBsaXVtaW5nQGdtYWlsLmNvbQ==" title="E-Mail → mailto:5200liuming@gmail.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vdS8zMTQ3OTEyODky" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;3147912892"><i class="fab fa-weibo fa-fw"></i>Weibo</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9yZWFsaXVtaW5n" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;realiuming"><i class="fab fa-twitter fa-fw"></i>Twitter</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL3JlYWxpdW1pbmc=" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;realiuming"><i class="fab fa-facebook fa-fw"></i>FB Page</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8xMjE4NTI3My9pdW1pbmc=" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;12185273&#x2F;iuming"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly95b3V0dWJlLmNvbS9jaGFubmVsL1VDaUNCSHJ4cDJ4Tlc3T1ZaTlFzZHROdw==" title="YouTube → https:&#x2F;&#x2F;youtube.com&#x2F;channel&#x2F;UCiCBHrxp2xNW7OVZNQsdtNw"><i class="fab fa-youtube fa-fw"></i>YouTube</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9pbnN0YWdyYW0uY29tL3JlYWxpdW1pbmc=" title="Instagram → https:&#x2F;&#x2F;instagram.com&#x2F;realiuming"><i class="fab fa-instagram fa-fw"></i>Instagram</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="c2t5cGU6ODQyNjczNTU2P2NhbGx8Y2hhdA==" title="Skype → skype:842673556?call|chat"><i class="fab fa-skype fa-fw"></i>Skype</span>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="Back to top">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://iuming.github.io/" title="https:&#x2F;&#x2F;iuming.github.io&#x2F;">Title</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://iuming.github.io/2024/06/20/LLRFLibsPy%E5%BA%93%E4%B8%ADsim-ncav-pulse%E5%87%BD%E6%95%B0%E8%A7%A3%E8%AF%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Liu Ming">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="REALIUMING'BLOG">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="LLRFLibsPy库中sim_ncav_pulse函数解读 | REALIUMING'BLOG">
+      <meta itemprop="description" content="该函数用于模拟脉冲射频驱动和束流电流对腔体的响应">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          LLRFLibsPy库中sim_ncav_pulse函数解读
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2024-06-20 13:57:46 / Modified: 20:40:13" itemprop="dateCreated datePublished" datetime="2024-06-20T13:57:46+08:00">2024-06-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/note/" itemprop="url" rel="index"><span itemprop="name">note</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2024/06/20/LLRFLibsPy%E5%BA%93%E4%B8%ADsim-ncav-pulse%E5%87%BD%E6%95%B0%E8%A7%A3%E8%AF%BB/" class="post-meta-item leancloud_visitors" data-flag-title="LLRFLibsPy库中sim_ncav_pulse函数解读" title="Views">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2024/06/20/LLRFLibsPy%E5%BA%93%E4%B8%ADsim-ncav-pulse%E5%87%BD%E6%95%B0%E8%A7%A3%E8%AF%BB/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2024/06/20/LLRFLibsPy库中sim-ncav-pulse函数解读/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+            <div class="post-description">该函数用于模拟脉冲射频驱动和束流电流对腔体的响应</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>source code: <a href=""></a></p>
+<p>这段代码定义了一个名为 <code>sim_ncav_pulse</code> 的函数，该函数用于模拟脉冲射频驱动和束流电流对腔体的响应。这个函数特别适用于具有恒定质量因数 (QL) 和失谐频率 (detuning) 的常导腔 (normal conducting cavity)。以下是对这段代码的详细解读：</p>
+<h3 id="函数定义"><a href="#函数定义" class="headerlink" title="函数定义"></a>函数定义</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">sim_ncav_pulse</span>(<span class="params">Arfc, Brfc, Crfc, Drfc, vf, Ts, </span></span><br><span class="line"><span class="params">                   Abmc = <span class="literal">None</span>, </span></span><br><span class="line"><span class="params">                   Bbmc = <span class="literal">None</span>, </span></span><br><span class="line"><span class="params">                   Cbmc = <span class="literal">None</span>, </span></span><br><span class="line"><span class="params">                   Dbmc = <span class="literal">None</span>, </span></span><br><span class="line"><span class="params">                   vb   = <span class="literal">None</span></span>):</span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">    Simulate the cavity response to a pulsed RF drive and beam current. This</span></span><br><span class="line"><span class="string">    function is for normal conducting cavties with constant QL and detuning.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Parameters:</span></span><br><span class="line"><span class="string">        Arfc, Brfc, Crfc, Drfc: numpy matrix (complex), continous cavity model for RF drive</span></span><br><span class="line"><span class="string">        vf:                     numpy array (complex), cavity forward voltage (calibrated to</span></span><br><span class="line"><span class="string">                                 the cavity probe signal reference plane)</span></span><br><span class="line"><span class="string">        Ts:                     float, sampling frequency, Hz</span></span><br><span class="line"><span class="string">        Abmc, Bbmc, Cbmc, Dbmc: numpy matrix (complex), continous cavity model for beam drive</span></span><br><span class="line"><span class="string">        vb:                     numpy array (complex), beam drive voltage (calibrated to</span></span><br><span class="line"><span class="string">                                 the cavity probe signal reference plane)</span></span><br><span class="line"><span class="string">                                 </span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">        status: boolean, success (True) or fail (False)</span></span><br><span class="line"><span class="string">        T:      numpy array, time waveform, s</span></span><br><span class="line"><span class="string">        vc:     numpy array (complex), cavity voltage waveform</span></span><br><span class="line"><span class="string">        vr:     numpy array (complex), cavity reflected voltage waveform</span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>函数接受以下参数：</p>
+<ul>
+<li><code>Arfc, Brfc, Crfc, Drfc</code>：用于射频驱动的连续腔体模型的状态空间矩阵。</li>
+<li><code>vf</code>：腔体前向电压的复数 numpy 数组（校准到腔体探头信号参考平面）。</li>
+<li><code>Ts</code>：采样时间，单位为秒。</li>
+<li><code>Abmc, Bbmc, Cbmc, Dbmc</code>：用于束流驱动的连续腔体模型的状态空间矩阵（可选）。</li>
+<li><code>vb</code>：束流驱动电压的复数 numpy 数组（校准到腔体探头信号参考平面）（可选）。</li>
+</ul>
+<p>返回值包括：</p>
+<ul>
+<li><code>status</code>：布尔值，表示成功 (True) 或失败 (False)。</li>
+<li><code>T</code>：时间波形的 numpy 数组，单位为秒。</li>
+<li><code>vc</code>：腔体电压波形的复数 numpy 数组。</li>
+<li><code>vr</code>：腔体反射电压波形的复数 numpy 数组。</li>
+</ul>
+<h3 id="参数检查"><a href="#参数检查" class="headerlink" title="参数检查"></a>参数检查</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># check the input</span></span><br><span class="line"><span class="keyword">if</span> (Ts &lt;= <span class="number">0.0</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">False</span>, <span class="literal">None</span>, <span class="literal">None</span>, <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> vb <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">not</span> vb.shape == vf.shape):</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span>, <span class="literal">None</span>, <span class="literal">None</span>, <span class="literal">None</span></span><br></pre></td></tr></table></figure>
+
+<p>检查采样时间 <code>Ts</code> 是否大于 0。如果不满足条件，函数返回 <code>False</code> 和三个 <code>None</code>。如果提供了 <code>vb</code>，检查其形状是否与 <code>vf</code> 相同，否则返回 <code>False</code> 和三个 <code>None</code>。</p>
+<h3 id="模拟连续系统的响应"><a href="#模拟连续系统的响应" class="headerlink" title="模拟连续系统的响应"></a>模拟连续系统的响应</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># simulate the response of the continous system</span></span><br><span class="line">T = np.arange(vf.shape[<span class="number">0</span>]) * Ts</span><br><span class="line">_, vc_rf, _ = signal.lsim((Arfc, Brfc, Crfc, Drfc), vf, T)      <span class="comment"># Returns: T, Yout, Xout</span></span><br><span class="line">vc = vc_rf</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">any</span>([x <span class="keyword">is</span> <span class="literal">None</span> <span class="keyword">for</span> x <span class="keyword">in</span> (Abmc, Bbmc, Cbmc, Dbmc, vb)]):</span><br><span class="line">    _, vc_bm, _ = signal.lsim((Abmc, Bbmc, Cbmc, Dbmc), vb, T)</span><br><span class="line">    vc += vc_bm</span><br></pre></td></tr></table></figure>
+
+<p>首先计算时间数组 <code>T</code>。然后使用 <code>signal.lsim</code> 函数模拟射频驱动的连续系统响应，得到腔体电压 <code>vc_rf</code>。如果束流驱动模型和 <code>vb</code> 都不为 <code>None</code>，则模拟束流驱动的连续系统响应，得到腔体电压 <code>vc_bm</code>，并将其加到总的腔体电压 <code>vc</code> 上。</p>
+<h3 id="计算腔体反射电压"><a href="#计算腔体反射电压" class="headerlink" title="计算腔体反射电压"></a>计算腔体反射电压</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># get the cavity reflected</span></span><br><span class="line">vr = vc - vf</span><br></pre></td></tr></table></figure>
+
+<p>计算腔体反射电压 <code>vr</code>，其等于总的腔体电压 <code>vc</code> 减去前向电压 <code>vf</code>。</p>
+<h3 id="返回结果"><a href="#返回结果" class="headerlink" title="返回结果"></a>返回结果</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> <span class="literal">True</span>, T, vc, vr</span><br></pre></td></tr></table></figure>
+
+<p>返回成功状态 <code>True</code>，时间波形 <code>T</code>，腔体电压波形 <code>vc</code> 和腔体反射电压波形 <code>vr</code>。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><code>sim_ncav_pulse</code> 函数的作用是模拟常导腔在脉冲射频驱动和束流电流下的响应。函数首先检查输入参数的有效性，然后模拟连续系统的响应，计算总的腔体电压波形和反射电压波形。最后返回成功状态和计算结果。</p>
+<p>为了举例说明如何使用 <code>sim_ncav_pulse</code> 函数，我们需要提供一些示例输入参数，包括连续状态空间模型的矩阵和驱动信号的波形。以下是一个示例，演示如何调用 <code>sim_ncav_pulse</code> 函数并解释其输出。</p>
+<h3 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> scipy.signal <span class="keyword">as</span> signal</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义连续腔体模型的状态空间矩阵（假设的值）</span></span><br><span class="line">Arfc = np.array([[<span class="number">0.0</span>, <span class="number">1.0</span>], [-<span class="number">1.0</span>, -<span class="number">1.0</span>]])</span><br><span class="line">Brfc = np.array([[<span class="number">0.0</span>], [<span class="number">1.0</span>]])</span><br><span class="line">Crfc = np.array([[<span class="number">1.0</span>, <span class="number">0.0</span>]])</span><br><span class="line">Drfc = np.array([[<span class="number">0.0</span>]])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义采样时间</span></span><br><span class="line">Ts = <span class="number">1e-3</span>  <span class="comment"># 1毫秒</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义前向电压驱动信号（示例脉冲信号）</span></span><br><span class="line">time_steps = <span class="number">1000</span></span><br><span class="line">vf = np.zeros(time_steps)</span><br><span class="line">vf[<span class="number">100</span>:<span class="number">200</span>] = <span class="number">1.0</span>  <span class="comment"># 在100到200时间步之间有一个幅度为1的脉冲</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义束流驱动模型的状态空间矩阵（假设的值，可选）</span></span><br><span class="line">Abmc = np.array([[<span class="number">0.0</span>, <span class="number">1.0</span>], [-<span class="number">1.0</span>, -<span class="number">1.0</span>]])</span><br><span class="line">Bbmc = np.array([[<span class="number">0.0</span>], [<span class="number">1.0</span>]])</span><br><span class="line">Cbmc = np.array([[<span class="number">1.0</span>, <span class="number">0.0</span>]])</span><br><span class="line">Dbmc = np.array([[<span class="number">0.0</span>]])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义束流驱动信号（与前向电压驱动信号形状相同，可选）</span></span><br><span class="line">vb = np.zeros(time_steps)</span><br><span class="line">vb[<span class="number">150</span>:<span class="number">250</span>] = <span class="number">0.5</span>  <span class="comment"># 在150到250时间步之间有一个幅度为0.5的脉冲</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 调用 sim_ncav_pulse 函数</span></span><br><span class="line">status, T, vc, vr = sim_ncav_pulse(Arfc, Brfc, Crfc, Drfc, vf, Ts, Abmc, Bbmc, Cbmc, Dbmc, vb)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查状态并打印结果</span></span><br><span class="line"><span class="keyword">if</span> status:</span><br><span class="line">    plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line"></span><br><span class="line">    plt.plot(T, np.real(vf), label=<span class="string">&#x27;Forward Voltage (Real Part)&#x27;</span>)</span><br><span class="line">    plt.plot(T, np.imag(vf), <span class="string">&#x27;--&#x27;</span>, label=<span class="string">&#x27;Forward Voltage (Imaginary Part)&#x27;</span>)</span><br><span class="line">    plt.plot(T, np.real(vc), label=<span class="string">&#x27;Cavity Voltage (Real Part)&#x27;</span>)</span><br><span class="line">    plt.plot(T, np.imag(vc), <span class="string">&#x27;--&#x27;</span>, label=<span class="string">&#x27;Cavity Voltage (Imaginary Part)&#x27;</span>)</span><br><span class="line">    plt.plot(T, np.real(vr), label=<span class="string">&#x27;Reflected Voltage (Real Part)&#x27;</span>)</span><br><span class="line">    plt.plot(T, np.imag(vr), <span class="string">&#x27;--&#x27;</span>, label=<span class="string">&#x27;Reflected Voltage (Imaginary Part)&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    plt.legend()</span><br><span class="line">    plt.xlabel(<span class="string">&#x27;Time [s]&#x27;</span>)</span><br><span class="line">    plt.ylabel(<span class="string">&#x27;Voltage [V]&#x27;</span>)</span><br><span class="line">    plt.title(<span class="string">&#x27;Cavity Response to Pulsed RF Drive and Beam Current&#x27;</span>)</span><br><span class="line">    plt.grid(<span class="literal">True</span>)</span><br><span class="line">    plt.show()</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Simulation failed.&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="示例解释"><a href="#示例解释" class="headerlink" title="示例解释"></a>示例解释</h3><ol>
+<li><p><strong>定义连续腔体模型的状态空间矩阵</strong>：</p>
+<ul>
+<li>这里我们假设了一些值，用于创建射频驱动的状态空间模型。</li>
+</ul>
+</li>
+<li><p><strong>定义采样时间</strong>：</p>
+<ul>
+<li><code>Ts = 1e-3</code>，表示采样时间为1毫秒。</li>
+</ul>
+</li>
+<li><p><strong>定义前向电压驱动信号</strong>：</p>
+<ul>
+<li><code>vf</code> 是一个包含1000个时间步的零向量。</li>
+<li>在时间步100到200之间，电压为1，形成一个脉冲信号。</li>
+</ul>
+</li>
+<li><p><strong>定义束流驱动模型的状态空间矩阵和驱动信号</strong>：</p>
+<ul>
+<li>这些矩阵和信号是可选的，同样是假设的值。</li>
+<li><code>vb</code> 在时间步150到250之间有一个幅度为0.5的脉冲。</li>
+</ul>
+</li>
+<li><p><strong>调用 <code>sim_ncav_pulse</code> 函数</strong>：</p>
+<ul>
+<li>使用定义好的参数调用函数，得到模拟的结果。</li>
+</ul>
+</li>
+<li><p><strong>检查状态并打印结果</strong>：</p>
+<ul>
+<li>如果模拟成功，使用 <code>matplotlib</code> 绘制前向电压、腔体电压和反射电压的波形图。</li>
+<li>如果模拟失败，打印失败信息。</li>
+</ul>
+</li>
+</ol>
+<h3 id="输出解释"><a href="#输出解释" class="headerlink" title="输出解释"></a>输出解释</h3><ul>
+<li><strong>前向电压</strong>：显示输入到腔体的脉冲信号。</li>
+<li><strong>腔体电压</strong>：显示腔体对前向电压和束流驱动信号的响应。</li>
+<li><strong>反射电压</strong>：显示腔体的反射电压，其值等于总腔体电压减去前向电压。</li>
+</ul>
+<p>通过这种方式，您可以看到脉冲射频驱动和束流电流对腔体的响应，并观察到前向电压、腔体电压和反射电压的时域行为。</p>
+<p><a target="_blank" rel="noopener" href="https://postimg.cc/qzfnqZFy"><img data-src="https://i.postimg.cc/CL54v3HP/example-sim-ncav-pulse.png" alt="example-sim-ncav-pulse.png"></a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="Liu Ming WeChat Pay">
+        <span>WeChat Pay</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="Liu Ming Alipay">
+        <span>Alipay</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>Liu Ming
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="http://iuming.github.io/2024/06/20/LLRFLibsPy%E5%BA%93%E4%B8%ADsim-ncav-pulse%E5%87%BD%E6%95%B0%E8%A7%A3%E8%AF%BB/" title="LLRFLibsPy库中sim_ncav_pulse函数解读">http://iuming.github.io/2024/06/20/LLRFLibsPy库中sim-ncav-pulse函数解读/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/realiuming">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+U5yo-Zxuw1OgbU6P">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </span>
+
+          <img class="social-item-img" src="/images/wechat_channel.jpg">
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/LLRF/" rel="tag"><i class="fa fa-tag"></i> LLRF</a>
+              <a href="/tags/SRF/" rel="tag"><i class="fa fa-tag"></i> SRF</a>
+              <a href="/tags/accelerator/" rel="tag"><i class="fa fa-tag"></i> accelerator</a>
+              <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
+              <a href="/tags/simulation/" rel="tag"><i class="fa fa-tag"></i> simulation</a>
+              <a href="/tags/pulse/" rel="tag"><i class="fa fa-tag"></i> pulse</a>
+          </div>
+
+        
+  <div class="social-like a2a_kit a2a_kit_size_32 a2a_default_style">
+    <a class="a2a_dd" target="_blank" rel="noopener" href="https://www.addtoany.com/share"></a>
+      <a class="a2a_button_facebook"></a>
+      <a class="a2a_button_twitter"></a>
+      <a class="a2a_button_wechat"></a>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/06/19/LLRFLibsPy%E5%BA%93%E4%B8%ADss-discrete%E5%87%BD%E6%95%B0%E8%A7%A3%E8%AF%BB/" rel="prev" title="LLRFLibsPy库中ss_discrete函数解读">
+                  <i class="fa fa-angle-left"></i> LLRFLibsPy库中ss_discrete函数解读
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Ming Liu. All rights reserved.</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL2l1bWluZw==" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.1.0/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/4.23.3/algoliasearch-lite.umd.js" integrity="sha256-1QNshz86RqXe/qsCBldsUu13eAX6n/O98uubKQs87UI=" crossorigin="anonymous"></script><script src="/js/third-party/search/algolia-search.js"></script>
+<script class="next-config" data-name="chatra" type="application/json">{"enable":true,"async":true,"id":"gTXKphrmKGf5QSb5L"}</script>
+<script src="/js/third-party/chat/chatra.js"></script>
+<script async src="https://call.chatra.io/chatra.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.0/pdfobject.min.js","integrity":"sha256-JJZNsid68vnh3/zyj0lY9BN5ynxVX/12XgOa1TlaYN0="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.0/mermaid.min.js","integrity":"sha256-stuqcu2FrjYCXDOytWFA5SoUE/r3nkp6gTglzNSlavU="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+  <script class="next-config" data-name="wavedrom" type="application/json">{"enable":true,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.5.0/wavedrom.min.js","integrity":"sha256-INLAoJc6quTNfiMWkGZniYO2cxE8mHpddnLow1m6RFs="}}</script>
+  <script class="next-config" data-name="wavedrom_skin" type="application/json">{"enable":true,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.5.0/skins/default.js","integrity":"sha256-fduc/Zszk5ezWws2uInY/ALWVmIrmV6VTgXbsYSReFI="}}</script>
+  <script src="/js/third-party/tags/wavedrom.js"></script>
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+  <script src="/js/third-party/addtoany.js"></script>
+
+  
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"JVYbABtynE3HmooKzd0mwfN4-gzGzoHsz","app_key":"KuLQwv33J92vlcFXyx0L7Asd","server_url":"https://jvybabty.lc-cn-n1-shared.com","security":true}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js"></script>
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":"ture","archive":true,"delay":true,"timeout":3000,"priority":true,"url":"http://iuming.github.io/2024/06/20/LLRFLibsPy%E5%BA%93%E4%B8%ADsim-ncav-pulse%E5%87%BD%E6%95%B0%E8%A7%A3%E8%AF%BB/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"realiuming","count":true,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+
+</body>
+</html>
