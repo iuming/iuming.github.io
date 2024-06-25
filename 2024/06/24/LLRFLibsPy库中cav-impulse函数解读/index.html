@@ -33,7 +33,7 @@
 <meta property="og:description" content="计算腔体系统的脉冲响应">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-06-24T07:47:37.000Z">
-<meta property="article:modified_time" content="2024-06-24T07:51:23.572Z">
+<meta property="article:modified_time" content="2024-06-25T01:59:14.224Z">
 <meta property="article:author" content="Liu Ming">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="LLRF">
@@ -291,9 +291,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2024-06-24 15:47:37 / Modified: 15:51:23" itemprop="dateCreated datePublished" datetime="2024-06-24T15:47:37+08:00">2024-06-24</time>
+      <time title="Created: 2024-06-24 15:47:37" itemprop="dateCreated datePublished" datetime="2024-06-24T15:47:37+08:00">2024-06-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-06-25 09:59:14" itemprop="dateModified" datetime="2024-06-25T09:59:14+08:00">2024-06-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -337,7 +343,7 @@
     
     
     <div class="post-body" itemprop="articleBody"><p>source code: <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FhcWlhby9MTFJGTGlic1B5L2Jsb2IvbWFpbi9zcmMvcmZfc2ltLnB5I0wyMzE=">Github<i class="fa fa-external-link-alt"></i></span></p>
-<p>这个函数 <code>cav_impulse</code> 计算了腔体系统的脉冲响应。该函数假设系统增益已经归一化为1，并且系统相位校正为0。对应的腔体方程为 $ dvc&#x2F;dt + (half_bw - 1j \cdot detuning) \cdot vc &#x3D; half_bw \cdot vd $，其中 <code>vc</code> 是腔体电压向量，<code>vd</code> 是腔体驱动向量。</p>
+<p>这个函数 <code>cav_impulse</code> 计算了腔体系统的脉冲响应。该函数假设系统增益已经归一化为1，并且系统相位校正为0。对应的腔体方程为 $ \frac{dvc}{dt} + (half_{bw} - 1j \cdot detuning) \cdot v_c &#x3D; half_bw \cdot v_d $，其中 <code>vc</code> 是腔体电压向量，<code>vd</code> 是腔体驱动向量。</p>
 <h3 id="函数参数："><a href="#函数参数：" class="headerlink" title="函数参数："></a>函数参数：</h3><ul>
 <li><code>half_bw</code> (float)：腔体的常数半带宽，以弧度每秒为单位。</li>
 <li><code>detuning</code> (float)：腔体的常数失谐，以弧度每秒为单位。</li>
