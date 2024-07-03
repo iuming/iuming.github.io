@@ -25,28 +25,38 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"iuming.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.20.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":null},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":true,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="REALIUMING&#39;BLOG">
-<meta property="og:url" content="http://iuming.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/page/2/index.html">
+    <meta name="description" content="用于应用迭代学习控制（ILC）来计算前馈修正波形">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LLRFLibsPy库中AFF_ilc函数解读">
+<meta property="og:url" content="http://iuming.github.io/2024/07/03/LLRFLibsPy%E5%BA%93%E4%B8%ADAFF-ilc%E5%87%BD%E6%95%B0%E8%A7%A3%E8%AF%BB/index.html">
 <meta property="og:site_name" content="REALIUMING&#39;BLOG">
+<meta property="og:description" content="用于应用迭代学习控制（ILC）来计算前馈修正波形">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-07-03T09:42:09.000Z">
+<meta property="article:modified_time" content="2024-07-03T09:43:33.574Z">
 <meta property="article:author" content="Liu Ming">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="LLRF">
+<meta property="article:tag" content="SRF">
+<meta property="article:tag" content="accelerator">
+<meta property="article:tag" content="ilc">
+<meta property="article:tag" content="AFF">
 <meta name="twitter:card" content="&lt;twitter:card&gt;">
-<meta name="twitter:image" content="http://iuming.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/page/2/%3Ctwitter:image%3E">
+<meta name="twitter:image" content="http://iuming.github.io/2024/07/03/LLRFLibsPy%E5%BA%93%E4%B8%ADAFF-ilc%E5%87%BD%E6%95%B0%E8%A7%A3%E8%AF%BB/%3Ctwitter:image%3E">
 <meta name="twitter:creator" content="@&lt;twitter:creator&gt;">
 <meta name="twitter:site" content="<twitter:site>">
 <meta property="fb:admins" content="&lt;fb:admin_id&gt;">
 <meta property="fb:app_id" content="&lt;fb:app_id&gt;">
 
 
-<link rel="canonical" href="http://iuming.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/page/2/">
+<link rel="canonical" href="http://iuming.github.io/2024/07/03/LLRFLibsPy%E5%BA%93%E4%B8%ADAFF-ilc%E5%87%BD%E6%95%B0%E8%A7%A3%E8%AF%BB/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"en","comments":"","permalink":"","path":"categories/学习笔记/page/2/index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://iuming.github.io/2024/07/03/LLRFLibsPy%E5%BA%93%E4%B8%ADAFF-ilc%E5%87%BD%E6%95%B0%E8%A7%A3%E8%AF%BB/","path":"2024/07/03/LLRFLibsPy库中AFF-ilc函数解读/","title":"LLRFLibsPy库中AFF_ilc函数解读"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Category: 学习笔记 | REALIUMING'BLOG</title>
+<title>LLRFLibsPy库中AFF_ilc函数解读 | REALIUMING'BLOG</title>
   
 
 
@@ -132,7 +142,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -145,6 +155,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">函数参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="nav-number">2.</span> <span class="nav-text">返回值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E6%B5%81%E7%A8%8B"><span class="nav-number">3.</span> <span class="nav-text">函数流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E8%A7%A3%E9%87%8A"><span class="nav-number">4.</span> <span class="nav-text">函数解释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%E8%A7%A3%E9%87%8A"><span class="nav-number">5.</span> <span class="nav-text">示例解释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%9C%E7%94%A8%E6%80%BB%E7%BB%93"><span class="nav-number">6.</span> <span class="nav-text">作用总结</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -241,214 +252,269 @@
 
     </div>
 
-    <div class="main-inner category posts-collapse">
+    <div class="main-inner post posts-expand">
 
 
   
+
+
+<div class="post-block">
   
   
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <h1 class="collection-header">学习笔记
-          <small>Category</small>
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://iuming.github.io/2024/07/03/LLRFLibsPy%E5%BA%93%E4%B8%ADAFF-ilc%E5%87%BD%E6%95%B0%E8%A7%A3%E8%AF%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Liu Ming">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="REALIUMING'BLOG">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="LLRFLibsPy库中AFF_ilc函数解读 | REALIUMING'BLOG">
+      <meta itemprop="description" content="用于应用迭代学习控制（ILC）来计算前馈修正波形">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          LLRFLibsPy库中AFF_ilc函数解读
         </h1>
-      </div>
 
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
       
-    <div class="collection-year">
-      <span class="collection-header">2020</span>
+
+      <time title="Created: 2024-07-03 17:42:09 / Modified: 17:43:33" itemprop="dateCreated datePublished" datetime="2024-07-03T17:42:09+08:00">2024-07-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/note/" itemprop="url" rel="index"><span itemprop="name">note</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2024/07/03/LLRFLibsPy%E5%BA%93%E4%B8%ADAFF-ilc%E5%87%BD%E6%95%B0%E8%A7%A3%E8%AF%BB/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2024/07/03/LLRFLibsPy库中AFF-ilc函数解读/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+            <div class="post-description">用于应用迭代学习控制（ILC）来计算前馈修正波形</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>source code: <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FhcWlhby9MTFJGTGlic1B5L2Jsb2IvbWFpbi9zcmMvcmZfY29udHJvbC5weSNMNjY3">Github<i class="fa fa-external-link-alt"></i></span></p>
+<p>这个函数 <code>AFF_ilc</code> 用于应用迭代学习控制（ILC）来计算前馈修正波形。具体解读如下：</p>
+<h3 id="函数参数"><a href="#函数参数" class="headerlink" title="函数参数"></a>函数参数</h3><ul>
+<li><code>vc_err</code>: 复数类型的一维 numpy 数组，表示腔体电压波形的误差。</li>
+<li><code>L</code>: 复数类型的 numpy 矩阵，ILC 的增益矩阵。</li>
+</ul>
+<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><ul>
+<li><code>vff_cor</code>: 复数类型的一维 numpy 数组，前馈修正波形。</li>
+</ul>
+<h3 id="函数流程"><a href="#函数流程" class="headerlink" title="函数流程"></a>函数流程</h3><ol>
+<li><strong>计算前馈修正波形</strong>：<ul>
+<li>使用矩阵乘法，将 ILC 增益矩阵 ( L ) 与电压误差 <code>vc_err</code> 相乘。</li>
+<li>返回计算得到的前馈修正波形 <code>vff_cor</code>。</li>
+</ul>
+</li>
+</ol>
+<h3 id="函数解释"><a href="#函数解释" class="headerlink" title="函数解释"></a>函数解释</h3><ol>
+<li><p><strong>输入检查</strong>：</p>
+<ul>
+<li>函数假定输入参数已经是正确的类型和尺寸，因此没有显式的输入检查。</li>
+</ul>
+</li>
+<li><p><strong>矩阵乘法</strong>：</p>
+<ul>
+<li>计算公式为 ( vff_cor &#x3D; L \cdot vc_err )。</li>
+<li>这里的 <code>np.matmul</code> 是 numpy 提供的矩阵乘法函数，计算增益矩阵 ( L ) 和电压误差 <code>vc_err</code> 的乘积。</li>
+</ul>
+</li>
+</ol>
+<h3 id="示例解释"><a href="#示例解释" class="headerlink" title="示例解释"></a>示例解释</h3><p>假设我们有以下电压误差 <code>vc_err</code> 和增益矩阵 ( L ):</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vc_err = np.array([<span class="number">0.1</span> + <span class="number">0.2j</span>, <span class="number">0.05</span> + <span class="number">0.1j</span>, -<span class="number">0.02</span> - <span class="number">0.03j</span>], dtype=<span class="built_in">complex</span>)</span><br><span class="line">L = np.array([[<span class="number">0.5</span>, <span class="number">0.1</span>, -<span class="number">0.05</span>],</span><br><span class="line">              [<span class="number">0.2</span>, <span class="number">0.4</span>, <span class="number">0.1</span>],</span><br><span class="line">              [-<span class="number">0.1</span>, <span class="number">0.2</span>, <span class="number">0.3</span>]], dtype=<span class="built_in">complex</span>)</span><br></pre></td></tr></table></figure>
+
+<p>我们可以调用函数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vff_cor = AFF_ilc(vc_err, L)</span><br></pre></td></tr></table></figure>
+
+<p>函数将进行以下步骤：</p>
+<ol>
+<li><p>计算前馈修正波形 <code>vff_cor</code>:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vff_cor = np.matmul(L, vc_err)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>返回计算得到的前馈修正波形 <code>vff_cor</code>。</p>
+</li>
+</ol>
+<p>例如，计算结果可能为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vff_cor = np.array([<span class="number">0.071</span> + <span class="number">0.114j</span>, <span class="number">0.068</span> + <span class="number">0.088j</span>, -<span class="number">0.004</span> - <span class="number">0.017j</span>], dtype=<span class="built_in">complex</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="作用总结"><a href="#作用总结" class="headerlink" title="作用总结"></a>作用总结</h3><p>这个函数的主要作用是利用 ILC 增益矩阵 ( L ) 对系统的电压误差进行修正，计算出相应的前馈信号，以提高系统的控制性能。这个修正波形可以用于下一次迭代，以逐步减少系统误差，达到更好的控制效果。</p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2020-08-25T18:03:31+08:00"
-              content="2020-08-25">
-          08-25
-        </time>
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="Liu Ming WeChat Pay">
+        <span>WeChat Pay</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="Liu Ming Alipay">
+        <span>Alipay</span>
       </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/08/25/%E8%88%B9%E8%88%B6%E6%A0%B8%E5%8A%A8%E5%8A%9B%E8%A3%85%E7%BD%AE%E7%9A%84%E6%8A%80%E6%9C%AF%E7%BB%8F%E6%B5%8E%E6%8C%87%E6%A0%87/" itemprop="url">
-            <span itemprop="name">船舶核动力装置的技术经济指标</span>
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>Liu Ming
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="http://iuming.github.io/2024/07/03/LLRFLibsPy%E5%BA%93%E4%B8%ADAFF-ilc%E5%87%BD%E6%95%B0%E8%A7%A3%E8%AF%BB/" title="LLRFLibsPy库中AFF_ilc函数解读">http://iuming.github.io/2024/07/03/LLRFLibsPy库中AFF-ilc函数解读/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/realiuming">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
           </a>
       </div>
 
-      
-    </header>
-  </article>
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+U5yo-Zxuw1OgbU6P">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2020-08-24T22:26:44+08:00"
-              content="2020-08-24">
-          08-24
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/08/24/%E8%88%B9%E7%94%A8%E6%A0%B8%E5%8A%A8%E5%8A%9B%E5%A0%86%E5%9E%8B/" itemprop="url">
-            <span itemprop="name">船用核动力堆型</span>
+            <span class="label">Telegram</span>
           </a>
       </div>
 
-      
-    </header>
-  </article>
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2020-08-24T21:58:00+08:00"
-              content="2020-08-24">
-          08-24
-        </time>
+            <span class="label">WeChat</span>
+          </span>
+
+          <img class="social-item-img" src="/images/wechat_channel.jpg">
       </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/08/24/%E5%8F%8D%E5%BA%94%E6%80%A7%E5%8F%8A%E5%85%B6%E6%8E%A7%E5%88%B6%E6%96%B9%E5%BC%8F/" itemprop="url">
-            <span itemprop="name">反应性及其控制方式</span>
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
           </a>
       </div>
+  </div>
+</div>
 
-      
-    </header>
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
+              <a href="/tags/LLRF/" rel="tag"><i class="fa fa-tag"></i> LLRF</a>
+              <a href="/tags/SRF/" rel="tag"><i class="fa fa-tag"></i> SRF</a>
+              <a href="/tags/accelerator/" rel="tag"><i class="fa fa-tag"></i> accelerator</a>
+              <a href="/tags/ilc/" rel="tag"><i class="fa fa-tag"></i> ilc</a>
+              <a href="/tags/AFF/" rel="tag"><i class="fa fa-tag"></i> AFF</a>
+          </div>
+
+        
+  <div class="social-like a2a_kit a2a_kit_size_32 a2a_default_style">
+    <a class="a2a_dd" target="_blank" rel="noopener" href="https://www.addtoany.com/share"></a>
+      <a class="a2a_button_facebook"></a>
+      <a class="a2a_button_twitter"></a>
+      <a class="a2a_button_wechat"></a>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/07/03/Iterative-Learning-Control-for-RF-system/" rel="prev" title="Iterative Learning Control for RF system">
+                  <i class="fa fa-angle-left"></i> Iterative Learning Control for RF system
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
   </article>
+</div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2020-08-24T21:08:56+08:00"
-              content="2020-08-24">
-          08-24
-        </time>
-      </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/08/24/%E8%88%B9%E8%88%B6%E5%8A%A8%E5%8A%9B%E8%A3%85%E7%BD%AE%E7%9A%84%E7%B1%BB%E5%9E%8B%E5%8F%8A%E5%85%B6%E7%89%B9%E7%82%B9/" itemprop="url">
-            <span itemprop="name">船舶动力装置的类型及其特点</span>
-          </a>
-      </div>
 
-      
-    </header>
-  </article>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2020-08-16T19:32:41+08:00"
-              content="2020-08-16">
-          08-16
-        </time>
-      </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/08/16/%E5%8E%9F%E5%AD%90%E6%A0%B8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%80%A7%E8%B4%A8%EF%BC%88%E4%B8%89%EF%BC%89/" itemprop="url">
-            <span itemprop="name">原子核的基本性质（三）</span>
-          </a>
-      </div>
 
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2020-08-15T19:28:54+08:00"
-              content="2020-08-15">
-          08-15
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/08/15/%E5%8E%9F%E5%AD%90%E6%A0%B8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%80%A7%E8%B4%A8%EF%BC%88%E4%BA%8C%EF%BC%89/" itemprop="url">
-            <span itemprop="name">原子核的基本性质（二）</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2020-08-15T18:43:13+08:00"
-              content="2020-08-15">
-          08-15
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/08/15/2007%E8%80%83%E7%A0%94%E8%8B%B1%E8%AF%ADText1/" itemprop="url">
-            <span itemprop="name">2007考研英语Text1</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2020-08-14T20:38:50+08:00"
-              content="2020-08-14">
-          08-14
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/08/14/%E5%8E%9F%E5%AD%90%E6%A0%B8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%80%A7%E8%B4%A8%EF%BC%88%E4%B8%80%EF%BC%89/" itemprop="url">
-            <span itemprop="name">原子核的基本性质（一）</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2020-08-13T20:13:01+08:00"
-              content="2020-08-13">
-          08-13
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/08/13/2006%E8%80%83%E7%A0%94%E8%8B%B1%E8%AF%ADText4/" itemprop="url">
-            <span itemprop="name">2006考研英语Text4</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-    </div>
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
   </div>
   
-  
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">1</a><span class="page-number current">2</span>
-  </nav>
-
 </div>
   </main>
 
@@ -546,7 +612,7 @@
 
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
-  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":"ture","archive":true,"delay":true,"timeout":3000,"priority":true,"url":"http://iuming.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/page/2/"}</script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":"ture","archive":true,"delay":true,"timeout":3000,"priority":true,"url":"http://iuming.github.io/2024/07/03/LLRFLibsPy%E5%BA%93%E4%B8%ADAFF-ilc%E5%87%BD%E6%95%B0%E8%A7%A3%E8%AF%BB/"}</script>
   <script src="/js/third-party/quicklink.js"></script>
 <script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"realiuming","count":true,"i18n":{"disqus":"disqus"}}</script>
 <script src="/js/third-party/comments/disqus.js"></script>
