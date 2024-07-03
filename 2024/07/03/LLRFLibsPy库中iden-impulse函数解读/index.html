@@ -32,8 +32,9 @@
 <meta property="og:site_name" content="REALIUMING&#39;BLOG">
 <meta property="og:description" content="用于通过输入输出数据识别系统的脉冲响应">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.postimg.cc/25tXKK2M/example-iden-impulse.png">
 <meta property="article:published_time" content="2024-07-03T06:30:53.000Z">
-<meta property="article:modified_time" content="2024-07-03T06:34:47.646Z">
+<meta property="article:modified_time" content="2024-07-03T06:57:14.569Z">
 <meta property="article:author" content="Liu Ming">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="LLRF">
@@ -154,7 +155,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">函数参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="nav-number">2.</span> <span class="nav-text">返回值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E9%80%BB%E8%BE%91"><span class="nav-number">3.</span> <span class="nav-text">函数逻辑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E8%A7%A3%E9%87%8A"><span class="nav-number">4.</span> <span class="nav-text">代码解释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E7%94%A8%E9%80%94"><span class="nav-number">5.</span> <span class="nav-text">函数用途</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">函数参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="nav-number">2.</span> <span class="nav-text">返回值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E9%80%BB%E8%BE%91"><span class="nav-number">3.</span> <span class="nav-text">函数逻辑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E8%A7%A3%E9%87%8A"><span class="nav-number">4.</span> <span class="nav-text">代码解释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E7%94%A8%E9%80%94"><span class="nav-number">5.</span> <span class="nav-text">函数用途</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%EF%BC%9A%E8%84%89%E5%86%B2%E5%93%8D%E5%BA%94%E8%AF%86%E5%88%AB"><span class="nav-number">6.</span> <span class="nav-text">示例：脉冲响应识别</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E7%94%9F%E6%88%90%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%95%B0%E6%8D%AE"><span class="nav-number">6.1.</span> <span class="nav-text">1. 生成输入输出数据</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C%E5%88%86%E6%9E%90"><span class="nav-number">7.</span> <span class="nav-text">结果分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E9%87%8A"><span class="nav-number">8.</span> <span class="nav-text">解释</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -292,7 +293,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2024-07-03 14:30:53 / Modified: 14:34:47" itemprop="dateCreated datePublished" datetime="2024-07-03T14:30:53+08:00">2024-07-03</time>
+      <time title="Created: 2024-07-03 14:30:53 / Modified: 14:57:14" itemprop="dateCreated datePublished" datetime="2024-07-03T14:30:53+08:00">2024-07-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -378,6 +379,42 @@
 <h3 id="代码解释"><a href="#代码解释" class="headerlink" title="代码解释"></a>代码解释</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">iden_impulse</span>(<span class="params">U, Y, order = <span class="number">20</span></span>):</span><br><span class="line">    <span class="comment"># 检查输入参数的有效性</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">not</span> U.shape == Y.shape) <span class="keyword">or</span> (order &lt; <span class="number">2</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span>, <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 获取波形的数量和每个波形的采样点数</span></span><br><span class="line">    n_wf = U.shape[<span class="number">0</span>]</span><br><span class="line">    N = U.shape[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 如果阶数超过采样点数，将阶数设为 N - 1</span></span><br><span class="line">    <span class="keyword">if</span> order &gt; N:</span><br><span class="line">        order = N - <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 初始化用于最小二乘拟合的矩阵 A 和向量 B</span></span><br><span class="line">    A = np.zeros(((N - order) * n_wf, order), dtype = <span class="built_in">complex</span>)</span><br><span class="line">    B = np.zeros((N - order) * n_wf, dtype = <span class="built_in">complex</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 填充矩阵 A 和向量 B</span></span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(n_wf):</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(N - order):</span><br><span class="line">            A[k * (N - order) + i, :] = U[k][i : i + order]</span><br><span class="line">            B[k * (N - order) + i] = Y[k][i + order]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 最小二乘拟合</span></span><br><span class="line">    X = np.linalg.lstsq(A, B, rcond = <span class="literal">None</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 返回识别出的脉冲响应，并将顺序反转</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span>, X[<span class="number">0</span>][::-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
 
 <h3 id="函数用途"><a href="#函数用途" class="headerlink" title="函数用途"></a>函数用途</h3><p>这个函数的主要用途是通过实验或仿真的输入输出数据，识别线性系统的脉冲响应。脉冲响应在系统辨识、控制设计和信号处理等领域具有广泛的应用。例如，可以用于射频腔体的脉冲响应识别，以优化控制系统的设计。</p>
+<h3 id="示例：脉冲响应识别"><a href="#示例：脉冲响应识别" class="headerlink" title="示例：脉冲响应识别"></a>示例：脉冲响应识别</h3><p>假设我们有一个简单的一阶低通滤波器，其脉冲响应为 <code>h[n] = (0.5)^n</code>，我们希望通过输入输出数据来识别出该脉冲响应。</p>
+<h4 id="1-生成输入输出数据"><a href="#1-生成输入输出数据" class="headerlink" title="1. 生成输入输出数据"></a>1. 生成输入输出数据</h4><p>我们使用随机输入信号通过滤波器生成输出信号，来模拟真实的输入输出数据。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 参数设置</span></span><br><span class="line">order = <span class="number">20</span>       <span class="comment"># 要识别的脉冲响应的阶数</span></span><br><span class="line">n_wf = <span class="number">100</span>       <span class="comment"># 波形数量</span></span><br><span class="line">N = <span class="number">1000</span>         <span class="comment"># 每个波形的采样点数</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成脉冲响应 h[n] = (0.5)^n</span></span><br><span class="line">true_h = (<span class="number">0.5</span>) ** np.arange(order)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成输入和输出数据</span></span><br><span class="line">U = np.random.randn(n_wf, N) + <span class="number">1j</span> * np.random.randn(n_wf, N)</span><br><span class="line">Y = np.zeros((n_wf, N), dtype=<span class="built_in">complex</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 通过滤波器生成输出数据</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n_wf):</span><br><span class="line">    Y[i] = np.convolve(U[i], true_h, mode=<span class="string">&#x27;same&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 iden_impulse 函数识别脉冲响应</span></span><br><span class="line">status, identified_h = iden_impulse(U, Y, order)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查结果并绘制对比图</span></span><br><span class="line"><span class="keyword">if</span> status:</span><br><span class="line">    plt.figure()</span><br><span class="line">    plt.stem(np.<span class="built_in">abs</span>(true_h), label=<span class="string">&#x27;True Impulse Response&#x27;</span>, use_line_collection=<span class="literal">True</span>)</span><br><span class="line">    plt.stem(np.<span class="built_in">abs</span>(identified_h), linefmt=<span class="string">&#x27;r--&#x27;</span>, markerfmt=<span class="string">&#x27;ro&#x27;</span>, label=<span class="string">&#x27;Identified Impulse Response&#x27;</span>, use_line_collection=<span class="literal">True</span>)</span><br><span class="line">    plt.xlabel(<span class="string">&#x27;Sample&#x27;</span>)</span><br><span class="line">    plt.ylabel(<span class="string">&#x27;Magnitude&#x27;</span>)</span><br><span class="line">    plt.legend()</span><br><span class="line">    plt.grid()</span><br><span class="line">    plt.show()</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Impulse response identification failed.&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://postimg.cc/3ygBynMF"><img data-src="https://i.postimg.cc/25tXKK2M/example-iden-impulse.png" alt="example-iden-impulse.png"></a></p>
+<h3 id="结果分析"><a href="#结果分析" class="headerlink" title="结果分析"></a>结果分析</h3><p>运行上述代码后，你应该会看到一个图表，对比真实的脉冲响应和识别出的脉冲响应。这将验证 <code>iden_impulse</code> 函数是否正确识别出系统的脉冲响应。</p>
+<h3 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h3><ol>
+<li><p><strong>参数设置</strong>：</p>
+<ul>
+<li>设置要识别的脉冲响应的阶数 <code>order</code>。</li>
+<li>生成 <code>n_wf</code> 个波形，每个波形的采样点数为 <code>N</code>。</li>
+</ul>
+</li>
+<li><p><strong>生成脉冲响应</strong>：</p>
+<ul>
+<li>生成目标脉冲响应 <code>h[n] = (0.5)^n</code>。</li>
+</ul>
+</li>
+<li><p><strong>生成输入输出数据</strong>：</p>
+<ul>
+<li>生成随机的复数输入信号 <code>U</code>。</li>
+<li>使用 <code>np.convolve</code> 函数将输入信号通过目标滤波器，生成输出信号 <code>Y</code>。</li>
+</ul>
+</li>
+<li><p><strong>使用 <code>iden_impulse</code> 识别脉冲响应</strong>：</p>
+<ul>
+<li>调用 <code>iden_impulse</code> 函数，使用生成的输入输出数据识别脉冲响应。</li>
+</ul>
+</li>
+<li><p><strong>结果对比</strong>：</p>
+<ul>
+<li>检查识别是否成功，如果成功，则绘制真实脉冲响应和识别脉冲响应的对比图。</li>
+</ul>
+</li>
+</ol>
+<p>通过这个示例，你可以直观地看到 <code>iden_impulse</code> 函数的工作效果，并了解如何在实际应用中使用该函数来识别系统的脉冲响应。</p>
 
     </div>
 
