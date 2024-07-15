@@ -25,35 +25,37 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"iuming.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.20.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":null},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":true,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="迭代学习控制（ILC）是一种用于改善重复性任务性能的控制策略，特别适用于存在模型不确定性或复杂动态的系统">
+    <meta name="description" content="用于设计一个陷波滤波器（notch filter）并返回离散滤波器的状态空间">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Iterative Learning Control for RF system">
-<meta property="og:url" content="http://iuming.github.io/2024/07/03/Iterative-Learning-Control-for-RF-system/index.html">
+<meta property="og:title" content="LLRFLibsPy库中design_notch_filter函数解读">
+<meta property="og:url" content="http://iuming.github.io/2024/07/15/LLRFLibsPy%E5%BA%93%E4%B8%ADdesign-notch-filter%E5%87%BD%E6%95%B0%E8%A7%A3%E8%AF%BB/index.html">
 <meta property="og:site_name" content="REALIUMING&#39;BLOG">
-<meta property="og:description" content="迭代学习控制（ILC）是一种用于改善重复性任务性能的控制策略，特别适用于存在模型不确定性或复杂动态的系统">
+<meta property="og:description" content="用于设计一个陷波滤波器（notch filter）并返回离散滤波器的状态空间">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-07-03T08:39:08.000Z">
-<meta property="article:modified_time" content="2024-07-03T08:59:56.486Z">
+<meta property="article:published_time" content="2024-07-15T02:48:15.000Z">
+<meta property="article:modified_time" content="2024-07-15T02:59:44.571Z">
 <meta property="article:author" content="Liu Ming">
+<meta property="article:tag" content="python">
 <meta property="article:tag" content="LLRF">
+<meta property="article:tag" content="SRF">
+<meta property="article:tag" content="accelerator">
 <meta property="article:tag" content="control">
-<meta property="article:tag" content="ilc">
 <meta name="twitter:card" content="&lt;twitter:card&gt;">
-<meta name="twitter:image" content="http://iuming.github.io/2024/07/03/Iterative-Learning-Control-for-RF-system/%3Ctwitter:image%3E">
+<meta name="twitter:image" content="http://iuming.github.io/2024/07/15/LLRFLibsPy%E5%BA%93%E4%B8%ADdesign-notch-filter%E5%87%BD%E6%95%B0%E8%A7%A3%E8%AF%BB/%3Ctwitter:image%3E">
 <meta name="twitter:creator" content="@&lt;twitter:creator&gt;">
 <meta name="twitter:site" content="<twitter:site>">
 <meta property="fb:admins" content="&lt;fb:admin_id&gt;">
 <meta property="fb:app_id" content="&lt;fb:app_id&gt;">
 
 
-<link rel="canonical" href="http://iuming.github.io/2024/07/03/Iterative-Learning-Control-for-RF-system/">
+<link rel="canonical" href="http://iuming.github.io/2024/07/15/LLRFLibsPy%E5%BA%93%E4%B8%ADdesign-notch-filter%E5%87%BD%E6%95%B0%E8%A7%A3%E8%AF%BB/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://iuming.github.io/2024/07/03/Iterative-Learning-Control-for-RF-system/","path":"2024/07/03/Iterative-Learning-Control-for-RF-system/","title":"Iterative Learning Control for RF system"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://iuming.github.io/2024/07/15/LLRFLibsPy%E5%BA%93%E4%B8%ADdesign-notch-filter%E5%87%BD%E6%95%B0%E8%A7%A3%E8%AF%BB/","path":"2024/07/15/LLRFLibsPy库中design-notch-filter函数解读/","title":"LLRFLibsPy库中design_notch_filter函数解读"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Iterative Learning Control for RF system | REALIUMING'BLOG</title>
+<title>LLRFLibsPy库中design_notch_filter函数解读 | REALIUMING'BLOG</title>
   
 
 
@@ -152,7 +154,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E8%BF%AD%E4%BB%A3%E5%AD%A6%E4%B9%A0%E6%8E%A7%E5%88%B6%E6%96%B9%E6%B3%95%E5%AF%B9%E5%B0%84%E9%A2%91%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%8E%A7%E5%88%B6"><span class="nav-number">1.</span> <span class="nav-text">基于迭代学习控制方法对射频系统的控制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-number">1.1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E5%AD%A6%E4%B9%A0%E6%8E%A7%E5%88%B6%E7%AE%97%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">迭代学习控制算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="nav-number">1.2.1.</span> <span class="nav-text">基本原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E5%90%8C%E7%9A%84ILC%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.2.2.</span> <span class="nav-text">不同的ILC算法实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E8%84%89%E5%86%B2%E5%93%8D%E5%BA%94%E7%9A%84ILC%E7%AE%97%E6%B3%95"><span class="nav-number">1.2.3.</span> <span class="nav-text">基于脉冲响应的ILC算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%84%E9%A2%91%E7%B3%BB%E7%BB%9F%E7%9A%84FIR%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.3.</span> <span class="nav-text">射频系统的FIR模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%84%89%E5%86%B2%E5%93%8D%E5%BA%94%E7%9A%84%E8%AF%86%E5%88%AB%E4%B8%8E%E5%BA%94%E7%94%A8"><span class="nav-number">1.4.</span> <span class="nav-text">脉冲响应的识别与应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ILC%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.5.</span> <span class="nav-text">ILC算法的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%88%90%E6%9C%AC%E5%87%BD%E6%95%B0%E7%9A%84%E6%9C%80%E5%B0%8F%E5%8C%96"><span class="nav-number">1.5.1.</span> <span class="nav-text">成本函数的最小化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ILC%E6%9B%B4%E6%96%B0%E6%B3%95%E5%88%99"><span class="nav-number">1.5.2.</span> <span class="nav-text">ILC更新法则</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E6%96%BDILC%E7%AE%97%E6%B3%95%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">1.6.</span> <span class="nav-text">实施ILC算法的注意事项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA"><span class="nav-number">1.7.</span> <span class="nav-text">结论</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">函数参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="nav-number">2.</span> <span class="nav-text">函数返回值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E9%80%BB%E8%BE%91"><span class="nav-number">3.</span> <span class="nav-text">函数逻辑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B"><span class="nav-number">4.</span> <span class="nav-text">示例</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -260,7 +262,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://iuming.github.io/2024/07/03/Iterative-Learning-Control-for-RF-system/">
+    <link itemprop="mainEntityOfPage" href="http://iuming.github.io/2024/07/15/LLRFLibsPy%E5%BA%93%E4%B8%ADdesign-notch-filter%E5%87%BD%E6%95%B0%E8%A7%A3%E8%AF%BB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -273,12 +275,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="Iterative Learning Control for RF system | REALIUMING'BLOG">
-      <meta itemprop="description" content="迭代学习控制（ILC）是一种用于改善重复性任务性能的控制策略，特别适用于存在模型不确定性或复杂动态的系统">
+      <meta itemprop="name" content="LLRFLibsPy库中design_notch_filter函数解读 | REALIUMING'BLOG">
+      <meta itemprop="description" content="用于设计一个陷波滤波器（notch filter）并返回离散滤波器的状态空间">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Iterative Learning Control for RF system
+          LLRFLibsPy库中design_notch_filter函数解读
         </h1>
 
         <div class="post-meta-container">
@@ -290,7 +292,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2024-07-03 16:39:08 / Modified: 16:59:56" itemprop="dateCreated datePublished" datetime="2024-07-03T16:39:08+08:00">2024-07-03</time>
+      <time title="Created: 2024-07-15 10:48:15 / Modified: 10:59:44" itemprop="dateCreated datePublished" datetime="2024-07-15T10:48:15+08:00">2024-07-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -298,7 +300,7 @@
       </span>
       <span class="post-meta-item-text">In</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/learning/" itemprop="url" rel="index"><span itemprop="name">learning</span></a>
+          <a href="/categories/note/" itemprop="url" rel="index"><span itemprop="name">note</span></a>
         </span>
     </span>
 
@@ -318,69 +320,60 @@
       </span>
       <span class="post-meta-item-text">Disqus: </span>
     
-    <a title="disqus" href="/2024/07/03/Iterative-Learning-Control-for-RF-system/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2024/07/03/Iterative-Learning-Control-for-RF-system/" itemprop="commentCount"></span>
+    <a title="disqus" href="/2024/07/15/LLRFLibsPy%E5%BA%93%E4%B8%ADdesign-notch-filter%E5%87%BD%E6%95%B0%E8%A7%A3%E8%AF%BB/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2024/07/15/LLRFLibsPy库中design-notch-filter函数解读/" itemprop="commentCount"></span>
     </a>
   </span>
   
   
 </div>
 
-            <div class="post-description">迭代学习控制（ILC）是一种用于改善重复性任务性能的控制策略，特别适用于存在模型不确定性或复杂动态的系统</div>
+            <div class="post-description">用于设计一个陷波滤波器（notch filter）并返回离散滤波器的状态空间</div>
         </div>
       </header>
 
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="基于迭代学习控制方法对射频系统的控制"><a href="#基于迭代学习控制方法对射频系统的控制" class="headerlink" title="基于迭代学习控制方法对射频系统的控制"></a>基于迭代学习控制方法对射频系统的控制</h1><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>迭代学习控制（ILC）是一种用于改善重复性任务性能的控制策略，特别适用于存在模型不确定性或复杂动态的系统。在射频（RF）系统中，ILC可以显著提高脉冲形状和系统响应的精确度。</p>
-<h2 id="迭代学习控制算法"><a href="#迭代学习控制算法" class="headerlink" title="迭代学习控制算法"></a>迭代学习控制算法</h2><h3 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h3><p>如果存在射频系统的线性模型，则可以使用基于模型的迭代学习控制算法来实现给定的控制目标。算法的基本公式如下：</p>
-<p>$$ u(n + 1) &#x3D; u(n) + Le(n) \qquad n &#x3D; 0, 1, 2, \ldots $$<br>$$ e(n) &#x3D; r - y(n) $$</p>
-<p>其中，$ L $ 是一个 $ K \times K $ 的常数矩阵，由系统模型导出，用于根据前一脉冲的错误生成前馈信号的校正。$ u(n) $, $ y(n) $, 和 $ e(n) $ 是具有 $ K $ 个样本的波形，定义如下：</p>
-<p>$$ u(n) :&#x3D; \begin{bmatrix} u(n, 0) \ u(n, 1) \ \vdots \ u(n, K - 1) \end{bmatrix}, $$<br>$$ y(n) :&#x3D; \begin{bmatrix} y(n, 0) \ y(n, 1) \ \vdots \ y(n, K - 1) \end{bmatrix}^T, $$<br>$$ e(n) :&#x3D; \begin{bmatrix} e(n, 0) \ e(n, 1) \ \vdots \ e(n, K - 1) \end{bmatrix}, $$<br>$$ r :&#x3D; \begin{bmatrix} r(0) \ r(1) \ \vdots \ r(K - 1) \end{bmatrix} $$</p>
-<h3 id="不同的ILC算法实现"><a href="#不同的ILC算法实现" class="headerlink" title="不同的ILC算法实现"></a>不同的ILC算法实现</h3><p>最简单的ILC实现使用对角矩阵，相当于独立地对射频脉冲的每个点应用脉冲到脉冲的积分反馈。这种算法在射频系统的时常与射频测量采样周期相比很小的情况下效果很好。例如，它已成功用于展平速调管的输出脉冲。</p>
-<h3 id="基于脉冲响应的ILC算法"><a href="#基于脉冲响应的ILC算法" class="headerlink" title="基于脉冲响应的ILC算法"></a>基于脉冲响应的ILC算法</h3><p>对于响应较慢的射频系统，如窄带腔体，$ L $ 的实现应考虑射频系统的动态特性。这里将介绍一种基于射频系统脉冲响应的算法。</p>
-<h2 id="射频系统的FIR模型"><a href="#射频系统的FIR模型" class="headerlink" title="射频系统的FIR模型"></a>射频系统的FIR模型</h2><p>对于具有有限脉冲宽度的离散线性系统，其第 $ n $ 个脉冲的输出和输入通过系统的脉冲响应相连：</p>
-<p>$$ y(n, k) &#x3D; \sum_{m&#x3D;0}^{M-1} h(m)u(n, k - m), \quad k &#x3D; 0, 1, 2, \ldots, K - 1 $$</p>
-<p>其中，$ u $ 和 $ y $ 分别是输入和输出，$ h $ 是射频系统的脉冲响应的有限长度序列。$ h $ 由复数组成，因为 $ u $ 和 $ y $ 都是相量。序列 $ h $ 包含 $ M $ 个点，且 $ M \leq K $。</p>
-<h2 id="脉冲响应的识别与应用"><a href="#脉冲响应的识别与应用" class="headerlink" title="脉冲响应的识别与应用"></a>脉冲响应的识别与应用</h2><p>脉冲响应可以通过经验方法识别，例如使用输入和输出测量数据的最小二乘拟合。此外，还可以从腔体模型导出脉冲响应。</p>
-<h2 id="ILC算法的实现"><a href="#ILC算法的实现" class="headerlink" title="ILC算法的实现"></a>ILC算法的实现</h2><h3 id="成本函数的最小化"><a href="#成本函数的最小化" class="headerlink" title="成本函数的最小化"></a>成本函数的最小化</h3><p>给定第 $ n $ 个脉冲的驱动向量 $ u(n) $ 和输出 $ y(n) $，我们需要确定一个新的驱动向量 $ u(n + 1) $，以最小化第 $ n + 1 $ 个脉冲的输出误差，并避免驱动信号的过大变化。问题可以形式化为最小化以下成本函数：</p>
-<p>$$ J &#x3D; e(n + 1)^T Pe(n + 1) + \Delta u(n + 1)^T Q \Delta u(n + 1) $$</p>
-<p>其中，$ e(n+1) $ 是第 $ n + 1 $ 个脉冲的误差向量，定义为：</p>
-<p>$$ e(n+1) &#x3D; r - y(n+1) \approx r - y(n) - G \Delta u(n+1) $$</p>
-<p>$ \Delta u(n+1) $ 是驱动信号的变化，定义为：</p>
-<p>$$ \Delta u(n+1) &#x3D; u(n + 1) - u(n) $$</p>
-<h3 id="ILC更新法则"><a href="#ILC更新法则" class="headerlink" title="ILC更新法则"></a>ILC更新法则</h3><p>通过最小化成本函数 $ J $，我们可以得到ILC更新法则：</p>
-<p>$$ u(n + 1) &#x3D; u(n) + (Q + G^{H}PG)^{-1}G^{H}Pe(n) $$</p>
-<p>相应的更新矩阵 $ L $ 为：</p>
-<p>$$ L &#x3D; (Q + G^{H}PG)^{-1}G^{H}P $$</p>
-<h2 id="实施ILC算法的注意事项"><a href="#实施ILC算法的注意事项" class="headerlink" title="实施ILC算法的注意事项"></a>实施ILC算法的注意事项</h2><p>在实际应用ILC算法时，需要注意以下几点：</p>
-<ol>
-<li>射频系统输出和输入之间的群延迟。</li>
-<li>腔体输入 $ u $ 与射频控制器输出之间的增益和相位偏移。</li>
-<li>为了避免不稳定，可能只应用前馈校正信号的一部分。</li>
-</ol>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>迭代学习控制（ILC）为射频系统提供了一种有效的控制策略，通过不断迭代优化，可以显著提高系统的控制精度和稳定性。以下是实施ILC算法的步骤：</p>
-<ol>
-<li><p><strong>脉冲响应识别</strong>：首先识别射频系统的脉冲响应 $ h $。这可以通过经验方法，如最小二乘拟合输入和输出测量数据来完成。</p>
+    <div class="post-body" itemprop="articleBody"><p>source code: <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FhcWlhby9MTFJGTGlic1B5L2Jsb2IvbWFpbi9zcmMvcmZfbm9pc2UucHkjTDM5Ng==">Github<i class="fa fa-external-link-alt"></i></span></p>
+<p>函数 <code>design_notch_filter</code> 用于设计一个陷波滤波器（notch filter）并返回离散滤波器的状态空间。下面是函数的详细解释：</p>
+<h3 id="函数参数"><a href="#函数参数" class="headerlink" title="函数参数"></a>函数参数</h3><ul>
+<li><code>fnotch</code>: 频率（以赫兹为单位），要被滤除的频率，即陷波（不通过）的中心频率。</li>
+<li><code>Q</code>: 陷波滤波器的质量因数，描述了滤波器中心频率的选择性。Q 值越高，滤波器的带宽越窄。</li>
+<li><code>fs</code>: 采样频率（以赫兹为单位），信号的采样频率。</li>
+</ul>
+<h3 id="函数返回值"><a href="#函数返回值" class="headerlink" title="函数返回值"></a>函数返回值</h3><ul>
+<li><code>status</code>: 布尔值，标记滤波器设计是否成功 <code>True</code> 或失败 <code>False</code>。</li>
+<li><code>Ad, Bd, Cd, Dd</code>: <code>numpy</code> 矩阵，滤波器的离散状态空间表示。它们分别代表状态矩阵 <code>A</code>，输入矩阵 <code>B</code>，输出矩阵 <code>C</code> 和直接传递矩阵 <code>D</code>。</li>
+</ul>
+<h3 id="函数逻辑"><a href="#函数逻辑" class="headerlink" title="函数逻辑"></a>函数逻辑</h3><ol>
+<li><p><strong>输入参数检查</strong>：</p>
+<ul>
+<li>检查 <code>fnotch</code>、<code>Q</code> 和 <code>fs</code> 是否为正值。如果任一参数不符合要求，则返回 <code>False</code> 以及四个 <code>None</code>。</li>
+</ul>
 </li>
-<li><p><strong>设定期望输出</strong>：确定射频系统输出的设定点波形 $ r $。</p>
+<li><p><strong>创建陷波滤波器</strong>：</p>
+<ul>
+<li>使用 <code>scipy.signal.iirnotch</code> 函数创建陷波滤波器系数 <code>b</code> 和 <code>a</code>。这个函数会根据给定的中心频率 <code>fnotch</code> 和质量因数 <code>Q</code> 生成滤波器系数。</li>
+<li>使用 <code>scipy.signal.dlti</code> 函数将滤波器转换为离散时间线性时不变系统对象 <code>dsys</code>，其中 <code>dt</code> 为 <code>1.0/fs</code>。</li>
+<li>将 <code>dsys</code> 转换为状态空间表示。<code>dsys</code> 是 <code>dlti</code> 类型，但通过 <code>signal.StateSpace</code> 函数将其转换为状态空间表示，获得状态矩阵 <code>A</code>、输入矩阵 <code>B</code>、输出矩阵 <code>C</code> 和直接传递矩阵 <code>D</code>。</li>
+</ul>
 </li>
-<li><p><strong>系统传递矩阵确定</strong>：根据脉冲响应 $ h $ 和脉冲中的样本数量，确定系统的传递矩阵 $ G $。</p>
-</li>
-<li><p><strong>权重矩阵确定与L计算</strong>：确定权重矩阵 $ P $ 和 $ Q $ 并计算更新矩阵 $ L $。权重矩阵通常通过实验确定，并可以根据需要调整以改变对输出误差和输入变化的惩罚。</p>
-</li>
-<li><p><strong>应用ILC更新法则</strong>：使用ILC更新法则 $ u(n + 1) &#x3D; u(n) + (Q + G^{H}PG)^{-1}G^{H}Pe(n) $ 来调整射频系统的前馈信号。如果性能不令人满意，调整 $ P $ 和 $ Q $ 并从步骤4开始重复。</p>
-</li>
-<li><p><strong>考虑群延迟</strong>：处理射频系统输出和输入之间的群延迟，确保前馈校正信号在应用到前馈信号之前进行适当的时间偏移。</p>
-</li>
-<li><p><strong>增益和相位调整</strong>：调整前馈校正信号的增益和相位，以匹配射频控制器的输入平面。</p>
-</li>
-<li><p><strong>部分校正应用</strong>：为了避免不稳定，可能只应用前馈校正信号的一部分，通过在ILC法则中乘以小于1的增益来实现。</p>
+<li><p><strong>返回值</strong>：</p>
+<ul>
+<li>返回 <code>True</code> 表明滤波器设计成功，同时返回状态矩阵 <code>Ad</code>、输入矩阵 <code>Bd</code>、输出矩阵 <code>Cd</code> 和直接传递矩阵 <code>Dd</code>。</li>
+</ul>
 </li>
 </ol>
-<p>通过遵循这些步骤，可以确保ILC算法的有效性和稳定性，从而在射频系统中实现精确的控制。</p>
-<p>迭代学习控制为射频系统提供了一种有效的控制策略，通过不断迭代优化，可以显著提高系统的控制精度和稳定性。通过调整权重矩阵 $ P $ 和 $ Q $，可以平衡输出误差和输入变化，以达到最佳的控制效果。</p>
+<p>总之，这个函数用于设计一个指定中心频率的陷波滤波器，并返回其状态空间表示以便进一步使用。</p>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p>下面是一个使用该函数 <code>design_notch_filter</code> 的示例。这个示例将设计一个陷波滤波器，并打印出滤波器的状态空间矩阵。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> scipy.signal <span class="keyword">as</span> signal</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">design_notch_filter</span>(<span class="params">fnotch, Q, fs</span>):</span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">    Design the notch filter (return a discrete filter).</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Parameters:</span></span><br><span class="line"><span class="string">        fnotch:  float, frequency to be notched, Hz</span></span><br><span class="line"><span class="string">        Q:       float, quality factor of the notch filter</span></span><br><span class="line"><span class="string">        fs:      float, sampling frequency, Hz</span></span><br><span class="line"><span class="string">        </span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">        status:         boolean, success (True) or fail (False)</span></span><br><span class="line"><span class="string">        Ad, Bd, Cd, Dd: numpy matrix, discrete notch filter</span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span></span><br><span class="line">    <span class="comment"># check the input</span></span><br><span class="line">    <span class="keyword">if</span> (fnotch &lt;= <span class="number">0.0</span>) <span class="keyword">or</span> (Q &lt;= <span class="number">0.0</span>) <span class="keyword">or</span> (fs &lt;= <span class="number">0.0</span>):</span><br><span class="line">        <span class="keyword">return</span> (<span class="literal">False</span>,) + (<span class="literal">None</span>,)*<span class="number">4</span>    </span><br><span class="line"></span><br><span class="line">    <span class="comment"># create the notch filter</span></span><br><span class="line">    b, a = signal.iirnotch(fnotch, Q, fs)</span><br><span class="line">    dsys = signal.dlti(b, a, dt = <span class="number">1.0</span>/fs)</span><br><span class="line">    dsys = signal.StateSpace(dsys)</span><br><span class="line">    Ad, Bd, Cd, Dd, dt = dsys.A, dsys.B, dsys.C, dsys.D    </span><br><span class="line"></span><br><span class="line">    <span class="comment"># filter the data</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span>, Ad, Bd, Cd, Dd</span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例参数</span></span><br><span class="line">fnotch = <span class="number">60.0</span>    <span class="comment"># 陷波频率 (Hz)</span></span><br><span class="line">Q = <span class="number">30.0</span>         <span class="comment"># 质量因数</span></span><br><span class="line">fs = <span class="number">1000.0</span>      <span class="comment"># 采样频率 (Hz)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设计陷波滤波器</span></span><br><span class="line">status, Ad, Bd, Cd, Dd = design_notch_filter(fnotch, Q, fs)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打印结果</span></span><br><span class="line"><span class="keyword">if</span> status:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;设计成功!&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Ad 矩阵:&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(Ad)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Bd 矩阵:&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(Bd)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Cd 矩阵:&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(Cd)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Dd 矩阵:&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(Dd)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;设计失败.&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>在上述例子中，我们设计了一个陷波频率为 60 Hz（通常是电源频率噪声）、质量因数为 30、采样频率为 1000 Hz 的陷波滤波器。程序运行后将输出设计后的状态空间矩阵 <code>Ad</code>、<code>Bd</code>、<code>Cd</code> 和 <code>Dd</code>。</p>
+<p>运行后，你应该能看到类似于如下的输出：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">设计成功!</span><br><span class="line">Ad 矩阵:</span><br><span class="line">[[ 1.84794186 -0.98751193]</span><br><span class="line"> [ 1.          0.        ]]</span><br><span class="line">Bd 矩阵:</span><br><span class="line">[[1.]</span><br><span class="line"> [0.]]</span><br><span class="line">Cd 矩阵:</span><br><span class="line">[[-0.01153861  0.01241009]]</span><br><span class="line">Dd 矩阵:</span><br><span class="line">[[0.99375596]]</span><br></pre></td></tr></table></figure>
+
+<p>这表示你成功设计了一个离散的陷波滤波器，如有问题请确保你已经导入必要的库，例如 <code>numpy</code> 和 <code>scipy.signal</code>。</p>
 
     </div>
 
@@ -416,7 +409,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>Post link: </strong>
-      <a href="http://iuming.github.io/2024/07/03/Iterative-Learning-Control-for-RF-system/" title="Iterative Learning Control for RF system">http://iuming.github.io/2024/07/03/Iterative-Learning-Control-for-RF-system/</a>
+      <a href="http://iuming.github.io/2024/07/15/LLRFLibsPy%E5%BA%93%E4%B8%ADdesign-notch-filter%E5%87%BD%E6%95%B0%E8%A7%A3%E8%AF%BB/" title="LLRFLibsPy库中design_notch_filter函数解读">http://iuming.github.io/2024/07/15/LLRFLibsPy库中design-notch-filter函数解读/</a>
   </li>
   <li class="post-copyright-license">
       <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> unless stating additionally.
@@ -474,9 +467,11 @@
 </div>
 
           <div class="post-tags">
+              <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
               <a href="/tags/LLRF/" rel="tag"><i class="fa fa-tag"></i> LLRF</a>
+              <a href="/tags/SRF/" rel="tag"><i class="fa fa-tag"></i> SRF</a>
+              <a href="/tags/accelerator/" rel="tag"><i class="fa fa-tag"></i> accelerator</a>
               <a href="/tags/control/" rel="tag"><i class="fa fa-tag"></i> control</a>
-              <a href="/tags/ilc/" rel="tag"><i class="fa fa-tag"></i> ilc</a>
           </div>
 
         
@@ -489,14 +484,11 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2024/07/03/LLRFLibsPy%E5%BA%93%E4%B8%ADAFF-ilc-design%E5%87%BD%E6%95%B0%E8%A7%A3%E8%AF%BB/" rel="prev" title="LLRFLibsPy库中AFF_ilc_design函数解读">
-                  <i class="fa fa-angle-left"></i> LLRFLibsPy库中AFF_ilc_design函数解读
+                <a href="/2024/07/12/%E5%9F%BA%E4%BA%8Eollama%E6%90%AD%E5%BB%BAGLM4%E6%A8%A1%E5%9E%8B/" rel="prev" title="基于ollama搭建GLM4模型">
+                  <i class="fa fa-angle-left"></i> 基于ollama搭建GLM4模型
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2024/07/03/LLRFLibsPy%E5%BA%93%E4%B8%ADAFF-ilc%E5%87%BD%E6%95%B0%E8%A7%A3%E8%AF%BB/" rel="next" title="LLRFLibsPy库中AFF_ilc函数解读">
-                  LLRFLibsPy库中AFF_ilc函数解读 <i class="fa fa-angle-right"></i>
-                </a>
             </div>
           </div>
     </footer>
@@ -610,7 +602,7 @@
 
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
-  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":"ture","archive":true,"delay":true,"timeout":3000,"priority":true,"url":"http://iuming.github.io/2024/07/03/Iterative-Learning-Control-for-RF-system/"}</script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":"ture","archive":true,"delay":true,"timeout":3000,"priority":true,"url":"http://iuming.github.io/2024/07/15/LLRFLibsPy%E5%BA%93%E4%B8%ADdesign-notch-filter%E5%87%BD%E6%95%B0%E8%A7%A3%E8%AF%BB/"}</script>
   <script src="/js/third-party/quicklink.js"></script>
 <script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"realiuming","count":true,"i18n":{"disqus":"disqus"}}</script>
 <script src="/js/third-party/comments/disqus.js"></script>
