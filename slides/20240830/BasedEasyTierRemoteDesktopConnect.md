@@ -62,7 +62,7 @@ date: Aug, 30, 2024
 
 ----
 
-## Commit
+## Comment
 
 
 <div id="disqus_thread"></div>
