@@ -1,7 +1,7 @@
 ---
 title: 基于EasyTier组网的远程桌面连接
 author: 刘铭
-Date: Aug, 30, 2024
+date: Aug, 30, 2024
 ---
 
 ## 下载EasyTier
