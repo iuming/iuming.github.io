@@ -59,3 +59,36 @@ date: Aug, 30, 2024
 注意：现在工作站使用的是流量下的外网，请不要<span style="color:red">传输大文件、打开ihepbox进行同步</span>等耗费流量的操作！
 
 另外，本地的虚拟IP在内部组网之间不能冲突。
+
+----
+
+## Commit
+
+
+<div id="disqus_thread"></div>
+<script>
+
+    var disqus_config = function () {
+        // Replace PAGE_URL with your page's canonical URL variable
+        this.page.url = "https://iuming.github.io/slides/20240830/BasedEasyTierRemoteDesktopConnect.html";  
+        
+        // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = BasedEasyTierRemoteDesktopConnect; 
+    };
+    
+    (function() {  // REQUIRED CONFIGURATION VARIABLE: EDIT THE SHORTNAME BELOW
+        var d = document, s = d.createElement('script');
+        
+        // IMPORTANT: Replace EXAMPLE with your forum shortname!
+        s.src = 'https://EXAMPLE.disqus.com/embed.js';
+        
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>
+    Please enable JavaScript to view the 
+    <a href="https://disqus.com/?ref_noscript" rel="nofollow">
+        comments powered by Disqus.
+    </a>
+</noscript>
