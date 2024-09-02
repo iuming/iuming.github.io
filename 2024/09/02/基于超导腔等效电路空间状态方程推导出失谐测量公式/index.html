@@ -33,7 +33,7 @@
 <meta property="og:description" content="尽可能详细的记录推导过程！">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-09-02T04:18:24.000Z">
-<meta property="article:modified_time" content="2024-09-02T04:20:14.138Z">
+<meta property="article:modified_time" content="2024-09-02T06:32:02.613Z">
 <meta property="article:author" content="Liu Ming">
 <meta property="article:tag" content="SRF">
 <meta property="article:tag" content="formula">
@@ -151,7 +151,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B%E6%8E%A8%E5%AF%BC"><span class="nav-number">1.</span> <span class="nav-text">开始推导</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E7%8A%B6%E6%80%81%E7%A9%BA%E9%97%B4%E6%96%B9%E7%A8%8B"><span class="nav-number">1.1.</span> <span class="nav-text">1. 状态空间方程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E7%9B%B8%E4%BD%8D%E5%AF%BC%E6%95%B0%E4%B8%8E%E9%A2%91%E7%8E%87%E5%81%8F%E7%A7%BB%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">1.2.</span> <span class="nav-text">2. 相位导数与频率偏移的关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%9F%BA%E4%BA%8E%E7%8A%B6%E6%80%81%E7%A9%BA%E9%97%B4%E6%96%B9%E7%A8%8B%E7%9A%84%E6%8E%A8%E5%AF%BC"><span class="nav-number">1.3.</span> <span class="nav-text">3. 基于状态空间方程的推导</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B%E6%8E%A8%E5%AF%BC"><span class="nav-number">1.</span> <span class="nav-text">开始推导</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E7%8A%B6%E6%80%81%E7%A9%BA%E9%97%B4%E6%96%B9%E7%A8%8B"><span class="nav-number">1.1.</span> <span class="nav-text">1. 状态空间方程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E7%9B%B8%E4%BD%8D%E5%AF%BC%E6%95%B0%E4%B8%8E%E9%A2%91%E7%8E%87%E5%81%8F%E7%A7%BB%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">1.2.</span> <span class="nav-text">2. 相位导数与频率偏移的关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%9F%BA%E4%BA%8E%E7%8A%B6%E6%80%81%E7%A9%BA%E9%97%B4%E6%96%B9%E7%A8%8B%E7%9A%84%E6%8E%A8%E5%AF%BC"><span class="nav-number">1.3.</span> <span class="nav-text">3. 基于状态空间方程的推导</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%88%9D%E5%A7%8B%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E4%B8%8E%E7%8A%B6%E6%80%81%E7%A9%BA%E9%97%B4%E8%A1%A8%E7%A4%BA"><span class="nav-number">1.4.</span> <span class="nav-text">1. 初始微分方程与状态空间表示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%BC%95%E5%85%A5%E7%8A%B6%E6%80%81%E5%8F%98%E9%87%8F"><span class="nav-number">1.5.</span> <span class="nav-text">2. 引入状态变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E7%8A%B6%E6%80%81%E7%A9%BA%E9%97%B4%E6%96%B9%E7%A8%8B%E8%A1%A8%E7%A4%BA"><span class="nav-number">1.6.</span> <span class="nav-text">3. 状态空间方程表示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E8%BD%AC%E6%8D%A2%E5%88%B0%E5%A4%8D%E6%95%B0%E5%9F%9F"><span class="nav-number">1.7.</span> <span class="nav-text">4. 转换到复数域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E7%9B%B8%E4%BD%8D%E8%A7%92%E4%B8%8E%E9%A2%91%E7%8E%87%E5%81%8F%E7%A7%BB%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">1.8.</span> <span class="nav-text">5. 相位角与频率偏移的关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E5%BC%95%E5%85%A5%E7%94%B5%E6%B5%81%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="nav-number">1.9.</span> <span class="nav-text">6. 引入电流的影响</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E5%B0%86%E7%BB%93%E6%9E%9C%E5%B8%A6%E5%85%A5%E9%A2%91%E7%8E%87%E5%81%8F%E7%A7%BB%E5%85%AC%E5%BC%8F"><span class="nav-number">1.10.</span> <span class="nav-text">7. 将结果带入频率偏移公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-%E6%9B%BF%E6%8D%A2%E5%8F%98%E9%87%8F"><span class="nav-number">1.11.</span> <span class="nav-text">8. 替换变量</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -289,7 +289,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2024-09-02 12:18:24 / Modified: 12:20:14" itemprop="dateCreated datePublished" datetime="2024-09-02T12:18:24+08:00">2024-09-02</time>
+      <time title="Created: 2024-09-02 12:18:24 / Modified: 14:32:02" itemprop="dateCreated datePublished" datetime="2024-09-02T12:18:24+08:00">2024-09-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -344,6 +344,21 @@
 <p>将状态空间方程代入，并考虑电流对相位的影响，我们可以得到：<br>$$<br>\frac{d\phi(t)}{dt} &#x3D; -\Delta\omega + \frac{R_L\omega_{1&#x2F;2}}{|V(t)|^2}(V_{\mathrm{Re}}I_{\mathrm{Img}} - V_{\mathrm{Img}}I_{\mathrm{Re}})<br>$$</p>
 <p>将此结果带入到相位导数与频率偏移的关系中，即：<br>$$<br>\Delta\omega &#x3D; -\frac{1}{2\pi}\Bigg(\frac{d\phi(t)}{dt} - 2\omega_{1&#x2F;2}\frac{|I(t)|}{|V(t)|}\sin(\phi_I - \phi)\Bigg)<br>$$</p>
 <p>进一步，将 $|I(t)|$ 用 $|U_{for}|$ 表示，$|V(t)|$ 用 $|U_{probe}|$ 表示，且将 $\phi_I - \phi$ 替换为 $\phi_{for} - \phi_{probe}$，就得到了最终的公式：<br>$$<br>\Delta\omega &#x3D; -\frac{1}{2\pi}\Bigg(\frac{d\phi_{probe}}{dt} - 2\omega_{1&#x2F;2}\frac{|U_{for}|}{|U_{probe}|}\sin(\phi_{for} - \phi_{probe})\Bigg)<br>$$</p>
+<p>让我们一步一步详细推导这个公式。</p>
+<h3 id="1-初始微分方程与状态空间表示"><a href="#1-初始微分方程与状态空间表示" class="headerlink" title="1. 初始微分方程与状态空间表示"></a>1. 初始微分方程与状态空间表示</h3><p>给定的微分方程为：<br>$$<br>\frac{d^{2} V(t)}{d t^{2}} + \frac{\omega_{0}}{Q_{\text{load}}} \frac{d V(t)}{d t} + \omega_{0}^{2} V(t) &#x3D; \frac{\omega_{0} R_{L}}{Q_{\text{load}}} \frac{d I(t)}{d t}<br>$$<br>这个方程描述了一个线性电路系统，其中 $V(t)$ 是电压，$I(t)$ 是电流，$\omega_0$ 是系统的固有频率，$Q_{\text{load}}$ 是品质因数，$R_L$ 是负载电阻。</p>
+<h3 id="2-引入状态变量"><a href="#2-引入状态变量" class="headerlink" title="2. 引入状态变量"></a>2. 引入状态变量</h3><p>为了将上述二阶微分方程转换为状态空间方程，我们定义两个状态变量：<br>$$<br>x_1(t) &#x3D; V(t), \quad x_2(t) &#x3D; \frac{dV(t)}{dt}<br>$$</p>
+<p>这样，二阶微分方程可以拆分为两个一阶微分方程：<br>$$<br>\frac{dx_1(t)}{dt} &#x3D; x_2(t)<br>$$<br>$$<br>\frac{dx_2(t)}{dt} &#x3D; -\frac{\omega_{0}}{Q_{\text{load}}} x_2(t) - \omega_{0}^{2} x_1(t) + \frac{\omega_{0} R_{L}}{Q_{\text{load}}} \frac{d I(t)}{d t}<br>$$</p>
+<h3 id="3-状态空间方程表示"><a href="#3-状态空间方程表示" class="headerlink" title="3. 状态空间方程表示"></a>3. 状态空间方程表示</h3><p>将上述微分方程写成矩阵形式：<br>$$<br>\frac{d}{dt} \begin{pmatrix} x_1(t) \ x_2(t) \end{pmatrix} &#x3D; \begin{pmatrix} 0 &amp; 1 \ -\omega_0^2 &amp; -\frac{\omega_0}{Q_{\text{load}}} \end{pmatrix} \begin{pmatrix} x_1(t) \ x_2(t) \end{pmatrix} + \begin{pmatrix} 0 \ \frac{\omega_0 R_L}{Q_{\text{load}}} \end{pmatrix} \frac{d I(t)}{dt}<br>$$</p>
+<h3 id="4-转换到复数域"><a href="#4-转换到复数域" class="headerlink" title="4. 转换到复数域"></a>4. 转换到复数域</h3><p>接下来，我们考虑将 $V(t)$ 和 $I(t)$ 转换到复数域表示。我们引入复数表示：<br>$$<br>\vec{V}(t) &#x3D; V_{\mathrm{Re}}(t) + iV_{\mathrm{Img}}(t)<br>$$<br>$$<br>\vec{I}(t) &#x3D; I_{\mathrm{Re}}(t) + iI_{\mathrm{Img}}(t)<br>$$<br>并假设电压和电流以以下形式变化：<br>$$<br>\vec{V}(t) &#x3D; \left(V_{\mathrm{Re}}(t) + iV_{\mathrm{Img}}(t)\right) e^{i\omega t}<br>$$<br>$$<br>\vec{I}(t) &#x3D; \left(I_{\mathrm{Re}}(t) + iI_{\mathrm{Img}}(t)\right) e^{i\omega t}<br>$$</p>
+<p>这样，状态空间方程变为：<br>$$<br>\frac{d}{dt}\begin{pmatrix}V_{\mathrm{Re}} \ V_{\mathrm{Img}}\end{pmatrix} &#x3D; \begin{pmatrix}-\omega_{1&#x2F;2} &amp; -\Delta\omega \ \Delta\omega &amp; -\omega_{1&#x2F;2}\end{pmatrix} \begin{pmatrix}V_{\mathrm{Re}} \ V_{\mathrm{Img}}\end{pmatrix} + \begin{pmatrix}R_L \omega_{1&#x2F;2} &amp; 0 \ 0 &amp; R_L \omega_{1&#x2F;2}\end{pmatrix} \begin{pmatrix}I_{\mathrm{Re}} \ I_{\mathrm{Img}}\end{pmatrix}<br>$$<br>其中，$\omega_{1&#x2F;2} &#x3D; \frac{\omega_0}{2Q_{\text{load}}}$，$\Delta\omega &#x3D; \omega_0 - \omega$。</p>
+<h3 id="5-相位角与频率偏移的关系"><a href="#5-相位角与频率偏移的关系" class="headerlink" title="5. 相位角与频率偏移的关系"></a>5. 相位角与频率偏移的关系</h3><p>电压的相位可以表示为：<br>$$<br>\phi(t) &#x3D; \tan^{-1}\left(\frac{V_{\mathrm{Img}}(t)}{V_{\mathrm{Re}}(t)}\right)<br>$$</p>
+<p>相位角 $\phi(t)$ 的导数可以表示为：<br>$$<br>\frac{d\phi(t)}{dt} &#x3D; \frac{1}{|V(t)|^2}\left(V_{\mathrm{Re}}(t)\frac{dV_{\mathrm{Img}}(t)}{dt} - V_{\mathrm{Img}}(t)\frac{dV_{\mathrm{Re}}(t)}{dt}\right)<br>$$</p>
+<p>由于 $\frac{d\phi(t)}{dt}$ 与频率偏移 $\Delta\omega$ 之间存在关系，即：<br>$$<br>\Delta\omega &#x3D; -\frac{d\phi(t)}{dt}<br>$$</p>
+<h3 id="6-引入电流的影响"><a href="#6-引入电流的影响" class="headerlink" title="6. 引入电流的影响"></a>6. 引入电流的影响</h3><p>状态空间方程的第二部分考虑了电流的影响。电流会对相位角产生一个附加项，可以写成：<br>$$<br>\frac{d\phi(t)}{dt} &#x3D; -\Delta\omega + \frac{R_L \omega_{1&#x2F;2}}{|V(t)|^2}\left(V_{\mathrm{Re}}(t)I_{\mathrm{Img}}(t) - V_{\mathrm{Img}}(t)I_{\mathrm{Re}}(t)\right)<br>$$</p>
+<h3 id="7-将结果带入频率偏移公式"><a href="#7-将结果带入频率偏移公式" class="headerlink" title="7. 将结果带入频率偏移公式"></a>7. 将结果带入频率偏移公式</h3><p>最终的频率偏移公式可以表示为：<br>$$<br>\Delta\omega &#x3D; -\frac{1}{2\pi}\left(\frac{d\phi(t)}{dt} - 2\omega_{1&#x2F;2}\frac{|I(t)|}{|V(t)|}\sin(\phi_I(t) - \phi(t))\right)<br>$$</p>
+<h3 id="8-替换变量"><a href="#8-替换变量" class="headerlink" title="8. 替换变量"></a>8. 替换变量</h3><p>为了得到目标公式，将 $|I(t)|$ 用 $|U_{for}|$ 表示，$|V(t)|$ 用 $|U_{probe}|$ 表示，$\phi_I - \phi$ 用 $\phi_{for} - \phi_{probe}$ 表示：</p>
+<p>$$<br>\Delta\omega &#x3D; -\frac{1}{2\pi}\left(\frac{d\phi_{probe}}{dt} - 2\omega_{1&#x2F;2}\frac{|U_{for}|}{|U_{probe}|}\sin(\phi_{for} - \phi_{probe})\right)<br>$$</p>
+<p>这样，我们就得到了推导的最终结果。</p>
 
     </div>
 
