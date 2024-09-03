@@ -34,7 +34,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://i.postimg.cc/X7mpzMfC/1-s2-0-S0168900224007514-gr3-lrg.jpg">
 <meta property="article:published_time" content="2024-09-03T09:03:04.000Z">
-<meta property="article:modified_time" content="2024-09-03T10:23:19.552Z">
+<meta property="article:modified_time" content="2024-09-03T10:24:42.063Z">
 <meta property="article:author" content="Liu Ming">
 <meta property="article:tag" content="LLRF">
 <meta property="article:tag" content="SRF">
@@ -292,7 +292,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2024-09-03 17:03:04 / Modified: 18:23:19" itemprop="dateCreated datePublished" datetime="2024-09-03T17:03:04+08:00">2024-09-03</time>
+      <time title="Created: 2024-09-03 17:03:04 / Modified: 18:24:42" itemprop="dateCreated datePublished" datetime="2024-09-03T17:03:04+08:00">2024-09-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -344,7 +344,7 @@
 <h3 id="半带宽与品质因数的关系"><a href="#半带宽与品质因数的关系" class="headerlink" title="半带宽与品质因数的关系"></a>半带宽与品质因数的关系</h3><p>$$ \omega_{1&#x2F;2} &#x3D; \frac{\omega_0}{2} \sqrt{\frac{1}{Q_0} + \frac{1}{Q_{ext}}} &#x3D; \frac{\omega_0}{2Q_L} $$<br>其中 $Q_{ext}$ 是外部品质因数，描述了超导腔与传输线之间的耦合强度，$Q_L$ 是负载品质因数。</p>
 <h3 id="驱动RF所需的功率"><a href="#驱动RF所需的功率" class="headerlink" title="驱动RF所需的功率"></a>驱动RF所需的功率</h3><p>$$ P_{RF} &#x3D; \frac{|V_P|^2}{4 r Q_Q L} \left( \frac{1}{1 + \left(\frac{r Q_L I_b}{|V_P|}\right)^2} + \Delta \omega^2 \right) $$<br>其中 $V_P$ 是加速电压或校准探针信号，$r&#x2F;Q$ 是特征阻抗，$I_b$ 是束流电流，$\Delta \omega$ 是腔体失谐。</p>
 <h3 id="校准矩阵"><a href="#校准矩阵" class="headerlink" title="校准矩阵"></a>校准矩阵</h3><p>$$ V_F &#x3D; a V_{mF} + b V_{mR} $$<br>$$ V_R &#x3D; c V_{mF} + d V_{mR} $$<br>其中 $V_F$ 和 $V_R$ 是校准后的正向和反射信号，$V_{mF}$ 和 $V_{mR}$ 是测量的正向和反射信号，$a, b, c, d$ 是信号校准参数。</p>
-<h3 id="能量守恒的优化问题"><a href="#能量守恒的优化问题" class="headerlink" title="能量守恒的优化问题"></a>能量守恒的优化问题</h3><p>$$ \frac{1}{2 \omega_{1&#x2F;2}} \frac{d|V_P(n)|^2}{dt} + |V_P(n)|^2 &#x3D; 2 \Re$V_P(n) V_F(n)} $$<br>$$ (a, b, c, d) &#x3D; \arg \min_{\hat{a},\hat{b},\hat{c},\hat{d}} \sum_{n \in N} (|f_{probe}(n; \hat{a},\hat{b}, \hat{c}, \hat{d})|^2 + |f_C(n; \hat{a},\hat{b}, \hat{c}, \hat{d})|^2 + |f_D(n; \hat{a},\hat{b})|^2) $$<br>其中 $f_{probe}, f_C, f_D$ 分别代表方程的误差项。</p>
+<h3 id="能量守恒的优化问题"><a href="#能量守恒的优化问题" class="headerlink" title="能量守恒的优化问题"></a>能量守恒的优化问题</h3><p>$$ \frac{1}{2 \omega_{1&#x2F;2}} \frac{d|V_P(n)|^2}{dt} + |V_P(n)|^2 &#x3D; 2 \Re{V_P(n) V_F(n)} $$<br>$$ (a, b, c, d) &#x3D; \arg \min_{\hat{a},\hat{b},\hat{c},\hat{d}} \sum_{n \in N} (|f_{probe}(n; \hat{a},\hat{b}, \hat{c}, \hat{d})|^2 + |f_C(n; \hat{a},\hat{b}, \hat{c}, \hat{d})|^2 + |f_D(n; \hat{a},\hat{b})|^2) $$<br>其中 $f_{probe}, f_C, f_D$ 分别代表方程的误差项。</p>
 <h2 id="现有信号校准方法讨论"><a href="#现有信号校准方法讨论" class="headerlink" title="现有信号校准方法讨论"></a>现有信号校准方法讨论</h2><ul>
 <li><strong>对角校准</strong>：假设有限方向性的影响可以忽略，只使用对角项a和d。</li>
 <li><strong>Pfeiffer等人的方法</strong>：使用RF脉冲数据，通过在衰减期间施加额外约束来解决非对角项。</li>
