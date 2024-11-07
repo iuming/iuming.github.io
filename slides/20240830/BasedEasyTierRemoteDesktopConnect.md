@@ -12,6 +12,17 @@ date: Aug, 30, 2024
 
 ----
 
+## Update on November 7th
+
+由于1.2.3版本与公共服务器2.0.3版本不兼容，服务器上easytier更新为2.0.3版本，需要本地计算机更新easytier后重新进行组网连接。公共服务器的url更改为以下地址：
+
+> tcp://public.easytier.top:11010
+
+ ![更改公共服务器url](EasyTier_URL.png)
+
+
+----
+
 ## 安装EasyTier
 
 按照安装软件的正常程序进行安装即可，安装位置可随意更改。
