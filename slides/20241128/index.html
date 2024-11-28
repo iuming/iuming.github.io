@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Power vs Filling Time</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.24/katex.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.24/katex.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        .header {
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            padding: 20px;
+            margin: auto;
+            max-width: 900px;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .formula {
+            margin: 20px 0;
+            padding: 10px;
+            background: #f8f9fa;
+            border-left: 4px solid #007bff;
+            font-size: 16px;
+        }
+
+        canvas {
+            margin-top: 20px;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>Power vs Filling Time Calculator</h1>
+    </div>
+
+    <!-- Page 1 -->
+    <div id="page1" class="container">
+        <h2>Enter Parameters</h2>
+        <div class="input-group">
+            <label for="Vcav">V<sub>cav</sub> (Volts):</label>
+            <input type="number" id="Vcav" value="1000000">
+        </div>
+        <div class="input-group">
+            <label for="RQ">R/Q (Ohms):</label>
+            <input type="number" id="RQ" value="1036">
+        </div>
+        <div class="input-group">
+            <label for="QL">Q<sub>L</sub>:</label>
+            <input type="number" id="QL" value="6400000">
+        </div>
+        <div class="input-group">
+            <label for="omega">ω<sub>1/2</sub> (Hz):</label>
+            <input type="number" id="omega" value="200">
+        </div>
+        <div class="input-group">
+            <label for="deltaOmega">Δω (Hz):</label>
+            <input type="number" id="deltaOmega" value="640">
+        </div>
+        <div class="input-group">
+            <label for="powerLimit">Power Limit (Watts):</label>
+            <input type="number" id="powerLimit" value="300000">
+        </div>
+        <div class="formula">
+            Formula:
+            <span id="formula">
+                \( P_{fill} = \frac{V_{cav}^{2}}{4(R/Q)Q_{L}} \cdot \frac{\omega_{1/2}^{2} + \Delta
+                \omega^{2}}{\omega_{1/2}^{2}} \cdot \frac{1}{\left[1 + e^{-2\omega_{1/2}T_{f}} - 2e^{-\omega_{1/2}T_{f}}
+                \cos(\Delta\omega T_{f})\right]} \)
+            </span>
+        </div>
+        <button onclick="generatePlot()">Generate Plot</button>
+    </div>
+
+    <!-- Page 2 -->
+    <div id="page2" class="container hidden">
+        <h2>Power vs Filling Time</h2>
+        <canvas id="plotCanvas"></canvas>
+        <button onclick="goBack()">Back to Input</button>
+    </div>
+
+    <script>
+        // Show/hide pages
+        function showPage(pageId) {
+            document.getElementById('page1').classList.add('hidden');
+            document.getElementById('page2').classList.add('hidden');
+            document.getElementById(pageId).classList.remove('hidden');
+        }
+
+        function goBack() {
+            showPage('page1');
+        }
+
+        function generatePlot() {
+            // Get parameters
+            const Vcav = parseFloat(document.getElementById('Vcav').value);
+            const RQ = parseFloat(document.getElementById('RQ').value);
+            const QL = parseFloat(document.getElementById('QL').value);
+            const omega = parseFloat(document.getElementById('omega').value);
+            const deltaOmega = parseFloat(document.getElementById('deltaOmega').value);
+            const powerLimit = parseFloat(document.getElementById('powerLimit').value);
+
+            // Compute formula
+            const Tf = Array.from({ length: 500 }, (_, i) => 0.0008 + i * (0.0012 - 0.0008) / 499);
+            const Pfill = Tf.map(t => (
+                (Vcav ** 2) / (4 * RQ * QL) *
+                ((omega ** 2 + deltaOmega ** 2) / omega ** 2) /
+                (1 + Math.exp(-2 * omega * t) -
+                    2 * Math.exp(-omega * t) * Math.cos(deltaOmega * t))
+            ));
+
+            // Plot data
+            const ctx = document.getElementById('plotCanvas').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: Tf,
+                    datasets: [
+                        {
+                            label: 'Power (kW)',
+                            data: Pfill.map(p => p / 1000),
+                            borderColor: 'blue',
+                            fill: false,
+                        },
+                        {
+                            label: 'Power Limit (kW)',
+                            data: Tf.map(() => powerLimit / 1000),
+                            borderColor: 'red',
+                            borderDash: [5, 5],
+                            fill: false,
+                        },
+                    ],
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: true },
+                    },
+                    scales: {
+                        x: { title: { display: true, text: 'Filling Time (s)' } },
+                        y: { title: { display: true, text: 'Power (kW)' } },
+                    },
+                },
+            });
+
+            showPage('page2');
+        }
+    </script>
+</body>
+
+</html>
