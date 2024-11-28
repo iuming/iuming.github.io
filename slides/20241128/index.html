@@ -6,8 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Power vs Filling Time</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.24/katex.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.24/katex.min.css">
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.24/katex.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.24/katex.min.css"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex/dist/contrib/auto-render.min.js" defer></script>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -36,6 +39,15 @@
         .input-group {
             margin-bottom: 15px;
         }
+
+        /* .formula {
+            margin: 20px 0;
+            padding: 10px;
+            background: #f8f9fa;
+            border-left: 4px solid #007bff;
+            font-size: 18px;
+            font-family: 'Cambria', 'Georgia', serif;
+        } */
 
         label {
             font-weight: bold;
@@ -113,18 +125,34 @@
         </div>
         <div class="input-group">
             <label for="powerLimit">Power Limit (Watts):</label>
-            <input type="number" id="powerLimit" value="300000">
+            <input type="number" id="powerLimit" value="1200">
         </div>
-        <div class="formula">
+        <!-- <div class="formula">
             Formula:
             <span id="formula">
                 \( P_{fill} = \frac{V_{cav}^{2}}{4(R/Q)Q_{L}} \cdot \frac{\omega_{1/2}^{2} + \Delta
                 \omega^{2}}{\omega_{1/2}^{2}} \cdot \frac{1}{\left[1 + e^{-2\omega_{1/2}T_{f}} - 2e^{-\omega_{1/2}T_{f}}
                 \cos(\Delta\omega T_{f})\right]} \)
             </span>
+        </div> -->
+        <div class="container">
+            <h2>Formula</h2>
+            <!-- 公式容器 -->
+            <div class="formula" id="formulaContainer"></div>
         </div>
         <button onclick="generatePlot()">Generate Plot</button>
     </div>
+
+    <script>
+        // 使用 KaTeX 渲染公式
+        const formula = `
+        P_{fill} = \\frac{V_{cav}^{2}}{4(R/Q)Q_{L}} 
+        \\cdot \\frac{\\omega_{1/2}^{2} + \\Delta \\omega^{2}}{\\omega_{1/2}^{2}} 
+        \\cdot \\frac{1}{\\left[1 + e^{-2\\omega_{1/2}T_{f}} - 2e^{-\\omega_{1/2}T_{f}} \\cos(\\Delta\\omega T_{f})\\right]}
+        `;
+        const container = document.getElementById('formulaContainer');
+        katex.render(formula, container, { throwOnError: false });
+    </script>
 
     <!-- Page 2 -->
     <div id="page2" class="container hidden">
