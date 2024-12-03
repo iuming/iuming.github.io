@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.2.0">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/manifest.json">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"iuming.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.20.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":null},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":true,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="from [paper](https :&#x2F;&#x2F;doi.org&#x2F;10.1103&#x2F;PhysRevAccelBeams.27.113101)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="激光处理铜表面对其二次电子产额和表面电阻的影响">
+<meta property="og:url" content="http://iuming.github.io/2024/12/03/%E6%BF%80%E5%85%89%E5%A4%84%E7%90%86%E9%93%9C%E8%A1%A8%E9%9D%A2%E5%AF%B9%E5%85%B6%E4%BA%8C%E6%AC%A1%E7%94%B5%E5%AD%90%E4%BA%A7%E9%A2%9D%E5%92%8C%E8%A1%A8%E9%9D%A2%E7%94%B5%E9%98%BB%E7%9A%84%E5%BD%B1%E5%93%8D/index.html">
+<meta property="og:site_name" content="REALIUMING&#39;BLOG">
+<meta property="og:description" content="from [paper](https :&#x2F;&#x2F;doi.org&#x2F;10.1103&#x2F;PhysRevAccelBeams.27.113101)">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.postimg.cc/GmDW04w9/LESS-II-0.png">
+<meta property="og:image" content="https://i.postimg.cc/B6n7v6yT/SEM.png">
+<meta property="og:image" content="https://i.postimg.cc/cLGDnT24/LESS-I-Cu-2p-Cu-LMM.png">
+<meta property="og:image" content="https://i.postimg.cc/Hxn3gNc3/The-surface-composition-of-the-detected-elements-in-atomic-percent-at-based-on-XPS-measurements.png">
+<meta property="og:image" content="https://i.postimg.cc/brQmCt2j/50-1800-e-V.png">
+<meta property="og:image" content="https://i.postimg.cc/3rcrY06Z/CHCDR.png">
+<meta property="og:image" content="https://i.postimg.cc/C5BgzJts/image.png">
+<meta property="og:image" content="https://i.postimg.cc/y8zH8mT0/a-LESS-I-b-LESS-II-c-LESS-f0-3-4.png">
+<meta property="article:published_time" content="2024-12-03T01:45:26.000Z">
+<meta property="article:modified_time" content="2024-12-03T02:43:47.907Z">
+<meta property="article:author" content="Liu Ming">
+<meta property="article:tag" content="SRF">
+<meta property="article:tag" content="laser">
+<meta property="article:tag" content="postprocessing">
+<meta property="article:tag" content="BCS">
+<meta property="article:tag" content="copper">
+<meta name="twitter:card" content="&lt;twitter:card&gt;">
+<meta name="twitter:image" content="http://iuming.github.io/2024/12/03/%E6%BF%80%E5%85%89%E5%A4%84%E7%90%86%E9%93%9C%E8%A1%A8%E9%9D%A2%E5%AF%B9%E5%85%B6%E4%BA%8C%E6%AC%A1%E7%94%B5%E5%AD%90%E4%BA%A7%E9%A2%9D%E5%92%8C%E8%A1%A8%E9%9D%A2%E7%94%B5%E9%98%BB%E7%9A%84%E5%BD%B1%E5%93%8D/%3Ctwitter:image%3E">
+<meta name="twitter:creator" content="@&lt;twitter:creator&gt;">
+<meta name="twitter:site" content="<twitter:site>">
+<meta property="fb:admins" content="&lt;fb:admin_id&gt;">
+<meta property="fb:app_id" content="&lt;fb:app_id&gt;">
+
+
+<link rel="canonical" href="http://iuming.github.io/2024/12/03/%E6%BF%80%E5%85%89%E5%A4%84%E7%90%86%E9%93%9C%E8%A1%A8%E9%9D%A2%E5%AF%B9%E5%85%B6%E4%BA%8C%E6%AC%A1%E7%94%B5%E5%AD%90%E4%BA%A7%E9%A2%9D%E5%92%8C%E8%A1%A8%E9%9D%A2%E7%94%B5%E9%98%BB%E7%9A%84%E5%BD%B1%E5%93%8D/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://iuming.github.io/2024/12/03/%E6%BF%80%E5%85%89%E5%A4%84%E7%90%86%E9%93%9C%E8%A1%A8%E9%9D%A2%E5%AF%B9%E5%85%B6%E4%BA%8C%E6%AC%A1%E7%94%B5%E5%AD%90%E4%BA%A7%E9%A2%9D%E5%92%8C%E8%A1%A8%E9%9D%A2%E7%94%B5%E9%98%BB%E7%9A%84%E5%BD%B1%E5%93%8D/","path":"2024/12/03/激光处理铜表面对其二次电子产额和表面电阻的影响/","title":"激光处理铜表面对其二次电子产额和表面电阻的影响"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>激光处理铜表面对其二次电子产额和表面电阻的影响 | REALIUMING'BLOG</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">REALIUMING'BLOG</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">161</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">17</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">67</span></a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fab fa-algolia fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%B7%E5%93%81%E5%88%B6%E5%A4%87"><span class="nav-number">1.</span> <span class="nav-text">样品制备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%85%E6%B4%81%E8%BF%87%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">清洁过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%B7%E5%93%81%E6%B5%8B%E8%AF%95"><span class="nav-number">3.</span> <span class="nav-text">样品测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%89%E5%AD%A6%E6%A3%80%E6%9F%A5"><span class="nav-number">3.1.</span> <span class="nav-text">光学检查</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SEM%E5%88%86%E6%9E%90"><span class="nav-number">4.</span> <span class="nav-text">SEM分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XPS%E5%88%86%E6%9E%90"><span class="nav-number">5.</span> <span class="nav-text">XPS分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SEY"><span class="nav-number">6.</span> <span class="nav-text">SEY</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A8%E9%9D%A2%E7%94%B5%E9%98%BB%E8%AF%84%E4%BC%B0"><span class="nav-number">7.</span> <span class="nav-text">表面电阻评估</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Liu Ming"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Liu Ming</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">67</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">161</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button animated">
+    <button><i class="fa fa-comment"></i>
+      Chat
+    </button>
+  </div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2l1bWluZw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;iuming"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOjUyMDBsaXVtaW5nQGdtYWlsLmNvbQ==" title="E-Mail → mailto:5200liuming@gmail.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vdS8zMTQ3OTEyODky" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;3147912892"><i class="fab fa-weibo fa-fw"></i>Weibo</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9yZWFsaXVtaW5n" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;realiuming"><i class="fab fa-twitter fa-fw"></i>Twitter</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL3JlYWxpdW1pbmc=" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;realiuming"><i class="fab fa-facebook fa-fw"></i>FB Page</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8xMjE4NTI3My9pdW1pbmc=" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;12185273&#x2F;iuming"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly95b3V0dWJlLmNvbS9jaGFubmVsL1VDaUNCSHJ4cDJ4Tlc3T1ZaTlFzZHROdw==" title="YouTube → https:&#x2F;&#x2F;youtube.com&#x2F;channel&#x2F;UCiCBHrxp2xNW7OVZNQsdtNw"><i class="fab fa-youtube fa-fw"></i>YouTube</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9pbnN0YWdyYW0uY29tL3JlYWxpdW1pbmc=" title="Instagram → https:&#x2F;&#x2F;instagram.com&#x2F;realiuming"><i class="fab fa-instagram fa-fw"></i>Instagram</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="c2t5cGU6ODQyNjczNTU2P2NhbGx8Y2hhdA==" title="Skype → skype:842673556?call|chat"><i class="fab fa-skype fa-fw"></i>Skype</span>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="Back to top">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://iuming.github.io/" title="https:&#x2F;&#x2F;iuming.github.io&#x2F;">Title</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://iuming.github.io/2024/12/03/%E6%BF%80%E5%85%89%E5%A4%84%E7%90%86%E9%93%9C%E8%A1%A8%E9%9D%A2%E5%AF%B9%E5%85%B6%E4%BA%8C%E6%AC%A1%E7%94%B5%E5%AD%90%E4%BA%A7%E9%A2%9D%E5%92%8C%E8%A1%A8%E9%9D%A2%E7%94%B5%E9%98%BB%E7%9A%84%E5%BD%B1%E5%93%8D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Liu Ming">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="REALIUMING'BLOG">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="激光处理铜表面对其二次电子产额和表面电阻的影响 | REALIUMING'BLOG">
+      <meta itemprop="description" content="from [paper](https ://doi.org/10.1103/PhysRevAccelBeams.27.113101)">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          激光处理铜表面对其二次电子产额和表面电阻的影响
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2024-12-03 09:45:26 / Modified: 10:43:47" itemprop="dateCreated datePublished" datetime="2024-12-03T09:45:26+08:00">2024-12-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/note/" itemprop="url" rel="index"><span itemprop="name">note</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2024/12/03/%E6%BF%80%E5%85%89%E5%A4%84%E7%90%86%E9%93%9C%E8%A1%A8%E9%9D%A2%E5%AF%B9%E5%85%B6%E4%BA%8C%E6%AC%A1%E7%94%B5%E5%AD%90%E4%BA%A7%E9%A2%9D%E5%92%8C%E8%A1%A8%E9%9D%A2%E7%94%B5%E9%98%BB%E7%9A%84%E5%BD%B1%E5%93%8D/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2024/12/03/激光处理铜表面对其二次电子产额和表面电阻的影响/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+            <div class="post-description">from [paper](https ://doi.org/10.1103/PhysRevAccelBeams.27.113101)</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>激光表面结构化是一种有效的技术，可使铜表面的二次电子产额 (SEY) 值接近或低于 1。然而，使 SEY 最小化的属性（例如中等深度的凹槽和重新沉积的纳米颗粒）可能会导致不良后果，包括射频表面电阻增加。</p>
+<p>电子倍增效应和由此产生的电子云效应是粒子加速器中可能发生的已知现象。同步辐射产生的光发射、残余气体的电离以及可能不受控制的杂散束粒子损失都会导致产生一次电子，这些电子可能会撞击束流真空室，从而导致二次电子的发射。这些电子可以在粒子束产生的电磁场中加速，并在特定共振条件下以雪崩形式倍增。这样的电子云可以吸引和积累更多的带电粒子，因此会对加速器性能产生多种不利影响，包括增加束流发射率、不稳定性和束流损失。倍增效应和电子云对于即将建成的环形对撞机至关重要，这些对撞机旨在实现强度和能量更高的质子束。</p>
+<p>电子倍增过程一般发生在强射频 (rf) 电场中，这种电场通常出现在加速器中，也出现在波导、同轴结构、滤波器或谐振腔等部件中。当射频场达到临界强度时，它有可能在结构内引起电子的共振加速和减速，这可能导致产生二次电子，从而导致功率损耗增加、射频击穿和性能下降。因此，在加速器中，管理电子倍增和云效应对于保持系统所需的性能和可靠性至关重要。</p>
+<p>为了解决电子倍增效应的这些不利影响，人们研究并实施了各种策略。其中一种方法是塑造射频结构的几何形状，以创建独特的配置，减轻倍增效应，另一种常见的缓解技术是考虑通过精心选择材料、特殊涂层或其他物理或化学表面处理来最大限度地减少真空组件的 SEY。SEY 值定义为离开表面的二次电子数与进入的一次电子数之比，当该比率超过 1 时，电子就有增殖的潜力，而 SEY 低于 1 的表面则充当电子吸收体。</p>
+<p>多项研究表明，对铜进行激光表面处理可以显著降低 SEY，具体取决于不同的激光和处理特性。这种激光处理是使用激光束对材料表面进行控制和精确的修改，以产生特定的图案、纹理或结构。激光烧蚀表面工程、激光诱导周期性表面结构以及激光工程表面结构（LESS），每种方法都采用不同的激光处理参数，是降低铜的 SEY 值的合适处理技术。</p>
+<p>除了较低的 SEY 值外，保持加速器中适当较低的表面阻抗对于优化性能和最大限度地降低功耗至关重要。在加速器中，表面阻抗会影响循环光束与周围真空组件之间的电磁相互作用。因此，低表面阻抗可最大限度地减少阻抗驱动的光束不稳定性。更一般地说，真空组件（如波导或谐振器）的较低表面阻抗可以保持信号完整性。因此，人们对能够降低 SEY 水平同时保持良好射频特性的方法非常感兴趣。</p>
+<p>激光结构化可能会提高处理材料的表面电阻；但是，在室温和低温下对这些激光结构表面进行兆赫和千兆赫频率的独立测试表明，表面电阻的变化很大，这取决于激光扫描线相对于射频表面电流的相对方向、产生的凹槽深度，以及更普遍地说，取决于整体地形。特别是，LESS由于其生产方法，通过以线性模式反复扫描激光束，可以实现高度复杂的表面拓扑结构，形成的微槽和附着颗粒对激光处理材料的 SEY 和表面电阻变化的各自贡献仍需详细了解。</p>
+<h2 id="样品制备"><a href="#样品制备" class="headerlink" title="样品制备"></a>样品制备</h2><p>对两组块状无氧电子 (OFE) 铜盘进行了激光处理，它们具有两种不同的尺寸，可用于各种实验配置：直径 5 厘米用于 SEY、XPS 和 SEM 分析，直径 12 厘米用于表面电阻测量和光学检查。在第一组（称为 LESS-I）中，凹槽主要沿径向雕刻，形成三角形扇区。相比之下，在第二组（称为 LESS-II）中，线条以连续螺旋状蚀刻，从光盘中心发出。同一组中的每个光盘都使用相同的激光参数进行处理，与光盘尺寸无关。激光表面结构化工艺采用波长为 532 nm、线性偏振、重复率为 200 kHz 的 10 ps 脉冲激光进行。这些结构是使用线距约为四十五μ米在15毫米&#x2F;s激光点扫描速度。为了将激光束聚焦到表面上，采用了透镜系统和氮气喷嘴。通过以最大功率操作激光，获得了高斯强度分布，标准偏差为4σ光斑直径为52μ米，平均通量约为0.9J&#x2F;厘米2或平均等效功率达到 4 W。为了尽量减少可能的表面氧化，以层流方式将受控氮气流导向光物质相互作用区域。</p>
+<h2 id="清洁过程"><a href="#清洁过程" class="headerlink" title="清洁过程"></a>清洁过程</h2><p>在每个连续清洁步骤之前和之后，对样品进行反复检查，以验证清洁程序的有效性。这种反复方法涉及在每个清洁阶段之后对样品进行反复检查和分析，包括光学显微镜、SEM 分析、XPS 分析、表面电阻测定和 SEY 测量。通过这种方法，可以评估清洁过程的进展，确定剩余纳米颗粒的数量，并观察表面形态的变化。这可以得出关于物理表面特性变化的结论。</p>
+<p>进行了四种不同的清洗步骤，以逐渐去除纳米颗粒并最大限度地暴露凹槽图案。</p>
+<ul>
+<li>激光加工后</li>
+<li>吹气压力为 5 bar 氮气，然后用超纯水冲洗 15 分钟，然后用超纯酒精冲洗，然后氮气干吹</li>
+<li>在去离子水中以 150 W 的功率进行超声波处理 10 分钟，然后用乙醇喷洒，并用过滤压缩空气吹干</li>
+<li>浸泡脱脂50°C在清洁剂 DP 17.40 SUP（瑞士 NGL Cleaning Technology SA）中超声波搅拌 15 分钟，持续约 2 小时，然后用去离子水喷射冲洗，浸泡，用乙醇喷洒，用压缩氮气吹干，并在 500 ℃ 下用热气流烘烤。60°C最长 60 分钟，冷却至室温（这对应于 CERN 在超高真空中使用的铜部件的典型表面处理）</li>
+<li>完成清洗工艺 3 的所有步骤后，用盐酸（50% v&#x2F;v）酸洗 10-20 秒，用去离子水喷射冲洗，然后浸泡，在铬酸水溶液中钝化（70–80克&#x2F;升)和硫酸(3毫升&#x2F;升）10-20秒（蚀刻速率约为1μ米&#x2F;分钟)，用软化喷射和浸泡，用乙醇喷洒，用压缩氮气吹干，并用热气流在60°C最长 60 分钟，冷却至室温。</li>
+</ul>
+<h2 id="样品测试"><a href="#样品测试" class="headerlink" title="样品测试"></a>样品测试</h2><h3 id="光学检查"><a href="#光学检查" class="headerlink" title="光学检查"></a>光学检查</h3><p> 光学成像的主要优势之一是它能够对样品进行无损和高分辨率成像。它允许可视化宏观和微观细节，以便快速检查样品。图中描绘的是螺旋图案的复杂细节，其中有清晰可辨的再沉积颗粒。此外，光学成像可以通过对凹槽进行三维重建来检查凹槽深度，以图中的 LESS-I-0 样品为例。重建轮廓的高度对应于横截面透视图，如图中从左到右的青绿色线所示。凹槽深度的测定表明，每个凹槽的平均相对深度约为 15 至 三十 μ米对于 LESS-I 和 15 至 二十五μ米对于 LESS-II，取决于椎间盘的位置。此外，预期的激光治疗线距离 四十五μ米。</p>
+<p><a target="_blank" rel="noopener" href="https://postimg.cc/zyJtKXf1"><img data-src="https://i.postimg.cc/GmDW04w9/LESS-II-0.png" alt="LESS-II-0.png"></a></p>
+<h2 id="SEM分析"><a href="#SEM分析" class="headerlink" title="SEM分析"></a>SEM分析</h2><p>与光学检查相比，SEM 成像可以更详细地查看微观结构。使用 SEM 对光盘表面（大致在相同位置，在不同处理步骤后拍摄）进行微观分析。展示了 LESS-I 的 SEM 结果，显示了 LESS-II 的结果，通过放大其中一个凹槽（在本例中为 LESS-II），可以更详细地检查微观结构。</p>
+<p><a target="_blank" rel="noopener" href="https://postimg.cc/hJN1ySKv"><img data-src="https://i.postimg.cc/B6n7v6yT/SEM.png" alt="SEM.png"></a></p>
+<p>研究结果表明，经过 LESS 处理后的激光处理样品含有大量不同尺寸的团聚颗粒，最大可达 50 μ米与激光处理方向无关。第一次清洗去除了上述颗粒团聚，而残留的纳米颗粒更牢固地结合到表面上，无法通过这种方式去除。由于结合力强，第二次清洗后附着在表面上的纳米颗粒的密度与第二次清洗之前相似。第三次清洗步骤暴露了波峰，从凹槽侧壁和底部去除颗粒的效率仍然很低。图像显示，第四种清洗方法是所采用的程序中最具侵略性的。在这种情况下，铜微槽结构暴露出来，纳米颗粒层几乎完全溶解，除了凹槽谷底，那里的表面仍然粗糙。</p>
+<h2 id="XPS分析"><a href="#XPS分析" class="headerlink" title="XPS分析"></a>XPS分析</h2><p>XPS 是一种表面敏感分析技术，可以确定材料最外层表面区域的元素组成，信息深度仅为几纳米（5-10 纳米，取决于材料和实验条件）所用实验装置的细节已在其他地方描述，例如每次清洁步骤后，样品通过空气输送，然后通过负载锁引入超高真空系统进行表面分析。尽管这种简单的计算高估了信息深度内更接近表面的物质数量，特别是表面吸附物，但这些值允许得出关于每次清洁步骤后表面变化的重要结论，这对于解释下一节中 SEY 测量的结果至关重要。</p>
+<p><a target="_blank" rel="noopener" href="https://postimg.cc/56pqc5fZ"><img data-src="https://i.postimg.cc/cLGDnT24/LESS-I-Cu-2p-Cu-LMM.png" alt="LESS-I-Cu-2p-Cu-LMM.png"></a></p>
+<p><a target="_blank" rel="noopener" href="https://postimg.cc/LYdjkNVZ"><img data-src="https://i.postimg.cc/Hxn3gNc3/The-surface-composition-of-the-detected-elements-in-atomic-percent-at-based-on-XPS-measurements.png" alt="The-surface-composition-of-the-detected-elements-in-atomic-percent-at-based-on-XPS-measurements.png"></a></p>
+<p>激光处理后的表面成分受加工过程中的表面反应（在氮气中进行）以及暴露在空气中产生的吸附物的影响。因此，加工后的表面表现出强烈的氧化程度（存在 Cu2O表面的性质与前面讨论过的类似样品一致）以及碳氢化合物，而氮则来源于激光加工过程中的反应。此外，光谱还包括表面羟基键的标记，它们也是通过空气中的反应形成的。在第一次冲洗步骤后，只去除了松散地附着在表面上的颗粒，没有观察到显著的变化，而第二次清洁步骤导致表面碳含量略有增加。这可能与此过程中在乙醇中的最后冲洗有关。在第三次清洁步骤后，使用同样会轻微蚀刻表面的清洁剂，观察到明显的变化。表面氢氧键的数量显著减少，表面烃含量低得多，Cu LMM 俄歇光谱表明金属 Cu 表面原子（氧化态）的部分存在 Cu0）。此外，检测到的低含量表面杂质（Ag、Si）与洗涤剂溶液中的成分有关，这些成分通常无法用水完全冲洗掉，因此会残留在表面。最后的清洁步骤包括用盐酸对表面进行强力蚀刻，以及包括铬酸的钝化步骤，导致表面形成氧化铬。图 4包括表面 Cu LMM 跃迁旁边的铬特征，这也表明金属 Cu 原子的相对含量更高。另一方面，Cu 2p 光谱表明，氢氧化物键的部分积累同时发生。此外，最后的强蚀刻旨在去除凹槽图案中的纳米结构，导致碳氢化合物含量增加并去除 Ag 表面杂质，而 Si 含量几乎保持不变。最后，检测到少量硫，这是由于在此清洁过程中使用了硫酸。</p>
+<h2 id="SEY"><a href="#SEY" class="headerlink" title="SEY"></a>SEY</h2><p>采用交变偏压法，在前文所述的实验条件下，对样品测量了一次电子能量在 50 至 1800 eV 之间的二次电子产额在 XPS 分析之前进行，以避免任何 x 射线引起的调节效应。由于样品缺乏圆周标记，由于样品可能旋转，斑点的位置在每个清洁周期都会发生变化。数据相对较大的散射表明横向不均匀性。</p>
+<p><a target="_blank" rel="noopener" href="https://postimg.cc/rRwGzzJh"><img data-src="https://i.postimg.cc/brQmCt2j/50-1800-e-V.png" alt="50-1800-e-V.png"></a></p>
+<p>一般来说，二次产率可能受两个主要方面的影响：（i）表面粗糙度和形貌的变化和（ii）表面成分的变化。因此，SEM 和 XPS 分析的结果被视为 SEY 测量的解释。在前两个清洁步骤中，轻微去除弱附着的纳米颗粒只会导致 SEY 曲线略有增加 δ（埃）元素表面成分的变化很小，除了清洁步骤 2 后吸收了碳氢化合物，清洁步骤 3 后去除了碳氢化合物。对于第三个清洁步骤，SEY 平均值再次略有降低，而去除微槽顶部边缘的纳米颗粒的主要地形变化预计会引起相反的变化，即使面积部分很小。总体而言，观察到的微小结构变化不会显著改变入射电子所经历的表面粗糙度。它们撞击有裂缝的纳米结构表面，该表面有许多通道，电子可以被捕获并通过前向散射耗散其能量。样品中 SEY 的横向变化大于连续处理步骤 0 至 3 引起的变化，因此无法从实验数据中提取清晰的相关性。几何和成分变化似乎不会对 SEY 产生决定性的影响。</p>
+<p>然而，在最终的强力表面蚀刻程序（清洁步骤 4）完全去除微槽顶部的纳米颗粒层后，SEY 急剧增加近 2 倍。化学转变，即形成被氧化铬钝化的表面，无法解释这种增量，因为 SEY 最大值为氧化铬片介于 1.6 和 2.0 之间。经过清洁程序 3 或 4 处理的平面 Cu 样品的 SEY 通常没有差异，尽管它们的表面成分存在显著差异。因此，该结果表明，从激光形成的微槽结构中去除纳米粒子会导致二次电子产率大幅增加。这一观察说明了重新沉积的纳米粒子对激光加工产生的 SEY 降低效应的重要贡献。</p>
+<p>在此背景下，应该注意的是，颗粒去除的效率取决于激光结构化过程中形成的结构、重新吸附的颗粒数量以及它们粘附在底层表面上的程度。当改变加工条件时，它们的表面密度可能会发生很大变化。在本例中，初始表面完全被一层致密的附着性良好的颗粒层覆盖，这些颗粒无法通过冲洗或超声波浴处理轻易去除。尤其是当改变施加的功率或清洁时间时，超声波等机械清洁方法的结果可能会发生变化。因此，关于步骤 2 中颗粒去除效率的研究报告结果必须与上述应用的清洁条件相关。在比较不同研究中报告的激光结构化表面的 SEY 值和颗粒去除效率及其对 SEY 的影响时，需要考虑这些方面。</p>
+<h2 id="表面电阻评估"><a href="#表面电阻评估" class="headerlink" title="表面电阻评估"></a>表面电阻评估</h2><p>实验装置：</p>
+<p><a target="_blank" rel="noopener" href="https://postimg.cc/7bSrNhqC"><img data-src="https://i.postimg.cc/3rcrY06Z/CHCDR.png" alt="CHCDR.png"></a></p>
+<p>归一化射频表面磁场分布密度图：</p>
+<p><a target="_blank" rel="noopener" href="https://postimg.cc/QK3PzgjF"><img data-src="https://i.postimg.cc/C5BgzJts/image.png" alt="image.png"></a></p>
+<p>表面电阻：</p>
+<p><a target="_blank" rel="noopener" href="https://postimg.cc/1fMTWN2z"><img data-src="https://i.postimg.cc/y8zH8mT0/a-LESS-I-b-LESS-II-c-LESS-f0-3-4.png" alt="a-LESS-I-b-LESS-II-c-LESS-f0-3-4.png"></a></p>
+<p>在 SEY 和表面电阻结果中观察到的动态效应在一定程度上支持了这两个参数的普遍矛盾性能；低表面电阻与高 SEY 值相关，反之亦然。尽管如此，本研究的结果也表明，表面电阻对部分颗粒去除更为敏感，并且根据清洁程序，可以修改 SEY 和表面电阻值以满足预期应用环境的特定要求。</p>
+<p>测量结果表明，激光处理产生的宏观几何形状，确切地说是方位角和纵向槽方向，对 Rs但 SEY 值没有变化。未清洗的 LESS 样品表现出明显的颗粒聚集，与 OFE 铜相比，其相对表面电阻最高。平行和垂直方向上的射频电流方向差异对表面电阻值的影响显而易见，差异高达 2 倍。该比率是四极谐振器中测量值的一半在 4.2 K 的较低温度下。考虑图中的数据。 8(c)并且当将数据进一步外推至较低温度下电阻比的增量时，可能会导致可比的值 &lt;10K 。此外，尽管两项研究中不同样品加工过程中的激光脉冲长度、波长和重复率相同，但其他激光参数（如扫描速度、光斑直径和凹槽间距）不同。因此，形成的微槽的结构参数（高度、宽度、倾斜角和纵横比）不同，可能会改变表面电阻。当包括频率依赖性以及凹槽和纳米颗粒的综合效应时，理论建模可以帮助理解差异并提高可比性。相比之下，加工后的 SEY 值低于所有后续清洁步骤后的 SEY 值，并且与激光结构模式无关。显然，凹槽方向不会改变垂直撞击的一次电子的 SEY。</p>
+<p>微观几何因素（包括颗粒尺寸和颗粒的面积覆盖率）对这两个参数的影响都很大。初始清洁步骤消除了样品上的团聚物和较大的松散附着颗粒。这些纳米颗粒的去除导致表面形貌元素量的变化可以忽略不计。因此，SEY 略有增加，而表面电阻略有降低（无论凹槽方向如何）。</p>
+<p>第三次清洗步骤主要暴露了波峰，而凹槽则发生了微小的改变。波峰上颗粒分布的减少，即表面粗糙度的局部降低，将为初级电子与下面的 Cu 基板相互作用提供更多机会。然而，受影响的横向区域相当小，而其余区域的粗糙度保持不变。发现的 SEY 变化在样品的横向变化范围内，无法提取明显的趋势。另一方面，SEY 的急剧减少 Rs 意味着表面电流主要沿波峰流动，表面电流密度在凹槽高度上可能呈渐进分布。从波峰上去除颗粒并暴露本体铜可以解释观察到的表面电阻降低。这些观察结果表明，颗粒是良好的导电材料（铜），其尺寸大于穿透深度，如图 SEM 图像所示。 3，从而影响表面电阻。相反，SEY 值则主要受凹槽内剩余纳米颗粒的影响。最佳方案似乎是具有干净的波峰以获得低表面电阻，同时凹槽内的纳米颗粒逐渐增加以保持较低的 SEY 值，并且可以使用包括轻度蚀刻的清洁剂清洁来实现。这一观察结果可以通过在不同频率下进行测量来进行交叉验证，以确定凹槽尖端的暴露与穿透深度之间的潜在相关性。</p>
+<p>此外，还应考虑两个相关相互作用深度的影响。首先，二次电子发射的主要区域距离表面几十纳米。这一方面使得电子发射对平面材料（例如几纳米厚的氧化物层）的表面成分变化相对敏感。其次，电磁穿透深度范围在微米级。因此，对于表面电阻测量，这种电导率低的氧化物层对电磁场是“不可见的”，因为趋肤深度远大于氧化物层的厚度。因此，天然氧化物层不会影响测量的表面电阻。然而，在这两种情况下，SEY 和 Rs 但是，纳米粒子引起的表面粗糙度使得电子散射和电磁相互作用过程更加复杂，且在理论上更难预测。</p>
+<p>最激进的清洁方法，即第四步，涉及强蚀刻和钝化，引发了变革性的地形变化。从凹槽中完全去除纳米颗粒并暴露底层铜微凹槽图案导致 SEY 急剧增加，几乎使其值翻倍。这一发现再次证实了微结构上的纳米颗粒（主要是凹槽上的纳米颗粒）是 LESS 降低 SEY 能力的必要成分，而其余微凹槽的三角形横截面与具有相同表面成分的平坦 Cu 样品相比，其二次电子发射特性并没有太大不同。必须注意的是，此处仅针对所表征的结构尺寸验证了这一观察结果，而其他微观几何形状（即具有更高纵横比的陡峭结构）也经过建模并证明可以降低二次电子发射。</p>
+<p>尽管这两个参数的性能通常相互矛盾，但可以根据应用的具体要求通过清洁方法来修改这两个参数。在恒定的 SEY 值下表面电阻显著降低表明，暴露的凹槽波峰与保留凹槽中的颗粒覆盖相结合，可以在这两个参数之间实现有效的平衡。与颗粒也覆盖波峰的情况相比，暴露的凹槽波峰导致表面电阻显著降低。这项观察结果表明，沿凹槽高度的表面电流密度分布呈渐进式，可能受到其他因素的影响，例如测量频率和相关的趋肤深度变化。然而，这一观察结果值得进一步进行理论和实验研究，并验证这一领域。强力清洁方法包括强蚀刻和钝化，通过完全去除纳米颗粒并暴露下面的铜基底，引发了变革性变化。微槽的剩余结构表现出与平面铜样品相似的二次电子发射特性。这强调了纳米粒子在降低激光处理表面的 SEY 方面的关键作用。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="Liu Ming WeChat Pay">
+        <span>WeChat Pay</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="Liu Ming Alipay">
+        <span>Alipay</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>Liu Ming
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="http://iuming.github.io/2024/12/03/%E6%BF%80%E5%85%89%E5%A4%84%E7%90%86%E9%93%9C%E8%A1%A8%E9%9D%A2%E5%AF%B9%E5%85%B6%E4%BA%8C%E6%AC%A1%E7%94%B5%E5%AD%90%E4%BA%A7%E9%A2%9D%E5%92%8C%E8%A1%A8%E9%9D%A2%E7%94%B5%E9%98%BB%E7%9A%84%E5%BD%B1%E5%93%8D/" title="激光处理铜表面对其二次电子产额和表面电阻的影响">http://iuming.github.io/2024/12/03/激光处理铜表面对其二次电子产额和表面电阻的影响/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/realiuming">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+U5yo-Zxuw1OgbU6P">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </span>
+
+          <img class="social-item-img" src="/images/wechat_channel.jpg">
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/SRF/" rel="tag"><i class="fa fa-tag"></i> SRF</a>
+              <a href="/tags/laser/" rel="tag"><i class="fa fa-tag"></i> laser</a>
+              <a href="/tags/postprocessing/" rel="tag"><i class="fa fa-tag"></i> postprocessing</a>
+              <a href="/tags/BCS/" rel="tag"><i class="fa fa-tag"></i> BCS</a>
+              <a href="/tags/copper/" rel="tag"><i class="fa fa-tag"></i> copper</a>
+          </div>
+
+        
+  <div class="social-like a2a_kit a2a_kit_size_32 a2a_default_style">
+    <a class="a2a_dd" target="_blank" rel="noopener" href="https://www.addtoany.com/share"></a>
+      <a class="a2a_button_facebook"></a>
+      <a class="a2a_button_twitter"></a>
+      <a class="a2a_button_wechat"></a>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/11/25/Quarter-Wave-%CE%BB-4-wave-Coaxial-Resonators/" rel="prev" title="Quarter-Wave (λ/4-wave) Coaxial Resonators">
+                  <i class="fa fa-angle-left"></i> Quarter-Wave (λ/4-wave) Coaxial Resonators
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Ming Liu. All rights reserved.</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL2l1bWluZw==" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.1.0/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/4.23.3/algoliasearch-lite.umd.js" integrity="sha256-1QNshz86RqXe/qsCBldsUu13eAX6n/O98uubKQs87UI=" crossorigin="anonymous"></script><script src="/js/third-party/search/algolia-search.js"></script>
+<script class="next-config" data-name="chatra" type="application/json">{"enable":true,"async":true,"id":"gTXKphrmKGf5QSb5L"}</script>
+<script src="/js/third-party/chat/chatra.js"></script>
+<script async src="https://call.chatra.io/chatra.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.0/pdfobject.min.js","integrity":"sha256-JJZNsid68vnh3/zyj0lY9BN5ynxVX/12XgOa1TlaYN0="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.0/mermaid.min.js","integrity":"sha256-stuqcu2FrjYCXDOytWFA5SoUE/r3nkp6gTglzNSlavU="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+  <script class="next-config" data-name="wavedrom" type="application/json">{"enable":true,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.5.0/wavedrom.min.js","integrity":"sha256-INLAoJc6quTNfiMWkGZniYO2cxE8mHpddnLow1m6RFs="}}</script>
+  <script class="next-config" data-name="wavedrom_skin" type="application/json">{"enable":true,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.5.0/skins/default.js","integrity":"sha256-fduc/Zszk5ezWws2uInY/ALWVmIrmV6VTgXbsYSReFI="}}</script>
+  <script src="/js/third-party/tags/wavedrom.js"></script>
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+  <script src="/js/third-party/addtoany.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":"ture","archive":true,"delay":true,"timeout":3000,"priority":true,"url":"http://iuming.github.io/2024/12/03/%E6%BF%80%E5%85%89%E5%A4%84%E7%90%86%E9%93%9C%E8%A1%A8%E9%9D%A2%E5%AF%B9%E5%85%B6%E4%BA%8C%E6%AC%A1%E7%94%B5%E5%AD%90%E4%BA%A7%E9%A2%9D%E5%92%8C%E8%A1%A8%E9%9D%A2%E7%94%B5%E9%98%BB%E7%9A%84%E5%BD%B1%E5%93%8D/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"realiuming","count":true,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+
+</body>
+</html>
