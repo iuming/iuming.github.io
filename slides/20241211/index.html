@@ -130,6 +130,7 @@
             <h2>Calculation Results</h2>
             <div class="results" id="resultsContainer"></div>
             <a href="#" class="btn" onclick="restartCalculation()">Restart</a>
+            <a href="#" class="btn" onclick="showInputForm()">Back to Input</a>
         </div>
     </div>
 
@@ -139,8 +140,27 @@
         function showInputForm() {
             document.getElementById("home").style.display = "none";
             document.getElementById("input-form").style.display = "block";
+            document.getElementById("results").style.display = "none"; // 确保结果页面隐藏
             updateModeFrequencyInputs();
             updateCellPhaseInputs();
+
+            // 从 localStorage 加载输入值
+            document.getElementById("inputN").value = localStorage.getItem("inputN") || 2;
+            document.getElementById("inputFTarget").value = localStorage.getItem("inputFTarget") || 1.3e9;
+            document.getElementById("inputQL").value = localStorage.getItem("inputQL") || 1e4;
+            document.getElementById("baselinePhase").value = localStorage.getItem("baselinePhase") || 0;
+
+            const N = parseInt(document.getElementById("inputN").value) || 0;
+            const modeFreqInputs = document.querySelectorAll("#modeFreqInputs input");
+            const cellPhaseInputs = document.querySelectorAll("#cellPhaseInputs input");
+
+            modeFreqInputs.forEach((input, index) => {
+                input.value = localStorage.getItem(`modeFrequency_${index}`) || '';
+            });
+
+            cellPhaseInputs.forEach((input, index) => {
+                input.value = localStorage.getItem(`cellPhase_${index}`) || '';
+            });
         }
 
         function updateModeFrequencyInputs() {
@@ -167,6 +187,7 @@
                 input.required = true;
                 input.min = -360;
                 input.max = 360;
+                input.step = "0.00001";
                 input.placeholder = `Cell Phase ${i + 1} (degrees)`;
                 cellPhaseContainer.appendChild(input);
             }
@@ -179,14 +200,28 @@
             const Q_L = parseFloat(document.getElementById("inputQL").value);
             const baseline_phase = parseFloat(document.getElementById("baselinePhase").value);
 
-            // 收集模式频率和单元相位
+            // Collect mode frequencies and cell phases
             const modeFreqInputs = document.querySelectorAll("#modeFreqInputs input");
             const cellPhaseInputs = document.querySelectorAll("#cellPhaseInputs input");
 
-            const mode_frequencies = Array.from(modeFreqInputs).map(input => parseFloat(input.value));
-            const cell_phases = Array.from(cellPhaseInputs).map(input => parseFloat(input.value));
+            const mode_frequencies = Array.from(modeFreqInputs).map((input, index) => {
+                const val = parseFloat(input.value);
+                localStorage.setItem(`modeFrequency_${index}`, val); // 保存模式频率
+                return val;
+            });
+            const cell_phases = Array.from(cellPhaseInputs).map((input, index) => {
+                const val = parseFloat(input.value);
+                localStorage.setItem(`cellPhase_${index}`, val); // 保存单元相位
+                return val;
+            });
 
-            // 开始计算
+            // 还可以保存基本输入值
+            localStorage.setItem("inputN", N);
+            localStorage.setItem("inputFTarget", f_target);
+            localStorage.setItem("inputQL", Q_L);
+            localStorage.setItem("baselinePhase", baseline_phase);
+
+            // Start calculation
             const results = fieldTuning(N, f_target, Q_L, mode_frequencies, baseline_phase, cell_phases);
             displayResults(results);
         }
