@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multicell Cavity Tuning</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1,
+        h2 {
+            color: #444;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 15px;
+            background: #007BFF;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .btn:hover {
+            background: #0056b3;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .results {
+            margin-top: 20px;
+        }
+
+        .results div {
+            margin-bottom: 10px;
+            padding: 10px;
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" id="app">
+        <!-- Home Page -->
+        <div id="home" style="display: block;">
+            <div style="text-align: center; border: 2px solid #007BFF; padding: 10px; border-radius: 5px;">
+                <h1>Multicell Superconducting Cavity Field Flat Tuning Calculation</h1>
+            </div>
+            <h2 style="text-align: center; font-family: 'Courier New', Courier, monospace; font-size: 1.2em;">Author:
+                Ming Liu</h2>
+            <p>Welcome to the tool for calculating field flat tuning parameters for multicell superconducting cavities.
+            </p>
+            <p>Reference: Padamsee H, Knobloch J, Hays T. RF superconductivity for accelerators[M]. John Wiley & Sons,
+                2008.</p>
+            <p>This project is licensed under the MIT License. See the LICENSE file for details.</p>
+            <p>Click the button below to start the calculation.</p>
+            <a href="#" class="btn" onclick="showInputForm()">Start Calculation</a>
+        </div>
+
+        <!-- Input Form -->
+        <div id="input-form" style="display: none;">
+            <h2>Input Parameters</h2>
+            <form id="calcForm" onsubmit="return handleInput(event)">
+                <div class="input-group">
+                    <label for="inputN">Number of cells (N):</label>
+                    <input type="number" id="inputN" required min="1" value="2"
+                        onchange="updateModeFrequencyInputs(); updateCellPhaseInputs();">
+                </div>
+                <div class="input-group">
+                    <label for="inputFTarget">Target Frequency (Hz):</label>
+                    <input type="number" id="inputFTarget" required min="0" value="1.3e9">
+                </div>
+                <div class="input-group">
+                    <label for="inputQL">Quality Factor (Q_L):</label>
+                    <input type="number" id="inputQL" required min="0" value="1e4">
+                </div>
+                <div class="input-group" id="step-modeFreq">
+                    <label>Enter Passband Frequencies (Hz):</label>
+                    <div id="modeFreqInputs"></div>
+                </div>
+                <div class="input-group">
+                    <label for="baselinePhase">Baseline Phase (degrees):</label>
+                    <input type="number" id="baselinePhase" required min="-360" max="360" value="0">
+                </div>
+                <div class="input-group" id="step-cellPhases">
+                    <label>Enter Cell Phases (degrees):</label>
+                    <div id="cellPhaseInputs"></div>
+                </div>
+                <button type="submit" class="btn">Calculate</button>
+            </form>
+        </div>
+
+        <!-- Results Section -->
+        <div id="results" style="display: none;">
+            <h2>Calculation Results</h2>
+            <div class="results" id="resultsContainer"></div>
+            <a href="#" class="btn" onclick="restartCalculation()">Restart</a>
+        </div>
+    </div>
+
+    <script>
+        let parameters = {};
+
+        function showInputForm() {
+            document.getElementById("home").style.display = "none";
+            document.getElementById("input-form").style.display = "block";
+            updateModeFrequencyInputs();
+            updateCellPhaseInputs();
+        }
+
+        function updateModeFrequencyInputs() {
+            const N = parseInt(document.getElementById("inputN").value) || 0;
+            const modeFreqContainer = document.getElementById("modeFreqInputs");
+            modeFreqContainer.innerHTML = "";
+            for (let i = 0; i < N; i++) {
+                const input = document.createElement("input");
+                input.type = "number";
+                input.required = true;
+                input.min = 0;
+                input.placeholder = `Mode Frequency ${i + 1} (Hz)`;
+                modeFreqContainer.appendChild(input);
+            }
+        }
+
+        function updateCellPhaseInputs() {
+            const N = parseInt(document.getElementById("inputN").value) || 0;
+            const cellPhaseContainer = document.getElementById("cellPhaseInputs");
+            cellPhaseContainer.innerHTML = "";
+            for (let i = 0; i < N; i++) {
+                const input = document.createElement("input");
+                input.type = "number";
+                input.required = true;
+                input.min = -360;
+                input.max = 360;
+                input.placeholder = `Cell Phase ${i + 1} (degrees)`;
+                cellPhaseContainer.appendChild(input);
+            }
+        }
+
+        function handleInput(event) {
+            event.preventDefault();
+            const N = parseInt(document.getElementById("inputN").value);
+            const f_target = parseFloat(document.getElementById("inputFTarget").value);
+            const Q_L = parseFloat(document.getElementById("inputQL").value);
+            const baseline_phase = parseFloat(document.getElementById("baselinePhase").value);
+
+            // 收集模式频率和单元相位
+            const modeFreqInputs = document.querySelectorAll("#modeFreqInputs input");
+            const cellPhaseInputs = document.querySelectorAll("#cellPhaseInputs input");
+
+            const mode_frequencies = Array.from(modeFreqInputs).map(input => parseFloat(input.value));
+            const cell_phases = Array.from(cellPhaseInputs).map(input => parseFloat(input.value));
+
+            // 开始计算
+            const results = fieldTuning(N, f_target, Q_L, mode_frequencies, baseline_phase, cell_phases);
+            displayResults(results);
+        }
+
+        function fieldTuning(N, f_target, Q_L, mode_frequencies, baseline_phase, cell_phases) {
+            const phase_differences = cell_phases.map(phase => phase - baseline_phase);
+
+            // 计算失谐量
+            const delta_f = phase_differences.map(diff => Math.tan(diff * Math.PI / 180) * f_target / (2 * Q_L));
+
+            // 耦合系数 k 计算
+            const f_squared_diff = (mode_frequencies[mode_frequencies.length - 1] ** 2 - mode_frequencies[0] ** 2) / 2;
+            const numerator = 2 * mode_frequencies[0] ** 2 - mode_frequencies[mode_frequencies.length - 1] ** 2;
+            const denominator = 1 - Math.cos(Math.PI / N);
+            const k = f_squared_diff / (numerator * denominator);
+
+            // 特征向量 v_j 计算
+            const v_j = Array.from({ length: N }, (_, j) =>
+                Array.from({ length: mode_frequencies.length }, (_, m) =>
+                    Math.sin((m + 1) * Math.PI * (2 * (j + 1) - 1) / (2 * N)) * Math.sqrt((2 - Number(m + 1 === N)) / N)
+                )
+            );
+
+            const H_r = Array.from({ length: N - 1 }, () => Array(N - 1).fill(0));
+            for (let l = 0; l < N - 1; l++) {
+                for (let m = 0; m < N - 1; m++) {
+                    for (let j = 0; j < mode_frequencies.length; j++) {
+                        if (j !== mode_frequencies.length - 1) {
+                            // omega_diff 计算
+                            const omega_diff = 2 * k * (Math.cos((j + 1) * Math.PI / N) + 1);
+
+                            // 确保 v_j 和 H_r 使用的是双精度
+                            const v_ll = v_j[l][j]; // v_j[l][j]
+                            const v_mm = v_j[m][j]; // v_j[m][j]
+                            const v_m_last = v_j[m][v_j[0].length - 1]; // v_j[m][mode_frequencies.length - 1]
+
+                            if (omega_diff !== 0) { // 避免除以零
+                                H_r[l][m] += (v_ll * v_mm * v_m_last) / omega_diff;
+                            } else {
+                                console.warn(`omega_diff is zero for l=${l}, m=${m}, j=${j}`);
+                            }
+                        }
+                    }
+                }
+            }
+
+            // 归一化失谐量计算
+            const delta_f_prime = delta_f.slice(0, N - 1).map(d => d / (delta_f.reduce((a, b) => a + b) / delta_f.length));
+            const delta_v = delta_f_prime.map(d => (d - 1) * v_j.slice(0, N - 1).map(row => row[v_j[0].length - 1]) / 2);
+
+            // 解 e_r
+            const e_r = solve(H_r, delta_v);
+            const e_r_average = e_r.reduce((acc, el) => acc + el, 0) / N;
+
+            // 计算 e_c
+            const e_c = Array(N).fill(0);
+            for (let j = 0; j < N - 1; j++) {
+                e_c[j] = -(e_r[j] - e_r_average);
+            }
+            e_c[N - 1] = e_r_average;
+
+            // 计算 δf_c
+            const delta_f_c = e_c.map(ec => ec * (mode_frequencies[mode_frequencies.length - 1] / (2 * N)));
+            const delta_f_pi = (f_target - mode_frequencies[mode_frequencies.length - 1]) / N;
+
+            // 计算应用的失谐量
+            const delta_f_applied = delta_f_c.map((dfc) => dfc + delta_f_pi);
+
+            return {
+                phase_differences,
+                delta_f,
+                k,
+                v_j,
+                H_r,
+                e_r,
+                e_r_average,
+                e_c,
+                delta_f_c,
+                delta_f_pi,
+                delta_f_applied
+            };
+        }
+
+        function solve(H_r, delta_v) {
+            const A = numeric.inv(H_r); // 矩阵求逆
+            return numeric.dot(A, delta_v); // 矩阵乘法
+        }
+
+        function displayResults(results) {
+            const resultsContainer = document.getElementById("resultsContainer");
+            resultsContainer.innerHTML = `
+                <div>Phase Differences (degrees): ${results.phase_differences.join(', ')}</div>
+                <div>Detuning (Hz): ${results.delta_f.join(', ')}</div>
+                <div>Coupling Coefficient k: ${results.k}</div>
+                <div>Eigenvectors v_j: ${results.v_j.map(row => row.join(', ')).join('<br>')}</div>
+                <div>Matrix H_r: ${results.H_r.map(row => row.join(', ')).join('<br>')}</div>
+                <div>e_r: ${results.e_r.join(', ')}</div>
+                <div>e_r Average: ${results.e_r_average}</div>
+                <div>e_c: ${results.e_c.join(', ')}</div>
+                <div>delta_f_c: ${results.delta_f_c.join(', ')}</div>
+                <div>delta_f_pi: ${results.delta_f_pi}</div>
+                <div>delta_f_applied: ${results.delta_f_applied.join(', ')}</div>
+            `;
+            document.getElementById("input-form").style.display = "none";
+            document.getElementById("results").style.display = "block";
+        }
+
+        function restartCalculation() {
+            parameters = {};
+            document.getElementById("calcForm").reset();
+            document.getElementById("results").style.display = "none";
+            document.getElementById("home").style.display = "block";
+        }
+    </script>
+
+    <!-- Include numeric.js library for matrix calculations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/numeric/1.2.6/numeric.min.js"></script>
+</body>
+
+</html>
