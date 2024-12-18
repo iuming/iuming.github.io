@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.2.0">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/manifest.json">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"iuming.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.20.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":null},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":true,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="基于沈致远《微波技术》5.8节内容进行总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="谐振腔中的微扰理论推导">
+<meta property="og:url" content="http://iuming.github.io/2024/12/18/%E8%B0%90%E6%8C%AF%E8%85%94%E4%B8%AD%E7%9A%84%E5%BE%AE%E6%89%B0%E7%90%86%E8%AE%BA%E6%8E%A8%E5%AF%BC/index.html">
+<meta property="og:site_name" content="REALIUMING&#39;BLOG">
+<meta property="og:description" content="基于沈致远《微波技术》5.8节内容进行总结">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-12-18T03:17:28.000Z">
+<meta property="article:modified_time" content="2024-12-18T07:26:26.654Z">
+<meta property="article:author" content="Liu Ming">
+<meta property="article:tag" content="SRF">
+<meta property="article:tag" content="Slater">
+<meta property="article:tag" content="microwave">
+<meta property="article:tag" content="fomulate">
+<meta property="article:tag" content="equation">
+<meta property="article:tag" content="Electromagnetic">
+<meta name="twitter:card" content="&lt;twitter:card&gt;">
+<meta name="twitter:image" content="http://iuming.github.io/2024/12/18/%E8%B0%90%E6%8C%AF%E8%85%94%E4%B8%AD%E7%9A%84%E5%BE%AE%E6%89%B0%E7%90%86%E8%AE%BA%E6%8E%A8%E5%AF%BC/%3Ctwitter:image%3E">
+<meta name="twitter:creator" content="@&lt;twitter:creator&gt;">
+<meta name="twitter:site" content="<twitter:site>">
+<meta property="fb:admins" content="&lt;fb:admin_id&gt;">
+<meta property="fb:app_id" content="&lt;fb:app_id&gt;">
+
+
+<link rel="canonical" href="http://iuming.github.io/2024/12/18/%E8%B0%90%E6%8C%AF%E8%85%94%E4%B8%AD%E7%9A%84%E5%BE%AE%E6%89%B0%E7%90%86%E8%AE%BA%E6%8E%A8%E5%AF%BC/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://iuming.github.io/2024/12/18/%E8%B0%90%E6%8C%AF%E8%85%94%E4%B8%AD%E7%9A%84%E5%BE%AE%E6%89%B0%E7%90%86%E8%AE%BA%E6%8E%A8%E5%AF%BC/","path":"2024/12/18/谐振腔中的微扰理论推导/","title":"谐振腔中的微扰理论推导"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>谐振腔中的微扰理论推导 | REALIUMING'BLOG</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">REALIUMING'BLOG</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">166</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">17</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">68</span></a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fab fa-algolia fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%E5%85%AC%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">基础理论公式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%BA%A6%E5%85%8B%E6%96%AF%E9%9F%A6%E6%96%B9%E7%A8%8B%E7%BB%84"><span class="nav-number">1.1.</span> <span class="nav-text">麦克斯韦方程组</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%B5%E7%A3%81%E7%BB%9F%E4%B8%80%E4%B9%8B%E8%B7%AF"><span class="nav-number">1.1.1.</span> <span class="nav-text">电磁统一之路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BA%93%E4%BB%91%E7%9A%84%E5%8F%91%E7%8E%B0"><span class="nav-number">1.1.2.</span> <span class="nav-text">库仑的发现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%B5%E5%9C%BA%E7%9A%84%E5%8F%A0%E5%8A%A0"><span class="nav-number">1.1.3.</span> <span class="nav-text">电场的叠加</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E9%87%8F%E7%9A%84%E5%BC%95%E5%85%A5"><span class="nav-number">1.1.4.</span> <span class="nav-text">通量的引入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%B5%E5%9C%BA%E7%9A%84%E9%80%9A%E9%87%8F"><span class="nav-number">1.1.5.</span> <span class="nav-text">电场的通量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%97%AD%E5%90%88%E6%9B%B2%E9%9D%A2%E7%9A%84%E7%94%B5%E9%80%9A%E9%87%8F"><span class="nav-number">1.1.6.</span> <span class="nav-text">闭合曲面的电通量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E7%A8%8B%E4%B8%80%EF%BC%9A%E9%AB%98%E6%96%AF%E7%94%B5%E5%9C%BA%E5%AE%9A%E5%BE%8B"><span class="nav-number">1.1.7.</span> <span class="nav-text">方程一：高斯电场定律</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E7%A8%8B%E4%BA%8C%EF%BC%9A%E9%AB%98%E6%96%AF%E7%A3%81%E5%9C%BA%E5%AE%9A%E5%BE%8B"><span class="nav-number">1.1.8.</span> <span class="nav-text">方程二：高斯磁场定律</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%B5%E7%A3%81%E6%84%9F%E5%BA%94"><span class="nav-number">1.1.9.</span> <span class="nav-text">电磁感应</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%B5%E5%9C%BA%E7%9A%84%E7%8E%AF%E6%B5%81"><span class="nav-number">1.1.10.</span> <span class="nav-text">电场的环流</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E7%A8%8B%E4%B8%89%EF%BC%9A%E6%B3%95%E6%8B%89%E7%AC%AC%E5%AE%9A%E5%BE%8B"><span class="nav-number">1.1.11.</span> <span class="nav-text">方程三：法拉第定律</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E5%9F%B9%E7%8E%AF%E8%B7%AF%E5%AE%9A%E7%90%86"><span class="nav-number">1.1.12.</span> <span class="nav-text">安培环路定理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E7%A8%8B%E5%9B%9B%EF%BC%9A%E5%AE%89%E5%9F%B9-%E9%BA%A6%E5%85%8B%E6%96%AF%E9%9F%A6%E5%AE%9A%E5%BE%8B"><span class="nav-number">1.1.13.</span> <span class="nav-text">方程四：安培-麦克斯韦定律</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%BA%A6%E5%85%8B%E6%96%AF%E9%9F%A6%E6%96%B9%E7%A8%8B%E7%BB%84-1"><span class="nav-number">1.1.14.</span> <span class="nav-text">麦克斯韦方程组</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A2%E9%87%8F%E6%81%92%E7%AD%89%E5%BC%8F"><span class="nav-number">1.2.</span> <span class="nav-text">矢量恒等式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%BC%E6%9E%97%E5%85%AC%E5%BC%8F"><span class="nav-number">1.3.</span> <span class="nav-text">格林公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%A3%E5%BA%A6%E5%AE%9A%E7%90%86"><span class="nav-number">1.4.</span> <span class="nav-text">散度定理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B5%E7%A3%81%E8%BE%B9%E7%95%8C%E6%9D%A1%E4%BB%B6"><span class="nav-number">1.5.</span> <span class="nav-text">电磁边界条件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B0%90%E6%8C%AF%E8%85%94%E4%B8%AD%E7%9A%84%E7%94%B5%E7%A3%81%E5%9C%BA"><span class="nav-number">2.</span> <span class="nav-text">谐振腔中的电磁场</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A8%E5%AF%BC%E5%BE%AE%E6%89%B0%E7%90%86%E8%AE%BA"><span class="nav-number">3.</span> <span class="nav-text">推导微扰理论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">4.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Liu Ming"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Liu Ming</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">68</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">166</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button animated">
+    <button><i class="fa fa-comment"></i>
+      Chat
+    </button>
+  </div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2l1bWluZw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;iuming"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOjUyMDBsaXVtaW5nQGdtYWlsLmNvbQ==" title="E-Mail → mailto:5200liuming@gmail.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vdS8zMTQ3OTEyODky" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;3147912892"><i class="fab fa-weibo fa-fw"></i>Weibo</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9yZWFsaXVtaW5n" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;realiuming"><i class="fab fa-twitter fa-fw"></i>Twitter</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL3JlYWxpdW1pbmc=" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;realiuming"><i class="fab fa-facebook fa-fw"></i>FB Page</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8xMjE4NTI3My9pdW1pbmc=" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;12185273&#x2F;iuming"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly95b3V0dWJlLmNvbS9jaGFubmVsL1VDaUNCSHJ4cDJ4Tlc3T1ZaTlFzZHROdw==" title="YouTube → https:&#x2F;&#x2F;youtube.com&#x2F;channel&#x2F;UCiCBHrxp2xNW7OVZNQsdtNw"><i class="fab fa-youtube fa-fw"></i>YouTube</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9pbnN0YWdyYW0uY29tL3JlYWxpdW1pbmc=" title="Instagram → https:&#x2F;&#x2F;instagram.com&#x2F;realiuming"><i class="fab fa-instagram fa-fw"></i>Instagram</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="c2t5cGU6ODQyNjczNTU2P2NhbGx8Y2hhdA==" title="Skype → skype:842673556?call|chat"><i class="fab fa-skype fa-fw"></i>Skype</span>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="Back to top">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://iuming.github.io/" title="https:&#x2F;&#x2F;iuming.github.io&#x2F;">Title</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://iuming.github.io/2024/12/18/%E8%B0%90%E6%8C%AF%E8%85%94%E4%B8%AD%E7%9A%84%E5%BE%AE%E6%89%B0%E7%90%86%E8%AE%BA%E6%8E%A8%E5%AF%BC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Liu Ming">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="REALIUMING'BLOG">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="谐振腔中的微扰理论推导 | REALIUMING'BLOG">
+      <meta itemprop="description" content="基于沈致远《微波技术》5.8节内容进行总结">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          谐振腔中的微扰理论推导
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2024-12-18 11:17:28 / Modified: 15:26:26" itemprop="dateCreated datePublished" datetime="2024-12-18T11:17:28+08:00">2024-12-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/note/" itemprop="url" rel="index"><span itemprop="name">note</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2024/12/18/%E8%B0%90%E6%8C%AF%E8%85%94%E4%B8%AD%E7%9A%84%E5%BE%AE%E6%89%B0%E7%90%86%E8%AE%BA%E6%8E%A8%E5%AF%BC/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2024/12/18/谐振腔中的微扰理论推导/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+            <div class="post-description">基于沈致远《微波技术》5.8节内容进行总结</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="基础理论公式"><a href="#基础理论公式" class="headerlink" title="基础理论公式"></a>基础理论公式</h2><p>在推导谐振腔的微扰理论前，需要对一些基本公式和定理进行回顾，以备推导微扰定理时使用！</p>
+<h3 id="麦克斯韦方程组"><a href="#麦克斯韦方程组" class="headerlink" title="麦克斯韦方程组"></a>麦克斯韦方程组</h3><h4 id="电磁统一之路"><a href="#电磁统一之路" class="headerlink" title="电磁统一之路"></a>电磁统一之路</h4><p>1820年，奥斯特在一次讲座上偶然发现通电的导线让旁边的小磁针偏转了一下，这个微小的现象并没有引起听众的注意，但是可把奥斯特给高兴坏了。他立马针对这个现象进行了三个月的穷追猛打，最后发现了电流的磁效应，也就是说电流也能像磁铁一样影响周围的小磁针。</p>
+<p>三个月，在奥斯特正式发表他的发现仅仅三个月之后，毕奥和萨伐尔在大佬拉普拉斯的帮助下就找到了电流在空间中产生磁场大小的定量规律，这就是著名的毕奥-萨伐尔定律。也就是说，有了毕奥-萨伐尔定律，我们就可以算出任意电流在空间中产生磁场的大小，但是这种方法在实际使用的时候会比较繁琐。</p>
+<p>又过了两个月之后，安培发现了一个更实用更简单的计算电流周围磁场的方式，这就是安培环路定理。顺便，安培还总结了一个很实用的规律来帮你判断电流产生磁场的方向，这就是安培定则。</p>
+<p>由于种种原因，奥斯特在1820年发现了电生磁，人类直到11年后的1831年，才由天才实验物理学家法拉第发现了磁生电的规律，也就是电磁感应定律。法拉第发现磁能生电的关键就是：他发现静止的磁并不能生电，一定要变化的磁才能生电。</p>
+<p>发现电磁感应定律之后，我们知道了磁如何生电，有了安培环路定理，我们就知道电流如何产生磁场。咋一看，有关电磁的东西我们好像都有解决方案了。其实不然，我们知道安培环路定理是从奥斯特发现了电流周围会产生磁场这一路推出来的，所以它只能处理电流周围表示磁场的情况。</p>
+<p>但是，如果没有电流呢？如果我压根就没有导线让你可以形成电流，如果仅仅是电场发生了变化，那么这样能不能产生磁场呢？大家不要觉得我胡搅蛮缠，你想想，根据电磁感应定律，变化的磁场是可以产生电场的。所以，我会反过来猜想变化的电场能否产生磁场并不奇怪。而这，正好是安培环路定理缺失的部分。</p>
+<p>于是，麦克斯韦就对安培环路定理进行了扩充，把变化的电场也能产生磁场这一项也添加了进去，补齐了这最后一块短板。</p>
+<h4 id="库仑的发现"><a href="#库仑的发现" class="headerlink" title="库仑的发现"></a>库仑的发现</h4><p>在奥斯特发现电流的磁效应之前，人类已经单独研究电研究了好长时间，人们发现电荷有正负两种，而且同性相斥，异性相吸。后来库伦发现了电荷之间相互作用的定量关系，它发现电荷之间的作用力跟距离的平方成反比的。也就是说，如果我把两个电荷之间的距离扩大为原来的两倍，这两个电荷之间的作用力就会减少为原来的四分之一，扩大为三倍就减少为九分之一。</p>
+<p>从更深层次理解了静电力遵循平方反比定律后，要猜出静电力的公式就是很简单的事情了。因为很明显的，两个电荷之间的静电力肯定跟两者的电荷量有关，而且还是电荷越大静电力越大，加上距离平方反比规律，两个电荷之间的静电力大致就是下面这样的了：</p>
+<p>$$<br>F &#x3D; k \frac{q_{1}q_{2}}{r^{2}} &#x3D; \frac{q_{1}q_{2}}{4\pi\epsilon_{0}r^{2}}<br>$$</p>
+<p>库伦定律：两个电荷之间的静电力跟两个电荷量的乘积成正比，跟它们距离的平方成反比，剩下的都是常数。q1、q2就是两个电荷的电荷量，ε0是真空的介电常数。</p>
+<p>库伦定律是一个实验定律，也就说库伦做了很多实验发现两个电荷之间确实存在着一个这么大小的静电力，但是它并没有告诉你这个静电力是如何传递的。两个并没有接触的物体之间存在某种力，一个常见的想法就是这两个物体之间存在着某种我们看不见的东西在帮它们传递作用力，那么这种东西是什么呢？有人认为是以太，有人认为是某种弹性介质，但是法拉第说是力线，而且这种力线不是什么虚拟的辅助工具，而是客观的物理实在。它可以传递作用力，也可以具有能量。这些思想慢慢形成了我们现在熟知的场。</p>
+<h4 id="电场的叠加"><a href="#电场的叠加" class="headerlink" title="电场的叠加"></a>电场的叠加</h4><p>有了场，我们就可以更加细致的描述两个电荷之间的相互作用了。为什么两个电荷之间存在这样一个静电力呢？因为电荷会在周围的空间中产生一个电场，这个电场又会对处在其中的电荷产生一个力的作用。这个电场的强度越大，电荷受到的力就越大，正电荷受力的方向就是这点电场的方向。所以，电场具有大小和方向，这是一个矢量。</p>
+<p>库伦定律告诉了我们两个点电荷之间静电力的大小，那么我们就可以根据这个求出一个点电荷周围的电场强度。然而，一个点电荷是最简单的情况，如果带电源再复杂一点呢？如果我有很多个电荷，或者说我直接就是一块形状不规则的带电体，这时候我们要怎么求它产生的电场呢？</p>
+<p>一个很简单自然的想法就是：如果有很多个电荷，我就把每个电荷在这点产生的电场强度算出来，再把它们叠加起来就行了。如果这是一个连续的带电体（比如一根带电的线），那我们就再次举起牛顿爵爷留给我们的微积分大刀，哗啦啦地把这个带电体切成无数个无穷小的部分，这样每一个无穷小的部分就可以看做一个点电荷，然后把这无数个点电荷在那点产生的电场强度叠加起来（就是积分）就行了。</p>
+<p>我们上面的思路其实就是秉着“万物皆可切成点，万物皆可积”的精神，强行让库伦定律和微积分联姻，“硬算”出任何带电体在任意位置的场强。这在原理上是行得通的，没问题，但是在具体操作上就很复杂了，有没有更简单优雅一点的办法呢？</p>
+<p>有，不过这需要我们换个角度看问题。物理学研究物体运动变化的规律，但是物体时时刻刻都处在变化之中，你要怎么去寻找它的规律呢？这里就涉及到科学研究的一个重要思想：把握变化世界里那些不变的东西。</p>
+<p>牛顿发现一切物体在运动中都有某种共同不变的东西，不管物体怎样运动，受到什么样的力，这个东西只由物体的密度和体积决定，于是牛顿从中提炼出了质量的概念（当然，现在质量是比密度体积更基本的概念）；科学家们发现物体在各种变化的过程中有某种守恒的东西，于是提炼出了能量的概念。那么，带电体在周围空间中产生电场的过程，能不能也提炼出某种不变的东西呢？</p>
+<h4 id="通量的引入"><a href="#通量的引入" class="headerlink" title="通量的引入"></a>通量的引入</h4><p>通量。通量，顾名思义，就是通过一个曲面的某种流量，通过塑料袋表面的水的流量就叫塑料袋的水通量。</p>
+<p>现在我们把水龙头换成一个正电荷，我们还是用一个完全透电（对电没有任何阻力）的塑料袋套住一个正电荷，那会发生什么呢？水龙头的喷头散发的是水流，正电荷“散发”的是电场线；通过该塑料袋的水流量叫塑料袋的水通量，那么电场线通过塑料袋的数量自然就叫塑料袋的电通量。</p>
+<p>之所以会有电场线，是因为空间中存在电荷。而且，电荷的电量越大，它产生的电场强度就越大，电场线就越密，那么穿过塑料袋的电场线的数量就越多，对应的电通量就越大。所以，我们虽然无法确定这个电通量的具体形式，但是可以肯定它一定跟这个塑料袋包含的电荷量有关，而且是正相关。</p>
+<p>通过一个闭合曲面的电通量跟曲面内包含电荷总量是成正比的，电荷量越大，通过这个任意闭合曲面的电通量就越大，反之亦然。这就是麦克斯韦方程组的第一个方程——高斯电场定律的核心思想。</p>
+<h4 id="电场的通量"><a href="#电场的通量" class="headerlink" title="电场的通量"></a>电场的通量</h4><p>问题1：我们假设空间里有一个电场强度为E的匀强电场，然后有一个面积为a的木板跟这个电场方向垂直，那么，通过这个木板的电通量Φ要怎么表示呢？</p>
+<p>我们想想，我们最开始是从水通过曲面的流量来引入通量的，到了电这里，我们用电场线通过一个曲面的数量表示电通量。而我们也知道，电场线的密度代表了电场强度的大小。所以，我们就能很明显的发现：电场强度越大，通过木板的电场线数量越多；木板的面积越大，通过木板的电场线数量越多。而电场线的数量越多，就意味着电通量越大。</p>
+<p>因为电场强度E是一个矢量（有大小和方向），所以我们用E的绝对值|E|来表示E的大小，那么我们直接用电场强度的大小|E|和木板面积a的乘积来表示电通量的大小是非常合理的。也就是说，通过木板的电通量Φ&#x3D;|E|×a。</p>
+<p>问题2：还是上面的木板和电场，如果木板跟电场的方向不是垂直的，它们之间有一个夹角θ，那这个电通量又要怎么求呢？</p>
+<p>首先，我们能直观地感觉到：当木板不再和电场方向垂直的时候，这个木板被电场线穿过的有效面积减小了。原来长度为AB的面都能挡住电场线，现在，虽然还是那块木板，但是真正能够有效挡住电场线的变成了BC这个面。</p>
+<p>然后，我们再来谈一谈曲面的方向，可能很多人都认为曲面的方向就是定义为AB的方向。其实不是的，我们是用一个垂直于这个平面的向量的方向表示这个平面的方向，这个向量就叫这个平面的法向量。如上图所示，我画了一个跟木板垂直的法向量n，那么这个法向量n和电场E的夹角才是木板这个平面和电场的夹角θ。</p>
+<p>AB、BC和θ之间存在一个非常简单的三角关系：BC&#x3D;AB×cosθ（因为夹角θ跟角ABC相等，cosθ表示直角三角形里邻边和斜边的比值）。而我们有知道垂直的时候通过木板的电通量Φ&#x3D;|E|×|a|，那么，当它们之间有一个夹角θ的时候，通过木板的电通量自然就变成了：Φ&#x3D;|E|×|a|×cosθ。</p>
+<h4 id="闭合曲面的电通量"><a href="#闭合曲面的电通量" class="headerlink" title="闭合曲面的电通量"></a>闭合曲面的电通量</h4><p>我们可以把一个曲面分割成许多块，只要我们分割得足够细，保证每一小块都足够小，那么我们是可以把这个小块近似当作平面来处理的。而且不难想象，我把这个曲面分割得越细，它的每一个小块就越接近平面，我们把这些小平面都加起来就会越接近这个曲面本身。</p>
+<p>如果我们把这个曲面分割成无穷多份，这样每个小块的面积就都是无穷小，于是我们就可以认为这些小块加起来就等于这个曲面了。这就是微积分最朴素的思想。</p>
+<p>我们把一个球面分割成了很多块，这样每一个小块就变成了一个长为dx，宽为dy的小方块，这个小方块的面积da&#x3D;dx·dy。如果这个小块的电场强度为E，那么通过这个小块的电通量就是E·da。如果我们我们把这个球面分割成了无穷多份，那么把这无穷多个小块的电通量加起来，就能得到穿过这个曲面的总电通量。</p>
+<p>一个小块da的电通量是E·da，那么我们就可以用下面的符号表示通过这个曲面S的总电通量：<br>$$<br>\oint_{S} \vec{E} \cdot d\vec{a}<br>$$<br>这个拉长的大S符号就是积分符号，它就是我们上面说的微积分思想的代表。它的右下角那个S代表曲面S，也就是说我们这里是把这个曲面S切割成无穷小块，然后对每一块都求它的通量E·da，然后把通量累积起来。至于这个大S中间的那个圆圈就代表这是一个闭合曲面。</p>
+<h4 id="方程一：高斯电场定律"><a href="#方程一：高斯电场定律" class="headerlink" title="方程一：高斯电场定律"></a>方程一：高斯电场定律</h4><p>上面这个式子就代表了电场E通过闭合曲面S的总电通量，而我们前面说过高斯电场定律的核心思想就是：通过闭合曲面的电通量跟这个曲面包含的电荷量成正比。那么，这样我们就能非常轻松的理解麦克斯韦方程组的第一个方程——高斯电场定律了：<br>$$<br>\oint_{S} \vec{E} \cdot d\vec{a} &#x3D; \frac{1}{\epsilon_{0}}Q_{enc}<br>$$</p>
+<p>方程的左边，就是电场E通过闭合曲面S的电通量。方程右边带enc下标的Q表示闭合曲面内包含的电荷总量，ε0是个常数（真空介电常数）。等号两边一边是闭合曲面的电通量，另一边是闭合曲面包含的电荷，我们这样就用数学公式完美地诠释了我们的思想。</p>
+<h4 id="方程二：高斯磁场定律"><a href="#方程二：高斯磁场定律" class="headerlink" title="方程二：高斯磁场定律"></a>方程二：高斯磁场定律</h4><p>磁通量的概念很好建立，我们可以完全模仿电通量的概念，将磁感线通过一个曲面的数量定义磁通量。因为磁场线的密度一样表征了磁感应强度（因为历史原因，我们这里无法使用磁场强度）的大小。所以不难理解，我们可以仿照电场把磁感应强度为B的磁场通过一个平面a的磁通量Φ表示为Φ&#x3D;B·a。</p>
+<p>根据我们在上面电场里使用的微积分思想，类比通过闭合曲面电通量的作法，我们可以把通过一个闭合曲面S的磁通量表示为：<br>$$<br>\oint_{s} \vec{B} \cdot d\vec{a}<br>$$</p>
+<p>然后，我们可以类比高斯电场定律的思想“通过闭合曲面的电通量跟这个曲面包含的电荷量成正比”，建立一个高斯磁场定律，它是核心思想似乎就应该是：通过闭合曲面的磁通量跟这个曲面包含的“磁荷量”成正比。</p>
+<p>然而这里会有个问题，我们知道自然界中有独立存在的正负电荷，电场线都是从正电荷出发，汇集与负电荷。但是自然界里并不存在（至少现在还没发现）独立的磁单极子，任何一个磁体都是南北两极共存。所以，磁感线跟电场线不一样，它不会存在一个单独的源头，也不会汇集到某个地方去，它只能是一条闭合的曲线。</p>
+<p>如果磁感线都是一个闭环，没有独立存在的磁单极，那我们可以想一想：如果你在这个闭环里画一个闭合曲面，那么结果肯定就是有多少磁感线从曲面进去，就肯定有多少跟磁感线从曲面出来。因为如果有一根磁感线只进不出，那它就不可能是闭合的了，反之亦然。</p>
+<p>如果一个闭合曲面有多少根磁感线进，就有多少根磁感线出，这意味着什么呢？这就意味着你进去的磁通量跟出来的磁通量相等，那么最后这个闭合曲面包含的总磁通量就恒为0了。这就是麦克斯韦方程组的第二个方程——高斯磁场定律的核心思想：闭合曲面包含的磁通量恒为0。</p>
+<p>所以高斯磁场定律的数学表达式就是这样的：<br>$$<br>\oint_{s} \vec{B} \cdot d\vec{a} &#x3D; 0<br>$$<br>对比一下高斯电场定律和高斯磁场定律，我们会发现他们不仅是名字想象，思想也几乎是一模一样的，只不过目前还没有发现磁荷、磁单极子，所以高斯磁场定律的右边就是一个0。</p>
+<p>为什么通过任意闭合曲面的某种通量会刚好是某种量的一个量度？</p>
+<p>原因还在它们的“平方反比”上。因为电场强度和磁感应强度都是跟距离的平方成反比，而表面积是跟距离的平方正比，所以你前者减小多少，后者就增加多少。那么，如果有一个量的表示形式是前者和后者的乘积，那么它的总量就会保持不变。而通量刚好就是XX强度和表面积的乘积，所以电通量、磁通量就都会有这样的性质。</p>
+<p>接下来我们来看看电和磁之间的交互，看看磁是如何生电，电是如何生磁的。说到磁如何生电，那就肯定得提到法拉第。奥斯特发现电流的磁效应之后，大家秉着对称性的精神，认为磁也一定能够生电，但是磁到底要怎样才能生电呢？不知道，这就得做实验研究了。</p>
+<h4 id="电磁感应"><a href="#电磁感应" class="headerlink" title="电磁感应"></a>电磁感应</h4><p>既然是要做实验看磁如何生电，那首先肯定得有一个磁场。这个简单，找两块N极和S极相对的磁铁，这样它们之间就会有一个磁场。我再拿一根金属棒来，看看它有没有办法从磁场中弄出电来。因为金属棒是导电的，所以我把它用导线跟一个检测电流的仪器连起来，如果仪器检测到了电流，那就说明磁生电成功了。</p>
+<p>法拉第做了很多这样的实验，他发现：你金属棒放在那里不动，是不会产生电流的。</p>
+<p>然后，他发现金属棒在那里动的时候，有时候能产生电流，有时候不能产生，你要是顺着磁感线的方向运动就没有电流，但是你要是做切割磁感线的运动它就能产生电流。打个通俗的比喻：如果把磁感线想象成一根根面条，你只有把面条（磁感线）切断了才会产生电流。</p>
+<p>再然后，他发现金属棒在磁场里不动虽然不会产生电流，但是如果这时候我改变一下磁场的强度，让磁场变强或者变弱一些，即便金属棒不动也会产生电流。</p>
+<p>法拉第仔细总结了这些情况，他发现不管是金属棒运动切割磁感线产生电流，还是磁场强度变化产生电流，都可以用一个通用的方式来表达：只要闭合回路的磁通量发生了改变，就会产生电流。我们想想，磁通量是磁场强度B和面积a的乘积（B·a），我切割磁感线其实是相当于改变了磁感线通过回路的面积a，改变磁场强度就是改变了B。不管我是改变了a还是B，它们的乘积B·a（磁通量）肯定都是要改变的。</p>
+<p>也就是说：只要通过曲面（我们可以把闭合回路当作一个曲面）的磁通量发生了改变，回路中就会产生电流，而且磁通量变化得越快，这个电流就越大。</p>
+<p>我们要表示通过一个曲面的磁通量应该已经轻车熟路了。磁通量是B·a，那么通过一个曲面S的磁通量给它套一个积分符号就行了。于是，通过曲面S磁通量可以写成下面这样：<br>$$<br>\int_{S}  \vec{B} \cdot d\vec{a}<br>$$<br>细心的同学就会发现这个表达式跟我们高斯磁场定律里磁通量部分稍微有点不一样，高斯磁场定律里的积分符号（拉长的S）中间有一个圆圈，我们这里却没有。高斯磁场定律说“闭合曲面的磁通量恒为0”，那里的曲面是闭合曲面，所以有圆圈。而我们这里的曲面并不是闭合曲面（我们是把电路回路当成一个曲面，考虑通过这个回路的磁通量），也不能是闭合曲面。因为法拉第就是发现了“通过一个曲面的磁通量有变化就会产生电流”，如果这是闭合曲面，那根据高斯磁场定律它的磁通量恒为0，恒为0那就是没有变化，没变化按照法拉第的说法就没有电流，那还生什么电？</p>
+<p>所以，我们要搞清楚，我们这里不再是讨论闭合曲面的磁通量，而是一个非闭合曲面的磁通量，这个磁通量发生了改变就会产生电流，而且变化得越快产生的电流就越大。上面的式子给出的只是通过一个曲面S的磁通量，但是我们看到了最终决定电流大小的并不是通过曲面的磁通量的大小，而是磁通量变化的快慢。那么这个变化的快慢我们要怎么表示呢？</p>
+<p>给定一个变化的时间dt（比如一年，或者更小），看看这个量的变化dy是多少，如果这个量的变化很大我们就说它变化得很快，反之则变化得慢。</p>
+<p>因此，我们可以用这个量的变化dy和给定的时间dt的比值dy&#x2F;dt来衡量量这个量y变化的快慢。所以，我们现在要衡量磁通量变化的快慢，那就只需要把磁通量的表达式替换掉上面的y就行了，那么通过曲面S的磁通量变化的快慢就可以这样表示：<br>$$<br>\frac{d}{dt} \int_{S}  \vec{B} \cdot d\vec{a}<br>$$<br>我们就把磁生电这个过程中磁的这部分说完了，那么电呢？一个闭合回路（曲面）的磁通量有变化就会产生电，那这种电要怎么描述？</p>
+<h4 id="电场的环流"><a href="#电场的环流" class="headerlink" title="电场的环流"></a>电场的环流</h4><p>可能有人觉得磁通量的变化不是在回路里产生了电流么，那么我直接用电流来描述这种电不就行了么？不行，我们的实验里之所以有电流，是因为我们用导线把金属棒连成了一个闭合回路，如果我们没有用导线去连金属棒呢？那肯定就没有电流了。</p>
+<p>所以，电流并不是最本质的东西，那个最本质的东西是电场。一个曲面的磁通量发生了变化，它就会在这个曲面的边界感生出一个电场，然后这个电场会驱动导体中的自由电子定向移动，从而形成电流。因此，就算没有导线没有电流，这个电场依然存在。所以，我们要想办法描述的是这个被感生出来的电场。</p>
+<p>首先，一个曲面的磁通量发生了改变，就会在在曲面的边界感应出一个电场，这个电场是环绕着磁感线的，就像是磁感线的腰部套了一个呼啦圈。而且，你这个磁通量是增大还是减小，决定了这个电场是顺时针环绕还是逆时针环绕。</p>
+<p>如果我们从上往下看的话，这个成闭环的感生电场就是如下图所示：它在这个闭环每点的方向都不一样，这样就刚好可以沿着回路驱动带电粒子，好像是电场在推着带电粒子在这里环里流动一样。</p>
+<p>这里，我们就要引入一个新的概念：电场环流，电场的环流就是电场沿着闭合路径的线积分。这里有两个关键词：闭合路径和线积分。闭合路径好说，你只有路径是闭合的，才是一个环嘛，感生电场也是一个环状的电场。</p>
+<p>电场的线积分是什么意思呢？因为我们发现这个感生电场是一个环状电场，它在每一个点的方向都不一样。但是，我们依然可以发动微积分的思想：这个电场在大范围内（比如上面的整个圆环）方向是不一样的，但是，如果在圆环里取一个非常小的段dl，电场E就可以看做是一个恒定的了，这时候E·dl就是有意义的了。然后把这个环上所有部分的E·dl都累加起来，也就是沿着这个圆环逐段把E·dl累加起来，这就是对电场求线积分。而这个线积分就是电场环流，用符号表示就是这样：<br>$$<br>\oint_{c} \dot{E} \cdot dl<br>$$<br>积分符号下面的C表示这是针对曲线进行积分，不同于我们前面的面积分（下标为S），积分符号中间的那个圆圈就表示这个是闭合曲线（电场形成的圆环）。如果大家已经熟悉了前面曲面通量的概念，我想这里要理解电场在曲线上的积分（即电场环流）并不难。</p>
+<p>这个电场环流有什么物理意义呢？它就是我们常说电动势，也就是电场对沿着这条路径移动的单位电荷所做的功。我这里并不想就这个问题再做深入的讨论，大家只要直观的感觉一下就行了。你想想这个电场沿着这个回路推动电荷做功（电场沿着回路推着电荷走，就像一个人拿着鞭子抽磨磨的驴），这就是电场环流要传递的概念。而用这个概念来描述变化的磁产生的电是更加合适的，它既包含了感生电场的大小信息，也包含了方向信息。</p>
+<h4 id="方程三：法拉第定律"><a href="#方程三：法拉第定律" class="headerlink" title="方程三：法拉第定律"></a>方程三：法拉第定律</h4><p>麦克斯韦方程组的第三个方程——法拉第定律的最后表述就是这样的：曲面的磁通量变化率等于感生电场的环流。用公式表述就是这样：<br>$$<br>\oint_{c} \dot{E} \cdot dl &#x3D; - \frac{d}{dt} \int_{S}  \vec{B} \cdot d\vec{a}<br>$$<br>方程右边的磁通量的变化率和和左边的感生电场环流我们上面都说了，还有一个需要说明的地方就是公式右边的这个负号。为什么磁通量的变化率前面会有个负号呢？</p>
+<p>我们想想，法拉第定律说磁通量的变化会感生出一个电场出来，但是我们别忘了奥斯特的发现：电流是有磁效应的。也就是说，磁通量的变化会产生一个电场，这个电场它自己也会产生磁场，那么也就有磁通量。那么，你觉得这个感生电场产生的磁通量跟原来磁场的磁通量的变化会有什么关系？</p>
+<p>假如原来的磁通量是增加的，那么这个增加的磁通量感生出来的电场产生的磁通量是跟原来方向相同还是相反？仔细想想你就会发现，答案必然是相反。如果原来的磁通量是增加的，你感生出来的电场产生的磁通量还跟它方向相同，这样不就让原来的磁通量增加得更快了么？增加得更快，按照这个逻辑就会感生出更强大的电场，产生更大的与原来方向相同的磁通量，然后又导致原来的磁通量增加得更快……</p>
+<p>然后你会发现这个过程可以无限循环下去，永远没有尽头，这样慢慢感生出无限大的电场和磁通量，这肯定是不可能的。所以，为了维持一个系统的稳定，你原来的磁通量是增加的，我感生电场产生的磁通量就必然要让原来的磁通量减小，反之亦然。这就是楞次定律的内容。</p>
+<p>到这里，我们就把麦克斯韦方程组的第三个方程——法拉第定律的内容讲完了，它刻画了变化的磁通量如何产生电场的过程。但是，我们上面也说了，我们这里的磁通量变化包含了两种情况：导体运动导致的磁通量变化和磁场变化导致的磁通量变化。这两种情况其实是不一样的，但是它们居然又可以用一个统一的公式来表达，这其实是非常不自然的，当时的人们也只是觉得这是一种巧合罢了，但是爱因斯坦却不认为这是一种巧合，而是大自然在向我们暗示什么，他最终从这里发现了狭义相对论。</p>
+<p>也因为这两种情况不一样，所以，法拉第定律还有另外一个版本：它把这两种情况做了一个区分，认为只有磁场变化导致的磁通量变化才是法拉第定律，前面导体运动导致的磁通量变化只是通量法则。所以我们有时候就会看到法拉第定律的另一个版本：</p>
+<p>$$<br>\oint_{c} \dot{E} \cdot dl &#x3D; - \int_{S}  \frac{\partial \vec{B}}{\partial t} \cdot d\vec{a}<br>$$</p>
+<h4 id="安培环路定理"><a href="#安培环路定理" class="headerlink" title="安培环路定理"></a>安培环路定理</h4><p>假设电流从下往上，那么它在周围就会产生这样一个环形的磁场。磁场的方向可以用所谓的右手定则直观的判断：手握着导线，拇指指向电流的方向，那么你右手四指弯曲的方向就是磁场B的方向。</p>
+<p>然后毕奥、萨伐尔和安培等人立马着手定量的研究电流的磁效应，看看一定大小的电流在周围产生的磁场的大小是怎样的。于是，我们就有了描述电流磁效应的毕奥-萨伐尔定律和安培环路定理。其中，毕奥-萨伐尔定律就类似于库伦定律，安培环路定理就类似于高斯电场定律，因为在麦克斯韦方程组里，我们使用的是后一套语言，所以我们这里就只来看看安培环路定理：</p>
+<p>$$<br>\oint_{C} \vec{B} \cdot d \vec{l} &#x3D; \mu_{0}I_{enc}<br>$$<br>安培环路定理的左边跟法拉第定律的左边很相似，这是很显然的。因为法拉第定律说磁通量的变化会在它周围产生一个旋转闭合的电场，而电流的磁效应也是在电流的周围产生一个旋转闭合的磁场。在上面我们已经说了我们是用电场环流（也就是电场在闭合路径的线积分）来描述这个旋转闭合的电场，那我们这里一样使用磁场环流（磁场在闭合路径的线积分）来描述这种旋转闭合的磁场。</p>
+<p>安培环路定理的右边就比较简单了，μ0是个常数（真空磁导率）。I通常是用来表示电流的，enc这个右标我们在高斯电场定律那里已经说过了，它是包含的意思。所以，右边这个带enc的电流I就表示被包含在闭合路径里的总电流，哪个闭合路径呢？那自然就是你左边积分符号中间那个圈圈表示的闭合路径了。</p>
+<p>也就是说，安培环路定理其实是在告诉我们：通电导线周围会产生旋转磁场，你可以在这个电流周围随便画一个圈，那么这个磁场的环流（沿着这个圈的线积分）就等于这个圈里包含的电流总量乘以真空磁导率。</p>
+<p>那么，这样就完了么？静电、静磁分别由两个高斯定律描述，磁生电由法拉第定律描述，电生磁就由安培环路定理描述？</p>
+<p>不对，我们看看安培环路定理，虽然它确实描述了电生磁，但是它这里的电仅仅是电流（定理右边只有电流一项）。难道一定要有电流才会产生磁？电磁感应被发现的原因就是看到奥斯特发现了电流的磁效应，发现电能生磁，所以人们秉着对称性的原则，觉得既然电能够生磁，那么磁也一定能够生电。那么，继续秉着这种对称性，既然法拉第定律说“变化的磁通量能够产生电”，那么，我们实在有理由怀疑：变化的电通量是不是也能产生磁呢？</p>
+<h4 id="方程四：安培-麦克斯韦定律"><a href="#方程四：安培-麦克斯韦定律" class="headerlink" title="方程四：安培-麦克斯韦定律"></a>方程四：安培-麦克斯韦定律</h4><p>在安培环路定理里，我们可以随意选一个曲面，然后所有穿过这个曲面的电流会在这个曲面的边界上形成一个环绕磁场，问题的关键就在这个曲面的选取上。按理说，只要你的这个曲面边界是一样的，那么曲面的其他部分就随便你选，因为安培环路定理坐标的磁场环流只是沿着曲面的边界的线积分而已，所以它只跟曲面边界有关。下面这个例子就会告诉你即便曲面边界一样，使用安培环路定理还是会做出相互矛盾的结果。</p>
+<p>上图是一个包含电容器的简单电路。电容器顾名思义就是装电的容器，它可以容纳一定量的电荷。一开始电容器是空的，当我们把开关闭合的时候，电荷在电池的驱动下开始移动，移动到了电容器这里就走不动了（此路不通），然后电荷们就聚集在电容器里。因为电容器可以容纳一定量的电荷，所以，当电容器还没有被占满的时候，电荷是可以在电路里移动的，电荷的移动就表现为电流。</p>
+<p>所以，我们会发现当我们在给电容器充电的时候，电路上是有电流的，但是电容器之间却没有电流。所以，如果我们选择上图的曲面，那么明显是有电流穿过这个曲面，但是，如果我们选择下面这个曲面呢？</p>
+<p>这个曲面的边界跟上面的一样，但是它的底却托得很长，盖住了半块电容器。这是什么意思呢？因为我们知道电容器在充电的时候，电容器里面是没有电流的，所以，当我们把曲面选择成下面这个样子的时候，根本就没有电流穿过这个曲面。</p>
+<p>也就是说，如果我选上面的曲面，有电流穿过曲面，按照安培环路定理，它是肯定会产生一个环绕磁场的。但是，如果我选择下面的曲面，就没有电流通过这个曲面，按照安培环路定理就不会产生环绕磁场。而安培环路定理只限定曲面的边界，并不管你曲面的其它地方，于是我们就看到这两个相同边界的曲面会得到完全不同的结论，这就只能说明：安培环路定理错了，或者至少它并不完善。</p>
+<p>我们再来想一想，电容器在充电的时候电路中是有电流的，所以它周围应该是会产生磁场的。但是，当我们选择下面那个大口袋形的曲面的时候，并没有电流穿过这个曲面。那么，到底这个磁场是怎么来的呢？</p>
+<p>我们再来仔细分析一下电容器充电的过程：电池驱使着电荷不断地向电容器聚集，电容器中间虽然没有电流，但是它两边聚集的电荷却越来越多。电荷越来越多的话，在电容器两个夹板之间的电场强度是不是也会越来越大？电场强度越来越大的话，有没有嗅到什么熟悉的味道？</p>
+<p>没错，电场强度越来越大，那么通过这个曲面的电通量也就越来越大。因此，我们可以看到虽然没有电流通过这个曲面，但是通过这个曲面的电通量却发生了改变。这样，我们就可以非常合理地把“变化的电通量”这一项也添加到产生磁场的原因里。因为这项工作是麦克斯韦完成的，所以添加了这一项之后的新公式就是麦克斯韦方程组的第四个方程——安培-麦克斯韦定律：</p>
+<p>$$<br>\oint_{c}\vec{B} \cdot d\vec{l} &#x3D; \mu_{0}(I_{enc} + \epsilon\frac{d}{dt}\int_{S} \vec{E} \cdot d\vec{a})<br>$$<br>把它和安培环路定理对比一下，你就会发现它只是在在右边加了变化的电通量这一项，其它的都原封未动。E·a是电通量，套个面积分符号就表示通过曲面S的电通量，再加个d&#x2F;dt就表示通过曲面S电通量变化的快慢。因为在讲法拉第定律的时候我们详细讲了通过曲面磁通量变化的快慢，这里只是把磁场换成了电场，其他都没变。</p>
+<p>ε0是真空中的介电常数，把这个常数和电通量变化的快慢乘起来就会得到一个跟电流的单位相同的量，它就被称为位移电流:<br>$$<br>I_{d} \equiv \epsilon_{0} \frac{d}{dt}(\int_{s}\vec{E} \cdot d\vec{a})<br>$$<br>所以，我们经常能够听到别人说麦克斯韦提出了位移电流假说。其实，它的核心就是添加了“变化的电通量也能产生磁场”这一项，因为当时并没有实验能证明这一点，所以只能暂时称之为假说。在安培环路定理里添加了这一项之后，新生的安培-麦克斯韦定律就能跟其他的几条定律和谐相处了。而麦克斯韦之所以能够从他的方程组里预言电磁波的存在，这最后添加这项“变化的电通量产生磁场”至关重要。</p>
+<p>因为你想想，预言电磁波的关键就是“变化的电场产生磁场，变化的磁场产生电场”，这样变化的磁场和电场就能相互感生传向远方，从而形成电磁波。而变化的电场能产生磁场，这不就是麦克斯韦添加的这一项的核心内容么？电场变了，电通量变了，于是就产生了磁场。至于麦克斯韦方程组如何推导出电磁波，我后面再专门写文章解释，这里知道电磁波的产生跟位移电流的假说密切相关就行了。</p>
+<h4 id="麦克斯韦方程组-1"><a href="#麦克斯韦方程组-1" class="headerlink" title="麦克斯韦方程组"></a>麦克斯韦方程组</h4><p>麦克斯韦方程组的四个方程：描述静电的高斯电场定律、描述静磁的高斯磁场定律、描述磁生电的法拉第定律和描述电生磁的安培-麦克斯韦定律的积分形式:</p>
+<p>高斯电场定律说穿过闭合曲面的电通量正比于这个曲面包含的电荷量。</p>
+<p>高斯磁场定律说穿过闭合曲面的磁通量恒等于0。</p>
+<p>法拉第定律说穿过曲面的磁通量的变化率等于感生电场的环流。</p>
+<p>安培-麦克斯韦定律说穿过曲面的电通量的变化率和曲面包含的电流等于感生磁场的环流。</p>
+<p>麦克斯韦方程组的积分形式是从宏观角度来描述问题，这些曲面都是宏观可见的东西。那么微分形式呢？微分形式似乎应该从微观角度去看问题，那么我们要怎样把曲面、通量这些宏观上的东西弄到微观里来呢？</p>
+<p>一个很简单的想法就是：我让宏观上的东西缩小缩小，直到缩小成一个点，这样不就进入微观了么？积分形式的麦克斯韦方程组需要选定一个曲面，但是它并没有限定这个曲面的大小，我可以把这个曲面选得很大，也可以选得很小。当你把这个曲面选得很小很小的时候，麦克斯韦方程组的积分形式就自然变成了微分形式。所以，微分形式的基本思想还是很简单的，它真正麻烦的地方是在于如何寻找一种方便的计算方式。</p>
+<p>如果我们把微观的高斯电场定律左右两边都同时除以体积ΔV，那么右边的电荷量Q除以体积Δ就变成了电荷密度ρ，左边我们也再除以一个ΔV，那么公式就变成了下面这样：<br>$$<br>\lim_{\Delta V \to 0} \frac{1}{\Delta V} \oint_{S}\vec{E}\cdot d\vec{a} &#x3D; \frac{1}{\epsilon_{0}} \cdot \frac{Q_{enc}}{\Delta V} &#x3D; \frac{\rho}{\epsilon_{0}}<br>$$<br>公式的右边除以一个体积ΔV，就成了电荷密度ρ除以真空介电常数ε0，那左边呢？左边原来是通过无穷小曲面的电通量，这玩意除以一个体积ΔV之后表示什么呢？这一长串的东西，我们给它取了个新名字：散度。</p>
+<p>也就是说，电场E在一个点（被无穷小曲面围着的这个点）上的散度被定义为电场通过这个无穷小曲面的电通量除以体积。散度的英文单词是divergence，所以我们通常就用div(E)表示电场E的散度，即：<br>$$<br>div(\vec{E}) &#x3D; \lim_{\Delta V\to 0} \frac{1}{\Delta V} \oint_{S} \vec{E} \cdot d\vec{a}<br>$$</p>
+<p>所以，高斯电场定律的微分形式就可以表示成这样：</p>
+<p>$$<br>div(\vec{E}) &#x3D; \frac{\rho}{\epsilon_{0}}<br>$$<br>它告诉我们：电场在某点的散度跟该点的电荷密度成正比。</p>
+<p>麦克斯韦方程组的第二个方程——高斯磁场定律的微分形式就是：</p>
+<p>$$<br>\nabla \cdot \vec{B} &#x3D; 0<br>$$</p>
+<p>我们让▽算子以叉乘的方式作用在电场E上，我们就得到了电场E的旋度▽×E，而这个旋度的另一种定义就是我们上面说的无穷小非闭合曲面的环流和这个曲面的面积之比。因为旋度的英文单词是curl，所以我们用curl（E）表示电场的旋度。所以，我们就可以写下下面这样的式子：<br>$$<br>curl(\vec{E}) &#x3D; \nabla \times \vec{E} &#x3D; \lim_{\Delta s \to 0} \frac{1}{\Delta S} \oint_{c} \vec{E} \cdot d\vec{l}<br>$$</p>
+<p>左边除了一个面积ΔS，那右边也得除以一个面积，右边本来是磁感应强度的变化率（∂B&#x2F;∂t）和面积的乘积，现在除以一个面积，那么剩下的就是磁感应强度的变化率∂B&#x2F;∂t了。那么，麦克斯韦方程组的第三个方程——法拉第定律的微分形式自然就是这样：</p>
+<p>$$<br>\nabla \times \vec{E} &#x3D; - \frac{\partial \vec{B}}{\partial t}<br>$$<br>这样表示之后，法拉第定律的微分形式看起来就比积分形式舒服多了，而且它还只有这一种形式。直接从方程上来看，它告诉我们某一点电场的旋度等于磁感应强度的变化率。简单归简单，要理解这种公式，核心还是要理解左边，也就是电场的旋度▽×E。</p>
+<p>电通量的变化率除以面积之后就剩下电场的变化率∂E&#x2F;∂t，这个跟法拉第定律的磁通量变化率除以面积类似。那么电流（带enc的I）那一项呢？电流I除以面积得到的东西是什么？这里我们定义了一个新的物理量：电流密度J。很显然，这个电流密度J就是电流除以电流通过的曲面的面积（注意不是体积）。相应的，电流密度的单位是A&#x2F;m²（安培每平方米）而不是A&#x2F;m³。</p>
+<p>这样，麦克斯韦方程组的第四个方程——安培-麦克斯韦定律的微分形式就自然出来了：<br>$$<br>\nabla \times \vec{B} &#x3D; \mu_{0}(\vec{J} + \epsilon_{0}\frac{\partial \vec{B}}{\partial t})<br>$$</p>
+<p>它告诉我们某一点感生磁场的旋度▽×B等于电流密度J和电场变化率∂E&#x2F;∂t两项的叠加。其实它跟积分形式讲的都是一回事，都是在说电流和变化的电场能够产生一个磁场，只不过积分形式是针对一个曲面，而微分形式只是针对一个点而已。</p>
+<p>高斯电场定律说电场的散度跟这点的电荷密度成正比。</p>
+<p>高斯磁场定律说磁场的散度处处为0。</p>
+<p>法拉第定律说感生电场的旋度等于磁感应强度的变化率。</p>
+<p>安培-麦克斯韦定律说感生磁场的旋度等于电流密度和电场强度变化率之和。</p>
+<h3 id="矢量恒等式"><a href="#矢量恒等式" class="headerlink" title="矢量恒等式"></a>矢量恒等式</h3><p>矢量恒等式是数学和物理中有关矢量运算的一组重要等式。这些恒等式通常涉及到矢量的加法、标量乘法、点积（内积）和叉积（外积）等运算。在物理学、工程学以及计算机图形学等领域经常需要用到这些恒等式。</p>
+<p>以下是一些常见的矢量恒等式：</p>
+<ol>
+<li><p><strong>加法交换律</strong>：<br>$$<br>\mathbf{A} + \mathbf{B} &#x3D; \mathbf{B} + \mathbf{A}<br>$$</p>
+</li>
+<li><p><strong>加法结合律</strong>：<br>$$<br>\mathbf{A} + (\mathbf{B} + \mathbf{C}) &#x3D; (\mathbf{A} + \mathbf{B}) + \mathbf{C}<br>$$</p>
+</li>
+<li><p><strong>标量乘法结合律</strong>：<br>$$<br>c(\mathbf{A} + \mathbf{B}) &#x3D; c\mathbf{A} + c\mathbf{B}<br>$$</p>
+</li>
+<li><p><strong>分配律</strong>：<br>$$<br>(c + d)\mathbf{A} &#x3D; c\mathbf{A} + d\mathbf{A}<br>$$<br>$$<br>c(\mathbf{A} \cdot \mathbf{B}) &#x3D; (c\mathbf{A}) \cdot \mathbf{B} &#x3D; \mathbf{A} \cdot (c\mathbf{B})<br>$$</p>
+</li>
+<li><p><strong>点积的性质</strong>：</p>
+<ul>
+<li>交换律：<br>$$<br>\mathbf{A} \cdot \mathbf{B} &#x3D; \mathbf{B} \cdot \mathbf{A}<br>$$</li>
+<li>结合律：<br>$$<br>c(\mathbf{A} \cdot \mathbf{B}) &#x3D; (c\mathbf{A}) \cdot \mathbf{B} &#x3D; \mathbf{A} \cdot (c\mathbf{B})<br>$$</li>
+<li>传播律：<br>$$<br>\mathbf{A} \cdot (\mathbf{B} + \mathbf{C}) &#x3D; \mathbf{A} \cdot \mathbf{B} + \mathbf{A} \cdot \mathbf{C}<br>$$</li>
+</ul>
+</li>
+<li><p><strong>叉积的性质</strong>：</p>
+<ul>
+<li>反交换律：<br>$$<br>\mathbf{A} \times \mathbf{B} &#x3D; -(\mathbf{B} \times \mathbf{A})<br>$$</li>
+<li>结合律：<br>$$<br>c(\mathbf{A} \times \mathbf{B}) &#x3D; (c\mathbf{A}) \times \mathbf{B} &#x3D; \mathbf{A} \times (c\mathbf{B})<br>$$</li>
+<li>传播律：<br>$$<br>\mathbf{A} \times (\mathbf{B} + \mathbf{C}) &#x3D; \mathbf{A} \times \mathbf{B} + \mathbf{A} \times \mathbf{C}<br>$$</li>
+</ul>
+</li>
+<li><p><strong>向量三重积恒等式</strong>（也称为Jacobi恒等式）：<br>$$<br>\mathbf{A} \times (\mathbf{B} \times \mathbf{C}) &#x3D; (\mathbf{A} \cdot \mathbf{C})\mathbf{B} - (\mathbf{A} \cdot \mathbf{B})\mathbf{C}<br>$$</p>
+</li>
+<li><p><strong>矢量的模</strong>：<br>$$<br>|\mathbf{A}|^2 &#x3D; \mathbf{A} \cdot \mathbf{A}<br>$$</p>
+</li>
+</ol>
+<p>这些恒等式在处理物理问题中的力学、运动以及场的计算时非常有用，能够帮助我们简化和理解涉及矢量的方程。理解这些基本性质有助于解决实际应用中的问题，同时也对深入学习线性代数和微积分等数学领域非常重要。</p>
+<p>在向量微积分中，nabla算子（$\nabla$）可以用于操作标量场和向量场。以下是两个常见的涉及nabla算子的矢量恒等式，它们描述了两个矢量场之间的关系。</p>
+<p>恒等式 1: 散度的乘法法则</p>
+<p>对于两个向量场 $\mathbf{A}$ 和 $\mathbf{B}$，有以下恒等式：<br>$$<br>\nabla \cdot (\mathbf{A} \times \mathbf{B}) &#x3D; \mathbf{B} \cdot (\nabla \times \mathbf{A}) - \mathbf{A} \cdot (\nabla \times \mathbf{B})<br>$$<br>这个恒等式表明，当你计算两个向量场的叉积的散度时，其结果与这两个向量场的旋度结合了另外一个向量场的点积有关。</p>
+<p>恒等式 2: 叉积的梯度</p>
+<p>对于两个标量场 $\phi$ 和 $\psi$，以及向量场 $\mathbf{F}$，有以下恒等式：<br>$$<br>\nabla \times (\phi \mathbf{F}) &#x3D; (\nabla \phi) \times \mathbf{F} + \phi (\nabla \times \mathbf{F})<br>$$<br>这个恒等式描述了标量场与向量场结合后，旋度的计算。它表明，标量场和向量场的乘积的旋度可以用标量场的梯度和向量场本身的旋度组合来计算。</p>
+<h3 id="格林公式"><a href="#格林公式" class="headerlink" title="格林公式"></a>格林公式</h3><p>格林公式（Green’s Theorem）是向量微积分中的一个重要结果，它将平面上某个区域的曲线积分与该区域内部的重积分联系起来。格林公式可以看作是斯托克斯定理在二维情况中的特例。</p>
+<p>格林公式的陈述</p>
+<p>设 $ C $ 是一个简单、封闭、正向（逆时针方向）取向的曲线，$ D $ 是 $ C $ 所围成的区域，且向量场 $\mathbf{F} &#x3D; (P, Q)$，其中 $ P $ 和 $ Q $ 是平面上的光滑函数。格林公式表明：<br>$$<br>\oint_C (P , dx + Q , dy) &#x3D; \iint_D \left( \frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y} \right) , dA<br>$$</p>
+<p>各部分的解释</p>
+<ul>
+<li><p><strong>左侧的曲线积分</strong>：$\oint_C (P , dx + Q , dy)$ 表示在曲线 $ C $ 上的积分。这个积分计算的是在 $ C $ 沿正向（逆时针）行走时，向量场 $\mathbf{F}$ 的切向量（功）的总和。</p>
+</li>
+<li><p><strong>右侧的重积分</strong>：$\iint_D \left( \frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y} \right) , dA$ 表示在区域 $ D $ 内部进行的重积分。这里，$\frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y}$ 是 $\mathbf{F}$ 的散度，表示该区域内部的”源”或“汇”的强度。</p>
+</li>
+</ul>
+<p>通过理解和应用格林公式，可以有效处理范围内的许多物理和工程问题。</p>
+<h3 id="散度定理"><a href="#散度定理" class="headerlink" title="散度定理"></a>散度定理</h3><p>散度定理（也称为高斯定理或Gauss定理）是向量微积分中的一个重要定理，它将一个向量场在某个体积内的散度与通过该体积边界的流量联系起来。散度定理在物理、工程学等领域中具有广泛应用，特别是在流体动力学和电磁学中。</p>
+<p>散度定理的陈述</p>
+<p>设 $ V $ 是三维空间中的一个光滑的有界区域，$ S $ 是 $ V $ 的封闭边界表面（通常取向为外法向），并且向量场 $\mathbf{F}$ 是在 $ V $ 内部和 $ S $ 上光滑的。散度定理表明：<br>$$<br>\iint_{S} \mathbf{F} \cdot d\mathbf{S} &#x3D; \iiint_{V} \nabla \cdot \mathbf{F} , dV<br>$$</p>
+<p>各部分的解释</p>
+<ul>
+<li><p><strong>左侧的曲面积分</strong>：$\iint_{S} \mathbf{F} \cdot d\mathbf{S}$ 代表的是通过表面 $ S $ 的流量，其中 $ d\mathbf{S} $ 是向外的面元向量，这个向量的大小是面元的面积，方向是外法线方向。这个积分计算的是向量场 $\mathbf{F}$ 在边界 $ S $ 上的总流量。</p>
+</li>
+<li><p><strong>右侧的体积分</strong>：$\iiint_{V} \nabla \cdot \mathbf{F} , dV$ 计算的是向量场 $\mathbf{F}$ 的散度在体积 $ V $ 内部的总和。散度 $\nabla \cdot \mathbf{F}$ 衡量的是向量场在某一点的“源”或“汇”的强度。</p>
+</li>
+</ul>
+<p>注意事项</p>
+<ul>
+<li><p><strong>光滑性</strong>：为了应用散度定理，向量场 $\mathbf{F}$ 必须在区域 $ V $ 和边界 $ S $ 上是光滑的。具体而言，要求 $\mathbf{F}$ 在这些区域内连续可微。</p>
+</li>
+<li><p><strong>取向</strong>：曲面 $ S $ 的方向必须是外法向，这样才能保证流量的正负方向合理。</p>
+</li>
+</ul>
+<p>散度定理是向量微积分中的核心定理之一，它帮助我们在理论和实际问题中建立非常重要的联系。通过掌握散度定理，可以更好地理解物理现象中的流量、场的分布等方面。</p>
+<h3 id="电磁边界条件"><a href="#电磁边界条件" class="headerlink" title="电磁边界条件"></a>电磁边界条件</h3><p>在电磁学中，电磁场的边界条件描述了在不同介质的界面上电场和磁场的行为。这些条件非常重要，因为它们在计算和理解电磁现象的分布与传播时起着关键作用。以下是静电场和静磁场的边界条件。</p>
+<p>考虑在两个不同介质（介质1和介质2）的界面上，电场的边界条件包括：</p>
+<ol>
+<li><p><strong>法向分量的边界条件</strong>：<br>对于电场的法向分量 $ E_n $，边界条件可以表示为：<br>$$<br>\epsilon_1 E_{1n} &#x3D; \epsilon_2 E_{2n}<br>$$<br>其中 $\epsilon_1$ 和 $\epsilon_2$ 分别是介质1和介质2的介电常数，$E_{1n}$ 和 $E_{2n}$ 是在两个介质中法向分量的电场。</p>
+</li>
+<li><p><strong>切向分量的边界条件</strong>：<br>对于电场的切向分量 $ E_t $，在两个介质的界面上，切向分量是连续的：<br>$$<br>E_{1t} &#x3D; E_{2t}<br>$$<br>这表明在界面上，切向电场的分量没有不连续性。</p>
+</li>
+</ol>
+<p>磁场边界条件</p>
+<p>同样，磁场的边界条件也是基于在两个介质界面上的性质：</p>
+<ol>
+<li><p><strong>法向分量的边界条件</strong>：<br>磁场的法向分量 $ B_n $ 在界面上是连续的：<br>$$<br>B_{1n} &#x3D; B_{2n}<br>$$<br>这表明磁感应强度的法向分量在不同介质的界面上是相等的。</p>
+</li>
+<li><p><strong>切向分量的边界条件</strong>：<br>磁场的切向分量在界面上的关系包括当前密度的影响，如果有电流流过界面，可以表示为：<br>$$<br>B_{1t} - B_{2t} &#x3D; \mu_0 K<br>$$<br>其中 $ K $ 是界面上的电流密度，$\mu_0$ 是真空的磁导率。</p>
+</li>
+</ol>
+<p>注意事项</p>
+<ul>
+<li><p><strong>介质的属性</strong>：这些边界条件依赖于介质的电气和磁性质（如介电常数和磁导率）。在设计电磁设备或分析电场和磁场分布时，需要考虑这些属性。</p>
+</li>
+<li><p><strong>特殊情况</strong>：在某些特殊情况（如理想导体或理想绝缘体）中，边界条件会更直接。例如，在理想导体中，电场在导体内部为零，且电场的法向分量在界面上会导致无限大的电荷密度。</p>
+</li>
+</ul>
+<p>理解电磁场的边界条件对于电磁场的计算和分析是至关重要的，尤其是在涉及不同材料、天线设计、电磁兼容性等应用中。掌握这些边界条件可以帮助我们更好地理解电磁场的行为并进行有效的计算和预测。</p>
+<h2 id="谐振腔中的电磁场"><a href="#谐振腔中的电磁场" class="headerlink" title="谐振腔中的电磁场"></a>谐振腔中的电磁场</h2><p>假设微扰前的谐振腔中电磁场分布为：<br>$$<br>\vec{E} &#x3D; \vec{E_{0}} \exp^{j \omega t} \<br>\vec{H} &#x3D; \vec{H_{0}} \exp^{j \omega t}<br>$$</p>
+<p>假设微扰后的谐振腔中电磁场分布变为：<br>$$<br>\vec{E’} &#x3D; (\vec{E_{0}} + \vec{E_{1}} ) \exp^{j (\omega + \delta \omega) t} \<br>\vec{H’} &#x3D; (\vec{H_{0}} + \vec{H_{1}} ) \exp^{j (\omega + \delta \omega) t} \<br>$$</p>
+<p>这里假设微扰之后，场附加了改变量$ \vec{E_{1}} $和$ \vec{H_{1}} $，角频率改变量为$ \delta \omega $。这使得微扰必须很小，可以分为以下两种情况：</p>
+<ol>
+<li><p>大体积中微小的介质变化，例如在腔中充以磁导率待测气体的情况；</p>
+</li>
+<li><p>在非常小的体积内媒介大变化，例如测量固体材料的性能，在腔中置入一块小的电介质；</p>
+</li>
+</ol>
+<h2 id="推导微扰理论"><a href="#推导微扰理论" class="headerlink" title="推导微扰理论"></a>推导微扰理论</h2><p>根据麦克斯韦方程微分形式中的法拉第定律和安培-麦克斯韦定律：<br>$$<br>\nabla \times \vec{E} &#x3D; - \frac{\partial \vec{B}}{\partial t} \<br>\nabla \times \vec{H} &#x3D; \frac{\partial \vec{D}}{\partial t}<br>$$</p>
+<p>将微扰前后的电磁场分布带入麦克斯韦方程中，得到：<br>$$<br>\nabla \times E_{0} &#x3D; -j\omega B_{0} \<br>\nabla \times(E_{0} + E_{1}) &#x3D; - j (\omega + \delta \omega)(B_{0} + B_{1}) \<br>\nabla \times H_{0} &#x3D; j \omega D_{0} \<br>\nabla \times (H_{0} + H_{1}) &#x3D; j (\omega + \delta \omega) (D_{0} + D_{1})<br>$$</p>
+<p>将上式整理后，根据旋度的分配律，可得到：<br>$$<br>\nabla \times E_{1} &#x3D; - j \omega B_{1} - j \delta \omega (B_{0} + B_{1}) \<br>\nabla \times H_{1} &#x3D; j \omega D_{1} + j \delta \omega (D_{0} + D_{1})<br>$$</p>
+<p>将上式乘以$ H_{0}^{<em>} $ 和$ E_{0}^{</em>} $后，得到：<br>$$<br>H_{0}^{<em>} \cdot \nabla \times E_{1} &#x3D; - j \omega H_{0}^{</em>} \cdot B_{1} - j \delta \omega H_{0}^{<em>} \cdot (B_{0} + B_{1}) \<br>E_{0}^{</em>} \cdot \nabla \times H_{1} &#x3D; j \omega E_{0}^{<em>} \cdot D_{1} + j \delta \omega E_{0}^{</em>} \cdot (D_{0} + D_{1})<br>$$</p>
+<p>将两式相减得到：<br>$$<br>E_{0}^{<em>} \cdot \nabla \times H_{1} - H_{0}^{</em>} \cdot \nabla \times E_{1} &#x3D; j \omega E_{0}^{<em>} \cdot D_{1} + j \delta \omega E_{0}^{</em>} \cdot (D_{0} + D_{1}) + j \omega H_{0}^{<em>} \cdot B_{1} + j \delta \omega H_{0}^{</em>} \cdot (B_{0} + B_{1})<br>$$</p>
+<p>整理后得到：<br>$$<br>E_{0}^{<em>} \cdot \nabla \times H_{1} - H_{0}^{</em>} \cdot \nabla \times E_{1} &#x3D; j \omega (E_{0}^{<em>} \cdot D_{1} + H_{0}^{</em>} \cdot B_{1}) + j \delta \omega (E_{0}^{<em>} \cdot D_{0} + H_{0}^{</em>} \cdot B_{0} + E_{0}^{<em>} \cdot D_{1} + H_{0}^{</em>} \cdot B_{1})<br>$$</p>
+<p>根据矢量恒等式：<br>$$<br>\nabla \cdot [(E_{0}^{<em>} \cdot H_{1}) - (H_{0}^{</em>} \cdot E_{1})] \equiv H_{1} \cdot \nabla \times E_{0}^{<em>} - E_{0}^{</em>} \cdot \nabla \times H_{1} - E_{1} \cdot \nabla \times H_{0}^{<em>} + H_{0}^{</em>} \cdot \nabla \times E_{1}<br>$$</p>
+<p>带入麦克斯韦方程，可得：<br>$$<br>\nabla \cdot [(E_{0}^{<em>} \cdot H_{1}) - (H_{0}^{</em>} \cdot E_{1})] \equiv -(E_{0}^{<em>} \cdot \nabla \times H_{1} - H_{0}^{</em>} \cdot \nabla \times E_{1}) - H_{1} \cdot j \omega B_{0}^{<em>} - E_{1} \cdot j \omega D_{0}^{</em>} \<br>\nabla \cdot [(E_{0}^{<em>} \cdot H_{1}) - (H_{0}^{</em>} \cdot E_{1})] \equiv -(E_{0}^{<em>} \cdot \nabla \times H_{1} - H_{0}^{</em>} \cdot \nabla \times E_{1}) + (j \omega H_{1} \cdot B_{0}^{<em>} + j \omega E_{1} \cdot D_{0}^{</em>} )<br>% 这里为什么正负号能反过来<br>$$</p>
+<p>上式也可写成：<br>$$<br>E_{0}^{<em>} \cdot \nabla \times H_{1} - H_{0}^{</em>} \cdot \nabla \times E_{1} &#x3D; j \omega (H_{1} \cdot B_{0}^{<em>} + E_{1} \cdot D_{0}^{</em>} ) - \nabla \cdot [(E_{0}^{<em>} \cdot H_{1}) - (H_{0}^{</em>} \cdot E_{1})]<br>$$</p>
+<p>将上式与前式整理，得：<br>$$<br>j \omega (H_{1} \cdot B_{0}^{<em>} + E_{1} \cdot D_{0}^{</em>} ) - \nabla \cdot [(E_{0}^{<em>} \cdot H_{1}) - (H_{0}^{</em>} \cdot E_{1})] &#x3D; j \omega (E_{0}^{<em>} \cdot D_{1} + H_{0}^{</em>} \cdot B_{1}) + j \delta \omega (E_{0}^{<em>} \cdot D_{0} + H_{0}^{</em>} \cdot B_{0} + E_{0}^{<em>} \cdot D_{1} + H_{0}^{</em>} \cdot B_{1})<br>$$</p>
+<p>将上式在整个谐振腔体积$ V_{0} $做积分，得到：<br>$$<br>j \omega \int_{V_{0}}[(H_{1} \cdot B_{0}^{<em>} + E_{1} \cdot D_{0}^{</em>} ) - (E_{0}^{<em>} \cdot D_{1} + H_{0}^{</em>} \cdot B_{1})] dv - \int_{V_{0}} \nabla \cdot [(E_{0}^{<em>} \cdot H_{1}) - (H_{0}^{</em>} \cdot E_{1})] dv &#x3D; j \delta \omega \int_{V_{0}} [(E_{0}^{<em>} \cdot D_{0} + H_{0}^{</em>} \cdot B_{0}) + (E_{0}^{<em>} \cdot D_{1} + H_{0}^{</em>} \cdot B_{1})]dv<br>$$</p>
+<p>根据散度定理，左边第二项的体积分可以化为腔壁的面积分：<br>$$<br>\iiint_{V_{0}} \nabla \cdot [(E_{0}^{<em>} \cdot H_{1}) - (H_{0}^{</em>} \cdot E_{1})] dv &#x3D; \iint_{S_{0}} [(E_{0}^{<em>} \cdot H_{1}) - (H_{0}^{</em>} \cdot E_{1})] ds<br>$$</p>
+<p>按照谐振腔的边界条件(理想电边界)，该项为零，即：<br>$$<br>\iint_{S_{0}} [(E_{0}^{<em>} \cdot H_{1}) - (H_{0}^{</em>} \cdot E_{1})] ds &#x3D; 0<br>$$</p>
+<p>因此，上式变为：<br>$$<br>j \omega \int_{V_{0}}[(H_{1} \cdot B_{0}^{<em>} + E_{1} \cdot D_{0}^{</em>} ) - (E_{0}^{<em>} \cdot D_{1} + H_{0}^{</em>} \cdot B_{1})] dv &#x3D; j \delta \omega \int_{V_{0}} [(E_{0}^{<em>} \cdot D_{0} + H_{0}^{</em>} \cdot B_{0}) + (E_{0}^{<em>} \cdot D_{1} + H_{0}^{</em>} \cdot B_{1})]dv<br>$$</p>
+<p>化简之后得到：<br>$$<br>\frac{\delta \omega}{\omega} &#x3D;  \frac{\int_{V_{0}}[(H_{1} \cdot B_{0}^{<em>} + E_{1} \cdot D_{0}^{</em>} ) - (E_{0}^{<em>} \cdot D_{1} + H_{0}^{</em>} \cdot B_{1})] dv}{\int_{V_{0}} [(E_{0}^{<em>} \cdot D_{0} + H_{0}^{</em>} \cdot B_{0}) + (E_{0}^{<em>} \cdot D_{1} + H_{0}^{</em>} \cdot B_{1})]dv}<br>$$</p>
+<p>至此，微扰定理的假设条件仅仅为谐振腔的边界条件为理想电边界。由于微扰量非常小，因此在上式右边的分母项中的第二项可以略去，近似为：<br>$$<br>\frac{\delta f}{f} &#x3D; \frac{\delta \omega}{\omega} &#x3D;  \frac{\int_{V_{0}}[(H_{1} \cdot B_{0}^{<em>} + E_{1} \cdot D_{0}^{</em>} ) - (E_{0}^{<em>} \cdot D_{1} + H_{0}^{</em>} \cdot B_{1})] dv}{\int_{V_{0}} (E_{0}^{<em>} \cdot D_{0} + H_{0}^{</em>} \cdot B_{0})dv}<br>$$</p>
+<p>可以看出，右式中的分母部分为腔内部储能的4倍($ 4W_{0} $)。</p>
+<p>以上就是谐振腔的微扰定理推导过程！</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>[1] <span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC83MTc5MzU1NA==">最美的公式：你也能懂的麦克斯韦方程组（积分篇）<i class="fa fa-external-link-alt"></i></span></p>
+<p>[2] <span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC83ODUwMzA4Mw==">最美的公式：你也能懂的麦克斯韦方程组（微分篇）<i class="fa fa-external-link-alt"></i></span></p>
+<p>[3] <span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC84MTg2NzY2OA==">见证奇迹的时刻：如何从麦克斯韦方程组推出电磁波<i class="fa fa-external-link-alt"></i></span></p>
+<p>[4] 沈致远.微波技术[M]. 1980.</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="Liu Ming WeChat Pay">
+        <span>WeChat Pay</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="Liu Ming Alipay">
+        <span>Alipay</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>Liu Ming
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="http://iuming.github.io/2024/12/18/%E8%B0%90%E6%8C%AF%E8%85%94%E4%B8%AD%E7%9A%84%E5%BE%AE%E6%89%B0%E7%90%86%E8%AE%BA%E6%8E%A8%E5%AF%BC/" title="谐振腔中的微扰理论推导">http://iuming.github.io/2024/12/18/谐振腔中的微扰理论推导/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/realiuming">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+U5yo-Zxuw1OgbU6P">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </span>
+
+          <img class="social-item-img" src="/images/wechat_channel.jpg">
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/SRF/" rel="tag"><i class="fa fa-tag"></i> SRF</a>
+              <a href="/tags/Slater/" rel="tag"><i class="fa fa-tag"></i> Slater</a>
+              <a href="/tags/microwave/" rel="tag"><i class="fa fa-tag"></i> microwave</a>
+              <a href="/tags/fomulate/" rel="tag"><i class="fa fa-tag"></i> fomulate</a>
+              <a href="/tags/equation/" rel="tag"><i class="fa fa-tag"></i> equation</a>
+              <a href="/tags/Electromagnetic/" rel="tag"><i class="fa fa-tag"></i> Electromagnetic</a>
+          </div>
+
+        
+  <div class="social-like a2a_kit a2a_kit_size_32 a2a_default_style">
+    <a class="a2a_dd" target="_blank" rel="noopener" href="https://www.addtoany.com/share"></a>
+      <a class="a2a_button_facebook"></a>
+      <a class="a2a_button_twitter"></a>
+      <a class="a2a_button_wechat"></a>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/12/03/%E6%BF%80%E5%85%89%E5%A4%84%E7%90%86%E9%93%9C%E8%A1%A8%E9%9D%A2%E5%AF%B9%E5%85%B6%E4%BA%8C%E6%AC%A1%E7%94%B5%E5%AD%90%E4%BA%A7%E9%A2%9D%E5%92%8C%E8%A1%A8%E9%9D%A2%E7%94%B5%E9%98%BB%E7%9A%84%E5%BD%B1%E5%93%8D/" rel="prev" title="激光处理铜表面对其二次电子产额和表面电阻的影响">
+                  <i class="fa fa-angle-left"></i> 激光处理铜表面对其二次电子产额和表面电阻的影响
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Ming Liu. All rights reserved.</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL2l1bWluZw==" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.1.0/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/4.23.3/algoliasearch-lite.umd.js" integrity="sha256-1QNshz86RqXe/qsCBldsUu13eAX6n/O98uubKQs87UI=" crossorigin="anonymous"></script><script src="/js/third-party/search/algolia-search.js"></script>
+<script class="next-config" data-name="chatra" type="application/json">{"enable":true,"async":true,"id":"gTXKphrmKGf5QSb5L"}</script>
+<script src="/js/third-party/chat/chatra.js"></script>
+<script async src="https://call.chatra.io/chatra.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.0/pdfobject.min.js","integrity":"sha256-JJZNsid68vnh3/zyj0lY9BN5ynxVX/12XgOa1TlaYN0="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.0/mermaid.min.js","integrity":"sha256-stuqcu2FrjYCXDOytWFA5SoUE/r3nkp6gTglzNSlavU="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+  <script class="next-config" data-name="wavedrom" type="application/json">{"enable":true,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.5.0/wavedrom.min.js","integrity":"sha256-INLAoJc6quTNfiMWkGZniYO2cxE8mHpddnLow1m6RFs="}}</script>
+  <script class="next-config" data-name="wavedrom_skin" type="application/json">{"enable":true,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.5.0/skins/default.js","integrity":"sha256-fduc/Zszk5ezWws2uInY/ALWVmIrmV6VTgXbsYSReFI="}}</script>
+  <script src="/js/third-party/tags/wavedrom.js"></script>
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+  <script src="/js/third-party/addtoany.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":"ture","archive":true,"delay":true,"timeout":3000,"priority":true,"url":"http://iuming.github.io/2024/12/18/%E8%B0%90%E6%8C%AF%E8%85%94%E4%B8%AD%E7%9A%84%E5%BE%AE%E6%89%B0%E7%90%86%E8%AE%BA%E6%8E%A8%E5%AF%BC/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"realiuming","count":true,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+
+</body>
+</html>
