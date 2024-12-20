@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.2.0">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/manifest.json">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"iuming.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.20.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":null},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":true,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="等离子体中各个带电粒子与电磁场有相互作用，这种相互作用决定了等离子体的宏观电磁性质">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微波与等离子体相互作用">
+<meta property="og:url" content="http://iuming.github.io/2024/12/20/%E5%BE%AE%E6%B3%A2%E4%B8%8E%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E7%9B%B8%E4%BA%92%E4%BD%9C%E7%94%A8/index.html">
+<meta property="og:site_name" content="REALIUMING&#39;BLOG">
+<meta property="og:description" content="等离子体中各个带电粒子与电磁场有相互作用，这种相互作用决定了等离子体的宏观电磁性质">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-12-20T07:45:53.000Z">
+<meta property="article:modified_time" content="2024-12-20T08:07:42.427Z">
+<meta property="article:author" content="Liu Ming">
+<meta property="article:tag" content="RF">
+<meta property="article:tag" content="microwave">
+<meta property="article:tag" content="plasma">
+<meta name="twitter:card" content="&lt;twitter:card&gt;">
+<meta name="twitter:image" content="http://iuming.github.io/2024/12/20/%E5%BE%AE%E6%B3%A2%E4%B8%8E%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E7%9B%B8%E4%BA%92%E4%BD%9C%E7%94%A8/%3Ctwitter:image%3E">
+<meta name="twitter:creator" content="@&lt;twitter:creator&gt;">
+<meta name="twitter:site" content="<twitter:site>">
+<meta property="fb:admins" content="&lt;fb:admin_id&gt;">
+<meta property="fb:app_id" content="&lt;fb:app_id&gt;">
+
+
+<link rel="canonical" href="http://iuming.github.io/2024/12/20/%E5%BE%AE%E6%B3%A2%E4%B8%8E%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E7%9B%B8%E4%BA%92%E4%BD%9C%E7%94%A8/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://iuming.github.io/2024/12/20/%E5%BE%AE%E6%B3%A2%E4%B8%8E%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E7%9B%B8%E4%BA%92%E4%BD%9C%E7%94%A8/","path":"2024/12/20/微波与等离子体相互作用/","title":"微波与等离子体相互作用"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>微波与等离子体相互作用 | REALIUMING'BLOG</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">REALIUMING'BLOG</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">169</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">17</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">71</span></a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fab fa-algolia fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E6%8C%AF%E8%8D%A1"><span class="nav-number">1.</span> <span class="nav-text">一、等离子体振荡</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE-7-16%EF%BC%9A%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E4%B8%AD%E7%9A%84%E7%94%B5%E8%8D%B7%E5%88%86%E5%B8%83%E5%9B%BE"><span class="nav-number">1.1.</span> <span class="nav-text">图 7-16：等离子体中的电荷分布图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E6%8C%AF%E8%8D%A1%E9%A2%91%E7%8E%87"><span class="nav-number">1.2.</span> <span class="nav-text">等离子体振荡频率</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E7%9A%84%E4%BB%8B%E7%94%B5%E6%80%A7%E8%B4%A8"><span class="nav-number">2.</span> <span class="nav-text">二、等离子体的介电性质</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E7%90%86%E6%83%B3%E6%97%A0%E7%A2%B0%E6%92%9E%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93"><span class="nav-number">2.1.</span> <span class="nav-text">1. 理想无碰撞等离子体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%9C%89%E7%A2%B0%E6%92%9E%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93"><span class="nav-number">2.2.</span> <span class="nav-text">2. 有碰撞等离子体</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%BE%AE%E6%B3%A2%E5%9C%A8%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E4%B8%AD%E7%9A%84%E4%BC%A0%E6%92%AD"><span class="nav-number">3.</span> <span class="nav-text">三、微波在等离子体中的传播</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E9%98%BB%E5%B0%BC%E4%BC%A0%E6%92%AD"><span class="nav-number">3.1.</span> <span class="nav-text">1. 阻尼传播</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%BE%AE%E6%B3%A2%E7%9A%84%E5%8F%8D%E5%B0%84%E5%92%8C%E9%80%8F%E5%B0%84"><span class="nav-number">3.2.</span> <span class="nav-text">2. 微波的反射和透射</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%8F%8D%E5%B0%84%E6%9D%A1%E4%BB%B6"><span class="nav-number">3.2.1.</span> <span class="nav-text">(1) 反射条件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E9%80%8F%E5%B0%84%E6%9D%A1%E4%BB%B6"><span class="nav-number">3.2.2.</span> <span class="nav-text">(2) 透射条件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E5%AF%B9%E7%94%B5%E7%A3%81%E6%B3%A2%E7%9A%84%E5%B1%8F%E8%94%BD%E6%95%88%E5%BA%94"><span class="nav-number">3.3.</span> <span class="nav-text">3. 等离子体对电磁波的屏蔽效应</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%BA%94%E7%94%A8%E5%AE%9E%E4%BE%8B"><span class="nav-number">3.4.</span> <span class="nav-text">4. 应用实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">3.5.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95"><span class="nav-number">3.6.</span> <span class="nav-text">具体计算方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%8F%8D%E5%B0%84%E7%B3%BB%E6%95%B0-R-%E5%92%8C%E9%80%8F%E5%B0%84%E7%B3%BB%E6%95%B0-T-%E7%9A%84%E8%AE%A1%E7%AE%97"><span class="nav-number">3.6.1.</span> <span class="nav-text">1. 反射系数 $R$ 和透射系数 $T$ 的计算</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%B3%A2%E5%9C%A8%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E4%B8%AD%E7%9A%84%E5%90%B8%E6%94%B6"><span class="nav-number">3.6.2.</span> <span class="nav-text">2. 波在等离子体中的吸收</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E5%B1%8F%E8%94%BD%E6%95%88%E8%83%BD%EF%BC%88SE%EF%BC%89%E7%9A%84%E8%AE%A1%E7%AE%97"><span class="nav-number">3.6.3.</span> <span class="nav-text">3. 屏蔽效能（SE）的计算</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90"><span class="nav-number">3.7.</span> <span class="nav-text">案例分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B-1%EF%BC%9A%E7%94%B5%E7%A6%BB%E5%B1%82%E5%AF%B9%E6%97%A0%E7%BA%BF%E7%94%B5%E6%B3%A2%E7%9A%84%E5%8F%8D%E5%B0%84"><span class="nav-number">3.7.1.</span> <span class="nav-text">案例 1：电离层对无线电波的反射</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B-2%EF%BC%9A%E5%BE%AE%E6%B3%A2%E5%9C%A8%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E7%82%AC%E4%B8%AD%E7%9A%84%E5%90%B8%E6%94%B6"><span class="nav-number">3.7.2.</span> <span class="nav-text">案例 2：微波在等离子体炬中的吸收</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B-3%EF%BC%9A%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E5%B1%8F%E8%94%BD%E9%AB%98%E5%8A%9F%E7%8E%87%E5%BE%AE%E6%B3%A2"><span class="nav-number">3.7.3.</span> <span class="nav-text">案例 3：等离子体屏蔽高功率微波</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Liu Ming"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Liu Ming</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">71</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">169</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button animated">
+    <button><i class="fa fa-comment"></i>
+      Chat
+    </button>
+  </div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2l1bWluZw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;iuming"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOjUyMDBsaXVtaW5nQGdtYWlsLmNvbQ==" title="E-Mail → mailto:5200liuming@gmail.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vdS8zMTQ3OTEyODky" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;3147912892"><i class="fab fa-weibo fa-fw"></i>Weibo</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9yZWFsaXVtaW5n" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;realiuming"><i class="fab fa-twitter fa-fw"></i>Twitter</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL3JlYWxpdW1pbmc=" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;realiuming"><i class="fab fa-facebook fa-fw"></i>FB Page</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8xMjE4NTI3My9pdW1pbmc=" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;12185273&#x2F;iuming"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly95b3V0dWJlLmNvbS9jaGFubmVsL1VDaUNCSHJ4cDJ4Tlc3T1ZaTlFzZHROdw==" title="YouTube → https:&#x2F;&#x2F;youtube.com&#x2F;channel&#x2F;UCiCBHrxp2xNW7OVZNQsdtNw"><i class="fab fa-youtube fa-fw"></i>YouTube</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9pbnN0YWdyYW0uY29tL3JlYWxpdW1pbmc=" title="Instagram → https:&#x2F;&#x2F;instagram.com&#x2F;realiuming"><i class="fab fa-instagram fa-fw"></i>Instagram</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="c2t5cGU6ODQyNjczNTU2P2NhbGx8Y2hhdA==" title="Skype → skype:842673556?call|chat"><i class="fab fa-skype fa-fw"></i>Skype</span>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="Back to top">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://iuming.github.io/" title="https:&#x2F;&#x2F;iuming.github.io&#x2F;">Title</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://iuming.github.io/2024/12/20/%E5%BE%AE%E6%B3%A2%E4%B8%8E%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E7%9B%B8%E4%BA%92%E4%BD%9C%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Liu Ming">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="REALIUMING'BLOG">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="微波与等离子体相互作用 | REALIUMING'BLOG">
+      <meta itemprop="description" content="等离子体中各个带电粒子与电磁场有相互作用，这种相互作用决定了等离子体的宏观电磁性质">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          微波与等离子体相互作用
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2024-12-20 15:45:53 / Modified: 16:07:42" itemprop="dateCreated datePublished" datetime="2024-12-20T15:45:53+08:00">2024-12-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/note/" itemprop="url" rel="index"><span itemprop="name">note</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2024/12/20/%E5%BE%AE%E6%B3%A2%E4%B8%8E%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E7%9B%B8%E4%BA%92%E4%BD%9C%E7%94%A8/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2024/12/20/微波与等离子体相互作用/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+            <div class="post-description">等离子体中各个带电粒子与电磁场有相互作用，这种相互作用决定了等离子体的宏观电磁性质</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>等离子体是由分别带有正负电荷的两种粒子所组成的电中性的粒子体系，其中至少有一种带电粒子是可以自由运动的。例如气体放电所形成的等离子体，带正电的是失去外层电子的正离子，带负电的是电离过程产生的自由电子，这两种带电粒子都可以自由运动。由于在整个系统中正、负电荷相消，总电荷为零，故等离子体就宏观平均而言是电中性的，但其中的各个带电粒子与电磁场有相互作用，这种相互作用决定了等离子体的宏观电磁性质。微波与等离子体的相互作用，就是通过这种微观的电磁相互作用实现的。</p>
+<p>本文采用经典方法研究微波与等离子体的相互作用，在不涉及粒子内部状态的改变（如能级间的跃迁等）的条件下，这种经典处理方法是可以允许的，所得结果与实验基本符合。</p>
+<hr>
+<h2 id="一、等离子体振荡"><a href="#一、等离子体振荡" class="headerlink" title="一、等离子体振荡"></a>一、等离子体振荡</h2><p>即使完全不存在外加的电磁场，由于等离子体本身由带电粒子所组成，所以其中运动着的带电粒子本身也会产生电磁场。这种由等离子体本身所产生的电磁场，会在其中激发起带电粒子的某种固有运动。这里讨论最简单的一种，即所谓“等离子体振荡”。</p>
+<p>由于离子质量远大于电子的质量，故作为一次近似可以认为离子是不动的，这些离子形成带正电的背景，而带负电的电子则可以自由运动，形成电中性的均匀等离子体。设在无限大的均匀等离子体中单位体积内有 $n$ 个电子，假定由于某种偶然的原因，在如图 7-16 所示的小体积内，其中的自由电子相对于离子背景移动了一段距离 $\Delta x$。由于电子的这一位移，将在这个小体积的两端形成如图所示的厚度为 $\alpha$ 的“偶电层”，各带正、负电荷，偶电层的电荷面密度为 $\pm n e \Delta x$。</p>
+<h3 id="图-7-16：等离子体中的电荷分布图"><a href="#图-7-16：等离子体中的电荷分布图" class="headerlink" title="图 7-16：等离子体中的电荷分布图"></a>图 7-16：等离子体中的电荷分布图</h3><p>偶电层可以看成为单位面积荷电为 $\pm n e \Delta x$ 的平板电容器，在偶电层间产生电场 $E_s$，电场的方向从正电层指向负电层。这个电场将使位移后的电子受到静电力，电力的方向是迫使产生位移的电子返回其原来的平衡位置。在这种由于位移而产生的静电力的作用下，自由电子的运动方程为：</p>
+<p>$$<br>\frac{d^2x}{dt^2} &#x3D; -\frac{n e E_s}{m \epsilon_0}<br>$$</p>
+<p>其中 $m$ 为电子的质量。上式可写成：</p>
+<p>$$<br>\frac{d^2x}{dt^2} &#x3D; -\frac{n e^2 x}{m \epsilon_0}<br>$$</p>
+<p>其解为：</p>
+<p>$$<br>x(t) &#x3D; X \sin(\omega_p t + \phi)<br>$$</p>
+<p>式（7-58）表明，这时电子将在其平衡位置（$x &#x3D; 0$）附近作简谐振荡，振幅为 $X$，初相位为 $\phi$，振荡角频率为：</p>
+<p>$$<br>\omega_p &#x3D; \sqrt{\frac{n e^2}{\epsilon_0 m}}<br>$$</p>
+<p>频率为：</p>
+<p>$$<br>f_p &#x3D; \frac{\omega_p}{2 \pi} &#x3D; \frac{1}{2 \pi} \sqrt{\frac{n e^2}{\epsilon_0 m}}<br>$$</p>
+<p>以各常数值代入得到：</p>
+<p>$$<br>f_p ,(\text{赫兹}) &#x3D; 9000 \sqrt{n(\text{厘米}^3)}<br>$$</p>
+<h3 id="等离子体振荡频率"><a href="#等离子体振荡频率" class="headerlink" title="等离子体振荡频率"></a>等离子体振荡频率</h3><p>$f_p$ 称为“等离子体振荡频率”，简称为“等离子体频率”。当等离子体内的自由电子密度在 $10^{10} \sim 10^{12}, \text{厘米}^{-3}$ 范围内，则按式（7-59）相应的等离子体振荡频率就落在微波频段内。这种等离子体振荡是等离子体中自由电子的一种固有振动，其物理过程是清楚的，由偶然原因所引起的电子对其平衡位置的位移，在原为电中性的等离子体中形成局部的偶电层，偶电层中的净电荷正比于位移（因为位移 $x$ 越大，偶电层的厚度就越大），故偶电层的电场和电场力都正比于位移。电场力迫使位移的电子返回平衡位置，但由于惯性作用，电子不是立即停止在其平衡位置上，而是在其平衡位置附近振荡。</p>
+<p>这种等离子体振荡不是由外来的交变电磁场激发起来的，而是等离子体本身的一种固有振荡，其频率仅决定于其中自由电子的体密度 $n$。</p>
+<p>以上的分析只是一种理想的情形，在实际的等离子体中存在着随机的热运动，由于热运动使电子与其他粒子不断地碰撞，故电子的有序运动的能量不断地损耗掉，这是对上述等离子体振荡的一种阻尼作用。考虑到阻尼作用后，右方应增加一阻尼项，成为：</p>
+<p>$$<br>\frac{d^2x}{dt^2} - \nu_e \frac{dx}{dt} + \frac{n e^2}{\epsilon_0 m} x &#x3D; 0<br>$$</p>
+<p>其中 $\nu_e$ 为自由电子的碰撞频率，即每秒的碰撞次数。解是振幅逐渐减小的衰减振荡，因此如果没有外来的能量补充，等离子体中的这种固有振荡很快就会停止下来，最后只剩下杂乱的热运动。</p>
+<p>如果通过某种方式（如外加同步的高频电磁场或引入电子注）补充能量，在一定条件下，等离子体中的振荡就能被激发起来并维持下去，这实际上相当于强迫振荡。关于等离子体中的振荡和波动现象的进一步分析，超出本书的范围，有兴趣的读者可参阅有关的专著。</p>
+<h2 id="二、等离子体的介电性质"><a href="#二、等离子体的介电性质" class="headerlink" title="二、等离子体的介电性质"></a>二、等离子体的介电性质</h2><p>等离子体可以看作是一种特殊的介质。当电磁波传入等离子体中时，等离子体中的自由电子将在电磁场的作用下产生响应，其响应可以用经典的介电理论来描述。等离子体的介电性质决定了微波在其中的传播特性。</p>
+<p>假设电磁波的电场为：</p>
+<p>$$<br>E &#x3D; E_0 e^{-i\omega t}<br>$$</p>
+<p>电子在此交变电场作用下的运动方程为：</p>
+<p>$$<br>m\frac{d^2x}{dt^2} + m\nu_e\frac{dx}{dt} &#x3D; -eE<br>$$</p>
+<p>其中，$\nu_e$ 是电子的碰撞频率，用于表示电子由于与其他粒子的碰撞而受到的阻力。通过简化，我们将电子的运动方程写为：</p>
+<p>$$<br>\frac{d^2x}{dt^2} + \nu_e\frac{dx}{dt} + \frac{eE}{m} &#x3D; 0<br>$$</p>
+<p>假设电子位移 $x$ 的解具有形式 $x &#x3D; x_0 e^{-i\omega t}$，代入方程得到：</p>
+<p>$$<br>x &#x3D; \frac{-eE&#x2F;m}{\omega^2 + i\omega\nu_e}<br>$$</p>
+<p>电子在电场中的运动将导致介质极化，其极化强度 $P$ 为：</p>
+<p>$$<br>P &#x3D; -nex<br>$$</p>
+<p>将 $x$ 代入极化公式，得：</p>
+<p>$$<br>P &#x3D; \frac{ne^2E}{m(\omega^2 + i\omega\nu_e)}<br>$$</p>
+<p>根据介电性质，介电常数 $\epsilon(\omega)$ 与极化强度 $P$ 的关系为：</p>
+<p>$$<br>\epsilon(\omega) &#x3D; 1 + \frac{P}{\epsilon_0E}<br>$$</p>
+<p>因此，等离子体的介电常数为：</p>
+<p>$$<br>\epsilon(\omega) &#x3D; 1 - \frac{\omega_p^2}{\omega^2 + i\omega\nu_e}<br>$$</p>
+<p>其中，$\omega_p &#x3D; \sqrt{\frac{ne^2}{\epsilon_0 m}}$ 是等离子体频率。</p>
+<h3 id="1-理想无碰撞等离子体"><a href="#1-理想无碰撞等离子体" class="headerlink" title="1. 理想无碰撞等离子体"></a>1. 理想无碰撞等离子体</h3><p>在无碰撞情况下，即 $\nu_e &#x3D; 0$，介电常数可简化为：</p>
+<p>$$<br>\epsilon(\omega) &#x3D; 1 - \frac{\omega_p^2}{\omega^2}<br>$$</p>
+<p>当 $\omega &gt; \omega_p$ 时，$\epsilon(\omega) &gt; 0$，表明电磁波可以在等离子体中传播。</p>
+<p>当 $\omega &lt; \omega_p$ 时，$\epsilon(\omega) &lt; 0$，表明电磁波将被反射，不能在等离子体中传播。</p>
+<p>这表明等离子体对频率低于其等离子体频率的电磁波具有反射作用，这种现象可用于描述地球电离层对无线电波的反射。</p>
+<h3 id="2-有碰撞等离子体"><a href="#2-有碰撞等离子体" class="headerlink" title="2. 有碰撞等离子体"></a>2. 有碰撞等离子体</h3><p>当 $\nu_e \neq 0$ 时，等离子体的介电常数为复数，其虚部表示电磁波在等离子体中传播时的吸收特性。复介电常数可写为：</p>
+<p>$$<br>\epsilon(\omega) &#x3D; \epsilon_r - i\epsilon_i<br>$$</p>
+<p>其中：</p>
+<p>$$<br>\epsilon_r &#x3D; 1 - \frac{\omega_p^2(\omega^2 - \nu_e^2)}{(\omega^2 + \nu_e^2)^2}<br>$$</p>
+<p>$$<br>\epsilon_i &#x3D; \frac{\omega_p^2\omega\nu_e}{(\omega^2 + \nu_e^2)^2}<br>$$</p>
+<p>吸收特性由虚部 $\epsilon_i$ 决定。碰撞频率越高，电磁波的衰减越显著。</p>
+<hr>
+<h2 id="三、微波在等离子体中的传播"><a href="#三、微波在等离子体中的传播" class="headerlink" title="三、微波在等离子体中的传播"></a>三、微波在等离子体中的传播</h2><p>微波在等离子体中的传播特性取决于等离子体的介电性质，以下简单介绍几种典型情况。</p>
+<h3 id="1-阻尼传播"><a href="#1-阻尼传播" class="headerlink" title="1. 阻尼传播"></a>1. 阻尼传播</h3><p>当电磁波频率 $\omega &gt; \omega_p$ 且碰撞频率较低时，电磁波可以在等离子体中传播，但会因吸收而逐渐衰减。</p>
+<p>传播常数为：</p>
+<p>$$<br>k &#x3D; \frac{\omega}{c} \sqrt{\epsilon(\omega)}<br>$$</p>
+<p>其中 $\epsilon(\omega)$ 的虚部导致振幅随着传播距离的增加而减小。</p>
+<h3 id="2-微波的反射和透射"><a href="#2-微波的反射和透射" class="headerlink" title="2. 微波的反射和透射"></a>2. 微波的反射和透射</h3><p>在等离子体界面处，电磁波的传播受到界面条件的限制，会发生部分反射和透射。其性质取决于等离子体的介电常数和电磁波的频率。</p>
+<h4 id="1-反射条件"><a href="#1-反射条件" class="headerlink" title="(1) 反射条件"></a>(1) 反射条件</h4><p>当电磁波的频率低于等离子体频率 $\omega_p$ 时，介电常数 $\epsilon(\omega)$ 为负，电磁波无法在等离子体中传播，完全被反射。</p>
+<p>反射系数 $R$ 表示反射波和入射波的能量比：</p>
+<p>$$<br>R &#x3D; \left| \frac{Z_2 - Z_1}{Z_2 + Z_1} \right|^2<br>$$</p>
+<p>其中 $Z_1$ 和 $Z_2$ 分别为介质1（例如空气）和介质2（等离子体）的特征阻抗。</p>
+<h4 id="2-透射条件"><a href="#2-透射条件" class="headerlink" title="(2) 透射条件"></a>(2) 透射条件</h4><p>当电磁波频率高于等离子体频率 $\omega_p$ 时，介电常数 $\epsilon(\omega)$ 为正，部分电磁波可以透射进入等离子体，但由于碰撞效应，波在传播过程中会被吸收。</p>
+<p>透射系数 $T$ 表示透射波和入射波的能量比：</p>
+<p>$$<br>T &#x3D; 1 - R<br>$$</p>
+<p>透射波的传播受到复介电常数 $\epsilon(\omega)$ 的影响，振幅随传播距离指数衰减。</p>
+<hr>
+<h3 id="3-等离子体对电磁波的屏蔽效应"><a href="#3-等离子体对电磁波的屏蔽效应" class="headerlink" title="3. 等离子体对电磁波的屏蔽效应"></a>3. 等离子体对电磁波的屏蔽效应</h3><p>当 $\omega &lt; \omega_p$ 时，等离子体表现为一种屏蔽介质，可以有效阻止电磁波的通过。这种特性在屏蔽高频辐射、无线电通信等领域具有重要意义。</p>
+<p>屏蔽效能（SE）用来定量描述等离子体屏蔽效果，定义为：</p>
+<p>$$<br>SE &#x3D; 10 \log_{10} \left( \frac{P_{\text{入射}}}{P_{\text{透射}}} \right)<br>$$</p>
+<p>当屏蔽效能足够高时，等离子体几乎完全反射电磁波。</p>
+<hr>
+<h3 id="4-应用实例"><a href="#4-应用实例" class="headerlink" title="4. 应用实例"></a>4. 应用实例</h3><p>等离子体的介电特性和微波传播规律在许多领域都有重要应用，包括但不限于：</p>
+<ul>
+<li><strong>电离层通信</strong>：地球电离层的等离子体特性使其能够反射短波信号，用于远距离无线电通信。</li>
+<li><strong>微波加热</strong>：利用等离子体对特定频率电磁波的吸收特性，可用于工业加热、等离子体炬等。</li>
+<li><strong>等离子体诊断</strong>：通过分析微波在等离子体中的传播特性，可以测量等离子体的电子密度、温度等参数。</li>
+<li><strong>电磁屏蔽</strong>：在航空航天、核工业等领域，利用等离子体屏蔽效应保护敏感设备免受电磁波干扰。</li>
+</ul>
+<hr>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>等离子体的介电性质决定了其对微波的反射、透射和吸收行为。通过调节微波频率及等离子体参数，可以实现不同的传播特性，这为许多现代技术提供了理论支持和实际指导。</p>
+<p>以下是扩展后的内容，包括具体的计算方法和案例分析。</p>
+<hr>
+<h3 id="具体计算方法"><a href="#具体计算方法" class="headerlink" title="具体计算方法"></a>具体计算方法</h3><h4 id="1-反射系数-R-和透射系数-T-的计算"><a href="#1-反射系数-R-和透射系数-T-的计算" class="headerlink" title="1. 反射系数 $R$ 和透射系数 $T$ 的计算"></a>1. 反射系数 $R$ 和透射系数 $T$ 的计算</h4><p>设电磁波从介质1（非等离子体）传播到介质2（等离子体）界面，界面两侧的特征阻抗分别为 $Z_1$ 和 $Z_2$。特征阻抗的表达式为：</p>
+<p>$$<br>Z &#x3D; \sqrt{\frac{\mu}{\epsilon}}<br>$$</p>
+<p>其中：</p>
+<ul>
+<li>$\mu$ 为介质的磁导率；</li>
+<li>$\epsilon$ 为介质的复介电常数，等离子体的复介电常数为：<br>$$<br>\epsilon(\omega) &#x3D; 1 - \frac{\omega_p^2}{\omega^2} - i \frac{\nu \omega_p^2}{\omega^3}<br>$$<br>其中：<ul>
+<li>$\omega_p &#x3D; \sqrt{\frac{n_e e^2}{\epsilon_0 m_e}}$ 为等离子体频率；</li>
+<li>$n_e$ 为电子密度；</li>
+<li>$\nu$ 为电子碰撞频率。</li>
+</ul>
+</li>
+</ul>
+<p>根据特征阻抗的定义，反射系数和透射系数分别为：</p>
+<p>$$<br>R &#x3D; \left| \frac{Z_2 - Z_1}{Z_2 + Z_1} \right|^2<br>$$</p>
+<p>$$<br>T &#x3D; 1 - R<br>$$</p>
+<p><strong>示例计算：</strong><br>假设电磁波频率为 $f &#x3D; 10 , \text{GHz}$，等离子体电子密度为 $n_e &#x3D; 10^{18} , \text{m}^{-3}$，电子碰撞频率为 $\nu &#x3D; 10^9 , \text{Hz}$，可计算等离子体频率 $\omega_p$ 和复介电常数 $\epsilon(\omega)$，进而得到 $R$ 和 $T$。</p>
+<hr>
+<h4 id="2-波在等离子体中的吸收"><a href="#2-波在等离子体中的吸收" class="headerlink" title="2. 波在等离子体中的吸收"></a>2. 波在等离子体中的吸收</h4><p>透射波在等离子体中的振幅 $E$ 随距离 $z$ 衰减，衰减公式为：</p>
+<p>$$<br>E(z) &#x3D; E_0 e^{-\alpha z}<br>$$</p>
+<p>其中 $\alpha$ 为吸收系数，计算公式为：</p>
+<p>$$<br>\alpha &#x3D; \frac{\omega}{c} \sqrt{\frac{|\epsilon_r| - \epsilon_r}{2}}<br>$$</p>
+<p>$\epsilon_r &#x3D; \text{Re}(\epsilon)$ 和 $|\epsilon_r| &#x3D; |\epsilon|$ 分别为复介电常数的实部和模值。</p>
+<p><strong>示例计算：</strong><br>若已知 $\omega &#x3D; 2 \pi f$、$\epsilon(\omega)$ 的实部和虚部，计算 $\alpha$ 并画出波强度随传播距离的衰减曲线。</p>
+<hr>
+<h4 id="3-屏蔽效能（SE）的计算"><a href="#3-屏蔽效能（SE）的计算" class="headerlink" title="3. 屏蔽效能（SE）的计算"></a>3. 屏蔽效能（SE）的计算</h4><p>屏蔽效能公式为：</p>
+<p>$$<br>SE &#x3D; 10 \log_{10} \left( \frac{P_{\text{入射}}}{P_{\text{透射}}} \right)<br>$$</p>
+<p>功率比与透射系数相关：</p>
+<p>$$<br>P_{\text{入射}} &#x2F; P_{\text{透射}} &#x3D; 1 &#x2F; T<br>$$</p>
+<p>因此屏蔽效能可以表示为：</p>
+<p>$$<br>SE &#x3D; -10 \log_{10}(T)<br>$$</p>
+<p><strong>示例计算：</strong><br>若计算得 $T &#x3D; 0.01$，则屏蔽效能为：</p>
+<p>$$<br>SE &#x3D; -10 \log_{10}(0.01) &#x3D; 20 , \text{dB}<br>$$</p>
+<hr>
+<h3 id="案例分析"><a href="#案例分析" class="headerlink" title="案例分析"></a>案例分析</h3><h4 id="案例-1：电离层对无线电波的反射"><a href="#案例-1：电离层对无线电波的反射" class="headerlink" title="案例 1：电离层对无线电波的反射"></a>案例 1：电离层对无线电波的反射</h4><p>电离层中的等离子体对短波 ($f &lt; 30 , \text{MHz}$) 具有良好的反射能力，这使其能够用作天然的“镜面”，将无线电波反射回地球表面，从而实现远距离通信。</p>
+<ul>
+<li>已知：短波频率 $f &#x3D; 15 , \text{MHz}$，电离层电子密度 $n_e &#x3D; 10^{12} , \text{m}^{-3}$。</li>
+<li>计算：$\omega_p \approx 5.64 \times 10^7 , \text{rad&#x2F;s}$，$\omega_p &gt; \omega$，电磁波完全反射。</li>
+</ul>
+<h4 id="案例-2：微波在等离子体炬中的吸收"><a href="#案例-2：微波在等离子体炬中的吸收" class="headerlink" title="案例 2：微波在等离子体炬中的吸收"></a>案例 2：微波在等离子体炬中的吸收</h4><p>工业微波等离子体炬利用高频微波（如 $f &#x3D; 2.45 , \text{GHz}$）加热低压等离子体。等离子体吸收微波能量，用于材料处理、废气处理等。</p>
+<ul>
+<li>假设：等离子体电子密度 $n_e &#x3D; 10^{19} , \text{m}^{-3}$，电子碰撞频率 $\nu &#x3D; 10^7 , \text{Hz}$。</li>
+<li>计算：通过介电常数公式，确定吸收系数 $\alpha$，计算微波在等离子体中的能量衰减。</li>
+</ul>
+<h4 id="案例-3：等离子体屏蔽高功率微波"><a href="#案例-3：等离子体屏蔽高功率微波" class="headerlink" title="案例 3：等离子体屏蔽高功率微波"></a>案例 3：等离子体屏蔽高功率微波</h4><p>在核工业或航空航天领域，使用等离子体屏蔽装置保护敏感设备。通过调节等离子体密度，可以定制屏蔽效能。</p>
+<ul>
+<li>已知：高功率微波频率 $f &#x3D; 10 , \text{GHz}$，要求屏蔽效能 $SE &gt; 40 , \text{dB}$。</li>
+<li>计算：通过调节电子密度 $n_e$，使透射系数 $T$ 满足：</li>
+</ul>
+<p>$$<br>T &#x3D; 10^{-\frac{SE}{10}}<br>$$</p>
+<p>解得 $T &lt; 10^{-4}$，进一步计算所需的等离子体参数。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="Liu Ming WeChat Pay">
+        <span>WeChat Pay</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="Liu Ming Alipay">
+        <span>Alipay</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>Liu Ming
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="http://iuming.github.io/2024/12/20/%E5%BE%AE%E6%B3%A2%E4%B8%8E%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E7%9B%B8%E4%BA%92%E4%BD%9C%E7%94%A8/" title="微波与等离子体相互作用">http://iuming.github.io/2024/12/20/微波与等离子体相互作用/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/realiuming">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+U5yo-Zxuw1OgbU6P">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </span>
+
+          <img class="social-item-img" src="/images/wechat_channel.jpg">
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/RF/" rel="tag"><i class="fa fa-tag"></i> RF</a>
+              <a href="/tags/microwave/" rel="tag"><i class="fa fa-tag"></i> microwave</a>
+              <a href="/tags/plasma/" rel="tag"><i class="fa fa-tag"></i> plasma</a>
+          </div>
+
+        
+  <div class="social-like a2a_kit a2a_kit_size_32 a2a_default_style">
+    <a class="a2a_dd" target="_blank" rel="noopener" href="https://www.addtoany.com/share"></a>
+      <a class="a2a_button_facebook"></a>
+      <a class="a2a_button_twitter"></a>
+      <a class="a2a_button_wechat"></a>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/12/20/%E5%BE%AE%E6%B3%A2%E9%93%81%E6%B0%A7%E4%BD%93%E5%85%83%E4%BB%B6/" rel="prev" title="微波铁氧体元件">
+                  <i class="fa fa-angle-left"></i> 微波铁氧体元件
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Ming Liu. All rights reserved.</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL2l1bWluZw==" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.1.0/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/4.23.3/algoliasearch-lite.umd.js" integrity="sha256-1QNshz86RqXe/qsCBldsUu13eAX6n/O98uubKQs87UI=" crossorigin="anonymous"></script><script src="/js/third-party/search/algolia-search.js"></script>
+<script class="next-config" data-name="chatra" type="application/json">{"enable":true,"async":true,"id":"gTXKphrmKGf5QSb5L"}</script>
+<script src="/js/third-party/chat/chatra.js"></script>
+<script async src="https://call.chatra.io/chatra.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.0/pdfobject.min.js","integrity":"sha256-JJZNsid68vnh3/zyj0lY9BN5ynxVX/12XgOa1TlaYN0="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.0/mermaid.min.js","integrity":"sha256-stuqcu2FrjYCXDOytWFA5SoUE/r3nkp6gTglzNSlavU="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+  <script class="next-config" data-name="wavedrom" type="application/json">{"enable":true,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.5.0/wavedrom.min.js","integrity":"sha256-INLAoJc6quTNfiMWkGZniYO2cxE8mHpddnLow1m6RFs="}}</script>
+  <script class="next-config" data-name="wavedrom_skin" type="application/json">{"enable":true,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.5.0/skins/default.js","integrity":"sha256-fduc/Zszk5ezWws2uInY/ALWVmIrmV6VTgXbsYSReFI="}}</script>
+  <script src="/js/third-party/tags/wavedrom.js"></script>
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+  <script src="/js/third-party/addtoany.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":"ture","archive":true,"delay":true,"timeout":3000,"priority":true,"url":"http://iuming.github.io/2024/12/20/%E5%BE%AE%E6%B3%A2%E4%B8%8E%E7%AD%89%E7%A6%BB%E5%AD%90%E4%BD%93%E7%9B%B8%E4%BA%92%E4%BD%9C%E7%94%A8/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"realiuming","count":true,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+
+</body>
+</html>
