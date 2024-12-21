@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>束流通过腔体功率损耗计算</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem 2rem;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        input,
+        button {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        canvas {
+            margin-top: 2rem;
+        }
+
+        .formula {
+            background: #f9f9f9;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-left: 4px solid #4CAF50;
+        }
+    </style>
+</head>
+
+<body>
+    <header>束流通过腔体功率损耗计算</header>
+    <div class="container">
+        <div>
+            <h2>相关公式</h2>
+            <div class="formula">
+                <p>束流感应腔电压公式：</p>
+                <p>$$ V_b' = \frac{V_q}{2} \cdot \frac{1}{1 -
+                    \exp\left(-\frac{T_b}{\tau_d}\right)\exp(iT_b\Delta\omega)} $$</p>
+                <p>功率损耗公式：</p>
+                <p>$$ P_b = \frac{I_0^2 \cdot \frac{G}{Q_L} \cdot T_b \cdot F_r \cdot f_0}{(1 + \beta) \cdot 2Q_L} $$
+                </p>
+            </div>
+        </div>
+        <form id="inputForm">
+            <h2>输入参数</h2>
+            <label for="G">几何因子 G</label>
+            <input type="number" id="G" placeholder="例如：10" required>
+
+            <label for="QL">加载品质因数 Q<sub>L</sub></label>
+            <input type="number" id="QL" placeholder="例如：20000" required>
+
+            <label for="f0">谐振频率 f<sub>0</sub> (Hz)</label>
+            <input type="number" id="f0" placeholder="例如：1e9" required>
+
+            <label for="Tb">束团间隔时间 T<sub>b</sub> (s)</label>
+            <input type="number" id="Tb" placeholder="例如：1e-6" required>
+
+            <label for="beta">耦合系数 β</label>
+            <input type="number" id="beta" placeholder="例如：1" required>
+
+            <label for="q">束流电荷 |q| (C)</label>
+            <input type="number" id="q" placeholder="例如：1e-9" required>
+
+            <button type="submit">绘制图像</button>
+        </form>
+        <canvas id="chart" width="800" height="400"></canvas>
+    </div>
+
+    <script>
+        document.getElementById('inputForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // 获取用户输入的参数
+            const G = parseFloat(document.getElementById('G').value);
+            const QL = parseFloat(document.getElementById('QL').value);
+            const f0 = parseFloat(document.getElementById('f0').value);
+            const Tb = parseFloat(document.getElementById('Tb').value);
+            const beta = parseFloat(document.getElementById('beta').value);
+            const q = parseFloat(document.getElementById('q').value);
+
+            // 常量和公式
+            const I0 = q / Tb; // 平均束流电流
+            const tau_d = (2 * QL) / f0; // 衰减时间常数
+            const Rs = G / QL; // 表面电阻
+
+            // 计算 P_b 的数据
+            const deltaOmega = [];
+            const Pb = [];
+            const omegaRange = 1e6; // 偏移范围为 ±1 MHz
+            const steps = 500; // 数据点数量
+
+            for (let i = -steps; i <= steps; i++) {
+                const delta_omega = (i / steps) * omegaRange; // Δω
+                const expDecay = Math.exp(-Tb / tau_d); // 衰减项
+                const Fr = (1 - expDecay * Math.cos(Tb * delta_omega)) /
+                    (1 - 2 * expDecay * Math.cos(Tb * delta_omega) + expDecay ** 2);
+                const Pb_value = (I0 ** 2 * Rs * Tb * Fr * f0) / ((1 + beta) * 2 * QL);
+
+                deltaOmega.push(delta_omega);
+                Pb.push(Pb_value);
+            }
+
+            // 绘制图像
+            const ctx = document.getElementById('chart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: deltaOmega,
+                    datasets: [{
+                        label: '功率损耗 P_b (W)',
+                        data: Pb,
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderWidth: 2,
+                        pointRadius: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: '频率偏移 Δω (Hz)'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: '功率损耗 P_b (W)'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
