@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>束流功率损耗计算</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        canvas {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>束流功率损耗计算</h1>
+
+        <!-- Formula and input form -->
+        <div id="inputPage">
+            <h2>输入参数</h2>
+            <div class="form-group">
+                <label for="geometryFactor">几何因子 G</label>
+                <input type="number" id="geometryFactor" placeholder="例如：1000">
+            </div>
+            <div class="form-group">
+                <label for="qualityFactor">加载品质因数 Q<sub>L</sub></label>
+                <input type="number" id="qualityFactor" placeholder="例如：50000">
+            </div>
+            <div class="form-group">
+                <label for="resonantFrequency">谐振频率 f<sub>0</sub> (Hz)</label>
+                <input type="number" id="resonantFrequency" placeholder="例如：1e9">
+            </div>
+            <div class="form-group">
+                <label for="bunchSpacing">束团间隔时间 T<sub>b</sub> (s)</label>
+                <input type="number" id="bunchSpacing" placeholder="例如：1e-6">
+            </div>
+            <div class="form-group">
+                <label for="couplingFactor">耦合系数 β</label>
+                <input type="number" id="couplingFactor" placeholder="例如：1">
+            </div>
+            <div class="form-group">
+                <label for="charge">束流电荷 |q| (C)</label>
+                <input type="number" id="charge" placeholder="例如：1e-9">
+            </div>
+            <button onclick="plotGraph()">绘制图像</button>
+        </div>
+
+        <!-- Graph display -->
+        <div id="outputPage" style="display: none;">
+            <h2>功率损耗曲线</h2>
+            <canvas id="powerLossChart"></canvas>
+            <button onclick="goBack()">返回</button>
+        </div>
+    </div>
+
+    <script>
+        function calculatePowerLoss(G, QL, f0, Tb, beta, q, deltaOmegaRange) {
+            const results = [];
+            const tauD = 2 * QL / f0;
+            const I0 = Math.abs(q) / Tb;
+            const Rs = G / QL;
+
+            deltaOmegaRange.forEach(deltaOmega => {
+                const Fr = (1 - Math.exp(-Tb / tauD) * Math.cos(Tb * deltaOmega)) /
+                    (1 - 2 * Math.exp(-Tb / tauD) * Math.cos(Tb * deltaOmega) + Math.exp(-2 * Tb / tauD));
+                const Pb = (I0 ** 2 * Rs * Tb * Fr * f0) / ((1 + beta) * 2 * QL);
+                results.push({ deltaOmega, Pb });
+            });
+
+            return results;
+        }
+
+        function plotGraph() {
+            // Get user inputs
+            const G = parseFloat(document.getElementById('geometryFactor').value);
+            const QL = parseFloat(document.getElementById('qualityFactor').value);
+            const f0 = parseFloat(document.getElementById('resonantFrequency').value);
+            const Tb = parseFloat(document.getElementById('bunchSpacing').value);
+            const beta = parseFloat(document.getElementById('couplingFactor').value);
+            const q = parseFloat(document.getElementById('charge').value);
+
+            if (isNaN(G) || isNaN(QL) || isNaN(f0) || isNaN(Tb) || isNaN(beta) || isNaN(q)) {
+                alert('请填写所有参数！');
+                return;
+            }
+
+            // Generate deltaOmega range
+            const deltaOmegaRange = Array.from({ length: 100 }, (_, i) => -1e6 + i * 2e4);
+
+            // Calculate power loss
+            const results = calculatePowerLoss(G, QL, f0, Tb, beta, q, deltaOmegaRange);
+
+            // Extract data for plotting
+            const deltaOmegaValues = results.map(r => r.deltaOmega);
+            const powerLossValues = results.map(r => r.Pb);
+
+            // Display output page
+            document.getElementById('inputPage').style.display = 'none';
+            document.getElementById('outputPage').style.display = 'block';
+
+            // Plot graph
+            const ctx = document.getElementById('powerLossChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: deltaOmegaValues,
+                    datasets: [{
+                        label: '功率损耗 P_b (W)',
+                        data: powerLossValues,
+                        borderColor: 'blue',
+                        borderWidth: 2,
+                        fill: false
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: '频率偏移 Δω (rad/s)'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: '功率损耗 P_b (W)'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function goBack() {
+            document.getElementById('inputPage').style.display = 'block';
+            document.getElementById('outputPage').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
