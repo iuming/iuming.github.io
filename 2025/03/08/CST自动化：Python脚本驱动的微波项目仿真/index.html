@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.2.0">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/manifest.json">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"iuming.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.20.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":null},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":true,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="随着电磁仿真需求的日益增长，CST Studio Suite 凭借其强大的功能，成为微波、射频、电磁兼容性（EMC）等领域不可或缺的工具。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CST自动化：Python脚本驱动的微波项目仿真">
+<meta property="og:url" content="http://iuming.github.io/2025/03/08/CST%E8%87%AA%E5%8A%A8%E5%8C%96%EF%BC%9APython%E8%84%9A%E6%9C%AC%E9%A9%B1%E5%8A%A8%E7%9A%84%E5%BE%AE%E6%B3%A2%E9%A1%B9%E7%9B%AE%E4%BB%BF%E7%9C%9F/index.html">
+<meta property="og:site_name" content="REALIUMING&#39;BLOG">
+<meta property="og:description" content="随着电磁仿真需求的日益增长，CST Studio Suite 凭借其强大的功能，成为微波、射频、电磁兼容性（EMC）等领域不可或缺的工具。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-03-08T05:56:15.000Z">
+<meta property="article:modified_time" content="2025-03-08T06:00:53.367Z">
+<meta property="article:author" content="Liu Ming">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="microwave">
+<meta property="article:tag" content="CST">
+<meta property="article:tag" content="automation">
+<meta name="twitter:card" content="&lt;twitter:card&gt;">
+<meta name="twitter:image" content="http://iuming.github.io/2025/03/08/CST%E8%87%AA%E5%8A%A8%E5%8C%96%EF%BC%9APython%E8%84%9A%E6%9C%AC%E9%A9%B1%E5%8A%A8%E7%9A%84%E5%BE%AE%E6%B3%A2%E9%A1%B9%E7%9B%AE%E4%BB%BF%E7%9C%9F/%3Ctwitter:image%3E">
+<meta name="twitter:creator" content="@&lt;twitter:creator&gt;">
+<meta name="twitter:site" content="<twitter:site>">
+<meta property="fb:admins" content="&lt;fb:admin_id&gt;">
+<meta property="fb:app_id" content="&lt;fb:app_id&gt;">
+
+
+<link rel="canonical" href="http://iuming.github.io/2025/03/08/CST%E8%87%AA%E5%8A%A8%E5%8C%96%EF%BC%9APython%E8%84%9A%E6%9C%AC%E9%A9%B1%E5%8A%A8%E7%9A%84%E5%BE%AE%E6%B3%A2%E9%A1%B9%E7%9B%AE%E4%BB%BF%E7%9C%9F/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://iuming.github.io/2025/03/08/CST%E8%87%AA%E5%8A%A8%E5%8C%96%EF%BC%9APython%E8%84%9A%E6%9C%AC%E9%A9%B1%E5%8A%A8%E7%9A%84%E5%BE%AE%E6%B3%A2%E9%A1%B9%E7%9B%AE%E4%BB%BF%E7%9C%9F/","path":"2025/03/08/CST自动化：Python脚本驱动的微波项目仿真/","title":"CST自动化：Python脚本驱动的微波项目仿真"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>CST自动化：Python脚本驱动的微波项目仿真 | REALIUMING'BLOG</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">REALIUMING'BLOG</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">214</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">19</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">87</span></a></li><li class="menu-item menu-item-books"><a href="/book/" rel="section"><i class="fa fa-book fa-fw"></i>books</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fab fa-algolia fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%84%9A%E6%9C%AC%E6%A6%82%E8%BF%B0%EF%BC%9A%E4%BB%8E%E6%89%8B%E5%8A%A8%E6%93%8D%E4%BD%9C%E5%88%B0%E8%87%AA%E5%8A%A8%E5%8C%96%E4%BB%BF%E7%9C%9F"><span class="nav-number">1.</span> <span class="nav-text">脚本概述：从手动操作到自动化仿真</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%84%9A%E6%9C%AC%E5%8A%9F%E8%83%BD%E5%88%86%E8%A7%A3"><span class="nav-number">1.1.</span> <span class="nav-text">脚本功能分解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E5%8C%96%E6%8A%80%E6%9C%AF%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="nav-number">2.</span> <span class="nav-text">自动化技术的优势</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9B%B4%E5%B9%BF%E6%B3%9B%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">3.</span> <span class="nav-text">更广泛的应用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E5%8C%96%E8%AE%BE%E8%AE%A1%E4%B8%8E%E4%BC%98%E5%8C%96"><span class="nav-number">3.1.</span> <span class="nav-text">参数化设计与优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%B9%E9%87%8F%E5%A4%84%E7%90%86"><span class="nav-number">3.2.</span> <span class="nav-text">批量处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%8E%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="nav-number">3.3.</span> <span class="nav-text">数据分析与可视化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8E%E5%85%B6%E4%BB%96%E5%B7%A5%E5%85%B7%E9%9B%86%E6%88%90"><span class="nav-number">3.4.</span> <span class="nav-text">与其他工具集成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E4%B8%8E%E9%AA%8C%E8%AF%81"><span class="nav-number">3.5.</span> <span class="nav-text">自动化测试与验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%99%E8%82%B2%E4%B8%8E%E5%9F%B9%E8%AE%AD"><span class="nav-number">3.6.</span> <span class="nav-text">教育与培训</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E5%88%B6%E5%8C%96%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="nav-number">3.7.</span> <span class="nav-text">定制化工作流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%91%E7%AB%AF%E4%B8%8E%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97"><span class="nav-number">3.8.</span> <span class="nav-text">云端与分布式计算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E6%96%B0%E8%AE%BE%E8%AE%A1%E6%8E%A2%E7%B4%A2"><span class="nav-number">3.9.</span> <span class="nav-text">创新设计探索</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AA%E6%9D%A5%E5%B1%95%E6%9C%9B"><span class="nav-number">4.</span> <span class="nav-text">未来展望</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA"><span class="nav-number">5.</span> <span class="nav-text">结论</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Liu Ming"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Liu Ming</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">87</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">214</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button animated">
+    <button><i class="fa fa-comment"></i>
+      Chat
+    </button>
+  </div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2l1bWluZw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;iuming"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOjUyMDBsaXVtaW5nQGdtYWlsLmNvbQ==" title="E-Mail → mailto:5200liuming@gmail.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vdS8zMTQ3OTEyODky" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;3147912892"><i class="fab fa-weibo fa-fw"></i>Weibo</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9yZWFsaXVtaW5n" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;realiuming"><i class="fab fa-twitter fa-fw"></i>Twitter</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL3JlYWxpdW1pbmc=" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;realiuming"><i class="fab fa-facebook fa-fw"></i>FB Page</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8xMjE4NTI3My9pdW1pbmc=" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;12185273&#x2F;iuming"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly95b3V0dWJlLmNvbS9jaGFubmVsL1VDaUNCSHJ4cDJ4Tlc3T1ZaTlFzZHROdw==" title="YouTube → https:&#x2F;&#x2F;youtube.com&#x2F;channel&#x2F;UCiCBHrxp2xNW7OVZNQsdtNw"><i class="fab fa-youtube fa-fw"></i>YouTube</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9pbnN0YWdyYW0uY29tL3JlYWxpdW1pbmc=" title="Instagram → https:&#x2F;&#x2F;instagram.com&#x2F;realiuming"><i class="fab fa-instagram fa-fw"></i>Instagram</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="c2t5cGU6ODQyNjczNTU2P2NhbGx8Y2hhdA==" title="Skype → skype:842673556?call|chat"><i class="fab fa-skype fa-fw"></i>Skype</span>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="Back to top">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://iuming.github.io/" title="https:&#x2F;&#x2F;iuming.github.io&#x2F;">Title</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://iuming.github.io/2025/03/08/CST%E8%87%AA%E5%8A%A8%E5%8C%96%EF%BC%9APython%E8%84%9A%E6%9C%AC%E9%A9%B1%E5%8A%A8%E7%9A%84%E5%BE%AE%E6%B3%A2%E9%A1%B9%E7%9B%AE%E4%BB%BF%E7%9C%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Liu Ming">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="REALIUMING'BLOG">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="CST自动化：Python脚本驱动的微波项目仿真 | REALIUMING'BLOG">
+      <meta itemprop="description" content="随着电磁仿真需求的日益增长，CST Studio Suite 凭借其强大的功能，成为微波、射频、电磁兼容性（EMC）等领域不可或缺的工具。">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CST自动化：Python脚本驱动的微波项目仿真
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2025-03-08 13:56:15 / Modified: 14:00:53" itemprop="dateCreated datePublished" datetime="2025-03-08T13:56:15+08:00">2025-03-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/note/" itemprop="url" rel="index"><span itemprop="name">note</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2025/03/08/CST%E8%87%AA%E5%8A%A8%E5%8C%96%EF%BC%9APython%E8%84%9A%E6%9C%AC%E9%A9%B1%E5%8A%A8%E7%9A%84%E5%BE%AE%E6%B3%A2%E9%A1%B9%E7%9B%AE%E4%BB%BF%E7%9C%9F/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2025/03/08/CST自动化：Python脚本驱动的微波项目仿真/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+            <div class="post-description">随着电磁仿真需求的日益增长，CST Studio Suite 凭借其强大的功能，成为微波、射频、电磁兼容性（EMC）等领域不可或缺的工具。</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>随着电磁仿真需求的日益增长，CST Studio Suite 凭借其强大的功能，成为微波、射频、电磁兼容性（EMC）等领域不可或缺的工具。然而，手动操作复杂的仿真项目往往耗时且容易出错。为此，CST Studio Suite 提供了 Python 自动化接口，允许用户通过脚本高效地创建、配置和运行仿真项目。本文将基于提供的 Python 脚本，深入探讨 CST Studio Suite 自动化技术的基本原理、应用场景，并展望其在更广泛领域中的潜力。</p>
+<h2 id="脚本概述：从手动操作到自动化仿真"><a href="#脚本概述：从手动操作到自动化仿真" class="headerlink" title="脚本概述：从手动操作到自动化仿真"></a>脚本概述：从手动操作到自动化仿真</h2><p>以下是提供的 Python 脚本的核心功能，它自动化了一个微波腔体项目的创建和仿真过程, 可见<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2l1bWluZy9NTF9MZWFybmluZy9ibG9iL21haW4vUHl0aG9uX0xlYXJuaW5nL0NTVF9MZWFybmluZy90ZXN0LnB5">Github<i class="fa fa-external-link-alt"></i></span>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">cst_lib_path = <span class="string">r&quot;C:\CST Studio Suite 2021\AMD64 python_cst_libraries&quot;</span></span><br><span class="line">sys.path.append(cst_lib_path)</span><br><span class="line"><span class="keyword">import</span> cst</span><br><span class="line"><span class="keyword">import</span> cst.interface</span><br><span class="line"><span class="keyword">import</span> cst.results</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建设计环境和新项目</span></span><br><span class="line">de = cst.interface.DesignEnvironment()</span><br><span class="line">prj = de.new_mws()</span><br><span class="line">prj.save(<span class="string">r&quot;C:\Users\LiuMing\Downloads\cylinder_project.cst&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置求解器为本征模式</span></span><br><span class="line">prj.modeler.add_to_history(<span class="string">&quot;Set Solver Type&quot;</span>, <span class="string">&quot;ChangeSolverType \&quot;HF Eigenmode\&quot;&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置单位</span></span><br><span class="line">UnitVba = <span class="string">&quot;&quot;&quot;With Units </span></span><br><span class="line"><span class="string">    .Geometry &quot;mm&quot; </span></span><br><span class="line"><span class="string">    .Frequency &quot;GHz&quot; </span></span><br><span class="line"><span class="string">    .Time &quot;ns&quot; </span></span><br><span class="line"><span class="string">    .TemperatureUnit &quot;Kelvin&quot; </span></span><br><span class="line"><span class="string">    .Voltage &quot;V&quot; </span></span><br><span class="line"><span class="string">    .Current &quot;A&quot; </span></span><br><span class="line"><span class="string">    .Resistance &quot;Ohm&quot; </span></span><br><span class="line"><span class="string">    .Conductance &quot;Siemens&quot; </span></span><br><span class="line"><span class="string">    .Capacitance &quot;PikoF&quot; </span></span><br><span class="line"><span class="string">    .Inductance &quot;NanoH&quot; </span></span><br><span class="line"><span class="string">    .SetResultUnit &quot;frequency&quot;, &quot;frequency&quot;, &quot;&quot; </span></span><br><span class="line"><span class="string">End With&quot;&quot;&quot;</span></span><br><span class="line">prj.modeler.add_to_history(<span class="string">&quot;Set Unit&quot;</span>, UnitVba)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置频率范围</span></span><br><span class="line">FrequencyRangeVba = <span class="string">&quot;&quot;&quot;Solver.FrequencyRange &quot;0&quot;, &quot;10&quot; &quot;&quot;&quot;</span></span><br><span class="line">prj.modeler.add_to_history(<span class="string">&quot;Set Frequency Range&quot;</span>, FrequencyRangeVba)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加圆柱体结构</span></span><br><span class="line">CavityShapeVba = <span class="string">&quot;&quot;&quot;With Cylinder </span></span><br><span class="line"><span class="string">    .Reset </span></span><br><span class="line"><span class="string">    .Name &quot;Cavity&quot; </span></span><br><span class="line"><span class="string">    .Component &quot;component1&quot; </span></span><br><span class="line"><span class="string">    .Material &quot;Vacuum&quot; </span></span><br><span class="line"><span class="string">    .OuterRadius &quot;100&quot; </span></span><br><span class="line"><span class="string">    .InnerRadius &quot;0&quot; </span></span><br><span class="line"><span class="string">    .Axis &quot;z&quot; </span></span><br><span class="line"><span class="string">    .Zrange &quot;-50&quot;, &quot;50&quot; </span></span><br><span class="line"><span class="string">    .Xcenter &quot;0&quot; </span></span><br><span class="line"><span class="string">    .Ycenter &quot;0&quot; </span></span><br><span class="line"><span class="string">    .Segments &quot;0&quot; </span></span><br><span class="line"><span class="string">    .Create </span></span><br><span class="line"><span class="string">End With&quot;&quot;&quot;</span></span><br><span class="line">prj.modeler.add_to_history(<span class="string">&quot;Add Cylinder&quot;</span>, CavityShapeVba)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置背景和边界条件</span></span><br><span class="line">BackgroundVba = <span class="string">&quot;&quot;&quot;With Background ...&quot;&quot;&quot;</span>  <span class="comment"># 简化展示，完整代码见原文</span></span><br><span class="line">prj.modeler.add_to_history(<span class="string">&quot;Set Background Conditions&quot;</span>, BackgroundVba)</span><br><span class="line">BoundaryVba = <span class="string">&quot;&quot;&quot;With Boundary ...&quot;&quot;&quot;</span>  <span class="comment"># 简化展示，完整代码见原文</span></span><br><span class="line">prj.modeler.add_to_history(<span class="string">&quot;Set Boundary Conditions&quot;</span>, BoundaryVba)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行求解器并保存结果</span></span><br><span class="line">prj.modeler.run_solver()</span><br><span class="line"><span class="keyword">while</span> prj.modeler.is_solver_running():</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line">prj.save(<span class="string">r&quot;C:\Users\LiuMing\Downloads\cylinder_project.cst&quot;</span>, include_results=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 关闭项目并提取模式频率</span></span><br><span class="line">prj.close()</span><br><span class="line">de.close()</span><br><span class="line">pf = cst.results.ProjectFile(<span class="string">r&quot;C:\Users\LiuMing\Downloads\cylinder_project.cst&quot;</span>)</span><br><span class="line">results_module = pf.get_3d()</span><br><span class="line">mode_frequencies_result = results_module.get_result_item(<span class="string">&quot;1D Results\\Mode Frequencies\\Mode 1&quot;</span>, run_id=<span class="number">0</span>)</span><br><span class="line">data = mode_frequencies_result.get_data()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(data)):</span><br><span class="line">    <span class="built_in">print</span>(data[i])</span><br></pre></td></tr></table></figure>
+
+<h3 id="脚本功能分解"><a href="#脚本功能分解" class="headerlink" title="脚本功能分解"></a>脚本功能分解</h3><ol>
+<li><strong>初始化环境</strong>：通过 <code>cst.interface.DesignEnvironment()</code> 和 <code>de.new_mws()</code> 创建设计环境和新项目。</li>
+<li><strong>配置求解器</strong>：将求解器设置为本征模式（Eigenmode），适用于计算腔体谐振频率。</li>
+<li><strong>设置单位和频率范围</strong>：定义几何单位（mm）、频率单位（GHz）等，并设置 0-10 GHz 的频率范围。</li>
+<li><strong>创建几何结构</strong>：添加一个真空材质的圆柱体，半径 100 mm，高度 100 mm。</li>
+<li><strong>定义边界条件</strong>：设置背景为完美电导体（PEC），边界条件为电边界。</li>
+<li><strong>运行仿真</strong>：启动求解器并保存结果。</li>
+<li><strong>结果提取</strong>：从仿真结果中提取模式频率并输出。</li>
+</ol>
+<p>通过这个脚本，用户无需手动点击 CST Studio Suite 的图形界面，即可完成一个完整的微波腔体仿真。这为高效、重复性的电磁仿真奠定了基础。</p>
+<h2 id="自动化技术的优势"><a href="#自动化技术的优势" class="headerlink" title="自动化技术的优势"></a>自动化技术的优势</h2><p>CST Studio Suite 的 Python 自动化技术带来了显著的效率提升和灵活性：</p>
+<ul>
+<li><strong>效率提升</strong>：自动化脚本消除了手动操作的重复性劳动，减少人为错误。</li>
+<li><strong>可重复性</strong>：脚本确保每次仿真的参数和流程一致，便于结果验证。</li>
+<li><strong>灵活性</strong>：通过修改脚本参数，可以快速调整模型和仿真设置。</li>
+<li><strong>扩展性</strong>：Python 的强大生态系统允许与数据分析、机器学习等工具集成。</li>
+</ul>
+<p>例如，手动创建上述圆柱体模型并运行仿真可能需要 10-15 分钟，而脚本只需几秒钟即可完成设置，求解时间则取决于硬件性能。</p>
+<h2 id="更广泛的应用场景"><a href="#更广泛的应用场景" class="headerlink" title="更广泛的应用场景"></a>更广泛的应用场景</h2><p>这项技术不仅限于微波腔体仿真，还可以在多个领域和场景中发挥作用。以下是基于脚本功能的扩展应用：</p>
+<h3 id="参数化设计与优化"><a href="#参数化设计与优化" class="headerlink" title="参数化设计与优化"></a>参数化设计与优化</h3><p>通过修改脚本中的参数（如圆柱体的半径、高度、材料属性），可以快速生成并仿真一系列模型。例如：</p>
+<ul>
+<li><strong>优化谐振频率</strong>：循环改变圆柱体半径，找出特定频率下的最佳尺寸。</li>
+<li><strong>材料选择</strong>：测试不同介电常数对模式频率的影响。</li>
+</ul>
+<h3 id="批量处理"><a href="#批量处理" class="headerlink" title="批量处理"></a>批量处理</h3><p>脚本可以批量创建和运行多个项目，例如：</p>
+<ul>
+<li><strong>多频段分析</strong>：自动生成不同频率范围的仿真项目。</li>
+<li><strong>结构对比</strong>：对比圆柱体、矩形腔等多种结构的性能。</li>
+</ul>
+<h3 id="数据分析与可视化"><a href="#数据分析与可视化" class="headerlink" title="数据分析与可视化"></a>数据分析与可视化</h3><p>结合 Python 的数据处理库（如 NumPy、Matplotlib），可以自动化提取和分析结果：</p>
+<ul>
+<li><strong>频率曲线</strong>：绘制模式频率随半径变化的曲线。</li>
+<li><strong>结果对比</strong>：比较不同模型的谐振特性。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">radii = [<span class="number">50</span>, <span class="number">75</span>, <span class="number">100</span>, <span class="number">125</span>]</span><br><span class="line">frequencies = []</span><br><span class="line"><span class="keyword">for</span> r <span class="keyword">in</span> radii:</span><br><span class="line">    <span class="comment"># 修改半径并运行仿真</span></span><br><span class="line">    <span class="comment"># ... (仿真代码)</span></span><br><span class="line">    freq = mode_frequencies_result.get_data()[<span class="number">0</span>]</span><br><span class="line">    frequencies.append(freq)</span><br><span class="line">plt.plot(radii, frequencies, <span class="string">&#x27;o-&#x27;</span>)</span><br><span class="line">plt.xlabel(<span class="string">&quot;Radius (mm)&quot;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&quot;Mode Frequency (GHz)&quot;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<h3 id="与其他工具集成"><a href="#与其他工具集成" class="headerlink" title="与其他工具集成"></a>与其他工具集成</h3><p>Python 的开放性允许与外部工具无缝衔接：</p>
+<ul>
+<li><strong>机器学习</strong>：使用 Scikit-learn 训练模型，预测最佳设计参数。</li>
+<li><strong>数据管理</strong>：用 Pandas 存储和管理仿真结果。</li>
+</ul>
+<h3 id="自动化测试与验证"><a href="#自动化测试与验证" class="headerlink" title="自动化测试与验证"></a>自动化测试与验证</h3><p>在产品开发中，脚本可用于：</p>
+<ul>
+<li><strong>EMC 测试</strong>：自动运行电磁兼容性分析，确保设备符合标准。</li>
+<li><strong>RF 性能验证</strong>：验证天线或滤波器的频率响应。</li>
+</ul>
+<h3 id="教育与培训"><a href="#教育与培训" class="headerlink" title="教育与培训"></a>教育与培训</h3><p>脚本可以作为教学工具：</p>
+<ul>
+<li><strong>演示仿真流程</strong>：展示电磁场理论的实际应用。</li>
+<li><strong>学生实验</strong>：提供可修改的模板，让学生探索参数影响。</li>
+</ul>
+<h3 id="定制化工作流程"><a href="#定制化工作流程" class="headerlink" title="定制化工作流程"></a>定制化工作流程</h3><p>工程师可以根据需求定制脚本：</p>
+<ul>
+<li><strong>报告生成</strong>：自动导出仿真结果为 PDF 或 Excel。</li>
+<li><strong>任务通知</strong>：仿真完成后通过邮件或消息通知用户。</li>
+</ul>
+<h3 id="云端与分布式计算"><a href="#云端与分布式计算" class="headerlink" title="云端与分布式计算"></a>云端与分布式计算</h3><p>结合 CST 的云端功能：</p>
+<ul>
+<li><strong>任务提交</strong>：脚本自动将仿真任务分发到云端或集群。</li>
+<li><strong>并行处理</strong>：同时运行多个参数组合，加速优化过程。</li>
+</ul>
+<h3 id="创新设计探索"><a href="#创新设计探索" class="headerlink" title="创新设计探索"></a>创新设计探索</h3><p>通过快速迭代：</p>
+<ul>
+<li><strong>概念验证</strong>：测试大量设计方案，发现潜在优化点。</li>
+<li><strong>前沿应用</strong>：探索 5G、太赫兹等新兴领域的新结构。</li>
+</ul>
+<h2 id="未来展望"><a href="#未来展望" class="headerlink" title="未来展望"></a>未来展望</h2><p>随着技术进步，CST Studio Suite 自动化将在以下方向展现更大潜力：</p>
+<ul>
+<li><strong>人工智能驱动设计</strong>：结合 AI，自动优化复杂电磁结构。</li>
+<li><strong>大规模仿真</strong>：利用云计算处理超大规模模型。</li>
+<li><strong>跨领域融合</strong>：推动电磁仿真在医疗、能源等领域的应用。</li>
+</ul>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>基于 Python 的 CST Studio Suite 自动化技术为电磁仿真带来了革命性变化。从简单的微波腔体仿真到复杂的参数优化和批量处理，这项技术显著提高了效率和灵活性。通过扩展应用场景，它不仅服务于工程师和研究人员，还推动了教育、创新和跨学科研究的发展。未来，随着计算能力和智能化水平的提升，这项技术必将在电磁仿真领域发挥更大作用。</p>
+<p><strong>参考文献</strong>：</p>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9zcGFjZS5taXQuZWR1L1JBRElPL0NTVF9vbmxpbmUvUHl0aG9uL21haW4uaHRtbA==">CST Python Libraries<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="Liu Ming WeChat Pay">
+        <span>WeChat Pay</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="Liu Ming Alipay">
+        <span>Alipay</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>Liu Ming
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="http://iuming.github.io/2025/03/08/CST%E8%87%AA%E5%8A%A8%E5%8C%96%EF%BC%9APython%E8%84%9A%E6%9C%AC%E9%A9%B1%E5%8A%A8%E7%9A%84%E5%BE%AE%E6%B3%A2%E9%A1%B9%E7%9B%AE%E4%BB%BF%E7%9C%9F/" title="CST自动化：Python脚本驱动的微波项目仿真">http://iuming.github.io/2025/03/08/CST自动化：Python脚本驱动的微波项目仿真/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/realiuming">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+U5yo-Zxuw1OgbU6P">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </span>
+
+          <img class="social-item-img" src="/images/wechat_channel.jpg">
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
+              <a href="/tags/microwave/" rel="tag"><i class="fa fa-tag"></i> microwave</a>
+              <a href="/tags/CST/" rel="tag"><i class="fa fa-tag"></i> CST</a>
+              <a href="/tags/automation/" rel="tag"><i class="fa fa-tag"></i> automation</a>
+          </div>
+
+        
+  <div class="social-like a2a_kit a2a_kit_size_32 a2a_default_style">
+    <a class="a2a_dd" target="_blank" rel="noopener" href="https://www.addtoany.com/share"></a>
+      <a class="a2a_button_facebook"></a>
+      <a class="a2a_button_twitter"></a>
+      <a class="a2a_button_wechat"></a>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/03/06/%E5%9F%BA%E4%BA%8EPython-GUI%E7%9A%84%E8%B6%85%E5%AF%BC%E8%85%94%E5%8A%A0%E9%80%9F%E6%A2%AF%E5%BA%A6%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/" rel="prev" title="基于Python GUI的超导腔加速梯度分析工具开发实战">
+                  <i class="fa fa-angle-left"></i> 基于Python GUI的超导腔加速梯度分析工具开发实战
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Ming Liu. All rights reserved.</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL2l1bWluZw==" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.1.0/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/4.23.3/algoliasearch-lite.umd.js" integrity="sha256-1QNshz86RqXe/qsCBldsUu13eAX6n/O98uubKQs87UI=" crossorigin="anonymous"></script><script src="/js/third-party/search/algolia-search.js"></script>
+<script class="next-config" data-name="chatra" type="application/json">{"enable":true,"async":true,"id":"gTXKphrmKGf5QSb5L"}</script>
+<script src="/js/third-party/chat/chatra.js"></script>
+<script async src="https://call.chatra.io/chatra.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.0/pdfobject.min.js","integrity":"sha256-JJZNsid68vnh3/zyj0lY9BN5ynxVX/12XgOa1TlaYN0="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.0/mermaid.min.js","integrity":"sha256-stuqcu2FrjYCXDOytWFA5SoUE/r3nkp6gTglzNSlavU="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+  <script class="next-config" data-name="wavedrom" type="application/json">{"enable":true,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.5.0/wavedrom.min.js","integrity":"sha256-INLAoJc6quTNfiMWkGZniYO2cxE8mHpddnLow1m6RFs="}}</script>
+  <script class="next-config" data-name="wavedrom_skin" type="application/json">{"enable":true,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.5.0/skins/default.js","integrity":"sha256-fduc/Zszk5ezWws2uInY/ALWVmIrmV6VTgXbsYSReFI="}}</script>
+  <script src="/js/third-party/tags/wavedrom.js"></script>
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+  <script src="/js/third-party/addtoany.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":"ture","archive":true,"delay":true,"timeout":3000,"priority":true,"url":"http://iuming.github.io/2025/03/08/CST%E8%87%AA%E5%8A%A8%E5%8C%96%EF%BC%9APython%E8%84%9A%E6%9C%AC%E9%A9%B1%E5%8A%A8%E7%9A%84%E5%BE%AE%E6%B3%A2%E9%A1%B9%E7%9B%AE%E4%BB%BF%E7%9C%9F/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"realiuming","count":true,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+
+</body>
+</html>
