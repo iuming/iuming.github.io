@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.2.0">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/manifest.json">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"iuming.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.20.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":null},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":true,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="粒子加速器是现代科学研究和工业应用中不可或缺的工具，广泛应用于基础物理学、材料科学、医学等多个领域">
+<meta property="og:type" content="article">
+<meta property="og:title" content="强化学习在低电平射频（LLRF）控制中的应用">
+<meta property="og:url" content="http://iuming.github.io/2025/04/15/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8%E4%BA%8ELLRF%E7%A0%94%E7%A9%B6/index.html">
+<meta property="og:site_name" content="REALIUMING&#39;BLOG">
+<meta property="og:description" content="粒子加速器是现代科学研究和工业应用中不可或缺的工具，广泛应用于基础物理学、材料科学、医学等多个领域">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-04-15T06:27:42.000Z">
+<meta property="article:modified_time" content="2025-04-15T06:34:37.682Z">
+<meta property="article:author" content="Liu Ming">
+<meta property="article:tag" content="LLRF">
+<meta property="article:tag" content="LLM">
+<meta property="article:tag" content="RL">
+<meta property="article:tag" content="Gemini">
+<meta name="twitter:card" content="&lt;twitter:card&gt;">
+<meta name="twitter:image" content="http://iuming.github.io/2025/04/15/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8%E4%BA%8ELLRF%E7%A0%94%E7%A9%B6/%3Ctwitter:image%3E">
+<meta name="twitter:creator" content="@&lt;twitter:creator&gt;">
+<meta name="twitter:site" content="<twitter:site>">
+<meta property="fb:admins" content="&lt;fb:admin_id&gt;">
+<meta property="fb:app_id" content="&lt;fb:app_id&gt;">
+
+
+<link rel="canonical" href="http://iuming.github.io/2025/04/15/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8%E4%BA%8ELLRF%E7%A0%94%E7%A9%B6/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://iuming.github.io/2025/04/15/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8%E4%BA%8ELLRF%E7%A0%94%E7%A9%B6/","path":"2025/04/15/强化学习应用于LLRF研究/","title":"强化学习在低电平射频（LLRF）控制中的应用"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>强化学习在低电平射频（LLRF）控制中的应用 | REALIUMING'BLOG</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">REALIUMING'BLOG</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">233</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">19</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">93</span></a></li><li class="menu-item menu-item-books"><a href="/book/" rel="section"><i class="fa fa-book fa-fw"></i>books</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fab fa-algolia fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%95%E7%94%A8%E7%9A%84%E8%91%97%E4%BD%9C"><span class="nav-number">1.</span> <span class="nav-text">引用的著作</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Liu Ming"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Liu Ming</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">233</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button animated">
+    <button><i class="fa fa-comment"></i>
+      Chat
+    </button>
+  </div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2l1bWluZw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;iuming"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOjUyMDBsaXVtaW5nQGdtYWlsLmNvbQ==" title="E-Mail → mailto:5200liuming@gmail.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vdS8zMTQ3OTEyODky" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;3147912892"><i class="fab fa-weibo fa-fw"></i>Weibo</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9yZWFsaXVtaW5n" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;realiuming"><i class="fab fa-twitter fa-fw"></i>Twitter</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL3JlYWxpdW1pbmc=" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;realiuming"><i class="fab fa-facebook fa-fw"></i>FB Page</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8xMjE4NTI3My9pdW1pbmc=" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;12185273&#x2F;iuming"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly95b3V0dWJlLmNvbS9jaGFubmVsL1VDaUNCSHJ4cDJ4Tlc3T1ZaTlFzZHROdw==" title="YouTube → https:&#x2F;&#x2F;youtube.com&#x2F;channel&#x2F;UCiCBHrxp2xNW7OVZNQsdtNw"><i class="fab fa-youtube fa-fw"></i>YouTube</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9pbnN0YWdyYW0uY29tL3JlYWxpdW1pbmc=" title="Instagram → https:&#x2F;&#x2F;instagram.com&#x2F;realiuming"><i class="fab fa-instagram fa-fw"></i>Instagram</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="c2t5cGU6ODQyNjczNTU2P2NhbGx8Y2hhdA==" title="Skype → skype:842673556?call|chat"><i class="fab fa-skype fa-fw"></i>Skype</span>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="Back to top">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://iuming.github.io/" title="https:&#x2F;&#x2F;iuming.github.io&#x2F;">Title</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://iuming.github.io/2025/04/15/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8%E4%BA%8ELLRF%E7%A0%94%E7%A9%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Liu Ming">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="REALIUMING'BLOG">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="强化学习在低电平射频（LLRF）控制中的应用 | REALIUMING'BLOG">
+      <meta itemprop="description" content="粒子加速器是现代科学研究和工业应用中不可或缺的工具，广泛应用于基础物理学、材料科学、医学等多个领域">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          强化学习在低电平射频（LLRF）控制中的应用
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2025-04-15 14:27:42 / Modified: 14:34:37" itemprop="dateCreated datePublished" datetime="2025-04-15T14:27:42+08:00">2025-04-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/note/" itemprop="url" rel="index"><span itemprop="name">note</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2025/04/15/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8%E4%BA%8ELLRF%E7%A0%94%E7%A9%B6/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2025/04/15/强化学习应用于LLRF研究/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+            <div class="post-description">粒子加速器是现代科学研究和工业应用中不可或缺的工具，广泛应用于基础物理学、材料科学、医学等多个领域</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p><strong>1. 引言：粒子加速器中低电平射频（LLRF）控制</strong></p>
+<p>粒子加速器是现代科学研究和工业应用中不可或缺的工具，广泛应用于基础物理学、材料科学、医学等多个领域 1。在这些加速器中，带电粒子通过射频（RF）系统产生的电磁场加速到极高的能量 1。低电平射频（LLRF）控制系统在维持加速腔内电磁场的稳定方面起着至关重要的作用。LLRF系统的精确控制对于实现所需的束流参数（如能量、束团长度和稳定性）至关重要 13，这些参数直接影响高能物理实验和其他应用的效果。现代粒子加速器对束流质量和稳定性的要求日益提高，对LLRF控制系统的性能提出了更高的挑战，尤其是在加速场幅度和相位稳定性方面 38。精确的控制对于最小化能量散布和维持束流质量至关重要 13。然而，加速器系统固有的非线性和时变特性，以及束流负载、微振、电源纹波和洛伦兹力失谐等多种干扰因素的存在，使得传统的控制方法难以满足日益增长的性能需求。</p>
+<p><strong>2. 低电平射频（LLRF）系统的传统控制方法</strong></p>
+<p>传统的LLRF控制系统主要依赖于反馈控制技术 39，其中比例-积分-微分（PID）控制器是最常用的方法 39。PID控制器通过调整比例、积分和微分项的增益来减小系统误差。然而，由于加速器系统的非线性和时变特性 55，以及运行过程中参数的漂移，传统的PID控制器在实现高精度控制方面面临诸多挑战 55。</p>
+<p>前馈控制策略也被广泛应用于LLRF系统中 18，用于补偿诸如束流负载等可预测的干扰 18。然而，精确建模和预测复杂的干扰仍然是一个难题 55。</p>
+<p>近年来，一些先进的控制技术，如模型预测控制（MPC）和自适应控制方法，也开始应用于LLRF系统中。然而，由于现代加速器的复杂性日益增加 55，数据驱动的方法越来越受到关注。</p>
+<p><strong>3. 强化学习：智能LLRF控制的新范式</strong></p>
+<p>强化学习（RL）作为一种机器学习范式，为解决LLRF控制中的复杂问题提供了一种新的途径 45。RL的核心概念包括智能体（agent）、环境（environment）、状态（state）、动作（action）、奖励（reward）和策略（policy） 45。智能体通过与环境交互，根据当前状态采取动作，并从环境中获得奖励或惩罚。智能体的目标是学习一个最优策略，使其在长期过程中获得的累积奖励最大化。</p>
+<p>RL方法可以分为基于模型和无模型两种 62。基于模型的方法需要学习环境的动态模型，然后利用该模型进行策略优化。无模型方法则直接从与环境的交互中学习最优策略，无需显式地建立环境模型。RL特别适用于解决具有延迟后果的复杂控制任务，并且能够从经验中学习，而无需预先了解系统的精确模型 45。</p>
+<p>在控制领域，与LLRF控制相关的关键RL算法包括：</p>
+<ul>
+<li><strong>基于价值的方法</strong>：如Q学习、深度Q网络（DQN） 68。  </li>
+<li><strong>基于策略的方法</strong>：如策略梯度、REINFORCE 68。  </li>
+<li><strong>演员-评论家方法</strong>：如深度确定性策略梯度（DDPG）、软演员-评论家（SAC）、双延迟DDPG（TD3）、近端策略优化（PPO） 68。</li>
+</ul>
+<p><strong>4. 强化学习在LLRF控制中的应用</strong></p>
+<p>强化学习在LLRF控制中展现出广泛的应用潜力：</p>
+<ul>
+<li><strong>自动调整和优化LLRF参数</strong>：RL智能体可以学习LLRF控制器的最优设置，例如PI增益，以最小化幅度和相位误差。RL还可以用于自动设置、校准和优化RF系统。  </li>
+<li><strong>超导腔中射频场的稳定</strong>：应用RL可以在存在扰动的情况下维持精确的幅度和相位稳定性，从而增强束流的稳定性 38。基于RL的反馈控制可以用于补偿束流负载和微振 18。  </li>
+<li><strong>纵向束流动力学控制</strong>：利用RL可以操纵RF参数，实现束团整形、同步和其他纵向束流操作 13。RL还可以优化束流注入和引出过程 45。</li>
+</ul>
+<p><strong>5. 利用强化学习优化LLRF系统性能</strong></p>
+<p>强化学习能够显著提升LLRF系统的性能：</p>
+<ul>
+<li><strong>提高场稳定性</strong>：RL算法可以设计成专门用于最小化幅度和相位波动，从而增强束流的稳定性 56。通过学习鲁棒的控制策略，RL能够应对不确定条件下的LLRF系统。  </li>
+<li><strong>降低延迟，提高响应时间</strong>：RL技术可以实现更快、更精确的控制动作 123。  </li>
+<li><strong>减少功耗</strong>：RL策略可以用于实现LLRF系统的节能运行 69。</li>
+</ul>
+<p><strong>6. 强化学习控制LLRF系统的案例研究</strong></p>
+<p>文献中报道了多个在实际粒子加速器或仿真环境中使用强化学习控制LLRF系统的案例：</p>
+<ul>
+<li>CERN AWAKE、FERMI FEL和LANSCE等设施的研究 45。  </li>
+<li>在这些案例中，RL被应用于各种LLRF控制任务，如腔体共振控制、幅度和相位稳定以及束流同步。  </li>
+<li>这些研究通常报告了RL方法相对于传统控制技术的性能提升 56。</li>
+</ul>
+<p><strong>7. 借鉴其他射频控制或实时控制系统的经验</strong></p>
+<p>强化学习已成功应用于其他射频控制系统，如通信、雷达和医疗应用中的射频控制 69。在实时控制领域，RL也被广泛应用于机器人、自动驾驶汽车和工业自动化等 123。这些领域的成功经验和策略可以借鉴到LLRF控制中 45。</p>
+<p><strong>8. LLRF控制系统的具体要求与强化学习方法的适用性评估</strong></p>
+<p>LLRF控制系统对响应时间、精度和稳定性有着严格的要求 38。RL方法在处理这些要求方面显示出潜力：</p>
+<ul>
+<li><strong>响应时间</strong>：通过优化RL算法和利用硬件加速，可以实现LLRF系统的快速响应 123。  </li>
+<li><strong>精度和稳定性</strong>：RL算法能够学习复杂的控制策略，以实现高精度的幅度和相位控制，并在各种操作条件下保持系统的稳定性 56。</li>
+</ul>
+<p><strong>9. 强化学习在处理LLRF系统常见问题方面的研究</strong></p>
+<p>强化学习在处理LLRF系统中常见的扰动、噪声和参数漂移方面展现出强大的能力：</p>
+<ul>
+<li><strong>鲁棒控制</strong>：RL技术可以设计出对噪声和模型不确定性具有鲁棒性的控制器。  </li>
+<li><strong>自适应控制</strong>：RL智能体可以学习适应系统参数的变化和漂移，保持控制性能。  </li>
+<li><strong>噪声抑制</strong>：研究表明，机器学习技术（包括RL）可用于降低LLRF系统中的噪声。</li>
+</ul>
+<p><strong>10. 强化学习在LLRF控制中更广泛应用的未来趋势和预测分析</strong></p>
+<p>未来，强化学习有望在LLRF控制中得到更广泛的应用：</p>
+<ul>
+<li><strong>自主加速器运行</strong>：RL是实现自主加速器运行的关键技术之一，可以减少人工干预，提高运行效率。  </li>
+<li><strong>与其他人工智能技术的集成</strong>：RL可以与其他机器学习技术和先进控制方法相结合，以实现更智能、更高效的LLRF控制 45。  </li>
+<li><strong>利用仿真和数字孪生</strong>：高保真仿真环境和数字孪生将在RL算法的开发和验证中发挥越来越重要的作用。  </li>
+<li><strong>解决从仿真到现实的迁移问题</strong>：领域随机化等技术将有助于弥合在仿真环境中训练的RL智能体与实际加速器之间的性能差距 73。</li>
+</ul>
+<p><strong>11. 结论</strong></p>
+<p>强化学习为解决粒子加速器中低电平射频（LLRF）控制的复杂挑战提供了一个极具前景的框架。通过回顾现有文献，我们发现RL在自动调整参数、稳定射频场、控制纵向束流动力学以及优化LLRF系统性能方面展现出显著的潜力。案例研究表明，RL算法能够在实际加速器设施和仿真环境中实现优于传统控制方法的性能。借鉴其他射频控制和实时控制领域的经验，进一步增强了RL在LLRF控制中的应用前景。尽管如此，将RL广泛应用于LLRF控制仍然面临着处理系统复杂性、噪声、扰动和参数漂移等挑战。未来的研究方向将侧重于开发更高效、更鲁棒的RL算法，并探索与其他人工智能技术的集成，以及利用高保真仿真环境来加速RL在加速器控制领域的部署。强化学习有望成为未来自主加速器运行的关键使能技术，推动粒子加速器技术的进步，并为科学研究和工业应用带来革命性的变革。</p>
+<p><strong>表1：传统方法与基于强化学习的LLRF控制方法比较</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">特征</th>
+<th align="left">传统方法（PID、前馈）</th>
+<th align="left">基于强化学习的方法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>处理非线性</strong></td>
+<td align="left">对非线性系统建模和控制能力有限</td>
+<td align="left">能够学习复杂映射，有效处理高度非线性的加速器系统 13</td>
+</tr>
+<tr>
+<td align="left"><strong>适应扰动</strong></td>
+<td align="left">需要精确的扰动模型，对未建模扰动鲁棒性较差</td>
+<td align="left">可以学习鲁棒的控制策略，有效处理噪声、扰动和参数漂移</td>
+</tr>
+<tr>
+<td align="left"><strong>优化能力</strong></td>
+<td align="left">参数调优通常依赖人工经验或简单的优化算法</td>
+<td align="left">可以通过最大化累积奖励来学习最优控制策略，实现更高级别的性能优化 45</td>
+</tr>
+<tr>
+<td align="left"><strong>系统模型依赖</strong></td>
+<td align="left">通常需要精确的系统模型进行设计和分析</td>
+<td align="left">无需显式系统模型，可以直接从与环境的交互中学习 45</td>
+</tr>
+<tr>
+<td align="left"><strong>实现复杂度</strong></td>
+<td align="left">相对简单</td>
+<td align="left">算法设计和训练可能较为复杂，需要专业的机器学习知识 45</td>
+</tr>
+</tbody></table>
+<p><strong>表2：强化学习在LLRF控制中的案例研究</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">设施名称</th>
+<th align="left">RL算法</th>
+<th align="left">控制目标</th>
+<th align="left">主要成果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">CERN AWAKE</td>
+<td align="left">基于高斯过程的模型RL</td>
+<td align="left">电子束轨迹控制</td>
+<td align="left">仅通过几次交互就学会了控制束流轨迹，学习速度与数值优化器相当 75</td>
+</tr>
+<tr>
+<td align="left">FERMI FEL</td>
+<td align="left">基于模型的RL，无模型的RL</td>
+<td align="left">强度优化</td>
+<td align="left">基于模型的方法展现出更高的表征能力和样本效率 81</td>
+</tr>
+<tr>
+<td align="left">LANSCE</td>
+<td align="left">深度Q网络（DQN）</td>
+<td align="left">梯度磁铁电源调节</td>
+<td align="left">实现了比现有PID控制器更高的精度 63</td>
+</tr>
+<tr>
+<td align="left">多个加速器</td>
+<td align="left">元强化学习，基于模型的RL</td>
+<td align="left">束流轨迹优化</td>
+<td align="left">元RL能够快速适应新场景，基于模型的RL展现出极高的样本效率 46</td>
+</tr>
+<tr>
+<td align="left">CERN PS</td>
+<td align="left">强化学习</td>
+<td align="left">优化射频操作以产生均匀的射频分裂</td>
+<td align="left">在仿真中训练并在控制室成功转移，实现完全运行 172</td>
+</tr>
+</tbody></table>
+<p><strong>表3：LLRF控制的关键性能指标及强化学习的影响</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">性能指标</th>
+<th align="left">传统方法的典型性能</th>
+<th align="left">强化学习实现的改进</th>
+<th align="left">相关研究</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>幅度稳定性</strong></td>
+<td align="left">0.1% - 1% RMS</td>
+<td align="left">可达0.01% RMS甚至更优 38</td>
+<td align="left">38</td>
+</tr>
+<tr>
+<td align="left"><strong>相位稳定性</strong></td>
+<td align="left">0.1° - 1° RMS</td>
+<td align="left">可达0.01° RMS甚至更优 38</td>
+<td align="left">38</td>
+</tr>
+<tr>
+<td align="left"><strong>响应时间</strong></td>
+<td align="left">微秒至毫秒级别</td>
+<td align="left">可实现更快的响应，具体取决于算法和硬件 123</td>
+<td align="left">123</td>
+</tr>
+<tr>
+<td align="left"><strong>功耗</strong></td>
+<td align="left">取决于具体系统设计</td>
+<td align="left">可以通过优化控制策略实现节能运行 69</td>
+<td align="left">69</td>
+</tr>
+</tbody></table>
+<h4 id="引用的著作"><a href="#引用的著作" class="headerlink" title="引用的著作"></a><strong>引用的著作</strong></h4><ol>
+<li>Particle accelerator - Wikipedia, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvUGFydGljbGVfYWNjZWxlcmF0b3I=">https://en.wikipedia.org/wiki/Particle_accelerator<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Review: Literature Study of Particle Accelerator Development and Its Applications In Material Physics Research - SunanKalijaga.org, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9zdW5hbmthbGlqYWdhLm9yZy9wcm9zaWRpbmcvaW5kZXgucGhwL2ljc2UvYXJ0aWNsZS9kb3dubG9hZC82MTIvNTg0LzExNTU=">https://sunankalijaga.org/prosiding/index.php/icse/article/download/612/584/1155<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Particle Accelerators and Radiation Research | US EPA, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cuZXBhLmdvdi9yYWR0b3duL3BhcnRpY2xlLWFjY2VsZXJhdG9ycy1hbmQtcmFkaWF0aW9uLXJlc2VhcmNo">https://www.epa.gov/radtown/particle-accelerators-and-radiation-research<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Nanophotonic electron accelerator: A review of particle accelerator …, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cucmVzZWFyY2hnYXRlLm5ldC9wdWJsaWNhdGlvbi8zODg2NjExMDZfTmFub3Bob3RvbmljX2VsZWN0cm9uX2FjY2VsZXJhdG9yX0FfcmV2aWV3X29mX3BhcnRpY2xlX2FjY2VsZXJhdG9yX3RlY2hub2xvZ3k=">https://www.researchgate.net/publication/388661106_Nanophotonic_electron_accelerator_A_review_of_particle_accelerator_technology<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>DOE Explains…Particle Accelerators - Department of Energy, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cuZW5lcmd5Lmdvdi9zY2llbmNlL2RvZS1leHBsYWluc3BhcnRpY2xlLWFjY2VsZXJhdG9ycw==">https://www.energy.gov/science/doe-explainsparticle-accelerators<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>How Particle Accelerators Work | Department of Energy, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cuZW5lcmd5Lmdvdi9hcnRpY2xlcy9ob3ctcGFydGljbGUtYWNjZWxlcmF0b3JzLXdvcms=">https://www.energy.gov/articles/how-particle-accelerators-work<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Accelerators | CERN, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cDovL2hvbWUuY2Vybi9hYm91dC9hY2NlbGVyYXRvcnM=">http://home.cern/about/accelerators<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>How do accelerators work? | Sanford Underground Research Facility, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9zYW5mb3JkbGFiLm9yZy9uZXdzL2hvdy1kby1hY2NlbGVyYXRvcnMtd29yaw==">https://sanfordlab.org/news/how-do-accelerators-work<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Types of particle accelerators | Particle Physics Class Notes - Fiveable, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9saWJyYXJ5LmZpdmVhYmxlLm1lL3BhcnRpY2xlLXBoeXNpY3MvdW5pdC05L3R5cGVzLXBhcnRpY2xlLWFjY2VsZXJhdG9ycy9zdHVkeS1ndWlkZS9nSHB6TkRvblhycGh5MTdM">https://library.fiveable.me/particle-physics/unit-9/types-particle-accelerators/study-guide/gHpzNDonXrphy17L<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Manhattan Project: Science &gt; PARTICLE ACCELERATORS AND OTHER TECHNOLOGIES, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cub3N0aS5nb3Yvb3Blbm5ldC9tYW5oYXR0YW4tcHJvamVjdC1oaXN0b3J5L1NjaWVuY2UvUGFydGljbGVBY2NlbGVyYXRvcnMvcGFydGljbGUtYWNjZWxlcmF0b3JzLmh0bWw=">https://www.osti.gov/opennet/manhattan-project-history/Science/ParticleAccelerators/particle-accelerators.html<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>home.cern, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9ob21lLmNlcm4vc2NpZW5jZS9hY2NlbGVyYXRvcnMjOn46dGV4dD1BY2NlbGVyYXRvcnMlMjB1c2UlMjBlbGVjdHJvbWFnbmV0aWMlMjBmaWVsZHMlMjB0byxlbmVyZ3klMjBib29zdCUyMGF0JTIwZWFjaCUyMHR1cm4u">https://home.cern/science/accelerators#:~:text&#x3D;Accelerators%20use%20electromagnetic%20fields%20to,energy%20boost%20at%20each%20turn.<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>a guide to particle accelerators, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9sc3MuZm5hbC5nb3YvYXJjaGl2ZS9vdGhlci9tdXJhL01VUkEtQy5wZGY=">https://lss.fnal.gov/archive/other/mura/MURA-C.pdf<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>(PDF) Advanced Control Methods for Particle Accelerators (ACM4PA) 2019 Workshop Report - ResearchGate, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cucmVzZWFyY2hnYXRlLm5ldC9wdWJsaWNhdGlvbi8zMzg2MjA2OTdfQWR2YW5jZWRfQ29udHJvbF9NZXRob2RzX2Zvcl9QYXJ0aWNsZV9BY2NlbGVyYXRvcnNfQUNNNFBBXzIwMTlfV29ya3Nob3BfUmVwb3J0">https://www.researchgate.net/publication/338620697_Advanced_Control_Methods_for_Particle_Accelerators_ACM4PA_2019_Workshop_Report<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>(PDF) Future Particle Accelerators - ResearchGate, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cucmVzZWFyY2hnYXRlLm5ldC9wdWJsaWNhdGlvbi8zNjM3MDk5NDBfRnV0dXJlX1BhcnRpY2xlX0FjY2VsZXJhdG9ycw==">https://www.researchgate.net/publication/363709940_Future_Particle_Accelerators<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Technologies for Particle Accelerators - Sidea, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cuc2lkZWEuaXQvZW4vc2NpZW50aWZpYy1yZXNlYXJjaC9wYXJ0aWNsZS1hY2NlbGVyYXRvci90ZWNobm9sb2dpZXMtZm9yLXBhcnRpY2xlLWFjY2VsZXJhdG9ycy8=">https://www.sidea.it/en/scientific-research/particle-accelerator/technologies-for-particle-accelerators/<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Excellence in precision: advanced RF measurement technology for particle accelerators, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9jZXJuY291cmllci5jb20vYS9leGNlbGxlbmNlLWluLXByZWNpc2lvbi1hZHZhbmNlZC1yZi1tZWFzdXJlbWVudC10ZWNobm9sb2d5LWZvci1wYXJ0aWNsZS1hY2NlbGVyYXRvcnMv">https://cerncourier.com/a/excellence-in-precision-advanced-rf-measurement-technology-for-particle-accelerators/<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Controls - Accel-Link Ltd., 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9hY2NlbC1saW5rLmNhL3BhcnRpY2xlLWFjY2VsZXJhdG9yL3N1Yi1zeXN0ZW1zL2NvbnRyb2xzLw==">https://accel-link.ca/particle-accelerator/sub-systems/controls/<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Next Generation LLRF Control Platform for Compact C-band Linear Accelerator, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9hZ2VuZGEubGluZWFyY29sbGlkZXIub3JnL2V2ZW50LzEwMTM0L2NvbnRyaWJ1dGlvbnMvNTQ3NzUvYXR0YWNobWVudHMvMzk3NDkvNjI3NjkvTExSRl9MQ1dTMjAyNF9DSEFPX0xJVS5wZGY=">https://agenda.linearcollider.org/event/10134/contributions/54775/attachments/39749/62769/LLRF_LCWS2024_CHAO_LIU.pdf<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Digital low level rf control system with four different intermediate frequencies for the International Linear Collider | Phys. Rev. Accel. Beams, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9saW5rLmFwcy5vcmcvZG9pLzEwLjExMDMvUGh5c1JldkFjY2VsQmVhbXMuMjAuMDkzNTAx">https://link.aps.org/doi/10.1103/PhysRevAccelBeams.20.093501<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Digital low level rf control system for the International Linear Collider | Phys. Rev. Accel. Beams, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9saW5rLmFwcy5vcmcvZG9pLzEwLjExMDMvUGh5c1JldkFjY2VsQmVhbXMuMjEuMDgyMDA0">https://link.aps.org/doi/10.1103/PhysRevAccelBeams.21.082004<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Radio Frequency Station - Beam Dynamics Interaction in Circular Accelerators - Inspire HEP, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9pbnNwaXJlaGVwLm5ldC9saXRlcmF0dXJlLzg5MjU0Mg==">https://inspirehep.net/literature/892542<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Application of disturbance observer-based control in low-level radio …, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9saW5rLmFwcy5vcmcvZG9pLzEwLjExMDMvUGh5c1JldlNUQUIuMTguMDkyODAx">https://link.aps.org/doi/10.1103/PhysRevSTAB.18.092801<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>controls - CERN, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9hY2NlbGNvbmYud2ViLmNlcm4uY2gvaXBhYzIwMjQva2V5d29yZC9jb250cm9scy9pbmRleC5odG1s">https://accelconf.web.cern.ch/ipac2024/keyword/controls/index.html<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>LLRF System Modelling and Controller Design in UED, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9hY2NlbGNvbmYud2ViLmNlcm4uY2gvaXBhYzIwMTkvcGFwZXJzL3RocHJiMDUwLnBkZg==">https://accelconf.web.cern.ch/ipac2019/papers/thprb050.pdf<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Low-Level RF System Design for the Accelerator Test Facility (ATF) Damping Ring - Inspire HEP, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9pbnNwaXJlaGVwLm5ldC9maWxlcy85NDllZjBjZmIwNDNjZjQ5OGRiYzg0YTNlYTQ3MWU5ZQ==">https://inspirehep.net/files/949ef0cfb043cf498dbc84a3ea471e9e<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>RF Control Optimization and Automation for Normal Conducting Linear Accelerators, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cucmVzZWFyY2hnYXRlLm5ldC9wdWJsaWNhdGlvbi8zMTgyMDM0ODNfUkZfQ29udHJvbF9PcHRpbWl6YXRpb25fYW5kX0F1dG9tYXRpb25fZm9yX05vcm1hbF9Db25kdWN0aW5nX0xpbmVhcl9BY2NlbGVyYXRvcnM=">https://www.researchgate.net/publication/318203483_RF_Control_Optimization_and_Automation_for_Normal_Conducting_Linear_Accelerators<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Studies in Applying Machine Learning to LLRF and Resonance Control in Superconducting RF Cavities - ResearchGate, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cucmVzZWFyY2hnYXRlLm5ldC9wdWJsaWNhdGlvbi8zMzY2Mzg5MzdfU3R1ZGllc19pbl9BcHBseWluZ19NYWNoaW5lX0xlYXJuaW5nX3RvX0xMUkZfYW5kX1Jlc29uYW5jZV9Db250cm9sX2luX1N1cGVyY29uZHVjdGluZ19SRl9DYXZpdGllcw==">https://www.researchgate.net/publication/336638937_Studies_in_Applying_Machine_Learning_to_LLRF_and_Resonance_Control_in_Superconducting_RF_Cavities<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>[PDF] Reinforcement Learning Based on Real-Time Iteration NMPC - Semantic Scholar, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cuc2VtYW50aWNzY2hvbGFyLm9yZy9wYXBlci9SZWluZm9yY2VtZW50LUxlYXJuaW5nLUJhc2VkLW9uLVJlYWwtVGltZS1JdGVyYXRpb24tWmFub24tS3VuZ3VydHNldi9hOGQ2YzFkOWI3ZDNlNTc3MWNlMmMwM2YyM2IzODliNjA3MDQ4NjA1">https://www.semanticscholar.org/paper/Reinforcement-Learning-Based-on-Real-Time-Iteration-Zanon-Kungurtsev/a8d6c1d9b7d3e5771ce2c03f23b389b607048605<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>New LLRF Control System at LNL - Indico Global, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9pbmRpY28uZ2xvYmFsL2V2ZW50LzY3OTMvY29udHJpYnV0aW9ucy81NjIzOS9hdHRhY2htZW50cy8yODMzOC80OTMyMS9DUlhfMV8wNjIucGRm">https://indico.global/event/6793/contributions/56239/attachments/28338/49321/CRX_1_062.pdf<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Requirements for LLRF Control - ILC Agenda (Indico), 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9hZ2VuZGEubGluZWFyY29sbGlkZXIub3JnL2V2ZW50LzQ0ODAvY29udHJpYnV0aW9ucy8xNzIzNi9hdHRhY2htZW50cy8xMzg3OS8yMjgwMy9MZWN0dXJlX0ItM19TaW1yb2NrX3BhcnRfMWEucGRm">https://agenda.linearcollider.org/event/4480/contributions/17236/attachments/13879/22803/Lecture_B-3_Simrock_part_1a.pdf<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Precision Regulation of RF Fields with MIMO Controllers and Cavity-based Notch Filters - JACoW, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cuamFjb3cub3JnL0xJTkFDMjAxMi9wYXBlcnMvVEhQQjA4Ni5wZGY=">https://www.jacow.org/LINAC2012/papers/THPB086.pdf<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Requirements for LLRF Control - ILC Agenda (Indico), 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9hZ2VuZGEubGluZWFyY29sbGlkZXIub3JnL2V2ZW50LzYyNTgvY29udHJpYnV0aW9ucy8yOTE0Ny9hdHRhY2htZW50cy8yNDE2Ni8zNzQxNi8yMDEzX0lTTENfbGVjdHVyZV9CNF9wYXJ0XzEuMS5wZGY=">https://agenda.linearcollider.org/event/6258/contributions/29147/attachments/24166/37416/2013_ISLC_lecture_B4_part_1.1.pdf<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>LLRF performance evaluation - ESS Indico, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9pbmRpY28uZXNzLmV1L2V2ZW50LzU2Mi9hdHRhY2htZW50cy80MzExLzU4ODEvTExSRl9wZXJmb3JtYW5jZV9ldmFsdWF0aW9uXzB2NS5wZGY=">https://indico.ess.eu/event/562/attachments/4311/5881/LLRF_performance_evaluation_0v5.pdf<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Robust Quantum Control using Reinforcement Learning from Demonstration - Inspire HEP, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9pbnNwaXJlaGVwLm5ldC9saXRlcmF0dXJlLzI5MDUwNjA=">https://inspirehep.net/literature/2905060<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>The reinforcement learning for autonomous accelerators collaboration - CERN, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9hY2NlbGNvbmYud2ViLmNlcm4uY2gvaXBhYzIwMjQvcGRmL1RVUFM2Mi5wZGY=">https://accelconf.web.cern.ch/ipac2024/pdf/TUPS62.pdf<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Cavity Field Control for Linear Particle Accelerators Troeng, Olof - Lund University Publications, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9sdXAubHViLmx1LnNlL3NlYXJjaC9maWxlcy83MTUyODk1OC90aGVzaXNfdHJvZW5nLnBkZg==">https://lup.lub.lu.se/search/files/71528958/thesis_troeng.pdf<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>An Updated LLRF Control System for the TLS Linac - Inspire HEP, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9pbnNwaXJlaGVwLm5ldC9saXRlcmF0dXJlLzE2MzYzNzI=">https://inspirehep.net/literature/1636372<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Next Generation LLRF Control Platform for Compact C-band Linear Accelerator - arXiv, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvaHRtbC8yNDA3LjE4MTk4djI=">https://arxiv.org/html/2407.18198v2<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Machine Learning-Based LLRF and Resonance Control of Superconducting Cavities - Inspire HEP, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9pbnNwaXJlaGVwLm5ldC9maWxlcy82NjBkYzg5YTAwYWY3OGE3N2IwODZjMWQ3N2JkZTA4NQ==">https://inspirehep.net/files/660dc89a00af78a77b086c1d77bde085<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Experimental Evaluation of Sub-Sampling IQ Detection for Low-Level RF Control in Particle Accelerator Systems - MDPI, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cubWRwaS5jb20vMTQyNC04MjIwLzIyLzEvMzg=">https://www.mdpi.com/1424-8220/22/1/38<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Prototype real-time ATCA-based LLRF control system - ResearchGate, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cucmVzZWFyY2hnYXRlLm5ldC9wdWJsaWNhdGlvbi8yMjQyMjk5MzVfUHJvdG90eXBlX3JlYWwtdGltZV9BVENBLWJhc2VkX0xMUkZfY29udHJvbF9zeXN0ZW0=">https://www.researchgate.net/publication/224229935_Prototype_real-time_ATCA-based_LLRF_control_system<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Machine Learning-Based Tuning of Control Parameters for LLRF System of Superconducting Cavities - Inspire HEP, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9pbnNwaXJlaGVwLm5ldC9saXRlcmF0dXJlLzIxMzgxMzQ=">https://inspirehep.net/literature/2138134<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Development of Low Level RF Control Systems for Superconducting Heavy Ion Linear Accelerators, Electron Synchrotrons and Storage, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9hY2NlbGNvbmYud2ViLmNlcm4uY2gvcDA1L3BhcGVycy9XUEFUMDY4LnBkZg==">https://accelconf.web.cern.ch/p05/papers/WPAT068.pdf<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Application of disturbance observer-based control in low-level radio-frequency system in a compact energy recovery linac at KEK - Physical Review Link Manager, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9saW5rLmFwcy5vcmcvcGRmLzEwLjExMDMvUGh5c1JldlNUQUIuMTguMDkyODAx">https://link.aps.org/pdf/10.1103/PhysRevSTAB.18.092801<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Optimisation of the Accelerator Control by Reinforcement Learning: A Simulation-Based Approach - arXiv, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvaHRtbC8yNTAzLjA5NjY1djE=">https://arxiv.org/html/2503.09665v1<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Towards few-shot reinforcement learning in particle accelerator control - JACoW.org, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9hY2NlbGNvbmYud2ViLmNlcm4uY2gvaXBhYzIwMjQvcGRmL1RVUFM2MC5wZGY=">https://accelconf.web.cern.ch/ipac2024/pdf/TUPS60.pdf<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Study of the Digital LLRF System for STF* - ResearchGate, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cucmVzZWFyY2hnYXRlLm5ldC9wcm9maWxlL1poZXFpYW8tR2VuZy0yL3B1YmxpY2F0aW9uLzIzNjYyMjY4Nl9TdHVkeV9vZl90aGVfZGlnaXRhbF9MTFJGX3N5c3RlbV9mb3JfU1RGL2xpbmtzLzU5OGRiODZkMGY3ZTliMDdkMjJjMWJhZC9TdHVkeS1vZi10aGUtZGlnaXRhbC1MTFJGLXN5c3RlbS1mb3ItU1RGLnBkZg==">https://www.researchgate.net/profile/Zheqiao-Geng-2/publication/236622686_Study_of_the_digital_LLRF_system_for_STF&#x2F;links&#x2F;598db86d0f7e9b07d22c1bad&#x2F;Study-of-the-digital-LLRF-system-for-STF.pdf<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Adaptive Control and Intersections with Reinforcement Learning | Annual Reviews, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cuYW5udWFscmV2aWV3cy5vcmcvY29udGVudC9qb3VybmFscy8xMC4xMTQ2L2FubnVyZXYtY29udHJvbC0wNjI5MjItMDkwMTUz">https://www.annualreviews.org/content/journals/10.1146/annurev-control-062922-090153<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Digital LLRF Control System Design and Implementation for APT Superconducting Cavities, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9hY2NlbGNvbmYud2ViLmNlcm4uY2gvcDk5L3BhcGVycy9UVUE0LnBkZg==">https://accelconf.web.cern.ch/p99/papers/TUA4.pdf<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Machine Learning-Based Tuning of Control Parameters for LLRF System of Superconducting Cavities - Inspire HEP, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9pbnNwaXJlaGVwLm5ldC9maWxlcy80YmUwNTk3ODk4ZjljNjFjZGFhM2M0ZmZmMGM5NTgyOQ==">https://inspirehep.net/files/4be0597898f9c61cdaa3c4fff0c95829<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>[2405.15421] Model-free reinforcement learning with noisy actions for automated experimental control in optics - arXiv, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzI0MDUuMTU0MjE=">https://arxiv.org/abs/2405.15421<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Achieving Optimal Control of LLRF Control System with Artificial Intelligence, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9hY2NlbGNvbmYud2ViLmNlcm4uY2gvaWNhbGVwY3MyMDE5L3BhcGVycy9tb3BoYTExNC5wZGY=">https://accelconf.web.cern.ch/icalepcs2019/papers/mopha114.pdf<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Operational Performance of the SNS LLRF Interim System, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9hY2NlbGNvbmYud2ViLmNlcm4uY2gvcDAzL3BhcGVycy9UUEFHMDE4LnBkZg==">https://accelconf.web.cern.ch/p03/papers/TPAG018.pdf<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Basic Reinforcement Learning Techniques to Control the Intensity of a Seeded Free-Electron Laser - MDPI, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cubWRwaS5jb20vMjA3OS05MjkyLzkvNS83ODE=">https://www.mdpi.com/2079-9292/9/5/781<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>(PDF) Neural Networks for Modeling and Control of Particle …, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cucmVzZWFyY2hnYXRlLm5ldC9wdWJsaWNhdGlvbi8zMDE1NzE3ODhfTmV1cmFsX05ldHdvcmtzX2Zvcl9Nb2RlbGluZ19hbmRfQ29udHJvbF9vZl9QYXJ0aWNsZV9BY2NlbGVyYXRvcnM=">https://www.researchgate.net/publication/301571788_Neural_Networks_for_Modeling_and_Control_of_Particle_Accelerators<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Orbit correction based on improved reinforcement learning algorithm …, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9saW5rLmFwcy5vcmcvZG9pLzEwLjExMDMvUGh5c1JldkFjY2VsQmVhbXMuMjYuMDQ0NjAx">https://link.aps.org/doi/10.1103/PhysRevAccelBeams.26.044601<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>AI algorithms used to tune particle accelerators | LANL, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cubGFubC5nb3YvbWVkaWEvbmV3cy8wMTE2LWFpLWFsZ29yaXRobXM=">https://www.lanl.gov/media/news/0116-ai-algorithms<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Adjusting Accelerators with Help from Machine Learning | Department of Energy, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cuZW5lcmd5Lmdvdi9zY2llbmNlL2FydGljbGVzL2FkanVzdGluZy1hY2NlbGVyYXRvcnMtaGVscC1tYWNoaW5lLWxlYXJuaW5n">https://www.energy.gov/science/articles/adjusting-accelerators-help-machine-learning<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>LANL: Artificial Algorithms Used To Tune Particle Accelerators - Los Alamos Reporter, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9sb3NhbGFtb3NyZXBvcnRlci5jb20vMjAyNS8wMS8xOS9sYW5sLWFydGlmaWNpYWwtYWxnb3JpdGhtcy11c2VkLXRvLXR1bmUtcGFydGljbGUtYWNjZWxlcmF0b3JzLw==">https://losalamosreporter.com/2025/01/19/lanl-artificial-algorithms-used-to-tune-particle-accelerators/<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Optimising Particle Accelerators with Adaptive Machine Learning - Research Outreach, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9yZXNlYXJjaG91dHJlYWNoLm9yZy9hcnRpY2xlcy9vcHRpbWlzaW5nLXBhcnRpY2xlLWFjY2VsZXJhdG9ycy1hZGFwdGl2ZS1tYWNoaW5lLWxlYXJuaW5nLw==">https://researchoutreach.org/articles/optimising-particle-accelerators-adaptive-machine-learning/<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Online reinforcement learning control for maintaining an optimum beam collision on an electron-positron collider - Physical Review Link Manager, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9saW5rLmFwcy5vcmcvZG9pLzEwLjExMDMvUGh5c1JldkFjY2VsQmVhbXMuMjcuMTIyODAx">https://link.aps.org/doi/10.1103/PhysRevAccelBeams.27.122801<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Sample-efficient reinforcement learning for CERN accelerator control | Phys. Rev. Accel. Beams - Physical Review Link Manager, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9saW5rLmFwcy5vcmcvZG9pLzEwLjExMDMvUGh5c1JldkFjY2VsQmVhbXMuMjMuMTI0ODAx">https://link.aps.org/doi/10.1103/PhysRevAccelBeams.23.124801<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Real-time artificial intelligence for accelerator control: A study at the Fermilab Booster | Phys. Rev. Accel. Beams - Physical Review Link Manager, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9saW5rLmFwcy5vcmcvZG9pLzEwLjExMDMvUGh5c1JldkFjY2VsQmVhbXMuMjQuMTA0NjAx">https://link.aps.org/doi/10.1103/PhysRevAccelBeams.24.104601<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Low Level RF Control System of J-PARC Synchrotrons - CERN, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9hY2NlbGNvbmYud2ViLmNlcm4uY2gvcDA1L3BhcGVycy9XUEFUMDY0LnBkZg==">https://accelconf.web.cern.ch/p05/papers/WPAT064.pdf<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>How much Controls is in Reinforcement Learning? : r&#x2F;ControlTheory - Reddit, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cucmVkZGl0LmNvbS9yL0NvbnRyb2xUaGVvcnkvY29tbWVudHMvdjZ4ajM0L2hvd19tdWNoX2NvbnRyb2xzX2lzX2luX3JlaW5mb3JjZW1lbnRfbGVhcm5pbmcv">https://www.reddit.com/r/ControlTheory/comments/v6xj34/how_much_controls_is_in_reinforcement_learning&#x2F;<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Reinforcement Learning and Feedback Control - eCAL, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9lY2FsLmJlcmtlbGV5LmVkdS90YnNpL1JlZmVyZW5jZXMvTGV3aXMxMiUyMC0lMjBVVEElMjAtJTIwUkwlMjBBZGFwdGl2ZSUyMEZlZWRiYWNrJTIwQ3RybC5wZGY=">https://ecal.berkeley.edu/tbsi/References/Lewis12%20-%20UTA%20-%20RL%20Adaptive%20Feedback%20Ctrl.pdf<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Adaptive Runtime Response Time Control in PLC-based Real-Time Systems using Reinforcement Learning - ResearchGate, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cucmVzZWFyY2hnYXRlLm5ldC9wdWJsaWNhdGlvbi8zMjQ3NDg0NTdfQWRhcHRpdmVfUnVudGltZV9SZXNwb25zZV9UaW1lX0NvbnRyb2xfaW5fUExDLWJhc2VkX1JlYWwtVGltZV9TeXN0ZW1zX3VzaW5nX1JlaW5mb3JjZW1lbnRfTGVhcm5pbmc=">https://www.researchgate.net/publication/324748457_Adaptive_Runtime_Response_Time_Control_in_PLC-based_Real-Time_Systems_using_Reinforcement_Learning<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Reinforcement Learning for Motor Control: A Comprehensive Review - arXiv, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvaHRtbC8yNDEyLjE3OTM2djE=">https://arxiv.org/html/2412.17936v1<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Injection Optimization at Particle Accelerators via Reinforcement Learning: From Simulation to Real-World Application - arXiv, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvaHRtbC8yNDA2LjEyNzM1djE=">https://arxiv.org/html/2406.12735v1<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>The reinforcement learning for autonomous accelerators collaboration - INSPIRE, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9pbnNwaXJlaGVwLm5ldC9saXRlcmF0dXJlLzI4MTIzMjU=">https://inspirehep.net/literature/2812325<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Reinforcement learning - Wikipedia, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvUmVpbmZvcmNlbWVudF9sZWFybmluZw==">https://en.wikipedia.org/wiki/Reinforcement_learning<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>TD3lite: FPGA Acceleration of Reinforcement Learning with Structural and Representation Optimizations, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9wYXIubnNmLmdvdi9zZXJ2bGV0cy9wdXJsLzEwMzU0ODUy">https://par.nsf.gov/servlets/purl/10354852<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Reinforcement Learning for Charged Particle Beam Control to Minimize Injection Mismatch in Particle Accelerators - Inspire HEP, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9pbnNwaXJlaGVwLm5ldC9saXRlcmF0dXJlLzI5MDMxNDc=">https://inspirehep.net/literature/2903147<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>10 Real-Life Applications of Reinforcement Learning - Neptune.ai, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9uZXB0dW5lLmFpL2Jsb2cvcmVpbmZvcmNlbWVudC1sZWFybmluZy1hcHBsaWNhdGlvbnM=">https://neptune.ai/blog/reinforcement-learning-applications<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>(PDF) Ultra fast reinforcement learning in accelerator control …, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cucmVzZWFyY2hnYXRlLm5ldC9wdWJsaWNhdGlvbi8zNzIwNzczNjJfVWx0cmFfZmFzdF9yZWluZm9yY2VtZW50X2xlYXJuaW5nX2luX2FjY2VsZXJhdG9yX2NvbnRyb2xfZGVtb25zdHJhdGVkX29uX0NFUk5fQVdBS0U=">https://www.researchgate.net/publication/372077362_Ultra_fast_reinforcement_learning_in_accelerator_control_demonstrated_on_CERN_AWAKE<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Optimisation of the Accelerator Control by Reinforcement Learning: A Simulation-Based Approach - Inspire HEP, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9pbnNwaXJlaGVwLm5ldC9saXRlcmF0dXJlLzI4OTk5MjY=">https://inspirehep.net/literature/2899926<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Reinforcement Learning for Particle Accelerator Optimisation - CERN Indico, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9pbmRpY28uY2Vybi5jaC9ldmVudC8xMTMyMzk5L2NvbnRyaWJ1dGlvbnMvNDc1MTg0MS9hdHRhY2htZW50cy8yMzk4MjA5LzQxMDA4NTQvMjAyMjAyMjVfREVTWV9DRVJOX01MX0NvZmZlZV9uZXcucGRm">https://indico.cern.ch/event/1132399/contributions/4751841/attachments/2398209/4100854/20220225_DESY_CERN_ML_Coffee_new.pdf<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Reinforcement Learning based Driving Speed Control for Two Vehicle Scenario - Australasian Transport Research Forum, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9hdXN0cmFsYXNpYW50cmFuc3BvcnRyZXNlYXJjaGZvcnVtLm9yZy5hdS93cC1jb250ZW50L3VwbG9hZHMvMjAyMi8wMy9BVFJGMjAxN18wNzYucGRm">https://australasiantransportresearchforum.org.au/wp-content/uploads/2022/03/ATRF2017_076.pdf<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Machine learning drives “autonomous” control | EurekAlert!, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cuZXVyZWthbGVydC5vcmcvbmV3cy1yZWxlYXNlcy8xMDc0MDA1">https://www.eurekalert.org/news-releases/1074005<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Autonomous Control of a Particle Accelerator using Deep Reinforcement Learning - ML4Eng, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9tbDRlbmcuZ2l0aHViLmlvL2NhbWVyYV9yZWFkeXMvNTgucGRm">https://ml4eng.github.io/camera_readys&#x2F;58.pdf<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Model-free and Bayesian Ensembling Model-based Deep Reinforcement Learning for Particle Accelerator Control Demonstrated on the FERMI FEL - Inspire HEP, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9pbnNwaXJlaGVwLm5ldC9saXRlcmF0dXJlLzE4MzcxNTk=">https://inspirehep.net/literature/1837159<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Towards Hardware Accelerated Reinforcement Learning for Application-Specific Robotic Control - Imperial College London, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cuZG9jLmljLmFjLnVrL353bC9wYXBlcnMvMTgvYXNhcDE4c3MucGRm">https://www.doc.ic.ac.uk/~wl&#x2F;papers&#x2F;18&#x2F;asap18ss.pdf<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Acceleration for Deep Reinforcement Learning using Parallel and Distributed Computing: A Survey - arXiv, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvaHRtbC8yNDExLjA1NjE0djE=">https://arxiv.org/html/2411.05614v1<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Benchmarking Real-Time Reinforcement Learning, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9wcm9jZWVkaW5ncy5tbHIucHJlc3MvdjE4MS90aG9kb3JvZmYyMmEvdGhvZG9yb2ZmMjJhLnBkZg==">https://proceedings.mlr.press/v181/thodoroff22a/thodoroff22a.pdf<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Achieving Precise Control with Slow Hardware: Model-Based Reinforcement Learning for Action Sequence Learning | OpenReview, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9vcGVucmV2aWV3Lm5ldC9mb3J1bT9pZD1JZEVhZUNiaFVXJm5vdGVJZD1EaE9PZEc3U0Vu">https://openreview.net/forum?id=IdEaeCbhUW¬eId=DhOOdG7SEn<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Reinforcement Learning for Charged Particle Beam Control to Minimize Injection Mismatch in Particle Accelerators | Request PDF - ResearchGate, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cucmVzZWFyY2hnYXRlLm5ldC9wdWJsaWNhdGlvbi8zOTA1MzY3ODdfUmVpbmZvcmNlbWVudF9MZWFybmluZ19mb3JfQ2hhcmdlZF9QYXJ0aWNsZV9CZWFtX0NvbnRyb2xfdG9fTWluaW1pemVfSW5qZWN0aW9uX01pc21hdGNoX2luX1BhcnRpY2xlX0FjY2VsZXJhdG9ycw==">https://www.researchgate.net/publication/390536787_Reinforcement_Learning_for_Charged_Particle_Beam_Control_to_Minimize_Injection_Mismatch_in_Particle_Accelerators<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Real-Time Reinforcement Learning, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cDovL3BhcGVycy5uZXVyaXBzLmNjL3BhcGVyLzg1NzEtcmVhbC10aW1lLXJlaW5mb3JjZW1lbnQtbGVhcm5pbmcucGRm">http://papers.neurips.cc/paper/8571-real-time-reinforcement-learning.pdf<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>9 Real-Life Examples of Reinforcement Learning - Santa Clara University, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9vbmxpbmVkZWdyZWVzLnNjdS5lZHUvbWVkaWEvYmxvZy85LWV4YW1wbGVzLW9mLXJlaW5mb3JjZW1lbnQtbGVhcm5pbmc=">https://onlinedegrees.scu.edu/media/blog/9-examples-of-reinforcement-learning<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Application of Reinforcement Learning in Decision Systems: Lift Control Case Study - MDPI, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cubWRwaS5jb20vMjA3Ni0zNDE3LzE0LzIvNTY5">https://www.mdpi.com/2076-3417/14/2/569<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>On-policy and off-policy Reinforcement Learning: Key features and differences - Ericsson, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cuZXJpY3Nzb24uY29tL2VuL2Jsb2cvMjAyMy8xMi9vbmxpbmUtYW5kLW9mZmxpbmUtcmVpbmZvcmNlbWVudC1sZWFybmluZy13aGF0LWFyZS10aGV5LWFuZC1ob3ctZG8tdGhleS1jb21wYXJl">https://www.ericsson.com/en/blog/2023/12/online-and-offline-reinforcement-learning-what-are-they-and-how-do-they-compare<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Bringing reinforcement learning solutions to action in telecom networks - Ericsson, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cuZXJpY3Nzb24uY29tL2VuL2Jsb2cvMjAyMi8zL3JlaW5mb3JjZW1lbnQtbGVhcm5pbmctc29sdXRpb25z">https://www.ericsson.com/en/blog/2022/3/reinforcement-learning-solutions<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Reinforcement Learning from Delayed Observations via World Models - arXiv, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvaHRtbC8yNDAzLjEyMzA5djE=">https://arxiv.org/html/2403.12309v1<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Beam trajectory control with lattice-agnostic reinforcement learning - KIT, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9wdWJsaWthdGlvbmVuLmJpYmxpb3RoZWsua2l0LmVkdS8xMDAwMTYzNjIyLzE1MTU3ODUwMg==">https://publikationen.bibliothek.kit.edu/1000163622/151578502<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Overcoming Slow Decision Frequencies in Continuous Control: Model-Based Sequence Reinforcement Learning for Model-Free Control - arXiv, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvaHRtbC8yNDEwLjA4OTc5djE=">https://arxiv.org/html/2410.08979v1<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Bridging the gap between machine learning and particle accelerator physics with high-speed, differentiable simulations | Phys. Rev. Accel. Beams, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9saW5rLmFwcy5vcmcvZG9pLzEwLjExMDMvUGh5c1JldkFjY2VsQmVhbXMuMjcuMDU0NjAx">https://link.aps.org/doi/10.1103/PhysRevAccelBeams.27.054601<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Towards Hardware Accelerated Reinforcement Learning for Application-Specific Robotic Control - IEEE Computer Society, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cuY29tcHV0ZXIub3JnL2NzZGwvcHJvY2VlZGluZ3MtYXJ0aWNsZS9hc2FwLzIwMTgvMDg0NDUwOTkvMTNiZDFmV2N1RGg=">https://www.computer.org/csdl/proceedings-article/asap/2018/08445099/13bd1fWcuDh<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Deep reinforcement learning for the real time control of stormwater systems - Abhiram Mullapudi, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9yYW5kb21zdG9ybXMubmV0L2RhdGEvcGFwZXJzL3JsLnBkZg==">https://randomstorms.net/data/papers/rl.pdf<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Reinforcement Learning for Control Systems Applications - MathWorks, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cubWF0aHdvcmtzLmNvbS9oZWxwL3JlaW5mb3JjZW1lbnQtbGVhcm5pbmcvdWcvcmVpbmZvcmNlbWVudC1sZWFybmluZy1mb3ItY29udHJvbC1zeXN0ZW1zLWFwcGxpY2F0aW9ucy5odG1s">https://www.mathworks.com/help/reinforcement-learning/ug/reinforcement-learning-for-control-systems-applications.html<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Overcoming Slow Decision Frequencies in Continuous Control: Model-Based Sequence Reinforcement Learning for Model-Free Control - arXiv, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvaHRtbC8yNDEwLjA4OTc5djM=">https://arxiv.org/html/2410.08979v3<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>[2010.08141] Autonomous Control of a Particle Accelerator using Deep Reinforcement Learning - arXiv, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIwMTAuMDgxNDE=">https://arxiv.org/abs/2010.08141<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Learning-based Optimisation of Particle Accelerators Under Partial Observability Without Real-World Training, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9wcm9jZWVkaW5ncy5tbHIucHJlc3MvdjE2Mi9rYWlzZXIyMmEuaHRtbA==">https://proceedings.mlr.press/v162/kaiser22a.html<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Overcoming Slow Decision Frequencies in Continuous Control: Model-Based Sequence Reinforcement Learning for Model-Free Control | OpenReview, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9vcGVucmV2aWV3Lm5ldC9mb3J1bT9pZD13M2lNNFdMdXZ5">https://openreview.net/forum?id=w3iM4WLuvy<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Reinforcement Learning for Charged Particle Beam Control to Minimize Injection Mismatch in Particle Accelerators - Inspire HEP, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9pbnNwaXJlaGVwLm5ldC9maWxlcy8xNzVjZjU2OGU0MDI3YTQ1MGFhZmQ4MjYyZGU3ZmNhZA==">https://inspirehep.net/files/175cf568e4027a450aafd8262de7fcad<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Reinforcement learning-trained optimisers and Bayesian optimisation for online particle accelerator tuning - PMC, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9wbWMubmNiaS5ubG0ubmloLmdvdi9hcnRpY2xlcy9QTUMxMTIzMTI1Ni8=">https://pmc.ncbi.nlm.nih.gov/articles/PMC11231256/<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Reinforcement Learning - Control Theory - MIT Fab Lab, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9mYWIuY2JhLm1pdC5lZHUvY2xhc3Nlcy84NjUuMjEvdG9waWNzL2NvbnRyb2wvMDdfcmVpbmZvcmNlbWVudF9sZWFybmluZy5odG1s">https://fab.cba.mit.edu/classes/865.21/topics/control/07_reinforcement_learning.html<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Accelerator Tuning with Deep Reinforcement Learning, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9tbDRwaHlzaWNhbHNjaWVuY2VzLmdpdGh1Yi5pby8yMDIxL2ZpbGVzL05ldXJJUFNfTUw0UFNfMjAyMV8xMjUucGRm">https://ml4physicalsciences.github.io/2021/files/NeurIPS_ML4PS_2021_125.pdf<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>How are “lags” and “exogenous factors” accounted for in reinforcement learning?, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9haS5zdGFja2V4Y2hhbmdlLmNvbS9xdWVzdGlvbnMvODI2Ny9ob3ctYXJlLWxhZ3MtYW5kLWV4b2dlbm91cy1mYWN0b3JzLWFjY291bnRlZC1mb3ItaW4tcmVpbmZvcmNlbWVudC1sZWFybmluZw==">https://ai.stackexchange.com/questions/8267/how-are-lags-and-exogenous-factors-accounted-for-in-reinforcement-learning<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Using Reinforcement Learning in Real Experiments - MATLAB Answers, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cubWF0aHdvcmtzLmNvbS9tYXRsYWJjZW50cmFsL2Fuc3dlcnMvMTQ0NzQ4OS11c2luZy1yZWluZm9yY2VtZW50LWxlYXJuaW5nLWluLXJlYWwtZXhwZXJpbWVudHM=">https://www.mathworks.com/matlabcentral/answers/1447489-using-reinforcement-learning-in-real-experiments<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Reinforcement learning-trained optimisers and Bayesian optimisation for online particle accelerator tuning - PubMed, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9wdWJtZWQubmNiaS5ubG0ubmloLmdvdi8zODk3Nzc0OS8=">https://pubmed.ncbi.nlm.nih.gov/38977749/<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Is there any reliable reference mentioning the time complexity of an RL algorithm like tabular Q-learning? : r&#x2F;reinforcementlearning - Reddit, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cucmVkZGl0LmNvbS9yL3JlaW5mb3JjZW1lbnRsZWFybmluZy9jb21tZW50cy9pd2Y3NGMvaXNfdGhlcmVfYW55X3JlbGlhYmxlX3JlZmVyZW5jZV9tZW50aW9uaW5nX3RoZS8=">https://www.reddit.com/r/reinforcementlearning/comments/iwf74c/is_there_any_reliable_reference_mentioning_the&#x2F;<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>100+ Real-Life Examples of Reinforcement Learning And It’s Challenges - OdinSchool, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cub2RpbnNjaG9vbC5jb20vYmxvZy90b3AtMTAwLXJlaW5mb3JjZW1lbnQtbGVhcm5pbmctcmVhbC1saWZlLWV4YW1wbGVzLWFuZC1pdHMtY2hhbGxlbmdlcw==">https://www.odinschool.com/blog/top-100-reinforcement-learning-real-life-examples-and-its-challenges<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>is Reinforcement Learning the future of process control? : r&#x2F;ControlTheory - Reddit, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cucmVkZGl0LmNvbS9yL0NvbnRyb2xUaGVvcnkvY29tbWVudHMvMWRyYjdxdC9pc19yZWluZm9yY2VtZW50X2xlYXJuaW5nX3RoZV9mdXR1cmVfb2ZfcHJvY2Vzcy8=">https://www.reddit.com/r/ControlTheory/comments/1drb7qt/is_reinforcement_learning_the_future_of_process&#x2F;<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Reinforcement Learning (RL) Case Studies - BytePlus, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cuYnl0ZXBsdXMuY29tL2VuL3RvcGljLzM5OTA3Nw==">https://www.byteplus.com/en/topic/399077<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Reinforcement Learning: Machine Learning Meets Control Theory - YouTube, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj0wTU5WaFhFWDl0bw==">https://www.youtube.com/watch?v=0MNVhXEX9to<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Hardware Accelerator For Machine Learning Using FPGA - HELP! - Reddit, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cucmVkZGl0LmNvbS9yL0ZQR0EvY29tbWVudHMvMWR6YXJnOS9oYXJkd2FyZV9hY2NlbGVyYXRvcl9mb3JfbWFjaGluZV9sZWFybmluZ191c2luZy8=">https://www.reddit.com/r/FPGA/comments/1dzarg9/hardware_accelerator_for_machine_learning_using&#x2F;<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Optimisation of the Accelerator Control by Reinforcement Learning, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cucmVzZWFyY2hnYXRlLm5ldC9wdWJsaWNhdGlvbi8zODk4MjE4MDlfT3B0aW1pc2F0aW9uX29mX3RoZV9BY2NlbGVyYXRvcl9Db250cm9sX2J5X1JlaW5mb3JjZW1lbnRfTGVhcm5pbmdfQV9TaW11bGF0aW9uLUJhc2VkX0FwcHJvYWNo">https://www.researchgate.net/publication/389821809_Optimisation_of_the_Accelerator_Control_by_Reinforcement_Learning_A_Simulation-Based_Approach<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Control Delay in Reinforcement Learning for Real-Time Dynamic Systems: A Memoryless Approach - Lucian Busoniu, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9idXNvbml1Lm5ldC9maWxlcy9wYXBlcnMvaXJvczEwLnBkZg==">https://busoniu.net/files/papers/iros10.pdf<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>A Compact Low-level RF Control System for Advanced Concept Compact Electron Linear Accelerator - arXiv, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvaHRtbC8yNTAyLjEwNjIzdjE=">https://arxiv.org/html/2502.10623v1<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>FUTURE ACCELERATOR CHALLENGES IN SUPPORT OF HIGH- ENERGY PHYSICS* - OSTI.GOV, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cub3N0aS5nb3Yvc2VydmxldHMvcHVybC85Mjg5NTctSkdqNzJDLw==">https://www.osti.gov/servlets/purl/928957-JGj72C/<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Systematic study of longitudinal excitations to influence the microbunching instability at KARA - KIT, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9wdWJsaWthdGlvbmVuLmJpYmxpb3RoZWsua2l0LmVkdS8xMDAwMTYzNjE1LzE1MjIyMDU5MQ==">https://publikationen.bibliothek.kit.edu/1000163615/152220591<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Reinforcement Learning in Particle Accelerators: a practical example Lecture 2&#x2F;2 - CERN Indico, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9pbmRpY28uY2Vybi5jaC9ldmVudC8xNDY4NzEzL2NvbnRyaWJ1dGlvbnMvNjM2OTA3MS9hdHRhY2htZW50cy8zMDM2ODI5LzUzNjMyNzEvTGVjdHVyZSUyMDJfJTIwUmVpbmZvcmNlbWVudCUyMExlYXJuaW5nJTIwZm9yJTIwUGFydGljbGUlMjBBY2NlbGVyYXRvcnNfJTIwYSUyMHByYWN0aWNhbCUyMGV4YW1wbGUucGRm">https://indico.cern.ch/event/1468713/contributions/6369071/attachments/3036829/5363271/Lecture%202_%20Reinforcement%20Learning%20for%20Particle%20Accelerators_%20a%20practical%20example.pdf<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Deep reinforcement learning agents for industrial control system design - UBC Library Open Collections - The University of British Columbia, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9vcGVuLmxpYnJhcnkudWJjLmNhL3NvYS9jSVJjbGUvY29sbGVjdGlvbnMvdWJjdGhlc2VzLzI0L2l0ZW1zLzEuMDQzMDU0Nw==">https://open.library.ubc.ca/soa/cIRcle/collections/ubctheses/24/items/1.0430547<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Feedback Control for Particle Accelerators - CNPEM, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9wYWdlcy5jbnBlbS5ici9wY2FwYWMyMDE2L3dwLWNvbnRlbnQvdXBsb2Fkcy9zaXRlcy82MC8yMDE2LzA3LzIwMTYxMDI1X1BDYVBBQzE2X0ZCX3R1dG9yaWFsLTEucGRm">https://pages.cnpem.br/pcapac2016/wp-content/uploads/sites/60/2016/07/20161025_PCaPAC16_FB_tutorial-1.pdf<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Control delay in Reinforcement Learning for real-time dynamic systems: A memoryless approach - ResearchGate, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cucmVzZWFyY2hnYXRlLm5ldC9wdWJsaWNhdGlvbi8yMjQxOTk3MjlfQ29udHJvbF9kZWxheV9pbl9SZWluZm9yY2VtZW50X0xlYXJuaW5nX2Zvcl9yZWFsLXRpbWVfZHluYW1pY19zeXN0ZW1zX0FfbWVtb3J5bGVzc19hcHByb2FjaA==">https://www.researchgate.net/publication/224199729_Control_delay_in_Reinforcement_Learning_for_real-time_dynamic_systems_A_memoryless_approach<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Reliable Low Latency Machine Learning for Resource Management in Wireless Networks, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly92dGVjaHdvcmtzLmxpYi52dC5lZHUvaXRlbXMvNzhlMDFlMjItODYzZi00NTVmLThhNTItMWEzNTA1NWI2Y2Uw">https://vtechworks.lib.vt.edu/items/78e01e22-863f-455f-8a52-1a35055b6ce0<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Microseconds matter: reducing interrupt latency in industrial control systems, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cuZWxlY3Ryb25pY3Byb2R1Y3RzLmNvbS9taWNyb3NlY29uZHMtbWF0dGVyLXJlZHVjaW5nLWludGVycnVwdC1sYXRlbmN5LWluLWluZHVzdHJpYWwtY29udHJvbC1zeXN0ZW1zLw==">https://www.electronicproducts.com/microseconds-matter-reducing-interrupt-latency-in-industrial-control-systems/<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Realizing a deep reinforcement learning agent for real-time …, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9wbWMubmNiaS5ubG0ubmloLmdvdi9hcnRpY2xlcy9QTUMxMDYyODIxNC8=">https://pmc.ncbi.nlm.nih.gov/articles/PMC10628214/<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Design and performance of a high resolution, low latency stripline beam position monitor system - Physical Review Link Manager, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9saW5rLmFwcy5vcmcvZG9pLzEwLjExMDMvUGh5c1JldlNUQUIuMTguMDMyODAz">https://link.aps.org/doi/10.1103/PhysRevSTAB.18.032803<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Low Latency Data Transmission in LLRF Systems - JACoW.org, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9hY2NlbGNvbmYud2ViLmNlcm4uY2gvUEFDMjAxMS9wYXBlcnMvdHVwMDM5LnBkZg==">https://accelconf.web.cern.ch/PAC2011/papers/tup039.pdf<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Accelerator Timing Systems Overview - CERN, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9hY2NlbGNvbmYud2ViLmNlcm4uY2gvcGFjMjAxMS9wYXBlcnMvd2VvYW4xLnBkZg==">https://accelconf.web.cern.ch/pac2011/papers/weoan1.pdf<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Delay-Aware Reinforcement Learning: Insights From Delay Distributional Perspective | OpenReview, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9vcGVucmV2aWV3Lm5ldC9mb3J1bT9pZD1ZOWNWcmRZbjEw">https://openreview.net/forum?id=Y9cVrdYn10<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Merging Data Acquisition and a Real-time Control Systems - Dewesoft, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9kZXdlc29mdC5jb20vYmxvZy9tZXJnaW5nLWRhdGEtYWNxdWlzaXRpb24tYW5kLXJlYWwtdGltZS1jb250cm9sLXN5c3RlbQ==">https://dewesoft.com/blog/merging-data-acquisition-and-real-time-control-system<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Real-Life Applications of Low-Latency Edge Inference | Gcore, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9nY29yZS5jb20vbGVhcm5pbmcvdW5sZWFzaGluZy1sb3ctbGF0ZW5jeS1pbmZlcmVuY2U=">https://gcore.com/learning/unleashing-low-latency-inference<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>A Low Latency Adaptive Coding Spike Framework for Deep Reinforcement Learning - IJCAI, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cuaWpjYWkub3JnL3Byb2NlZWRpbmdzLzIwMjMvMDM0MC5wZGY=">https://www.ijcai.org/proceedings/2023/0340.pdf<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Research on Deep Reinforcement Learning Control Algorithm for Active Suspension Considering Uncertain Time Delay - MDPI, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cubWRwaS5jb20vMTQyNC04MjIwLzIzLzE4Lzc4Mjc=">https://www.mdpi.com/1424-8220/23/18/7827<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Congestion Control with Deep Reinforcement Learning - iQua Group, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9pcXVhLmVjZS50b3JvbnRvLmVkdS9yZXNlYXJjaC9kcmwtYmFzZWQtY29uZ2VzdGlvbi1jb250cm9sLw==">https://iqua.ece.toronto.edu/research/drl-based-congestion-control/<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Solving Mixed-Integer Optimization Problems in Microsecond Scale: A Scalable Real-Time Embedded Hardware Architecture - Future Home of paperhost.org, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cucGFwZXJob3N0Lm9yZy9wcm9jZWVkaW5ncy9jb250cm9scy9FQ0MyNC9maWxlcy8wNzg1LnBkZg==">https://www.paperhost.org/proceedings/controls/ECC24/files/0785.pdf<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Is it possible that time complexity of any algorithm decrease as the input size increase, any example - Stack Overflow, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvNzQ1ODAyMi9pcy1pdC1wb3NzaWJsZS10aGF0LXRpbWUtY29tcGxleGl0eS1vZi1hbnktYWxnb3JpdGhtLWRlY3JlYXNlLWFzLXRoZS1pbnB1dC1zaXpl">https://stackoverflow.com/questions/7458022/is-it-possible-that-time-complexity-of-any-algorithm-decrease-as-the-input-size<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Constrained Reinforcement Learning for Adaptive Controller Synchronization in Distributed SDN - arXiv, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvaHRtbC8yNDAzLjA4Nzc1djE=">https://arxiv.org/html/2403.08775v1<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Handling Delay in Real-Time Reinforcement Learning - arXiv, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvaHRtbC8yNTAzLjIzNDc4djE=">https://arxiv.org/html/2503.23478v1<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Latency and Lifetime Enhancements in Industrial Wireless Sensor Networks:A Q-Learning Approach for Graph Routing - White Rose Research Online, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9lcHJpbnRzLndoaXRlcm9zZS5hYy51ay8xNjAxMjcvMS9USUlfRmluYWxfVjEucGRm">https://eprints.whiterose.ac.uk/160127/1/TII_Final_V1.pdf<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>FastRLAP: A System for Learning High-Speed Driving via Deep RL and Autonomous Practicing, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9wcm9jZWVkaW5ncy5tbHIucHJlc3MvdjIyOS9zdGFjaG93aWN6MjNhL3N0YWNob3dpY3oyM2EucGRm">https://proceedings.mlr.press/v229/stachowicz23a/stachowicz23a.pdf<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>XFC - eXtreme Fast Control Technology | Beckhoff USA, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cuYmVja2hvZmYuY29tL2VuLXVzL3Byb2R1Y3RzL2ktby94ZmMv">https://www.beckhoff.com/en-us/products/i-o/xfc/<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Ultra Low Latency Machine Learning for Scientific Edge Applications - OSTI, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cub3N0aS5nb3Yvc2VydmxldHMvcHVybC8xODg3Njg3">https://www.osti.gov/servlets/purl/1887687<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Microsecond Enhanced Indirect Model Predictive Control for Dynamic Power Management in MMC Units - MDPI, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cubWRwaS5jb20vMTk5Ni0xMDczLzE0LzExLzMzMTg=">https://www.mdpi.com/1996-1073/14/11/3318<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Addressing Signal Delay in Deep Reinforcement Learning | OpenReview, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9vcGVucmV2aWV3Lm5ldC9mb3J1bT9pZD1aOFVmRHM0SjQ2">https://openreview.net/forum?id=Z8UfDs4J46<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Closed-loop supersonic flow control with a high-speed experimental deep reinforcement learning framework | Journal of Fluid Mechanics - Cambridge University Press &amp; Assessment, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cuY2FtYnJpZGdlLm9yZy9jb3JlL2pvdXJuYWxzL2pvdXJuYWwtb2YtZmx1aWQtbWVjaGFuaWNzL2FydGljbGUvY2xvc2VkbG9vcC1zdXBlcnNvbmljLWZsb3ctY29udHJvbC13aXRoLWEtaGlnaHNwZWVkLWV4cGVyaW1lbnRhbC1kZWVwLXJlaW5mb3JjZW1lbnQtbGVhcm5pbmctZnJhbWV3b3JrL0NCOTY4QUNDOEM5NDA5Q0JGOUY3QTEyOUJCNzMxNzMz">https://www.cambridge.org/core/journals/journal-of-fluid-mechanics/article/closedloop-supersonic-flow-control-with-a-highspeed-experimental-deep-reinforcement-learning-framework/CB968ACC8C9409CBF9F7A129BB731733<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Reinforcement Learning-Aided Edge Intelligence Framework for Delay-Sensitive Industrial Applications - PMC, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9wbWMubmNiaS5ubG0ubmloLmdvdi9hcnRpY2xlcy9QTUM5NjA5MTAzLw==">https://pmc.ncbi.nlm.nih.gov/articles/PMC9609103/<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>How to deal with the time delay in reinforcement learning? - AI Stack Exchange, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9haS5zdGFja2V4Y2hhbmdlLmNvbS9xdWVzdGlvbnMvMjUxNzgvaG93LXRvLWRlYWwtd2l0aC10aGUtdGltZS1kZWxheS1pbi1yZWluZm9yY2VtZW50LWxlYXJuaW5n">https://ai.stackexchange.com/questions/25178/how-to-deal-with-the-time-delay-in-reinforcement-learning<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Handling Delay in Real-Time Reinforcement Learning - OpenReview, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9vcGVucmV2aWV3Lm5ldC9mb3J1bT9pZD1ZT2M1dDhQSGYy">https://openreview.net/forum?id=YOc5t8PHf2<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Real-Time Inference and Low-Latency Models - [x]cube LABS, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cueGN1YmVsYWJzLmNvbS9ibG9nL3JlYWwtdGltZS1pbmZlcmVuY2UtYW5kLWxvdy1sYXRlbmN5LW1vZGVscy8=">https://www.xcubelabs.com/blog/real-time-inference-and-low-latency-models/<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>PLC with micro-second time base? | PLCS.net - Interactive Q &amp; A, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cucGxjdGFsay5uZXQvdGhyZWFkcy9wbGMtd2l0aC1taWNyby1zZWNvbmQtdGltZS1iYXNlLjIyMjM2Lw==">https://www.plctalk.net/threads/plc-with-micro-second-time-base.22236/<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>High-speed train automatic stopping control method based on deep reinforcement learning - SPIE Digital Library, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cuc3BpZWRpZ2l0YWxsaWJyYXJ5Lm9yZy9jb25mZXJlbmNlLXByb2NlZWRpbmdzLW9mLXNwaWUvMTMxNjAvMTMxNjAxQy9IaWdoLXNwZWVkLXRyYWluLWF1dG9tYXRpYy1zdG9wcGluZy1jb250cm9sLW1ldGhvZC1iYXNlZC1vbi1kZWVwLzEwLjExMTcvMTIuMzAzMDcwMy5zaG9ydA==">https://www.spiedigitallibrary.org/conference-proceedings-of-spie/13160/131601C/High-speed-train-automatic-stopping-control-method-based-on-deep/10.1117/12.3030703.short<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>[2409.16611] Achieving Stable High-Speed Locomotion for Humanoid Robots with Deep Reinforcement Learning - arXiv, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzI0MDkuMTY2MTE=">https://arxiv.org/abs/2409.16611<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Rapid Locomotion via Reinforcement Learning, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9hZ2lsaXR5LmNzYWlsLm1pdC5lZHUv">https://agility.csail.mit.edu/<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Implementing microsecond timestamp : r&#x2F;embedded - Reddit, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cucmVkZGl0LmNvbS9yL2VtYmVkZGVkL2NvbW1lbnRzLzFnbmFrZHMvaW1wbGVtZW50aW5nX21pY3Jvc2Vjb25kX3RpbWVzdGFtcC8=">https://www.reddit.com/r/embedded/comments/1gnakds/implementing_microsecond_timestamp&#x2F;<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Robust High-Speed Running for Quadruped Robots via Deep Reinforcement Learning, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj0zZ2RSRnpOUWQ2OA==">https://www.youtube.com/watch?v=3gdRFzNQd68<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Millisecond, Microsecond, Nanosecond: What Can We Do With More Precise Time? - Schweitzer Engineering Laboratories, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9zZWxpbmMuY29tL2FwaS9kb3dubG9hZC8xMTE2NjMv">https://selinc.com/api/download/111663/<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>What is the time complexity of the value iteration algorithm? - AI Stack Exchange, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9haS5zdGFja2V4Y2hhbmdlLmNvbS9xdWVzdGlvbnMvOTAxOS93aGF0LWlzLXRoZS10aW1lLWNvbXBsZXhpdHktb2YtdGhlLXZhbHVlLWl0ZXJhdGlvbi1hbGdvcml0aG0=">https://ai.stackexchange.com/questions/9019/what-is-the-time-complexity-of-the-value-iteration-algorithm<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Network Latency: Understanding Its Impact on Industrial Applications - Blog, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cub21uaXRyb24tc3lzdGVtcy5jb20vYmxvZy91bmRlcnN0YW5kaW5nLW5ldHdvcmstbGF0ZW5jeS1hbmQtaXRzLWltcGFjdC1vbi1pbmR1c3RyaWFsLWFwcGxpY2F0aW9ucw==">https://www.omnitron-systems.com/blog/understanding-network-latency-and-its-impact-on-industrial-applications<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Self-Optimizing Memory Controllers: A Reinforcement Learning Approach - Electrical and Computer Engineering, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly91c2Vycy5lY2UuY211LmVkdS9+b211dGx1L3B1Yi9ybG1jX2lzY2EwOC5wZGY=">https://users.ece.cmu.edu/~omutlu&#x2F;pub&#x2F;rlmc_isca08.pdf<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Reinforcement Learning with Latent Flow, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9wcm9jZWVkaW5ncy5uZXVyaXBzLmNjL3BhcGVyLzIwMjEvaGFzaC9iYTNjNWZlMWQ2ZDY3MDhiNWJmZmFlYjY5NDJiN2UwNC1BYnN0cmFjdC5odG1s">https://proceedings.neurips.cc/paper/2021/hash/ba3c5fe1d6d6708b5bffaeb6942b7e04-Abstract.html<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Research on Deep Reinforcement Learning Control Algorithm for Active Suspension Considering Uncertain Time Delay - PubMed, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9wdWJtZWQubmNiaS5ubG0ubmloLmdvdi8zNzc2NTg4NC8=">https://pubmed.ncbi.nlm.nih.gov/37765884/<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>MLOps for Low-Latency Applications: A Practical Guide - CloudFactory, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cuY2xvdWRmYWN0b3J5LmNvbS9ibG9nL21sb3BzLWZvci1sb3ctbGF0ZW5jeQ==">https://www.cloudfactory.com/blog/mlops-for-low-latency<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>PLC Vs. DCS – How to choose the right option for your operation, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cuaW5kaWEuZnVqaWVsZWN0cmljLmNvbS9ibG9nL3BsYy12cy4tZGNzLWhvdy10by1jaG9vc2UtdGhlLXJpZ2h0LW9wdGlvbi1mb3IteW91ci1vcGVyYXRpb24=">https://www.india.fujielectric.com/blog/plc-vs.-dcs-how-to-choose-the-right-option-for-your-operation<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Reinforcement learning methods based on GPU accelerated industrial control hardware - Fraunhofer-Publica, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9wdWJsaWNhLmZyYXVuaG9mZXIuZGUvYml0c3RyZWFtcy8zNmMzZTJlMy02NWZiLTQzMTctYjA1ZC0xNTgyMzJiMTFjMDgvZG93bmxvYWQ=">https://publica.fraunhofer.de/bitstreams/36c3e2e3-65fb-4317-b05d-158232b11c08/download<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Fiber optic amplifier has 10 microsecond response time - Control Engineering, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cuY29udHJvbGVuZy5jb20vZmliZXItb3B0aWMtYW1wbGlmaWVyLWhhcy0xMC1taWNyb3NlY29uZC1yZXNwb25zZS10aW1lLw==">https://www.controleng.com/fiber-optic-amplifier-has-10-microsecond-response-time/<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Fundamentals of real-time processing in automation and control, part 2, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cuY29udHJvbGVuZy5jb20vYXJ0aWNsZXMvZnVuZGFtZW50YWxzLW9mLXJlYWwtdGltZS1wcm9jZXNzaW5nLWluLWF1dG9tYXRpb24tYW5kLWNvbnRyb2wtcGFydC0yLw==">https://www.controleng.com/articles/fundamentals-of-real-time-processing-in-automation-and-control-part-2/<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Low-latency deep-reinforcement learning algorithm for ultrafast fiber lasers, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9vcGcub3B0aWNhLm9yZy9wcmovYWJzdHJhY3QuY2ZtP3VyaT1wcmotOS04LTE0OTM=">https://opg.optica.org/prj/abstract.cfm?uri=prj-9-8-1493<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Microseconds - NI - National Instruments, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly93d3cubmkuY29tL2RvY3MvZW4tVVMvYnVuZGxlL2xhYnZpZXctbnhnLW5vZGVzLWFwaS1yZWYvcGFnZS93YWl0LXVudGlsLW5leHQtbXVsdGlwbGUtdXMuaHRtbA==">https://www.ni.com/docs/en-US/bundle/labview-nxg-nodes-api-ref/page/wait-until-next-multiple-us.html<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>[2012.09737] Model-free and Bayesian Ensembling Model-based Deep Reinforcement Learning for Particle Accelerator Control Demonstrated on the FERMI FEL - arXiv, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIwMTIuMDk3Mzc=">https://arxiv.org/abs/2012.09737<i class="fa fa-external-link-alt"></i></span>  </li>
+<li>Reinforcement Learning at CERN’s accelerators - KIT Indico, 访问时间为 四月 15, 2025， <span class="exturl" data-url="aHR0cHM6Ly9pbmRpY28uc2NjLmtpdC5lZHUvZXZlbnQvMzc0Ni9jb250cmlidXRpb25zLzE1NDc3L2F0dGFjaG1lbnRzLzcxODgvMTE0MTQvUkxfQ0VSTl92a2Fpbl9GZWIyNC5wZGY=">https://indico.scc.kit.edu/event/3746/contributions/15477/attachments/7188/11414/RL_CERN_vkain_Feb24.pdf<i class="fa fa-external-link-alt"></i></span></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="Liu Ming WeChat Pay">
+        <span>WeChat Pay</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="Liu Ming Alipay">
+        <span>Alipay</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>Liu Ming
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="http://iuming.github.io/2025/04/15/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8%E4%BA%8ELLRF%E7%A0%94%E7%A9%B6/" title="强化学习在低电平射频（LLRF）控制中的应用">http://iuming.github.io/2025/04/15/强化学习应用于LLRF研究/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/realiuming">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+U5yo-Zxuw1OgbU6P">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </span>
+
+          <img class="social-item-img" src="/images/wechat_channel.jpg">
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/LLRF/" rel="tag"><i class="fa fa-tag"></i> LLRF</a>
+              <a href="/tags/LLM/" rel="tag"><i class="fa fa-tag"></i> LLM</a>
+              <a href="/tags/RL/" rel="tag"><i class="fa fa-tag"></i> RL</a>
+              <a href="/tags/Gemini/" rel="tag"><i class="fa fa-tag"></i> Gemini</a>
+          </div>
+
+        
+  <div class="social-like a2a_kit a2a_kit_size_32 a2a_default_style">
+    <a class="a2a_dd" target="_blank" rel="noopener" href="https://www.addtoany.com/share"></a>
+      <a class="a2a_button_facebook"></a>
+      <a class="a2a_button_twitter"></a>
+      <a class="a2a_button_wechat"></a>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/03/23/%E4%BB%8E%E4%BA%BA%E5%BD%A2%E6%9C%BA%E5%99%A8%E4%BA%BA%E2%80%9C%E5%A4%A7%E5%B0%8F%E8%84%91%E2%80%9D%E8%8A%AF%E7%89%87%E8%AE%BE%E8%AE%A1%E5%88%B0%E8%B6%85%E5%AF%BC%E8%85%94%E9%A2%91%E7%8E%87%E6%8E%A7%E5%88%B6%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%90%AF%E7%A4%BA/" rel="prev" title="从人形机器人“大小脑”芯片设计到超导腔频率控制系统的启示">
+                  <i class="fa fa-angle-left"></i> 从人形机器人“大小脑”芯片设计到超导腔频率控制系统的启示
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Ming Liu. All rights reserved.</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL2l1bWluZw==" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.1.0/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/4.23.3/algoliasearch-lite.umd.js" integrity="sha256-1QNshz86RqXe/qsCBldsUu13eAX6n/O98uubKQs87UI=" crossorigin="anonymous"></script><script src="/js/third-party/search/algolia-search.js"></script>
+<script class="next-config" data-name="chatra" type="application/json">{"enable":true,"async":true,"id":"gTXKphrmKGf5QSb5L"}</script>
+<script src="/js/third-party/chat/chatra.js"></script>
+<script async src="https://call.chatra.io/chatra.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.0/pdfobject.min.js","integrity":"sha256-JJZNsid68vnh3/zyj0lY9BN5ynxVX/12XgOa1TlaYN0="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.0/mermaid.min.js","integrity":"sha256-stuqcu2FrjYCXDOytWFA5SoUE/r3nkp6gTglzNSlavU="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+  <script class="next-config" data-name="wavedrom" type="application/json">{"enable":true,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.5.0/wavedrom.min.js","integrity":"sha256-INLAoJc6quTNfiMWkGZniYO2cxE8mHpddnLow1m6RFs="}}</script>
+  <script class="next-config" data-name="wavedrom_skin" type="application/json">{"enable":true,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.5.0/skins/default.js","integrity":"sha256-fduc/Zszk5ezWws2uInY/ALWVmIrmV6VTgXbsYSReFI="}}</script>
+  <script src="/js/third-party/tags/wavedrom.js"></script>
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+  <script src="/js/third-party/addtoany.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":"ture","archive":true,"delay":true,"timeout":3000,"priority":true,"url":"http://iuming.github.io/2025/04/15/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8%E4%BA%8ELLRF%E7%A0%94%E7%A9%B6/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"realiuming","count":true,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+
+</body>
+</html>
