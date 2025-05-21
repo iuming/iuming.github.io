@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RF Cavity Qe Calculator</title>
+    <meta name="author" content="Ming Liu">
+    <meta name="copyright" content="© 2025 Ming Liu. All rights reserved.">
+    <!-- 
+        Author: Ming Liu
+        Copyright © 2025 Ming Liu. All rights reserved.
+    -->
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #18bc9c;
+            --light: #ecf0f1;
+            --dark: #34495e;
+            --accent: #f39c12;
+            --radius: 10px;
+            --shadow: 0 4px 24px rgba(24, 188, 156, 0.15), 0 1.5px 8px #18bc9c33;
+            --glow: 0 0 16px #18bc9c88, 0 0 4px #fff;
+            --border: 1.5px solid #18bc9c;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #232526 0%, #2c3e50 100%);
+            color: var(--light);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Techy animated background lines */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 0;
+            background: repeating-linear-gradient(120deg,
+                    transparent,
+                    transparent 38px,
+                    #18bc9c22 40px,
+                    transparent 42px);
+            animation: movebg 12s linear infinite;
+        }
+
+        @keyframes movebg {
+            0% {
+                background-position: 0 0;
+            }
+
+            100% {
+                background-position: 120px 120px;
+            }
+        }
+
+        header {
+            background: rgba(44, 62, 80, 0.98);
+            color: var(--secondary);
+            width: 100%;
+            padding: 1.5rem 1rem 1rem 1rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            border-bottom: var(--border);
+            position: relative;
+            z-index: 1;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.3rem;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 8px #18bc9c55, 0 0 2px #fff;
+            font-weight: 700;
+        }
+
+        main {
+            flex: 1;
+            width: 100%;
+            max-width: 900px;
+            padding: 2rem;
+            z-index: 1;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 2rem;
+            gap: 2rem;
+        }
+
+        .btn {
+            background: linear-gradient(90deg, #18bc9c 60%, #1abc9c 100%);
+            color: #fff;
+            border: none;
+            padding: 1.5rem 2.5rem;
+            font-size: 1.25rem;
+            border-radius: var(--radius);
+            cursor: pointer;
+            box-shadow: var(--shadow), 0 0 0 0 #18bc9c;
+            transition: background 0.3s, box-shadow 0.3s, transform 0.2s;
+            font-weight: 600;
+            letter-spacing: 1px;
+            outline: none;
+            border-bottom: 2.5px solid #f39c12;
+        }
+
+        .btn:hover,
+        .btn:focus {
+            background: linear-gradient(90deg, #1abc9c 60%, #18bc9c 100%);
+            box-shadow: 0 0 16px #18bc9c88, 0 0 4px #fff;
+            transform: translateY(-2px) scale(1.04);
+        }
+
+        .form-card {
+            background: rgba(44, 62, 80, 0.98);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 2.2rem 2rem 2rem 2rem;
+            margin-bottom: 2rem;
+            border: var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #18bc9c, #f39c12, #18bc9c);
+            filter: blur(0.5px);
+            opacity: 0.7;
+        }
+
+        .form-card h2 {
+            margin-top: 0;
+            color: #18bc9c;
+            letter-spacing: 1px;
+            font-size: 1.4rem;
+            text-shadow: 0 1px 4px #18bc9c33;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #f39c12;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1.5px solid #18bc9c;
+            border-radius: var(--radius);
+            font-size: 1.05rem;
+            background: #232526;
+            color: #fff;
+            box-shadow: 0 0 6px #18bc9c22 inset;
+            transition: border 0.2s, box-shadow 0.2s;
+        }
+
+        .form-group input:focus {
+            border: 2px solid #f39c12;
+            box-shadow: 0 0 12px #f39c12aa;
+            outline: none;
+        }
+
+        .help {
+            font-size: 0.92rem;
+            color: #7f8c8d;
+            margin-top: 0.3rem;
+        }
+
+        #results,
+        #results-trans {
+            background: #232526;
+            border: 1.5px solid #18bc9c;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            margin-top: 1rem;
+            box-shadow: 0 0 12px #18bc9c33;
+            color: #fff;
+            font-size: 1.08rem;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .back {
+            background: none;
+            border: none;
+            color: #18bc9c;
+            cursor: pointer;
+            margin-top: 1rem;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            transition: color 0.2s;
+        }
+
+        .back:hover {
+            color: #f39c12;
+            text-decoration: underline;
+        }
+
+        .formula {
+            background: #181c20;
+            padding: 1rem;
+            border-radius: var(--radius);
+            margin: 1rem 0;
+            white-space: pre-wrap;
+            box-shadow: 0 0 8px #18bc9c22;
+            color: #18bc9c;
+            font-family: 'Fira Mono', 'Consolas', 'Menlo', monospace;
+            font-size: 1.07rem;
+        }
+
+        /* Neon border for results */
+        #results,
+        #results-trans {
+            border: 1.5px solid #18bc9c;
+            box-shadow: 0 0 16px #18bc9c55, 0 0 4px #fff;
+        }
+
+        /* Responsive */
+        @media (max-width: 700px) {
+            main {
+                padding: 1rem;
+            }
+
+            .form-card {
+                padding: 1.2rem 0.7rem 1.2rem 0.7rem;
+            }
+
+            .buttons {
+                flex-direction: column;
+                gap: 1.2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>RF Cavity External Q Calculator</h1>
+    </header>
+    <main>
+        <div id="home" class="buttons">
+            <button class="btn" onclick="showForm('reflection')">Reflection Method</button>
+            <button class="btn" onclick="showForm('transmission')">Transmission Method</button>
+        </div>
+        <div id="reflection-form" class="form-card hidden">
+            <h2>Single-Port (Reflection) Inputs</h2>
+            <div class="form-group">
+                <label>Resonant Frequency f0 (Hz)</label>
+                <input id="f0_reflect" type="number" step="any">
+                <div class="help">Measure S11 or S22 sweep and locate minimum.</div>
+            </div>
+            <div class="form-group">
+                <label>Bandwidth Δf_FPC (Hz)</label>
+                <input id="df_fpc" type="number" step="any">
+                <div class="help">3 dB width of S11 dip.</div>
+            </div>
+            <div class="form-group">
+                <label>Min. S11(dB) (FPC)</label>
+                <input id="s11min_fpc" type="number" step="any">
+                <div class="help">Convert to |Γ|=10^(dB/20).</div>
+            </div>
+            <div class="form-group">
+                <label>Bandwidth Δf_pt (Hz)</label>
+                <input id="df_pt" type="number" step="any">
+                <div class="help">3 dB width of S22 dip.</div>
+            </div>
+            <div class="form-group">
+                <label>Min. S22(dB) (Pickup)</label>
+                <input id="s22min_pt" type="number" step="any">
+                <div class="help">Convert to |Γ|=10^(dB/20).</div>
+            </div>
+            <button class="btn" onclick="calcReflection()">Calculate Qe</button>
+            <div id="results" class="hidden"></div>
+            <button class="back" onclick="goHome()">← Back</button>
+        </div>
+        <div id="transmission-form" class="form-card hidden">
+            <h2>Dual-Port (Transmission) Inputs</h2>
+            <div class="form-group">
+                <label>Resonant Frequency f0 (Hz)</label>
+                <input id="f0_trans" type="number" step="any">
+                <div class="help">Peak of |S21| & phase inflection.</div>
+            </div>
+            <div class="form-group">
+                <label>Bandwidth Δf (Hz)</label>
+                <input id="df_trans" type="number" step="any">
+                <div class="help">Half-max width, then QL=f0/Δf.</div>
+            </div>
+            <div class="form-group">
+                <label>S11(dB) at f0</label>
+                <input id="s11_trans" type="number" step="any">
+                <div class="help">Reflection at port 1.</div>
+            </div>
+            <div class="form-group">
+                <label>S21(dB) at f0</label>
+                <input id="s21_trans" type="number" step="any">
+                <div class="help">Transmission magnitude.</div>
+            </div>
+            <button class="btn" onclick="calcTransmission()">Calculate Qe</button>
+            <div id="results-trans" class="hidden"></div>
+            <button class="back" onclick="goHome()">← Back</button>
+        </div>
+    </main>
+    <script>
+        function showForm(type) {
+            document.getElementById('home').classList.add('hidden');
+            document.getElementById('reflection-form').classList.add('hidden');
+            document.getElementById('transmission-form').classList.add('hidden');
+            document.getElementById(type + '-form').classList.remove('hidden');
+        }
+        function goHome() {
+            document.getElementById('home').classList.remove('hidden');
+            document.getElementById('reflection-form').classList.add('hidden');
+            document.getElementById('transmission-form').classList.add('hidden');
+        }
+        function calcReflection() {
+            const f0 = +document.getElementById('f0_reflect').value,
+                dfF = +document.getElementById('df_fpc').value,
+                s11dB = +document.getElementById('s11min_fpc').value,
+                dfP = +document.getElementById('df_pt').value,
+                s22dB = +document.getElementById('s22min_pt').value;
+            const QL_F = f0 / dfF, QL_P = f0 / dfP;
+            const G11 = 10 ** (s11dB / 20), G22 = 10 ** (s22dB / 20);
+            const betaF = (1 - G11) / (1 + G11), betaP = (1 - G22) / (1 + G22);
+            const QeF = QL_F / betaF, QeP = QL_P / betaP;
+            document.getElementById('results').innerHTML =
+                `<h3>Results (Reflection)</h3>` +
+                `<div class="formula">QL(FPC)=f0/Δf_FPC = ${QL_F.toFixed(1)}</div>` +
+                `<div class="formula">β(FPC)=(1-|Γ|)/(1+|Γ|) = ${betaF.toFixed(3)}</div>` +
+                `<div class="formula">Qe(FPC)=QL(FPC)/β(FPC) = ${QeF.toFixed(1)}</div>` +
+                `<hr>` +
+                `<div class="formula">QL(pickup)=f0/Δf_pt = ${QL_P.toFixed(1)}</div>` +
+                `<div class="formula">β(pickup)=(1-|Γ|)/(1+|Γ|) = ${betaP.toFixed(3)}</div>` +
+                `<div class="formula">Qe(pickup)=QL(pickup)/β(pickup) = ${QeP.toFixed(1)}</div>`;
+            document.getElementById('results').classList.remove('hidden');
+        }
+        function calcTransmission() {
+            const f0 = +document.getElementById('f0_trans').value,
+                df = +document.getElementById('df_trans').value,
+                s11dB = +document.getElementById('s11_trans').value,
+                s21dB = +document.getElementById('s21_trans').value;
+            const QL = f0 / df;
+            const G11 = 10 ** (s11dB / 20);
+            const N = (1 + G11) ** 2;
+            const D = 1 - 10 ** (s11dB / 10) - 10 ** (s21dB / 10);
+            const beta1 = N / D;
+            const beta2 = D / (10 ** (s21dB / 10));
+            const Qe1 = QL / beta1;
+            const Qe2 = QL / beta2;
+            document.getElementById('results-trans').innerHTML =
+                `<h3>Results (Transmission)</h3>` +
+                `<div class="formula">QL=f0/Δf = ${QL.toFixed(1)}</div>` +
+                `<div class="formula">β1=(1+|Γ|)²/(1-S11_lin-S21_lin) = ${beta1.toFixed(3)}</div>` +
+                `<div class="formula">β2=(1-S11_lin-S21_lin)/S21_lin = ${beta2.toFixed(3)}</div>` +
+                `<div class="formula">Qe1=QL/β1 = ${Qe1.toFixed(1)}</div>` +
+                `<div class="formula">Qe2=QL/β2 = ${Qe2.toFixed(1)}</div>`;
+            document.getElementById('results-trans').classList.remove('hidden');
+        }
+    </script>
+</body>
+
+</html>
