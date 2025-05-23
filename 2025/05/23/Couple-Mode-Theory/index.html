@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.2.0">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/manifest.json">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"iuming.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.20.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":null},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":true,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="本文回顾了耦合模式理论的主要特征，特别是其在无源结构（如耦合谐振器和耦合波导）中的应用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Coupled Mode Theory">
+<meta property="og:url" content="http://iuming.github.io/2025/05/23/Couple-Mode-Theory/index.html">
+<meta property="og:site_name" content="REALIUMING&#39;BLOG">
+<meta property="og:description" content="本文回顾了耦合模式理论的主要特征，特别是其在无源结构（如耦合谐振器和耦合波导）中的应用">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?da/dt=K_%7B12%7Da_%7B2%7De%5E%7Bj(%5Comega_%7B2%7D-%5Comega_%7B1%7D)t%7D">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?W=%7Ca_%7B1%7D%7C%5E%7B2%7D+%7Ca_%7B2%7D%7C%5E%7B2%7D">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?dW/dt=0">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?K_%7B12%7D=K_%7B21%7D%5E%7B*%7D">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?K_%7B12%7D=K_%7B21%7D%5E%7B*%7D">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?%5Comega_%7B%5Cpm%7D=%5Cfrac%7B%5Comega_%7B1%7D+%5Comega_%7B2%7D%7D%7B2%7D%5Cpm%5Cfrac%7B1%7D%7B2%7D%5Csqrt%7B(%5Comega_%7B1%7D-%5Comega_%7B2%7D)%5E%7B2%7D+4%7CK_%7B12%7D%7C%5E%7B2%7D%7D">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?%5Cepsilon_%7B1%7D(%5Cmathbf%7Br%7D)">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?%5Cepsilon_%7B2%7D(%5Cmathbf%7Br%7D)">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?%5Cepsilon(%5Cmathbf%7Br%7D)=%5Cepsilon_%7B1%7D(%5Cmathbf%7Br%7D)+%5Cepsilon_%7B2%7D(%5Cmathbf%7Br%7D)-%5Cepsilon_%7B0%7D">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?W_%7B1%7D=%5Cint%7Be_%7B1%7D%7D%5E%7B*%7D%5Ccdot%7Be_%7B1%7D%7DdV">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?dW_%7B1%7D/dt=2%5Ctext%7BRe%7D%7Ba_%7B1%7D%5E%7B*%7D%5Cdot%7Ba%7D_%7B1%7D%7D">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?J_%7Bp%7D=-j%5Comega_%7B1%7D%5Cepsilon_%7B0%7D(%5Cdelta%5Cepsilon_%7B1%7D/%5Cepsilon_%7B0%7D)e_%7B1%7Da_%7B1%7D">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?P_%7B12%7D=%5Cint%7BJ_%7Bp%7D%7D%5Ccdot%7BE_%7B1%7D%7DdV=-j%5Comega_%7B1%7D%5Cepsilon_%7B0%7Da_%7B1%7D%5E%7B*%7D%5Cint(%5Cdelta%5Cepsilon_%7B1%7D/%5Cepsilon_%7B0%7D)%7Ce_%7B1%7D%7C%5E%7B2%7DdV">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?K_%7B12%7D=K_%7B21%7D%5E%7B*%7D">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?W=%5Cmathbf%7Ba%7D%5E%7B%5Cdagger%7DW%5Cmathbf%7Ba%7D">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?d%5Cmathbf%7Ba%7D/dt=H%5Cmathbf%7Ba%7D">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?dW/dt=0">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?H%5E%7B%5Cdagger%7DW+WH=0">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?H%5E%7B%5Cdagger%7DW+WH=0">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?U%5E%7B%5Cdagger%7DWU=P">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?U%5E%7B%5Cdagger%7DU=I">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?b=U%5Cmathbf%7Ba%7D">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?db/dt=Mb">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?M=UH">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?%5Comega_%7Bp%7D=%5Comega_%7Bs%7D+%5Comega_%7Bi%7D">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?%7Cb_%7B1%7D%7C%5E%7B2%7D-%7Cb_%7B2%7D%7C%5E%7B2%7D=%5Ctext%7Bconst%7D">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?K_%7B12%7D=K_%7B21%7D%5E%7B*%7D">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?%5Comega_%7B%5Cpm%7D=%5Cfrac%7B%5Comega_%7B1%7D+%5Comega_%7B2%7D%7D%7B2%7D%5Cpm%5Cfrac%7B1%7D%7B2%7D%5Csqrt%7B(%5Comega_%7B1%7D-%5Comega_%7B2%7D)%5E%7B2%7D+4%7CK_%7B12%7D%7C%5E%7B2%7D%7D">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?%5Cnabla%5Ctimes%5Cnabla%5Ctimes%5Cmathbf%7BE%7D-k%5E%7B2%7D%5Cepsilon%5Cmathbf%7BE%7D=0">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?%5Cmathbf%7Bn%7D%5Ctimes%5Cmathbf%7BE%7D=0">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?%5Cmathbf%7Bn%7D%5Ccdot%5Cmathbf%7BB%7D=0">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?%5Cepsilon%5E%7B%5Cdagger%7D=%5Cepsilon">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?w%5E%7B2%7D=%5Cfrac%7B%5Cint%5Cmathbf%7BE%7D%5E%7B*%7D%5Ccdot%5Cnabla%5Ctimes%5Cnabla%5Ctimes%5Cmathbf%7BE%7DdV%7D%7B%5Cint%5Cmathbf%7BE%7D%5E%7B*%7D%5Ccdot%5Cmathbf%7BE%7DdV%7D">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?%5Cdelta%7B%7Dw%5E%7B2%7D=0">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?%5Cnabla%5Ctimes%5Cnabla%5Ctimes%5Cmathbf%7Be%7D_%7B0%7D-k%5E%7B2%7D%5Cepsilon_%7B0%7D%5Cmathbf%7Be%7D_%7B0%7D=0">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?%5Cmathbf%7BE%7D=%5Csum_%7Bi%7Da_%7Bi%7D%5Cmathbf%7Be%7D_%7Bi%7D">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?w%5E%7B2%7D=%5Cfrac%7B%5Csum_%7Bi,j%7Da_%7Bi%7D%5E%7B*%7Da_%7Bj%7D(%5Cmathbf%7Be%7D_%7Bi%7D%5E%7B*%7D%5Ccdot%5Cnabla%5Ctimes%5Cnabla%5Ctimes%5Cmathbf%7Be%7D_%7Bj%7D)%7D%7B%5Csum_%7Bi,j%7Da_%7Bi%7D%5E%7B*%7Da_%7Bj%7D(%5Cmathbf%7Be%7D_%7Bi%7D%5E%7B*%7D%5Ccdot%5Cmathbf%7Be%7D_%7Bj%7D)%7D">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?W_%7Bij%7D=%5Cmathbf%7Be%7D_%7Bi%7D%5E%7B*%7D%5Ccdot%5Cmathbf%7Be%7D_%7Bj%7D">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?K_%7Bij%7D=%5Cmathbf%7Be%7D_%7Bi%7D%5E%7B*%7D%5Ccdot%5Cnabla%5Ctimes%5Cnabla%5Ctimes%5Cmathbf%7Be%7D_%7Bj%7D">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?%5Cdelta%7B%7Dw%5Csimeq%5Cfrac%7B%5Cdelta%7B%7DK_%7Bij%7D-w_%7B0%7D%5Cdelta%7B%7DW_%7Bij%7D%7D%7B2w_%7B0%7D%7D">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?j%5Cfrac%7Bda_%7Bi%7D%7D%7Bdt%7D=%5Csum_%7Bj%7D%5Cleft(%5Cfrac%7BK_%7Bij%7D-w_%7B0%7D%5E%7B2%7DW_%7Bij%7D%7D%7B2w_%7B0%7D%7D%5Cright)a_%7Bj%7D">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?d%5Cmathbf%7Ba%7D/dt=%5Cfrac%7B1%7D%7B2j%7D%5Cleft(%5Cfrac%7BK%7D%7Bw_%7B0%7D%7D-%5Cfrac%7Bw_%7B0%7D%7D%7B2%7D%5Cright)%5Cmathbf%7Ba%7D">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?K_%7B12%7D=K_%7B21%7D%5E%7B*%7D">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?dA_%7B1%7D/dz=K_%7B12%7DA_%7B2%7De%5E%7Bj(%5Cbeta_%7B2%7D-%5Cbeta_%7B1%7D)z%7D">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?dA_%7B2%7D/dz=K_%7B21%7DA_%7B1%7De%5E%7Bj(%5Cbeta_%7B1%7D-%5Cbeta_%7B2%7D)z%7D">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?P=%7CA_%7B1%7D%7C%5E%7B2%7DP_%7B1%7D+%7CA_%7B2%7D%7C%5E%7B2%7DP_%7B2%7D">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?A_%7B2%7D=A_%7B1%7De%5E%7Bj(%5Cbeta_%7B1%7D-%5Cbeta_%7B2%7D)z%7D">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?dA_%7B1%7D/dz=K_%7B12%7DA_%7B2%7De%5E%7Bj(%5Cbeta_%7B2%7D-%5Cbeta_%7B1%7D)z%7D">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?M=%5Cbegin%7Bpmatrix%7D0%7B%7D&%7B%7DK_%7B12%7D%5C%7B%7DK_%7B21%7D%7B%7D&%7B%7D0%5Cend%7Bpmatrix%7D">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?P_%7B1%7D%7CA_%7B1%7D%7C%5E%7B2%7D+P_%7B2%7D%7CA_%7B2%7D%7C%5E%7B2%7D=%5Ctext%7B%E5%B8%B8%E6%95%B0%7D">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?dA/dz=%5Cpm%7B%7DjK%7B%7DA">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?A_%7B1%7D=A_%7B0%7D%5Ccos(Kz),%5Cquad%7B%7DA_%7B2%7D=A_%7B0%7D%5Csin(Kz)">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?A_%7B1%7D=A_%7B0%7De%5E%7BjKz%7D,%5Cquad%7B%7DA_%7B2%7D=A_%7B0%7De%5E%7B-jKz%7D">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?A_%7B1%7D=A_%7B0%7De%5E%7B-jKz%7D,%5Cquad%7B%7DA_%7B2%7D=A_%7B0%7De%5E%7BjKz%7D">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?G=%7CA_%7B2%7D%7C%5E%7B2%7D/%7CA_%7B1%7D%7C%5E%7B2%7D=e%5E%7B2Kl%7D">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?A_%7B1%7D=A_%7B0%7De%5E%7B-Kz%7D,%5Cquad%7B%7DA_%7B2%7D=A_%7B0%7De%5E%7BKz%7D">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?R=%7CA_%7B2%7D%7C%5E%7B2%7D/%7CA_%7B1%7D%7C%5E%7B2%7D=e%5E%7B-2Kl%7D">
+<meta property="og:image" content="https://latex.codecogs.com/svg.image?G=%7CA_%7B2%7D%7C%5E%7B2%7D/%7CA_%7B1%7D%7C%5E%7B2%7D=e%5E%7B2Kl%7D">
+<meta property="article:published_time" content="2025-05-23T05:56:15.000Z">
+<meta property="article:modified_time" content="2025-05-23T05:59:24.748Z">
+<meta property="article:author" content="Liu Ming">
+<meta property="article:tag" content="theory">
+<meta property="article:tag" content="coupled">
+<meta property="article:tag" content="translate">
+<meta property="article:tag" content="paper">
+<meta name="twitter:card" content="&lt;twitter:card&gt;">
+<meta name="twitter:image" content="http://iuming.github.io/2025/05/23/Couple-Mode-Theory/%3Ctwitter:image%3E">
+<meta name="twitter:creator" content="@&lt;twitter:creator&gt;">
+<meta name="twitter:site" content="<twitter:site>">
+<meta property="fb:admins" content="&lt;fb:admin_id&gt;">
+<meta property="fb:app_id" content="&lt;fb:app_id&gt;">
+
+
+<link rel="canonical" href="http://iuming.github.io/2025/05/23/Couple-Mode-Theory/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://iuming.github.io/2025/05/23/Couple-Mode-Theory/","path":"2025/05/23/Couple-Mode-Theory/","title":"Coupled Mode Theory"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Coupled Mode Theory | REALIUMING'BLOG</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">REALIUMING'BLOG</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">239</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">20</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">96</span></a></li><li class="menu-item menu-item-books"><a href="/book/" rel="section"><i class="fa fa-book fa-fw"></i>books</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fab fa-algolia fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%86%E5%8F%B2%E5%9B%9E%E9%A1%BE"><span class="nav-number">2.</span> <span class="nav-text">历史回顾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E8%80%A6%E5%90%88%E6%A8%A1%E5%BC%8F"><span class="nav-number">3.</span> <span class="nav-text">时间耦合模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A3%E8%83%BD%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%80%A6%E5%90%88"><span class="nav-number">3.1.</span> <span class="nav-text">正能模式的耦合</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E4%BE%8B%E5%AD%90"><span class="nav-number">3.2.</span> <span class="nav-text">一个简单例子</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A3%E8%83%BD%E5%92%8C%E8%B4%9F%E8%83%BD%E7%9A%84%E9%9D%9E%E6%AD%A3%E4%BA%A4%E6%A8%A1%E5%BC%8F"><span class="nav-number">3.3.</span> <span class="nav-text">正能和负能的非正交模式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A3%E8%83%BD%E9%87%8F%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8F%98%E5%88%86%E5%8E%9F%E7%90%86"><span class="nav-number">4.</span> <span class="nav-text">正能量模式的变分原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%80%A6%E5%90%88%E4%BB%8B%E8%B4%A8%E8%B0%90%E6%8C%AF%E8%85%94%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-number">4.1.</span> <span class="nav-text">耦合介质谐振腔的应用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A9%BA%E9%97%B4%E8%80%A6%E5%90%88%E6%A8%A1%E5%BC%8F"><span class="nav-number">5.</span> <span class="nav-text">空间耦合模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA"><span class="nav-number">6.</span> <span class="nav-text">结论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%99%84%E5%BD%95"><span class="nav-number">7.</span> <span class="nav-text">附录</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9E%81%E5%80%BC%E5%8C%96"><span class="nav-number">7.1.</span> <span class="nav-text">极值化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E6%96%87"><span class="nav-number">8.</span> <span class="nav-text">原文</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Liu Ming"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Liu Ming</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">96</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">239</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button animated">
+    <button><i class="fa fa-comment"></i>
+      Chat
+    </button>
+  </div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2l1bWluZw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;iuming"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOjUyMDBsaXVtaW5nQGdtYWlsLmNvbQ==" title="E-Mail → mailto:5200liuming@gmail.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vdS8zMTQ3OTEyODky" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;3147912892"><i class="fab fa-weibo fa-fw"></i>Weibo</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9yZWFsaXVtaW5n" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;realiuming"><i class="fab fa-twitter fa-fw"></i>Twitter</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL3JlYWxpdW1pbmc=" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;realiuming"><i class="fab fa-facebook fa-fw"></i>FB Page</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8xMjE4NTI3My9pdW1pbmc=" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;12185273&#x2F;iuming"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly95b3V0dWJlLmNvbS9jaGFubmVsL1VDaUNCSHJ4cDJ4Tlc3T1ZaTlFzZHROdw==" title="YouTube → https:&#x2F;&#x2F;youtube.com&#x2F;channel&#x2F;UCiCBHrxp2xNW7OVZNQsdtNw"><i class="fab fa-youtube fa-fw"></i>YouTube</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9pbnN0YWdyYW0uY29tL3JlYWxpdW1pbmc=" title="Instagram → https:&#x2F;&#x2F;instagram.com&#x2F;realiuming"><i class="fab fa-instagram fa-fw"></i>Instagram</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="c2t5cGU6ODQyNjczNTU2P2NhbGx8Y2hhdA==" title="Skype → skype:842673556?call|chat"><i class="fab fa-skype fa-fw"></i>Skype</span>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="Back to top">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://iuming.github.io/" title="https:&#x2F;&#x2F;iuming.github.io&#x2F;">Title</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://iuming.github.io/2025/05/23/Couple-Mode-Theory/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Liu Ming">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="REALIUMING'BLOG">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Coupled Mode Theory | REALIUMING'BLOG">
+      <meta itemprop="description" content="本文回顾了耦合模式理论的主要特征，特别是其在无源结构（如耦合谐振器和耦合波导）中的应用">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Coupled Mode Theory
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2025-05-23 13:56:15 / Modified: 13:59:24" itemprop="dateCreated datePublished" datetime="2025-05-23T13:56:15+08:00">2025-05-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/node/" itemprop="url" rel="index"><span itemprop="name">node</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2025/05/23/Couple-Mode-Theory/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2025/05/23/Couple-Mode-Theory/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+            <div class="post-description">本文回顾了耦合模式理论的主要特征，特别是其在无源结构（如耦合谐振器和耦合波导）中的应用</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>本文回顾了耦合模式理论的主要特征，特别是其在无源结构（如耦合谐振器和耦合波导）中的应用。前者是时间模式耦合的例子，后者是空间模式耦合的例子。简要考虑了有源结构，只要它们遵守正负能量的守恒定律。最近关于模式能量非正交性带来的复杂问题在文献中有所讨论。</p>
+<p>耦合模式形式主义的一个优点在于其直观性，最简单的耦合方程可以通过检查写出。当关注“串扰”等问题时，则需要更正式的推导。这里介绍的推导基于变分原理。</p>
+<h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>本文回顾了耦合模式理论的主要特征。该主题的文献浩如烟海，要全面涵盖耦合模式理论的所有方面几乎是不可能的。当第一作者H. A. Haus被邀请撰写本文时，他接受的原因是，耦合模式理论的某些方面在他整个职业生涯中一直令他着迷，他早在20世纪50年代就撰写了该主题的首批论文。最近与他的一位博士生W. P. Huang合作完成的工作促使他邀请后者共同撰写本文。因此，本文是通过两位“耦合模式理论爱好者”的“镜头”对耦合模式理论的概述。由于论文长度的限制，本综述并非详尽无遗，它代表了作者基于自身经验和知识的观点。</p>
+<p>我们首先简要介绍耦合模式理论的历史背景。描述了该理论在早期的微波领域以及近年来在光电子和光纤领域的发展和应用。然后我们考虑时间耦合的两个无损模式。两个耦合的共振电路，或两个耦合的微波或光学谐振器，是物理实例。能量守恒要求本征频率为实数。参数振荡器的启动是另一个例子。接着，我们研究耦合模式理论的形式推导，并考虑模式能量非正交的一般情况，此时能量不一定是正的。详细介绍了过去五年为光学波导开发的非正交耦合模式理论。当一个谐振器储存负能量，另一个储存正能量时，频率会以共轭复数对出现。包含活性介质的谐振器（后者在简化近似中处理）是一个例子。</p>
+<p>该研究随后展示了如何从系统频率的变分原理推导出耦合模式形式主义。如果为无损电磁系统中的电场引入一个试解，即未耦合模式的线性叠加，那么耦合模式形式主义就是结果。我们不考虑更复杂的有源系统的正式推导，这些可以在文献中找到。实际上，耦合模式形式主义的优点之一就在于其直观性。通过检查可以获得许多物理见解，无需正式推导。</p>
+<p>接下来，我们考虑空间模式耦合。这里，时间耦合中的初始条件被空间边界条件所取代。波的群速度符号表明波在哪一端被激发。其能量的符号表明它是无源的（正能量）还是有源的（负能量）。基于这样的简单论点，可以区分布拉格反射器、行波管或后向波振荡器的工作原理。</p>
+<p>空间耦合模式形式主义的正式推导再次仅限于无源电磁结构。我们展示了该形式主义如何从变分原理得出。变分原理为评估耦合系数提供了一种精致的方法，一些容易被直观方法忽略的细节可以通过这种方法捕捉到。对于理解光学波导耦合器中的串扰问题，这种精致的方法是必要的。正是在这种背景下，对耦合模式理论的更正式推导的需求重新凸显。</p>
+<h3 id="历史回顾"><a href="#历史回顾" class="headerlink" title="历史回顾"></a>历史回顾</h3><p>电磁学中的耦合模式概念可以追溯到20世纪50年代初，最初应用于微波领域，并通过许多人的贡献逐步发展起来。1954年，Pierce将耦合模式理论应用于微波行波管的分析。随后，Gould对backward-wave振荡器进行了研究。耦合模式理论随后被用于分析参数放大器、振荡器和频率转换器。</p>
+<p>在微波波导和器件方面，Miller最先将耦合模式理论引入微波波导和无源器件的分析与设计中。Louise11很快将其推广，用于分析渐变波导结构，其中耦合系数取决于长度z。在20世纪60年代，耦合模式理论进一步发展，用于描述微波波导中的各种不规则性引起的模式转换，以及周期性波导结构中的模式转换。</p>
+<p>早期的耦合模式理论方法相当启发式。人们识别出“未耦合系统”的模式，并根据功率考虑确定模式幅度所遵循的耦合模式方程。</p>
+<p>Schelkunoff对耦合模式理论进行了严格的推导。他通过将未知的电磁场展开为未耦合系统的已知模式，直接从麦克斯韦方程组中得出一套广义的电报方程（耦合模式方程的一个不同版本）。一旦定义了未耦合系统的模式，耦合系数就可以明确确定。只要假设模式展开是完整的，耦合模式方程就等同于麦克斯韦方程组。然而，对于大多数应用来说，展开中只使用有限数量的模式（通常是两种），因此耦合模式理论仍然是一个近似的、但富有洞察力且通常准确的电磁振荡和波传播的数学描述。</p>
+<p>为了使方法更具正式的数学基础，作者之一（HAH）在1958年表明，耦合模式理论可以从为耦合系统的传播常数建立的变分原理推导出来。由于变分原理的驻性，不完全展开中的误差不会导致从耦合模式理论计算出的传播常数的准确性显著恶化。如果决定将耦合系统的场近似为未耦合系统的场的线性叠加，那么从耦合模式方程中可以得到传播常数的最佳值。</p>
+<p>光学波导的耦合模式理论在20世纪70年代初由Marcuse、Snyder、Yariv和Taylor以及Kogelnik等人发展起来。它已成功应用于各种引导波光电子和光纤器件的建模和分析，例如由薄膜和通道波导制成的光学定向耦合器、光纤、多波导透镜、相锁激光阵列、分布反馈激光器和分布布拉格反射器、光栅波导和耦合器、非平行和渐变波导结构、Y分支波导、TE&#x2F;TM偏振转换器、光纤中的偏振旋转、平板波导和光纤中的模式转换和辐射损耗，以及标量模式之间的残余耦合。它还被用于研究非线性介质中的波耦合现象，例如体材料中的谐波生成和引导波器件中的谐波生成、非线性脉冲或孤子传播以及光纤中的调制不稳定性，和非线性相干耦合器。这些应用中的许多都在文献[87]-[93]中有详细记录和总结。</p>
+<p>传统耦合模式理论的一个假设是未耦合系统的模式彼此正交。如果模式属于同一参考结构，这可能是正确的。然而，在研究耦合系统中的模式耦合时，人们通常选择将孤立系统的模式作为模式展开的基础，而这些模式可能并不正交。正交耦合模式理论（OCMT）在这种情况下不能正确描述模式耦合过程。Chen和Wang首次认识到光耦合器中波导模式之间的非正交性对串扰的影响，随后Haus和Whitaker提出了一种消除这种效应引起的串扰的方案。后来，Hardy和Streifer、Haus、Huang、Kawakami和Whitaker以及Chuang开发了几种非正交耦合模式理论（NCMT）的公式。新的非正交耦合模式理论（NCMT）被证明能为耦合波导的模式提供更准确的色散特性和场模式。它还要求修改波导之间的功率交换描述。</p>
+<p>在发展的早期阶段，不同公式之间存在一些差异。一些差异是表面的，很快通过重新公式化得到解决；一些则更为微妙。Snyder、Ankiewicz和Altintasl展示了非正交公式在平行平板的TM模式的耦合长度预测中可能导致错误结果，当折射率不连续性较大时。错误的根源在这种情况下很明显，因为当指数阶跃较大时，用作耦合模式理论试探解的波导模式存在严重误差。但他们也在同一例子中证明，基于相同试探解的传统正交耦合模式理论对耦合长度的预测非常准确。这一意外结果引发了该领域的一系列辩论。后来由Haus、Huang和Snyder解决了这一问题。</p>
+<p>尽管存在争议，但过去几年中在光电子和光纤领域开发和应用非正交耦合模式理论的研究活动非常活跃。开发了适用于弱导结构的简化标量版本和适用于强导结构的修改矢量版本。试图将理论推广到多波导和&#x2F;或多模式结构、各向异性介质、周期和渐变结构，以及非线性耦合器。非正交耦合模式理论已被用于光引导波器件和光纤耦合器的分析和设计。Marcatili和Syms进行了理论的实验验证。</p>
+<h3 id="时间耦合模式"><a href="#时间耦合模式" class="headerlink" title="时间耦合模式"></a>时间耦合模式</h3><p>我们将首先讨论时间耦合模式，从几个直观明显的假设开始。从这些假设出发，我们可以发展出描述两个谐振器耦合、参数放大和振荡的形式主义。然后我们将展示如何从变分原理推导出被动电磁结构中模式耦合的形式主义。这个变分原理提供了评估耦合系数的规则，当直观论证不足以提供这些系数时。</p>
+<p>考虑两个弱耦合的无损谐振器。将一个谐振器中的幅度，其时间依赖性为exp(jω₁t)，记为a₁；另一个谐振器中的幅度，其时间依赖性为exp(jω₂t)，记为a₂。这些是电场幅度的正频率分量。当两个谐振器耦合时，它们的时间依赖性会发生变化。当耦合较弱时，其形式必须为：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?da/dt=K_%7B12%7Da_%7B2%7De%5E%7Bj(%5Comega_%7B2%7D-%5Comega_%7B1%7D)t%7D"></p>
+<p>一开始可能并不明显为什么耦合应该与另一个谐振器的幅度成正比，而不是与幅度的时间导数、时间积分或任何复杂算子作用下的幅度成正比。然而，如果耦合较弱，时间依赖性只会受到微弱的扰动，只有当ω₁≈ω₂时，耦合项才重要。在方程（2.3）的耦合系数比ω₁和ω₂都小得多的情况下，用其近似值代替导数或积分会导致更高阶的误差，可以忽略。这就是为什么在弱耦合极限下，模式耦合形式主义可以如此简单地建立。</p>
+<h4 id="正能模式的耦合"><a href="#正能模式的耦合" class="headerlink" title="正能模式的耦合"></a>正能模式的耦合</h4><p>我们通常认为能量是一个正量。这将是首先讨论的情况。在许多完全现实的情况下，必须考虑能量为负值的情况。我们稍后将回到这种情况。</p>
+<p>我们首先关注能量正交的模式，即使在耦合存在的情况下，能量也可以写成：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?W=%7Ca_%7B1%7D%7C%5E%7B2%7D+%7Ca_%7B2%7D%7C%5E%7B2%7D"></p>
+<p>这里我们已经将电场幅度a₁和a₂归一化，使得它们的平方等于模式中的能量。没有假设存在交叉项，即模式是能量正交的。如果耦合是无损的，这里只处理这种情况，能量必须守恒：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?dW/dt=0"></p>
+<p>根据（2.3）和（2.4），我们得到：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?K_%7B12%7D=K_%7B21%7D%5E%7B*%7D"></p>
+<p>由于初始条件可以任意选择，只有当：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?K_%7B12%7D=K_%7B21%7D%5E%7B*%7D"></p>
+<p>时，（2.6）才能成立。这是两个模式在无损方式下耦合的耦合系数的约束条件。当（2.7）被引入（2.3）和（2.4）中，并假设时间依赖性为exp(jωt)，解决定性方程可以找到ω的两个根：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?%5Comega_%7B%5Cpm%7D=%5Cfrac%7B%5Comega_%7B1%7D+%5Comega_%7B2%7D%7D%7B2%7D%5Cpm%5Cfrac%7B1%7D%7B2%7D%5Csqrt%7B(%5Comega_%7B1%7D-%5Comega_%7B2%7D)%5E%7B2%7D+4%7CK_%7B12%7D%7C%5E%7B2%7D%7D"></p>
+<p>这两个频率是实数，因为当两个正能模式耦合并且能量守恒时，它们必须是实数。图1显示了当改变其中一个谐振频率（ω₁）时，另一个保持固定，对称和反对称正常模式的根ω₊（下曲线）和ω₋（上曲线）。</p>
+<p>有趣的是，这种简单的耦合模式形式主义有什么含义。首先考虑两个谐振器频率相等的情况。然后，如果在t&#x3D;0时，谐振器1被激发，a₁&#x3D;1，而谐振器2未被激发，a₂&#x3D;0，初始条件可以通过相等量的对称和反对称解的叠加来匹配。两个解的相位以不同的速率演化，经过时间t&#x3D;π&#x2F;(2|K|)后，所有激发将被转移到另一个谐振器。激发在两个谐振器之间振荡。当两个未耦合谐振器的频率不相等，并且最初只有一个谐振器被激发时，转移是不完全的。</p>
+<h4 id="一个简单例子"><a href="#一个简单例子" class="headerlink" title="一个简单例子"></a>一个简单例子</h4><p>图2显示了一个简单例子，该例子既允许严格的分析，又容易屈服于耦合模式形式主义。通过这种方式，人们可以将精确解与近似解进行比较。两个谐振器是部分填充介质的金属矩形波导，使得空波导在谐振频率下低于截止频率。未耦合的波导每个都终止于无限的空气填充波导。问题是如何找到这种结构的耦合系数，从而得到两个本征模式的拍频。将形成谐振腔（1）的介电常数的空间分布记为：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?%5Cepsilon_%7B1%7D(%5Cmathbf%7Br%7D)"></p>
+<p>和形成谐振器（2）的：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?%5Cepsilon_%7B2%7D(%5Cmathbf%7Br%7D)"></p>
+<p>实际分布是：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?%5Cepsilon(%5Cmathbf%7Br%7D)=%5Cepsilon_%7B1%7D(%5Cmathbf%7Br%7D)+%5Cepsilon_%7B2%7D(%5Cmathbf%7Br%7D)-%5Cepsilon_%7B0%7D"></p>
+<p>将模式（1）和（2）的电场模式分别记为e₁和e₂。模式（1）中的能量是：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?W_%7B1%7D=%5Cint%7Be_%7B1%7D%7D%5E%7B*%7D%5Ccdot%7Be_%7B1%7D%7DdV"></p>
+<p>通过能量论证来推导耦合。考虑模式（1）中的能量变化率：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?dW_%7B1%7D/dt=2%5Ctext%7BRe%7D%7Ba_%7B1%7D%5E%7B*%7D%5Cdot%7Ba%7D_%7B1%7D%7D"></p>
+<p>这种能量变化必须等于模式（2）通过模式（1）中的介电常数扰动δε₁驱动的极化电流密度输入到模式（1）中的功率。这个电流密度等于：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?J_%7Bp%7D=-j%5Comega_%7B1%7D%5Cepsilon_%7B0%7D(%5Cdelta%5Cepsilon_%7B1%7D/%5Cepsilon_%7B0%7D)e_%7B1%7Da_%7B1%7D"></p>
+<p>这个电流密度输入到模式（1）中的功率等于：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?P_%7B12%7D=%5Cint%7BJ_%7Bp%7D%7D%5Ccdot%7BE_%7B1%7D%7DdV=-j%5Comega_%7B1%7D%5Cepsilon_%7B0%7Da_%7B1%7D%5E%7B*%7D%5Cint(%5Cdelta%5Cepsilon_%7B1%7D/%5Cepsilon_%7B0%7D)%7Ce_%7B1%7D%7C%5E%7B2%7DdV"></p>
+<p>并且必须负责由于模式（2）的存在导致的模式（1）中的能量随时间的增长率。</p>
+<p>由于激发幅度是任意的，必须成立：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?K_%7B12%7D=K_%7B21%7D%5E%7B*%7D"></p>
+<p>其中我们已经将结果独立于归一化写出。图3显示了作为标准化谐振器分离函数的耦合系数。</p>
+<h4 id="正能和负能的非正交模式"><a href="#正能和负能的非正交模式" class="headerlink" title="正能和负能的非正交模式"></a>正能和负能的非正交模式</h4><p>并非所有模式都必须具有正能量。一个负能量的例子是运动的电子束或等离子体。如果该系统的方程被线性化，并找到波解，这些波的能量可以是负的。负能量仅仅意味着当波被激发时系统的能量低于未被激发时的能量：运动的电子束储存正动能和电磁能。波的激发会减少这种能量。</p>
+<p>在当前讨论中，我们不必假设只有两个耦合波。假设存在n个感兴趣的模式，它们的n个幅度被排列成n阶列向量a。在没有耦合的情况下，不同谐振频率的模式必须是能量正交的。如果不是这样，如果存在能量交叉项，它们将随时间变化，能量将不独立于时间。如果模式具有相同的频率，它们总是可以被正交化。系统的能量W可以写成：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?W=%5Cmathbf%7Ba%7D%5E%7B%5Cdagger%7DW%5Cmathbf%7Ba%7D"></p>
+<p>其中W是一个n阶方阵，可以是正定的（如果所有波能量都是正的）或不定的（如果存在正负波能量）。符号†表示Hermitian转置。然后模式的运动方程可以写成：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?d%5Cmathbf%7Ba%7D/dt=H%5Cmathbf%7Ba%7D"></p>
+<p>其中H是包含（小）频率差异和耦合的耦合矩阵。如果能量守恒，我们有：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?dW/dt=0"></p>
+<p>这对方程施加了约束：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?H%5E%7B%5Cdagger%7DW+WH=0"></p>
+<p>由于初始条件是任意的，向量a是任意的，必须有：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?H%5E%7B%5Cdagger%7DW+WH=0"></p>
+<p>能量非正交性可能作为耦合的自然结果出现，如我们稍后在空间模式耦合的背景下将看到的。因此，理解其后果非常重要。当处理空间模式耦合时，我们将更详细地研究这些后果。</p>
+<p>然而，形式主义总是可以被塑造成能量正交的形式。让我们简要地看一下正交化。因为能量W是实数，矩阵W是Hermitian的。Hermitian矩阵总是可以通过酉变换对角化。记这个矩阵为U。然后，</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?U%5E%7B%5Cdagger%7DWU=P"></p>
+<p>其中P是一个对角矩阵。它可能是不定的，具有正负对角元素。不失一般性，我们可以假设元素都是±1，因为可以通过适当归一化模式幅度a₁来实现。当然，</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?U%5E%7B%5Cdagger%7DU=I"></p>
+<p>其中I是单位矩阵。现在定义新的幅度矩阵b：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?b=U%5Cmathbf%7Ba%7D"></p>
+<p>将方程两边乘以U，我们得到幅度矩阵b的方程：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?db/dt=Mb"></p>
+<p>其中</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?M=UH"></p>
+<p>新的耦合矩阵必须遵守由能量守恒施加的约束。事实上，让我们研究矩阵PM：</p>
+<p>可以证明：</p>
+<p>因此</p>
+<p>我们已经推导出一种能量正交的模式耦合形式主义，允许正能和负能模式同时存在。当P是正定时，或单位矩阵时，我们看到M是Hermitian的。Hermitian矩阵只能有实特征值，即所有耦合振荡器的频率必须是实数。当P是不定的，M不是Hermitian的，特征值可以是复数。可以证明复特征值以共轭对出现；对于每一个随时间增长的解，存在一个随时间衰减的解。</p>
+<p>现在我们已经开发了一种适用于并非所有模式都具有正能量的模式耦合的一般形式主义，研究两个模式的特殊情况是有趣的，其中一个具有正能量，另一个具有负能量。如前所述，这可能是电磁腔通过等离子体的情况，等离子体中的波携带负能量。一个更现实的模型是参数振荡器，其中信号模式在频率ωs和闲置模式在频率ωi通过频率为ωp的泵浦耦合，满足：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?%5Comega_%7Bp%7D=%5Comega_%7Bs%7D+%5Comega_%7Bi%7D"></p>
+<p>这不是严格意义上的能量守恒案例，而是遵循Manley-Rowe关系的系统案例。Manley-Rowe关系最初是从经典考虑推导出来的，也可以从（无损非线性）系统的Hamiltonian推导出来。然而，它们可以用光子数“守恒”来表述。在参数振荡器中，泵浦被激发到闲置模式和信号模式中。信号光子和闲置光子同时产生。因此，如果|b₁|²代表信号光子数，|b₂|²代表闲置光子数，则成立：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?%7Cb_%7B1%7D%7C%5E%7B2%7D-%7Cb_%7B2%7D%7C%5E%7B2%7D=%5Ctext%7Bconst%7D"></p>
+<p>但现在我们分析的系统类型看起来像一个能量守恒关系，其中一个模式具有负能量（或光子数）。现在我们来看行列式方程的解。方程的形式与（2.3）和（2.4）相同，只不过ai被替换为bi，并且根据（2.25）：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?K_%7B12%7D=K_%7B21%7D%5E%7B*%7D"></p>
+<p>行列式方程的解现在是：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?%5Comega_%7B%5Cpm%7D=%5Cfrac%7B%5Comega_%7B1%7D+%5Comega_%7B2%7D%7D%7B2%7D%5Cpm%5Cfrac%7B1%7D%7B2%7D%5Csqrt%7B(%5Comega_%7B1%7D-%5Comega_%7B2%7D)%5E%7B2%7D+4%7CK_%7B12%7D%7C%5E%7B2%7D%7D"></p>
+<p>当两个模式的频率几乎相同时，|ω₁ - ω₂| &lt; 2|K|，特征值是复数，存在一个增长模式和一个衰减模式。应该指出的是，在参数振荡器的情况下，当严格遵守（2.28）时，即ω₁ &#x3D; ω₂时，会发生“同步”。</p>
+<p>在当前情况下发现的增长和衰减是活性不稳定系统的标志。一个模式中的正能量（或光子数）与另一个模式中的负能量（或光子数）同时增长或衰减。</p>
+<h3 id="正能量模式的变分原理"><a href="#正能量模式的变分原理" class="headerlink" title="正能量模式的变分原理"></a>正能量模式的变分原理</h3><p>到目前为止，我们基于直观方法发展了耦合模式理论。显然，如果该理论确实物理正确，那么应该能够从系统的根本方程推导出来。这确实可行。对于纯电磁系统，Schelkunoff通过将场展开为完整的一组模式来推导耦合模式形式主义。另一种方法是从变分原理推导耦合模式形式主义。这已用于电子束在微波结构中的情况，也可以相对容易地应用于纯电磁结构，假设能量矩阵W是正定的。我们将在此集中讨论这种情况，因为它简单且能提供对过程的洞察。</p>
+<p>变分原理为微分方程的特征值提供了一个比用于评估它的试探解更准确的近似值。这在使用变分原理时是一个重要方面。确实，当假设耦合系统的激发是未耦合系统的模式的线性叠加时，使用的场模式是在没有耦合的情况下获得的，即忽略了耦合的场模式。因此，人们如何期望从忽略了耦合的场模式中可靠地预测系统的时域演化呢？变分原理消除了这种批评。</p>
+<p>介质的电场方程为：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?%5Cnabla%5Ctimes%5Cnabla%5Ctimes%5Cmathbf%7BE%7D-k%5E%7B2%7D%5Cepsilon%5Cmathbf%7BE%7D=0"></p>
+<p>假设系统被封闭在一个由完美电导体和&#x2F;或磁导体组成的封闭空间中。然后，在封闭空间上满足边界条件：</p>
+<p>在磁导体上：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?%5Cmathbf%7Bn%7D%5Ctimes%5Cmathbf%7BE%7D=0"></p>
+<p>在电导体上：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?%5Cmathbf%7Bn%7D%5Ccdot%5Cmathbf%7BB%7D=0"></p>
+<p>最后，考虑介质无损的约束条件。众所周知，用笛卡尔坐标表示的介电张量ε形成一个Hermitian矩阵，满足关系：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?%5Cepsilon%5E%7B%5Cdagger%7D=%5Cepsilon"></p>
+<p>现在，我们来证明（2.18）的变分特性。通过将（3.1）与E*点乘，对封闭空间的体积进行积分，并利用边界条件（3.2）进行分部积分，得到：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?w%5E%7B2%7D=%5Cfrac%7B%5Cint%5Cmathbf%7BE%7D%5E%7B*%7D%5Ccdot%5Cnabla%5Ctimes%5Cnabla%5Ctimes%5Cmathbf%7BE%7DdV%7D%7B%5Cint%5Cmathbf%7BE%7D%5E%7B*%7D%5Ccdot%5Cmathbf%7BE%7DdV%7D"></p>
+<p>方程（3.4）是频率w的变分表达式。假设将（3.1）中的场替换为E + δE，其中δE是误差，即精确解的偏差。然后可以证明w²在δE的一阶下不受影响。对（3.4）进行扰动分析，我们发现：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?%5Cdelta%7B%7Dw%5E%7B2%7D=0"></p>
+<p>这完成了（3.4）的变分特性的证明。</p>
+<p>现在，我们将该形式主义应用于多模谐振器。分析的第一部分是通用的，没有特定情况在考虑中。然后我们将分析专门针对两个通过边缘场耦合的介质谐振腔。</p>
+<p>我们使用的试探解场由一些空间变化介质中的模式组成，通常每个模式对应不同的介质。我们用e₀表示模式，介电常数分布用ε₀。假设模式满足波动方程：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?%5Cnabla%5Ctimes%5Cnabla%5Ctimes%5Cmathbf%7Be%7D_%7B0%7D-k%5E%7B2%7D%5Cepsilon_%7B0%7D%5Cmathbf%7Be%7D_%7B0%7D=0"></p>
+<p>其中ω₀是模式的谐振频率。模式在封闭系统表面的边界条件下是适当的。我们假设试探场是这些场模式的线性叠加：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?%5Cmathbf%7BE%7D=%5Csum_%7Bi%7Da_%7Bi%7D%5Cmathbf%7Be%7D_%7Bi%7D"></p>
+<p>当将此试探解代入（3.4）时，我们得到：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?w%5E%7B2%7D=%5Cfrac%7B%5Csum_%7Bi,j%7Da_%7Bi%7D%5E%7B*%7Da_%7Bj%7D(%5Cmathbf%7Be%7D_%7Bi%7D%5E%7B*%7D%5Ccdot%5Cnabla%5Ctimes%5Cnabla%5Ctimes%5Cmathbf%7Be%7D_%7Bj%7D)%7D%7B%5Csum_%7Bi,j%7Da_%7Bi%7D%5E%7B*%7Da_%7Bj%7D(%5Cmathbf%7Be%7D_%7Bi%7D%5E%7B*%7D%5Ccdot%5Cmathbf%7Be%7D_%7Bj%7D)%7D"></p>
+<p>其中：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?W_%7Bij%7D=%5Cmathbf%7Be%7D_%7Bi%7D%5E%7B*%7D%5Ccdot%5Cmathbf%7Be%7D_%7Bj%7D"></p>
+<p>和：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?K_%7Bij%7D=%5Cmathbf%7Be%7D_%7Bi%7D%5E%7B*%7D%5Ccdot%5Cnabla%5Ctimes%5Cnabla%5Ctimes%5Cmathbf%7Be%7D_%7Bj%7D"></p>
+<p>显然，W和K都是Hermitian矩阵。由于W和K都是正定的，w²的值是实数且正数，这是正确的。通过对（3.9）的右侧关于a₀的幅度和相位进行微分，可以找到特征值w²的驻值。附录显示这种微分是合法的。结果可以写成耦合模式方程的形式。假设摄动理论适用，所有频率都聚集在典型值w₀周围。然后可以写成：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?%5Cdelta%7B%7Dw%5Csimeq%5Cfrac%7B%5Cdelta%7B%7DK_%7Bij%7D-w_%7B0%7D%5Cdelta%7B%7DW_%7Bij%7D%7D%7B2w_%7B0%7D%7D"></p>
+<p>这可以表示为：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?j%5Cfrac%7Bda_%7Bi%7D%7D%7Bdt%7D=%5Csum_%7Bj%7D%5Cleft(%5Cfrac%7BK_%7Bij%7D-w_%7B0%7D%5E%7B2%7DW_%7Bij%7D%7D%7B2w_%7B0%7D%7D%5Cright)a_%7Bj%7D"></p>
+<p>这显然是一个Hermitian能量矩阵W和Hermitian耦合矩阵H&#x3D;(K - w₀²W)&#x2F;2w₀的耦合模式方程。该形式主义不仅得出了耦合模式方程，还提供了评估耦合系数的配方。</p>
+<h4 id="耦合介质谐振腔的应用"><a href="#耦合介质谐振腔的应用" class="headerlink" title="耦合介质谐振腔的应用"></a>耦合介质谐振腔的应用</h4><p>现在，我们将耦合模式分析应用于之前通过简单正交模式耦合理论分析的耦合腔体。这里更仔细地处理由耦合引入的非正交性，这会改变方程。我们将这种改进的耦合模式分析与前一种方法以及在这种简单情况下不难进行的精确分析进行比较。</p>
+<p>我们引入两个与单个波导相关的介电分布，当另一个不存在时（见图2）。耦合腔体的谐振频率相等，可以设为ω₀。耦合模式方程变为：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?d%5Cmathbf%7Ba%7D/dt=%5Cfrac%7B1%7D%7B2j%7D%5Cleft(%5Cfrac%7BK%7D%7Bw_%7B0%7D%7D-%5Cfrac%7Bw_%7B0%7D%7D%7B2%7D%5Cright)%5Cmathbf%7Ba%7D"></p>
+<p>其中K是耦合矩阵：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?K_%7B12%7D=K_%7B21%7D%5E%7B*%7D"></p>
+<p>从物理论证中得到了耦合系数。但之前在正交能量模式的情况下没有从头开始获得右手边的自项。它们是影响图4中所示的本征值的修正项。</p>
+<h3 id="空间耦合模式"><a href="#空间耦合模式" class="headerlink" title="空间耦合模式"></a>空间耦合模式</h3><p>考虑一个线性系统中的两个波，它们的隐含时间依赖性为exp(jωt)，当它们未耦合时，空间依赖性分别为exp(-jβ₁z)和exp(-jβ₂z)。这两个波通过均匀结构或某种周期结构（如光栅或螺旋线）或某种周期时空现象（如参数放大器中的光泵浦）在空间中耦合。在后者的情况下，指定的公共频率ω实际上是模式（1）的信号频率ωₛ，另一方面是模式（2）的频率ωₚ - ωₛ，这在同步时等于ωₛ。在均匀结构中，传播常数β₁和β₂必须符号相同且大致相等，以便波彼此影响。如果耦合结构的周期为Λ，则空间谐波（布洛赫波或布里渊分量）之间的耦合成为可能。例如，假设耦合系数的形式为：2K₁₂ cos(2πz&#x2F;Λ)。空间耦合模式方程如下：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?dA_%7B1%7D/dz=K_%7B12%7DA_%7B2%7De%5E%7Bj(%5Cbeta_%7B2%7D-%5Cbeta_%7B1%7D)z%7D"></p>
+<p>和：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?dA_%7B2%7D/dz=K_%7B21%7DA_%7B1%7De%5E%7Bj(%5Cbeta_%7B1%7D-%5Cbeta_%7B2%7D)z%7D"></p>
+<p>所有关于时间耦合模式形式主义中的耦合形式的论点都适用于当前情况。模式可能携带正或负功率。负功率可能是因为正能量向-z方向传播（群速度为负）或负能量向前传播（群速度为正）。在这种情况下，可以问，如何可能让两个相位速度符号相同的波具有符号相反的群速度。这个特性在具有许多“布洛赫波”的周期结构中很常见，其中一些布洛赫波的相位速度和群速度符号相反。正是与这些“反向”布洛赫波的耦合导致了下面讨论的物理情况。</p>
+<p>定义功率矩阵P &#x3D; diag(1, fl)，其中符号对应于两个波的功率流动方向，使得经过适当归一化后，功率可以写成：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?P=%7CA_%7B1%7D%7C%5E%7B2%7DP_%7B1%7D+%7CA_%7B2%7D%7C%5E%7B2%7DP_%7B2%7D"></p>
+<p>假设空间谐波的传播常数β₂ + 2π&#x2F;Λ与β₁接近同步。然后使用假设：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?A_%7B2%7D=A_%7B1%7De%5E%7Bj(%5Cbeta_%7B1%7D-%5Cbeta_%7B2%7D)z%7D"></p>
+<p>我们可以写出：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?dA_%7B1%7D/dz=K_%7B12%7DA_%7B2%7De%5E%7Bj(%5Cbeta_%7B2%7D-%5Cbeta_%7B1%7D)z%7D"></p>
+<p>与时间耦合模式的情况类似，当前情况的耦合矩阵M的形式为：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?M=%5Cbegin%7Bpmatrix%7D0%7B%7D&%7B%7DK_%7B12%7D%5C%7B%7DK_%7B21%7D%7B%7D&%7B%7D0%5Cend%7Bpmatrix%7D"></p>
+<p>必须遵守功率守恒定律（与（2.27）比较）：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?P_%7B1%7D%7CA_%7B1%7D%7C%5E%7B2%7D+P_%7B2%7D%7CA_%7B2%7D%7C%5E%7B2%7D=%5Ctext%7B%E5%B8%B8%E6%95%B0%7D"></p>
+<p>功率矩阵P可以是正定的或不定的。物理原因比时间耦合模式的情况更多样化。因此，我们可能有简单的情况，两个波的群速度同向且能量同号。这样的波携带同一方向的正功率，P矩阵是正定的。两个波可能具有相反的群速度方向，但能量同号。此时P是不定的。另一方面，能量可能符号相反，群速度同向，此时P也是不定的。</p>
+<p>我们在这里关注两个同步波的情况，当两个模式相位匹配时。对于均匀结构，相位匹配要求β₁ &#x3D; β₂；对于周期结构，它导致β₁ - β₂ &#x3D; 2π&#x2F;Λ。因此，即使传播常数差异较大，但结构的周期性补偿了差异，也可以发生耦合。例如，相位速度相反的波可以通过这种方法彼此耦合。</p>
+<p>在相位匹配下，空间耦合模式方程采用更简单的形式：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?dA/dz=%5Cpm%7B%7DjK%7B%7DA"></p>
+<p>其中K &#x3D; |K₁₂|。两种符号对应于功率流动方向相同或相反的情况。解为：</p>
+<p>对于P正定或负定的情况：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?A_%7B1%7D=A_%7B0%7D%5Ccos(Kz),%5Cquad%7B%7DA_%7B2%7D=A_%7B0%7D%5Csin(Kz)"></p>
+<p>对于P不定的情况：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?A_%7B1%7D=A_%7B0%7De%5E%7BjKz%7D,%5Cquad%7B%7DA_%7B2%7D=A_%7B0%7De%5E%7B-jKz%7D"></p>
+<p>首先考虑周期解（4.11）。如果系统是被动的，波的能量是正的，两个群速度必须同向。假设系统从左侧激发模式（1）。经过距离π&#x2F;(2K)后，激发全部转移到模式（2）。这类似于前面讨论的时间耦合模式（见图5）。波导耦合器在微波和光学中的应用就是一个例子。</p>
+<p>然而，具有相反群速度的活性结构也有相同的解。例如，后向波放大器。假设波（1）是具有负群速度的电路波。它在结构的远端被激发，长度为l（见图6和7）。活性波具有正群速度，并在z&#x3D;0处被激发，假设未被激发。解为：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?A_%7B1%7D=A_%7B0%7De%5E%7B-jKz%7D,%5Cquad%7B%7DA_%7B2%7D=A_%7B0%7De%5E%7BjKz%7D"></p>
+<p>系统的增益为：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?G=%7CA_%7B2%7D%7C%5E%7B2%7D/%7CA_%7B1%7D%7C%5E%7B2%7D=e%5E%7B2Kl%7D"></p>
+<p>当lK &#x3D; π&#x2F;2时，增益趋于无穷大。后向波放大器变为振荡器。另一个物理例子是相位匹配的信号和闲置波的参数放大器。</p>
+<p>最后，考虑指数解的情况。在被动情况下，两个波具有正能和相反的群速度，前向波A₁从左侧被激发，后向波A₂从右侧未被激发，解为：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?A_%7B1%7D=A_%7B0%7De%5E%7B-Kz%7D,%5Cquad%7B%7DA_%7B2%7D=A_%7B0%7De%5E%7BKz%7D"></p>
+<p>这个解适用于耦合两个反向传播波的光栅耦合器（见图8）。耦合器的反射率为：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?R=%7CA_%7B2%7D%7C%5E%7B2%7D/%7CA_%7B1%7D%7C%5E%7B2%7D=e%5E%7B-2Kl%7D"></p>
+<p>相反，如果一个波具有负能量，两个波都具有正群速度，则两个波必须从左侧被激发。具有负能量的波A₂是行波管中的束波，正能量波A₁是电路波。系统的增益为：</p>
+<p><img data-src="https://latex.codecogs.com/svg.image?G=%7CA_%7B2%7D%7C%5E%7B2%7D/%7CA_%7B1%7D%7C%5E%7B2%7D=e%5E%7B2Kl%7D"></p>
+<p>到目前为止，我们研究了简单空间耦合模式形式主义所覆盖的不同物理器件特性。接下来，我们将研究如何从变分原理推导该形式主义。我们仅限于被动情况，并考虑与此形式主义相关的一些问题。</p>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>我们回顾了关于耦合模式的广泛文献。然后简要研究了耦合模式在时间中的强大洞察力。正能量模式的情况表明，两个正能量模式的耦合会导致共振频率的分裂。在能量符号相反的情况下，如果是不稳定的，当然，前提是两个系统的自然频率差异不大。尽管参数振荡器的情况严格来说并不是能量符号相反的情况，但Manley-Rowe关系提供了与能量符号相反的耦合模式系统描述一致的守恒定律。</p>
+<p>能量正交性为耦合模式理论提供了简单的图景。如果能量不是正交的，描述就会改变。非正交性通常是耦合本身的后果。因此，它不会导致定性不同的行为。然而，会出现定量差异，我们通过一个可以由两种方法以及精确方法分析的两个耦合腔体的例子来探讨这些差异。能量非正交性的改进需要更系统的方法来确定耦合矩阵。我们已经展示，当试探解由模式图案的线性叠加组成时，时间中的耦合模式可以基于变分原理得出。</p>
+<p>接下来，我们考虑了空间中的模式耦合。在这里，两个模式覆盖的物理现象更多，因为模式可以具有相同或相反的符号的能量，以及相同和相反方向的功率流动。波导耦合器、行波管、后向波振荡器和光栅反射器就是例子。</p>
+<p>与时间中的耦合模式形式主义一样，空间中的耦合模式形式主义也是从变分原理推导出来的，该原理在被动无损电磁结构的情况下进行了说明。同样，通过变分原理克服了非正交模式耦合的复杂性。</p>
+<h3 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h3><h4 id="极值化"><a href="#极值化" class="headerlink" title="极值化"></a>极值化</h4><p>必须对形如 $ E &#x3D; a_i^* M_{ij} a_j $ 的表达式分别关于复变量 $ a_i $ 的模 $ |a_i| $ 和幅角 $ \arg a_i &#x3D; \phi_i $ 进行求导。例如：</p>
+<p>$$<br>\frac{\partial E}{\partial |a_i|} &#x3D; 2 \text{Re} \left( \frac{\partial E}{\partial a_i} \right )<br>$$</p>
+<p>以及</p>
+<p>$$<br>\frac{\partial E}{\partial \phi_i} &#x3D; 2 \text{Im} \left( \frac{\partial E}{\partial a_i} \right )<br>$$</p>
+<p>其中，</p>
+<p>$$<br>\frac{\partial E}{\partial a_i} &#x3D; M_{ij} a_j<br>$$</p>
+<p>如果将上述表达式应用于（3.9），可以发现：</p>
+<p>$$<br>\frac{\partial E}{\partial |a_i|} &#x3D; 2 \text{Re} \left( \frac{\partial E}{\partial a_i} \right )<br>$$</p>
+<p>以及</p>
+<p>$$<br>\frac{\partial E}{\partial \phi_i} &#x3D; 2 \text{Im} \left( \frac{\partial E}{\partial a_i} \right )<br>$$</p>
+<p>这两个方程等价于：</p>
+<p>$$<br>\frac{\partial E}{\partial a_i^*} &#x3D; M_{ij} a_j<br>$$</p>
+<p>但是，这个方程也可以通过将下式对 $ a_i^* $ 求导得到：</p>
+<p>$$<br>E &#x3D; a_i^* M_{ij} a_j<br>$$</p>
+<p>该论证同样适用于 $ a_i &#x3D; a_j $ 的情况。</p>
+<h3 id="原文"><a href="#原文" class="headerlink" title="原文"></a>原文</h3><p><span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2RvY3VtZW50LzEwNDIyNS8=">Coupled-mode Theory<i class="fa fa-external-link-alt"></i></span></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="Liu Ming WeChat Pay">
+        <span>WeChat Pay</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="Liu Ming Alipay">
+        <span>Alipay</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>Liu Ming
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="http://iuming.github.io/2025/05/23/Couple-Mode-Theory/" title="Coupled Mode Theory">http://iuming.github.io/2025/05/23/Couple-Mode-Theory/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/realiuming">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+U5yo-Zxuw1OgbU6P">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </span>
+
+          <img class="social-item-img" src="/images/wechat_channel.jpg">
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/theory/" rel="tag"><i class="fa fa-tag"></i> theory</a>
+              <a href="/tags/coupled/" rel="tag"><i class="fa fa-tag"></i> coupled</a>
+              <a href="/tags/translate/" rel="tag"><i class="fa fa-tag"></i> translate</a>
+              <a href="/tags/paper/" rel="tag"><i class="fa fa-tag"></i> paper</a>
+          </div>
+
+        
+  <div class="social-like a2a_kit a2a_kit_size_32 a2a_default_style">
+    <a class="a2a_dd" target="_blank" rel="noopener" href="https://www.addtoany.com/share"></a>
+      <a class="a2a_button_facebook"></a>
+      <a class="a2a_button_twitter"></a>
+      <a class="a2a_button_wechat"></a>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/05/08/Analyzing-Coupled-Oscillators-Stored-Energy-Insights-from-ChatGPT-Conversations/" rel="prev" title="Analyzing Coupled Oscillators' Stored Energy: Insights from ChatGPT Conversations">
+                  <i class="fa fa-angle-left"></i> Analyzing Coupled Oscillators' Stored Energy: Insights from ChatGPT Conversations
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Ming Liu. All rights reserved.</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL2l1bWluZw==" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.1.0/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/4.23.3/algoliasearch-lite.umd.js" integrity="sha256-1QNshz86RqXe/qsCBldsUu13eAX6n/O98uubKQs87UI=" crossorigin="anonymous"></script><script src="/js/third-party/search/algolia-search.js"></script>
+<script class="next-config" data-name="chatra" type="application/json">{"enable":true,"async":true,"id":"gTXKphrmKGf5QSb5L"}</script>
+<script src="/js/third-party/chat/chatra.js"></script>
+<script async src="https://call.chatra.io/chatra.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.0/pdfobject.min.js","integrity":"sha256-JJZNsid68vnh3/zyj0lY9BN5ynxVX/12XgOa1TlaYN0="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.0/mermaid.min.js","integrity":"sha256-stuqcu2FrjYCXDOytWFA5SoUE/r3nkp6gTglzNSlavU="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+  <script class="next-config" data-name="wavedrom" type="application/json">{"enable":true,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.5.0/wavedrom.min.js","integrity":"sha256-INLAoJc6quTNfiMWkGZniYO2cxE8mHpddnLow1m6RFs="}}</script>
+  <script class="next-config" data-name="wavedrom_skin" type="application/json">{"enable":true,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.5.0/skins/default.js","integrity":"sha256-fduc/Zszk5ezWws2uInY/ALWVmIrmV6VTgXbsYSReFI="}}</script>
+  <script src="/js/third-party/tags/wavedrom.js"></script>
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+  <script src="/js/third-party/addtoany.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":"ture","archive":true,"delay":true,"timeout":3000,"priority":true,"url":"http://iuming.github.io/2025/05/23/Couple-Mode-Theory/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"realiuming","count":true,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+
+</body>
+</html>
