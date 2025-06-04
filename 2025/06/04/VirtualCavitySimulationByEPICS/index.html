@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.2.0">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/manifest.json">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"iuming.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.20.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":null},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":true,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="A simulation method for virtual cavity by EPICS for chat GPT">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Virtual Cavity Simulation By EPICS">
+<meta property="og:url" content="http://iuming.github.io/2025/06/04/VirtualCavitySimulationByEPICS/index.html">
+<meta property="og:site_name" content="REALIUMING&#39;BLOG">
+<meta property="og:description" content="A simulation method for virtual cavity by EPICS for chat GPT">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-06-04T04:24:54.000Z">
+<meta property="article:modified_time" content="2025-06-04T04:29:54.645Z">
+<meta property="article:author" content="Liu Ming">
+<meta property="article:tag" content="LLRF">
+<meta property="article:tag" content="RF">
+<meta property="article:tag" content="EPICS">
+<meta property="article:tag" content="Cavity">
+<meta property="article:tag" content="Simulate">
+<meta name="twitter:card" content="&lt;twitter:card&gt;">
+<meta name="twitter:image" content="http://iuming.github.io/2025/06/04/VirtualCavitySimulationByEPICS/%3Ctwitter:image%3E">
+<meta name="twitter:creator" content="@&lt;twitter:creator&gt;">
+<meta name="twitter:site" content="<twitter:site>">
+<meta property="fb:admins" content="&lt;fb:admin_id&gt;">
+<meta property="fb:app_id" content="&lt;fb:app_id&gt;">
+
+
+<link rel="canonical" href="http://iuming.github.io/2025/06/04/VirtualCavitySimulationByEPICS/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://iuming.github.io/2025/06/04/VirtualCavitySimulationByEPICS/","path":"2025/06/04/VirtualCavitySimulationByEPICS/","title":"Virtual Cavity Simulation By EPICS"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Virtual Cavity Simulation By EPICS | REALIUMING'BLOG</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">REALIUMING'BLOG</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">241</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">20</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">97</span></a></li><li class="menu-item menu-item-books"><a href="/book/" rel="section"><i class="fa fa-book fa-fw"></i>books</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fab fa-algolia fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Install-and-configure-EPICS-Base-iocCore-and-Sequencer"><span class="nav-number">1.</span> <span class="nav-text">Install and configure EPICS Base, iocCore, and Sequencer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Enumerate-all-PVs-records-you-need-and-choose-naming-conventions"><span class="nav-number">2.</span> <span class="nav-text">Enumerate all PVs (records) you need, and choose naming conventions</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Static-user-tunable-parameters"><span class="nav-number">2.1.</span> <span class="nav-text">Static (user-tunable) parameters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fixed-but-array-valued-buffers"><span class="nav-number">2.2.</span> <span class="nav-text">Fixed (but array-valued) buffers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Internal-state-variables-updated-each-Ts"><span class="nav-number">2.3.</span> <span class="nav-text">Internal state variables (updated each Ts)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Output-signals-that-Phoebus-will-plot"><span class="nav-number">2.4.</span> <span class="nav-text">Output signals (that Phoebus will plot)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Write-the-main-database-file-db-cavity-sim-db"><span class="nav-number">3.</span> <span class="nav-text">Write the main database file (db&#x2F;cavity_sim.db)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Write-the-Sequencer-program-SNL-cavity-sim-st"><span class="nav-number">4.</span> <span class="nav-text">Write the Sequencer program (SNL&#x2F;cavity_sim.st)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Write-or-generate-the-C-helper-code-cav-ss-c-and-cav-ss-h"><span class="nav-number">5.</span> <span class="nav-text">Write or generate the C helper code (cav_ss.c and cav_ss.h)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#begin-bmatrix-dot-x-m-1-dot-x-m-2-end-bmatrix"><span class="nav-number"></span> <span class="nav-text">$$\begin{bmatrix} \dot x_{m,1} \ \dot x_{m,2} \end{bmatrix}</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Compile-and-launch-the-Soft-IOC"><span class="nav-number">1.</span> <span class="nav-text">Compile and launch the Soft IOC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Build-a-Phoebus-display"><span class="nav-number">2.</span> <span class="nav-text">Build a Phoebus display</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Recap-of-%E2%80%9CWhole-Steps%E2%80%9D"><span class="nav-number">3.</span> <span class="nav-text">Recap of “Whole Steps”</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Tips-and-Caveats"><span class="nav-number">3.1.</span> <span class="nav-text">Tips and Caveats</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#In-summary"><span class="nav-number">3.2.</span> <span class="nav-text">In summary</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Liu Ming"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Liu Ming</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">97</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">241</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button animated">
+    <button><i class="fa fa-comment"></i>
+      Chat
+    </button>
+  </div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2l1bWluZw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;iuming"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOjUyMDBsaXVtaW5nQGdtYWlsLmNvbQ==" title="E-Mail → mailto:5200liuming@gmail.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vdS8zMTQ3OTEyODky" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;3147912892"><i class="fab fa-weibo fa-fw"></i>Weibo</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9yZWFsaXVtaW5n" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;realiuming"><i class="fab fa-twitter fa-fw"></i>Twitter</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL3JlYWxpdW1pbmc=" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;realiuming"><i class="fab fa-facebook fa-fw"></i>FB Page</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8xMjE4NTI3My9pdW1pbmc=" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;12185273&#x2F;iuming"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly95b3V0dWJlLmNvbS9jaGFubmVsL1VDaUNCSHJ4cDJ4Tlc3T1ZaTlFzZHROdw==" title="YouTube → https:&#x2F;&#x2F;youtube.com&#x2F;channel&#x2F;UCiCBHrxp2xNW7OVZNQsdtNw"><i class="fab fa-youtube fa-fw"></i>YouTube</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9pbnN0YWdyYW0uY29tL3JlYWxpdW1pbmc=" title="Instagram → https:&#x2F;&#x2F;instagram.com&#x2F;realiuming"><i class="fab fa-instagram fa-fw"></i>Instagram</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="c2t5cGU6ODQyNjczNTU2P2NhbGx8Y2hhdA==" title="Skype → skype:842673556?call|chat"><i class="fab fa-skype fa-fw"></i>Skype</span>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="Back to top">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://iuming.github.io/" title="https:&#x2F;&#x2F;iuming.github.io&#x2F;">Title</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://iuming.github.io/2025/06/04/VirtualCavitySimulationByEPICS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Liu Ming">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="REALIUMING'BLOG">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Virtual Cavity Simulation By EPICS | REALIUMING'BLOG">
+      <meta itemprop="description" content="A simulation method for virtual cavity by EPICS for chat GPT">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Virtual Cavity Simulation By EPICS
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2025-06-04 12:24:54 / Modified: 12:29:54" itemprop="dateCreated datePublished" datetime="2025-06-04T12:24:54+08:00">2025-06-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/note/" itemprop="url" rel="index"><span itemprop="name">note</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2025/06/04/VirtualCavitySimulationByEPICS/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2025/06/04/VirtualCavitySimulationByEPICS/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+            <div class="post-description">A simulation method for virtual cavity by EPICS for chat GPT</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>Below is a detailed, end-to-end recipe for rewriting your entire Python-based cavity simulator as a “pure EPICS” Soft IOC (i.e. one or more <code>.db</code> files, plus a Sequencer program) so that Phoebus can drive and display everything. In broad strokes you will:</p>
+<ol>
+<li><p><strong>Set up your EPICS environment</strong> (EPICS Base, iocCore, sequencer).</p>
+</li>
+<li><p><strong>List every parameter and internal state</strong> in terms of EPICS record names (PVs).</p>
+</li>
+<li><p><strong>Write a <code>.db</code> file</strong> that declares all of those PVs:</p>
+<ul>
+<li>Scalar parameters (AO records) for things like <code>Ts</code>, <code>fsrc</code>, <code>Asrc</code>, <code>gain_dB</code>, <code>β</code>, etc.</li>
+<li>Waveform records (or array‐valued records) for any fixed buffers (e.g. <code>base_pul[]</code>, <code>beam_pul[]</code>, mechanical‐mode arrays) and for state vectors (<code>state_m</code>).</li>
+<li>“Output” records—PVs that hold <code>vc</code>, <code>vr</code>, <code>dw</code>, plus any intermediate signals you want to see.</li>
+<li>Calc records if you choose to break simple arithmetic into EPICS functions (but in practice most of the heavy lifting will be done in Sequencer).</li>
+</ul>
+</li>
+<li><p><strong>Write a Sequencer (SNL) program</strong> that:</p>
+<ol>
+<li>Runs once at IOC startup, computes any “one‐time” matrices (e.g. discrete‐time mechanical state‐space matrices), and initializes internal state.</li>
+<li>Enters a loop that repeats every Ts seconds (using <code>delay(Ts)</code>), reading the latest AO PVs (so the user can tweak them at run‐time), advancing the RF‐source phase, running the I&#x2F;Q modulator step, the amplifier step, a microphonics kick, and the cavity&#x2F;mechanical update (the equivalent of <code>sim_scav_step</code>).</li>
+<li>Writes the new <code>vc</code>, <code>vr</code>, and <code>dw</code> back into EPICS PVs each iteration so that Phoebus can plot them.</li>
+</ol>
+</li>
+<li><p><strong>Compile &amp; launch</strong> the IOC (<code>softIoc</code> + sequencer), then build Phoebus screens around those PVs.</p>
+</li>
+</ol>
+<p>Below are the complete steps in order.</p>
+<h2 id="Install-and-configure-EPICS-Base-iocCore-and-Sequencer"><a href="#Install-and-configure-EPICS-Base-iocCore-and-Sequencer" class="headerlink" title="Install and configure EPICS Base, iocCore, and Sequencer"></a>Install and configure EPICS Base, iocCore, and Sequencer</h2><ol>
+<li><p><strong>Download and install EPICS Base (e.g. version 7.x or 7.0.5+)</strong> on your Linux machine. Follow the usual EPICS “makeBaseApp.pl” instructions.</p>
+</li>
+<li><p><strong>Install iocCore</strong> (it comes with EPICS Base).</p>
+</li>
+<li><p><strong>Install the EPICS Sequencer</strong> (<code>asyn</code>, <code>streamDevice</code>, and <code>seq</code>) so that you can compile an SNL file. Make sure <code>$EPICS_BASE/bin/$EPICS_HOST_ARCH</code> is on your PATH.</p>
+</li>
+<li><p><strong>Create a new IOC directory</strong> (for instance, call it <code>cavityIoc/</code>). Under <code>cavityIoc/</code>, you will have:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cavityIoc/</span><br><span class="line">  ├── Makefile</span><br><span class="line">  ├── db/                # folder for .db files</span><br><span class="line">  │     └── cavity_sim.db</span><br><span class="line">  ├── SNL/               # folder for .st (Sequencer) files</span><br><span class="line">  │     └── cavity_sim.st</span><br><span class="line">  └── iocBoot/           # folder for st.cmd (IOC startup) and any support files</span><br><span class="line">        ├── st.cmd</span><br><span class="line">        └── envPaths</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>Edit the IOC’s <code>Makefile</code></strong> to compile the SNL file. A minimal <code>Makefile</code> might look like:</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># in cavityIoc/Makefile</span></span><br><span class="line">TOP = .</span><br><span class="line"><span class="keyword">include</span> <span class="variable">$(EPICS_BASE)</span>/configure/RULES_TOP</span><br><span class="line"><span class="comment"># Path to your .db file(s)</span></span><br><span class="line">DB += db/cavity_sim.db</span><br><span class="line"></span><br><span class="line"><span class="comment"># Sequencer files</span></span><br><span class="line">SNLFILES += SNL/cavity_sim.st</span><br><span class="line">EMIT+=cavity_sim</span><br><span class="line"></span><br><span class="line"><span class="comment"># No additional libraries needed if all logic is in SNL</span></span><br><span class="line"><span class="comment"># ------------------------------------------------------</span></span><br><span class="line"><span class="comment"># Note: if you want a custom C function (e.g. for your sim_scav_step logic),</span></span><br><span class="line"><span class="comment"># you&#x27;ll have to link it here and adjust LIBRARY paths accordingly.</span></span><br><span class="line"><span class="comment"># ------------------------------------------------------</span></span><br></pre></td></tr></table></figure></li>
+<li><p><strong>Edit <code>iocBoot/st.cmd</code></strong> to load the <code>.db</code> and the sequencer. For instance:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env bash</span><br><span class="line">procServ -f -L iocLog/servoLog.txt -p 1234 -n CAV:IOC softIoc -d $(TOP)/db/cavity_sim.db \</span><br><span class="line">  &amp;</span><br><span class="line"></span><br><span class="line"># Wait a few seconds, then load the sequencer code</span><br><span class="line">epicsEnvSet(&quot;SNCSEQ_PROC&quot;,  &quot;cavity_sim&quot;)</span><br><span class="line">epicsEnvSet(&quot;SNCSEQ_RECS&quot;,  &quot;$(TOP)/db/cavity_sim.db&quot;)</span><br><span class="line">sequencer -k -l -c &quot;cavity_sim.st&quot; &amp;</span><br></pre></td></tr></table></figure>
+
+<p>Adjust paths and names as needed. The key point is: first start <code>softIoc</code> with your <code>.db</code>, then load the compiled <code>cavity_sim</code> sequencer.</p>
+</li>
+</ol>
+<h2 id="Enumerate-all-PVs-records-you-need-and-choose-naming-conventions"><a href="#Enumerate-all-PVs-records-you-need-and-choose-naming-conventions" class="headerlink" title="Enumerate all PVs (records) you need, and choose naming conventions"></a>Enumerate all PVs (records) you need, and choose naming conventions</h2><p>Before writing any code, list every signal, parameter, and internal state from your Python script, and assign each a unique EPICS PV name. For consistency, let’s prefix everything with <code>CAV:</code> (you can change this to your lab’s naming standard).</p>
+<h3 id="Static-user-tunable-parameters"><a href="#Static-user-tunable-parameters" class="headerlink" title="Static (user-tunable) parameters"></a>Static (user-tunable) parameters</h3><table>
+<thead>
+<tr>
+<th>PV name</th>
+<th>Record Type</th>
+<th>Comments</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>CAV:TS</code></td>
+<td><code>ao</code></td>
+<td>Simulation time step (s). Initial value &#x3D; <code>1e-6</code>.</td>
+</tr>
+<tr>
+<td><code>CAV:FSRC</code></td>
+<td><code>ao</code></td>
+<td>RF source offset from carrier (Hz). Init &#x3D; <code>-460</code>.</td>
+</tr>
+<tr>
+<td><code>CAV:ASRC</code></td>
+<td><code>ao</code></td>
+<td>RF source amplitude (V). Init &#x3D; <code>1.0</code>.</td>
+</tr>
+<tr>
+<td><code>CAV:PULSED</code></td>
+<td><code>bi</code> or <code>mbbi</code></td>
+<td>0 &#x3D; CW mode, 1 &#x3D; pulsed mode.</td>
+</tr>
+<tr>
+<td><code>CAV:GAIN_DB</code></td>
+<td><code>ao</code></td>
+<td>Amplifier gain in dB (20·log10(12e6) ≃ 163.6 dB).</td>
+</tr>
+<tr>
+<td><code>CAV:BETA</code></td>
+<td><code>ao</code></td>
+<td>Coupling factor β (init &#x3D; 1e4).</td>
+</tr>
+<tr>
+<td><code>CAV:RoQ</code></td>
+<td><code>ao</code></td>
+<td>r&#x2F;Q of the cavity (Ω). Init &#x3D; 1036.</td>
+</tr>
+<tr>
+<td><code>CAV:QL</code></td>
+<td><code>ao</code></td>
+<td>Loaded Q. Init &#x3D; 3e6.</td>
+</tr>
+<tr>
+<td><code>CAV:IB</code></td>
+<td><code>ao</code></td>
+<td>Average beam current (A). Init &#x3D; 0.008.</td>
+</tr>
+<tr>
+<td><code>CAV:DW0</code></td>
+<td><code>ao</code></td>
+<td>Initial detuning Δω₀ (rad&#x2F;s). If zero, init&#x3D;0.</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>You could also expose <code>mech_modes.f[5]</code>, <code>mech_modes.Q[5]</code>, <code>mech_modes.K[5]</code> as separate waveform records (or hard‐code them in the SNL). We’ll define them below.</p>
+</blockquote>
+<h3 id="Fixed-but-array-valued-buffers"><a href="#Fixed-but-array-valued-buffers" class="headerlink" title="Fixed (but array-valued) buffers"></a>Fixed (but array-valued) buffers</h3><table>
+<thead>
+<tr>
+<th>PV name</th>
+<th>Record Type</th>
+<th>Size</th>
+<th>Comments</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>CAV:BASE_PUL</code></td>
+<td><code>waveform</code></td>
+<td>16384</td>
+<td>Buffer for I&#x2F;Q modulator. Baseband pulsing envelope (1 for first t_flat samples, 0 afterward).</td>
+</tr>
+<tr>
+<td><code>CAV:BEAM_PUL</code></td>
+<td><code>waveform</code></td>
+<td>16384</td>
+<td>Beam buffer: beam current from sample t_fill to t_flat (value &#x3D; IB), else 0.</td>
+</tr>
+<tr>
+<td><code>CAV:MECH_F</code></td>
+<td><code>waveform</code></td>
+<td>5</td>
+<td>Mechanical‐mode freqs in Hz (280, 341, 460, 487, 618).</td>
+</tr>
+<tr>
+<td><code>CAV:MECH_Q</code></td>
+<td><code>waveform</code></td>
+<td>5</td>
+<td>Mechanical‐mode Qs (40, 20, 50, 80, 100).</td>
+</tr>
+<tr>
+<td><code>CAV:MECH_K</code></td>
+<td><code>waveform</code></td>
+<td>5</td>
+<td>Mechanical‐mode coupling constants (2, 0.8, 2, 0.6, 0.2).</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>In principle, you could choose to pass the mechanical state‐space matrices (<code>Ad</code>, <code>Bd</code>, <code>Cd</code>, <code>Dd</code>) from Python into EPICS, but it’s cleaner to let SNL compute them at startup (once).</p>
+</blockquote>
+<h3 id="Internal-state-variables-updated-each-Ts"><a href="#Internal-state-variables-updated-each-Ts" class="headerlink" title="Internal state variables (updated each Ts)"></a>Internal state variables (updated each Ts)</h3><table>
+<thead>
+<tr>
+<th>PV name</th>
+<th>Record Type</th>
+<th>Comments</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>CAV:PHA_SCAL</code></td>
+<td><code>longout</code></td>
+<td>Current RF source phase (rad) as a scalar, updated every step.</td>
+</tr>
+<tr>
+<td><code>CAV:STATE_VC</code></td>
+<td><code>longout</code></td>
+<td>Current cavity complex‐voltage (we’ll keep real &amp; imag in separate PVs).</td>
+</tr>
+<tr>
+<td><code>CAV:STATE_VC_R</code></td>
+<td><code>ao</code></td>
+<td>Real part of Vc (V).</td>
+</tr>
+<tr>
+<td><code>CAV:STATE_VC_I</code></td>
+<td><code>ao</code></td>
+<td>Imag part of Vc (V).</td>
+</tr>
+<tr>
+<td><code>CAV:STATE_M</code></td>
+<td><code>waveform</code></td>
+<td>Mechanical state vector (x₁ … xₙ) with n &#x3D; number of mech modes (here 5).</td>
+</tr>
+<tr>
+<td><code>CAV:DW_PREV</code></td>
+<td><code>ao</code></td>
+<td>Detuning from previous step (rad&#x2F;s).</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>We keep <code>STATE_VC</code> in two AO records (real &amp; imag). Alternately you could store magnitude&#x2F;phase, but real&#x2F;imag is simpler for complex arithmetic.</p>
+</blockquote>
+<h3 id="Output-signals-that-Phoebus-will-plot"><a href="#Output-signals-that-Phoebus-will-plot" class="headerlink" title="Output signals (that Phoebus will plot)"></a>Output signals (that Phoebus will plot)</h3><table>
+<thead>
+<tr>
+<th>PV name</th>
+<th>Record Type</th>
+<th>Comments</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>CAV:SIG_VC_R</code></td>
+<td><code>ao</code></td>
+<td>Instantaneous real(Vc) (V).</td>
+</tr>
+<tr>
+<td><code>CAV:SIG_VC_I</code></td>
+<td><code>ao</code></td>
+<td>Instantaneous imag(Vc) (V).</td>
+</tr>
+<tr>
+<td><code>CAV:SIG_VR_R</code></td>
+<td><code>ao</code></td>
+<td>Instantaneous real(Vr) (V).</td>
+</tr>
+<tr>
+<td><code>CAV:SIG_VR_I</code></td>
+<td><code>ao</code></td>
+<td>Instantaneous imag(Vr) (V).</td>
+</tr>
+<tr>
+<td><code>CAV:SIG_DW</code></td>
+<td><code>ao</code></td>
+<td>Instantaneous detuning (Hz) &#x3D; dw&#x2F;(2π).</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>If you want to record full time‐traces (size &#x3D; sim_len&#x3D;16 384), you could use a <code>waveform</code> record for each (<code>SIG_VC</code>, <code>SIG_VR</code>, <code>SIG_DW</code>). But in most LLRF‐in‐EPICS setups, you stream a handful of “live” PVs (updated each cycle) and let a Phoebus trend viewer show those points in real time.</p>
+</blockquote>
+<h2 id="Write-the-main-database-file-db-cavity-sim-db"><a href="#Write-the-main-database-file-db-cavity-sim-db" class="headerlink" title="Write the main database file (db/cavity_sim.db)"></a>Write the main database file (<code>db/cavity_sim.db</code>)</h2><p>Below is a complete <code>.db</code> that declares every PV outlined above. Copy this into <code>db/cavity_sim.db</code> under your IOC directory.</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">###############################################################################</span></span><br><span class="line"><span class="comment"># file: db/cavity_sim.db</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Defines all PVs for the “pure‐EPICS” version of the Python cavity simulator.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Static parameters (editable), waveform buffers, internal state holders, and</span></span><br><span class="line"><span class="comment"># PVs for the “live” outputs (vc, vr, dw).  The actual time stepping is done</span></span><br><span class="line"><span class="comment"># in the Sequencer (.st) program.</span></span><br><span class="line"><span class="comment">###############################################################################</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># === 1) Static, user‐tunable scalars ===</span></span><br><span class="line"></span><br><span class="line">record(ao, &quot;CAV:TS&quot;) &#123;</span><br><span class="line">  field(DESC,  &quot;Simulation time step (s)&quot;)</span><br><span class="line">  field(EGU,   &quot;s&quot;)</span><br><span class="line">  field(PREC,  9)</span><br><span class="line">  field(VAL,   &quot;1e-6&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">record(ao, &quot;CAV:FSRC&quot;) &#123;</span><br><span class="line">  field(DESC,  &quot;RF source offset freq (Hz)&quot;)</span><br><span class="line">  field(EGU,   &quot;Hz&quot;)</span><br><span class="line">  field(PREC,  3)</span><br><span class="line">  field(VAL,   &quot;-460.0&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">record(ao, &quot;CAV:ASRC&quot;) &#123;</span><br><span class="line">  field(DESC,  &quot;RF source amplitude (V)&quot;)</span><br><span class="line">  field(EGU,   &quot;V&quot;)</span><br><span class="line">  field(PREC,  4)</span><br><span class="line">  field(VAL,   &quot;1.0&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">record(mbbi, &quot;CAV:PULSED&quot;) &#123;</span><br><span class="line">  field(DESC,  &quot;Pulsed (1) or CW (0) mode&quot;)</span><br><span class="line">  field(ZNAM,  &quot;CW&quot;)</span><br><span class="line">  field(ONAM,  &quot;PULSED&quot;)</span><br><span class="line">  field(NOBT,  &quot;2&quot;)</span><br><span class="line">  field(DESC,  &quot;<span class="attr">0</span> = CW<span class="comment">; 1 = Pulsed&quot;)</span></span><br><span class="line">  field(VAL,   &quot;1&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">record(ao, &quot;CAV:GAIN_DB&quot;) &#123;</span><br><span class="line">  field(DESC,  &quot;Amplifier gain (dB)&quot;)</span><br><span class="line">  field(EGU,   &quot;dB&quot;)</span><br><span class="line">  field(PREC,  3)</span><br><span class="line">  field(VAL,   &quot;163.6&quot;)   <span class="comment"># =20*log10(12e6) ≃ 163.6 dB</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">record(ao, &quot;CAV:BETA&quot;) &#123;</span><br><span class="line">  field(DESC,  &quot;Coupling factor β&quot;)</span><br><span class="line">  field(EGU,   &quot;&quot;)</span><br><span class="line">  field(PREC,  0)</span><br><span class="line">  field(VAL,   &quot;10000&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">record(ao, &quot;CAV:RoQ&quot;) &#123;</span><br><span class="line">  field(DESC,  &quot;r/Q of cavity (Ω)&quot;)</span><br><span class="line">  field(EGU,   &quot;Ω&quot;)</span><br><span class="line">  field(PREC,  0)</span><br><span class="line">  field(VAL,   &quot;1036&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">record(ao, &quot;CAV:QL&quot;) &#123;</span><br><span class="line">  field(DESC,  &quot;Loaded Q&quot;)</span><br><span class="line">  field(EGU,   &quot;&quot;)</span><br><span class="line">  field(PREC,  0)</span><br><span class="line">  field(VAL,   &quot;3000000&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">record(ao, &quot;CAV:IB&quot;) &#123;</span><br><span class="line">  field(DESC,  &quot;Average beam current (A)&quot;)</span><br><span class="line">  field(EGU,   &quot;A&quot;)</span><br><span class="line">  field(PREC,  4)</span><br><span class="line">  field(VAL,   &quot;0.008&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">record(ao, &quot;CAV:DW0&quot;) &#123;</span><br><span class="line">  field(DESC,  &quot;Initial detuning Δω₀ (rad/s)&quot;)</span><br><span class="line">  field(EGU,   &quot;rad/s&quot;)</span><br><span class="line">  field(PREC,  3)</span><br><span class="line">  field(VAL,   &quot;0.0&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># === 2) Array‐valued (waveform) buffers ===</span></span><br><span class="line"><span class="comment">#    We use NELM=16384 (2048*8).  Indices run 0..16383.</span></span><br><span class="line"></span><br><span class="line">record(waveform, &quot;CAV:BASE_PUL&quot;) &#123;</span><br><span class="line">  field(DESC,  &quot;I/Q modulator pulse envelope (0/1) for each sample&quot;)</span><br><span class="line">  field(NELM,  &quot;16384&quot;)</span><br><span class="line">  field(DTYP,  &quot;Soft Channel&quot;)</span><br><span class="line">  field(VAL,   &quot;1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,\</span><br><span class="line">             1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,\</span><br><span class="line">             1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,\</span><br><span class="line">             1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,\</span><br><span class="line">             1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,\</span><br><span class="line">             1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,\</span><br><span class="line">             1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,\</span><br><span class="line">             1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,\</span><br><span class="line">             1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,\</span><br><span class="line">             1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,\</span><br><span class="line">             1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,\</span><br><span class="line">             1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,\</span><br><span class="line">             1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,\</span><br><span class="line">             1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,\</span><br><span class="line">             1,1,1,1, ...  )   <span class="comment"># total 16384 entries; first t_flat entries are 1, rest are 0</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">record(waveform, &quot;CAV:BEAM_PUL&quot;) &#123;</span><br><span class="line">  field(DESC,  &quot;Beam current array (A) for each sample&quot;)</span><br><span class="line">  field(NELM,  &quot;16384&quot;)</span><br><span class="line">  field(DTYP,  &quot;Soft Channel&quot;)</span><br><span class="line">  field(VAL,   &quot;0,0,0, ..., 0.008, 0.008, ..., 0.008, 0,0,0, ...&quot;)  </span><br><span class="line">  <span class="comment"># In practice, set indices t_fill..t_flat = 0.008, others 0</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">record(waveform, &quot;CAV:MECH_F&quot;) &#123;</span><br><span class="line">  field(DESC,  &quot;Mechanical‐mode freqs (Hz)&quot;)</span><br><span class="line">  field(NELM,  &quot;5&quot;)</span><br><span class="line">  field(DTYP,  &quot;Soft Channel&quot;)</span><br><span class="line">  field(VAL,   &quot;280,341,460,487,618&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">record(waveform, &quot;CAV:MECH_Q&quot;) &#123;</span><br><span class="line">  field(DESC,  &quot;Mechanical‐mode Qs&quot;)</span><br><span class="line">  field(NELM,  &quot;5&quot;)</span><br><span class="line">  field(DTYP,  &quot;Soft Channel&quot;)</span><br><span class="line">  field(VAL,   &quot;40,20,50,80,100&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">record(waveform, &quot;CAV:MECH_K&quot;) &#123;</span><br><span class="line">  field(DESC,  &quot;Mechanical‐mode couplings&quot;)</span><br><span class="line">  field(NELM,  &quot;5&quot;)</span><br><span class="line">  field(DTYP,  &quot;Soft Channel&quot;)</span><br><span class="line">  field(VAL,   &quot;2,0.8,2,0.6,0.2&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># === 3) Internal state variables ===</span></span><br><span class="line"></span><br><span class="line">record(longout, &quot;CAV:PHA_SCAL&quot;) &#123;</span><br><span class="line">  field(DESC,  &quot;RF source phase (rad)&quot;)</span><br><span class="line">  field(PREC,  6)</span><br><span class="line">  field(VAL,   &quot;0.0&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">record(ao, &quot;CAV:STATE_VC_R&quot;) &#123;</span><br><span class="line">  field(DESC,  &quot;Real part of Vc (V)&quot;)</span><br><span class="line">  field(PREC,  6)</span><br><span class="line">  field(VAL,   &quot;0.0&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">record(ao, &quot;CAV:STATE_VC_I&quot;) &#123;</span><br><span class="line">  field(DESC,  &quot;Imag part of Vc (V)&quot;)</span><br><span class="line">  field(PREC,  6)</span><br><span class="line">  field(VAL,   &quot;0.0&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">record(waveform, &quot;CAV:STATE_M&quot;) &#123;</span><br><span class="line">  field(DESC,  &quot;Mechanical state vector <span class="section">[x₁…x₅]</span>&quot;)</span><br><span class="line">  field(NELM,  &quot;5&quot;)</span><br><span class="line">  field(DTYP,  &quot;Soft Channel&quot;)</span><br><span class="line">  field(VAL,   &quot;0,0,0,0,0&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">record(ao, &quot;CAV:DW_PREV&quot;) &#123;</span><br><span class="line">  field(DESC,  &quot;Detuning from previous step (rad/s)&quot;)</span><br><span class="line">  field(EGU,   &quot;rad/s&quot;)</span><br><span class="line">  field(PREC,  3)</span><br><span class="line">  field(VAL,   &quot;0.0&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># === 4) Output signals (written each TS by SNL) ===</span></span><br><span class="line"></span><br><span class="line">record(ao, &quot;CAV:SIG_VC_R&quot;) &#123;</span><br><span class="line">  field(DESC,  &quot;Current real(Vc) (V)&quot;)</span><br><span class="line">  field(EGU,   &quot;V&quot;)</span><br><span class="line">  field(PREC,  6)</span><br><span class="line">  field(VAL,   &quot;0.0&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">record(ao, &quot;CAV:SIG_VC_I&quot;) &#123;</span><br><span class="line">  field(DESC,  &quot;Current imag(Vc) (V)&quot;)</span><br><span class="line">  field(EGU,   &quot;V&quot;)</span><br><span class="line">  field(PREC,  6)</span><br><span class="line">  field(VAL,   &quot;0.0&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">record(ao, &quot;CAV:SIG_VR_R&quot;) &#123;</span><br><span class="line">  field(DESC,  &quot;Current real(Vr) (V)&quot;)</span><br><span class="line">  field(EGU,   &quot;V&quot;)</span><br><span class="line">  field(PREC,  6)</span><br><span class="line">  field(VAL,   &quot;0.0&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">record(ao, &quot;CAV:SIG_VR_I&quot;) &#123;</span><br><span class="line">  field(DESC,  &quot;Current imag(Vr) (V)&quot;)</span><br><span class="line">  field(EGU,   &quot;V&quot;)</span><br><span class="line">  field(PREC,  6)</span><br><span class="line">  field(VAL,   &quot;0.0&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">record(ao, &quot;CAV:SIG_DW&quot;) &#123;</span><br><span class="line">  field(DESC,  &quot;Current detuning (Hz)&quot;)</span><br><span class="line">  field(EGU,   &quot;Hz&quot;)</span><br><span class="line">  field(PREC,  3)</span><br><span class="line">  field(VAL,   &quot;0.0&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Notes on the <code>.db</code> file above</strong></p>
+<ul>
+<li>The <code>VAL</code> lines for <code>CAV:BASE_PUL</code> and <code>CAV:BEAM_PUL</code> must be filled with exactly 16 384 comma-separated numbers. In practice, you can generate these arrays offline (e.g. with Python), then paste them into the <code>.db</code> file.</li>
+<li>All “AO” records with <code>VAL</code> set to “0.0” or some initial number can be edited at run-time by Phoebus.</li>
+<li>We chose to store <code>STATE_M</code> as a length-5 <code>waveform</code> because there are 5 mechanical modes. If you prefer, you can split <code>STATE_M</code> into 5 separate AO records (<code>CAV:STATE_M1</code>, …, <code>CAV:STATE_M5</code>), but a single <code>waveform</code> is tidier.</li>
+<li><code>CAV:PHA_SCAL</code> is a <code>longout</code> so it can hold the continuously‐increasing phase (rad). We kept that as a scalar in SNL.</li>
+<li>The “output” PVs <code>CAV:SIG_VC_R/I</code>, <code>CAV:SIG_VR_R/I</code>, and <code>CAV:SIG_DW</code> are AO records that will be written on every Ts by the sequencer.</li>
+</ul>
+<h2 id="Write-the-Sequencer-program-SNL-cavity-sim-st"><a href="#Write-the-Sequencer-program-SNL-cavity-sim-st" class="headerlink" title="Write the Sequencer program (SNL/cavity_sim.st)"></a>Write the Sequencer program (<code>SNL/cavity_sim.st</code>)</h2><p>You now need an SNL file that:</p>
+<ol>
+<li><p><strong>Runs once at IOC startup</strong>:</p>
+<ul>
+<li>Reads in the mechanical‐mode arrays (<code>MECH_F</code>, <code>MECH_Q</code>, <code>MECH_K</code>).</li>
+<li>Computes the continuous-time state-space <code>(Aₘ, Bₘ, Cₘ, Dₘ)</code> for the mechanical part (just like <code>cav_ss_mech(mech_modes)</code> in Python).</li>
+<li>Discretizes it (<code>(A_d, B_d, C_d, D_d) = ss_discrete(Aₘ, Bₘ, Cₘ, Dₘ, Ts)</code>).</li>
+<li>Computes constants like <code>wh = π·f₀/QL</code> and <code>RL = 0.5·(r/Q)·QL</code>.</li>
+<li>Initializes internal state (<code>pha = 0</code>, <code>state_vc = 0 + j·0</code>, <code>state_m = [0 … 0]^T</code>, <code>dw_prev = DW0</code>).</li>
+</ul>
+</li>
+<li><p><strong>Steps at each “time step”</strong> (every Ts):</p>
+<ul>
+<li><p>Reads <strong>fresh</strong> parameter PVs: <code>TS</code>, <code>FSRC</code>, <code>ASRC</code>, <code>GAIN_DB</code>, <code>BETA</code>, <code>RoQ</code>, <code>QL</code>, <code>IB</code>, <code>DW0</code>, <code>PULSED</code>.</p>
+</li>
+<li><p>Advances the RF phase:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pha = pha + 2·π·fsrc·Ts</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Computes the complex RF source <code>S0 = Asrc · exp(i·pha)</code>, i.e.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">S0_R = Asrc * cos(pha)</span><br><span class="line">S0_I = Asrc * sin(pha)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Chooses “pulsed” or “CW” I&#x2F;Q modulator output:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">idx = buf_id mod 16384</span><br><span class="line">if (PULSED == 1) then</span><br><span class="line">  base_coeff = BASE_PUL[idx]        # 0 or 1</span><br><span class="line">else</span><br><span class="line">  base_coeff = 1.0</span><br><span class="line">S1_R = S0_R * base_coeff</span><br><span class="line">S1_I = S0_I * base_coeff</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Amplifier:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gain_lin = 10^(GAIN_DB / 20)</span><br><span class="line">S2_R = S1_R * gain_lin</span><br><span class="line">S2_I = S1_I * gain_lin</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Microphonic detuning:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># SNL’s seq function rand( ) returns uniform rand in [0,1). For Gaussian, you can approximate</span><br><span class="line"># using Box–Muller if you want. For simplicity, we’ll do small uniform random:</span><br><span class="line">rnd = rand(1) - 0.5        ; # uniform in [–0.5, +0.5)</span><br><span class="line">dw_micr = 2·π·rnd·20       ; # scale so sigma ≃ 10 Hz</span><br><span class="line">dw_tot  = dw_prev + dw_micr  ; # total detuning (rad/s)</span><br></pre></td></tr></table></figure>
+
+<p>If you need a true Gaussian, you can code a Box–Muller inside SNL (two calls to <code>rand()</code>).</p>
+</li>
+<li><p><strong>Cavity + mechanical update</strong>: call a custom subroutine that implements your discrete‐time cavity ODE + mechanical ODE for one step. In Python you used:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">status, vc, vr, dw, state_vc, state_m = sim_scav_step(</span><br><span class="line">    wh, dw_prev, dw0 + dw_micr, S2, state_vc, Ts,</span><br><span class="line">    β = beta, state_m0 = state_m, Am = A_d, Bm = B_d,</span><br><span class="line">    Cm = C_d, Dm = D_d, mech_exe = <span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<p>In EPICS&#x2F;SNL you cannot call a Python function. Instead you have two options:</p>
+<ol>
+<li><p><strong>Write a C subroutine (linked into Sequencer)</strong> that replicates <code>sim_scav_step</code> in its entirety (i.e. the discrete‐time cavity&#x2F;mechanical update). Let’s name it <code>scav_step(…)</code>. You compile it as part of your IOC, then call it from SNL:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* SNL_C_subr.c */</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;cav_ss.h&quot;</span>   <span class="comment">/* header for your discrete matrices, maybe generated */</span></span></span><br><span class="line"><span class="type">void</span> <span class="title function_">scav_step</span><span class="params">(<span class="type">double</span> wh, <span class="type">double</span> dw_prev, <span class="type">double</span> dw0_total,</span></span><br><span class="line"><span class="params">               <span class="type">double</span> VF_R, <span class="type">double</span> VF_I,</span></span><br><span class="line"><span class="params">               <span class="type">double</span> SVc_R, <span class="type">double</span> SVc_I, <span class="type">double</span> Ts,</span></span><br><span class="line"><span class="params">               <span class="type">double</span> beta,</span></span><br><span class="line"><span class="params">               <span class="type">double</span> stateM[], <span class="comment">/* length = 5 */</span></span></span><br><span class="line"><span class="params">               <span class="type">double</span> A_d[][<span class="number">5</span>], <span class="type">double</span> B_d[][<span class="number">5</span>], <span class="type">double</span> C_d[][<span class="number">5</span>], <span class="type">double</span> D_d[][<span class="number">5</span>],</span></span><br><span class="line"><span class="params">               <span class="type">double</span> *newVc_R, <span class="type">double</span> *newVc_I,</span></span><br><span class="line"><span class="params">               <span class="type">double</span> *newVr_R, <span class="type">double</span> *newVr_I,</span></span><br><span class="line"><span class="params">               <span class="type">double</span> *newDw,   <span class="comment">/* rad/s */</span></span></span><br><span class="line"><span class="params">               <span class="type">double</span> newStateM[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/* </span></span><br><span class="line"><span class="comment">      Implement exactly what sim_scav_step does:</span></span><br><span class="line"><span class="comment">      - Compute cavity differential equation:</span></span><br><span class="line"><span class="comment">          dVc/dt = –(ωh + j·(dw_prev+dw0_total))·Vc + (2·ωh)·S2 – (2·ωh/β)·Vc – (2·ωh/β)·0</span></span><br><span class="line"><span class="comment">        Then discretize by Ts or use the A_d,B_d etc. outputs for state_m update.</span></span><br><span class="line"><span class="comment">      - Update mechanical state:  x[k+1] = A_d * x[k] + B_d * detuning</span></span><br><span class="line"><span class="comment">      - Compute detuning (dw) from mechanical motion:  dw_mech = C_d * x[k] + D_d * detuning_in</span></span><br><span class="line"><span class="comment">      - Compute new Vc, Vr from formulas in sim_scav_step</span></span><br><span class="line"><span class="comment">      - Return newVc_R, newVc_I, newVr_R, newVr_I, newDw, newStateM[]</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">      In practice you can literally copy the code from llrflibs/… </span></span><br><span class="line"><span class="comment">      and adapt it to pure C.                                                </span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Then, in your SNL <code>cavity_sim.st</code>, you declare:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;epicsEvent.h&quot;</span><br><span class="line">#include &quot;cav_ss.h&quot;    /* where you declared the subroutine prototype */</span><br><span class="line">#include &quot;cadef.h&quot;</span><br><span class="line"></span><br><span class="line">epicsShareFunc</span><br><span class="line">void scav_step(double wh, double dw_prev, double dw0_total,</span><br><span class="line">               double VF_R,  double VF_I,</span><br><span class="line">               double SVc_R, double SVc_I,</span><br><span class="line">               double Ts, double beta,</span><br><span class="line">               double stateM[], /* length = 5 */</span><br><span class="line">               double A_d[][5], double B_d[][5], double C_d[][5], double D_d[][5],</span><br><span class="line">               double *newVc_R, double *newVc_I,</span><br><span class="line">               double *newVr_R, double *newVr_I,</span><br><span class="line">               double *newDw,   /* rad/s */</span><br><span class="line">               double newStateM[]);</span><br><span class="line"></span><br><span class="line">program cavity_sim</span><br><span class="line">&#123;</span><br><span class="line">  double pha, Ts, fsrc, Asrc, gain_dB, beta, rOQ, QL, IB, dw0, wh, RL;</span><br><span class="line">  int pulsed;</span><br><span class="line">  double base_val, beam_val;</span><br><span class="line">  int buf_id;</span><br><span class="line">  double S0_R, S0_I, S1_R, S1_I, S2_R, S2_I;</span><br><span class="line">  double dw_prev, dw_tot, dw_micr;</span><br><span class="line">  double VC_R, VC_I, VR_R, VR_I, newVc_R, newVc_I, newVr_R, newVr_I, newDw;</span><br><span class="line">  double state_vc_R, state_vc_I;</span><br><span class="line">  double stateM[5], newStateM[5];</span><br><span class="line">  double A_d[5][5], B_d[5][5], C_d[5][5], D_d[5][5];</span><br><span class="line">  double mech_f[5], mech_Q[5], mech_K[5];</span><br><span class="line">  int i;</span><br><span class="line">  </span><br><span class="line">  double tmpArray[16384];   /* for reading waveform values */</span><br><span class="line">  </span><br><span class="line">  /* --------------- Initialization --------------- */</span><br><span class="line">  /* 1) Read constant PVs once (will refresh inside loop too) */</span><br><span class="line">  dvGet(&quot;CAV:TS&quot;,       &amp;Ts);</span><br><span class="line">  dvGet(&quot;CAV:FSRC&quot;,     &amp;fsrc);</span><br><span class="line">  dvGet(&quot;CAV:ASRC&quot;,     &amp;Asrc);</span><br><span class="line">  dvGet(&quot;CAV:GAIN_DB&quot;,  &amp;gain_dB);</span><br><span class="line">  dvGet(&quot;CAV:BETA&quot;,     &amp;beta);</span><br><span class="line">  dvGet(&quot;CAV:RoQ&quot;,      &amp;rOQ);</span><br><span class="line">  dvGet(&quot;CAV:QL&quot;,       &amp;QL);</span><br><span class="line">  dvGet(&quot;CAV:IB&quot;,       &amp;IB);</span><br><span class="line">  dvGet(&quot;CAV:DW0&quot;,      &amp;dw0);</span><br><span class="line">  dvGet(&quot;CAV:PULSED&quot;,   &amp;pulsed);</span><br><span class="line"></span><br><span class="line">  /* 2) Read mechanical‐mode arrays */</span><br><span class="line">  dvGet(&quot;CAV:MECH_F&quot;, mech_f);</span><br><span class="line">  dvGet(&quot;CAV:MECH_Q&quot;, mech_Q);</span><br><span class="line">  dvGet(&quot;CAV:MECH_K&quot;, mech_K);</span><br><span class="line"></span><br><span class="line">  /* 3) Compute RL and wh */</span><br><span class="line">  RL = 0.5 * rOQ * QL;</span><br><span class="line">  wh = 3.141592653589793 * (1.3e9) / QL;  # f0=1.3GHz</span><br><span class="line"></span><br><span class="line">  /* 4) Build continuous‐time A_m, B_m, C_m, D_m for mech modes, then discretize.</span><br><span class="line">   *    You must write a helper C function in &#x27;cav_ss.h/.c&#x27; that does exactly:</span><br><span class="line">   *      cav_ss_mech(...) → returns (A_m, B_m, C_m, D_m), </span><br><span class="line">   *      then ss_discrete((A_m,B_m,C_m,D_m), Ts) → (A_d, B_d, C_d, D_d).</span><br><span class="line">   *    For brevity, assume we call:</span><br><span class="line">   */</span><br><span class="line">  compute_ss_discrete(mech_f, mech_Q, mech_K, 5, Ts, A_d, B_d, C_d, D_d);</span><br><span class="line"></span><br><span class="line">  /* 5) Initialize internal state */</span><br><span class="line">  pha        = 0.0;</span><br><span class="line">  state_vc_R = 0.0;</span><br><span class="line">  state_vc_I = 0.0;</span><br><span class="line">  for(i=0; i&lt;5; i++) &#123;</span><br><span class="line">      stateM[i] = 0.0;</span><br><span class="line">  &#125;</span><br><span class="line">  dw_prev = dw0;   /* initial detuning (rad/s)  */</span><br><span class="line"></span><br><span class="line">  buf_id = 0;      /* start at sample 0 */</span><br><span class="line"></span><br><span class="line">  /* 6) Populate BASE_PUL buffer: (we could read it from PV each time; instead:</span><br><span class="line">   *    BASE_PUL[i] = 1 for i&lt;t_flat (1300), else 0. We do that once:</span><br><span class="line">   */</span><br><span class="line">  dvGetWaveform(&quot;CAV:BASE_PUL&quot;, tmpArray, 16384);</span><br><span class="line">  /* But since BASE_PUL is static in the .db file, we actually do not need to re‐fill it;</span><br><span class="line">   * the .db value is already set. */</span><br><span class="line"></span><br><span class="line">  /* 7) Similarly, BEAM_PUL is loaded from .db at IOC startup. */</span><br><span class="line"></span><br><span class="line">  /* --------------- Real‐time TS loop --------------- */</span><br><span class="line">  while (TRUE) &#123;</span><br><span class="line">    /***** 1) Re‐read dynamic PVs so user can adjust on the fly *****/</span><br><span class="line">    dvGet(&quot;CAV:TS&quot;,       &amp;Ts);</span><br><span class="line">    dvGet(&quot;CAV:FSRC&quot;,     &amp;fsrc);</span><br><span class="line">    dvGet(&quot;CAV:ASRC&quot;,     &amp;Asrc);</span><br><span class="line">    dvGet(&quot;CAV:GAIN_DB&quot;,  &amp;gain_dB);</span><br><span class="line">    dvGet(&quot;CAV:BETA&quot;,     &amp;beta);</span><br><span class="line">    dvGet(&quot;CAV:RoQ&quot;,      &amp;rOQ);</span><br><span class="line">    dvGet(&quot;CAV:QL&quot;,       &amp;QL);</span><br><span class="line">    dvGet(&quot;CAV:IB&quot;,       &amp;IB);</span><br><span class="line">    dvGet(&quot;CAV:DW0&quot;,      &amp;dw0);</span><br><span class="line">    dvGet(&quot;CAV:PULSED&quot;,   &amp;pulsed);</span><br><span class="line"></span><br><span class="line">    /* 2) Advance RF phase */</span><br><span class="line">    pha = pha + 2.0 * 3.141592653589793 * fsrc * Ts;</span><br><span class="line">    dvPut(&quot;CAV:PHA_SCAL&quot;, pha);</span><br><span class="line"></span><br><span class="line">    /* 3) Compute S0 = Asrc * exp(i·pha) */</span><br><span class="line">    S0_R = Asrc * cos(pha);</span><br><span class="line">    S0_I = Asrc * sin(pha);</span><br><span class="line"></span><br><span class="line">    /* 4) I/Q modulator: if pulsed, multiply by BASE_PUL[buf_id] */</span><br><span class="line">    /*    We read one element from the BASE_PUL waveform PV: */</span><br><span class="line">    dvGetWaveformElement(&quot;CAV:BASE_PUL&quot;, buf_id, &amp;base_val);</span><br><span class="line">    if (pulsed == 1) &#123;</span><br><span class="line">      S1_R = S0_R * base_val;</span><br><span class="line">      S1_I = S0_I * base_val;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      S1_R = S0_R;</span><br><span class="line">      S1_I = S0_I;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /* 5) Amplifier: gain_lin = 10^(gain_dB/20) */</span><br><span class="line">    double gain_lin = pow(10.0, gain_dB / 20.0);</span><br><span class="line">    S2_R = S1_R * gain_lin;</span><br><span class="line">    S2_I = S1_I * gain_lin;</span><br><span class="line"></span><br><span class="line">    /* 6) Microphonics: uniform random approx (for Gaussian, use Box-Muller) */</span><br><span class="line">    double rnd1 = rand() / (RAND_MAX + 1.0);</span><br><span class="line">    double rnd2 = rand() / (RAND_MAX + 1.0);</span><br><span class="line">    /* Box–Muller for zero‐mean unit‐std dev: */</span><br><span class="line">    double gm = sqrt(-2.0 * log(rnd1)) * cos(2.0 * 3.141592653589793 * rnd2);</span><br><span class="line">    dw_micr = 2.0 * 3.141592653589793 * gm * 10.0;  # σ=10 Hz</span><br><span class="line">    dw_tot = dw_prev + dw_micr + dw0;</span><br><span class="line"></span><br><span class="line">    /* 7) Fetch current cavity state */</span><br><span class="line">    dvGet(&quot;CAV:STATE_VC_R&quot;, &amp;state_vc_R);</span><br><span class="line">    dvGet(&quot;CAV:STATE_VC_I&quot;, &amp;state_vc_I);</span><br><span class="line">    dvGet(&quot;CAV:DW_PREV&quot;,    &amp;dw_prev);</span><br><span class="line">    dvGetWaveform(&quot;CAV:STATE_M&quot;, stateM, 5);</span><br><span class="line"></span><br><span class="line">    /* 8) Call custom C routine that does one discrete‐step: */</span><br><span class="line">    scav_step(wh, dw_prev, dw_tot,</span><br><span class="line">              S2_R, S2_I,</span><br><span class="line">              state_vc_R, state_vc_I,</span><br><span class="line">              Ts, beta,</span><br><span class="line">              stateM, A_d, B_d, C_d, D_d,</span><br><span class="line">              &amp;newVc_R, &amp;newVc_I,</span><br><span class="line">              &amp;newVr_R, &amp;newVr_I,</span><br><span class="line">              &amp;newDw,     /* rad/s */</span><br><span class="line">              newStateM);</span><br><span class="line"></span><br><span class="line">    /* 9) Write back new state_vc, new state_m, new dw */</span><br><span class="line">    dvPut(&quot;CAV:STATE_VC_R&quot;, newVc_R);</span><br><span class="line">    dvPut(&quot;CAV:STATE_VC_I&quot;, newVc_I);</span><br><span class="line"></span><br><span class="line">    /*    We only store dw_prev = newDw, so next iteration uses it: */</span><br><span class="line">    dvPut(&quot;CAV:DW_PREV&quot;, newDw);</span><br><span class="line"></span><br><span class="line">    /*    Write out new mechanical state vector: */</span><br><span class="line">    dvPutWaveform(&quot;CAV:STATE_M&quot;, newStateM, 5);</span><br><span class="line"></span><br><span class="line">    /* 10) Write “live” output PVs so Phoebus can trend them: */</span><br><span class="line">    dvPut(&quot;CAV:SIG_VC_R&quot;, newVc_R);</span><br><span class="line">    dvPut(&quot;CAV:SIG_VC_I&quot;, newVc_I);</span><br><span class="line">    dvPut(&quot;CAV:SIG_VR_R&quot;, newVr_R);</span><br><span class="line">    dvPut(&quot;CAV:SIG_VR_I&quot;, newVr_I);</span><br><span class="line">    dvPut(&quot;CAV:SIG_DW&quot;,   (newDw / (2.0 * 3.141592653589793)));  # convert to Hz</span><br><span class="line"></span><br><span class="line">    /* 11) Increment buffer index, wrap around at 16384 */</span><br><span class="line">    buf_id++;</span><br><span class="line">    if (buf_id &gt;= 16384) buf_id = 0;</span><br><span class="line"></span><br><span class="line">    /* 12) Delay for Ts seconds */</span><br><span class="line">    delay(Ts);</span><br><span class="line">  &#125; /* end while(TRUE) */</span><br><span class="line"></span><br><span class="line">&#125; /* end program cavity_sim */</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+<p><strong>Explanation of key parts:</strong></p>
+<ul>
+<li><p><strong>compute_ss_discrete(…)</strong><br>You must write a helper C function (e.g. in <code>cav_ss.c</code>) that takes the mechanical mode arrays (<code>mech_f[]</code>, <code>mech_Q[]</code>, <code>mech_K[]</code>) and returns the continuous‐time state‐space <code>(Aₘ, Bₘ, Cₘ, Dₘ)</code> for those five modes, then discretizes them at the current <code>Ts</code> (using a zero‐order hold). In Python you used <code>cav_ss_mech(...)</code> followed by <code>ss_discrete(...)</code>. In C, you can port that code (there are simple textbook formulas for a second‐order mechanical resonance) or literally translate the Python logic from <code>llrflibs.rf_sim</code>.</p>
+</li>
+<li><p><strong>scav_step(…)</strong><br>This is where the heart of <code>sim_scav_step</code> lives. It must implement exactly what Python’s <code>sim_scav_step</code> does:</p>
+<ol>
+<li>Compute the new mechanical detuning (<code>dw_mech</code>) from <code>C_d * x[k] + D_d * detuning_in</code>.</li>
+<li>Solve the discrete‐time cavity ODE (with half‐bandwidth <code>wh</code>, coupling β, RL, etc.) to get <code>vc[k+1]</code> from <code>vc[k]</code> and the new drive <code>vf_step (S2)</code>.</li>
+<li>Compute <code>vr</code> (reflected voltage) from <code>vc</code> and <code>vf</code>, typically <code>vr = (2·ωh/β)·Vc – Vf</code> or however your convention is.</li>
+<li>Return <code>newVc_R</code>, <code>newVc_I</code>, <code>newVr_R</code>, <code>newVr_I</code>, <code>newDw</code> (rad&#x2F;s), and the new mechanical state <code>newStateM[]</code>.</li>
+</ol>
+<p>The exact formulas appear inside <code>llrflibs/rf_sim.py</code>, so you must port them to C. We assume you create <code>&lt;cav_ss.h&gt;</code> and <code>&lt;cav_ss.c&gt;</code> that supply both <code>compute_ss_discrete(...)</code> and <code>scav_step(...)</code>. Then compile them as part of your IOC (adjust the <code>Makefile</code> to add these sources).</p>
+</li>
+<li><p><strong>dvGet &#x2F; dvPut &#x2F; dvGetWaveform &#x2F; dvPutWaveform</strong><br>These are SNL built-in calls that read or write EPICS PVs. For example, <code>dvGet(&quot;CAV:TS&quot;, &amp;Ts)</code> fetches the current value of <code>CAV:TS</code> into the local SNL variable <code>Ts</code>.</p>
+</li>
+<li><p><strong>delay(Ts)</strong><br>Causes the SNL program to sleep for <code>Ts</code> seconds. If <code>Ts = 1e-6</code>, the sequencer will loop at 1 MHz. In practice, runs at 1 MHz are very tight; watch CPU load. If you do not need a full 1 MHz scan (for example, if you can tolerate 100 kHz), set <code>CAV:TS = 1e-5</code> (10 µs) to lighten the CPU.</p>
+</li>
+</ul>
+<h2 id="Write-or-generate-the-C-helper-code-cav-ss-c-and-cav-ss-h"><a href="#Write-or-generate-the-C-helper-code-cav-ss-c-and-cav-ss-h" class="headerlink" title="Write or generate the C helper code (cav_ss.c and cav_ss.h)"></a>Write or generate the C helper code (<code>cav_ss.c</code> and <code>cav_ss.h</code>)</h2><p>You need two pieces of C code:</p>
+<ol>
+<li><p><strong>compute_ss_discrete(…)</strong></p>
+<ul>
+<li><p>Input:</p>
+<ul>
+<li><code>mech_f[5]</code> (Hz),</li>
+<li><code>mech_Q[5]</code>,</li>
+<li><code>mech_K[5]</code>,</li>
+<li><code>num_modes = 5</code>,</li>
+<li><code>Ts</code> (s).</li>
+</ul>
+</li>
+<li><p>Output (passed by pointer):</p>
+<ul>
+<li><code>A_d[5][5], B_d[5][5], C_d[5][5], D_d[5][5]</code></li>
+</ul>
+</li>
+</ul>
+<p>These are the discretized mechanical‐mode state matrices, just like your Python did with <code>ss_discrete(...)</code>. The continuous system for each mode <code>m</code> is:</p>
+<h1 id="begin-bmatrix-dot-x-m-1-dot-x-m-2-end-bmatrix"><a href="#begin-bmatrix-dot-x-m-1-dot-x-m-2-end-bmatrix" class="headerlink" title="$$\begin{bmatrix} \dot x_{m,1} \ \dot x_{m,2} \end{bmatrix}"></a>$$<br>\begin{bmatrix} \dot x_{m,1} \ \dot x_{m,2} \end{bmatrix}</h1><p>\begin{bmatrix} 0 &amp; 1 \ - (2\pi f_m)^2 &amp; - (2\pi f_m)&#x2F;Q_m \end{bmatrix}<br>\begin{bmatrix} x_{m,1} \ x_{m,2} \end{bmatrix}<br>;+;<br>\begin{bmatrix} 0 \ K_m \end{bmatrix}, \Delta\omega_{\text{in}}<br>$$</p>
+<p>$$<br>\Delta\omega_{\text{out}} &#x3D; [,1 ;; 0,] \begin{bmatrix} x_{m,1} \ x_{m,2} \end{bmatrix}<br>$$</p>
+<p>If you bundle all 5 modes into a 10×10 <code>A_m, B_m, C_m, D_m</code> system, you can build it in C, then do the matrix‐exponential (zero‐order hold) to get <code>A_d = exp(A_m·Ts)</code>, and so on. A simpler approach is to use a Taylor expansion if <code>Ts</code> is small. Whichever route you choose, make sure your C code returns exactly the same <code>A_d, B_d, C_d, D_d</code> that Python’s <code>ss_discrete</code> would.</p>
+</li>
+<li><p><strong>scav_step(…)</strong></p>
+<ul>
+<li>Input: all the arguments listed in the SNL prototype above.</li>
+<li>Behavior: compute one discrete‐time update of the cavity+mechanical system.</li>
+<li>Output: new <code>Vc_R, Vc_I, Vr_R, Vr_I, dw, newStateM[]</code>.</li>
+</ul>
+<p>The formulas come directly from <code>llrflibs.rf_sim:sim_scav_step</code>. You must translate them line by line into C.</p>
+</li>
+</ol>
+<p>Compile both <code>cav_ss.c</code> and <code>scav_step.c</code> (or keep them together) into an object library and link them with your IOC. In your IOC’s <code>Makefile</code>, add:</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">PROD_IOC = cavityIoc</span><br><span class="line"><span class="comment"># List the C source files you need:</span></span><br><span class="line">cavityIoc_SRCS += \</span><br><span class="line">    cav_ss.c \</span><br><span class="line">    scav_step.c</span><br><span class="line"></span><br><span class="line"><span class="comment"># Sequencer files:</span></span><br><span class="line">SNCFLAGS += +r</span><br><span class="line">cavityIoc_LIBS += seq pv</span><br></pre></td></tr></table></figure>
+
+<p>Adjust as needed so that when you run <code>make</code>, you get an IOC executable that contains both the SNL program and your C routines.</p>
+<h2 id="Compile-and-launch-the-Soft-IOC"><a href="#Compile-and-launch-the-Soft-IOC" class="headerlink" title="Compile and launch the Soft IOC"></a>Compile and launch the Soft IOC</h2><ol>
+<li><p><strong>At the top of <code>cavityIoc/Makefile</code>,</strong> ensure you have:</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">TOP = .</span><br><span class="line"><span class="keyword">include</span> <span class="variable">$(EPICS_BASE)</span>/configure/RULES_TOP</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>From inside <code>cavityIoc/</code></strong>, run:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make</span><br></pre></td></tr></table></figure>
+
+<p>This should compile your SNL (<code>cavity_sim.st</code> → <code>cavity_sim.c → cavity_sim.o</code>) and link it with <code>cav_ss.o</code> and <code>scav_step.o</code> into an IOC executable (e.g. <code>cavityIoc</code>).</p>
+</li>
+<li><p><strong>Start the IOC</strong> by running:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd iocBoot</span><br><span class="line">./st.cmd</span><br></pre></td></tr></table></figure>
+
+<p>You should see output indicating EPICS is loading <code>cavity_sim.db</code>, then printing “Sequencer loaded: cavity_sim” and “Program cavity_sim started”.</p>
+</li>
+<li><p><strong>Check that the PVs exist.</strong> In another terminal, use:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">caget CAV:TS CAV:FSRC CAV:ASRC CAV:SIG_VC_R CAV:SIG_DW</span><br></pre></td></tr></table></figure>
+
+<p>You should get back their initial values (e.g. <code>1e-6</code>, <code>-460.0</code>, <code>1.0</code>, <code>0.0</code>, <code>0.0</code>). If Euler’s algorithm or the discrete integration is running, after a few milliseconds you’ll see <code>CAV:SIG_VC_R</code> jump off zero (once the loop executes).</p>
+</li>
+</ol>
+<h2 id="Build-a-Phoebus-display"><a href="#Build-a-Phoebus-display" class="headerlink" title="Build a Phoebus display"></a>Build a Phoebus display</h2><p>Once the IOC is running and streaming the “live” PVs (updated each Ts), open Phoebus and:</p>
+<ol>
+<li><p><strong>Create a new Screen.</strong></p>
+</li>
+<li><p><strong>Add a “Stripchart” widget</strong> (Trend) and bind it to <code>CAV:SIG_VC_R</code> (y-axis) vs. time.</p>
+</li>
+<li><p><strong>Add another Trend</strong> for <code>CAV:SIG_VC_I</code>. Or combine both real&#x2F;imag into one “Complex” plot if you like.</p>
+</li>
+<li><p><strong>Add a third Trend</strong> for <code>CAV:SIG_DW</code> (in Hz).</p>
+</li>
+<li><p><strong>Add numeric input fields (Text‐Entry or Slider)</strong> bound to:</p>
+<ul>
+<li><code>CAV:TS</code> (so you can increase or decrease step size)</li>
+<li><code>CAV:FSRC</code> (offset frequency)</li>
+<li><code>CAV:ASRC</code> (source amplitude)</li>
+<li><code>CAV:GAIN_DB</code> (amplifier gain)</li>
+<li><code>CAV:IB</code> (beam current)</li>
+<li><code>CAV:PULSED</code> (you can switch CW vs. pulsed)</li>
+<li><code>CAV:RoQ</code>, <code>CAV:QL</code>, <code>CAV:BETA</code> if you want to change cavity loading at run‐time.</li>
+</ul>
+</li>
+<li><p><strong>Optionally</strong> add read-only display fields (Read Only Text) showing <code>CAV:PHA_SCAL</code>, so you can watch the RF phase drift.</p>
+</li>
+</ol>
+<p>Now, as you hit “Apply” or move the slider, the Sequencer loop will read the new PV value on its next iteration and immediately incorporate it into the next <code>scav_step</code>. Your Phoebus trends will show how <code>vc</code>, <code>vr</code>, and <code>dw</code> evolve over time.</p>
+<h2 id="Recap-of-“Whole-Steps”"><a href="#Recap-of-“Whole-Steps”" class="headerlink" title="Recap of “Whole Steps”"></a>Recap of “Whole Steps”</h2><p>To summarize, here is the step-by-step checklist you must follow:</p>
+<ol>
+<li><p><strong>Install EPICS Base, iocCore, and Sequencer</strong> on your development machine.</p>
+</li>
+<li><p><strong>Create an IOC directory structure</strong> (with <code>db/</code> and <code>SNL/</code> subfolders).</p>
+</li>
+<li><p><strong>Write <code>db/cavity_sim.db</code></strong> containing:</p>
+<ul>
+<li>AO records for static parameters (<code>Ts</code>, <code>fsrc</code>, <code>Asrc</code>, <code>gain_dB</code>, <code>β</code>, <code>r/Q</code>, <code>QL</code>, <code>IB</code>, <code>DW0</code>, <code>PULSED</code>).</li>
+<li>Waveform records for the 16 384-point arrays (<code>BASE_PUL</code>, <code>BEAM_PUL</code>) and the 5-element mechanical‐mode arrays (<code>MECH_F</code>, <code>MECH_Q</code>, <code>MECH_K</code>).</li>
+<li>Records for internal state: <code>CAV:PHA_SCAL</code> (longout), <code>CAV:STATE_VC_R/I</code>, <code>CAV:STATE_M[5]</code> (waveform), <code>CAV:DW_PREV</code> (AO).</li>
+<li>Output PVs (AO) for <code>CAV:SIG_VC_R/I</code>, <code>CAV:SIG_VR_R/I</code>, <code>CAV:SIG_DW</code>.</li>
+</ul>
+</li>
+<li><p><strong>Write C helper code</strong> (<code>cav_ss.c/.h</code> and <code>scav_step.c/.h</code>):</p>
+<ul>
+<li><code>compute_ss_discrete(...)</code> to build and discretize the mechanical‐mode state matrices.</li>
+<li><code>scav_step(...)</code> to implement one discrete‐time cavity + mechanical update (port from Python’s <code>sim_scav_step</code>).</li>
+</ul>
+</li>
+<li><p><strong>Write the Sequencer program</strong> (<code>SNL/cavity_sim.st</code>) that:</p>
+<ol>
+<li><p>Imports your C routines.</p>
+</li>
+<li><p>In <code>initialize&#123;&#125;</code> or at the top of <code>program cavity_sim</code>, reads the mechanical arrays, computes <code>A_d, B_d, …</code>, initializes state (<code>pha</code>, <code>state_vc</code>, <code>state_m</code>, <code>dw_prev</code>, <code>buf_id</code>).</p>
+</li>
+<li><p>Enters a <code>while(TRUE)</code> loop that runs once per Ts:</p>
+<ul>
+<li><code>dvGet(…)</code> for all parameter PVs.</li>
+<li>Advances the RF phase: <code>pha += 2π·fsrc·Ts</code>.</li>
+<li>Computes <code>S0 = Asrc·exp(i·pha)</code>, “I&#x2F;Q modulate” by reading <code>CAV:BASE_PUL[buf_id]</code> if pulsed, then amplify by <code>10^(gain_dB/20)</code>.</li>
+<li>Creates a small microphonic <code>dw_micr</code> (e.g. Box–Muller for Gaussian noise).</li>
+<li>Calls your C routine <code>scav_step(...)</code> to update <code>vc, vr, dw</code> and <code>state_m</code>.</li>
+<li><code>dvPut(...)</code> the new state back into <code>CAV:STATE_VC_R/I</code>, <code>CAV:STATE_M</code>, <code>CAV:DW_PREV</code>.</li>
+<li><code>dvPut(...)</code> the “live” outputs into <code>CAV:SIG_VC_R/I</code>, <code>CAV:SIG_VR_R/I</code>, <code>CAV:SIG_DW</code>.</li>
+<li>Increment <code>buf_id</code> modulo 16 384.</li>
+<li><code>delay(Ts)</code>.</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p><strong>Edit your IOC’s <code>Makefile</code></strong> so that it:</p>
+<ul>
+<li>Includes your C source files (<code>cav_ss.c</code>, <code>scav_step.c</code>, plus the SNL output).</li>
+<li>Lists <code>db/cavity_sim.db</code> under <code>DB +=</code></li>
+<li>Lists <code>SNL/cavity_sim.st</code> under <code>SNLFILES +=</code> and sets <code>EMIT += cavity_sim</code>.</li>
+<li>Ensures that on <code>make</code> you end up with a working IOC named, say, <code>cavityIoc</code>.</li>
+</ul>
+</li>
+<li><p><strong>Write <code>iocBoot/st.cmd</code></strong> (or equivalent) that:</p>
+<ul>
+<li>Launches <code>softIoc -d db/cavity_sim.db</code>.</li>
+<li>Loads and starts the Sequencer (<code>sequencer -k -l -c &quot;cavity_sim.st&quot;</code>).</li>
+</ul>
+</li>
+<li><p><strong>Run <code>make; ./iocBoot/st.cmd</code></strong>. Confirm the IOC is up by using <code>cainfo</code> or <code>caget</code> on a few PVs (<code>CAV:TS</code>, <code>CAV:SIG_VC_R</code>, etc.).</p>
+</li>
+<li><p><strong>Open Phoebus</strong>, create a new screen, and add:</p>
+<ul>
+<li><strong>Slider or Numeric Entry</strong> widgets bound to your user-tunable AO PVs (<code>CAV:TS</code>, <code>CAV:FSRC</code>, <code>CAV:ASRC</code>, <code>CAV:GAIN_DB</code>, <code>CAV:IB</code>, etc.).</li>
+<li><strong>Stripchart&#x2F;Trend</strong> widgets bound to <code>CAV:SIG_VC_R</code>, <code>CAV:SIG_VC_I</code>, and <code>CAV:SIG_DW</code>.</li>
+<li><strong>Status displays</strong> (Text) for things like <code>CAV:PHA_SCAL</code> (RF phase) or <code>CAV:STATE_M</code> (mechanical states) if desired.</li>
+</ul>
+</li>
+<li><p><strong>Test interactivity</strong>: adjust <code>CAV:FSRC</code> or <code>CAV:GAIN_DB</code> on the Phoebus panel and watch <code>CAV:SIG_VC_R</code> respond in real time. Switch <code>CAV:PULSED</code> between 0&#x2F;1 to see pulsed vs. CW behavior.</p>
+</li>
+</ol>
+<h3 id="Tips-and-Caveats"><a href="#Tips-and-Caveats" class="headerlink" title="Tips and Caveats"></a>Tips and Caveats</h3><ul>
+<li><strong>Timing resolution</strong>: A sequencer loop at Ts &#x3D; 1 µs is very tight. Real-time OS jitter can affect accuracy. If you don’t truly need 1 MHz updates, consider Ts &#x3D; 10 µs (100 kHz) to lighten CPU load.</li>
+<li><strong>Waveform data sizes</strong>: If you actually want to store the entire <code>sig_vc[16384]</code> as a waveform, declare <code>record(waveform, &quot;CAV:SIG_VC&quot;) &#123; NELM = 16384 &#125;</code> and write each new sample into <code>SIG_VC[buf_id]</code> via <code>dvPutWaveformElement(&quot;CAV:SIG_VC&quot;, buf_id, newVc_R + i·newVc_I)</code>. But this can fill buffers quickly. For simple live plots, updating a single “latest point” PV is easier.</li>
+<li><strong>Gaussian vs. Uniform noise</strong>: Python’s <code>np.random.randn()</code> yields true Gaussian. In SNL, you must implement your own Box–Muller if you need Gaussian microphonics. Otherwise, a small uniform random (e.g. <code>(rand()–0.5)*2π*10</code>) may suffice.</li>
+<li><strong>Discretization of mechanical modes</strong>: If you do not want to code a full <code>compute_ss_discrete</code> in C, you can precompute the 5×5 discrete matrices offline (once) for your nominal Ts &#x3D; 1 µs, then paste them into the SNL as constants. However, if the user changes <code>CAV:TS</code> at run-time, those matrices must be recomputed. In that case, it’s best to keep the C routine that recomputes <code>A_d,B_d,C_d,D_d</code> whenever Ts changes.</li>
+<li><strong>Complex arithmetic</strong>: We keep real&#x2F;imag parts in separate PVs always. Never try to concatenate them into one.</li>
+<li><strong>Memory layout</strong>: SNL’s <code>double stateM[5]</code> is a local array in the <code>while(TRUE)</code> loop. We fetch its contents from <code>CAV:STATE_M</code> (waveform) at the start of each iteration, then write the new <code>stateM</code> back at the end. That ensures mechanical state is persistent.</li>
+<li><strong>Buffer indices</strong>: We keep a local <code>int buf_id</code> that tracks which sample from the waveform buffers (<code>BASE_PUL</code>, <code>BEAM_PUL</code>) to pick this iteration. Wrap it at 16 384 so you cycle continuously.</li>
+</ul>
+<h3 id="In-summary"><a href="#In-summary" class="headerlink" title="In summary"></a>In summary</h3><ul>
+<li><p>You have now mapped <strong>every single variable</strong> from the Python simulation into EPICS PVs and records:</p>
+<ol>
+<li>Static parameters (AO, MBBI).</li>
+<li>Buffers (WAVEFORM).</li>
+<li>Internal state (LONGOUT, AO, WAVEFORM).</li>
+<li>Outputs (AO).</li>
+</ol>
+</li>
+<li><p>You wrote an SNL program that runs exactly the same logic as your Python loop, except each operation is either:</p>
+<ol>
+<li>A direct C call in <code>scav_step(...)</code>, or</li>
+<li>Arithmetic inside SNL (phase update, amplifier gain, pulsed flags).</li>
+</ol>
+</li>
+<li><p>At each Ts, you read from EPICS PVs (<code>dvGet</code>), update internal variables, call <code>scav_step</code>, then <code>dvPut</code> back to PVs.</p>
+</li>
+<li><p>Phoebus can subscribe to those PVs and display live‐updating cavity voltage, phase, and detuning.</p>
+</li>
+</ul>
+<p>Once this is in place, you have a <strong>fully EPICS‐native Soft IOC</strong> that reproduces your original Python simulation, but now every parameter and every dynamic output is exposed as a PV—and can be driven or displayed by Phoebus (or CSS, EDM, CSS-BOY, etc.).  Maintenance is harder than a Python‐centric IOC, but if your lab policy requires “no Python inside the IOC,” this is the standard EPICS way to do it.</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="Liu Ming WeChat Pay">
+        <span>WeChat Pay</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="Liu Ming Alipay">
+        <span>Alipay</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>Liu Ming
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="http://iuming.github.io/2025/06/04/VirtualCavitySimulationByEPICS/" title="Virtual Cavity Simulation By EPICS">http://iuming.github.io/2025/06/04/VirtualCavitySimulationByEPICS/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/realiuming">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+U5yo-Zxuw1OgbU6P">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </span>
+
+          <img class="social-item-img" src="/images/wechat_channel.jpg">
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/LLRF/" rel="tag"><i class="fa fa-tag"></i> LLRF</a>
+              <a href="/tags/RF/" rel="tag"><i class="fa fa-tag"></i> RF</a>
+              <a href="/tags/EPICS/" rel="tag"><i class="fa fa-tag"></i> EPICS</a>
+              <a href="/tags/Cavity/" rel="tag"><i class="fa fa-tag"></i> Cavity</a>
+              <a href="/tags/Simulate/" rel="tag"><i class="fa fa-tag"></i> Simulate</a>
+          </div>
+
+        
+  <div class="social-like a2a_kit a2a_kit_size_32 a2a_default_style">
+    <a class="a2a_dd" target="_blank" rel="noopener" href="https://www.addtoany.com/share"></a>
+      <a class="a2a_button_facebook"></a>
+      <a class="a2a_button_twitter"></a>
+      <a class="a2a_button_wechat"></a>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/05/23/Couple-Mode-Theory/" rel="prev" title="Coupled Mode Theory">
+                  <i class="fa fa-angle-left"></i> Coupled Mode Theory
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Ming Liu. All rights reserved.</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL2l1bWluZw==" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.1.0/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/4.23.3/algoliasearch-lite.umd.js" integrity="sha256-1QNshz86RqXe/qsCBldsUu13eAX6n/O98uubKQs87UI=" crossorigin="anonymous"></script><script src="/js/third-party/search/algolia-search.js"></script>
+<script class="next-config" data-name="chatra" type="application/json">{"enable":true,"async":true,"id":"gTXKphrmKGf5QSb5L"}</script>
+<script src="/js/third-party/chat/chatra.js"></script>
+<script async src="https://call.chatra.io/chatra.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.0/pdfobject.min.js","integrity":"sha256-JJZNsid68vnh3/zyj0lY9BN5ynxVX/12XgOa1TlaYN0="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.0/mermaid.min.js","integrity":"sha256-stuqcu2FrjYCXDOytWFA5SoUE/r3nkp6gTglzNSlavU="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+  <script class="next-config" data-name="wavedrom" type="application/json">{"enable":true,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.5.0/wavedrom.min.js","integrity":"sha256-INLAoJc6quTNfiMWkGZniYO2cxE8mHpddnLow1m6RFs="}}</script>
+  <script class="next-config" data-name="wavedrom_skin" type="application/json">{"enable":true,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.5.0/skins/default.js","integrity":"sha256-fduc/Zszk5ezWws2uInY/ALWVmIrmV6VTgXbsYSReFI="}}</script>
+  <script src="/js/third-party/tags/wavedrom.js"></script>
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+  <script src="/js/third-party/addtoany.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":"ture","archive":true,"delay":true,"timeout":3000,"priority":true,"url":"http://iuming.github.io/2025/06/04/VirtualCavitySimulationByEPICS/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"realiuming","count":true,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+
+</body>
+</html>
