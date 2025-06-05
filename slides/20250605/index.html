@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jaynes-Cummings模型可视化</title>
+    <script src="https://cdn.plot.ly/plotly-2.24.1.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px 0;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+
+        .subtitle {
+            color: var(--dark-color);
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 20px;
+        }
+
+        .visualization {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            display: grid;
+            grid-template-rows: auto 1fr 1fr;
+            gap: 20px;
+            height: 850px;
+        }
+
+        .plot-container {
+            width: 100%;
+            height: 100%;
+        }
+
+        .controls {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            height: 850px;
+            overflow-y: auto;
+        }
+
+        .control-group {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        h3 {
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .slider-container {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: #ddd;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--secondary-color);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        input[type="range"]::-webkit-slider-thumb:hover {
+            background: var(--primary-color);
+            transform: scale(1.2);
+        }
+
+        .value-display {
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-top: 5px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        button {
+            flex: 1;
+            padding: 10px;
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        button.active {
+            background: var(--accent-color);
+            box-shadow: 0 0 0 2px var(--light-color), 0 0 0 4px var(--accent-color);
+        }
+
+        .physics-explanation {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .physics-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .formula-box {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .formula {
+            font-size: 1.2rem;
+            text-align: center;
+            margin: 15px 0;
+            font-family: 'Cambria', serif;
+        }
+
+        .phenomenon {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #ddd;
+        }
+
+        .phenomenon h4 {
+            color: var(--accent-color);
+            margin-bottom: 8px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            color: var(--dark-color);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 1100px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+
+            .controls {
+                height: auto;
+            }
+
+            .physics-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Jaynes-Cummings 模型可视化</h1>
+            <p class="subtitle">探索量子光学中的基本现象：拉比振荡、坍塌与复苏效应、真空拉比分裂</p>
+        </header>
+
+        <div class="content">
+            <div class="visualization">
+                <div class="plot-container" id="time-evolution"></div>
+                <div class="plot-container" id="rabi-splitting"></div>
+                <div class="plot-container" id="photon-distribution"></div>
+            </div>
+
+            <div class="controls">
+                <div class="control-group">
+                    <h2>模型参数</h2>
+
+                    <div class="slider-container">
+                        <label for="g-slider">耦合强度 (g): <span id="g-value">0.1</span></label>
+                        <input type="range" id="g-slider" min="0.01" max="0.5" step="0.01" value="0.1">
+                    </div>
+
+                    <div class="slider-container">
+                        <label for="delta-slider">失谐量 (Δ): <span id="delta-value">0.0</span></label>
+                        <input type="range" id="delta-slider" min="-1.0" max="1.0" step="0.05" value="0.0">
+                    </div>
+
+                    <div class="slider-container">
+                        <label for="n-slider">初始光子数 (n): <span id="n-value">5</span></label>
+                        <input type="range" id="n-slider" min="0" max="15" step="1" value="5">
+                    </div>
+
+                    <div class="slider-container">
+                        <label for="alpha-slider">相干态参数 (α): <span id="alpha-value">2.0</span></label>
+                        <input type="range" id="alpha-slider" min="0.1" max="5.0" step="0.1" value="2.0">
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <h2>初始状态</h2>
+                    <div class="btn-group">
+                        <button id="fock-btn" class="active">Fock态（确定光子数）</button>
+                        <button id="coherent-btn">相干态（不确定光子数）</button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <h2>模拟控制</h2>
+                    <div class="btn-group">
+                        <button id="run-btn">运行模拟</button>
+                        <button id="reset-btn">重置参数</button>
+                        <button id="animate-btn">播放动画</button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <h2>物理现象解释</h2>
+                    <div class="phenomenon">
+                        <h4>拉比振荡 (Rabi Oscillations)</h4>
+                        <p>当原子与光场共振时，原子在激发态和基态之间周期性振荡，振荡频率与耦合强度和光子数有关：Ω = 2g√(n+1)</p>
+                    </div>
+
+                    <div class="phenomenon">
+                        <h4>坍塌与复苏 (Collapse and Revival)</h4>
+                        <p>当光场处于相干态（光子数不确定）时，原子激发态概率随时间变化表现出初始快速振荡（坍塌），随后部分恢复（复苏）的量子干涉现象。</p>
+                    </div>
+
+                    <div class="phenomenon">
+                        <h4>真空拉比分裂 (Vacuum Rabi Splitting)</h4>
+                        <p>即使没有光子（真空场），原子能级也会分裂成两条，分裂间距为2g，是光与物质强相互作用的标志性量子效应。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="physics-explanation">
+            <h2>Jaynes-Cummings 模型</h2>
+
+            <div class="physics-content">
+                <div class="formula-box">
+                    <h3>哈密顿量</h3>
+                    <div class="formula">H = (ħω<sub>a</sub>/2)σ<sub>z</sub> + ħω<sub>c</sub>a<sup>†</sup>a +
+                        ħg(σ<sub>+</sub>a + σ<sub>-</sub>a<sup>†</sup>)</div>
+                    <p>该哈密顿量描述了一个二能级原子（频率ω<sub>a</sub>）与单模量子化光场（频率ω<sub>c</sub>）的相互作用，耦合强度为g。</p>
+                </div>
+
+                <div class="formula-box">
+                    <h3>量子现象</h3>
+                    <ul>
+                        <li>真空拉比分裂：原子能级在真空场中的分裂</li>
+                        <li>拉比振荡：原子-光子能量交换</li>
+                        <li>光子数分裂：能级随光子数位移</li>
+                        <li>坍塌与复苏：量子干涉效应</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>量子光学可视化工具 | Jaynes-Cummings 模型 | 基于Plotly.js实现</p>
+            <p>© 2025 刘铭</p>
+        </footer>
+    </div>
+
+    <script>
+        // 物理参数
+        let params = {
+            omega_a: 1.0,
+            omega_c: 1.0,
+            g: 0.1,
+            delta: 0.0,
+            n_photon: 5,
+            alpha: 2.0,
+            initial_state: 'fock',
+            t_max: 150,
+            t_points: 200,
+            n_max: 15
+        };
+
+        // DOM元素
+        const gSlider = document.getElementById('g-slider');
+        const deltaSlider = document.getElementById('delta-slider');
+        const nSlider = document.getElementById('n-slider');
+        const alphaSlider = document.getElementById('alpha-slider');
+        const gValue = document.getElementById('g-value');
+        const deltaValue = document.getElementById('delta-value');
+        const nValue = document.getElementById('n-value');
+        const alphaValue = document.getElementById('alpha-value');
+        const fockBtn = document.getElementById('fock-btn');
+        const coherentBtn = document.getElementById('coherent-btn');
+        const runBtn = document.getElementById('run-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const animateBtn = document.getElementById('animate-btn');
+
+        // 图表容器
+        const timeEvolutionDiv = document.getElementById('time-evolution');
+        const rabiSplittingDiv = document.getElementById('rabi-splitting');
+        const photonDistributionDiv = document.getElementById('photon-distribution');
+
+        // 动画状态
+        let animationId = null;
+        let animationRunning = false;
+        let animationFrame = 0;
+
+        // 初始化事件监听器
+        function initEventListeners() {
+            // 滑块事件
+            gSlider.addEventListener('input', () => {
+                params.g = parseFloat(gSlider.value);
+                gValue.textContent = params.g.toFixed(2);
+            });
+
+            deltaSlider.addEventListener('input', () => {
+                params.delta = parseFloat(deltaSlider.value);
+                params.omega_a = params.omega_c + params.delta;
+                deltaValue.textContent = params.delta.toFixed(2);
+            });
+
+            nSlider.addEventListener('input', () => {
+                params.n_photon = parseInt(nSlider.value);
+                nValue.textContent = params.n_photon;
+            });
+
+            alphaSlider.addEventListener('input', () => {
+                params.alpha = parseFloat(alphaSlider.value);
+                alphaValue.textContent = params.alpha.toFixed(1);
+            });
+
+            // 按钮事件
+            fockBtn.addEventListener('click', () => {
+                params.initial_state = 'fock';
+                fockBtn.classList.add('active');
+                coherentBtn.classList.remove('active');
+                updateVisualization();
+            });
+
+            coherentBtn.addEventListener('click', () => {
+                params.initial_state = 'coherent';
+                coherentBtn.classList.add('active');
+                fockBtn.classList.remove('active');
+                updateVisualization();
+            });
+
+            runBtn.addEventListener('click', updateVisualization);
+            resetBtn.addEventListener('click', resetParameters);
+            animateBtn.addEventListener('click', toggleAnimation);
+        }
+
+        // 重置参数
+        function resetParameters() {
+            params.g = 0.1;
+            params.delta = 0.0;
+            params.n_photon = 5;
+            params.alpha = 2.0;
+            params.initial_state = 'fock';
+            params.omega_a = params.omega_c + params.delta;
+
+            gSlider.value = params.g;
+            deltaSlider.value = params.delta;
+            nSlider.value = params.n_photon;
+            alphaSlider.value = params.alpha;
+
+            gValue.textContent = params.g.toFixed(2);
+            deltaValue.textContent = params.delta.toFixed(2);
+            nValue.textContent = params.n_photon;
+            alphaValue.textContent = params.alpha.toFixed(1);
+
+            fockBtn.classList.add('active');
+            coherentBtn.classList.remove('active');
+
+            updateVisualization();
+        }
+
+        // 切换动画
+        function toggleAnimation() {
+            if (animationRunning) {
+                cancelAnimationFrame(animationId);
+                animationRunning = false;
+                animateBtn.textContent = '播放动画';
+            } else {
+                animationFrame = 0;
+                animationRunning = true;
+                animateBtn.textContent = '停止动画';
+                animate();
+            }
+        }
+
+        // 动画函数
+        function animate() {
+            if (!animationRunning) return;
+
+            // 动态改变失谐量
+            params.delta = Math.sin(animationFrame * 0.05) * 0.8;
+            params.omega_a = params.omega_c + params.delta;
+            deltaSlider.value = params.delta;
+            deltaValue.textContent = params.delta.toFixed(2);
+
+            updateVisualization();
+
+            animationFrame++;
+            animationId = requestAnimationFrame(animate);
+        }
+
+        // 计算时间演化
+        function calculateTimeEvolution() {
+            const t = [];
+            const prob_excited = [];
+            const theory = [];
+
+            // 生成时间点
+            for (let i = 0; i < params.t_points; i++) {
+                t.push(i * params.t_max / params.t_points);
+            }
+
+            // 计算激发态概率
+            if (params.initial_state === 'fock') {
+                const rabi_freq = 2 * params.g * Math.sqrt(params.n_photon + 1);
+                const detuning = params.delta;
+                const effective_freq = Math.sqrt(rabi_freq * rabi_freq + detuning * detuning);
+
+                for (let i = 0; i < t.length; i++) {
+                    const ti = t[i];
+                    if (Math.abs(detuning) < 1e-5) {
+                        // 共振情况
+                        const p = Math.cos(rabi_freq * ti) ** 2;
+                        prob_excited.push(p);
+                        theory.push(p);
+                    } else {
+                        // 非共振情况
+                        const p = 1 - (rabi_freq * rabi_freq / (effective_freq * effective_freq)) *
+                            Math.sin(effective_freq * ti / 2) ** 2;
+                        prob_excited.push(p);
+                        theory.push(null);
+                    }
+                }
+            } else {
+                // 相干态 - 坍塌与复苏效应
+                const avg_n = params.alpha * params.alpha;
+                const rabi_freq_avg = 2 * params.g * Math.sqrt(avg_n + 1);
+
+                for (let i = 0; i < t.length; i++) {
+                    const ti = t[i];
+                    const p = 0.5 * (1 + Math.exp(-2 * params.g * params.g * ti * ti) *
+                        Math.cos(2 * rabi_freq_avg * ti));
+                    prob_excited.push(p);
+                }
+            }
+
+            return { t, prob_excited, theory };
+        }
+
+        // 计算真空拉比分裂
+        function calculateVacuumRabiSplitting() {
+            const g_vals = [];
+            const energies_0 = [];
+            const energies_1 = [];
+
+            for (let i = 0; i <= 50; i++) {
+                const g_val = i * 0.5 / 50;
+                g_vals.push(g_val);
+
+                // 计算能级
+                const E0 = -0.5 * params.omega_a;
+                const E1 = 0.5 * params.omega_a;
+                const splitting = 2 * Math.sqrt(g_val * g_val + (params.delta / 2) ** 2);
+
+                energies_0.push((E0 + E1 - splitting) / 2);
+                energies_1.push((E0 + E1 + splitting) / 2);
+            }
+
+            return { g_vals, energies_0, energies_1 };
+        }
+
+        // 计算光子数分布
+        function calculatePhotonDistribution() {
+            const n_vals = [];
+            const probs = [];
+
+            if (params.initial_state === 'fock') {
+                for (let n = 0; n <= params.n_max; n++) {
+                    n_vals.push(n);
+                    probs.push(n === params.n_photon ? 1.0 : 0.0);
+                }
+            } else {
+                // 相干态的光子数分布（泊松分布）
+                const alpha_sq = params.alpha * params.alpha;
+                let total = 0;
+
+                for (let n = 0; n <= params.n_max; n++) {
+                    n_vals.push(n);
+                    const p = Math.exp(-alpha_sq) * Math.pow(alpha_sq, n) / factorial(n);
+                    probs.push(p);
+                    total += p;
+                }
+
+                // 归一化
+                for (let i = 0; i < probs.length; i++) {
+                    probs[i] /= total;
+                }
+            }
+
+            return { n_vals, probs };
+        }
+
+        // 阶乘函数
+        function factorial(n) {
+            if (n === 0 || n === 1) return 1;
+            let result = 1;
+            for (let i = 2; i <= n; i++) {
+                result *= i;
+            }
+            return result;
+        }
+
+        // 更新可视化
+        function updateVisualization() {
+            // 计算数据
+            const timeData = calculateTimeEvolution();
+            const rabiData = calculateVacuumRabiSplitting();
+            const photonData = calculatePhotonDistribution();
+
+            // 更新时间演化图
+            Plotly.react('time-evolution', [{
+                x: timeData.t,
+                y: timeData.prob_excited,
+                type: 'scatter',
+                mode: 'lines',
+                name: '激发态概率',
+                line: { color: '#3498db', width: 3 }
+            }, ...(timeData.theory[0] !== null ? [{
+                x: timeData.t,
+                y: timeData.theory,
+                type: 'scatter',
+                mode: 'lines',
+                name: '理论预测',
+                line: { color: '#e74c3c', width: 2, dash: 'dash' }
+            }] : [])], {
+                title: '原子激发态概率随时间演化',
+                xaxis: { title: '时间 (无量纲)', gridcolor: '#eee' },
+                yaxis: { title: '激发态概率', range: [0, 1.1], gridcolor: '#eee' },
+                margin: { t: 40, b: 50, l: 60, r: 30 },
+                showlegend: true,
+                legend: { x: 0.8, y: 0.9 },
+                plot_bgcolor: 'rgba(255,255,255,0.8)',
+                paper_bgcolor: 'rgba(0,0,0,0)'
+            });
+
+            // 更新真空拉比分裂图
+            Plotly.react('rabi-splitting', [{
+                x: rabiData.g_vals,
+                y: rabiData.energies_0,
+                type: 'scatter',
+                mode: 'lines',
+                name: '下能级',
+                line: { color: '#e74c3c', width: 3 }
+            }, {
+                x: rabiData.g_vals,
+                y: rabiData.energies_1,
+                type: 'scatter',
+                mode: 'lines',
+                name: '上能级',
+                line: { color: '#3498db', width: 3 }
+            }, {
+                x: [params.g, params.g],
+                y: [
+                    rabiData.energies_0[Math.round(params.g * 100)],
+                    rabiData.energies_1[Math.round(params.g * 100)]
+                ],
+                type: 'scatter',
+                mode: 'markers',
+                name: '当前值',
+                marker: { size: 10, color: '#2c3e50' }
+            }], {
+                title: '真空拉比分裂 (n=0)',
+                xaxis: { title: '耦合强度 g', gridcolor: '#eee' },
+                yaxis: { title: '能量 (无量纲)', gridcolor: '#eee' },
+                margin: { t: 40, b: 50, l: 60, r: 30 },
+                showlegend: true,
+                legend: { x: 0.8, y: 0.1 },
+                plot_bgcolor: 'rgba(255,255,255,0.8)',
+                paper_bgcolor: 'rgba(0,0,0,0)'
+            });
+
+            // 更新光子数分布图
+            Plotly.react('photon-distribution', [{
+                x: photonData.n_vals,
+                y: photonData.probs,
+                type: 'bar',
+                name: '光子数概率',
+                marker: { color: '#9b59b6' }
+            }], {
+                title: '光子数分布',
+                xaxis: { title: '光子数 n', gridcolor: '#eee' },
+                yaxis: { title: '概率', range: [0, 1.1], gridcolor: '#eee' },
+                margin: { t: 40, b: 50, l: 60, r: 30 },
+                plot_bgcolor: 'rgba(255,255,255,0.8)',
+                paper_bgcolor: 'rgba(0,0,0,0)'
+            });
+        }
+
+        // 初始化
+        function init() {
+            initEventListeners();
+            resetParameters();
+        }
+
+        // 页面加载完成后初始化
+        window.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+
+</html>
