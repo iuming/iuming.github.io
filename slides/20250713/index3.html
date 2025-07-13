@@ -1,0 +1,2185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RF Superconducting Technologies: A Decade of Advancement</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&amp;family=Inter:wght@300;400;500;600&amp;display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'serif': ['Crimson Text', 'serif'],
+                        'sans': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary': '#1e40af',
+                        'secondary': '#64748b',
+                        'accent': '#0ea5e9',
+                        'surface': '#f8fafc',
+                        'muted': '#94a3b8'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gradient-overlay {
+            background: linear-gradient(135deg, rgba(30, 64, 175, 0.9) 0%, rgba(14, 165, 233, 0.7) 100%);
+        }
+
+        .text-shadow {
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .backdrop-blur-subtle {
+            backdrop-filter: blur(8px);
+        }
+
+        .toc-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 280px;
+            height: 100vh;
+            background: rgba(248, 250, 252, 0.95);
+            backdrop-filter: blur(12px);
+            border-right: 1px solid #e2e8f0;
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .main-content {
+            margin-left: 280px;
+            min-height: 100vh;
+        }
+
+        .toc-link {
+            transition: all 0.2s ease;
+        }
+
+        .toc-link:hover {
+            color: #1e40af;
+            transform: translateX(4px);
+        }
+
+        .toc-link.active {
+            color: #1e40af;
+            font-weight: 500;
+        }
+
+        .section-anchor {
+            scroll-margin-top: 2rem;
+        }
+
+        .chart-container {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
+        }
+
+        .citation-link {
+            color: #1e40af;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .citation-link:hover {
+            color: #0ea5e9;
+            text-decoration: underline;
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 2rem;
+            height: 60vh;
+        }
+
+        .bento-main {
+            grid-row: 1 / -1;
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+        }
+
+        .bento-side {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .bento-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            flex: 1;
+        }
+
+        /* Mermaid Chart Styles - Updated for improved contrast */
+        .mermaid-container {
+            display: flex;
+            justify-content: center;
+            min-height: 300px;
+            max-height: 800px;
+            background: #ffffff;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mermaid-container .mermaid {
+            width: 100%;
+            max-width: 100%;
+            height: 100%;
+            cursor: grab;
+            transition: transform 0.3s ease;
+            transform-origin: center center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            touch-action: none;
+            /* 防止触摸设备上的默认行为 */
+            -webkit-user-select: none;
+            /* 防止文本选择 */
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .mermaid-container .mermaid svg {
+            max-width: 100%;
+            height: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .mermaid-container .mermaid:active {
+            cursor: grabbing;
+        }
+
+        .mermaid-container.zoomed .mermaid {
+            height: 100%;
+            width: 100%;
+            cursor: grab;
+        }
+
+        .mermaid-controls {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 20;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 8px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .mermaid-control-btn {
+            background: #ffffff;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #374151;
+            font-size: 14px;
+            min-width: 36px;
+            height: 36px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mermaid-control-btn:hover {
+            background: #f8fafc;
+            border-color: #3b82f6;
+            color: #3b82f6;
+            transform: translateY(-1px);
+        }
+
+        .mermaid-control-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Base node styles with high contrast */
+        .mermaid .node rect,
+        .mermaid .node circle,
+        .mermaid .node ellipse,
+        .mermaid .node polygon {
+            stroke-width: 2px;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+        }
+
+        /* Specific node color styling with high contrast text */
+        .mermaid .node[style*="fill:#f8fafc"] .label,
+        .mermaid .node[style*="fill: #f8fafc"] .label {
+            color: #1e293b !important;
+            font-weight: 600;
+        }
+
+        .mermaid .node[style*="fill:#dbeafe"] .label,
+        .mermaid .node[style*="fill: #dbeafe"] .label {
+            color: #1e3a8a !important;
+            font-weight: 600;
+        }
+
+        .mermaid .node[style*="fill:#dcfce7"] .label,
+        .mermaid .node[style*="fill: #dcfce7"] .label {
+            color: #14532d !important;
+            font-weight: 600;
+        }
+
+        .mermaid .node[style*="fill:#fef3c7"] .label,
+        .mermaid .node[style*="fill: #fef3c7"] .label {
+            color: #92400e !important;
+            font-weight: 600;
+        }
+
+        .mermaid .node[style*="fill:#fce7f3"] .label,
+        .mermaid .node[style*="fill: #fce7f3"] .label {
+            color: #831843 !important;
+            font-weight: 600;
+        }
+
+        /* Default label styling for better contrast */
+        .mermaid .node .label {
+            color: #1e293b !important;
+            font-weight: 600;
+            font-size: 13px;
+            line-height: 1.3;
+        }
+
+        /* Edge styling for better visibility */
+        .mermaid .edgePath .path {
+            stroke: #475569;
+            stroke-width: 2px;
+            filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+        }
+
+        .mermaid .edgeLabel {
+            background-color: rgba(255, 255, 255, 0.95) !important;
+            color: #374151 !important;
+            font-weight: 500;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            padding: 4px 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Timeline specific styling */
+        .mermaid .section {
+            fill: #f8fafc !important;
+            stroke: #1e40af !important;
+            stroke-width: 2px !important;
+        }
+
+        .mermaid .section-title {
+            fill: #1e3a8a !important;
+            font-weight: 600 !important;
+            font-size: 14px !important;
+        }
+
+        .mermaid .cScale0,
+        .mermaid .cScale1,
+        .mermaid .cScale2 {
+            fill: #f8fafc !important;
+            stroke: #475569 !important;
+            stroke-width: 1px !important;
+        }
+
+        @media (max-width: 1024px) {
+            .toc-fixed {
+                display: none;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .bento-grid {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+
+            .bento-main {
+                grid-row: auto;
+                height: 40vh;
+            }
+
+            .mermaid-control-btn:not(.reset-zoom) {
+                display: none;
+            }
+
+            .mermaid-controls {
+                top: auto;
+                bottom: 15px;
+                right: 15px;
+            }
+        }
+
+        /* Responsive adjustments for small screens */
+        @media (max-width: 768px) {
+            .main-content {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            #hero h1 {
+                font-size: 2.5rem;
+                line-height: 1.2;
+            }
+
+            #hero p {
+                font-size: 1rem;
+            }
+
+            .bento-main {
+                height: 30vh;
+            }
+        }
+
+        @media (max-width: 640px) {
+            #hero h1 {
+                font-size: 2rem;
+            }
+
+            .bento-card {
+                word-wrap: break-word;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-surface font-sans text-gray-900 overflow-x-hidden">
+    <!-- Fixed Table of Contents -->
+    <nav class="toc-fixed">
+        <div class="mb-8">
+            <h3 class="font-serif text-lg font-semibold text-gray-900 mb-4">Contents</h3>
+            <ul class="space-y-2 text-sm">
+                <li>
+                    <a href="#hero" class="toc-link block py-1 text-gray-600 hover:text-primary">Introduction</a>
+                </li>
+                <li>
+                    <a href="#executive-summary" class="toc-link block py-1 text-gray-600 hover:text-primary">Executive
+                        Summary</a>
+                </li>
+                <li>
+                    <a href="#materials" class="toc-link block py-1 text-gray-600 hover:text-primary">1. Key
+                        Materials</a>
+                </li>
+                <li>
+                    <a href="#theoretical" class="toc-link block py-1 text-gray-600 hover:text-primary">2. Theoretical
+                        Breakthroughs</a>
+                </li>
+                <li>
+                    <a href="#accelerators" class="toc-link block py-1 text-gray-600 hover:text-primary">3. Particle
+                        Accelerators</a>
+                </li>
+                <li>
+                    <a href="#quantum" class="toc-link block py-1 text-gray-600 hover:text-primary">4. Quantum
+                        Computing</a>
+                </li>
+                <li>
+                    <a href="#medical" class="toc-link block py-1 text-gray-600 hover:text-primary">5. Medical
+                        Imaging</a>
+                </li>
+                <li>
+                    <a href="#future" class="toc-link block py-1 text-gray-600 hover:text-primary">6. Future Outlook</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="mt-8 pt-6 border-t border-gray-200">
+            <h4 class="font-medium text-gray-900 mb-3">Key Metrics</h4>
+            <div class="space-y-3 text-xs text-gray-600">
+                <div class="flex justify-between">
+                    <span>Niobium T<sub>c</sub></span>
+                    <span class="font-medium">9.2-9.3 K</span>
+                </div>
+                <div class="flex justify-between">
+                    <span>Nb₃Sn T<sub>c</sub></span>
+                    <span class="font-medium">18-18.3 K</span>
+                </div>
+                <div class="flex justify-between">
+                    <span>MgB₂ T<sub>c</sub></span>
+                    <span class="font-medium">~39 K</span>
+                </div>
+                <div class="flex justify-between">
+                    <span>Peak E<sub>acc</sub></span>
+                    <span class="font-medium">35-50 MV/m</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section id="hero" class="section-anchor">
+            <div class="bento-grid max-w-7xl mx-auto p-8">
+                <!-- Main Hero Card -->
+                <div class="bento-main relative">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www6.slac.stanford.edu/a6b9c086d83af9469ddacf6259724b42e6c35849.jpg"
+                        alt="Abstract superconducting cavity with blue energy glow" class="w-full h-full object-cover"
+                        size="large" aspect="wide" color="blue" style="photo"
+                        query="superconducting radio frequency cavity abstract" referrerpolicy="no-referrer"
+                        data-modified="1" data-score="11599.00" />
+                    <div class="absolute inset-0 gradient-overlay flex items-center justify-center">
+                        <div class="text-center text-white p-8">
+                            <h1 class="font-serif text-5xl lg:text-6xl font-bold text-shadow mb-6 leading-tight">
+                                <em>RF Superconducting Technologies</em>
+                                <br />
+                                <span class="text-3xl lg:text-4xl font-normal">A Decade of Advancement</span>
+                            </h1>
+                            <p class="text-xl lg:text-2xl font-light text-shadow opacity-90">
+                                2015-2025: From Niobium Foundations to Quantum Frontiers
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Side Cards -->
+                <div class="bento-side">
+                    <div class="bento-card">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-atom text-primary text-xl mr-3"></i>
+                            <h3 class="font-serif text-lg font-semibold">Materials Evolution</h3>
+                        </div>
+                        <p class="text-sm text-gray-600">From Nb dominance to HTS alternatives like Nb₃Sn and MgB₂,
+                            enabling higher temperatures and simplified cryogenics.</p>
+                    </div>
+
+                    <div class="bento-card">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-microchip text-accent text-xl mr-3"></i>
+                            <h3 class="font-serif text-lg font-semibold">Quantum Integration</h3>
+                        </div>
+                        <p class="text-sm text-gray-600">SRF cavities enabling qudit generation with extended coherence
+                            times for next-generation quantum computing.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Executive Summary -->
+        <section id="executive-summary" class="section-anchor bg-white py-16">
+            <div class="max-w-4xl mx-auto px-8">
+                <h2 class="font-serif text-3xl font-bold text-gray-900 mb-8">Executive Summary</h2>
+                <div class="prose prose-lg max-w-none">
+                    <p class="text-xl leading-relaxed text-gray-700 mb-6">
+                        Over the past decade, radio frequency superconducting technologies have undergone a
+                        transformative evolution, driven by the pursuit of higher performance, increased efficiency, and
+                        broader applicability across scientific, medical, and industrial domains.
+                    </p>
+
+                    <div class="grid md:grid-cols-2 gap-8 my-8">
+                        <div class="bg-surface p-6 rounded-lg">
+                            <h3 class="font-serif text-xl font-semibold mb-4 text-primary">Key Achievements</h3>
+                            <ul class="space-y-2 text-gray-700">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                    <span><strong>World&#39;s first Nb₃Sn SRF accelerator</strong> achieving 4.6 MeV
+                                        with cryogen-free operation</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                    <span><strong>MgB₂ films demonstrating</strong> 30% higher vortex penetration fields
+                                        than Nb</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                    <span><strong>Quantum computing integration</strong> with SRF cavities for qudit
+                                        generation</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                    <span><strong>HTS RF coils delivering</strong> 200-300% SNR improvement in MRI
+                                        systems</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-surface p-6 rounded-lg">
+                            <h3 class="font-serif text-xl font-semibold mb-4 text-primary">Future Outlook</h3>
+                            <ul class="space-y-2 text-gray-700">
+                                <li class="flex items-start">
+                                    <i class="fas fa-arrow-right text-accent mt-1 mr-2"></i>
+                                    <span>Accelerating gradient targets of <strong>90-100 MV/m</strong> with advanced
+                                        materials</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-arrow-right text-accent mt-1 mr-2"></i>
+                                    <span><strong>Cryogen-free operation</strong> becoming standard across
+                                        applications</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-arrow-right text-accent mt-1 mr-2"></i>
+                                    <span><strong>Industrial scalability</strong> driving cost-effective
+                                        deployment</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-arrow-right text-accent mt-1 mr-2"></i>
+                                    <span><strong>Quantum-classical integration</strong> enabling new computational
+                                        paradigms</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 1: Materials Overview -->
+        <section id="materials" class="section-anchor py-16 bg-surface">
+            <div class="max-w-6xl mx-auto px-8">
+                <h2 class="font-serif text-4xl font-bold text-gray-900 mb-12">1. Key Superconducting Materials for RF
+                    Applications</h2>
+
+                <!-- Material Properties Chart -->
+                <div class="chart-container mb-12">
+                    <h3 class="font-serif text-2xl font-semibold mb-6 text-center">Critical Temperature Evolution</h3>
+                    <div class="mermaid-container" id="mermaid-container-1">
+                        <div class="mermaid-controls">
+                            <button class="mermaid-control-btn zoom-in" title="放大">
+                                <i class="fas fa-search-plus"></i>
+                            </button>
+                            <button class="mermaid-control-btn zoom-out" title="缩小">
+                                <i class="fas fa-search-minus"></i>
+                            </button>
+                            <button class="mermaid-control-btn reset-zoom" title="重置">
+                                <i class="fas fa-expand-arrows-alt"></i>
+                            </button>
+                            <button class="mermaid-control-btn fullscreen" title="全屏查看">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                        </div>
+                        <div class="mermaid" id="mermaid-chart-1">
+                            graph LR
+                            A[&#34;Niobium
+                            <br />T<sub>c</sub> = 9.2 K&#34;] --&gt; B[&#34;Nb₃Sn
+                            <br />T<sub>c</sub> = 18.3 K&#34;]
+                            B --&gt; C[&#34;MgB₂
+                            <br />T<sub>c</sub> = 39 K&#34;]
+                            C --&gt; D[&#34;YBCO
+                            <br />T<sub>c</sub> = 90 K&#34;]
+
+                            style A fill:#f8fafc,stroke:#1e40af,stroke-width:3px,color:#1e293b
+                            style B fill:#dbeafe,stroke:#1e40af,stroke-width:3px,color:#1e3a8a
+                            style C fill:#dcfce7,stroke:#16a34a,stroke-width:3px,color:#14532d
+                            style D fill:#fef3c7,stroke:#d97706,stroke-width:3px,color:#92400e
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Niobium Section -->
+                <div class="mb-12">
+                    <h3 class="font-serif text-2xl font-semibold mb-6 text-primary">1.1 Niobium: The Workhorse Material
+                    </h3>
+                    <div class="bg-white p-8 rounded-lg shadow-sm">
+                        <p class="text-gray-700 leading-relaxed mb-4">
+                            Niobium has been the cornerstone material for superconducting radio frequency (SRF) cavities
+                            for several decades, primarily due to its excellent superconducting properties, including a
+                            critical temperature (T<sub>c</sub>) of <strong>9.2-9.3 K</strong> and superior mechanical
+                            workability. <a href="https://www.nature.com/articles/srep35879" class="citation-link"
+                                target="_blank">[28]</a>
+                            <a href="https://www.osti.gov/servlets/purl/902144" class="citation-link"
+                                target="_blank">[231]</a>
+                        </p>
+
+                        <div class="grid md:grid-cols-2 gap-8 my-6">
+                            <div>
+                                <h4 class="font-semibold mb-3">Performance Limits</h4>
+                                <ul class="space-y-2 text-gray-700">
+                                    <li>• Superheating critical field: <strong>200-240 mT</strong></li>
+                                    <li>• State-of-the-art E<sub>acc</sub>: <strong>35-50 MV/m</strong> at 2K</li>
+                                    <li>• Vortex penetration field: <strong>~2000 Oe</strong></li>
+                                    <li>• Approaching theoretical performance limits</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-3">Current Challenges</h4>
+                                <ul class="space-y-2 text-gray-700">
+                                    <li>• Fundamental magnetic field limitations</li>
+                                    <li>• Complex sub-2K cryogenic requirements</li>
+                                    <li>• Need for alternative materials and coatings</li>
+                                    <li>• Cost and complexity of large-scale systems</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <p class="text-gray-700 leading-relaxed">
+                            Despite these impressive achievements, the SRF community actively seeks new materials and
+                            approaches to push beyond current Nb-based technology limitations, particularly for future
+                            particle accelerators requiring even higher gradients and more efficient operation. <a
+                                href="https://www.nature.com/articles/srep35879" class="citation-link"
+                                target="_blank">[28]</a>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Nb3Sn Section -->
+                <div class="mb-12">
+                    <h3 class="font-serif text-2xl font-semibold mb-6 text-primary">1.2 Niobium Tin (Nb₃Sn): A Promising
+                        Higher-Temperature Alternative</h3>
+                    <div class="bg-white p-8 rounded-lg shadow-sm">
+                        <div class="flex items-start mb-6">
+                            <img src="https://kimi-web-img.moonshot.cn/img/placeholder-0620/%E5%9B%BE%E7%89%8715.png"
+                                alt="Nb3Sn superconducting thin film microstructure"
+                                class="w-32 h-24 object-cover rounded-lg mr-6" size="small" aspect="wide" style="photo"
+                                query="Nb3Sn thin film microstructure" referrerpolicy="no-referrer" data-modified="1"
+                                data-score="10000.00" />
+                            <div>
+                                <p class="text-gray-700 leading-relaxed">
+                                    Nb₃Sn has emerged as a next-generation material for SRF cavities due to its higher
+                                    critical temperature (<strong>T<sub>c</sub> ≈ 18-18.3 K</strong>) compared to
+                                    niobium, enabling operation at temperatures achievable with cryocoolers (4.2-4.5K).
+                                    <a href="https://www.jstage.jst.go.jp/article/jcsj/57/1/57_23/_pdf"
+                                        class="citation-link" target="_blank">[2]</a>
+                                    <a href="https://arxiv.org/pdf/2203.06752" class="citation-link"
+                                        target="_blank">[52]</a>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-3 gap-6 my-8">
+                            <div class="text-center p-4 bg-surface rounded-lg">
+                                <div class="text-2xl font-bold text-primary mb-2">18.3 K</div>
+                                <div class="text-sm text-gray-600">Critical Temperature</div>
+                            </div>
+                            <div class="text-center p-4 bg-surface rounded-lg">
+                                <div class="text-2xl font-bold text-accent mb-2">4.2-4.5 K</div>
+                                <div class="text-sm text-gray-600">Operating Range</div>
+                            </div>
+                            <div class="text-center p-4 bg-surface rounded-lg">
+                                <div class="text-2xl font-bold text-green-600 mb-2">90-100 MV/m</div>
+                                <div class="text-sm text-gray-600">Target Gradient</div>
+                            </div>
+                        </div>
+
+                        <p class="text-gray-700 leading-relaxed mb-4">
+                            A key breakthrough occurred when researchers at Cornell University demonstrated Nb₃Sn
+                            cavities with accelerating gradients exceeding <strong>10 MV/m</strong> without the
+                            significant Q₀ drop phenomenon that had plagued earlier efforts. <a
+                                href="https://www.jstage.jst.go.jp/article/jcsj/57/1/57_23/_pdf" class="citation-link"
+                                target="_blank">[2]</a>
+                        </p>
+
+                        <blockquote class="border-l-4 border-primary pl-6 py-4 bg-surface rounded-r-lg my-6">
+                            <p class="text-gray-700 italic mb-2">
+                                &#34;The higher T<sub>c</sub> of Nb₃Sn offers the potential for substantial reductions
+                                in cryogenic complexity and operational costs, potentially revolutionizing the
+                                accessibility of SRF technology.&#34;
+                            </p>
+                            <cite class="text-sm text-gray-600">— Cornell University Research Team</cite>
+                        </blockquote>
+                    </div>
+                </div>
+
+                <!-- MgB2 Section -->
+                <div class="mb-12">
+                    <h3 class="font-serif text-2xl font-semibold mb-6 text-primary">1.3 Magnesium Diboride (MgB₂):
+                        Cryogen-Free Potential</h3>
+                    <div class="bg-white p-8 rounded-lg shadow-sm">
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            Discovered as a superconductor in 2001, MgB₂ has emerged as a highly promising material for
+                            RF applications due to its relatively high critical temperature (<strong>T<sub>c</sub> ≈ 39
+                                K</strong>) and simple binary composition, enabling potential &#34;cryogen-free&#34;
+                            operation around 10-25K. <a href="http://accelconf.web.cern.ch/P05/PAPERS/TPPT088.PDF"
+                                class="citation-link" target="_blank">[1]</a>
+                            <a href="https://www.jstage.jst.go.jp/article/jcsj/57/1/57_23/_pdf" class="citation-link"
+                                target="_blank">[2]</a>
+                        </p>
+
+                        <div class="bg-amber-50 border border-amber-200 p-6 rounded-lg my-6">
+                            <h4 class="font-semibold text-amber-800 mb-3">Key Advantages</h4>
+                            <ul class="space-y-2 text-amber-700">
+                                <li>• <strong>Absence of weak links</strong> at grain boundaries, unlike HTS cuprates
+                                </li>
+                                <li>• <strong>Two-gap superconductor</strong> with Δσ ≈ 2.7 meV (nearly twice Nb&#39;s
+                                    gap)</li>
+                                <li>• <strong>Lower BCS surface resistance</strong> at elevated temperatures</li>
+                                <li>• <strong>Compatibility with cryocoolers</strong> for simplified operation</li>
+                            </ul>
+                        </div>
+
+                        <p class="text-gray-700 leading-relaxed">
+                            Recent advancements include successful coating of 3D structures like 3 GHz single-cell
+                            cavities using techniques such as Hybrid Physical-Chemical Vapor Deposition (HPCVD), with
+                            films demonstrating RF surface resistances lower than Nb at 4K. <a
+                                href="https://arxiv.org/pdf/2204.02536" class="citation-link" target="_blank">[5]</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Theoretical Breakthroughs -->
+        <section id="theoretical" class="section-anchor py-16 bg-white">
+            <div class="max-w-6xl mx-auto px-8">
+                <h2 class="font-serif text-4xl font-bold text-gray-900 mb-12">2. Theoretical Advancements and Material
+                    Science Breakthroughs</h2>
+
+                <!-- Fundamental Properties -->
+                <div class="mb-12">
+                    <h3 class="font-serif text-2xl font-semibold mb-6 text-primary">2.1 Enhancing Fundamental Material
+                        Properties</h3>
+                    <div class="bg-surface p-8 rounded-lg">
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div>
+                                <h4 class="font-semibold mb-4">Critical Parameters</h4>
+                                <div class="space-y-3">
+                                    <div class="flex justify-between items-center p-3 bg-white rounded">
+                                        <span class="font-medium">H<sub>c</sub> (Critical Field)</span>
+                                        <span class="text-primary font-semibold">Enhanced via coatings</span>
+                                    </div>
+                                    <div class="flex justify-between items-center p-3 bg-white rounded">
+                                        <span class="font-medium">Δ (Energy Gap)</span>
+                                        <span class="text-primary font-semibold">Larger in MgB₂</span>
+                                    </div>
+                                    <div class="flex justify-between items-center p-3 bg-white rounded">
+                                        <span class="font-medium">λ<sub>eff</sub> (Penetration Depth)</span>
+                                        <span class="text-primary font-semibold">Optimized films</span>
+                                    </div>
+                                    <div class="flex justify-between items-center p-3 bg-white rounded">
+                                        <span class="font-medium">ρ<sub>n</sub> (Resistivity)</span>
+                                        <span class="text-primary font-semibold">RRR &gt; 80 achieved</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="text-gray-700 leading-relaxed mb-4">
+                                    Significant theoretical and experimental efforts have focused on understanding and
+                                    enhancing fundamental superconducting properties. For MgB₂, a ~200 nm thick film on
+                                    Nb ellipsoids increased H<sub>vp</sub> from 2100 Oe to 2700 Oe at 2.8 K, suggesting
+                                    potential for 30% higher accelerating gradients. <a
+                                        href="https://www.nature.com/articles/srep35879" class="citation-link"
+                                        target="_blank">[28]</a>
+                                </p>
+                                <p class="text-gray-700 leading-relaxed">
+                                    High-quality MgB₂ films have achieved ρ<sub>n</sub> values ≤ 1 μΩ·cm and RRR values
+                                    exceeding 80, demonstrating the material&#39;s potential for high-performance RF
+                                    applications. <a href="https://arxiv.org/pdf/2204.02536" class="citation-link"
+                                        target="_blank">[5]</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Thin Film Deposition -->
+                <div class="mb-12">
+                    <h3 class="font-serif text-2xl font-semibold mb-6 text-primary">2.2 Innovations in Thin Film
+                        Deposition</h3>
+                    <div class="bg-white p-8 rounded-lg shadow-sm">
+                        <div class="grid md:grid-cols-3 gap-6 mb-8">
+                            <div class="text-center p-6 bg-surface rounded-lg">
+                                <i class="fas fa-flask text-3xl text-primary mb-4"></i>
+                                <h4 class="font-semibold mb-2">HPCVD</h4>
+                                <p class="text-sm text-gray-600">Hybrid Physical-Chemical Vapor Deposition for
+                                    high-quality MgB₂ films</p>
+                            </div>
+                            <div class="text-center p-6 bg-surface rounded-lg">
+                                <i class="fas fa-layer-group text-3xl text-accent mb-4"></i>
+                                <h4 class="font-semibold mb-2">Multilayer Sputtering</h4>
+                                <p class="text-sm text-gray-600">Precise control for Nb₃Sn and complex structures</p>
+                            </div>
+                            <div class="text-center p-6 bg-surface rounded-lg">
+                                <i class="fas fa-bolt text-3xl text-green-600 mb-4"></i>
+                                <h4 class="font-semibold mb-2">Electrochemical</h4>
+                                <p class="text-sm text-gray-600">Seed-free synthesis for ultra-smooth films</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-blue-50 border border-blue-200 p-6 rounded-lg">
+                            <h4 class="font-semibold text-blue-800 mb-3">Bronze Method Innovation</h4>
+                            <p class="text-blue-700">
+                                A promising development is the &#34;bronze method,&#34; where Nb thin films are
+                                deposited on bronze (CuSn) substrates followed by post-annealing to form the A15 Nb₃Sn
+                                phase. This approach is attractive for coating complex geometries due to the ease of
+                                casting CuSn. <a href="https://arxiv.org/pdf/2204.02536" class="citation-link"
+                                    target="_blank">[5]</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Multilayer Structures -->
+                <div class="mb-12">
+                    <h3 class="font-serif text-2xl font-semibold mb-6 text-primary">2.3 Superconducting Multilayers and
+                        Novel Structures</h3>
+                    <div class="bg-surface p-8 rounded-lg">
+                        <div class="flex items-start mb-6">
+                            <img src="https://kimi-web-img.moonshot.cn/img/www.psi.ch/ad32841dc7a0b1a7b2dfc2c0f8b03561c6127ab2.webp"
+                                alt="Cross-section of superconducting multilayer thin film structure"
+                                class="w-48 h-32 object-cover rounded-lg mr-6" size="medium" aspect="wide" style="photo"
+                                query="superconducting multilayer thin film cross section" referrerpolicy="no-referrer"
+                                data-modified="1" data-score="11580.00" />
+                            <div>
+                                <p class="text-gray-700 leading-relaxed mb-4">
+                                    The development of superconducting multilayers represents a significant frontier in
+                                    RF superconductivity. Theoretical proposals by Gurevich suggest that coating niobium
+                                    with sequential layers of thin dielectric and superconductor can significantly
+                                    increase surface breakdown fields. <a
+                                        href="https://accelconf.web.cern.ch/srf2009/papers/tuobau08.pdf"
+                                        class="citation-link" target="_blank">[29]</a>
+                                    <a href="https://lss.fnal.gov/archive/2022/conf/fermilab-conf-22-321-td.pdf"
+                                        class="citation-link" target="_blank">[43]</a>
+                                </p>
+                                <p class="text-gray-700 leading-relaxed">
+                                    Experimental work includes research on <strong>Nb₃Sn/Al₂O₃ superconducting
+                                        multilayers</strong> for particle accelerators, combining superior
+                                    superconducting properties with enhanced field management capabilities. <a
+                                        href="https://accelconf.web.cern.ch/srf2009/papers/tuobau08.pdf"
+                                        class="citation-link" target="_blank">[29]</a>
+                                </p>
+                            </div>
+                        </div>
+
+                        <blockquote class="border-l-4 border-accent pl-6 py-4 bg-white rounded-r-lg">
+                            <p class="text-gray-700 italic">
+                                &#34;The successful implementation of these complex structures could lead to a new
+                                generation of SRF cavities with unprecedented performance, enabling more compact and
+                                efficient particle accelerators.&#34;
+                            </p>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Particle Accelerators -->
+        <section id="accelerators" class="section-anchor py-16 bg-surface">
+            <div class="max-w-6xl mx-auto px-8">
+                <h2 class="font-serif text-4xl font-bold text-gray-900 mb-12">3. Practical Applications in Particle
+                    Accelerators</h2>
+
+                <!-- Performance Limits -->
+                <div class="mb-12">
+                    <h3 class="font-serif text-2xl font-semibold mb-6 text-primary">3.1 Pushing Acceleration Gradients
+                        and Quality Factors</h3>
+                    <div class="bg-white p-8 rounded-lg shadow-sm">
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div>
+                                <h4 class="font-semibold mb-4">Current State-of-the-Art</h4>
+                                <div class="space-y-4">
+                                    <div class="flex items-center justify-between p-4 bg-surface rounded">
+                                        <div>
+                                            <div class="font-medium">Bulk Nb Cavities</div>
+                                            <div class="text-sm text-gray-600">Theoretical limits approaching</div>
+                                        </div>
+                                        <div class="text-right">
+                                            <div class="font-bold text-primary">35-50 MV/m</div>
+                                            <div class="text-xs text-gray-500">at 2K</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center justify-between p-4 bg-surface rounded">
+                                        <div>
+                                            <div class="font-medium">Nb₃Sn Coated</div>
+                                            <div class="text-sm text-gray-600">No Q-drop breakthrough</div>
+                                        </div>
+                                        <div class="text-right">
+                                            <div class="font-bold text-accent">10-24 MV/m</div>
+                                            <div class="text-xs text-gray-500">at 4.4K</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="text-gray-700 leading-relaxed mb-4">
+                                    State-of-the-art Nb cavities are approaching fundamental limits set by the
+                                    superheating critical field (H<sub>sh,Nb</sub> ≈ 2280 Oe at 2K). When surface
+                                    magnetic fields exceed this value, vortex penetration occurs, leading to drastic Q₀
+                                    degradation. <a href="https://www.nature.com/articles/srep35879"
+                                        class="citation-link" target="_blank">[28]</a>
+                                </p>
+                                <p class="text-gray-700 leading-relaxed">
+                                    Alternative materials like Nb₃Sn and MgB₂ offer pathways to higher gradients through
+                                    their potentially higher critical magnetic fields and lower BCS surface resistances
+                                    at elevated temperatures.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chinese Developments -->
+                <div class="mb-12">
+                    <h3 class="font-serif text-2xl font-semibold mb-6 text-primary">3.3 Domestic (Chinese) Developments:
+                        The IMP Nb₃Sn Accelerator</h3>
+                    <div class="bg-white p-8 rounded-lg shadow-sm">
+                        <div class="flex items-start mb-6">
+                            <img src="https://kimi-web-img.moonshot.cn/img/td.fnal.gov/dad4b7764b3a9e1f79e5ac014e6b24426fe5cc67.png"
+                                alt="Superconducting radio frequency particle accelerator"
+                                class="w-64 h-40 object-cover rounded-lg mr-6" size="medium" aspect="wide" style="photo"
+                                query="superconducting RF particle accelerator" referrerpolicy="no-referrer"
+                                data-modified="1" data-score="11594.00" />
+                            <div>
+                                <h4 class="font-semibold mb-3">World&#39;s First Nb₃Sn SRF Electron Accelerator</h4>
+                                <p class="text-gray-700 leading-relaxed mb-4">
+                                    A landmark achievement by the Institute of Modern Physics (IMP) of the Chinese
+                                    Academy of Sciences, in collaboration with the Advanced Energy Science and
+                                    Technology Guangdong Laboratory. Completed in early 2024, this system represents the
+                                    world&#39;s first operational Nb₃Sn SRF accelerator. <a
+                                        href="https://phys.org/news/2024-05-nbsn-superconducting-radio-frequency-electron.html"
+                                        class="citation-link" target="_blank">[75]</a>
+                                    <a href="https://english.cas.cn/newsroom/research_news/tech/202404/t20240426_661620.shtml"
+                                        class="citation-link" target="_blank">[106]</a>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-4 gap-4 my-8">
+                            <div class="text-center p-4 bg-green-50 rounded-lg border border-green-200">
+                                <div class="text-2xl font-bold text-green-700">4.6 MeV</div>
+                                <div class="text-sm text-green-600">Maximum Energy</div>
+                            </div>
+                            <div class="text-center p-4 bg-blue-50 rounded-lg border border-blue-200">
+                                <div class="text-2xl font-bold text-blue-700">200+ mA</div>
+                                <div class="text-sm text-blue-600">Beam Current</div>
+                            </div>
+                            <div class="text-center p-4 bg-purple-50 rounded-lg border border-purple-200">
+                                <div class="text-2xl font-bold text-purple-700">650 MHz</div>
+                                <div class="text-sm text-purple-600">Cavity Frequency</div>
+                            </div>
+                            <div class="text-center p-4 bg-orange-50 rounded-lg border border-orange-200">
+                                <div class="text-2xl font-bold text-orange-700">LHe-free</div>
+                                <div class="text-sm text-orange-600">Cryogenics</div>
+                            </div>
+                        </div>
+
+                        <div class="bg-green-50 border border-green-200 p-6 rounded-lg">
+                            <h4 class="font-semibold text-green-800 mb-3">Key Innovation: Liquid-Helium-Free Design</h4>
+                            <p class="text-green-700">
+                                The system features a novel conduction-cooled design where Nb₃Sn cavities are cooled
+                                directly by cryocoolers, eliminating the need for complex liquid helium systems. This
+                                approach significantly reduces infrastructure costs and enables more compact accelerator
+                                designs. <a href="https://arxiv.org/abs/2404.09187" class="citation-link"
+                                    target="_blank">[105]</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- International Projects -->
+                <div class="mb-12">
+                    <h3 class="font-serif text-2xl font-semibold mb-6 text-primary">3.4 International Collaborations and
+                        Large-Scale Projects</h3>
+                    <div class="bg-surface p-8 rounded-lg">
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div>
+                                <h4 class="font-semibold mb-4">CLIC at CERN</h4>
+                                <p class="text-gray-700 leading-relaxed mb-4">
+                                    The Compact Linear Collider study is developing <strong>MgB₂ superconducting
+                                        solenoid magnets operating at 20K</strong> for electron beam focusing in
+                                    klystrons. A prototype MgB₂ solenoid, conductively cooled by cryocoolers, aims for a
+                                    central field of 0.8T. <a
+                                        href="https://cds.cern.ch/record/2812512/files/2201.09501.pdf"
+                                        class="citation-link" target="_blank">[4]</a>
+                                </p>
+                                <div class="bg-white p-4 rounded border-l-4 border-blue-400">
+                                    <p class="text-sm text-gray-700">
+                                        <strong>Impact:</strong> Potential AC plug power savings with ~5,000 klystrons
+                                        required for CLIC
+                                    </p>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-4">Superconducting Power Links</h4>
+                                <p class="text-gray-700 leading-relaxed mb-4">
+                                    A 60-meter flexible cryostat prototype using <strong>MgB₂ superconducting
+                                        cables</strong> successfully demonstrated transmission up to 58.8 kA,
+                                    highlighting potential for highly efficient power distribution in particle
+                                    accelerators. <a href="https://cds.cern.ch/record/2812512/files/2201.09501.pdf"
+                                        class="citation-link" target="_blank">[4]</a>
+                                </p>
+                                <div class="bg-white p-4 rounded border-l-4 border-green-400">
+                                    <p class="text-sm text-gray-700">
+                                        <strong>Future:</strong> Technology slated for realization in late 2020s with
+                                        broader grid implications
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Quantum Computing -->
+        <section id="quantum" class="section-anchor py-16 bg-white">
+            <div class="max-w-6xl mx-auto px-8">
+                <h2 class="font-serif text-4xl font-bold text-gray-900 mb-12">4. RF Superconductivity in Quantum
+                    Computing</h2>
+
+                <!-- Quantum Timeline Chart -->
+                <div class="chart-container mb-12">
+                    <h3 class="font-serif text-2xl font-semibold mb-6 text-center">Quantum Computing Development
+                        Timeline</h3>
+                    <div class="mermaid-container" id="mermaid-container-2">
+                        <div class="mermaid-controls">
+                            <button class="mermaid-control-btn zoom-in" title="放大">
+                                <i class="fas fa-search-plus"></i>
+                            </button>
+                            <button class="mermaid-control-btn zoom-out" title="缩小">
+                                <i class="fas fa-search-minus"></i>
+                            </button>
+                            <button class="mermaid-control-btn reset-zoom" title="重置">
+                                <i class="fas fa-expand-arrows-alt"></i>
+                            </button>
+                            <button class="mermaid-control-btn fullscreen" title="全屏查看">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                        </div>
+                        <div class="mermaid" id="mermaid-chart-2">
+                            timeline
+                            title &#34;Quantum Computing Evolution&#34;
+
+                            2015-2018 : &#34;Early Qubit Development&#34;
+                            : &#34;Transmon qubits&#34;
+                            : &#34;Basic RF control&#34;
+
+                            2018-2021 : &#34;Integration Era&#34;
+                            : &#34;Cryogenic RF switches&#34;
+                            : &#34;Multiplexed control&#34;
+                            : &#34;Modular systems&#34;
+
+                            2021-2024 : &#34;Advanced Architectures&#34;
+                            : &#34;SRF cavity qudits&#34;
+                            : &#34;Ultralow-loss interconnects&#34;
+                            : &#34;Integrated RF frontends&#34;
+
+                            2024+ : &#34;Scalable Systems&#34;
+                            : &#34;Large-scale integration&#34;
+                            : &#34;Error correction&#34;
+                            : &#34;Commercial deployment&#34;
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Superconducting Qubits -->
+                <div class="mb-12">
+                    <h3 class="font-serif text-2xl font-semibold mb-6 text-primary">4.1 Superconducting Qubits and RF
+                        Control</h3>
+                    <div class="bg-surface p-8 rounded-lg">
+                        <div class="flex items-start mb-6">
+                            <img src="https://kimi-web-img.moonshot.cn/img/thequantuminsider.com/b714567513b94db32c73ac070e030b488cb97555.png"
+                                alt="Superconducting quantum processor chip"
+                                class="w-48 h-32 object-cover rounded-lg mr-6" size="medium" aspect="wide" style="photo"
+                                query="superconducting quantum processor" referrerpolicy="no-referrer" data-modified="1"
+                                data-score="11599.00" />
+                            <div>
+                                <p class="text-gray-700 leading-relaxed mb-4">
+                                    Superconducting qubits rely heavily on RF and microwave techniques for control and
+                                    readout, operating at GHz frequencies similar to 5G technology. Each additional
+                                    qubit requires dedicated RF control lines, creating scalability challenges as system
+                                    complexity increases exponentially. <a
+                                        href="https://www.cambridge.org/core/journals/international-journal-of-microwave-and-wireless-technologies/article/rf-and-microwave-metrology-for-quantum-computing-recent-developments-at-the-uks-national-physical-laboratory/E0E132549C68EAFFB7BFF2F076D21507"
+                                        class="citation-link" target="_blank">[152]</a>
+                                </p>
+                                <p class="text-gray-700 leading-relaxed">
+                                    Recent advancements focus on miniaturizing and integrating RF components closer to
+                                    qubits, including the development of all-metallic superconducting RF switches that
+                                    can control multiple qubits through a single cable. <a
+                                        href="https://research.chalmers.se/project/10780" class="citation-link"
+                                        target="_blank">[128]</a>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-3 gap-6">
+                            <div class="bg-white p-6 rounded-lg border">
+                                <h4 class="font-semibold mb-3 text-primary">QueSt Project</h4>
+                                <p class="text-sm text-gray-600 mb-2">EU-funded all-metallic superconducting RF switch
+                                </p>
+                                <ul class="text-xs text-gray-600 space-y-1">
+                                    <li>• Operating frequency: ~1 THz</li>
+                                    <li>• Near-zero power dissipation</li>
+                                    <li>• Multiple qubits per cable</li>
+                                </ul>
+                            </div>
+                            <div class="bg-white p-6 rounded-lg border">
+                                <h4 class="font-semibold mb-3 text-accent">Berkeley Lab System</h4>
+                                <p class="text-sm text-gray-600 mb-2">Modular RF control with mixing modules</p>
+                                <ul class="text-xs text-gray-600 space-y-1">
+                                    <li>• Reduced size and cost</li>
+                                    <li>• High-resolution signals</li>
+                                    <li>• FPGA-based control</li>
+                                </ul>
+                            </div>
+                            <div class="bg-white p-6 rounded-lg border">
+                                <h4 class="font-semibold mb-3 text-green-600">Integrated Solutions</h4>
+                                <p class="text-sm text-gray-600 mb-2">Cryogenic RF electronics on silicon</p>
+                                <ul class="text-xs text-gray-600 space-y-1">
+                                    <li>• HEMT amplifiers</li>
+                                    <li>• Nb interconnects</li>
+                                    <li>• Low-loss routing</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SRF Cavities for Qudits -->
+                <div class="mb-12">
+                    <h3 class="font-serif text-2xl font-semibold mb-6 text-primary">4.2 SRF Cavities for Qudit
+                        Generation</h3>
+                    <div class="bg-white p-8 rounded-lg shadow-sm">
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            Superconducting RF cavities are emerging as promising platforms for quantum information
+                            processing, particularly for storing quantum information as quantum d-level systems or
+                            &#34;qudits.&#34; Fermilab&#39;s SQMS division is actively researching qudit-based quantum
+                            computing using single-cell niobium SRF cavities. <a
+                                href="https://lss.fnal.gov/archive/2024/conf/fermilab-conf-24-0026-sqms.pdf"
+                                class="citation-link" target="_blank">[131]</a>
+                        </p>
+
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div class="bg-blue-50 p-6 rounded-lg border border-blue-200">
+                                <h4 class="font-semibold text-blue-800 mb-3">Advantages</h4>
+                                <ul class="space-y-2 text-blue-700">
+                                    <li>• <strong>Significantly longer coherence times</strong> compared to 2D transmons
+                                    </li>
+                                    <li>• Smaller surface-to-volume ratio reduces losses</li>
+                                    <li>• Larger accessible Hilbert space for complex computations</li>
+                                    <li>• Reduced error rates for quantum memory applications</li>
+                                </ul>
+                            </div>
+                            <div class="bg-amber-50 p-6 rounded-lg border border-amber-200">
+                                <h4 class="font-semibold text-amber-800 mb-3">Challenges</h4>
+                                <ul class="space-y-2 text-amber-700">
+                                    <li>• Integrating nonlinear elements while preserving Q-factor</li>
+                                    <li>• Managing Purcell decay and decoherence channels</li>
+                                    <li>• Developing efficient gate schemes for qudit operations</li>
+                                    <li>• Scaling to multiple qudit architectures</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chinese Efforts -->
+                <div class="mb-12">
+                    <h3 class="font-serif text-2xl font-semibold mb-6 text-primary">4.3 Domestic (Chinese) Efforts in
+                        Quantum Computing</h3>
+                    <div class="bg-surface p-8 rounded-lg">
+                        <div class="grid md:grid-cols-2 gap-8 mb-8">
+                            <div class="bg-white p-6 rounded-lg shadow-sm">
+                                <h4 class="font-semibold mb-3 flex items-center">
+                                    <i class="fas fa-microchip text-primary mr-2"></i>
+                                    SpinQ Technology
+                                </h4>
+                                <div class="space-y-2 text-sm text-gray-700">
+                                    <div class="flex justify-between">
+                                        <span>Qubits:</span>
+                                        <span class="font-medium">20</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>Single-qubit fidelity:</span>
+                                        <span class="font-medium">99.9%</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>Double-qubit fidelity:</span>
+                                        <span class="font-medium">98%</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>Decoherence time:</span>
+                                        <span class="font-medium">30 μs</span>
+                                    </div>
+                                </div>
+                                <p class="text-xs text-gray-600 mt-3">
+                                    Complete systems including cryogenics and RF control electronics. <a
+                                        href="https://www.spinquanta.com/news-detail/superconducting-quantum-computers-industrys-top-choice20250108060304"
+                                        class="citation-link" target="_blank">[132]</a>
+                                </p>
+                            </div>
+
+                            <div class="bg-white p-6 rounded-lg shadow-sm">
+                                <h4 class="font-semibold mb-3 flex items-center">
+                                    <i class="fas fa-link text-accent mr-2"></i>
+                                    SUSTech Breakthrough
+                                </h4>
+                                <div class="space-y-2 text-sm text-gray-700">
+                                    <div class="flex justify-between">
+                                        <span>Interconnect Q-factor:</span>
+                                        <span class="font-medium">8.1 × 10⁵</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>Transfer fidelity:</span>
+                                        <span class="font-medium">99%</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>Entangled qubits:</span>
+                                        <span class="font-medium">12 across 3 modules</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>Improvement:</span>
+                                        <span class="font-medium">10× previous</span>
+                                    </div>
+                                </div>
+                                <p class="text-xs text-gray-600 mt-3">
+                                    Published in Nature Electronics, demonstrating viable modular architecture. <a
+                                        href="https://siqse.sustech.edu.cn/en/Index/view/mid/70/id/1324?play=0"
+                                        class="citation-link" target="_blank">[153]</a>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-lg border-l-4 border-green-400">
+                            <h4 class="font-semibold mb-2">Industry Applications</h4>
+                            <p class="text-gray-700 text-sm">
+                                <strong>Origin Quantum</strong> successfully deployed superconducting quantum processors
+                                to enhance breast cancer screening accuracy, showcasing practical industrial
+                                applications of RF superconducting quantum technologies. <a
+                                    href="http://english.scio.gov.cn/m/in-depth/2025-06/24/content_117945049.html"
+                                    class="citation-link" target="_blank">[282]</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Medical Imaging -->
+        <section id="medical" class="section-anchor py-16 bg-surface">
+            <div class="max-w-6xl mx-auto px-8">
+                <h2 class="font-serif text-4xl font-bold text-gray-900 mb-12">5. RF Superconductivity in Medical Imaging
+                </h2>
+
+                <!-- MRI Systems -->
+                <div class="mb-12">
+                    <h3 class="font-serif text-2xl font-semibold mb-6 text-primary">5.1 Superconducting Magnets and RF
+                        Coils in MRI</h3>
+                    <div class="bg-white p-8 rounded-lg shadow-sm">
+                        <div class="flex items-start mb-6">
+                            <img src="https://kimi-web-img.moonshot.cn/img/mriquestions.com/a4a5123885501bf483dcdded6bbd319f6d691051.gif"
+                                alt="Superconducting MRI magnet assembly" class="w-56 h-40 object-cover rounded-lg mr-6"
+                                size="medium" aspect="wide" style="photo" query="superconducting MRI magnet"
+                                referrerpolicy="no-referrer" data-modified="1" data-score="11597.00" />
+                            <div>
+                                <p class="text-gray-700 leading-relaxed mb-4">
+                                    MRI systems rely heavily on superconducting technology, with
+                                    <strong>Niobium-Titanium (NbTi)</strong> being the most commonly used material for
+                                    main magnets. These systems operate at liquid helium temperatures (4.2K) to generate
+                                    strong, stable magnetic fields up to 10T. <a
+                                        href="https://mriquestions.com/superconductive-design.html"
+                                        class="citation-link" target="_blank">[140]</a>
+                                    <a href="https://www.researchgate.net/publication/275420537_Superconductivity_in_Medicine"
+                                        class="citation-link" target="_blank">[143]</a>
+                                </p>
+                                <p class="text-gray-700 leading-relaxed">
+                                    The RF subsystem is equally critical, with growing interest in using superconducting
+                                    materials for RF coils to significantly reduce electrical resistance and thermal
+                                    noise, thereby enhancing signal-to-noise ratio (SNR).
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="bg-blue-50 border border-blue-200 p-6 rounded-lg mb-6">
+                            <h4 class="font-semibold text-blue-800 mb-3">HTS RF Coil Performance</h4>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <p class="text-blue-700 mb-3">
+                                        Time Medical&#39;s HTS RF coils demonstrate significant SNR improvements:
+                                    </p>
+                                    <ul class="space-y-2 text-blue-700 text-sm">
+                                        <li>• <strong>200-300% improvement</strong> for proton imaging</li>
+                                        <li>• <strong>300-500% improvement</strong> for non-proton imaging (²³Na MRI)
+                                        </li>
+                                        <li>• Multi-frequency tuning capabilities</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-white p-4 rounded">
+                                    <p class="text-sm text-gray-700">
+                                        <strong>Challenge:</strong> Requires cryogenic cooling and careful decoupling
+                                        from transmit coils to avoid image artifacts. <a
+                                            href="https://www.time-medical.com/new-page-2" class="citation-link"
+                                            target="_blank">[136]</a>
+                                        <a href="https://www.frontiersin.org/journals/physics/articles/10.3389/fphy.2021.705438/full"
+                                            class="citation-link" target="_blank">[139]</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- HTS Potential -->
+                <div class="mb-12">
+                    <h3 class="font-serif text-2xl font-semibold mb-6 text-primary">5.2 Potential of High-Temperature
+                        Superconductors</h3>
+                    <div class="bg-surface p-8 rounded-lg">
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div>
+                                <h4 class="font-semibold mb-4 flex items-center">
+                                    <i class="fas fa-thermometer-half text-red-500 mr-2"></i>
+                                    MgB₂ for MRI Magnets
+                                </h4>
+                                <p class="text-gray-700 leading-relaxed mb-4">
+                                    <strong>MgB₂ (T<sub>c</sub> ~ 39K)</strong> offers the potential for
+                                    &#34;liquid-helium-free&#34; MRI systems by enabling operation at temperatures
+                                    achievable with compact cryocoolers. This simplifies cryogenic design and reduces
+                                    lifecycle costs. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5472374/"
+                                        class="citation-link" target="_blank">[138]</a>
+                                </p>
+                                <div class="bg-white p-4 rounded border-l-4 border-green-400">
+                                    <p class="text-sm text-gray-700">
+                                        <strong>Development:</strong> MIT&#39;s Francis Bitter Magnet Laboratory is
+                                        developing a 0.5T whole-body MgB₂ MRI magnet prototype. <a
+                                            href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6639028/"
+                                            class="citation-link" target="_blank">[150]</a>
+                                    </p>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-4 flex items-center">
+                                    <i class="fas fa-wave-square text-blue-500 mr-2"></i>
+                                    YBCO for RF Coils
+                                </h4>
+                                <p class="text-gray-700 leading-relaxed mb-4">
+                                    <strong>YBCO (T<sub>c</sub> ~ 90K)</strong> RF coils can operate above liquid helium
+                                    temperatures, simplifying cryogenic design while delivering substantial SNR
+                                    improvements, especially at higher field strengths. <a
+                                        href="https://www.time-medical.com/new-page-2" class="citation-link"
+                                        target="_blank">[136]</a>
+                                </p>
+                                <div class="bg-white p-4 rounded border-l-4 border-blue-400">
+                                    <p class="text-sm text-gray-700">
+                                        <strong>Commercialization:</strong> Time Medical&#39;s &#34;SupMR&#34; concept
+                                        integrates HTS RF, magnet, and gradient technologies for revolutionary
+                                        performance.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cryogen-Free Trend -->
+                <div class="mb-12">
+                    <h3 class="font-serif text-2xl font-semibold mb-6 text-primary">5.3 Trends Towards Cryogen-Free and
+                        Compact Systems</h3>
+                    <div class="bg-white p-8 rounded-lg shadow-sm">
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            A significant trend in medical imaging is the move towards <strong>cryogen-free operation
+                                and more compact designs</strong>, driven by the desire to reduce operational complexity
+                            and improve accessibility in diverse clinical environments. <a
+                                href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5472374/" class="citation-link"
+                                target="_blank">[138]</a>
+                            <a href="https://www.sciencedirect.com/science/article/pii/S2667325825002250"
+                                class="citation-link" target="_blank">[144]</a>
+                        </p>
+
+                        <div class="grid md:grid-cols-3 gap-6">
+                            <div class="text-center p-6 bg-green-50 rounded-lg border border-green-200">
+                                <i class="fas fa-snowflake text-3xl text-green-600 mb-4"></i>
+                                <h4 class="font-semibold mb-2">Cryogen-Free</h4>
+                                <p class="text-sm text-gray-600">Pulsed-tube cryocoolers replacing liquid helium</p>
+                            </div>
+                            <div class="text-center p-6 bg-blue-50 rounded-lg border border-blue-200">
+                                <i class="fas fa-compress text-3xl text-blue-600 mb-4"></i>
+                                <h4 class="font-semibold mb-2">Compact Design</h4>
+                                <p class="text-sm text-gray-600">Smaller footprint for diverse clinical settings</p>
+                            </div>
+                            <div class="text-center p-6 bg-purple-50 rounded-lg border border-purple-200">
+                                <i class="fas fa-dollar-sign text-3xl text-purple-600 mb-4"></i>
+                                <h4 class="font-semibold mb-2">Cost-Effective</h4>
+                                <p class="text-sm text-gray-600">Reduced operational and maintenance costs</p>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 bg-surface p-6 rounded-lg">
+                            <h4 class="font-semibold mb-3">Recent Progress</h4>
+                            <p class="text-gray-700 text-sm leading-relaxed">
+                                Recent developments in MRI-compatible cryostats utilizing low-noise pulsed-tube
+                                cryocoolers have made cryogen-free HTS RF coils more practical and user-friendly. This
+                                shift contributes to creating more portable MRI scanners, including ultra-low-field
+                                systems that benefit from superconducting RF coil integration. <a
+                                    href="https://hal.science/hal-03292154/" class="citation-link"
+                                    target="_blank">[156]</a>
+                                <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4961584"
+                                    class="citation-link" target="_blank">[137]</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Other Medical Applications -->
+                <div class="mb-12">
+                    <h3 class="font-serif text-2xl font-semibold mb-6 text-primary">5.4 Other Medical Imaging Modalities
+                    </h3>
+                    <div class="bg-surface p-8 rounded-lg">
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div class="bg-white p-6 rounded-lg shadow-sm">
+                                <h4 class="font-semibold mb-3 flex items-center">
+                                    <i class="fas fa-brain text-purple-600 mr-2"></i>
+                                    Magnetoencephalography (MEG)
+                                </h4>
+                                <p class="text-gray-700 text-sm leading-relaxed mb-3">
+                                    MEG systems measure femtotesla-level magnetic fields from neuronal activity using
+                                    <strong>Superconducting Quantum Interference Devices (SQUIDs)</strong> that must
+                                    operate at cryogenic temperatures (4.2K).
+                                </p>
+                                <div class="bg-purple-50 p-3 rounded text-xs text-purple-700">
+                                    UK&#39;s National Quantum Technologies Programme identifies superconductors as
+                                    relevant for quantum sensing, including ultra-sensitive magnetic field detection. <a
+                                        href="https://raeng.org.uk/media/rrqjm2v3/quantum-infrastructure-review.pdf"
+                                        class="citation-link" target="_blank">[158]</a>
+                                </div>
+                            </div>
+                            <div class="bg-white p-6 rounded-lg shadow-sm">
+                                <h4 class="font-semibold mb-3 flex items-center">
+                                    <i class="fas fa-atom text-green-600 mr-2"></i>
+                                    PET Isotope Production
+                                </h4>
+                                <p class="text-gray-700 text-sm leading-relaxed mb-3">
+                                    Superconducting RF cavities in cyclotrons can accelerate particles for medical
+                                    isotope production, leading to more compact, energy-efficient machines.
+                                </p>
+                                <div class="bg-green-50 p-3 rounded text-xs text-green-700">
+                                    EuCARD-2 project tested superconducting NbTi solenoids for cyclotrons dedicated to
+                                    medical radioisotope production. <a
+                                        href="https://cordis.europa.eu/project/id/312453/reporting/es"
+                                        class="citation-link" target="_blank">[257]</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: Future Outlook -->
+        <section id="future" class="section-anchor py-16 bg-white">
+            <div class="max-w-6xl mx-auto px-8">
+                <h2 class="font-serif text-4xl font-bold text-gray-900 mb-12">6. General Technology Trends and Future
+                    Outlook</h2>
+
+                <!-- Technology Evolution Chart -->
+                <div class="chart-container mb-12">
+                    <h3 class="font-serif text-2xl font-semibold mb-6 text-center">RF Superconducting Technology
+                        Evolution</h3>
+                    <div class="mermaid-container" id="mermaid-container-3">
+                        <div class="mermaid-controls">
+                            <button class="mermaid-control-btn zoom-in" title="放大">
+                                <i class="fas fa-search-plus"></i>
+                            </button>
+                            <button class="mermaid-control-btn zoom-out" title="缩小">
+                                <i class="fas fa-search-minus"></i>
+                            </button>
+                            <button class="mermaid-control-btn reset-zoom" title="重置">
+                                <i class="fas fa-expand-arrows-alt"></i>
+                            </button>
+                            <button class="mermaid-control-btn fullscreen" title="全屏查看">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                        </div>
+                        <div class="mermaid" id="mermaid-chart-3">
+                            graph TD
+                            A[&#34;Niobium Era
+                            <br />2000-2015&#34;] --&gt; B[&#34;HTS Exploration
+                            <br />2015-2020&#34;]
+                            B --&gt; C[&#34;Integration Era
+                            <br />2020-2025&#34;]
+                            C --&gt; D[&#34;Industrial Scale
+                            <br />2025+&#34;]
+
+                            A --&gt; A1[&#34;2K Operation&#34;]
+                            A --&gt; A2[&#34;Complex Cryogenics&#34;]
+                            A --&gt; A3[&#34;Scientific Focus&#34;]
+
+                            B --&gt; B1[&#34;Nb₃Sn Development&#34;]
+                            B --&gt; B2[&#34;MgB₂ Films&#34;]
+                            B --&gt; B3[&#34;4.2-20K Operation&#34;]
+
+                            C --&gt; C1[&#34;Cryogen-Free&#34;]
+                            C --&gt; C2[&#34;Quantum Integration&#34;]
+                            C --&gt; C3[&#34;Compact Systems&#34;]
+
+                            D --&gt; D1[&#34;Mass Deployment&#34;]
+                            D --&gt; D2[&#34;Cost Optimization&#34;]
+                            D --&gt; D3[&#34;Broad Applications&#34;]
+
+                            style A fill:#e0f2fe,stroke:#0277bd,stroke-width:2px,color:#01579b
+                            style B fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
+                            style C fill:#e8f5e8,stroke:#2e7d32,stroke-width:2px,color:#1b5e20
+                            style D fill:#fff3e0,stroke:#ef6c00,stroke-width:2px,color:#e65100
+                            style A1 fill:#f8fafc,stroke:#64748b,stroke-width:1px,color:#334155
+                            style A2 fill:#f8fafc,stroke:#64748b,stroke-width:1px,color:#334155
+                            style A3 fill:#f8fafc,stroke:#64748b,stroke-width:1px,color:#334155
+                            style B1 fill:#f8fafc,stroke:#64748b,stroke-width:1px,color:#334155
+                            style B2 fill:#f8fafc,stroke:#64748b,stroke-width:1px,color:#334155
+                            style B3 fill:#f8fafc,stroke:#64748b,stroke-width:1px,color:#334155
+                            style C1 fill:#f8fafc,stroke:#64748b,stroke-width:1px,color:#334155
+                            style C2 fill:#f8fafc,stroke:#64748b,stroke-width:1px,color:#334155
+                            style C3 fill:#f8fafc,stroke:#64748b,stroke-width:1px,color:#334155
+                            style D1 fill:#f8fafc,stroke:#64748b,stroke-width:1px,color:#334155
+                            style D2 fill:#f8fafc,stroke:#64748b,stroke-width:1px,color:#334155
+                            style D3 fill:#f8fafc,stroke:#64748b,stroke-width:1px,color:#334155
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Higher Operating Temperatures -->
+                <div class="mb-12">
+                    <h3 class="font-serif text-2xl font-semibold mb-6 text-primary">6.1 Drive Towards Higher Operating
+                        Temperatures</h3>
+                    <div class="bg-surface p-8 rounded-lg">
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            A dominant trend over the last decade has been the drive towards achieving <strong>higher
+                                operating temperatures and simplified cryogenic systems</strong>. Traditional SRF
+                            accelerators using niobium require complex sub-2K infrastructure, spurring research into
+                            alternative materials with higher critical temperatures. <a
+                                href="https://phys.org/news/2024-05-nbsn-superconducting-radio-frequency-electron.html"
+                                class="citation-link" target="_blank">[75]</a>
+                        </p>
+
+                        <div class="grid md:grid-cols-3 gap-6">
+                            <div class="bg-white p-6 rounded-lg border-l-4 border-blue-400">
+                                <h4 class="font-semibold mb-3">Nb₃Sn at 4.2K</h4>
+                                <p class="text-sm text-gray-700 mb-3">Enables commercial cryocooler operation with Q₀
+                                    values comparable to Nb at 2K</p>
+                                <div class="text-xs text-gray-600">
+                                    • Liquid helium temperature
+                                    <br />
+                                    • Reduced infrastructure complexity
+                                    <br />
+                                    • Proven in IMP accelerator
+                                </div>
+                            </div>
+                            <div class="bg-white p-6 rounded-lg border-l-4 border-green-400">
+                                <h4 class="font-semibold mb-3">MgB₂ at 20-25K</h4>
+                                <p class="text-sm text-gray-700 mb-3">Cryogen-free operation with compact cryocoolers
+                                </p>
+                                <div class="text-xs text-gray-600">
+                                    • Near-room temperature cryogenics
+                                    <br />
+                                    • Significant cost reduction
+                                    <br />
+                                    • Industrial accessibility
+                                </div>
+                            </div>
+                            <div class="bg-white p-6 rounded-lg border-l-4 border-purple-400">
+                                <h4 class="font-semibold mb-3">Future HTS &gt; 77K</h4>
+                                <p class="text-sm text-gray-700 mb-3">Liquid nitrogen temperatures for ultimate
+                                    simplicity</p>
+                                <div class="text-xs text-gray-600">
+                                    • YBCO and similar materials
+                                    <br />
+                                    • Complete cryogen elimination
+                                    <br />
+                                    • Maximum accessibility
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Alternative Materials -->
+                <div class="mb-12">
+                    <h3 class="font-serif text-2xl font-semibold mb-6 text-primary">6.2 Exploration of Alternative
+                        Materials</h3>
+                    <div class="bg-white p-8 rounded-lg shadow-sm">
+                        <div class="flex items-start mb-6">
+                            <img src="https://kimi-web-img.moonshot.cn/img/media.springernature.com/2bb06ce81cb20540a83b0022bdbb0d1923ce8822.jpg"
+                                alt="Superconducting multilayer thin film cross-section"
+                                class="w-48 h-32 object-cover rounded-lg mr-6" size="medium" aspect="wide" style="photo"
+                                query="superconducting multilayer thin film cross section" referrerpolicy="no-referrer"
+                                data-modified="1" data-score="11588.00" />
+                            <div>
+                                <p class="text-gray-700 leading-relaxed mb-4">
+                                    The last decade has witnessed significant exploration of alternative superconducting
+                                    materials and hybrid structures to overcome niobium&#39;s intrinsic limitations.
+                                    This includes intensive research into Nb₃Sn, MgB₂, and more exotic materials like
+                                    NbN, NbTiN, and high-entropy alloy superconductors. <a
+                                        href="https://cds.cern.ch/record/2807796/files/jt.pdf" class="citation-link"
+                                        target="_blank">[209]</a>
+                                    <a href="https://pubs.rsc.org/en/content/articlehtml/2025/mh/d5mh00323g"
+                                        class="citation-link" target="_blank">[224]</a>
+                                </p>
+                                <p class="text-gray-700 leading-relaxed">
+                                    The development of <strong>Superconductor-Insulator-Superconductor (SIS)
+                                        multilayers</strong> represents a key strategy to enhance performance beyond
+                                    single-material limitations. <a
+                                        href="https://pubs.rsc.org/en/content/articlehtml/2025/mh/d5mh00323g"
+                                        class="citation-link" target="_blank">[199]</a>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="bg-blue-50 border border-blue-200 p-6 rounded-lg">
+                            <h4 class="font-semibold text-blue-800 mb-3">Hybrid Structure Advantages</h4>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <ul class="space-y-2 text-blue-700 text-sm">
+                                    <li>• Enhanced critical fields in thin films</li>
+                                    <li>• Bulk substrate shielding from high RF fields</li>
+                                    <li>• Accelerating gradients beyond single-material limits</li>
+                                    <li>• Precise engineering of layer properties</li>
+                                </ul>
+                                <div class="bg-white p-4 rounded">
+                                    <p class="text-sm text-gray-700">
+                                        <strong>Example:</strong> Coating Nb cavities with MgB₂ films has shown 30%
+                                        increase in vortex penetration fields, while Nb₃Sn/Al₂O₃ multilayers combine
+                                        superior properties with enhanced field management. <a
+                                            href="https://www.nature.com/articles/srep35879" class="citation-link"
+                                            target="_blank">[28]</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Miniaturization -->
+                <div class="mb-12">
+                    <h3 class="font-serif text-2xl font-semibold mb-6 text-primary">6.3 Miniaturization and Integration
+                    </h3>
+                    <div class="bg-surface p-8 rounded-lg">
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div>
+                                <h4 class="font-semibold mb-4">Quantum Computing Integration</h4>
+                                <p class="text-gray-700 leading-relaxed mb-4">
+                                    The drive towards miniaturization is particularly evident in quantum computing,
+                                    where reducing the size, weight, and power (SWaP) consumption of RF systems is
+                                    crucial for scalability. <a href="https://research.chalmers.se/project/10780"
+                                        class="citation-link" target="_blank">[128]</a>
+                                    <a href="https://www.spinquanta.com/news-detail/superconducting-quantum-computers-industrys-top-choice20250108060304"
+                                        class="citation-link" target="_blank">[132]</a>
+                                </p>
+                                <div class="bg-white p-4 rounded border-l-4 border-blue-400">
+                                    <p class="text-sm text-gray-700">
+                                        <strong>Key Development:</strong> Superconducting RF switches enabling multiple
+                                        qubit control through single cables, drastically reducing cryostat penetrations.
+                                    </p>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-4">Communication Systems</h4>
+                                <p class="text-gray-700 leading-relaxed mb-4">
+                                    In communication systems, demand for higher data rates drives development of highly
+                                    integrated RF modules using HTS filters in compact lumped-element configurations. <a
+                                        href="https://apps.dtic.mil/sti/pdfs/AD1034423.pdf" class="citation-link"
+                                        target="_blank">[338]</a>
+                                </p>
+                                <div class="bg-white p-4 rounded border-l-4 border-green-400">
+                                    <p class="text-sm text-gray-700">
+                                        <strong>Innovation:</strong> Multilayer LTS processes adapted for passive filter
+                                        circuits, enabling stronger inter-resonator coupling and more compact designs.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cost-Effectiveness -->
+                <div class="mb-12">
+                    <h3 class="font-serif text-2xl font-semibold mb-6 text-primary">6.4 Focus on Cost-Effectiveness</h3>
+                    <div class="bg-white p-8 rounded-lg shadow-sm">
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            A growing focus over the past decade has been enhancing cost-effectiveness and expanding
+                            into broader industrial applications. This requires reducing both capital costs and
+                            operational expenditures associated with superconducting systems. <a
+                                href="https://accelconf.web.cern.ch/ipac2024/pdf/FRXD1_talk.pdf" class="citation-link"
+                                target="_blank">[71]</a>
+                            <a href="https://arxiv.org/pdf/2204.02536" class="citation-link" target="_blank">[192]</a>
+                        </p>
+
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div class="bg-green-50 p-6 rounded-lg border border-green-200">
+                                <h4 class="font-semibold text-green-800 mb-3">Cost Reduction Strategies</h4>
+                                <ul class="space-y-2 text-green-700 text-sm">
+                                    <li>• Higher-temperature operation reducing cryogenic complexity</li>
+                                    <li>• Economical material production and fabrication processes</li>
+                                    <li>• Simplified system integration techniques</li>
+                                    <li>• Competitive lifecycle costs vs. conventional technologies</li>
+                                </ul>
+                            </div>
+                            <div class="bg-blue-50 p-6 rounded-lg border border-blue-200">
+                                <h4 class="font-semibold text-blue-800 mb-3">Industrial Applications</h4>
+                                <ul class="space-y-2 text-blue-700 text-sm">
+                                    <li>• Medical isotope production accelerators</li>
+                                    <li>• Materials processing systems</li>
+                                    <li>• Communication network components</li>
+                                    <li>• Quantum computing platforms</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RF Resonators and Filters -->
+                <div class="mb-12">
+                    <h3 class="font-serif text-2xl font-semibold mb-6 text-primary">6.5 Advancements in RF Resonators
+                        and Filters</h3>
+                    <div class="bg-surface p-8 rounded-lg">
+                        <div class="grid md:grid-cols-3 gap-6 mb-8">
+                            <div class="text-center p-6 bg-white rounded-lg shadow-sm">
+                                <i class="fas fa-filter text-3xl text-primary mb-4"></i>
+                                <h4 class="font-semibold mb-2">HTS Filters</h4>
+                                <p class="text-sm text-gray-600 mb-3">YBCO filters operating at 77K with liquid nitrogen
+                                </p>
+                                <div class="text-xs text-gray-500">Tunable range: 1.22-1.34 GHz</div>
+                            </div>
+                            <div class="text-center p-6 bg-white rounded-lg shadow-sm">
+                                <i class="fas fa-layer-group text-3xl text-accent mb-4"></i>
+                                <h4 class="font-semibold mb-2">LTS Multilayer</h4>
+                                <p class="text-sm text-gray-600 mb-3">Nb-based multilayer processes for flexibility</p>
+                                <div class="text-xs text-gray-500">Enhanced design capabilities</div>
+                            </div>
+                            <div class="text-center p-6 bg-white rounded-lg shadow-sm">
+                                <i class="fas fa-microchip text-3xl text-green-600 mb-4"></i>
+                                <h4 class="font-semibold mb-2">MEMS Filters</h4>
+                                <p class="text-sm text-gray-600 mb-3">Cryogenic BAW filters for qubit control</p>
+                                <div class="text-xs text-gray-500">0.79 dB insertion loss at 77K</div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-lg border-l-4 border-purple-400">
+                            <h4 class="font-semibold mb-3">Future 6G Applications</h4>
+                            <p class="text-gray-700 text-sm leading-relaxed">
+                                The development of superconducting RF components continues to evolve, with exploration
+                                of new materials including graphene and ferrite materials to meet even more stringent
+                                requirements of future 6G communication systems. These materials offer potential for
+                                significantly improved electromagnetic and mechanical properties. <a
+                                    href="https://www.apextech-mw.com/news/technological-breakthroughs-and-development-trends-of-rf-filters-in-the-6g-era/"
+                                    class="citation-link" target="_blank">[334]</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Final Outlook -->
+                <div class="bg-gradient-to-r from-primary to-accent text-white p-12 rounded-lg">
+                    <h3 class="font-serif text-3xl font-bold mb-6 text-center">Looking Forward: 2025 and Beyond</h3>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="font-semibold mb-4">Immediate Future (2025-2030)</h4>
+                            <ul class="space-y-2 text-sm opacity-90">
+                                <li>• Commercial deployment of Nb₃Sn accelerators</li>
+                                <li>• Widespread adoption of cryogen-free MRI systems</li>
+                                <li>• Integration of SRF cavities in quantum computers</li>
+                                <li>• Industrial-scale production of HTS materials</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-4">Long-term Vision (2030+)</h4>
+                            <ul class="space-y-2 text-sm opacity-90">
+                                <li>• Practical quantum-classical hybrid systems</li>
+                                <li>• Ubiquitous superconducting RF in communications</li>
+                                <li>• Energy-efficient particle accelerators</li>
+                                <li>• Transformative medical imaging capabilities</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="text-center mt-8">
+                        <p class="text-lg font-light italic">
+                            &#34;The convergence of materials science, quantum technologies, and industrial applications
+                            positions RF superconductivity as a cornerstone of next-generation technological
+                            advancement.&#34;
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-gray-900 text-white py-12">
+            <div class="max-w-6xl mx-auto px-8">
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div>
+                        <h3 class="font-serif text-xl font-semibold mb-4">Key References</h3>
+                        <div class=" &lt;h3 class=" font-serif="" text-xl="" font-semibold="" mb-4"="">RF
+                            Superconductivity
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                A comprehensive analysis of advancements in radio frequency superconducting technologies
+                                from 2015-2025, covering materials science, applications, and future directions.
+                            </p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-4">Key Institutions</h4>
+                            <ul class="space-y-2 text-gray-400 text-sm">
+                                <li>• Institute of Modern Physics (IMP), CAS</li>
+                                <li>• Cornell University</li>
+                                <li>• Fermilab SQMS Center</li>
+                                <li>• CERN</li>
+                                <li>• Lawrence Berkeley National Lab</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-4">Research Areas</h4>
+                            <ul class="space-y-2 text-gray-400 text-sm">
+                                <li>• Particle Accelerators</li>
+                                <li>• Quantum Computing</li>
+                                <li>• Medical Imaging</li>
+                                <li>• Communication Systems</li>
+                                <li>• Materials Science</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+                        <p class="text-gray-500 text-sm">
+                            This analysis is based on peer-reviewed research and technical publications from 2015-2025.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        // Initialize Mermaid with enhanced configuration
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#f8fafc',
+                primaryTextColor: '#1e293b',
+                primaryBorderColor: '#1e40af',
+                lineColor: '#475569',
+                secondaryColor: '#e2e8f0',
+                tertiaryColor: '#f1f5f9',
+                background: '#ffffff',
+                mainBkg: '#f8fafc',
+                secondBkg: '#e2e8f0',
+                tertiaryBkg: '#f1f5f9',
+                // Enhanced contrast settings
+                nodeBorder: '#1e40af',
+                clusterBkg: '#f8fafc',
+                clusterBorder: '#64748b',
+                defaultLinkColor: '#475569',
+                titleColor: '#1e293b',
+                edgeLabelBackground: '#ffffff',
+                nodeTextColor: '#1e293b'
+            },
+            flowchart: {
+                useMaxWidth: false,
+                htmlLabels: true,
+                curve: 'basis',
+                padding: 20
+            },
+            timeline: {
+                useMaxWidth: false,
+                padding: 20
+            },
+            // Global font settings
+            fontFamily: 'Inter, sans-serif',
+            fontSize: '13px'
+        });
+
+        // Initialize Mermaid Controls for zoom and pan
+        function initializeMermaidControls() {
+            const containers = document.querySelectorAll('.mermaid-container');
+
+            containers.forEach(container => {
+                const mermaidElement = container.querySelector('.mermaid');
+                let scale = 1;
+                let isDragging = false;
+                let startX, startY, translateX = 0, translateY = 0;
+
+                // 触摸相关状态
+                let isTouch = false;
+                let touchStartTime = 0;
+                let initialDistance = 0;
+                let initialScale = 1;
+                let isPinching = false;
+
+                // Zoom controls
+                const zoomInBtn = container.querySelector('.zoom-in');
+                const zoomOutBtn = container.querySelector('.zoom-out');
+                const resetBtn = container.querySelector('.reset-zoom');
+                const fullscreenBtn = container.querySelector('.fullscreen');
+
+                function updateTransform() {
+                    mermaidElement.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+
+                    if (scale > 1) {
+                        container.classList.add('zoomed');
+                    } else {
+                        container.classList.remove('zoomed');
+                    }
+
+                    mermaidElement.style.cursor = isDragging ? 'grabbing' : 'grab';
+                }
+
+                if (zoomInBtn) {
+                    zoomInBtn.addEventListener('click', () => {
+                        scale = Math.min(scale * 1.25, 4);
+                        updateTransform();
+                    });
+                }
+
+                if (zoomOutBtn) {
+                    zoomOutBtn.addEventListener('click', () => {
+                        scale = Math.max(scale / 1.25, 0.3);
+                        if (scale <= 1) {
+                            translateX = 0;
+                            translateY = 0;
+                        }
+                        updateTransform();
+                    });
+                }
+
+                if (resetBtn) {
+                    resetBtn.addEventListener('click', () => {
+                        scale = 1;
+                        translateX = 0;
+                        translateY = 0;
+                        updateTransform();
+                    });
+                }
+
+                if (fullscreenBtn) {
+                    fullscreenBtn.addEventListener('click', () => {
+                        if (container.requestFullscreen) {
+                            container.requestFullscreen();
+                        } else if (container.webkitRequestFullscreen) {
+                            container.webkitRequestFullscreen();
+                        } else if (container.msRequestFullscreen) {
+                            container.msRequestFullscreen();
+                        }
+                    });
+                }
+
+                // Mouse Events
+                mermaidElement.addEventListener('mousedown', (e) => {
+                    if (isTouch) return; // 如果是触摸设备，忽略鼠标事件
+
+                    isDragging = true;
+                    startX = e.clientX - translateX;
+                    startY = e.clientY - translateY;
+                    mermaidElement.style.cursor = 'grabbing';
+                    updateTransform();
+                    e.preventDefault();
+                });
+
+                document.addEventListener('mousemove', (e) => {
+                    if (isDragging && !isTouch) {
+                        translateX = e.clientX - startX;
+                        translateY = e.clientY - startY;
+                        updateTransform();
+                    }
+                });
+
+                document.addEventListener('mouseup', () => {
+                    if (isDragging && !isTouch) {
+                        isDragging = false;
+                        mermaidElement.style.cursor = 'grab';
+                        updateTransform();
+                    }
+                });
+
+                document.addEventListener('mouseleave', () => {
+                    if (isDragging && !isTouch) {
+                        isDragging = false;
+                        mermaidElement.style.cursor = 'grab';
+                        updateTransform();
+                    }
+                });
+
+                // 获取两点之间的距离
+                function getTouchDistance(touch1, touch2) {
+                    return Math.hypot(
+                        touch2.clientX - touch1.clientX,
+                        touch2.clientY - touch1.clientY
+                    );
+                }
+
+                // Touch Events - 触摸事件处理
+                mermaidElement.addEventListener('touchstart', (e) => {
+                    isTouch = true;
+                    touchStartTime = Date.now();
+
+                    if (e.touches.length === 1) {
+                        // 单指拖动
+                        isPinching = false;
+                        isDragging = true;
+
+                        const touch = e.touches[0];
+                        startX = touch.clientX - translateX;
+                        startY = touch.clientY - translateY;
+
+                    } else if (e.touches.length === 2) {
+                        // 双指缩放
+                        isPinching = true;
+                        isDragging = false;
+
+                        const touch1 = e.touches[0];
+                        const touch2 = e.touches[1];
+                        initialDistance = getTouchDistance(touch1, touch2);
+                        initialScale = scale;
+                    }
+
+                    e.preventDefault();
+                }, { passive: false });
+
+                mermaidElement.addEventListener('touchmove', (e) => {
+                    if (e.touches.length === 1 && isDragging && !isPinching) {
+                        // 单指拖动
+                        const touch = e.touches[0];
+                        translateX = touch.clientX - startX;
+                        translateY = touch.clientY - startY;
+                        updateTransform();
+
+                    } else if (e.touches.length === 2 && isPinching) {
+                        // 双指缩放
+                        const touch1 = e.touches[0];
+                        const touch2 = e.touches[1];
+                        const currentDistance = getTouchDistance(touch1, touch2);
+
+                        if (initialDistance > 0) {
+                            const newScale = Math.min(Math.max(
+                                initialScale * (currentDistance / initialDistance),
+                                0.3
+                            ), 4);
+                            scale = newScale;
+                            updateTransform();
+                        }
+                    }
+
+                    e.preventDefault();
+                }, { passive: false });
+
+                mermaidElement.addEventListener('touchend', (e) => {
+                    // 重置状态
+                    if (e.touches.length === 0) {
+                        isDragging = false;
+                        isPinching = false;
+                        initialDistance = 0;
+
+                        // 延迟重置isTouch，避免鼠标事件立即触发
+                        setTimeout(() => {
+                            isTouch = false;
+                        }, 100);
+                    } else if (e.touches.length === 1 && isPinching) {
+                        // 从双指变为单指，切换为拖动模式
+                        isPinching = false;
+                        isDragging = true;
+
+                        const touch = e.touches[0];
+                        startX = touch.clientX - translateX;
+                        startY = touch.clientY - translateY;
+                    }
+
+                    updateTransform();
+                });
+
+                mermaidElement.addEventListener('touchcancel', (e) => {
+                    isDragging = false;
+                    isPinching = false;
+                    initialDistance = 0;
+
+                    setTimeout(() => {
+                        isTouch = false;
+                    }, 100);
+
+                    updateTransform();
+                });
+
+                // Enhanced wheel zoom with better center point handling
+                container.addEventListener('wheel', (e) => {
+                    e.preventDefault();
+                    const rect = container.getBoundingClientRect();
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+
+                    const delta = e.deltaY > 0 ? 0.9 : 1.1;
+                    const newScale = Math.min(Math.max(scale * delta, 0.3), 4);
+
+                    // Adjust translation to zoom towards center
+                    if (newScale !== scale) {
+                        const scaleDiff = newScale / scale;
+                        translateX = translateX * scaleDiff;
+                        translateY = translateY * scaleDiff;
+                        scale = newScale;
+
+                        if (scale <= 1) {
+                            translateX = 0;
+                            translateY = 0;
+                        }
+
+                        updateTransform();
+                    }
+                });
+
+                // Initialize display
+                updateTransform();
+            });
+        }
+
+        // Initialize controls after mermaid renders
+        setTimeout(initializeMermaidControls, 1000);
+
+        // Smooth scrolling for TOC links
+        document.querySelectorAll('.toc-link').forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Active TOC link highlighting
+        window.addEventListener('scroll', function () {
+            const sections = document.querySelectorAll('.section-anchor');
+            const tocLinks = document.querySelectorAll('.toc-link');
+
+            let currentSection = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (window.scrollY >= sectionTop) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + currentSection) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Add hover effects to citation links
+        document.querySelectorAll('.citation-link').forEach(link => {
+            link.addEventListener('mouseenter', function () {
+                this.style.transform = 'translateY(-1px)';
+            });
+            link.addEventListener('mouseleave', function () {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+
+
+</body>
+
+</html>
