@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Superconducting Accelerators: A Global Perspective</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --slate-blue: #6366f1;
+            --deep-indigo: #4338ca;
+            --soft-gray: #f8fafc;
+            --charcoal: #1e293b;
+            --accent-purple: #8b5cf6;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            color: var(--charcoal);
+            overflow-x: hidden;
+        }
+
+        .serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .toc-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 280px;
+            background: white;
+            border-right: 1px solid #e2e8f0;
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .main-content {
+            margin-left: 280px;
+            min-height: 100vh;
+        }
+
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #cbd5e1, transparent);
+            margin: 4rem 0;
+        }
+
+        .citation-link {
+            color: var(--slate-blue);
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted var(--slate-blue);
+        }
+
+        .citation-link:hover {
+            background-color: #eef2ff;
+            border-bottom: 1px solid var(--slate-blue);
+        }
+
+        .chart-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border-left: 4px solid var(--slate-blue);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .bento-item {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .toc-link {
+            display: block;
+            padding: 0.5rem 0;
+            color: #64748b;
+            text-decoration: none;
+            border-left: 2px solid transparent;
+            padding-left: 1rem;
+            margin-left: -1rem;
+            transition: all 0.3s ease;
+        }
+
+        .toc-link:hover,
+        .toc-link.active {
+            color: var(--slate-blue);
+            border-left-color: var(--slate-blue);
+            background-color: #f8fafc;
+        }
+
+        .toc-link.sub {
+            font-size: 0.875rem;
+            padding-left: 2rem;
+            margin-left: -1rem;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.9) 0%, rgba(67, 56, 202, 0.8) 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .mermaid-container {
+            display: flex;
+            justify-content: center;
+            min-height: 300px;
+            max-height: 800px;
+            background: #ffffff;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mermaid-container .mermaid {
+            width: 100%;
+            max-width: 100%;
+            height: 100%;
+            cursor: grab;
+            transition: transform 0.3s ease;
+            transform-origin: center center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            touch-action: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .mermaid-container .mermaid svg {
+            max-width: 100%;
+            height: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .mermaid-container .mermaid:active {
+            cursor: grabbing;
+        }
+
+        .mermaid-container.zoomed .mermaid {
+            height: 100%;
+            width: 100%;
+            cursor: grab;
+        }
+
+        .mermaid-controls {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 20;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 8px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .mermaid-control-btn {
+            background: #ffffff;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #374151;
+            font-size: 14px;
+            min-width: 36px;
+            height: 36px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mermaid-control-btn:hover {
+            background: #f8fafc;
+            border-color: #3b82f6;
+            color: #3b82f6;
+            transform: translateY(-1px);
+        }
+
+        .mermaid-control-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Mermaid theme customization for better contrast and unified styling */
+        .mermaid .node rect,
+        .mermaid .node circle,
+        .mermaid .node ellipse,
+        .mermaid .node polygon {
+            fill: #ffffff;
+            stroke: var(--slate-blue);
+            stroke-width: 2px;
+            filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+        }
+
+        /* Different node types with high contrast colors */
+        .mermaid .node.primary rect,
+        .mermaid .node.primary circle,
+        .mermaid .node.primary ellipse,
+        .mermaid .node.primary polygon {
+            fill: #e0f2fe;
+            stroke: var(--deep-indigo);
+            stroke-width: 3px;
+        }
+
+        .mermaid .node.secondary rect,
+        .mermaid .node.secondary circle,
+        .mermaid .node.secondary ellipse,
+        .mermaid .node.secondary polygon {
+            fill: #f0f9ff;
+            stroke: var(--slate-blue);
+            stroke-width: 2px;
+        }
+
+        .mermaid .node.tertiary rect,
+        .mermaid .node.tertiary circle,
+        .mermaid .node.tertiary ellipse,
+        .mermaid .node.tertiary polygon {
+            fill: #f8fafc;
+            stroke: var(--accent-purple);
+            stroke-width: 2px;
+        }
+
+        /* Hover states for enhanced interactivity */
+        .mermaid .node:hover rect,
+        .mermaid .node:hover circle,
+        .mermaid .node:hover ellipse,
+        .mermaid .node:hover polygon {
+            fill: var(--soft-gray);
+            stroke: var(--deep-indigo);
+            stroke-width: 3px;
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+        }
+
+        /* Text styling with excellent contrast */
+        .mermaid .node .label {
+            color: var(--charcoal) !important;
+            font-family: 'Inter', sans-serif !important;
+            font-size: 14px !important;
+            font-weight: 600 !important;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+        }
+
+        /* Edge styling */
+        .mermaid .edgePath .path {
+            stroke: var(--slate-blue);
+            stroke-width: 2px;
+            filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.1));
+        }
+
+        .mermaid .arrowheadPath {
+            fill: var(--slate-blue);
+            filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.1));
+        }
+
+        /* Edge labels */
+        .mermaid .edgeLabel {
+            background-color: rgba(255, 255, 255, 0.95) !important;
+            color: var(--charcoal) !important;
+            font-family: 'Inter', sans-serif !important;
+            font-size: 12px !important;
+            font-weight: 500 !important;
+            padding: 4px 8px !important;
+            border-radius: 4px !important;
+            border: 1px solid #e2e8f0 !important;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+        }
+
+        /* Timeline specific styling */
+        .mermaid .section {
+            fill: var(--soft-gray) !important;
+            stroke: var(--deep-indigo) !important;
+            stroke-width: 2px !important;
+        }
+
+        .mermaid .section-title {
+            fill: var(--charcoal) !important;
+            font-family: 'Inter', sans-serif !important;
+            font-weight: 700 !important;
+            font-size: 16px !important;
+        }
+
+        /* Gantt chart styling */
+        .mermaid .task {
+            fill: var(--slate-blue) !important;
+            stroke: var(--deep-indigo) !important;
+            stroke-width: 1px !important;
+        }
+
+        .mermaid .taskText {
+            fill: white !important;
+            font-family: 'Inter', sans-serif !important;
+            font-weight: 600 !important;
+            font-size: 12px !important;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .toc-fixed {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+
+            .toc-fixed.open {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .mermaid-control-btn:not(.reset-zoom) {
+                display: none;
+            }
+
+            .mermaid-controls {
+                top: auto;
+                bottom: 15px;
+                right: 15px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .mermaid-container {
+                overflow: auto;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <!-- Mobile Menu Toggle Button -->
+    <button id="mobile-menu-toggle" class="md:hidden fixed top-4 left-4 z-50 bg-white p-2 rounded-lg shadow-lg">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Table of Contents - Fixed Left -->
+    <nav class="toc-fixed">
+        <div class="mb-8">
+            <h3 class="serif text-lg font-semibold text-gray-800 mb-4">Contents</h3>
+            <div class="space-y-1">
+                <a href="#introduction" class="toc-link">Introduction</a>
+                <a href="#historical-development" class="toc-link">Historical Development</a>
+                <a href="#technical-advancements" class="toc-link">Technical Advancements</a>
+                <a href="#international-projects" class="toc-link">International Projects</a>
+                <a href="#china-development" class="toc-link">China&#39;s Development</a>
+                <a href="#policy-funding" class="toc-link">Policy &amp; Funding</a>
+                <a href="#challenges-outlook" class="toc-link">Future Outlook</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="relative min-h-[60vh] hero-gradient overflow-hidden">
+            <div class="hero-overlay"></div>
+            <img src="https://kimi-web-img.moonshot.cn/img/news.fnal.gov/a28dc950e1c270ef88c72e92da51bbc6ec4ee857.jpg"
+                alt="Superconducting accelerator facility"
+                class="absolute inset-0 w-full h-full object-cover opacity-30" size="wallpaper" aspect="wide"
+                style="photo" query="superconducting accelerator facility" referrerpolicy="no-referrer"
+                data-modified="1" data-score="11599.00" />
+
+            <div class="hero-content relative z-10 h-full flex items-center">
+                <div class="container mx-auto px-4 md:px-8 py-16">
+                    <div class="bento-grid">
+                        <div class="bento-item bg-white/95 backdrop-blur-sm">
+                            <h1 class="serif text-3xl md:text-5xl font-bold text-gray-800 mb-6 leading-tight">
+                                <em class="text-indigo-600">Superconducting Accelerators:</em>
+                                <br />
+                                A Global Perspective on Technology and Innovation
+                            </h1>
+                            <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                                Exploring the cutting-edge world of superconducting particle accelerators, from
+                                international megaprojects to China&#39;s ambitious domestic programs, and their
+                                transformative impact on science, medicine, and industry.
+                            </p>
+                            <div class="flex flex-wrap gap-4 text-sm text-gray-500">
+                                <span class="flex items-center gap-2">
+                                    <i class="fas fa-atom"></i>
+                                    High-Energy Physics
+                                </span>
+                                <span class="flex items-center gap-2">
+                                    <i class="fas fa-microscope"></i>
+                                    Materials Science
+                                </span>
+                                <span class="flex items-center gap-2">
+                                    <i class="fas fa-heartbeat"></i>
+                                    Medical Applications
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div class="stat-card">
+                                <div class="text-3xl font-bold text-indigo-600 mb-2">100+</div>
+                                <div class="text-sm text-gray-600">Major Facilities Worldwide</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="text-3xl font-bold text-indigo-600 mb-2">16T</div>
+                                <div class="text-sm text-gray-600">Future Magnet Fields</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="text-3xl font-bold text-indigo-600 mb-2">2.5MW</div>
+                                <div class="text-sm text-gray-600">CiADS Beam Power</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Introduction Section -->
+        <section id="introduction" class="py-16 px-8">
+            <div class="container mx-auto max-w-4xl">
+                <h2 class="serif text-4xl font-bold text-gray-800 mb-8">Introduction to Superconducting Accelerators
+                </h2>
+
+                <div class="prose prose-lg max-w-none">
+                    <p class="text-xl text-gray-700 mb-6 leading-relaxed">
+                        Superconducting accelerators represent the pinnacle of particle acceleration technology,
+                        utilizing materials that exhibit zero electrical resistance when cooled to near absolute zero
+                        temperatures. These advanced machines are revolutionizing our ability to explore fundamental
+                        physics, develop new materials, and treat diseases.
+                    </p>
+
+                    <div class="highlight-box">
+                        <h3 class="serif text-2xl font-semibold text-gray-800 mb-4">Core Technology Components</h3>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Superconducting RF Cavities</h4>
+                                <p class="text-gray-600">Made primarily from niobium and cooled by liquid helium to
+                                    around 2 Kelvin (-271°C), these cavities can sustain strong electromagnetic fields
+                                    with minimal energy loss, enabling efficient particle acceleration.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Superconducting Magnets</h4>
+                                <p class="text-gray-600">Wound from superconducting wire (Nb-Ti or Nb₃Sn), these magnets
+                                    generate powerful magnetic fields for beam steering and focusing in circular
+                                    accelerators.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="text-gray-700">
+                        The significance of superconducting accelerators extends far beyond fundamental research. In
+                        medicine, they enable precise cancer therapy through proton and ion beam treatment. In industry,
+                        they facilitate advanced materials processing and sterilization. The <a
+                            href="https://link.springer.com/chapter/10.1007/978-3-030-16118-7_1"
+                            class="citation-link">efficiency gains from superconducting technology</a> are transforming
+                        what&#39;s possible in particle acceleration.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Historical Development Section -->
+        <section id="historical-development" class="py-16 px-8 bg-white">
+            <div class="container mx-auto max-w-4xl">
+                <h2 class="serif text-4xl font-bold text-gray-800 mb-8">Historical Development</h2>
+
+                <div class="space-y-8">
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <h3 class="serif text-2xl font-semibold text-gray-800 mb-4">Early International Pioneering
+                            Efforts</h3>
+                        <p class="text-gray-700 mb-4">
+                            The development of superconducting accelerators has been a truly international endeavor. In
+                            the United States, early proposals like the <a
+                                href="https://www.aip.org/history/the-superconducting-super-collider"
+                                class="citation-link">&#34;Desertron&#34; concept in 1982</a> laid groundwork for
+                            ambitious projects. The Superconducting Super Collider (SSC), proposed in the early 1980s
+                            and approved during the Reagan administration, aimed for energies in the tens of TeV but was
+                            <a href="https://www.aps.org/publications/apsnews/201310/physicshistory.cfm"
+                                class="citation-link">terminated by Congress in 1993</a> due to escalating costs.
+                        </p>
+                        <p class="text-gray-700">
+                            Concurrently, Europe&#39;s CERN has been at the forefront, with studies for future colliders
+                            like the <a href="https://www2.lbl.gov/LBL-Programs/atap/MagnetDevelopmentProgramPlan.pdf"
+                                class="citation-link">Future Circular Collider (FCC) encouraged by the 2013 EU Strategy
+                                Update</a>. China&#39;s engagement began in the 1960s-70s with superconducting materials
+                            and magnet development at institutions like the Beijing General Research Institute of
+                            Nonferrous Metals.
+                        </p>
+                    </div>
+
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <h3 class="serif text-2xl font-semibold text-gray-800 mb-4">Evolution of SRF Technology</h3>
+                        <p class="text-gray-700 mb-4">
+                            Superconducting Radio Frequency (SRF) technology has evolved significantly, becoming a
+                            cornerstone for modern particle accelerators. Early developments focused on understanding
+                            superconductivity at RF frequencies and improving niobium cavity performance. <a
+                                href="https://accelconf.web.cern.ch/srf2007/papers/MO101.pdf"
+                                class="citation-link">Progress in niobium material purity, cavity fabrication, and
+                                surface treatments</a> has enhanced quality factors and accelerating gradients.
+                        </p>
+                        <p class="text-gray-700">
+                            International collaborations among facilities like CERN, DESY, Fermilab, KEK, and JLab have
+                            been vital. In China, SRF research began with <a
+                                href="https://snf.ieeecsc.org/files/ieeecsc/slides/RN27.pdf" class="citation-link">Dr.
+                                Ding Yu&#39;s work on an X-band cavity at IHEP in the 1970s</a>, with significant
+                            advancements through the PKU-IHEP Joint SRF Centre established in 2001.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Technical Advancements Section -->
+        <section id="technical-advancements" class="py-16 px-8">
+            <div class="container mx-auto max-w-4xl">
+                <h2 class="serif text-4xl font-bold text-gray-800 mb-8">Current Status and Technical Advancements</h2>
+
+                <div class="space-y-8">
+                    <div class="bg-white p-6 rounded-lg shadow-sm border">
+                        <h3 class="serif text-2xl font-semibold text-gray-800 mb-4">State-of-the-Art SRF Cavities</h3>
+                        <p class="text-gray-700 mb-4">
+                            The current state-of-the-art in SRF cavities reflects decades of intensive R&amp;D. <a
+                                href="https://cds.cern.ch/record/2315464/files/moyba1.pdf" class="citation-link">Niobium
+                                remains the material of choice</a>, with performance continually improving through
+                            advancements in material purity, fabrication techniques, and sophisticated surface
+                            treatments.
+                        </p>
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-gray-800 mb-2">Key Performance Metrics:</h4>
+                            <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                <li>Accelerating gradients exceeding <strong>30-40 MV/m</strong></li>
+                                <li>Quality factors in the range of <strong>10¹⁰ to 10¹¹</strong></li>
+                                <li>Operating temperatures of <strong>1.8-2.0 K</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg shadow-sm border">
+                        <h3 class="serif text-2xl font-semibold text-gray-800 mb-4">Progress in High-Field Magnets</h3>
+                        <p class="text-gray-700 mb-4">
+                            Significant progress has been made in developing high-field superconducting magnets. While
+                            <a href="https://link.springer.com/chapter/10.1007/978-3-030-16118-7_1"
+                                class="citation-link">Niobium-Titanium (Nb-Ti) enabled fields up to 9-10 T</a> in
+                            facilities like the LHC, <strong>Niobium-Tin (Nb₃Sn) has emerged as the leading candidate
+                                for fields in the 12-16 T range</strong>.
+                        </p>
+                        <p class="text-gray-700">
+                            The <a
+                                href="https://atap.lbl.gov/news/superconducting-magnets-enhancing-the-capabilities-of-particle-accelerators/"
+                                class="citation-link">High Luminosity LHC (HL-LHC) upgrade is installing new Nb₃Sn
+                                quadrupole magnets</a>. Beyond this, considerable R&amp;D focuses on High-Temperature
+                            Superconductors (HTS) like REBCO tapes and Bi-2212 wires, which can operate at higher
+                            temperatures and in much higher magnetic fields, potentially exceeding 20 T.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- International Projects Section -->
+        <section id="international-projects" class="py-16 px-8 bg-white">
+            <div class="container mx-auto max-w-4xl">
+                <h2 class="serif text-4xl font-bold text-gray-800 mb-8">Major International Projects</h2>
+
+                <div class="space-y-12">
+                    <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-8 rounded-xl">
+                        <h3 class="serif text-3xl font-semibold text-gray-800 mb-6">High-Energy Physics Colliders</h3>
+
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div class="bg-white p-6 rounded-lg shadow-sm">
+                                <h4 class="font-semibold text-xl text-gray-800 mb-4">
+                                    <i class="fas fa-circle text-blue-600 mr-2"></i>
+                                    Large Hadron Collider (LHC)
+                                </h4>
+                                <p class="text-gray-700 mb-4">
+                                    The world&#39;s largest particle accelerator uses <a
+                                        href="http://www.ccas-web.org/superconductivity/highenergyphysics/"
+                                        class="citation-link">1232 main dipole magnets (8.3 T) and 392 main quadrupole
+                                        magnets</a>, all Nb-Ti operating at 1.9 K.
+                                </p>
+                                <div class="text-sm text-gray-600">
+                                    <strong>Energy:</strong> 13 TeV (design: 14 TeV)
+                                    <br />
+                                    <strong>Upgrade:</strong> HL-LHC will feature 11-12 T Nb₃Sn magnets
+                                </div>
+                            </div>
+
+                            <div class="bg-white p-6 rounded-lg shadow-sm">
+                                <h4 class="font-semibold text-xl text-gray-800 mb-4">
+                                    <i class="fas fa-circle text-purple-600 mr-2"></i>
+                                    Future Circular Collider (FCC)
+                                </h4>
+                                <p class="text-gray-700 mb-4">
+                                    A 90-100 km circumference collider studying <a
+                                        href="https://cds.cern.ch/record/2315464/files/moyba1.pdf"
+                                        class="citation-link">proton-proton collisions up to 100 TeV</a>, requiring
+                                    dipole magnets of 16 T or higher.
+                                </p>
+                                <div class="text-sm text-gray-600">
+                                    <strong>Options:</strong> FCC-hh (hadron) and FCC-ee (electron-positron)
+                                    <br />
+                                    <strong>Technology:</strong> Nb₃Sn or HTS magnets
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-gradient-to-r from-green-50 to-emerald-50 p-8 rounded-xl">
+                        <h3 class="serif text-3xl font-semibold text-gray-800 mb-6">Medical Applications</h3>
+
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div class="bg-white p-6 rounded-lg shadow-sm">
+                                <h4 class="font-semibold text-xl text-gray-800 mb-4">
+                                    <i class="fas fa-heartbeat text-red-600 mr-2"></i>
+                                    Proton Therapy Systems
+                                </h4>
+                                <p class="text-gray-700 mb-4">
+                                    Superconducting cyclotrons and synchrotrons are revolutionizing cancer treatment. <a
+                                        href="https://mevion.com/press-release/mevion-nmpa-approval"
+                                        class="citation-link">Mevion Medical Systems has developed compact
+                                        superconducting proton therapy systems</a> like the MEVION S250i.
+                                </p>
+                                <div class="text-sm text-gray-600">
+                                    <strong>Advantage:</strong> Superior dose conformity, sparing healthy tissue
+                                    <br />
+                                    <strong>Footprint:</strong> Compact designs for hospital integration
+                                </div>
+                            </div>
+
+                            <div class="bg-white p-6 rounded-lg shadow-sm">
+                                <h4 class="font-semibold text-xl text-gray-800 mb-4">
+                                    <i class="fas fa-radiation text-yellow-600 mr-2"></i>
+                                    Medical Isotope Production
+                                </h4>
+                                <p class="text-gray-700 mb-4">
+                                    Superconducting accelerators offer advantages in efficiency and specific activity
+                                    for producing isotopes like Technetium-99m for diagnostic imaging and other
+                                    therapeutic applications.
+                                </p>
+                                <div class="text-sm text-gray-600">
+                                    <strong>Benefits:</strong> Higher yields, reliable production
+                                    <br />
+                                    <strong>Future:</strong> Novel isotope creation capabilities
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- China Development Section -->
+        <section id="china-development" class="py-16 px-8">
+            <div class="container mx-auto max-w-4xl">
+                <h2 class="serif text-4xl font-bold text-gray-800 mb-8">China&#39;s Domestic Development</h2>
+
+                <div class="space-y-8">
+                    <div class="bg-red-50 p-6 rounded-lg border-l-4 border-red-500">
+                        <h3 class="serif text-2xl font-semibold text-gray-800 mb-4">Strategic National Projects</h3>
+                        <p class="text-gray-700 mb-6">
+                            China has established a comprehensive ecosystem for superconducting accelerator development,
+                            pursuing ambitious projects across high-energy physics, neutron science, and nuclear
+                            applications. The country&#39;s approach emphasizes <strong>self-sufficiency and
+                                international competitiveness</strong> in critical accelerator technologies.
+                        </p>
+                    </div>
+
+                    <!-- China Projects Table -->
+                    <div class="overflow-x-auto">
+                        <table class="w-full bg-white rounded-lg shadow-sm border">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-4 text-left font-semibold text-gray-800">Project</th>
+                                    <th class="px-6 py-4 text-left font-semibold text-gray-800">Type</th>
+                                    <th class="px-6 py-4 text-left font-semibold text-gray-800">Key Technology</th>
+                                    <th class="px-6 py-4 text-left font-semibold text-gray-800">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-4 font-semibold text-gray-800">CEPC</td>
+                                    <td class="px-6 py-4 text-gray-600">Electron-Positron Collider</td>
+                                    <td class="px-6 py-4 text-gray-600">1.3 GHz SRF cavities, HTS magnets</td>
+                                    <td class="px-6 py-4"><span
+                                            class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-sm">R&amp;D
+                                            Phase</span></td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-4 font-semibold text-gray-800">CiADS</td>
+                                    <td class="px-6 py-4 text-gray-600">Accelerator-Driven System</td>
+                                    <td class="px-6 py-4 text-gray-600">High-power CW superconducting linac</td>
+                                    <td class="px-6 py-4"><span
+                                            class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-sm">Under
+                                            Construction</span></td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-4 font-semibold text-gray-800">CSNS</td>
+                                    <td class="px-6 py-4 text-gray-600">Spallation Neutron Source</td>
+                                    <td class="px-6 py-4 text-gray-600">Superconducting spoke cavities</td>
+                                    <td class="px-6 py-4"><span
+                                            class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-sm">Operational</span>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-4 font-semibold text-gray-800">HIAF</td>
+                                    <td class="px-6 py-4 text-gray-600">Heavy-Ion Accelerator</td>
+                                    <td class="px-6 py-4 text-gray-600">Superconducting QWRs, HWRs</td>
+                                    <td class="px-6 py-4"><span
+                                            class="bg-orange-100 text-orange-800 px-2 py-1 rounded-full text-sm">Construction</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg shadow-sm border">
+                        <h3 class="serif text-2xl font-semibold text-gray-800 mb-4">Technological Capabilities</h3>
+                        <p class="text-gray-700 mb-4">
+                            China has made substantial advancements in SRF cavity development and manufacturing. <a
+                                href="https://cerncourier.com/a/chinas-bid-for-a-circular-electron-positron-collider/"
+                                class="citation-link">IHEP constructed a 4500 m² SRF facility</a> as part of the
+                            Platform of Advanced Photon Source technology R&amp;D (PAPS) project, designed for
+                            processing, testing, and assembling hundreds of SRF cavities annually.
+                        </p>
+                        <p class="text-gray-700">
+                            In magnet technology, China is actively pursuing <a
+                                href="https://www.frontiersin.org/journals/physics/articles/10.3389/fphy.2022.935196/full"
+                                class="citation-link">High-Temperature Superconducting magnets, particularly iron-based
+                                superconductors</a>, with significant progress in tape fabrication and cable production.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Policy and Funding Section -->
+        <section id="policy-funding" class="py-16 px-8 bg-white">
+            <div class="container mx-auto max-w-4xl">
+                <h2 class="serif text-4xl font-bold text-gray-800 mb-8">Policy and Funding Landscape</h2>
+
+                <div class="space-y-8">
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <h3 class="serif text-2xl font-semibold text-gray-800 mb-4">International Funding Mechanisms
+                        </h3>
+                        <div class="grid md:grid-cols-3 gap-6">
+                            <div class="bg-white p-4 rounded-lg shadow-sm">
+                                <h4 class="font-semibold text-gray-800 mb-2">Europe</h4>
+                                <p class="text-sm text-gray-600 mb-2">CERN + Horizon Europe</p>
+                                <p class="text-xs text-gray-500">Coordinated through European Strategy for Particle
+                                    Physics</p>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg shadow-sm">
+                                <h4 class="font-semibold text-gray-800 mb-2">United States</h4>
+                                <p class="text-sm text-gray-600 mb-2">DOE ARDAP Program</p>
+                                <p class="text-xs text-gray-500">
+                                    <a href="https://science.osti.gov/-/media/budget/pdf/sc-budget-request-to-congress/2025/Accelerator-RD-and-Production-31524--Final.pdf"
+                                        class="citation-link">$31.3M requested for FY2025</a>
+                                </p>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg shadow-sm">
+                                <h4 class="font-semibold text-gray-800 mb-2">China</h4>
+                                <p class="text-sm text-gray-600 mb-2">MOST + CAS + NSFC</p>
+                                <p class="text-xs text-gray-500">National Key R&amp;D Programs and Five-Year Plans</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-green-50 p-6 rounded-lg">
+                        <h3 class="serif text-2xl font-semibold text-gray-800 mb-4">China&#39;s Domestic Funding
+                            Framework</h3>
+                        <p class="text-gray-700 mb-4">
+                            China&#39;s development is strategically guided through National Key R&amp;D Programs and
+                            Five-Year Plans. <a
+                                href="https://cerncourier.com/a/chinas-bid-for-a-circular-electron-positron-collider/"
+                                class="citation-link">The CEPC has received support from MOST&#39;s national R&amp;D
+                                plan since 2016</a>, with significant funding from multiple sources.
+                        </p>
+                        <div class="bg-white p-4 rounded-lg">
+                            <h4 class="font-semibold text-gray-800 mb-3">Key Funding Sources:</h4>
+                            <ul class="space-y-2 text-sm text-gray-600">
+                                <li><strong>MOST:</strong> National Key R&amp;D Programs for CEPC and other major
+                                    projects</li>
+                                <li><strong>CAS:</strong> Planned 200 million RMB in 2018 for HTS magnet research</li>
+                                <li><strong>Local Governments:</strong> Beijing allocated 500+ million RMB to IHEP for
+                                    SRF development</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Future Outlook Section -->
+        <section id="challenges-outlook" class="py-16 px-8">
+            <div class="container mx-auto max-w-4xl">
+                <h2 class="serif text-4xl font-bold text-gray-800 mb-8">Challenges and Future Outlook</h2>
+
+                <div class="space-y-8">
+                    <div class="bg-yellow-50 p-6 rounded-lg border-l-4 border-yellow-500">
+                        <h3 class="serif text-2xl font-semibold text-gray-800 mb-4">Technical Challenges</h3>
+                        <p class="text-gray-700 mb-4">
+                            Despite significant progress, several technical hurdles remain in SRF and magnet
+                            development. Achieving even higher accelerating gradients while maintaining
+                            cost-effectiveness is a continuous challenge, involving mitigation of performance-limiting
+                            phenomena such as field emission and quenches.
+                        </p>
+                        <p class="text-gray-700">
+                            For superconducting magnets, the push towards higher magnetic fields (16 T and beyond)
+                            requires overcoming material limitations. While Nb₃Sn is being implemented, its brittleness
+                            and complex manufacturing process are hurdles. High-Temperature Superconductors offer
+                            potential but present challenges in conductor fabrication and cabling.
+                        </p>
+                    </div>
+
+                    <div class="bg-red-50 p-6 rounded-lg border-l-4 border-red-500">
+                        <h3 class="serif text-2xl font-semibold text-gray-800 mb-4">Cost and Sustainability</h3>
+                        <p class="text-gray-700 mb-4">
+                            The escalating cost and immense scale of future projects pose significant challenges.
+                            Next-generation facilities envision circumferences of 100 km or more, requiring
+                            unprecedented quantities of superconducting components and leading to multi-billion-dollar
+                            price tags.
+                        </p>
+                        <p class="text-gray-700">
+                            Energy consumption of large facilities is a growing sustainability concern. While
+                            superconducting technology is more efficient, cryogenic plants consume substantial
+                            electricity. Future projects must address energy efficiency and environmental impact.
+                        </p>
+                    </div>
+
+                    <div class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-500">
+                        <h3 class="serif text-2xl font-semibold text-gray-800 mb-4">Emerging Applications</h3>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Medical Innovations</h4>
+                                <p class="text-sm text-gray-600">Compact superconducting cyclotrons for proton therapy
+                                    and medical isotope production</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Industrial Applications</h4>
+                                <p class="text-sm text-gray-600">Electron beams for sterilization and materials
+                                    processing</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Nuclear Energy</h4>
+                                <p class="text-sm text-gray-600">Accelerator-Driven Systems for waste transmutation</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Scientific Discovery</h4>
+                                <p class="text-sm text-gray-600">Next-generation colliders for fundamental physics</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Technology Evolution Diagram -->
+                    <div class="bg-white p-6 rounded-lg shadow-sm border">
+                        <h3 class="serif text-2xl font-semibold text-gray-800 mb-6">Technology Evolution Timeline</h3>
+                        <div class="mermaid-container">
+                            <div class="mermaid-controls">
+                                <button class="mermaid-control-btn zoom-in" title="放大">
+                                    <i class="fas fa-search-plus"></i>
+                                </button>
+                                <button class="mermaid-control-btn zoom-out" title="缩小">
+                                    <i class="fas fa-search-minus"></i>
+                                </button>
+                                <button class="mermaid-control-btn reset-zoom" title="重置">
+                                    <i class="fas fa-expand-arrows-alt"></i>
+                                </button>
+                                <button class="mermaid-control-btn fullscreen" title="全屏查看">
+                                    <i class="fas fa-expand"></i>
+                                </button>
+                            </div>
+                            <div class="mermaid" id="mermaid-1">
+                                timeline
+                                title &#34;Superconducting Accelerator Development&#34;
+
+                                &#34;1960s-70s&#34; : &#34;Early material research&#34;
+                                : &#34;First superconducting magnets&#34;
+
+                                &#34;1980s-90s&#34; : &#34;Large-scale projects (SSC, LHC)&#34;
+                                : &#34;Commercialization of Nb-Ti technology&#34;
+                                : &#34;SRF technology matures&#34;
+
+                                &#34;2000s&#34; : &#34;TESLA technology standardization&#34;
+                                : &#34;ILC design efforts&#34;
+                                : &#34;China establishes SRF capabilities&#34;
+
+                                &#34;2010s&#34; : &#34;LHC achieves 13 TeV&#34;
+                                : &#34;Nb₃Sn implementation begins&#34;
+                                : &#34;Medical applications expand&#34;
+
+                                &#34;2020s&#34; : &#34;HL-LHC installation&#34;
+                                : &#34;HTS magnet development&#34;
+                                : &#34;Compact industrial systems&#34;
+
+                                &#34;2030s+&#34; : &#34;Future circular colliders&#34;
+                                : &#34;ADS systems operational&#34;
+                                : &#34;Widespread medical adoption&#34;
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-gray-900 text-white py-12 px-8">
+            <div class="container mx-auto max-w-4xl">
+                <div class="text-center">
+                    <h3 class="serif text-2xl font-semibold mb-4">Superconducting Accelerators: Transforming Science and
+                        Society</h3>
+                    <p class="text-gray-300 mb-6">
+                        From fundamental physics discoveries to life-saving medical treatments, superconducting
+                        accelerator technology continues to push the boundaries of what&#39;s possible, driven by
+                        international collaboration and strategic national investments.
+                    </p>
+                    <div class="flex justify-center space-x-8 text-sm text-gray-400">
+                        <span>Scientific Discovery</span>
+                        <span>•</span>
+                        <span>Medical Innovation</span>
+                        <span>•</span>
+                        <span>Industrial Applications</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#ffffff',
+                primaryTextColor: '#1e293b',
+                primaryBorderColor: '#6366f1',
+                lineColor: '#6366f1',
+                sectionBkgColor: '#f8fafc',
+                altSectionBkgColor: '#ffffff',
+                gridColor: '#e2e8f0',
+                secondaryColor: '#e0f2fe',
+                tertiaryColor: '#f1f5f9',
+                background: '#ffffff',
+                mainBkg: '#ffffff',
+                secondBkg: '#f8fafc',
+                tertiaryBkg: '#f1f5f9'
+            },
+            startOnLoad: true,
+            timeline: {
+                numberSectionStyles: 3
+            }
+        });
+
+        // Initialize Mermaid Controls for zoom and pan
+        function initializeMermaidControls() {
+            const containers = document.querySelectorAll('.mermaid-container');
+
+            containers.forEach(container => {
+                const mermaidElement = container.querySelector('.mermaid');
+                let scale = 1;
+                let isDragging = false;
+                let startX, startY, translateX = 0, translateY = 0;
+
+                // 触摸相关状态
+                let isTouch = false;
+                let touchStartTime = 0;
+                let initialDistance = 0;
+                let initialScale = 1;
+                let isPinching = false;
+
+                // Zoom controls
+                const zoomInBtn = container.querySelector('.zoom-in');
+                const zoomOutBtn = container.querySelector('.zoom-out');
+                const resetBtn = container.querySelector('.reset-zoom');
+                const fullscreenBtn = container.querySelector('.fullscreen');
+
+                function updateTransform() {
+                    mermaidElement.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+
+                    if (scale > 1) {
+                        container.classList.add('zoomed');
+                    } else {
+                        container.classList.remove('zoomed');
+                    }
+
+                    mermaidElement.style.cursor = isDragging ? 'grabbing' : 'grab';
+                }
+
+                if (zoomInBtn) {
+                    zoomInBtn.addEventListener('click', () => {
+                        scale = Math.min(scale * 1.25, 4);
+                        updateTransform();
+                    });
+                }
+
+                if (zoomOutBtn) {
+                    zoomOutBtn.addEventListener('click', () => {
+                        scale = Math.max(scale / 1.25, 0.3);
+                        if (scale <= 1) {
+                            translateX = 0;
+                            translateY = 0;
+                        }
+                        updateTransform();
+                    });
+                }
+
+                if (resetBtn) {
+                    resetBtn.addEventListener('click', () => {
+                        scale = 1;
+                        translateX = 0;
+                        translateY = 0;
+                        updateTransform();
+                    });
+                }
+
+                if (fullscreenBtn) {
+                    fullscreenBtn.addEventListener('click', () => {
+                        if (container.requestFullscreen) {
+                            container.requestFullscreen();
+                        } else if (container.webkitRequestFullscreen) {
+                            container.webkitRequestFullscreen();
+                        } else if (container.msRequestFullscreen) {
+                            container.msRequestFullscreen();
+                        }
+                    });
+                }
+
+                // Mouse Events
+                mermaidElement.addEventListener('mousedown', (e) => {
+                    if (isTouch) return; // 如果是触摸设备，忽略鼠标事件
+
+                    isDragging = true;
+                    startX = e.clientX - translateX;
+                    startY = e.clientY - translateY;
+                    mermaidElement.style.cursor = 'grabbing';
+                    updateTransform();
+                    e.preventDefault();
+                });
+
+                document.addEventListener('mousemove', (e) => {
+                    if (isDragging && !isTouch) {
+                        translateX = e.clientX - startX;
+                        translateY = e.clientY - startY;
+                        updateTransform();
+                    }
+                });
+
+                document.addEventListener('mouseup', () => {
+                    if (isDragging && !isTouch) {
+                        isDragging = false;
+                        mermaidElement.style.cursor = 'grab';
+                        updateTransform();
+                    }
+                });
+
+                document.addEventListener('mouseleave', () => {
+                    if (isDragging && !isTouch) {
+                        isDragging = false;
+                        mermaidElement.style.cursor = 'grab';
+                        updateTransform();
+                    }
+                });
+
+                // 获取两点之间的距离
+                function getTouchDistance(touch1, touch2) {
+                    return Math.hypot(
+                        touch2.clientX - touch1.clientX,
+                        touch2.clientY - touch1.clientY
+                    );
+                }
+
+                // Touch Events - 触摸事件处理
+                mermaidElement.addEventListener('touchstart', (e) => {
+                    isTouch = true;
+                    touchStartTime = Date.now();
+
+                    if (e.touches.length === 1) {
+                        // 单指拖动
+                        isPinching = false;
+                        isDragging = true;
+
+                        const touch = e.touches[0];
+                        startX = touch.clientX - translateX;
+                        startY = touch.clientY - translateY;
+
+                    } else if (e.touches.length === 2) {
+                        // 双指缩放
+                        isPinching = true;
+                        isDragging = false;
+
+                        const touch1 = e.touches[0];
+                        const touch2 = e.touches[1];
+                        initialDistance = getTouchDistance(touch1, touch2);
+                        initialScale = scale;
+                    }
+
+                    e.preventDefault();
+                }, { passive: false });
+
+                mermaidElement.addEventListener('touchmove', (e) => {
+                    if (e.touches.length === 1 && isDragging && !isPinching) {
+                        // 单指拖动
+                        const touch = e.touches[0];
+                        translateX = touch.clientX - startX;
+                        translateY = touch.clientY - startY;
+                        updateTransform();
+
+                    } else if (e.touches.length === 2 && isPinching) {
+                        // 双指缩放
+                        const touch1 = e.touches[0];
+                        const touch2 = e.touches[1];
+                        const currentDistance = getTouchDistance(touch1, touch2);
+
+                        if (initialDistance > 0) {
+                            const newScale = Math.min(Math.max(
+                                initialScale * (currentDistance / initialDistance),
+                                0.3
+                            ), 4);
+                            scale = newScale;
+                            updateTransform();
+                        }
+                    }
+
+                    e.preventDefault();
+                }, { passive: false });
+
+                mermaidElement.addEventListener('touchend', (e) => {
+                    // 重置状态
+                    if (e.touches.length === 0) {
+                        isDragging = false;
+                        isPinching = false;
+                        initialDistance = 0;
+
+                        // 延迟重置isTouch，避免鼠标事件立即触发
+                        setTimeout(() => {
+                            isTouch = false;
+                        }, 100);
+                    } else if (e.touches.length === 1 && isPinching) {
+                        // 从双指变为单指，切换为拖动模式
+                        isPinching = false;
+                        isDragging = true;
+
+                        const touch = e.touches[0];
+                        startX = touch.clientX - translateX;
+                        startY = touch.clientY - translateY;
+                    }
+
+                    updateTransform();
+                });
+
+                mermaidElement.addEventListener('touchcancel', (e) => {
+                    isDragging = false;
+                    isPinching = false;
+                    initialDistance = 0;
+
+                    setTimeout(() => {
+                        isTouch = false;
+                    }, 100);
+
+                    updateTransform();
+                });
+
+                // Enhanced wheel zoom with better center point handling
+                container.addEventListener('wheel', (e) => {
+                    e.preventDefault();
+                    const rect = container.getBoundingClientRect();
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+
+                    const delta = e.deltaY > 0 ? 0.9 : 1.1;
+                    const newScale = Math.min(Math.max(scale * delta, 0.3), 4);
+
+                    // Adjust translation to zoom towards center
+                    if (newScale !== scale) {
+                        const scaleDiff = newScale / scale;
+                        translateX = translateX * scaleDiff;
+                        translateY = translateY * scaleDiff;
+                        scale = newScale;
+
+                        if (scale <= 1) {
+                            translateX = 0;
+                            translateY = 0;
+                        }
+
+                        updateTransform();
+                    }
+                });
+
+                // Initialize display
+                updateTransform();
+            });
+        }
+
+        // Initialize the controls when the DOM is loaded
+        document.addEventListener('DOMContentLoaded', function () {
+            initializeMermaidControls();
+        });
+
+        // Table of Contents functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            const tocLinks = document.querySelectorAll('.toc-link');
+            const sections = document.querySelectorAll('section[id]');
+            const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+            const tocFixed = document.querySelector('.toc-fixed');
+
+            // Toggle mobile menu
+            mobileMenuToggle.addEventListener('click', function () {
+                tocFixed.classList.toggle('open');
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', function (event) {
+                if (tocFixed.classList.contains('open') &&
+                    !tocFixed.contains(event.target) &&
+                    event.target !== mobileMenuToggle) {
+                    tocFixed.classList.remove('open');
+                }
+            });
+
+            // Handle TOC link clicks
+            tocLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    if (targetSection) {
+                        targetSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                    // Close mobile menu
+                    tocFixed.classList.remove('open');
+                });
+            });
+
+            // Highlight current section
+            function highlightCurrentSection() {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (window.pageYOffset >= sectionTop - 200) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                tocLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + current) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', highlightCurrentSection);
+            highlightCurrentSection(); // Initial call
+        });
+    </script>
+
+
+</body>
+
+</html>
