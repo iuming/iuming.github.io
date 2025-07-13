@@ -1,0 +1,2295 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中国医疗加速器行业深度研究报告</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.5.0/mermaid.min.js"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a365d;
+            --secondary: #2d3748;
+            --accent: #e53e3e;
+            --muted: #718096;
+            --background: #f7fafc;
+            --surface: #ffffff;
+            --text: #2d3748;
+            --text-light: #4a5568;
+            --border: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            color: var(--text);
+            background: var(--background);
+            overflow-x: hidden;
+            word-wrap: break-word;
+        }
+
+        .serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .toc-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 280px;
+            height: 100vh;
+            background: var(--surface);
+            border-right: 1px solid var(--border);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 2rem 1.5rem;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .main-content {
+            margin-left: 280px;
+            min-height: 100vh;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-overlay {
+            background: rgba(26, 54, 93, 0.8);
+            backdrop-filter: blur(2px);
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 2rem;
+            height: 60vh;
+        }
+
+        .bento-main {
+            grid-row: 1 / -1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 3rem;
+            color: white;
+        }
+
+        .bento-stats,
+        .bento-highlights {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            color: white;
+        }
+
+        .citation {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .citation:hover {
+            text-decoration: underline;
+        }
+
+        .section-card {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--border);
+        }
+
+        .insight-highlight {
+            background: linear-gradient(135deg, #fef5e7, #fed7aa);
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .stat-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .pullquote {
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--primary);
+            border-left: 4px solid var(--accent);
+            padding-left: 2rem;
+            margin: 3rem 0;
+            line-height: 1.6;
+        }
+
+        .timeline-item {
+            border-left: 2px solid var(--accent);
+            padding-left: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 0;
+            width: 10px;
+            height: 10px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        @media (max-width: 1024px) {
+            .toc-fixed {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+
+            .toc-fixed.open {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .bento-grid {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+
+            .bento-main {
+                grid-row: auto;
+            }
+        }
+
+        .toc-item {
+            display: block;
+            padding: 0.5rem 0;
+            color: var(--text-light);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .toc-item:hover {
+            color: var(--primary);
+            border-bottom-color: var(--accent);
+        }
+
+        .toc-item.active {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .toc-sub {
+            padding-left: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .toc-sub-sub {
+            padding-left: 2rem;
+            font-size: 0.8rem;
+        }
+
+        /* Mermaid diagram styles */
+        .mermaid-container {
+            display: flex;
+            justify-content: center;
+            min-height: 300px;
+            max-height: 800px;
+            background: #ffffff;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mermaid-container .mermaid {
+            width: 100%;
+            max-width: 100%;
+            height: 100%;
+            cursor: grab;
+            transition: transform 0.3s ease;
+            transform-origin: center center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            touch-action: none;
+            /* 防止触摸设备上的默认行为 */
+            -webkit-user-select: none;
+            /* 防止文本选择 */
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .mermaid-container .mermaid svg {
+            max-width: 100%;
+            height: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .mermaid-container .mermaid:active {
+            cursor: grabbing;
+        }
+
+        .mermaid-container.zoomed .mermaid {
+            height: 100%;
+            width: 100%;
+            cursor: grab;
+        }
+
+        .mermaid-controls {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 20;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 8px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .mermaid-control-btn {
+            background: #ffffff;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #374151;
+            font-size: 14px;
+            min-width: 36px;
+            height: 36px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mermaid-control-btn:hover {
+            background: #f8fafc;
+            border-color: #3b82f6;
+            color: #3b82f6;
+            transform: translateY(-1px);
+        }
+
+        .mermaid-control-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Enhanced mermaid diagram text readability */
+        .mermaid .node rect,
+        .mermaid .node circle,
+        .mermaid .node ellipse,
+        .mermaid .node polygon {
+            stroke-width: 2px !important;
+        }
+
+        .mermaid .node text {
+            font-family: 'Inter', sans-serif !important;
+            font-size: 14px !important;
+            font-weight: 600 !important;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+        }
+
+        .mermaid .edgeLabel {
+            background-color: rgba(255, 255, 255, 0.9) !important;
+            border-radius: 4px !important;
+            padding: 2px 6px !important;
+            font-family: 'Inter', sans-serif !important;
+            font-size: 12px !important;
+            font-weight: 500 !important;
+        }
+
+        .mermaid .edgePath path {
+            stroke-width: 2px !important;
+        }
+
+        @media (max-width: 768px) {
+            .bento-grid {
+                padding: 1rem;
+            }
+
+            .bento-main {
+                padding: 1.5rem;
+            }
+
+            .bento-main h1 {
+                font-size: 2.5rem;
+            }
+
+            .bento-main p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Table of Contents -->
+    <nav class="toc-fixed">
+        <div class="mb-8">
+            <h3 class="text-lg font-bold text-gray-900 mb-4">目录导航</h3>
+        </div>
+
+        <div class="space-y-1">
+            <a href="#executive-summary" class="toc-item">执行摘要</a>
+
+            <a href="#market-overview" class="toc-item">1. 市场整体规模与发展趋势</a>
+            <a href="#current-market" class="toc-item toc-sub">1.1 当前市场规模与增长态势</a>
+            <a href="#market-drivers" class="toc-item toc-sub">1.2 主要市场驱动因素分析</a>
+            <a href="#future-forecast" class="toc-item toc-sub">1.3 未来市场规模预测</a>
+            <a href="#county-market" class="toc-item toc-sub">1.4 县域医院细分市场</a>
+
+            <a href="#technology-innovation" class="toc-item">2. 产品技术与创新进展</a>
+            <a href="#tech-types" class="toc-item toc-sub">2.1 主要技术类型概述</a>
+            <a href="#localization" class="toc-item toc-sub">2.2 国产化率与进程</a>
+            <a href="#breakthroughs" class="toc-item toc-sub">2.3 技术突破与创新成果</a>
+            <a href="#gaps-challenges" class="toc-item toc-sub">2.4 技术差距与挑战</a>
+            <a href="#core-components" class="toc-item toc-sub">2.5 核心部件研发生产</a>
+
+            <a href="#clinical-applications" class="toc-item">3. 临床应用现状与市场需求</a>
+            <a href="#clinical-fields" class="toc-item toc-sub">3.1 主要临床应用领域</a>
+            <a href="#demand-fulfillment" class="toc-item toc-sub">3.2 临床需求满足程度</a>
+            <a href="#utilization-acceptance" class="toc-item toc-sub">3.3 设备使用率与接受度</a>
+            <a href="#emerging-tech" class="toc-item toc-sub">3.4 新兴技术临床应用</a>
+
+            <a href="#policies-standards" class="toc-item">4. 政策法规与行业标准</a>
+            <a href="#national-policies" class="toc-item toc-sub">4.1 国家层面政策支持</a>
+            <a href="#regulatory-system" class="toc-item toc-sub">4.2 行业监管体系</a>
+            <a href="#industry-standards" class="toc-item toc-sub">4.3 行业标准与质量控制</a>
+            <a href="#equipment-licensing" class="toc-item toc-sub">4.4 大型设备配置许可</a>
+
+            <a href="#competitive-landscape" class="toc-item">5. 产业链结构与竞争格局</a>
+            <a href="#industry-chain" class="toc-item toc-sub">5.1 产业链上下游构成</a>
+            <a href="#domestic-players" class="toc-item toc-sub">5.2 主要国内生产企业</a>
+            <a href="#international-competitors" class="toc-item toc-sub">5.3 国际竞争对手布局</a>
+            <a href="#competitive-situation" class="toc-item toc-sub">5.4 行业竞争态势分析</a>
+            <a href="#internationalization" class="toc-item toc-sub">5.5 国产企业国际化发展</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section relative">
+            <div class="hero-overlay">
+                <div class="container mx-auto px-6 py-16">
+                    <div class="bento-grid">
+                        <div class="bento-main">
+                            <h1 class="serif text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                                <em class="text-yellow-300">中国医疗加速器行业</em>
+                                <br>
+                                深度研究报告
+                            </h1>
+                            <p class="text-xl text-gray-200 mb-8 max-w-2xl">
+                                探索医用直线加速器市场的发展趋势、技术创新与竞争格局，
+                                洞察国产化进程中的机遇与挑战
+                            </p>
+                            <div class="flex items-center space-x-6 text-sm text-gray-300">
+                                <span><i class="fas fa-calendar mr-2"></i>2025年6月</span>
+                                <span><i class="fas fa-chart-line mr-2"></i>市场规模分析</span>
+                                <span><i class="fas fa-microscope mr-2"></i>技术创新评估</span>
+                            </div>
+                        </div>
+
+                        <div class="bento-stats">
+                            <h3 class="text-lg font-semibold mb-4">关键数据</h3>
+                            <div class="space-y-3">
+                                <div class="flex justify-between">
+                                    <span>2024年市场规模</span>
+                                    <span class="font-bold">75亿元</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>2030年预测</span>
+                                    <span class="font-bold">190亿元</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>国产化率(2023)</span>
+                                    <span class="font-bold">27.16%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bento-highlights">
+                            <h3 class="text-lg font-semibold mb-4">核心洞察</h3>
+                            <ul class="space-y-2 text-sm">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-400 mr-2 mt-1"></i>
+                                    癌症发病率上升推动需求增长
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-400 mr-2 mt-1"></i>
+                                    国家政策支持国产化替代
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-400 mr-2 mt-1"></i>
+                                    县域医院市场快速增长
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Executive Summary -->
+        <section id="executive-summary" class="py-16 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="section-card">
+                    <h2 class="serif text-4xl font-bold mb-8 text-center">执行摘要</h2>
+
+                    <div class="grid md:grid-cols-3 gap-8 mb-12">
+                        <div class="stat-card">
+                            <div class="text-3xl font-bold text-blue-600 mb-2">75亿元</div>
+                            <div class="text-gray-600">2024年预计市场规模</div>
+                            <div class="text-sm text-gray-500 mt-2">年复合增长率12.56%</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="text-3xl font-bold text-green-600 mb-2">27.16%</div>
+                            <div class="text-gray-600">2023年国产化率</div>
+                            <div class="text-sm text-gray-500 mt-2">较2019年10.24%显著提升</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="text-3xl font-bold text-purple-600 mb-2">185.71%</div>
+                            <div class="text-gray-600">县域医院新增装机增幅</div>
+                            <div class="text-sm text-gray-500 mt-2">2024年Q3同比数据</div>
+                        </div>
+                    </div>
+
+                    <div class="prose prose-lg max-w-none">
+                        <p class="text-xl leading-relaxed mb-6">
+                            中国医疗加速器行业，特别是医用直线加速器领域，近年来市场规模持续扩大，
+                            <strong>2024年预计达到约75亿元人民币</strong>，并展现出强劲的增长潜力，
+                            <strong>预计到2030年市场规模有望达到190亿元人民币</strong>。
+                        </p>
+
+                        <div class="insight-highlight">
+                            <h4 class="text-lg font-semibold mb-3">
+                                <i class="fas fa-lightbulb text-yellow-600 mr-2"></i>核心发现
+                            </h4>
+                            <ul class="space-y-2">
+                                <li><strong>市场增长驱动因素：</strong>癌症发病率上升、人口老龄化、国家政策支持、技术进步及国产化进程加快</li>
+                                <li><strong>国产化突破：</strong>2023年国产医用直线加速器市场占有率已达27.16%，并在质子重离子等高端领域取得重要突破</li>
+                                <li><strong>临床应用：</strong>以肿瘤放疗为主，但设备配置与发达国家相比仍有不足，县域医院市场成为新的增长点</li>
+                                <li><strong>政策环境：</strong>持续鼓励国产化和技术创新，行业监管和标准体系不断完善</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Market Overview -->
+        <section id="market-overview" class="py-16 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="section-card">
+                    <h2 class="serif text-4xl font-bold mb-8">1. 市场整体规模与发展趋势</h2>
+
+                    <div id="current-market" class="mb-12">
+                        <h3 class="text-2xl font-semibold mb-6">1.1 当前市场规模与增长态势</h3>
+                        <p class="text-lg mb-6">
+                            中国医疗加速器市场，特别是<strong>医用直线加速器</strong>领域，近年来呈现出显著的增长态势。根据<a
+                                href="https://m.huaon.com/channel/trend/1060446.html" class="citation">华经情报网</a>的数据，
+                            <strong>2024年中国医用直线加速器市场规模预计约为75亿元人民币</strong>。
+                            <a href="https://m.baogao.com/chanye/1236823.html" class="citation">智研咨询</a>的报告也给出了相似的估计，
+                            <strong>2023年中国医用直线加速器市场规模达到了76.67亿元人民币</strong>。
+                        </p>
+
+                        <div class="bg-blue-50 p-6 rounded-lg mb-6">
+                            <h4 class="font-semibold mb-3">关键增长指标</h4>
+                            <ul class="space-y-2">
+                                <li>• <strong>2024年第三季度新增装机量增幅：</strong>61.29%</li>
+                                <li>• <strong>县域医院新增装机量增幅：</strong>185.71%</li>
+                                <li>• <strong>2019-2023年市场规模增长：</strong>从42.41亿元增至68.07亿元</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div id="market-drivers" class="mb-12">
+                        <h3 class="text-2xl font-semibold mb-6">1.2 主要市场驱动因素分析</h3>
+
+                        <div class="grid md:grid-cols-2 gap-8 mb-8">
+                            <div class="bg-white p-6 rounded-lg border border-gray-200">
+                                <h4 class="font-semibold mb-4 text-blue-600">
+                                    <i class="fas fa-chart-line mr-2"></i>需求侧驱动
+                                </h4>
+                                <ul class="space-y-3">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-user-md text-red-500 mr-3 mt-1"></i>
+                                        <div>
+                                            <strong>人口老龄化加剧：</strong>老年人口癌症发病率相对较高，直接导致对肿瘤放疗设备需求增加
+                                        </div>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-heartbeat text-red-500 mr-3 mt-1"></i>
+                                        <div>
+                                            <strong>癌症发病率上升：</strong>癌症已成为威胁国民健康的主要疾病，放疗作为三大治疗手段之一重要性凸显
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-white p-6 rounded-lg border border-gray-200">
+                                <h4 class="font-semibold mb-4 text-green-600">
+                                    <i class="fas fa-cogs mr-2"></i>供给侧驱动
+                                </h4>
+                                <ul class="space-y-3">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-flag text-green-500 mr-3 mt-1"></i>
+                                        <div>
+                                            <strong>国家政策支持：</strong>从"八五"到"十四五"规划，国家对医用直线加速器行业的支持政策持续演进
+                                        </div>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-rocket text-green-500 mr-3 mt-1"></i>
+                                        <div>
+                                            <strong>技术进步与创新：</strong>图像引导、调强放疗等技术的显著进展提高了治疗精准度和疗效
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="pullquote">
+                            "中核集团自主研发的VeloX直线加速器，在组件级实现了100%国产化，零件级实现了85%国产化，其功能和性能达到国际领先水平。"
+                        </div>
+                    </div>
+
+                    <div id="future-forecast" class="mb-12">
+                        <h3 class="text-2xl font-semibold mb-6">1.3 未来市场规模预测与增长潜力</h3>
+
+                        <div class="bg-gradient-to-r from-blue-50 to-purple-50 p-6 rounded-lg mb-6">
+                            <h4 class="font-semibold mb-4">市场规模预测</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                <div class="text-center">
+                                    <div class="text-2xl font-bold text-blue-600">75亿元</div>
+                                    <div class="text-sm text-gray-600">2024年预计</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-2xl font-bold text-purple-600">190亿元</div>
+                                    <div class="text-sm text-gray-600">2030年预测</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-2xl font-bold text-green-600">12.56%</div>
+                                    <div class="text-sm text-gray-600">年复合增长率</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4">
+                            <h4 class="font-semibold">增长潜力来源：</h4>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="flex items-start space-x-4 p-4 bg-white rounded-lg border border-gray-200">
+                                    <i class="fas fa-hospital text-blue-500 text-2xl mt-1"></i>
+                                    <div>
+                                        <h5 class="font-semibold mb-2">基层医疗市场潜力</h5>
+                                        <p class="text-gray-600">县级医院对医用直线加速器等放疗设备的需求将快速增长，2024年Q3县域医院新增装机量增幅高达185.71%
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-4 p-4 bg-white rounded-lg border border-gray-200">
+                                    <i class="fas fa-microchip text-purple-500 text-2xl mt-1"></i>
+                                    <div>
+                                        <h5 class="font-semibold mb-2">技术创新驱动</h5>
+                                        <p class="text-gray-600">IGRT、IMRT、VMAT、SBRT等先进放疗技术的普及，以及质子重离子等尖端放疗技术的发展</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="county-market" class="mb-12">
+                        <h3 class="text-2xl font-semibold mb-6">1.4 细分市场发展（县域医院市场）</h3>
+
+                        <div class="insight-highlight">
+                            <h4 class="text-lg font-semibold mb-3">
+                                <i class="fas fa-star text-yellow-600 mr-2"></i>县域医院市场亮点
+                            </h4>
+                            <p class="mb-4">
+                                <strong>县域医院市场正成为一个快速增长且潜力巨大的细分市场</strong>。随着国家分级诊疗政策的深入推进和对基层医疗卫生服务体系建设的持续投入，
+                                县域医院在肿瘤防治能力建设方面的需求日益凸显。
+                            </p>
+                            <div class="grid md:grid-cols-3 gap-4 mt-4">
+                                <div class="text-center">
+                                    <div class="text-xl font-bold">16.26亿元</div>
+                                    <div class="text-sm">2023年市场规模</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-xl font-bold">19亿元</div>
+                                    <div class="text-sm">2024年预计规模</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-xl font-bold">185.71%</div>
+                                    <div class="text-sm">2024年Q3新增装机增幅</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technology and Innovation -->
+        <section id="technology-innovation" class="py-16 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="section-card">
+                    <h2 class="serif text-4xl font-bold mb-8">2. 产品技术与创新进展</h2>
+
+                    <div id="tech-types" class="mb-12">
+                        <h3 class="text-2xl font-semibold mb-6">2.1 主要技术类型概述</h3>
+
+                        <div class="grid md:grid-cols-3 gap-6 mb-8">
+                            <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg">
+                                <h4 class="font-semibold mb-3 text-blue-800">
+                                    <i class="fas fa-atom mr-2"></i>医用直线加速器 (LINAC)
+                                </h4>
+                                <p class="text-sm text-blue-700">
+                                    目前临床应用最为广泛、技术最为成熟的放射治疗设备，利用微波电磁场在直线型加速管中加速电子，产生高能X射线或电子线
+                                </p>
+                            </div>
+
+                            <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg">
+                                <h4 class="font-semibold mb-3 text-purple-800">
+                                    <i class="fas fa-radiation mr-2"></i>质子重离子加速器
+                                </h4>
+                                <p class="text-sm text-purple-700">
+                                    利用质子束的"布拉格峰"物理特性，能够在肿瘤靶区集中释放最大剂量，而在肿瘤后方几乎没有剂量沉积
+                                </p>
+                            </div>
+
+                            <div class="bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-lg">
+                                <h4 class="font-semibold mb-3 text-green-800">
+                                    <i class="fas fa-sync mr-2"></i>医用回旋加速器
+                                </h4>
+                                <p class="text-sm text-green-700">
+                                    主要用于生产医用放射性同位素，这些同位素可用于PET/CT等影像诊断或放射性药物靶向治疗
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50 p-6 rounded-lg">
+                            <h4 class="font-semibold mb-4">现代医用直线加速器技术特点</h4>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <ul class="space-y-2">
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>多叶准直器
+                                        (MLC)</li>
+                                    <li class="flex items-center"><i
+                                            class="fas fa-check text-green-500 mr-2"></i>电子射野影像装置 (EPID)</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>锥形束CT
+                                        (CBCT)</li>
+                                </ul>
+                                <ul class="space-y-2">
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>图像引导放疗
+                                        (IGRT)</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>调强放疗
+                                        (IMRT)</li>
+                                    <li class="flex items-center"><i
+                                            class="fas fa-check text-green-500 mr-2"></i>容积旋转调强放疗 (VMAT)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="localization" class="mb-12">
+                        <h3 class="text-2xl font-semibold mb-6">2.2 国产化率与国产化进程</h3>
+
+                        <div class="bg-blue-50 p-6 rounded-lg mb-6">
+                            <h4 class="font-semibold mb-4">国产化进程里程碑</h4>
+                            <div class="space-y-4">
+                                <div class="timeline-item">
+                                    <h5 class="font-semibold">2019年</h5>
+                                    <p class="text-sm text-gray-600">国产医用直线加速器市场占有率为10.24%</p>
+                                </div>
+                                <div class="timeline-item">
+                                    <h5 class="font-semibold">2023年</h5>
+                                    <p class="text-sm text-gray-600">国产医用直线加速器市场占有率提升至27.16%</p>
+                                </div>
+                                <div class="timeline-item">
+                                    <h5 class="font-semibold">2024年6月</h5>
+                                    <p class="text-sm text-gray-600">医用直线加速器有效产品注册数量中，境内产品占比达到51.16%</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pullquote">
+                            "大医集团的TAICHI产品不仅获得了NMPA的注册认证，还获得了美国FDA的注册认证，并获得了FDA的'突破性医疗器械'认定，这标志着国产大型医疗设备的技术创新得到了国际认可。"
+                        </div>
+                    </div>
+
+                    <div id="breakthroughs" class="mb-12">
+                        <h3 class="text-2xl font-semibold mb-6">2.3 国内技术突破与创新成果</h3>
+
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div class="space-y-6">
+                                <div class="bg-white p-6 rounded-lg border border-gray-200">
+                                    <h4 class="font-semibold mb-3 text-blue-600">
+                                        <i class="fas fa-trophy mr-2"></i>中核集团 - VeloX直线加速器
+                                    </h4>
+                                    <ul class="space-y-2 text-sm">
+                                        <li>• 功能和性能达到国际领先水平</li>
+                                        <li>• 组件级实现100%国产化</li>
+                                        <li>• 零件级实现85%国产化</li>
+                                    </ul>
+                                </div>
+
+                                <div class="bg-white p-6 rounded-lg border border-gray-200">
+                                    <h4 class="font-semibold mb-3 text-purple-600">
+                                        <i class="fas fa-star mr-2"></i>大医集团 - TAICHI系列
+                                    </h4>
+                                    <ul class="space-y-2 text-sm">
+                                        <li>• 全球首创x/γ射线一体化放射治疗系统</li>
+                                        <li>• 获得美国FDA"突破性医疗器械"认定</li>
+                                        <li>• 中国首个获得该认定的大型医疗设备</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="space-y-6">
+                                <div class="bg-white p-6 rounded-lg border border-gray-200">
+                                    <h4 class="font-semibold mb-3 text-green-600">
+                                        <i class="fas fa-atom mr-2"></i>中核集团 - "鲲鹏刀"BNCT装备
+                                    </h4>
+                                    <ul class="space-y-2 text-sm">
+                                        <li>• 国产化率达到90%</li>
+                                        <li>• 国内BNCT厂商里唯一取得两个订单</li>
+                                        <li>• 对复发性、浸润性肿瘤具有突出临床优势</li>
+                                    </ul>
+                                </div>
+
+                                <div class="bg-white p-6 rounded-lg border border-gray-200">
+                                    <h4 class="font-semibold mb-3 text-orange-600">
+                                        <i class="fas fa-cogs mr-2"></i>其他创新成果
+                                    </h4>
+                                    <ul class="space-y-2 text-sm">
+                                        <li>• 全球首台螺旋断层放射治疗设备获批上市</li>
+                                        <li>• GE医疗中国首批次国产医用回旋加速器下线</li>
+                                        <li>• 新一代伽玛射束立体定向放射治疗系统</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="gaps-challenges" class="mb-12">
+                        <h3 class="text-2xl font-semibold mb-6">2.4 与国外先进技术的差距与挑战</h3>
+
+                        <div class="insight-highlight">
+                            <h4 class="text-lg font-semibold mb-3">
+                                <i class="fas fa-exclamation-triangle text-orange-600 mr-2"></i>主要技术差距
+                            </h4>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <h5 class="font-semibold mb-2">核心技术和关键部件</h5>
+                                    <ul class="space-y-1 text-sm">
+                                        <li>• 高功率微波源（磁控管/速调管）</li>
+                                        <li>• 加速管技术</li>
+                                        <li>• 高精度多叶光栅（MLC）</li>
+                                        <li>• 先进剂量计算算法</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold mb-2">其他挑战</h5>
+                                    <ul class="space-y-1 text-sm">
+                                        <li>• 研发投入和创新能力</li>
+                                        <li>• 品牌影响力和市场认可度</li>
+                                        <li>• 产业链协同和生态系统建设</li>
+                                        <li>• 高端市场占有率</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-red-50 border border-red-200 p-6 rounded-lg">
+                            <h4 class="font-semibold mb-3 text-red-800">
+                                <i class="fas fa-info-circle mr-2"></i>关键提醒
+                            </h4>
+                            <p class="text-red-700">
+                                国际领先的医疗加速器企业通常将年销售收入的10%-15%投入研发，以保持技术领先优势。
+                                相比之下，国内企业在研发投入的绝对额和占比上仍有不足，持续的、大规模的研发投入是技术创新的基础。
+                            </p>
+                        </div>
+                    </div>
+
+                    <div id="core-components" class="mb-12">
+                        <h3 class="text-2xl font-semibold mb-6">2.5 核心部件自主研发与生产情况</h3>
+
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div class="bg-white p-6 rounded-lg border border-gray-200">
+                                <h4 class="font-semibold mb-4 text-blue-600">
+                                    <i class="fas fa-check-circle mr-2"></i>已实现突破的核心部件
+                                </h4>
+                                <ul class="space-y-3">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-cog text-blue-500 mr-3 mt-1"></i>
+                                        <div>
+                                            <strong>加速管：</strong>中核集团VeloX直线加速器的加速管等核心部件实现了国产化
+                                        </div>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-microchip text-blue-500 mr-3 mt-1"></i>
+                                        <div>
+                                            <strong>控制系统：</strong>国内企业在软件研发方面取得进展，部分国产TPS和控制系统已应用于临床
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-white p-6 rounded-lg border border-gray-200">
+                                <h4 class="font-semibold mb-4 text-orange-600">
+                                    <i class="fas fa-tools mr-2"></i>仍需攻关的领域
+                                </h4>
+                                <ul class="space-y-3">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-exclamation text-orange-500 mr-3 mt-1"></i>
+                                        <div>
+                                            <strong>微波功率源：</strong>高端磁控管和速调管仍部分依赖进口，对稳定性和寿命要求严格
+                                        </div>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-exclamation text-orange-500 mr-3 mt-1"></i>
+                                        <div>
+                                            <strong>多叶准直器：</strong>国产MLC在精度、可靠性和叶片数量等方面与国际先进水平仍有差距
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Clinical Applications -->
+        <section id="clinical-applications" class="py-16 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="section-card">
+                    <h2 class="serif text-4xl font-bold mb-8">3. 临床应用现状与市场需求</h2>
+
+                    <div id="clinical-fields" class="mb-12">
+                        <h3 class="text-2xl font-semibold mb-6">3.1 主要临床应用领域（肿瘤放疗等）</h3>
+
+                        <div class="grid md:grid-cols-2 gap-8 mb-8">
+                            <div class="bg-gradient-to-br from-red-50 to-red-100 p-6 rounded-lg">
+                                <h4 class="font-semibold mb-4 text-red-800">
+                                    <i class="fas fa-bullseye mr-2"></i>肿瘤放射治疗
+                                </h4>
+                                <p class="text-sm text-red-700 mb-4">
+                                    医用直线加速器在临床上最主要的应用领域是<strong>肿瘤的放射治疗</strong>。
+                                    放疗作为癌症治疗的三大主要手段之一，利用高能量的放射线来杀死癌细胞或抑制其生长。
+                                </p>
+                                <div class="bg-white p-4 rounded border border-red-200">
+                                    <h5 class="font-semibold mb-2 text-xs">治疗效果贡献占比</h5>
+                                    <div class="space-y-2">
+                                        <div class="flex justify-between text-xs">
+                                            <span>外科治疗</span>
+                                            <span class="font-semibold">22%</span>
+                                        </div>
+                                        <div class="flex justify-between text-xs">
+                                            <span>放射治疗</span>
+                                            <span class="font-semibold">18%</span>
+                                        </div>
+                                        <div class="flex justify-between text-xs">
+                                            <span>化学治疗</span>
+                                            <span class="font-semibold">5%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg">
+                                <h4 class="font-semibold mb-4 text-blue-800">
+                                    <i class="fas fa-microscope mr-2"></i>核医学诊断和治疗
+                                </h4>
+                                <p class="text-sm text-blue-700 mb-4">
+                                    医用回旋加速器主要用于生产短半衰期的医用放射性同位素，
+                                    用于PET/CT等先进影像技术和靶向放射性核素治疗。
+                                </p>
+                                <div class="bg-white p-4 rounded border border-blue-200">
+                                    <h5 class="font-semibold mb-2 text-xs">主要同位素应用</h5>
+                                    <ul class="text-xs space-y-1">
+                                        <li>• 氟-18：PET/CT显像</li>
+                                        <li>• 镥-177：前列腺癌治疗</li>
+                                        <li>• 碘-131：甲状腺癌治疗</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-lg border border-gray-200">
+                            <h4 class="font-semibold mb-4">现代放疗技术类型</h4>
+                            <div class="grid md:grid-cols-3 gap-6">
+                                <div>
+                                    <h5 class="font-semibold text-blue-600 mb-2">精准放疗</h5>
+                                    <ul class="text-sm space-y-1">
+                                        <li>• 三维适形放疗 (3D-CRT)</li>
+                                        <li>• 调强放疗 (IMRT)</li>
+                                        <li>• 图像引导放疗 (IGRT)</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold text-purple-600 mb-2">高级技术</h5>
+                                    <ul class="text-sm space-y-1">
+                                        <li>• 容积旋转调强放疗 (VMAT)</li>
+                                        <li>• 立体定向放射外科 (SRS)</li>
+                                        <li>• 立体定向体部放疗 (SBRT)</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold text-green-600 mb-2">特殊应用</h5>
+                                    <ul class="text-sm space-y-1">
+                                        <li>• 伽玛刀：颅内肿瘤</li>
+                                        <li>• BNCT：复发性肿瘤</li>
+                                        <li>• 质子重离子：重要器官附近肿瘤</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="demand-fulfillment" class="mb-12">
+                        <h3 class="text-2xl font-semibold mb-6">3.2 临床需求满足程度与设备配置情况</h3>
+
+                        <div class="bg-yellow-50 border border-yellow-200 p-6 rounded-lg mb-6">
+                            <h4 class="font-semibold mb-4 text-yellow-800">
+                                <i class="fas fa-chart-bar mr-2"></i>设备配置现状
+                            </h4>
+                            <p class="text-yellow-700 mb-4">
+                                中国医用直线加速器的保有量与发达国家相比，人均拥有量仍然偏低。
+                                优质医疗资源主要集中在大城市的三级甲等医院，基层医疗机构配置相对匮乏。
+                            </p>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="bg-white p-4 rounded border border-yellow-200">
+                                    <h5 class="font-semibold mb-2 text-sm">医用回旋加速器保有量对比</h5>
+                                    <div class="space-y-2">
+                                        <div class="flex justify-between">
+                                            <span class="text-sm">中国</span>
+                                            <span class="font-semibold text-sm">约160台</span>
+                                        </div>
+                                        <div class="flex justify-between">
+                                            <span class="text-sm">欧美国家</span>
+                                            <span class="font-semibold text-sm">约1500台</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-white p-4 rounded border border-yellow-200">
+                                    <h5 class="font-semibold mb-2 text-sm">2024年Q3新增装机增幅</h5>
+                                    <div class="space-y-2">
+                                        <div class="flex justify-between">
+                                            <span class="text-sm">全国整体</span>
+                                            <span class="font-semibold text-sm text-blue-600">+61.29%</span>
+                                        </div>
+                                        <div class="flex justify-between">
+                                            <span class="text-sm">县域医院</span>
+                                            <span class="font-semibold text-sm text-green-600">+185.71%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div class="bg-white p-6 rounded-lg border border-gray-200">
+                                <h4 class="font-semibold mb-4 text-green-600">
+                                    <i class="fas fa-hospital mr-2"></i>县域医院市场
+                                </h4>
+                                <ul class="space-y-3 text-sm">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-arrow-up text-green-500 mr-3 mt-1"></i>
+                                        <div>
+                                            <strong>快速增长：</strong>2023年市场规模16.26亿元，预计2024年达19亿元
+                                        </div>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-users text-green-500 mr-3 mt-1"></i>
+                                        <div>
+                                            <strong>需求迫切：</strong>大量基层肿瘤患者需要本地化、便捷化的肿瘤放疗服务
+                                        </div>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-dollar-sign text-green-500 mr-3 mt-1"></i>
+                                        <div>
+                                            <strong>性价比优势：</strong>国产设备在价格、售后服务等方面更贴近基层需求
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-white p-6 rounded-lg border border-gray-200">
+                                <h4 class="font-semibold mb-4 text-blue-600">
+                                    <i class="fas fa-city mr-2"></i>三甲医院市场
+                                </h4>
+                                <ul class="space-y-3 text-sm">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-star text-blue-500 mr-3 mt-1"></i>
+                                        <div>
+                                            <strong>设备先进：</strong>配备高端加速器，技术含量和性能要求较高
+                                        </div>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-chart-line text-blue-500 mr-3 mt-1"></i>
+                                        <div>
+                                            <strong>使用率高：</strong>患者来源充足，设备通常满负荷运转
+                                        </div>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-graduation-cap text-blue-500 mr-3 mt-1"></i>
+                                        <div>
+                                            <strong>技术领先：</strong>拥有经验丰富的放疗团队和先进技术应用能力
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="utilization-acceptance" class="mb-12">
+                        <h3 class="text-2xl font-semibold mb-6">3.3 设备使用率与患者接受度分析</h3>
+
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div class="bg-white p-6 rounded-lg border border-gray-200">
+                                <h4 class="font-semibold mb-4 text-purple-600">
+                                    <i class="fas fa-chart-pie mr-2"></i>设备使用率影响因素
+                                </h4>
+                                <div class="space-y-4">
+                                    <div class="border-l-4 border-purple-500 pl-4">
+                                        <h5 class="font-semibold text-sm">高使用率医院特征</h5>
+                                        <ul class="text-sm text-gray-600 mt-2 space-y-1">
+                                            <li>• 患者来源充足</li>
+                                            <li>• 设备先进稳定</li>
+                                            <li>• 放疗团队专业</li>
+                                            <li>• 管理水平高效</li>
+                                        </ul>
+                                    </div>
+                                    <div class="border-l-4 border-orange-500 pl-4">
+                                        <h5 class="font-semibold text-sm">低使用率医院特征</h5>
+                                        <ul class="text-sm text-gray-600 mt-2 space-y-1">
+                                            <li>• 患者流量不足</li>
+                                            <li>• 操作技能不熟练</li>
+                                            <li>• 设备维护不到位</li>
+                                            <li>• 专业人才缺乏</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-white p-6 rounded-lg border border-gray-200">
+                                <h4 class="font-semibold mb-4 text-green-600">
+                                    <i class="fas fa-heart mr-2"></i>患者接受度提升因素
+                                </h4>
+                                <div class="space-y-4">
+                                    <div class="bg-green-50 p-4 rounded border border-green-200">
+                                        <h5 class="font-semibold text-sm mb-2 text-green-800">技术进步</h5>
+                                        <p class="text-xs text-green-700">
+                                            现代放疗技术精准度提高，对正常组织损伤显著降低，副作用得到有效控制
+                                        </p>
+                                    </div>
+                                    <div class="bg-blue-50 p-4 rounded border border-blue-200">
+                                        <h5 class="font-semibold text-sm mb-2 text-blue-800">医保覆盖</h5>
+                                        <p class="text-xs text-blue-700">
+                                            医保政策覆盖范围扩大，减轻患者经济负担，提高患者对放疗的接受度
+                                        </p>
+                                    </div>
+                                    <div class="bg-purple-50 p-4 rounded border border-purple-200">
+                                        <h5 class="font-semibold text-sm mb-2 text-purple-800">认知提升</h5>
+                                        <p class="text-xs text-purple-700">
+                                            医疗机构加强患者宣教工作，普及放疗知识，消除患者疑虑
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="emerging-tech" class="mb-12">
+                        <h3 class="text-2xl font-semibold mb-6">3.4 新兴技术（质子重离子）的临床应用进展</h3>
+
+                        <div class="bg-gradient-to-r from-purple-50 to-blue-50 p-6 rounded-lg mb-6">
+                            <h4 class="font-semibold mb-4 text-purple-800">
+                                <i class="fas fa-atom mr-2"></i>质子重离子治疗技术特点
+                            </h4>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="bg-white p-4 rounded border border-purple-200">
+                                    <h5 class="font-semibold mb-2 text-purple-700">质子治疗</h5>
+                                    <p class="text-sm text-purple-600">
+                                        利用质子束的"布拉格峰"效应，在肿瘤靶区集中释放最大剂量，
+                                        在肿瘤后方剂量迅速跌落至近乎为零，最大限度保护正常组织
+                                    </p>
+                                </div>
+                                <div class="bg-white p-4 rounded border border-blue-200">
+                                    <h5 class="font-semibold mb-2 text-blue-700">重离子治疗</h5>
+                                    <p class="text-sm text-blue-600">
+                                        除了具有布拉格峰特性外，还具有更高的相对生物学效应（RBE），
+                                        对乏氧细胞和放射抗拒性肿瘤具有更强杀伤作用
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="insight-highlight">
+                            <h4 class="text-lg font-semibold mb-3">
+                                <i class="fas fa-map-marker-alt text-red-600 mr-2"></i>中国质子重离子治疗发展现状
+                            </h4>
+                            <div class="grid md:grid-cols-3 gap-4">
+                                <div class="bg-white p-4 rounded border border-gray-200">
+                                    <h5 class="font-semibold mb-2 text-sm">上海质子重离子医院</h5>
+                                    <p class="text-xs text-gray-600">
+                                        中国大陆首家同时拥有质子和重离子治疗技术的医疗机构，
+                                        自2015年投入临床运营以来积累了丰富经验
+                                    </p>
+                                </div>
+                                <div class="bg-white p-4 rounded border border-gray-200">
+                                    <h5 class="font-semibold mb-2 text-sm">其他中心</h5>
+                                    <p class="text-xs text-gray-600">
+                                        山东淄博万杰肿瘤医院、甘肃武威重离子中心等相继开展质子或碳离子治疗临床工作
+                                    </p>
+                                </div>
+                                <div class="bg-white p-4 rounded border border-gray-200">
+                                    <h5 class="font-semibold mb-2 text-sm">自主研发</h5>
+                                    <p class="text-xs text-gray-600">
+                                        中科院近代物理研究所等单位在重离子加速器技术方面有长期研究积累，
+                                        成功研制出医用碳离子加速器装置
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-red-50 border border-red-200 p-6 rounded-lg">
+                            <h4 class="font-semibold mb-3 text-red-800">
+                                <i class="fas fa-exclamation-triangle mr-2"></i>发展挑战
+                            </h4>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <ul class="space-y-2 text-sm text-red-700">
+                                    <li>• <strong>成本高昂：</strong>设备造价高达数亿甚至数十亿元</li>
+                                    <li>• <strong>治疗费用：</strong>相对昂贵，尚未被普遍纳入医保</li>
+                                </ul>
+                                <ul class="space-y-2 text-sm text-red-700">
+                                    <li>• <strong>技术复杂：</strong>设备庞大，建设和运营要求极高</li>
+                                    <li>• <strong>人才缺乏：</strong>专业技术人员培养需要时间</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Policies and Standards -->
+        <section id="policies-standards" class="py-16 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="section-card">
+                    <h2 class="serif text-4xl font-bold mb-8">4. 政策法规与行业标准环境</h2>
+
+                    <div id="national-policies" class="mb-12">
+                        <h3 class="text-2xl font-semibold mb-6">4.1 国家层面相关政策支持与规划</h3>
+
+                        <div class="timeline-item mb-8">
+                            <h4 class="font-semibold mb-4">政策演进历程</h4>
+                            <div class="space-y-6">
+                                <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                                    <h5 class="font-semibold text-blue-800 mb-2">"八五"至"十五"计划</h5>
+                                    <p class="text-sm text-blue-700">主要提倡提高医疗器械性能，有重点地发展高技术产业</p>
+                                </div>
+                                <div class="bg-green-50 p-4 rounded-lg border border-green-200">
+                                    <h5 class="font-semibold text-green-800 mb-2">"十一五"规划</h5>
+                                    <p class="text-sm text-green-700">开始明确鼓励扩大先进技术的进口</p>
+                                </div>
+                                <div class="bg-purple-50 p-4 rounded-lg border border-purple-200">
+                                    <h5 class="font-semibold text-purple-800 mb-2">"十二五"至"十三五"</h5>
+                                    <p class="text-sm text-purple-700">重点转向增强共性及核心技术的突破能力，推进精准医疗等新兴前沿领域创新</p>
+                                </div>
+                                <div class="bg-red-50 p-4 rounded-lg border border-red-200">
+                                    <h5 class="font-semibold text-red-800 mb-2">"十四五"规划</h5>
+                                    <p class="text-sm text-red-700">强化医工协同，推进技术创新，加快补齐高端医疗装备短板，实现自主可控</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div class="bg-white p-6 rounded-lg border border-gray-200">
+                                <h4 class="font-semibold mb-4 text-blue-600">
+                                    <i class="fas fa-flag mr-2"></i>国家战略文件
+                                </h4>
+                                <ul class="space-y-3">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                                        <div>
+                                            <strong>《中国制造2025》</strong>
+                                            <br>
+                                            <span class="text-sm text-gray-600">将高端医疗装备列为重点发展领域</span>
+                                        </div>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                                        <div>
+                                            <strong>《"健康中国2030"规划纲要》</strong>
+                                            <br>
+                                            <span class="text-sm text-gray-600">强调完善医疗器械快速审评审批机制</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-white p-6 rounded-lg border border-gray-200">
+                                <h4 class="font-semibold mb-4 text-purple-600">
+                                    <i class="fas fa-file-alt mr-2"></i>专项政策文件
+                                </h4>
+                                <ul class="space-y-3">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                                        <div>
+                                            <strong>《"十四五"医疗装备产业发展规划》</strong>
+                                            <br>
+                                            <span class="text-sm text-gray-600">强调加快高端医疗装备自主可控</span>
+                                        </div>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                                        <div>
+                                            <strong>《增强制造业核心竞争力三年行动计划》</strong>
+                                            <br>
+                                            <span class="text-sm text-gray-600">重点支持高端医疗器械产业化</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="bg-yellow-50 border border-yellow-200 p-6 rounded-lg mt-6">
+                            <h4 class="font-semibold mb-3 text-yellow-800">
+                                <i class="fas fa-map mr-2"></i>地方政策响应
+                            </h4>
+                            <p class="text-yellow-700 mb-4">
+                                地方政府积极响应国家号召，出台适合各地自身发展的医用直线加速器产业相关规划。
+                                例如广东省发布的《广东省加快推动核医疗产业高质量发展行动方案（2025-2030年）》明确提出要加快大型治疗装备全产业链发展。
+                            </p>
+                        </div>
+                    </div>
+
+                    <div id="regulatory-system" class="mb-12">
+                        <h3 class="text-2xl font-semibold mb-6">4.2 行业监管体系与市场准入机制</h3>
+
+                        <div class="bg-blue-50 p-6 rounded-lg mb-6">
+                            <h4 class="font-semibold mb-4 text-blue-800">
+                                <i class="fas fa-building mr-2"></i>主要监管机构
+                            </h4>
+                            <div class="grid md:grid-cols-3 gap-4">
+                                <div class="bg-white p-4 rounded border border-blue-200">
+                                    <h5 class="font-semibold mb-2 text-sm">国务院</h5>
+                                    <p class="text-xs text-gray-600">制定医疗器械监督管理条例等顶层法规</p>
+                                </div>
+                                <div class="bg-white p-4 rounded border border-blue-200">
+                                    <h5 class="font-semibold mb-2 text-sm">国家卫生健康委员会</h5>
+                                    <p class="text-xs text-gray-600">负责大型医用设备配置许可管理</p>
+                                </div>
+                                <div class="bg-white p-4 rounded border border-blue-200">
+                                    <h5 class="font-semibold mb-2 text-sm">国家药品监督管理局</h5>
+                                    <p class="text-xs text-gray-600">负责医疗器械产品注册审批</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div class="bg-white p-6 rounded-lg border border-gray-200">
+                                <h4 class="font-semibold mb-4 text-green-600">
+                                    <i class="fas fa-gavel mr-2"></i>核心监管法规
+                                </h4>
+                                <ul class="space-y-3">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-book text-green-500 mr-3 mt-1"></i>
+                                        <div>
+                                            <strong>《医疗器械监督管理条例》（2021年修订）</strong>
+                                            <br>
+                                            <span class="text-sm text-gray-600">规定医疗器械研制、生产、经营、使用活动的监督管理规则</span>
+                                        </div>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-book text-green-500 mr-3 mt-1"></i>
+                                        <div>
+                                            <strong>《医疗器械生产监督管理办法》</strong>
+                                            <br>
+                                            <span class="text-sm text-gray-600">详细规定医疗器械生产企业许可管理、监督检查等内容</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-white p-6 rounded-lg border border-gray-200">
+                                <h4 class="font-semibold mb-4 text-purple-600">
+                                    <i class="fas fa-key mr-2"></i>市场准入要求
+                                </h4>
+                                <ul class="space-y-3">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-certificate text-purple-500 mr-3 mt-1"></i>
+                                        <div>
+                                            <strong>医疗器械生产许可证</strong>
+                                            <br>
+                                            <span class="text-sm text-gray-600">生产企业必须获得生产许可证</span>
+                                        </div>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-certificate text-purple-500 mr-3 mt-1"></i>
+                                        <div>
+                                            <strong>医疗器械注册证</strong>
+                                            <br>
+                                            <span class="text-sm text-gray-600">产品需通过注册审批后方可上市</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="industry-standards" class="mb-12">
+                        <h3 class="text-2xl font-semibold mb-6">4.3 主要行业标准与质量控制规范</h3>
+
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div class="bg-white p-6 rounded-lg border border-gray-200">
+                                <h4 class="font-semibold mb-4 text-blue-600">
+                                    <i class="fas fa-clipboard-check mr-2"></i>医用直线加速器标准
+                                </h4>
+                                <ul class="space-y-4">
+                                    <li class="border-l-4 border-blue-500 pl-4">
+                                        <h5 class="font-semibold text-sm">《医用电子直线加速器质量控制检测规范》（WS 674—2020）</h5>
+                                        <p class="text-xs text-gray-600 mt-1">
+                                            详细规定了医用电子直线加速器的质量控制检测要求，
+                                            包括设备防护性能要求、质量控制要求及检测方法
+                                        </p>
+                                    </li>
+                                    <li class="border-l-4 border-green-500 pl-4">
+                                        <h5 class="font-semibold text-sm">《医用电子加速器 验收试验和周期检验规程》（GB/T 19046-2013）</h5>
+                                        <p class="text-xs text-gray-600 mt-1">
+                                            规定了医用电子加速器的验收试验和周期检验规程，
+                                            非等效采用IEC国际标准
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-white p-6 rounded-lg border border-gray-200">
+                                <h4 class="font-semibold mb-4 text-purple-600">
+                                    <i class="fas fa-cogs mr-2"></i>特殊技术标准
+                                </h4>
+                                <ul class="space-y-4">
+                                    <li class="border-l-4 border-purple-500 pl-4">
+                                        <h5 class="font-semibold text-sm">《医用电子直线加速器调强放疗全流程剂量校准规范》</h5>
+                                        <p class="text-xs text-gray-600 mt-1">
+                                            北京市发布，旨在将头部放射治疗全流程剂量进行标准化设计，
+                                            提高放射治疗的精准性
+                                        </p>
+                                    </li>
+                                    <li class="border-l-4 border-orange-500 pl-4">
+                                        <h5 class="font-semibold text-sm">人工智能医疗器械标准</h5>
+                                        <p class="text-xs text-gray-600 mt-1">
+                                            聚焦数据质量、算法质量、全生命周期质量管理、
+                                            临床应用场景等方面的特殊性
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="bg-green-50 border border-green-200 p-6 rounded-lg mt-6">
+                            <h4 class="font-semibold mb-3 text-green-800">
+                                <i class="fas fa-shield-alt mr-2"></i>质量控制意义
+                            </h4>
+                            <p class="text-green-700">
+                                这些标准和规范的制定与实施，构成了医疗加速器质量控制的基础，
+                                对于确保设备性能稳定、治疗精准、患者安全至关重要。
+                                随着技术进步，相关标准化工作也在加速推进。
+                            </p>
+                        </div>
+                    </div>
+
+                    <div id="equipment-licensing" class="mb-12">
+                        <h3 class="text-2xl font-semibold mb-6">4.4 大型医用设备配置许可管理</h3>
+
+                        <div class="bg-gradient-to-r from-red-50 to-orange-50 p-6 rounded-lg mb-6">
+                            <h4 class="font-semibold mb-4 text-red-800">
+                                <i class="fas fa-tasks mr-2"></i>大型医用设备分类管理
+                            </h4>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="bg-white p-4 rounded border border-red-200">
+                                    <h5 class="font-semibold mb-3 text-red-700">甲类大型医用设备</h5>
+                                    <ul class="space-y-2 text-sm text-red-600">
+                                        <li>• 重离子放射治疗系统</li>
+                                        <li>• 质子放射治疗系统</li>
+                                        <li>• X线立体定向放射治疗系统Cyberknife</li>
+                                        <li>• 螺旋断层放射治疗系统Tomo HD/HDA</li>
+                                    </ul>
+                                    <p class="text-xs text-red-500 mt-2">
+                                        由国家卫生健康委员会负责配置管理并核发配置许可证
+                                    </p>
+                                </div>
+
+                                <div class="bg-white p-4 rounded border border-orange-200">
+                                    <h5 class="font-semibold mb-3 text-orange-700">乙类大型医用设备</h5>
+                                    <ul class="space-y-2 text-sm text-orange-600">
+                                        <li>• 医用直线加速器</li>
+                                        <li>• 螺旋断层放射治疗系统</li>
+                                        <li>• 伽玛射线立体定向放射治疗系统</li>
+                                        <li>• 常规放射治疗类设备</li>
+                                    </ul>
+                                    <p class="text-xs text-orange-500 mt-2">
+                                        由省级卫生健康行政部门负责配置管理并核发配置许可证
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-lg border border-gray-200">
+                            <h4 class="font-semibold mb-4">配置许可申请条件</h4>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <ul class="space-y-3">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-green-500 mr-3 mt-1"></i>
+                                        <div>
+                                            <strong>符合配置规划：</strong>符合本地区大型医用设备配置规划
+                                        </div>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-green-500 mr-3 mt-1"></i>
+                                        <div>
+                                            <strong>技术条件：</strong>具备相应的技术条件和配套设施
+                                        </div>
+                                    </li>
+                                </ul>
+                                <ul class="space-y-3">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-green-500 mr-3 mt-1"></i>
+                                        <div>
+                                            <strong>专业人员：</strong>拥有具备相应资质和能力的专业技术人员
+                                        </div>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-green-500 mr-3 mt-1"></i>
+                                        <div>
+                                            <strong>资金来源：</strong>有合法的资金来源证明
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="bg-blue-50 border border-blue-200 p-6 rounded-lg mt-6">
+                            <h4 class="font-semibold mb-3 text-blue-800">
+                                <i class="fas fa-chart-line mr-2"></i>配置规划调整
+                            </h4>
+                            <p class="text-blue-700 mb-4">
+                                国家卫生健康委员会会根据经济社会发展、医疗服务需求以及医疗技术发展等因素，
+                                制定和调整大型医用设备配置规划。例如，《"十四五"大型医用设备配置规划》
+                                将直线加速器的新增数量从1208台调整至1451台。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Competitive Landscape -->
+        <section id="competitive-landscape" class="py-16 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="section-card">
+                    <h2 class="serif text-4xl font-bold mb-8">5. 产业链结构与竞争格局分析</h2>
+
+                    <div id="industry-chain" class="mb-12">
+                        <h3 class="text-2xl font-semibold mb-6">5.1 产业链上下游构成与关键环节</h3>
+
+                        <div class="bg-white p-6 rounded-lg border border-gray-200 mb-6">
+                            <h4 class="font-semibold mb-4">医疗加速器产业链结构</h4>
+                            <div class="mermaid-container">
+                                <div class="mermaid-controls">
+                                    <button class="mermaid-control-btn zoom-in" title="放大">
+                                        <i class="fas fa-search-plus"></i>
+                                    </button>
+                                    <button class="mermaid-control-btn zoom-out" title="缩小">
+                                        <i class="fas fa-search-minus"></i>
+                                    </button>
+                                    <button class="mermaid-control-btn reset-zoom" title="重置">
+                                        <i class="fas fa-expand-arrows-alt"></i>
+                                    </button>
+                                    <button class="mermaid-control-btn fullscreen" title="全屏查看">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                                <div class="mermaid">
+                                    graph LR
+                                    A["上游原材料与核心组件"] --> B["中游整机制造"]
+                                    B["中游整机制造"] --> C["下游临床应用"]
+                                    C["下游临床应用"] --> D["售后服务与维护"]
+
+                                    A1["高纯度钨、不锈钢"] --> A
+                                    A2["加速管、磁控管"] --> A
+                                    A3["多叶光栅MLC"] --> A
+                                    A4["控制系统、软件"] --> A
+
+                                    B1["联影医疗"] --> B
+                                    B2["新华医疗"] --> B
+                                    B3["中核集团"] --> B
+                                    B4["大医集团"] --> B
+
+                                    C1["三甲医院"] --> C
+                                    C2["县级医院"] --> C
+                                    C3["肿瘤专科医院"] --> C
+                                    C4["独立治疗中心"] --> C
+
+                                    style A fill:#e1f5fe,stroke:#1976d2,stroke-width:2px,color:#000
+                                    style B fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#000
+                                    style C fill:#e8f5e8,stroke:#388e3c,stroke-width:2px,color:#000
+                                    style D fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#000
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-3 gap-6">
+                            <div class="bg-blue-50 p-6 rounded-lg border border-blue-200">
+                                <h4 class="font-semibold mb-4 text-blue-800">
+                                    <i class="fas fa-industry mr-2"></i>上游环节
+                                </h4>
+                                <ul class="space-y-2 text-sm text-blue-700">
+                                    <li>• <strong>核心原材料：</strong>高纯度钨、不锈钢等</li>
+                                    <li>• <strong>核心组件：</strong>高频波导、加速管、磁控管/速调管</li>
+                                    <li>• <strong>关键部件：</strong>准直器、多叶光栅(MLC)、治疗床</li>
+                                    <li>• <strong>软件系统：</strong>控制系统、治疗计划软件</li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-purple-50 p-6 rounded-lg border border-purple-200">
+                                <h4 class="font-semibold mb-4 text-purple-800">
+                                    <i class="fas fa-cogs mr-2"></i>中游环节
+                                </h4>
+                                <ul class="space-y-2 text-sm text-purple-700">
+                                    <li>• <strong>整机制造：</strong>组装、调试和测试</li>
+                                    <li>• <strong>主要企业：</strong>联影医疗、新华医疗</li>
+                                    <li>• <strong>其他企业：</strong>中科超精、西安大医、苏州雷泰</li>
+                                    <li>• <strong>技术密集：</strong>需要强大研发能力和精密制造工艺</li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-green-50 p-6 rounded-lg border border-green-200">
+                                <h4 class="font-semibold mb-4 text-green-800">
+                                    <i class="fas fa-hospital mr-2"></i>下游环节
+                                </h4>
+                                <ul class="space-y-2 text-sm text-green-700">
+                                    <li>• <strong>应用场所：</strong>各级医院肿瘤科、癌症专科医院</li>
+                                    <li>• <strong>服务网络：</strong>售后服务、设备维护、人员培训</li>
+                                    <li>• <strong>需求驱动：</strong>下游需求直接驱动中游生产和上游研发</li>
+                                    <li>• <strong>关键环节：</strong>保证设备正常运行和发挥最佳效能</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="domestic-players" class="mb-12">
+                        <h3 class="text-2xl font-semibold mb-6">5.2 主要国内生产企业及其市场份额</h3>
+
+                        <div class="bg-gradient-to-r from-blue-50 to-purple-50 p-6 rounded-lg mb-6">
+                            <h4 class="font-semibold mb-4 text-center">2023年中国医用直线加速器市场份额</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                                <div class="bg-white p-4 rounded border border-gray-200">
+                                    <h5 class="font-semibold text-lg text-blue-700">国际巨头</h5>
+                                    <p class="text-3xl font-bold text-blue-600">74.78%</p>
+                                    <p class="text-sm text-gray-600">医科达 + 瓦里安</p>
+                                </div>
+                                <div class="bg-white p-4 rounded border border-gray-200">
+                                    <h5 class="font-semibold text-lg text-green-700">国内领军</h5>
+                                    <p class="text-3xl font-bold text-green-600">15.13%</p>
+                                    <p class="text-sm text-gray-600">联影医疗</p>
+                                </div>
+                                <div class="bg-white p-4 rounded border border-gray-200">
+                                    <h5 class="font-semibold text-lg text-purple-700">其他国内企业</h5>
+                                    <p class="text-3xl font-bold text-purple-600">10.09%</p>
+                                    <p class="text-sm text-gray-600">新华医疗、雷泰、大医等</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div class="bg-white p-6 rounded-lg border border-gray-200">
+                                <h4 class="font-semibold mb-4 text-blue-600">
+                                    <i class="fas fa-star mr-2"></i>联影医疗
+                                </h4>
+                                <div class="space-y-3">
+                                    <div class="flex items-center">
+                                        <span class="text-sm font-medium w-20">市场份额：</span>
+                                        <span class="font-bold text-blue-600">15.13%</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <span class="text-sm font-medium w-20">产品矩阵：</span>
+                                        <span class="text-sm">5大直线加速器、4套专业软件及4类模拟定位设备</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <span class="text-sm font-medium w-20">市场覆盖：</span>
+                                        <span class="text-sm">全国150余家核心医疗机构，70%国家级肿瘤专科头部机构</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <span class="text-sm font-medium w-20">国际拓展：</span>
+                                        <span class="text-sm">已在法国、意大利、土耳其、印度等多个国家实现订单突破</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-white p-6 rounded-lg border border-gray-200">
+                                <h4 class="font-semibold mb-4 text-green-600">
+                                    <i class="fas fa-building mr-2"></i>新华医疗
+                                </h4>
+                                <div class="space-y-3">
+                                    <div class="flex items-center">
+                                        <span class="text-sm font-medium w-20">市场份额：</span>
+                                        <span class="font-bold text-green-600">5.04%</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <span class="text-sm font-medium w-20">企业性质：</span>
+                                        <span class="text-sm">国内较早进入放疗设备领域的企业之一</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <span class="text-sm font-medium w-20">技术特点：</span>
+                                        <span class="text-sm">在加速器核心部件方面有一定技术积累</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-yellow-50 border border-yellow-200 p-6 rounded-lg mt-6">
+                            <h4 class="font-semibold mb-3 text-yellow-800">
+                                <i class="fas fa-rocket mr-2"></i>其他重要国内企业
+                            </h4>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <h5 class="font-semibold mb-2 text-sm">中广核技</h5>
+                                    <p class="text-xs text-gray-700">
+                                        在质子治疗系统领域取得重要突破，成功研发具有自主知识产权的小型化质子治疗系统，
+                                        "和质"质子治疗系统已具备每年3-4套的供货能力
+                                    </p>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold mb-2 text-sm">中核集团</h5>
+                                    <p class="text-xs text-gray-700">
+                                        致力于打造核医疗的"中国方案"，在BNCT、直线加速器、伽玛刀等多种核医疗装备国产化方面取得显著成就
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="international-competitors" class="mb-12">
+                        <h3 class="text-2xl font-semibold mb-6">5.3 国际主要竞争对手及其在华布局</h3>
+
+                        <div class="grid md:grid-cols-2 gap-8 mb-6">
+                            <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg">
+                                <h4 class="font-semibold mb-4 text-blue-800">
+                                    <i class="fas fa-globe mr-2"></i>医科达 (Elekta)
+                                </h4>
+                                <div class="space-y-3">
+                                    <div class="flex items-center">
+                                        <span class="text-sm font-medium w-16">份额：</span>
+                                        <span class="font-bold text-blue-600 text-lg">37.39%</span>
+                                    </div>
+                                    <div class="text-sm text-blue-700">
+                                        <strong>市场地位：</strong>凭借先进技术和产品，以及积极的市场推广策略，获得广泛用户认可
+                                    </div>
+                                    <div class="text-sm text-blue-700">
+                                        <strong>技术优势：</strong>在图像引导放疗、调强放疗等先进技术方面保持领先
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg">
+                                <h4 class="font-semibold mb-4 text-purple-800">
+                                    <i class="fas fa-globe mr-2"></i>瓦里安 (Varian)
+                                </h4>
+                                <div class="space-y-3">
+                                    <div class="flex items-center">
+                                        <span class="text-sm font-medium w-16">份额：</span>
+                                        <span class="font-bold text-purple-600 text-lg">37.39%</span>
+                                    </div>
+                                    <div class="text-sm text-purple-700">
+                                        <strong>在华布局：</strong>2007年在北京建立中国工厂及地区总部，是其在北美以外唯一的直线加速器生产基地
+                                    </div>
+                                    <div class="text-sm text-purple-700">
+                                        <strong>服务体系：</strong>在北京设立亚太地区培训中心，为中国及亚太地区用户提供技术支持和培训
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-lg border border-gray-200">
+                            <h4 class="font-semibold mb-4">其他国际厂商</h4>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="border-l-4 border-orange-500 pl-4">
+                                    <h5 class="font-semibold mb-2 text-orange-700">安科锐 (Accuray)</h5>
+                                    <p class="text-sm text-gray-600">
+                                        专注于创新型放射治疗解决方案，产品如射波刀（CyberKnife）和TOMOTherapy®在中国市场有一定应用。
+                                        与中核集团成立合资公司中核安科锐。
+                                    </p>
+                                </div>
+                                <div class="border-l-4 border-green-500 pl-4">
+                                    <h5 class="font-semibold mb-2 text-green-700">其他专业企业</h5>
+                                    <p class="text-sm text-gray-600">
+                                        如日本日新（Nissin）在消毒灭菌用电子加速器领域，
+                                        凭借设备运行稳定性和操作简便性在中国市场占有一席之地。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="competitive-situation" class="mb-12">
+                        <h3 class="text-2xl font-semibold mb-6">5.4 行业竞争态势与集中度分析</h3>
+
+                        <div class="bg-gradient-to-r from-red-50 to-orange-50 p-6 rounded-lg mb-6">
+                            <h4 class="font-semibold mb-4 text-red-800 text-center">
+                                <i class="fas fa-chart-pie mr-2"></i>行业集中度指标
+                            </h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-center">
+                                <div class="bg-white p-6 rounded border border-red-200">
+                                    <h5 class="font-semibold text-red-700 mb-2">CR3 (前三企业份额)</h5>
+                                    <p class="text-4xl font-bold text-red-600">89.91%</p>
+                                    <p class="text-sm text-gray-600 mt-2">医科达 + 瓦里安 + 联影医疗</p>
+                                </div>
+                                <div class="bg-white p-6 rounded border border-orange-200">
+                                    <h5 class="font-semibold text-orange-700 mb-2">CR5 (前五企业份额)</h5>
+                                    <p class="text-4xl font-bold text-orange-600">96.63%</p>
+                                    <p class="text-sm text-gray-600 mt-2">加上新华医疗、雷泰、大医等</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="insight-highlight">
+                            <h4 class="text-lg font-semibold mb-3">
+                                <i class="fas fa-shield-alt text-blue-600 mr-2"></i>行业壁垒分析
+                            </h4>
+                            <div class="grid md:grid-cols-3 gap-6">
+                                <div>
+                                    <h5 class="font-semibold mb-2">技术壁垒</h5>
+                                    <p class="text-sm text-gray-700">
+                                        涉及生物医学工程、机械制造、算法开发、电子信息、材料科学等多个高精尖学科领域，
+                                        研发周期长，技术要求高
+                                    </p>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold mb-2">资金壁垒</h5>
+                                    <p class="text-sm text-gray-700">
+                                        研发和生产医用直线加速器投入巨大，需要强大的资金实力支持长期技术开发
+                                    </p>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold mb-2">准入壁垒</h5>
+                                    <p class="text-sm text-gray-700">
+                                        严格的行业准入资质要求，包括生产许可、产品注册、配置许可等多个环节的审批
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-lg border border-gray-200 mt-6">
+                            <h4 class="font-semibold mb-4">五力竞争模型分析</h4>
+                            <div class="grid md:grid-cols-2 gap-8">
+                                <div class="space-y-4">
+                                    <div class="flex items-start">
+                                        <i class="fas fa-check-circle text-green-500 mr-3 mt-1"></i>
+                                        <div>
+                                            <strong>现有竞争者：</strong>数量不多，但市场集中度非常高，主要被少数几家企业占据
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-times-circle text-red-500 mr-3 mt-1"></i>
+                                        <div>
+                                            <strong>替代品威胁：</strong>较小，放疗是肿瘤治疗的重要手段，医用直线加速器是放疗的核心设备
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-minus-circle text-yellow-500 mr-3 mt-1"></i>
+                                        <div>
+                                            <strong>上游议价能力：</strong>一般，高端核心部件仍以国外进口为主
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="space-y-4">
+                                    <div class="flex items-start">
+                                        <i class="fas fa-minus-circle text-yellow-500 mr-3 mt-1"></i>
+                                        <div>
+                                            <strong>下游议价能力：</strong>一般，高端医疗设备选择性相对有限，对性能要求极高
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-times-circle text-red-500 mr-3 mt-1"></i>
+                                        <div>
+                                            <strong>潜在进入者威胁：</strong>较小，存在严格的准入资质、高昂的资金要求以及较高的技术门槛
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="internationalization" class="mb-12">
+                        <h3 class="text-2xl font-semibold mb-6">5.5 国产企业的国际化发展与面临的挑战</h3>
+
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div class="bg-white p-6 rounded-lg border border-gray-200">
+                                <h4 class="font-semibold mb-4 text-green-600">
+                                    <i class="fas fa-globe-americas mr-2"></i>国际化发展成果
+                                </h4>
+                                <div class="space-y-4">
+                                    <div class="border-l-4 border-green-500 pl-4">
+                                        <h5 class="font-semibold mb-2 text-sm">大医集团 - TAICHI系列</h5>
+                                        <p class="text-xs text-gray-600">
+                                            获得美国FDA的注册认证和"突破性医疗器械"认定，
+                                            是目前唯一获得美国FDA许可的中国医用直线加速器产品
+                                        </p>
+                                    </div>
+                                    <div class="border-l-4 border-blue-500 pl-4">
+                                        <h5 class="font-semibold mb-2 text-sm">其他企业进展</h5>
+                                        <p class="text-xs text-gray-600">
+                                            部分产品已通过欧盟CE认证、英国GMDN等国际认证，
+                                            获得了欧盟、英国、印度、中东、南美等40多个国家的准入
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-white p-6 rounded-lg border border-gray-200">
+                                <h4 class="font-semibold mb-4 text-orange-600">
+                                    <i class="fas fa-exclamation-triangle mr-2"></i>国际化挑战
+                                </h4>
+                                <div class="space-y-4">
+                                    <div class="bg-red-50 p-3 rounded border border-red-200">
+                                        <h5 class="font-semibold mb-1 text-sm text-red-800">品牌认知度</h5>
+                                        <p class="text-xs text-red-700">
+                                            与国际巨头相比仍有较大差距，建立品牌信任度需要长期投入
+                                        </p>
+                                    </div>
+                                    <div class="bg-orange-50 p-3 rounded border border-orange-200">
+                                        <h5 class="font-semibold mb-1 text-sm text-orange-800">技术性能</h5>
+                                        <p class="text-xs text-orange-700">
+                                            在高端功能和核心技术方面可能仍与国际领先水平存在差距
+                                        </p>
+                                    </div>
+                                    <div class="bg-yellow-50 p-3 rounded border border-yellow-200">
+                                        <h5 class="font-semibold mb-1 text-sm text-yellow-800">法规符合性</h5>
+                                        <p class="text-xs text-yellow-700">
+                                            不同国家和地区对医疗器械的注册审批、质量标准要求各不相同
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-blue-50 border border-blue-200 p-6 rounded-lg mt-6">
+                            <h4 class="font-semibold mb-3 text-blue-800">
+                                <i class="fas fa-lightbulb mr-2"></i>发展机遇
+                            </h4>
+                            <p class="text-blue-700 mb-4">
+                                随着中国制造向中国创造的转变，以及"一带一路"等倡议的推进，
+                                国产医疗加速器企业仍有巨大的国际化发展潜力。
+                            </p>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <ul class="space-y-1 text-sm text-blue-700">
+                                    <li>• 通过技术创新提升产品竞争力</li>
+                                    <li>• 利用性价比优势开拓新兴市场</li>
+                                </ul>
+                                <ul class="space-y-1 text-sm text-blue-700">
+                                    <li>• 加强国际合作与交流</li>
+                                    <li>• 建立完善的海外服务体系</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-gray-900 text-white py-12">
+            <div class="container mx-auto px-6">
+                <div class="text-center">
+                    <h3 class="serif text-2xl font-bold mb-4">中国医疗加速器行业深度研究报告</h3>
+                    <p class="text-gray-400 mb-6">
+                        本报告基于公开资料和行业数据进行分析，旨在为行业发展提供参考
+                    </p>
+                    <div class="flex justify-center space-x-8 text-sm text-gray-400">
+                        <span><i class="fas fa-calendar mr-2"></i>2025年6月</span>
+                        <span><i class="fas fa-chart-bar mr-2"></i>市场分析</span>
+                        <span><i class="fas fa-microscope mr-2"></i>技术评估</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        // Initialize Mermaid Controls for zoom and pan
+        function initializeMermaidControls() {
+            const containers = document.querySelectorAll('.mermaid-container');
+
+            containers.forEach(container => {
+                const mermaidElement = container.querySelector('.mermaid');
+                let scale = 1;
+                let isDragging = false;
+                let startX, startY, translateX = 0, translateY = 0;
+
+                // 触摸相关状态
+                let isTouch = false;
+                let touchStartTime = 0;
+                let initialDistance = 0;
+                let initialScale = 1;
+                let isPinching = false;
+
+                // Zoom controls
+                const zoomInBtn = container.querySelector('.zoom-in');
+                const zoomOutBtn = container.querySelector('.zoom-out');
+                const resetBtn = container.querySelector('.reset-zoom');
+                const fullscreenBtn = container.querySelector('.fullscreen');
+
+                function updateTransform() {
+                    mermaidElement.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+
+                    if (scale > 1) {
+                        container.classList.add('zoomed');
+                    } else {
+                        container.classList.remove('zoomed');
+                    }
+
+                    mermaidElement.style.cursor = isDragging ? 'grabbing' : 'grab';
+                }
+
+                if (zoomInBtn) {
+                    zoomInBtn.addEventListener('click', () => {
+                        scale = Math.min(scale * 1.25, 4);
+                        updateTransform();
+                    });
+                }
+
+                if (zoomOutBtn) {
+                    zoomOutBtn.addEventListener('click', () => {
+                        scale = Math.max(scale / 1.25, 0.3);
+                        if (scale <= 1) {
+                            translateX = 0;
+                            translateY = 0;
+                        }
+                        updateTransform();
+                    });
+                }
+
+                if (resetBtn) {
+                    resetBtn.addEventListener('click', () => {
+                        scale = 1;
+                        translateX = 0;
+                        translateY = 0;
+                        updateTransform();
+                    });
+                }
+
+                if (fullscreenBtn) {
+                    fullscreenBtn.addEventListener('click', () => {
+                        if (container.requestFullscreen) {
+                            container.requestFullscreen();
+                        } else if (container.webkitRequestFullscreen) {
+                            container.webkitRequestFullscreen();
+                        } else if (container.msRequestFullscreen) {
+                            container.msRequestFullscreen();
+                        }
+                    });
+                }
+
+                // Mouse Events
+                mermaidElement.addEventListener('mousedown', (e) => {
+                    if (isTouch) return; // 如果是触摸设备，忽略鼠标事件
+
+                    isDragging = true;
+                    startX = e.clientX - translateX;
+                    startY = e.clientY - translateY;
+                    mermaidElement.style.cursor = 'grabbing';
+                    updateTransform();
+                    e.preventDefault();
+                });
+
+                document.addEventListener('mousemove', (e) => {
+                    if (isDragging && !isTouch) {
+                        translateX = e.clientX - startX;
+                        translateY = e.clientY - startY;
+                        updateTransform();
+                    }
+                });
+
+                document.addEventListener('mouseup', () => {
+                    if (isDragging && !isTouch) {
+                        isDragging = false;
+                        mermaidElement.style.cursor = 'grab';
+                        updateTransform();
+                    }
+                });
+
+                document.addEventListener('mouseleave', () => {
+                    if (isDragging && !isTouch) {
+                        isDragging = false;
+                        mermaidElement.style.cursor = 'grab';
+                        updateTransform();
+                    }
+                });
+
+                // 获取两点之间的距离
+                function getTouchDistance(touch1, touch2) {
+                    return Math.hypot(
+                        touch2.clientX - touch1.clientX,
+                        touch2.clientY - touch1.clientY
+                    );
+                }
+
+                // Touch Events - 触摸事件处理
+                mermaidElement.addEventListener('touchstart', (e) => {
+                    isTouch = true;
+                    touchStartTime = Date.now();
+
+                    if (e.touches.length === 1) {
+                        // 单指拖动
+                        isPinching = false;
+                        isDragging = true;
+
+                        const touch = e.touches[0];
+                        startX = touch.clientX - translateX;
+                        startY = touch.clientY - translateY;
+
+                    } else if (e.touches.length === 2) {
+                        // 双指缩放
+                        isPinching = true;
+                        isDragging = false;
+
+                        const touch1 = e.touches[0];
+                        const touch2 = e.touches[1];
+                        initialDistance = getTouchDistance(touch1, touch2);
+                        initialScale = scale;
+                    }
+
+                    e.preventDefault();
+                }, { passive: false });
+
+                mermaidElement.addEventListener('touchmove', (e) => {
+                    if (e.touches.length === 1 && isDragging && !isPinching) {
+                        // 单指拖动
+                        const touch = e.touches[0];
+                        translateX = touch.clientX - startX;
+                        translateY = touch.clientY - startY;
+                        updateTransform();
+
+                    } else if (e.touches.length === 2 && isPinching) {
+                        // 双指缩放
+                        const touch1 = e.touches[0];
+                        const touch2 = e.touches[1];
+                        const currentDistance = getTouchDistance(touch1, touch2);
+
+                        if (initialDistance > 0) {
+                            const newScale = Math.min(Math.max(
+                                initialScale * (currentDistance / initialDistance),
+                                0.3
+                            ), 4);
+                            scale = newScale;
+                            updateTransform();
+                        }
+                    }
+
+                    e.preventDefault();
+                }, { passive: false });
+
+                mermaidElement.addEventListener('touchend', (e) => {
+                    // 重置状态
+                    if (e.touches.length === 0) {
+                        isDragging = false;
+                        isPinching = false;
+                        initialDistance = 0;
+
+                        // 延迟重置isTouch，避免鼠标事件立即触发
+                        setTimeout(() => {
+                            isTouch = false;
+                        }, 100);
+                    } else if (e.touches.length === 1 && isPinching) {
+                        // 从双指变为单指，切换为拖动模式
+                        isPinching = false;
+                        isDragging = true;
+
+                        const touch = e.touches[0];
+                        startX = touch.clientX - translateX;
+                        startY = touch.clientY - translateY;
+                    }
+
+                    updateTransform();
+                });
+
+                mermaidElement.addEventListener('touchcancel', (e) => {
+                    isDragging = false;
+                    isPinching = false;
+                    initialDistance = 0;
+
+                    setTimeout(() => {
+                        isTouch = false;
+                    }, 100);
+
+                    updateTransform();
+                });
+
+                // Enhanced wheel zoom with better center point handling
+                container.addEventListener('wheel', (e) => {
+                    e.preventDefault();
+                    const rect = container.getBoundingClientRect();
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+
+                    const delta = e.deltaY > 0 ? 0.9 : 1.1;
+                    const newScale = Math.min(Math.max(scale * delta, 0.3), 4);
+
+                    // Adjust translation to zoom towards center
+                    if (newScale !== scale) {
+                        const scaleDiff = newScale / scale;
+                        translateX = translateX * scaleDiff;
+                        translateY = translateY * scaleDiff;
+                        scale = newScale;
+
+                        if (scale <= 1) {
+                            translateX = 0;
+                            translateY = 0;
+                        }
+
+                        updateTransform();
+                    }
+                });
+
+                // Initialize display
+                updateTransform();
+            });
+        }
+
+        // Initialize Mermaid
+        document.addEventListener('DOMContentLoaded', function () {
+            mermaid.initialize({
+                startOnLoad: true,
+                theme: 'base',
+                themeVariables: {
+                    // Primary colors with high contrast
+                    primaryColor: '#ffffff',
+                    primaryTextColor: '#1a365d',
+                    primaryBorderColor: '#2d3748',
+                    lineColor: '#4a5568',
+
+                    // Secondary colors
+                    secondaryColor: '#f7fafc',
+                    secondaryTextColor: '#2d3748',
+                    secondaryBorderColor: '#e2e8f0',
+
+                    // Tertiary colors
+                    tertiaryColor: '#edf2f7',
+                    tertiaryTextColor: '#2d3748',
+                    tertiaryBorderColor: '#cbd5e0',
+
+                    // Background and text
+                    background: '#ffffff',
+                    mainBkg: '#ffffff',
+                    secondBkg: '#f7fafc',
+                    tertiaryBkg: '#edf2f7',
+
+                    // Node colors with high contrast
+                    primaryBorderColor: '#2d3748',
+                    primaryTextColor: '#1a365d',
+
+                    // Edge and label colors
+                    edgeLabelBackground: '#ffffff',
+                    edgeLabelText: '#2d3748',
+
+                    // Ensure text readability on colored backgrounds
+                    textColor: '#1a365d',
+                    nodeTextColor: '#1a365d',
+
+                    // Font settings
+                    fontFamily: 'Inter, sans-serif',
+                    fontSize: '14px'
+                },
+                flowchart: {
+                    useMaxWidth: true,
+                    htmlLabels: true,
+                    curve: 'basis',
+                    padding: 20
+                }
+            });
+
+            // Initialize mermaid controls
+            initializeMermaidControls();
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Update active navigation item on scroll
+        window.addEventListener('scroll', function () {
+            let current = '';
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.toc-item');
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Mobile menu toggle (if needed)
+        function toggleMobileMenu() {
+            const toc = document.querySelector('.toc-fixed');
+            toc.classList.toggle('open');
+        }
+    </script>
+</body>
+
+</html>
