@@ -1,0 +1,2194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>工业加速器：核技术应用的核心引擎</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+
+    <style>
+        :root {
+            --primary: #1e3a5f;
+            --secondary: #2d5a87;
+            --accent: #2563eb;
+            --neutral: #374151;
+            --base-100: #ffffff;
+            --base-200: #f8fafc;
+            --base-300: #e2e8f0;
+            --info: #0ea5e9;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            color: var(--neutral);
+        }
+
+        .serif {
+            font-family: 'Noto Serif SC', serif;
+        }
+
+        .toc {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 280px;
+            height: 100vh;
+            background: var(--base-100);
+            border-right: 1px solid var(--base-300);
+            overflow-y: auto;
+            z-index: 1000;
+            padding: 2rem 1.5rem;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .main-content {
+            margin-left: 280px;
+            min-height: 100vh;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            align-items: center;
+            min-height: 60vh;
+        }
+
+        .hero-text {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .citation {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted var(--accent);
+        }
+
+        .citation:hover {
+            background: rgba(37, 99, 235, 0.1);
+            border-bottom: 1px solid var(--accent);
+        }
+
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+            margin: 3rem 0;
+        }
+
+        .quote-block {
+            border-left: 4px solid var(--accent);
+            background: var(--base-200);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            font-size: 1.1rem;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 1.2rem;
+            width: 2px;
+            height: calc(100% + 1rem);
+            background: var(--base-300);
+        }
+
+        .timeline-item:last-child::after {
+            display: none;
+        }
+
+        .industry-card {
+            background: var(--base-100);
+            border: 1px solid var(--base-300);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .industry-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--base-100) 0%, var(--base-200) 100%);
+            border: 1px solid var(--base-300);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: var(--base-100);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--base-300);
+        }
+
+        .comparison-table th {
+            background: var(--base-200);
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .comparison-table tr:hover {
+            background: var(--base-200);
+        }
+
+        .toc-link {
+            display: block;
+            padding: 0.5rem 0;
+            color: var(--neutral);
+            text-decoration: none;
+            border-left: 3px solid transparent;
+            padding-left: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .toc-link:hover,
+        .toc-link.active {
+            color: var(--accent);
+            border-left-color: var(--accent);
+            background: rgba(37, 99, 235, 0.05);
+        }
+
+        .toc-section {
+            font-weight: 600;
+            margin-top: 1.5rem;
+            color: var(--primary);
+        }
+
+        .toc-subsection {
+            margin-left: 1rem;
+            font-size: 0.9rem;
+        }
+
+        /* Mermaid diagram styles */
+        .mermaid-container {
+            display: flex;
+            justify-content: center;
+            min-height: 300px;
+            max-height: 800px;
+            background: #ffffff;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mermaid-container .mermaid {
+            width: 100%;
+            max-width: 100%;
+            height: 100%;
+            cursor: grab;
+            transition: transform 0.3s ease;
+            transform-origin: center center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            touch-action: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .mermaid-container .mermaid svg {
+            max-width: 100%;
+            height: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .mermaid-container .mermaid:active {
+            cursor: grabbing;
+        }
+
+        .mermaid-container.zoomed .mermaid {
+            height: 100%;
+            width: 100%;
+            cursor: grab;
+        }
+
+        .mermaid-controls {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 20;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 8px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .mermaid-control-btn {
+            background: #ffffff;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #374151;
+            font-size: 14px;
+            min-width: 36px;
+            height: 36px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mermaid-control-btn:hover {
+            background: #f8fafc;
+            border-color: #3b82f6;
+            color: #3b82f6;
+            transform: translateY(-1px);
+        }
+
+        .mermaid-control-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Enhanced mermaid node styling for better contrast */
+        .mermaid .node rect,
+        .mermaid .node circle,
+        .mermaid .node ellipse,
+        .mermaid .node polygon {
+            stroke: #2563eb !important;
+            stroke-width: 2px !important;
+            fill: #ffffff !important;
+        }
+
+        .mermaid .node .label {
+            color: #1e293b !important;
+            font-weight: 500 !important;
+            font-size: 13px !important;
+        }
+
+        .mermaid .edgePath .path {
+            stroke: #64748b !important;
+            stroke-width: 2px !important;
+        }
+
+        .mermaid .edgeLabel {
+            background-color: #ffffff !important;
+            color: #374151 !important;
+            font-weight: 500 !important;
+            border: 1px solid #e2e8f0 !important;
+            border-radius: 4px !important;
+            padding: 2px 6px !important;
+        }
+
+        /* Timeline specific styling */
+        .mermaid .section0,
+        .mermaid .section1,
+        .mermaid .section2,
+        .mermaid .section3 {
+            fill: #e0f2fe !important;
+            stroke: #0277bd !important;
+        }
+
+        /* Timeline tasks styling */
+        .mermaid .task0,
+        .mermaid .task1,
+        .mermaid .task2,
+        .mermaid .task3 {
+            fill: #ffffff !important;
+            stroke: #2563eb !important;
+            stroke-width: 2px !important;
+        }
+
+        .mermaid .taskText0,
+        .mermaid .taskText1,
+        .mermaid .taskText2,
+        .mermaid .taskText3 {
+            fill: #1e293b !important;
+            font-weight: 500 !important;
+        }
+
+        @media (max-width: 1024px) {
+            .toc {
+                display: none;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .mermaid-control-btn:not(.reset-zoom) {
+                display: none;
+            }
+
+            .mermaid-controls {
+                top: auto;
+                bottom: 15px;
+                right: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .hero-text {
+                font-size: 2.5rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .mermaid-container {
+                padding: 15px;
+            }
+
+            .industry-card {
+                padding: 1.5rem;
+            }
+
+            .comparison-table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+
+            .hero-grid img {
+                height: auto;
+            }
+        }
+
+        @media (max-width: 390px) {
+            .hero-text {
+                font-size: 2rem;
+            }
+
+            .px-8 {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .mermaid-container {
+                padding: 10px;
+                margin: 15px 0;
+            }
+
+            .industry-card {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-base-100">
+    <!-- Table of Contents -->
+    <nav class="toc">
+        <div class="mb-8">
+            <h2 class="text-xl font-bold text-primary mb-4">目录导航</h2>
+        </div>
+
+        <div class="toc-section">概述</div>
+        <a href="#introduction" class="toc-link">引言</a>
+        <a href="#definition" class="toc-link toc-subsection">定义与分类</a>
+        <a href="#importance" class="toc-link toc-subsection">重要性及应用价值</a>
+
+        <div class="toc-section">发展历程</div>
+        <a href="#domestic-history" class="toc-link">国内发展历程</a>
+        <a href="#international-history" class="toc-link">国外发展历程</a>
+        <a href="#comparison" class="toc-link">技术发展比较</a>
+
+        <div class="toc-section">应用领域</div>
+        <a href="#irradiation" class="toc-link">辐照加工领域</a>
+        <a href="#environmental" class="toc-link">环境保护领域</a>
+        <a href="#medical" class="toc-link">医疗健康领域</a>
+        <a href="#other-industries" class="toc-link">其他工业与科研领域</a>
+
+        <div class="toc-section">产业现状</div>
+        <a href="#domestic-industry" class="toc-link">国内产业现状</a>
+        <a href="#international-industry" class="toc-link">国外产业现状</a>
+
+        <div class="toc-section">案例分析</div>
+        <a href="#domestic-cases" class="toc-link">国内典型案例</a>
+        <a href="#international-cases" class="toc-link">国外典型案例</a>
+
+        <div class="toc-section">展望</div>
+        <a href="#conclusion" class="toc-link">结论与展望</a>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="px-8 py-16 bg-gradient-to-br from-slate-50 to-blue-50">
+            <div class="max-w-7xl mx-auto">
+                <div class="hero-grid">
+                    <div class="space-y-6">
+                        <h1 class="text-5xl font-bold serif hero-text leading-tight">
+                            工业加速器：核技术应用的
+                            <em class="italic text-secondary">核心引擎</em>
+                        </h1>
+                        <p class="text-xl text-gray-600 leading-relaxed">
+                            国内外工业加速器历史与现状深度研究：从基础理论到产业化应用的全景分析
+                        </p>
+                        <div class="flex items-center space-x-6 text-sm text-gray-500">
+                            <span><i class="fas fa-atom mr-2"></i>核技术应用</span>
+                            <span><i class="fas fa-industry mr-2"></i>工业装备</span>
+                            <span><i class="fas fa-chart-line mr-2"></i>产业发展</span>
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <img src="https://kimi-web-img.moonshot.cn/img/api.oe1.com/91efc60bfd52af7dc809b8eaece29268eff1c228.jpg"
+                            alt="工业粒子加速器设备" class="w-full h-80 object-cover rounded-lg shadow-lg" size="large"
+                            aspect="wide" style="photo" query="工业粒子加速器" referrerpolicy="no-referrer" data-modified="1"
+                            data-score="11595.00" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-lg"></div>
+                    </div>
+                </div>
+
+                <!-- Key Highlights -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+                    <div class="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+                        <div class="text-2xl font-bold text-accent mb-2">1200+</div>
+                        <div class="text-sm text-gray-600">全球医用同位素生产回旋加速器数量</div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+                        <div class="text-2xl font-bold text-accent mb-2">244.79亿</div>
+                        <div class="text-sm text-gray-600">2024年中国辐照加速器市场规模（人民币）</div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+                        <div class="text-2xl font-bold text-accent mb-2">12.5%</div>
+                        <div class="text-sm text-gray-600">中国市场年复合增长率（2018-2024）</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Introduction Section -->
+        <section id="introduction" class="px-8 py-16">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-4xl font-bold serif text-primary mb-8">引言</h2>
+
+                <div id="definition" class="mb-12">
+                    <h3 class="text-2xl font-semibold text-secondary mb-6">工业加速器的定义与分类</h3>
+
+                    <p class="mb-6">
+                        工业加速器，广义上是指所有产生带电粒子束（电子或离子）并应用于工业领域的加速器设备，但不包括医疗治疗和基础物理研究的加速器，也不包括产生内部束流的设备<a
+                            href="https://www-pub.iaea.org/MTCD/publications/PDF/P1433_CD/datasets/presentations/AP-IA-12.pdf"
+                            class="citation">[162]</a>。狭义上，工业加速器特指产生外部束流的带电粒子加速器，这些束流用于离子注入、离子束分析、中子产生、放射性同位素生产、电子束材料加工、电子束辐照和电子束检测等工业应用<a
+                            href="https://www.sci-hub.se/downloads/2020-03-19/73/doyle2019.pdf"
+                            class="citation">[163]</a>。
+                    </p>
+
+                    <div class="quote-block">
+                        &#34;具有合适能量和强度的合适粒子束可以缩小肿瘤、生产更清洁的能源、发现可疑货物、制造更好的子午线轮胎、净化饮用水、绘制蛋白质图谱、研究核爆炸、设计新药、制造耐热汽车电缆、诊断疾病、减少核废料、检测艺术品伪造、将离子注入半导体、勘探石油、确定考古发现年代、包装感恩节火鸡，甚至发现宇宙的秘密。&#34;
+                        <cite class="block text-sm text-gray-500 mt-2">— &#34;加速器为美国未来&#34;研讨会报告</cite>
+                    </div>
+
+                    <h4 class="text-xl font-semibold text-neutral mb-4">主要分类</h4>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                        <div class="industry-card">
+                            <h5 class="font-semibold text-accent mb-3">直流高压型加速器</h5>
+                            <ul class="space-y-2 text-sm">
+                                <li>• 范德格拉夫加速器 (1-15 MeV)</li>
+                                <li>• 地那米加速器 (≤5 MeV, ≤100 mA)</li>
+                                <li>• 科克罗夫特-瓦尔顿加速器</li>
+                                <li>• 感应芯式变压器加速器 (ICT)</li>
+                            </ul>
+                        </div>
+
+                        <div class="industry-card">
+                            <h5 class="font-semibold text-accent mb-3">射频直线加速器</h5>
+                            <ul class="space-y-2 text-sm">
+                                <li>• 电子直线加速器 (1-16 MeV, ≤50 kW)</li>
+                                <li>• 离子直线加速器 (1-70 MeV)</li>
+                                <li>• 工作频率：0.8-9 GHz (电子)</li>
+                                <li>• 工作频率：100-600 MHz (离子)</li>
+                            </ul>
+                        </div>
+
+                        <div class="industry-card">
+                            <h5 class="font-semibold text-accent mb-3">回旋型加速器</h5>
+                            <ul class="space-y-2 text-sm">
+                                <li>• 回旋加速器 (10-70 MeV)</li>
+                                <li>• 电子感应加速器 (≤15 MeV)</li>
+                                <li>• 罗多otron加速器 (5-10 MeV, ≤700 kW)</li>
+                                <li>• 同步加速器 (≤3 GeV)</li>
+                            </ul>
+                        </div>
+
+                        <div class="industry-card">
+                            <h5 class="font-semibold text-accent mb-3">应用分类</h5>
+                            <ul class="space-y-2 text-sm">
+                                <li>• 低能电子束系统 (100-300 keV)</li>
+                                <li>• 中能电子束系统 (450-1000 keV)</li>
+                                <li>• 中高能电子束系统 (1-5 MeV)</li>
+                                <li>• 高能电子束系统 (5-10 MeV)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="importance" class="mb-12">
+                    <h3 class="text-2xl font-semibold text-secondary mb-6">工业加速器的重要性及应用价值</h3>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number">材料改性</div>
+                            <div class="text-sm text-gray-600">核心技术手段</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">公共健康</div>
+                            <div class="text-sm text-gray-600">消毒灭菌保障</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">环境保护</div>
+                            <div class="text-sm text-gray-600">污染治理新方向</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">新兴产业</div>
+                            <div class="text-sm text-gray-600">关键支撑技术</div>
+                        </div>
+                    </div>
+
+                    <div class="prose prose-lg max-w-none">
+                        <p>
+                            工业加速器作为现代工业和高科技产业的关键设备之一，其重要性体现在多个层面。首先，它们是材料改性的核心技术手段。通过高能电子束或离子束辐照，可以改变材料的物理、化学和生物特性，从而赋予材料新的功能或提升其性能<a
+                                href="https://www.inp.nsk.su/sites/promusk/eng/" class="citation">[165]</a>
+                            <a href="https://cds.cern.ch/record/1005393/files/p383.pdf" class="citation">[172]</a>。
+                        </p>
+
+                        <p>
+                            其次，工业加速器在保障公共健康与安全方面发挥着至关重要的作用。电子束和X射线辐照是医疗用品灭菌的主流技术之一，能够有效杀灭细菌和病毒，确保医疗器械和一次性医疗用品的无菌安全，且无化学残留，环保高效<a
+                                href="https://www-pub.iaea.org/MTCD/publications/PDF/P1433_CD/datasets/presentations/AP-IA-12.pdf"
+                                class="citation">[162]</a>
+                            <a href="https://cds.cern.ch/record/1005393/files/p383.pdf" class="citation">[172]</a>。
+                        </p>
+
+                        <p>
+                            再者，工业加速器在环境保护和可持续发展方面展现出巨大潜力。电子束辐照技术可用于处理工业废水、废气和固体废弃物，通过辐照分解有机污染物，去除有害物质，实现污染物的无害化或资源化利用<a
+                                href="https://www-pub.iaea.org/MTCD/publications/PDF/P1433_CD/datasets/presentations/AP-IA-12.pdf"
+                                class="citation">[162]</a>。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Development History Section -->
+        <section id="domestic-history" class="px-8 py-16">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-4xl font-bold serif text-primary mb-8">国内工业加速器的历史与发展</h2>
+
+                <!-- Development Timeline Diagram -->
+                <div class="mermaid-container">
+                    <div class="mermaid-controls">
+                        <button class="mermaid-control-btn zoom-in" title="放大">
+                            <i class="fas fa-search-plus"></i>
+                        </button>
+                        <button class="mermaid-control-btn zoom-out" title="缩小">
+                            <i class="fas fa-search-minus"></i>
+                        </button>
+                        <button class="mermaid-control-btn reset-zoom" title="重置">
+                            <i class="fas fa-expand-arrows-alt"></i>
+                        </button>
+                        <button class="mermaid-control-btn fullscreen" title="全屏查看">
+                            <i class="fas fa-expand"></i>
+                        </button>
+                    </div>
+                    <div class="mermaid" id="timeline-chart">
+                        timeline
+                        title &#34;中国工业加速器发展历程&#34;
+                        1950s-1970s : &#34;起步与探索阶段&#34;
+                        : &#34;引进1.2米回旋加速器&#34;
+                        : &#34;开启同位素技术应用&#34;
+
+                        1980s-1990s : &#34;技术攻关阶段&#34;
+                        : &#34;首台医用电子直线加速器(1976)&#34;
+                        : &#34;30MeV质子回旋加速器(1996)&#34;
+
+                        2000s-Present : &#34;产业化发展阶段&#34;
+                        : &#34;环保应用突破(2020)&#34;
+                        : &#34;国际市场份额提升&#34;
+                    </div>
+                </div>
+
+                <div class="space-y-12">
+                    <div class="timeline-item">
+                        <h3 class="text-xl font-semibold text-secondary mb-4">起步与探索阶段（20世纪50年代-70年代）</h3>
+                        <p class="mb-4">
+                            中国工业加速器的历史可以追溯到20世纪50年代。在这一时期，中国开始引进和研制早期的加速器设备，为后续的核技术应用奠定了基础。一个重要的里程碑是中国原子能科学研究院引进了一台<strong>1.2米回旋加速器</strong>，这标志着中国加速器放射性同位素技术与应用事业的开启<a
+                                href="https://www.caea.gov.cn/n6760340/n6760355/c6827456/part/6792949.pdf"
+                                class="citation">[261]</a>。
+                        </p>
+                        <p>
+                            这一时期的努力，体现了中国在核技术领域追赶世界先进水平的决心和初步尝试。例如，北京师范大学等机构曾利用原子能科学研究院的1.2米回旋加速器开展放射性同位素的研制工作，并在国际上取得了一定的研究成果<a
+                                href="https://www.caea.gov.cn/n6760340/n6760355/c6827456/part/6792949.pdf"
+                                class="citation">[360]</a>。
+                        </p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h3 class="text-xl font-semibold text-secondary mb-4">技术攻关与初步应用阶段（20世纪80年代-90年代）</h3>
+                        <p class="mb-4">
+                            进入20世纪80年代和90年代，中国工业加速器进入了技术攻关和初步应用阶段。中国于<strong>1976年研制出第一台医用电子直线加速器</strong>，这在世界范围内也属于较早自主研制出加速器的国家之一<a
+                                href="https://www.caea.gov.cn/n6760340/n6760355/c6827456/part/6792949.pdf"
+                                class="citation">[278]</a>。
+                        </p>
+                        <p class="mb-4">
+                            中国原子能科学研究院于<strong>1996年与比利时合作建成一台30MeV强流质子回旋加速器装置</strong>，专门用于放射性同位素的生产<a
+                                href="https://www.caea.gov.cn/n6760340/n6760355/c6827456/part/6792949.pdf"
+                                class="citation">[261]</a>。北京射线中心与北京首创轮胎等在2000年前后进行了轮胎辐照预硫化的相关技术研究<a
+                                href="https://www.caea.gov.cn/n6760340/n6760355/c6827456/part/6792949.pdf"
+                                class="citation">[360]</a>。
+                        </p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h3 class="text-xl font-semibold text-secondary mb-4">产业化与快速发展阶段（21世纪至今）</h3>
+                        <p class="mb-4">
+                            进入21世纪，特别是近年来，中国工业加速器产业进入了产业化和快速发展的新阶段。在辐照加工领域，无锡爱邦辐射技术有限公司研发了应用于轮胎预硫化的<strong>0.5MeV/80mA自屏蔽加速器</strong>，并已累计销售7台；中广核达胜加速器技术有限公司也销售了2台加速器用于轮胎辐照预硫化<a
+                                href="https://www.caea.gov.cn/n6760340/n6760355/c6827456/part/6792949.pdf"
+                                class="citation">[261]</a>。
+                        </p>
+
+                        <div class="industry-card">
+                            <h5 class="font-semibold text-accent mb-3">环保领域重大突破</h5>
+                            <p class="mb-3">
+                                中广核达胜在广东建成了国内第一个工业规模的电子加速器辐照处理印染废水工程项目，并于<strong>2020年6月正式投入运营</strong>，该工程采用7台电子加速器联机运行，设计处理能力达到30000立方米/天<a
+                                    href="https://www.caea.gov.cn/n6760340/n6760355/c6827456/part/6792949.pdf"
+                                    class="citation">[261]</a>。
+                            </p>
+                            <p>
+                                中广核中科海维科技发展有限公司的<strong>10MeV/20kW高能电子直线加速器成功出口巴基斯坦</strong>，实现了我国工业用高能电子辐照加速器海外市场的突破<a
+                                    href="https://www.caea.gov.cn/n6760340/n6760353/n6760381/c6827215/content.html"
+                                    class="citation">[346]</a>。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <section id="international-history" class="px-8 py-16 bg-base-200">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-4xl font-bold serif text-primary mb-8">国外工业加速器的历史与发展</h2>
+
+                <div class="space-y-12">
+                    <div class="timeline-item">
+                        <h3 class="text-xl font-semibold text-secondary mb-4">早期理论与技术奠基（20世纪初-40年代）</h3>
+                        <p class="mb-4">
+                            国外工业加速器的历史可以追溯到20世纪初，其发展深深植根于核物理和粒子物理学的早期探索。<strong>1907年，约翰·汤森德（John
+                                Townsend）首次实现了气体中电子的加速</strong>，这可以视为加速器概念的萌芽。<strong>1930年，欧内斯特·劳伦斯（Ernest O.
+                                Lawrence）发明了回旋加速器</strong>，并因此获得了1939年的诺贝尔物理学奖。
+                        </p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h3 class="text-xl font-semibold text-secondary mb-4">技术突破与工业应用兴起（20世纪50年代-80年代）</h3>
+                        <p class="mb-4">
+                            从20世纪50年代到80年代，是国外工业加速器技术取得重大突破并开始广泛应用于工业领域的时期。一个标志性的事件是，<strong>1954年，美国强生公司（Johnson &amp;
+                                Johnson）的子公司Ethicon率先使用电子加速器对医疗产品进行灭菌处理</strong>
+                            <a href="https://www.inp.nsk.su/sites/promusk/eng/" class="citation">[165]</a>。
+                        </p>
+
+                        <div class="industry-card">
+                            <h5 class="font-semibold text-accent mb-3">主要进展</h5>
+                            <ul class="space-y-2">
+                                <li>• <strong>1960年</strong>：丹麦RISOE国家实验室开始利用加速器进行医疗产品灭菌研究</li>
+                                <li>• <strong>1967年</strong>：法国SRTICARIC公司建立工业加速器设施用于医疗设备灭菌</li>
+                                <li>• <strong>1971年</strong>：日本开始辐射交联耐热电线电缆的商业化生产</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h3 class="text-xl font-semibold text-secondary mb-4">技术成熟与多元化发展（20世纪90年代至今）</h3>
+                        <p class="mb-4">
+                            自20世纪90年代至今，国外工业加速器技术进入了成熟与多元化发展的新阶段。全球已有<strong>1200余台回旋加速器用于医用同位素生产</strong>，主要分布在北美、欧洲、日本等发达国家和地区<a
+                                href="https://www.caea.gov.cn/n6760340/n6760355/c6827456/part/6792949.pdf"
+                                class="citation">[360]</a>。
+                        </p>
+
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-number">1200+</div>
+                                <div class="text-sm text-gray-600">医用同位素生产回旋加速器</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">50%+</div>
+                                <div class="text-sm text-gray-600">IBA质子治疗系统市场份额</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">25+</div>
+                                <div class="text-sm text-gray-600">IBA质子治疗中心数量</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Technology Comparison Section -->
+        <section id="comparison" class="px-8 py-16">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-4xl font-bold serif text-primary mb-8">工业加速器技术发展历程比较</h2>
+
+                <div class="comparison-table">
+                    <table class="w-full">
+                        <thead>
+                            <tr>
+                                <th>比较维度</th>
+                                <th>国内工业加速器</th>
+                                <th>国外工业加速器</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="font-semibold">发展历程</td>
+                                <td>起步较晚（20世纪50年代），但发展迅速</td>
+                                <td>起步早（20世纪初），技术积累深厚</td>
+                            </tr>
+                            <tr>
+                                <td class="font-semibold">技术特点</td>
+                                <td>从引进消化吸收到自主创新，部分领域已达国际领先</td>
+                                <td>技术成熟度高，应用领域广泛，产业链完整</td>
+                            </tr>
+                            <tr>
+                                <td class="font-semibold">核心优势</td>
+                                <td>环保应用（废水处理）、中低能加速器国产化</td>
+                                <td>高端设备、核心部件、多元化应用</td>
+                            </tr>
+                            <tr>
+                                <td class="font-semibold">市场表现</td>
+                                <td>国内市场中低端产品占比较高，高端产品进口依赖度约80%</td>
+                                <td>全球市场主导地位，特别是在高端医疗和科研领域</td>
+                            </tr>
+                            <tr>
+                                <td class="font-semibold">主要挑战</td>
+                                <td>核心技术自主化、高端产品竞争力、产业链协同</td>
+                                <td>技术创新持续动力、成本控制、新兴市场竞争</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="industry-card">
+                        <h4 class="text-xl font-semibold text-accent mb-4">国内技术发展特点与成就</h4>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-success mt-1 mr-3"></i>
+                                <span>在无损检验加速器技术和产品方面已进入国际领先行列</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-success mt-1 mr-3"></i>
+                                <span>国产高功率速调管投入使用，核心部件国产化取得突破</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-success mt-1 mr-3"></i>
+                                <span>电子束处理工业废水等技术世界领先</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-success mt-1 mr-3"></i>
+                                <span>10MeV/20kW高能电子直线加速器成功出口海外</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="industry-card">
+                        <h4 class="text-xl font-semibold text-accent mb-4">国外技术发展特点与领先优势</h4>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-star text-warning mt-1 mr-3"></i>
+                                <span>技术积累深厚，产业链完整，应用领域广泛</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-star text-warning mt-1 mr-3"></i>
+                                <span>高端医疗加速器市场主导地位稳固</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-star text-warning mt-1 mr-3"></i>
+                                <span>质子治疗系统全球市场份额超过50%</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-star text-warning mt-1 mr-3"></i>
+                                <span>持续推出创新产品如梅花瓣型加速器（Rhodotron）</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mt-8">
+                    <h4 class="text-xl font-semibold text-secondary mb-4">国内外技术差距与未来发展方向</h4>
+                    <p class="mb-4">
+                        尽管中国在工业加速器技术领域取得了显著进步，但在整体技术水平、核心部件自主化、高端产品市场占有率以及产业链完整性方面，与国外先进水平相比仍存在一定差距。例如，在医用电子直线加速器领域，虽然国内已有约<strong>2000台设备</strong>在医院使用，但约<strong>80%为进口设备</strong>
+                        <a href="https://www.caea.gov.cn/n6760340/n6760355/c6827456/part/6792949.pdf"
+                            class="citation">[278]</a>。
+                    </p>
+
+                    <div class="industry-card">
+                        <h5 class="font-semibold text-accent mb-3">中国未来发展重点方向</h5>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <h6 class="font-semibold mb-2">技术层面</h6>
+                                <ul class="text-sm space-y-1">
+                                    <li>• 加强核心技术攻关</li>
+                                    <li>• 提升关键部件自主化水平</li>
+                                    <li>• 突破&#34;卡脖子&#34;技术瓶颈</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h6 class="font-semibold mb-2">应用层面</h6>
+                                <ul class="text-sm space-y-1">
+                                    <li>• 大力发展高端应用</li>
+                                    <li>• 推动产业链协同发展</li>
+                                    <li>• 积极参与国际标准制定</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Application Fields Section -->
+        <section id="irradiation" class="px-8 py-16 bg-base-200">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-4xl font-bold serif text-primary mb-8">工业加速器的应用领域变迁</h2>
+
+                <!-- Application Areas Diagram -->
+                <div class="mermaid-container mb-12">
+                    <div class="mermaid-controls">
+                        <button class="mermaid-control-btn zoom-in" title="放大">
+                            <i class="fas fa-search-plus"></i>
+                        </button>
+                        <button class="mermaid-control-btn zoom-out" title="缩小">
+                            <i class="fas fa-search-minus"></i>
+                        </button>
+                        <button class="mermaid-control-btn reset-zoom" title="重置">
+                            <i class="fas fa-expand-arrows-alt"></i>
+                        </button>
+                        <button class="mermaid-control-btn fullscreen" title="全屏查看">
+                            <i class="fas fa-expand"></i>
+                        </button>
+                    </div>
+                    <div class="mermaid" id="application-chart">
+                        graph TD
+                        A[&#34;工业加速器应用&#34;] --&gt; B[&#34;辐照加工&#34;]
+                        A --&gt; C[&#34;环境保护&#34;]
+                        A --&gt; D[&#34;医疗健康&#34;]
+                        A --&gt; E[&#34;工业科研&#34;]
+
+                        B --&gt; B1[&#34;材料改性&#34;]
+                        B --&gt; B2[&#34;食品保鲜&#34;]
+                        B --&gt; B3[&#34;消毒灭菌&#34;]
+
+                        C --&gt; C1[&#34;废水处理&#34;]
+                        C --&gt; C2[&#34;废气净化&#34;]
+                        C --&gt; C3[&#34;固废处理&#34;]
+
+                        D --&gt; D1[&#34;医疗器械灭菌&#34;]
+                        D --&gt; D2[&#34;同位素生产&#34;]
+                        D --&gt; D3[&#34;癌症治疗&#34;]
+
+                        E --&gt; E1[&#34;无损检测&#34;]
+                        E --&gt; E2[&#34;半导体制造&#34;]
+                        E --&gt; E3[&#34;科学研究&#34;]
+                    </div>
+                </div>
+
+                <div class="space-y-12">
+                    <div id="irradiation">
+                        <h3 class="text-2xl font-semibold text-secondary mb-6">辐照加工领域（材料改性、食品保鲜等）</h3>
+                        <p class="mb-6">
+                            辐照加工是工业加速器最早也是应用最为广泛的领域之一，其核心是利用加速器产生的高能电子束或X射线与物质相互作用，引发物理、化学或生物效应。日本在辐射交联耐热电线电缆的商业化生产方面起步较早，各大电线电缆公司均使用多台电子加速器生产耐热、阻燃和耐化学腐蚀的电线电缆<a
+                                href="https://www-pub.iaea.org/mtcd/meetings/pdfplus/2009/cn173/cn173_boa.pdf"
+                                class="citation">[287]</a>。
+                        </p>
+
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-number">7台</div>
+                                <div class="text-sm text-gray-600">无锡爱邦轮胎预硫化加速器销量</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">8家</div>
+                                <div class="text-sm text-gray-600">2010年中国薄膜改性企业数量</div>
+                            </div>
+                        </div>
+
+                        <div class="industry-card">
+                            <h5 class="font-semibold text-accent mb-3">主要应用方向</h5>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div class="text-center">
+                                    <i class="fas fa-bolt text-2xl text-accent mb-2"></i>
+                                    <h6 class="font-semibold">电线电缆</h6>
+                                    <p class="text-sm text-gray-600">辐照交联提高耐温等级</p>
+                                </div>
+                                <div class="text-center">
+                                    <i class="fas fa-tire text-2xl text-accent mb-2"></i>
+                                    <h6 class="font-semibold">轮胎工业</h6>
+                                    <p class="text-sm text-gray-600">预硫化和性能改良</p>
+                                </div>
+                                <div class="text-center">
+                                    <i class="fas fa-box text-2xl text-accent mb-2"></i>
+                                    <h6 class="font-semibold">包装材料</h6>
+                                    <p class="text-sm text-gray-600">热收缩膜和阻隔膜</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="environmental">
+                        <h3 class="text-2xl font-semibold text-secondary mb-6">环境保护领域（废水、废气处理等）</h3>
+                        <p class="mb-6">
+                            近年来，工业加速器在环境保护领域的应用日益受到重视，并取得了显著成效。中国在电子束处理工业废水方面走在世界前列。<strong>2020年，清华大学与江苏达胜加速器制造有限公司成功研制出水处理专用的电子加速器及辐照反应器</strong>，并建立了国内第一个工业规模的电子加速器辐照处理印染废水示范工程<a
+                                href="https://www.caea.gov.cn/n6760340/n6760355/c6827456/part/6792949.pdf"
+                                class="citation">[278]</a>。
+                        </p>
+
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-number">30000</div>
+                                <div class="text-sm text-gray-600">立方米/天 印染废水处理能力</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">400</div>
+                                <div class="text-sm text-gray-600">吨/天 医疗污水处理能力</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">100</div>
+                                <div class="text-sm text-gray-600">吨/天 抗生素菌渣处理能力</div>
+                            </div>
+                        </div>
+
+                        <div class="industry-card">
+                            <h5 class="font-semibold text-accent mb-3">环保应用案例</h5>
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fas fa-water text-info mt-1 mr-3"></i>
+                                    <div>
+                                        <strong>印染废水处理</strong>：广东工业规模项目，7台加速器联机运行
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-hospital text-info mt-1 mr-3"></i>
+                                    <div>
+                                        <strong>医疗废水处理</strong>：湖北十堰西苑医院污水处理项目
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-recycle text-info mt-1 mr-3"></i>
+                                    <div>
+                                        <strong>抗生素菌渣处理</strong>：新疆伊犁示范工程，实现无害化处理
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div id="medical">
+                        <h3 class="text-2xl font-semibold text-secondary mb-6">医疗健康领域（消毒灭菌、癌症治疗等）</h3>
+                        <p class="mb-6">
+                            工业加速器在医疗健康领域的应用非常广泛，主要包括医疗器械的消毒灭菌、放射性同位素的生产以及癌症的放射治疗等。全球已有<strong>超过1200台回旋加速器用于医用同位素生产</strong>
+                            <a href="https://www.caea.gov.cn/n6760340/n6760355/c6827456/part/6792949.pdf"
+                                class="citation">[261]</a>。
+                        </p>
+
+                        <div class="industry-card">
+                            <h5 class="font-semibold text-accent mb-3">医疗应用统计</h5>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <h6 class="font-semibold mb-2">国内市场</h6>
+                                    <ul class="text-sm space-y-1">
+                                        <li>• 约2000台电子直线加速器用于肿瘤治疗</li>
+                                        <li>• 约80%为进口设备</li>
+                                        <li>• 20多家单位可生产放疗加速器</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h6 class="font-semibold mb-2">全球市场</h6>
+                                    <ul class="text-sm space-y-1">
+                                        <li>• 1200+台回旋加速器用于同位素生产</li>
+                                        <li>• 主要分布在北美、欧洲、日本</li>
+                                        <li>• IBA质子治疗系统市场份额超50%</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="other-industries">
+                        <h3 class="text-2xl font-semibold text-secondary mb-6">其他工业与科研领域（无损检测、半导体制造等）</h3>
+                        <p class="mb-6">
+                            除了主要应用领域外，工业加速器还在无损检测、半导体制造、航空航天、国家安全等多个工业与科研领域发挥着重要作用。中国在<strong>无损检验加速器技术和产品方面已进入国际领先行列</strong>，产品不仅满足国内需求，还在国际市场上占有相当大的份额<a
+                                href="https://www.caea.gov.cn/n6760340/n6760355/c6827456/part/6792949.pdf"
+                                class="citation">[261]</a>。
+                        </p>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="industry-card">
+                                <h5 class="font-semibold text-accent mb-3">半导体制造</h5>
+                                <ul class="space-y-2 text-sm">
+                                    <li>• 芯片改性与缺陷修复</li>
+                                    <li>• 光刻工艺应用</li>
+                                    <li>• IGBT器件制造</li>
+                                </ul>
+                            </div>
+                            <div class="industry-card">
+                                <h5 class="font-semibold text-accent mb-3">科学研究</h5>
+                                <ul class="space-y-2 text-sm">
+                                    <li>• 北京正负电子对撞机(BEPCII)</li>
+                                    <li>• 中国散裂中子源(CSNS)</li>
+                                    <li>• 同步辐射光源应用</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Industry Status Section -->
+        <section id="domestic-industry" class="px-8 py-16">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-4xl font-bold serif text-primary mb-8">国内外工业加速器产业发展现状</h2>
+
+                <div class="space-y-12">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-secondary mb-6">国内产业规模、政策支持与竞争格局</h3>
+
+                        <div class="stats-grid mb-8">
+                            <div class="stat-card">
+                                <div class="stat-number">244.79亿</div>
+                                <div class="text-sm text-gray-600">2024年市场规模（人民币）</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">12.5%</div>
+                                <div class="text-sm text-gray-600">年复合增长率（2018-2024）</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">1.86亿</div>
+                                <div class="text-sm text-gray-600">中广核技2024上半年收入（人民币）</div>
+                            </div>
+                        </div>
+
+                        <p class="mb-6">
+                            中国辐照加速器行业近年来展现出强劲的增长势头，市场规模持续扩大。根据智研咨询的数据，<strong>2018年中国辐照加速器行业市场规模为120.54亿元人民币，到2024年已增长至244.79亿元人民币</strong>，期间的年复合增长率达到了<strong>12.5%</strong>
+                            <a href="https://m.chyxx.com/industry/1218662.html" class="citation">[246]</a>。
+                        </p>
+
+                        <div class="industry-card">
+                            <h5 class="font-semibold text-accent mb-3">竞争格局分析</h5>
+                            <div class="space-y-4">
+                                <div class="border-l-4 border-success pl-4">
+                                    <h6 class="font-semibold text-success">第一梯队</h6>
+                                    <p class="text-sm">中广核技：高端市场技术实力强，全系列产品覆盖</p>
+                                </div>
+                                <div class="border-l-4 border-warning pl-4">
+                                    <h6 class="font-semibold text-warning">第二梯队</h6>
+                                    <p class="text-sm">蓝孚高能、广东中能、宁波超能、戈瑞电子等：中能加速器为主</p>
+                                </div>
+                                <div class="border-l-4 border-info pl-4">
+                                    <h6 class="font-semibold text-info">其他企业</h6>
+                                    <p class="text-sm">中小型企业集中在低端产品领域</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="industry-card">
+                            <h5 class="font-semibold text-accent mb-3">政策支持</h5>
+                            <p class="mb-3">
+                                国家原子能机构等十二部门联合发布了<strong>《核技术应用产业高质量发展三年行动方案（2024—2026年）》</strong>，明确提出要积极扩大辐照技术在医疗物资灭菌、中药材加工等领域的应用规模<a
+                                    href="https://m.chyxx.com/industry/1218662.html" class="citation">[246]</a>。
+                            </p>
+                        </div>
+                    </div>
+
+                    <div id="international-industry">
+                        <h3 class="text-2xl font-semibold text-secondary mb-6">国外产业规模、市场分布与主要参与者</h3>
+
+                        <div class="stats-grid mb-8">
+                            <div class="stat-card">
+                                <div class="stat-number">30.2亿</div>
+                                <div class="text-sm text-gray-600">2023年全球市场规模（美元）</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">86亿</div>
+                                <div class="text-sm text-gray-600">2032年预计规模（美元）</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">12.32%</div>
+                                <div class="text-sm text-gray-600">预期复合增长率</div>
+                            </div>
+                        </div>
+
+                        <p class="mb-6">
+                            全球工业加速器市场呈现出持续增长的态势。根据WiseGuy
+                            Reports的分析，<strong>2023年全球电子辐照加速器市场规模为30.2亿美元，预计到2024年将增长至34亿美元，并有望在2032年达到86亿美元</strong>，期间的复合年增长率（CAGR）预计为<strong>12.32%</strong>
+                            <a href="https://www.wiseguyreports.com/cn/reports/electron-irradiation-accelerator-market"
+                                class="citation">[316]</a>。
+                        </p>
+
+                        <div class="industry-card">
+                            <h5 class="font-semibold text-accent mb-3">全球市场分布</h5>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <h6 class="font-semibold mb-2">成熟市场</h6>
+                                    <ul class="text-sm space-y-1">
+                                        <li>• 北美：美国、加拿大</li>
+                                        <li>• 欧洲：德国、英国、法国、俄罗斯等</li>
+                                        <li>• 日本、韩国</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h6 class="font-semibold mb-2">增长最快市场</h6>
+                                    <ul class="text-sm space-y-1">
+                                        <li>• 中国、印度</li>
+                                        <li>• 马来西亚、泰国</li>
+                                        <li>• 印度尼西亚</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="industry-card">
+                            <h5 class="font-semibold text-accent mb-3">主要国际参与者</h5>
+                            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
+                                <div class="text-center p-3 bg-base-200 rounded">
+                                    <i class="fas fa-building text-accent mb-1"></i>
+                                    <div class="font-semibold">IBA</div>
+                                    <div class="text-xs text-gray-600">比利时</div>
+                                </div>
+                                <div class="text-center p-3 bg-base-200 rounded">
+                                    <i class="fas fa-building text-accent mb-1"></i>
+                                    <div class="font-semibold">Comet</div>
+                                    <div class="text-xs text-gray-600">瑞士</div>
+                                </div>
+                                <div class="text-center p-3 bg-base-200 rounded">
+                                    <i class="fas fa-building text-accent mb-1"></i>
+                                    <div class="font-semibold">三菱电机</div>
+                                    <div class="text-xs text-gray-600">日本</div>
+                                </div>
+                                <div class="text-center p-3 bg-base-200 rounded">
+                                    <i class="fas fa-building text-accent mb-1"></i>
+                                    <div class="font-semibold">日立</div>
+                                    <div class="text-xs text-gray-600">日本</div>
+                                </div>
+                                <div class="text-center p-3 bg-base-200 rounded">
+                                    <i class="fas fa-building text-accent mb-1"></i>
+                                    <div class="font-semibold">住友重工</div>
+                                    <div class="text-xs text-gray-600">日本</div>
+                                </div>
+                                <div class="text-center p-3 bg-base-200 rounded">
+                                    <i class="fas fa-building text-accent mb-1"></i>
+                                    <div class="font-semibold">Scanditronix</div>
+                                    <div class="text-xs text-gray-600">瑞典</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-2xl font-semibold text-secondary mb-6">全球工业加速器产业发展趋势与挑战</h3>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div class="industry-card">
+                                <h5 class="font-semibold text-success mb-3">
+                                    <i class="fas fa-arrow-trend-up mr-2"></i>发展趋势
+                                </h5>
+                                <ul class="space-y-2 text-sm">
+                                    <li>• 小型化、智能化、自动化发展</li>
+                                    <li>• AI驱动的无损检测分析平台</li>
+                                    <li>• 应用领域持续拓展</li>
+                                    <li>• 非同位素辐射源受青睐</li>
+                                    <li>• 高能直线加速器需求增加</li>
+                                </ul>
+                            </div>
+
+                            <div class="industry-card">
+                                <h5 class="font-semibold text-error mb-3">
+                                    <i class="fas fa-exclamation-triangle mr-2"></i>面临挑战
+                                </h5>
+                                <ul class="space-y-2 text-sm">
+                                    <li>• 高昂的初始投资成本</li>
+                                    <li>• 严格的法规监管要求</li>
+                                    <li>• 技术认知度和接受度</li>
+                                    <li>• 传统技术的竞争</li>
+                                    <li>• 核心技术自主创新能力</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Case Studies Section -->
+        <section id="domestic-cases" class="px-8 py-16 bg-base-200">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-4xl font-bold serif text-primary mb-8">典型案例分析</h2>
+
+                <div class="space-y-12">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-secondary mb-6">国内典型企业/机构案例分析</h3>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div class="industry-card">
+                                <h4 class="text-xl font-semibold text-accent mb-4">
+                                    <i class="fas fa-atom mr-2"></i>中广核核技术发展股份有限公司
+                                </h4>
+                                <div class="space-y-3">
+                                    <div class="flex justify-between">
+                                        <span class="font-semibold">成立时间</span>
+                                        <span>1993年</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="font-semibold">2023年收入</span>
+                                        <span>4.21亿元</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="font-semibold">2024上半年收入</span>
+                                        <span>1.86亿元 (+18.34%)</span>
+                                    </div>
+                                </div>
+
+                                <div class="mt-4 pt-4 border-t border-base-300">
+                                    <h5 class="font-semibold mb-2">核心优势</h5>
+                                    <ul class="text-sm space-y-1">
+                                        <li>• 电子束处理特种废物技术全球领先</li>
+                                        <li>• 高、中、低能全系列工业电子加速器</li>
+                                        <li>• 国内最大电子加速器研发制造企业之一</li>
+                                        <li>• 产品出口日本、韩国、印度等18个国家</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="industry-card">
+                                <h4 class="text-xl font-semibold text-accent mb-4">
+                                    <i class="fas fa-radiation mr-2"></i>无锡爱邦辐射技术有限公司
+                                </h4>
+                                <div class="space-y-3">
+                                    <div class="flex justify-between">
+                                        <span class="font-semibold">市场定位</span>
+                                        <span>价格竞争型</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="font-semibold">主要产品</span>
+                                        <span>0.5MeV/80mA自屏蔽加速器</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="font-semibold">轮胎预硫化销量</span>
+                                        <span>7台</span>
+                                    </div>
+                                </div>
+
+                                <div class="mt-4 pt-4 border-t border-base-300">
+                                    <h5 class="font-semibold mb-2">竞争优势</h5>
+                                    <ul class="text-sm space-y-1">
+                                        <li>• 产品售价较低，性价比优势明显</li>
+                                        <li>• 在特定应用型加速器研发有成绩</li>
+                                        <li>• 产品出口韩国、印度、土耳其等国</li>
+                                        <li>• 在材料改性领域出货量较高</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="industry-card mt-8">
+                            <h4 class="text-xl font-semibold text-accent mb-4">其他重要机构</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div class="text-center p-4 bg-white rounded-lg border">
+                                    <i class="fas fa-university text-2xl text-accent mb-2"></i>
+                                    <h5 class="font-semibold">中科院近代物理所</h5>
+                                    <p class="text-xs text-gray-600">医用重离子加速器</p>
+                                </div>
+                                <div class="text-center p-4 bg-white rounded-lg border">
+                                    <i class="fas fa-microscope text-2xl text-accent mb-2"></i>
+                                    <h5 class="font-semibold">中科院上海应用物理所</h5>
+                                    <p class="text-xs text-gray-600">辐照加速器技术</p>
+                                </div>
+                                <div class="text-center p-4 bg-white rounded-lg border">
+                                    <i class="fas fa-shield-alt text-2xl text-accent mb-2"></i>
+                                    <h5 class="font-semibold">同方威视</h5>
+                                    <p class="text-xs text-gray-600">安全检查设备</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="international-cases">
+                        <h3 class="text-2xl font-semibold text-secondary mb-6">国外典型企业/机构案例分析</h3>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div class="industry-card">
+                                <h4 class="text-xl font-semibold text-accent mb-4">
+                                    <i class="fas fa-globe-europe mr-2"></i>离子束应用有限公司 (IBA)
+                                </h4>
+                                <div class="space-y-3">
+                                    <div class="flex justify-between">
+                                        <span class="font-semibold">成立时间</span>
+                                        <span>1986年</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="font-semibold">质子治疗市场份额</span>
+                                        <span>&gt;50%</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="font-semibold">治疗中心数量</span>
+                                        <span>25+</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="font-semibold">治疗患者数量</span>
+                                        <span>25000+</span>
+                                    </div>
+                                </div>
+
+                                <div class="mt-4 pt-4 border-t border-base-300">
+                                    <h5 class="font-semibold mb-2">核心产品</h5>
+                                    <ul class="text-sm space-y-1">
+                                        <li>• Proteus®ONE小型化质子治疗系统</li>
+                                        <li>• 回旋加速器和同步加速器解决方案</li>
+                                        <li>• 工业辐照和半导体制造加速器</li>
+                                        <li>• 全球销售和服务网络</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="industry-card">
+                                <h4 class="text-xl font-semibold text-accent mb-4">
+                                    <i class="fas fa-industry mr-2"></i>三菱电机 (Mitsubishi Electric)
+                                </h4>
+                                <div class="space-y-3">
+                                    <div class="flex justify-between">
+                                        <span class="font-semibold">质子重离子中心</span>
+                                        <span>10座</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="font-semibold">重离子中心</span>
+                                        <span>4座</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="font-semibold">占地面积削减</span>
+                                        <span>35-60%</span>
+                                    </div>
+                                </div>
+
+                                <div class="mt-4 pt-4 border-t border-base-300">
+                                    <h5 class="font-semibold mb-2">技术特点</h5>
+                                    <ul class="text-sm space-y-1">
+                                        <li>• 小型质子束治疗装置</li>
+                                        <li>• 平面款和双层款设计</li>
+                                        <li>• 高可靠性和先进性</li>
+                                        <li>• 适用于城市小规模医院</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Conclusion Section -->
+        <section id="conclusion" class="px-8 py-16">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-4xl font-bold serif text-primary mb-8">结论与展望</h2>
+
+                <div class="space-y-12">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-secondary mb-6">国内外工业加速器发展经验总结</h3>
+
+                        <div class="quote-block mb-8">
+                            国内外工业加速器的发展历程为我们提供了宝贵的经验。持续的技术创新是推动产业发展的核心动力，明确的市场需求和应用导向是技术成果转化的关键。
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div class="industry-card">
+                                <h5 class="font-semibold text-accent mb-3">成功经验</h5>
+                                <ul class="space-y-2">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-lightbulb text-warning mt-1 mr-3"></i>
+                                        <span>持续的技术创新是核心动力</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-target text-warning mt-1 mr-3"></i>
+                                        <span>市场需求和应用导向是关键</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-network-wired text-warning mt-1 mr-3"></i>
+                                        <span>完善的产业链和产业生态是基础</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-hand-holding-heart text-warning mt-1 mr-3"></i>
+                                        <span>政府政策支持和资金投入至关重要</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-globe text-warning mt-1 mr-3"></i>
+                                        <span>国际合作与交流是重要途径</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="industry-card">
+                                <h5 class="font-semibold text-accent mb-3">关键启示</h5>
+                                <div class="space-y-4">
+                                    <div class="border-l-4 border-accent pl-4">
+                                        <h6 class="font-semibold">技术驱动</h6>
+                                        <p class="text-sm text-gray-600">从基础研究到产业应用的完整创新链</p>
+                                    </div>
+                                    <div class="border-l-4 border-success pl-4">
+                                        <h6 class="font-semibold">市场导向</h6>
+                                        <p class="text-sm text-gray-600">以应用需求牵引技术发展方向</p>
+                                    </div>
+                                    <div class="border-l-4 border-info pl-4">
+                                        <h6 class="font-semibold">生态协同</h6>
+                                        <p class="text-sm text-gray-600">上下游产业链协同发展</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-2xl font-semibold text-secondary mb-6">未来工业加速器技术发展趋势预测</h3>
+
+                        <div class="industry-card">
+                            <h5 class="font-semibold text-accent mb-4">四大发展方向</h5>
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                                <div class="text-center">
+                                    <div
+                                        class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                                        <i class="fas fa-rocket text-white text-xl"></i>
+                                    </div>
+                                    <h6 class="font-semibold mb-2">更高性能</h6>
+                                    <p class="text-sm text-gray-600">更高能量、更大功率、更高效率、更高稳定性</p>
+                                </div>
+
+                                <div class="text-center">
+                                    <div
+                                        class="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                                        <i class="fas fa-expand-arrows-alt text-white text-xl"></i>
+                                    </div>
+                                    <h6 class="font-semibold mb-2">更广应用</h6>
+                                    <p class="text-sm text-gray-600">新能源、新材料、生命健康、环境保护等领域</p>
+                                </div>
+
+                                <div class="text-center">
+                                    <div
+                                        class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                                        <i class="fas fa-brain text-white text-xl"></i>
+                                    </div>
+                                    <h6 class="font-semibold mb-2">更智能化</h6>
+                                    <p class="text-sm text-gray-600">AI、大数据、物联网深度融合</p>
+                                </div>
+
+                                <div class="text-center">
+                                    <div
+                                        class="w-16 h-16 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                                        <i class="fas fa-leaf text-white text-xl"></i>
+                                    </div>
+                                    <h6 class="font-semibold mb-2">更绿色化</h6>
+                                    <p class="text-sm text-gray-600">节能降耗、环保材料、减少环境影响</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="industry-card mt-8">
+                            <h5 class="font-semibold text-accent mb-3">前沿技术探索</h5>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div class="p-4 bg-base-200 rounded-lg">
+                                    <h6 class="font-semibold text-info mb-2">小型化</h6>
+                                    <p class="text-sm text-gray-600">紧凑化、模块化和专用化发展</p>
+                                </div>
+                                <div class="p-4 bg-base-200 rounded-lg">
+                                    <h6 class="font-semibold text-info mb-2">超导技术</h6>
+                                    <p class="text-sm text-gray-600">超导加速技术应用</p>
+                                </div>
+                                <div class="p-4 bg-base-200 rounded-lg">
+                                    <h6 class="font-semibold text-info mb-2">激光等离子体</h6>
+                                    <p class="text-sm text-gray-600">激光等离子体加速技术</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-2xl font-semibold text-secondary mb-6">中国工业加速器产业发展机遇与挑战</h3>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div class="industry-card">
+                                <h5 class="font-semibold text-success mb-3">
+                                    <i class="fas fa-chart-line mr-2"></i>发展机遇
+                                </h5>
+                                <ul class="space-y-3">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-flag text-success mt-1 mr-3"></i>
+                                        <div>
+                                            <strong>国家战略支持</strong>
+                                            <p class="text-sm text-gray-600">核技术应用列为国家重点发展产业</p>
+                                        </div>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-shopping-cart text-success mt-1 mr-3"></i>
+                                        <div>
+                                            <strong>巨大市场需求</strong>
+                                            <p class="text-sm text-gray-600">传统产业升级和新兴产业发展需求</p>
+                                        </div>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-cogs text-success mt-1 mr-3"></i>
+                                        <div>
+                                            <strong>技术进步加速</strong>
+                                            <p class="text-sm text-gray-600">国产化替代和核心技术突破</p>
+                                        </div>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-road text-success mt-1 mr-3"></i>
+                                        <div>
+                                            <strong>国际合作空间</strong>
+                                            <p class="text-sm text-gray-600">&#34;一带一路&#34;等倡议开辟国际市场</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="industry-card">
+                                <h5 class="font-semibold text-error mb-3">
+                                    <i class="fas fa-exclamation-triangle mr-2"></i>面临挑战
+                                </h5>
+                                <ul class="space-y-3">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-wrench text-error mt-1 mr-3"></i>
+                                        <div>
+                                            <strong>核心技术自主创新</strong>
+                                            <p class="text-sm text-gray-600">高端产品和关键部件仍有差距</p>
+                                        </div>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-puzzle-piece text-error mt-1 mr-3"></i>
+                                        <div>
+                                            <strong>产业链协同性</strong>
+                                            <p class="text-sm text-gray-600">上下游配套和技术标准统一性</p>
+                                        </div>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-users text-error mt-1 mr-3"></i>
+                                        <div>
+                                            <strong>市场竞争激烈</strong>
+                                            <p class="text-sm text-gray-600">国际巨头竞争和国内同质化竞争</p>
+                                        </div>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-shield-alt text-error mt-1 mr-3"></i>
+                                        <div>
+                                            <strong>法规和安全要求</strong>
+                                            <p class="text-sm text-gray-600">公众认知和严格的安全监管</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="quote-block mt-8">
+                            面对这些机遇与挑战，中国工业加速器产业需要坚持创新驱动，加强产学研用结合，完善产业生态，积极参与国际竞争与合作，以期实现高质量可持续发展。
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="px-8 py-12 bg-primary text-white">
+            <div class="max-w-4xl mx-auto text-center">
+                <h3 class="text-2xl font-bold serif mb-4">工业加速器：核技术应用的核心引擎</h3>
+                <p class="text-blue-200 mb-6">
+                    国外工业加速器起步早，技术积累深厚，在高端设备、核心部件及多元化应用方面保持领先；
+                    国内工业加速器虽起步较晚，但发展迅速，在部分中低能领域已实现国产化替代，并在特定应用（如环保）取得突破。
+                </p>
+                <div class="flex justify-center space-x-8 text-sm text-blue-200">
+                    <span><i class="fas fa-calendar mr-2"></i>2025年研究报告</span>
+                    <span><i class="fas fa-atom mr-2"></i>核技术应用</span>
+                    <span><i class="fas fa-industry mr-2"></i>工业装备</span>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        // Initialize Mermaid with enhanced styling and better contrast
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                // Primary colors with good contrast
+                primaryColor: '#ffffff',
+                primaryTextColor: '#1e293b',
+                primaryBorderColor: '#2563eb',
+
+                // Secondary colors
+                secondaryColor: '#e0f2fe',
+                secondaryTextColor: '#1e293b',
+                secondaryBorderColor: '#0277bd',
+
+                // Tertiary colors
+                tertiaryColor: '#f0f9ff',
+                tertiaryTextColor: '#374151',
+                tertiaryBorderColor: '#0284c7',
+
+                // Background and lines
+                background: '#ffffff',
+                mainBkg: '#ffffff',
+                secondBkg: '#f8fafc',
+                tertiaryBkg: '#f1f5f9',
+
+                // Lines and borders
+                lineColor: '#64748b',
+                edgeLabelBackground: '#ffffff',
+
+                // Node specific colors with good contrast
+                cScale0: '#ffffff',
+                cScale1: '#e0f2fe',
+                cScale2: '#f0f9ff',
+                cScale3: '#f8fafc',
+
+                // Text colors for better readability
+                textColor: '#1e293b',
+                nodeTextColor: '#1e293b',
+
+                // Timeline specific colors
+                section0: '#e0f2fe',
+                section1: '#f0f9ff',
+                section2: '#f8fafc',
+                section3: '#ffffff',
+
+                // Task colors in timeline
+                taskBkgColor: '#ffffff',
+                taskTextColor: '#1e293b',
+                taskTextLightColor: '#374151',
+                taskTextOutsideColor: '#1e293b',
+                taskTextClickableColor: '#2563eb',
+
+                // Grid and axis
+                gridColor: '#e2e8f0',
+                axisTextColor: '#64748b'
+            },
+            timeline: {
+                numberSectionStyles: 4,
+                axisFormat: '%Y'
+            },
+            flowchart: {
+                useMaxWidth: false,
+                htmlLabels: true,
+                curve: 'basis'
+            }
+        });
+
+        // Initialize Mermaid Controls for zoom and pan
+        function initializeMermaidControls() {
+            const containers = document.querySelectorAll('.mermaid-container');
+
+            containers.forEach(container => {
+                const mermaidElement = container.querySelector('.mermaid');
+                let scale = 1;
+                let isDragging = false;
+                let startX, startY, translateX = 0, translateY = 0;
+
+                // 触摸相关状态
+                let isTouch = false;
+                let touchStartTime = 0;
+                let initialDistance = 0;
+                let initialScale = 1;
+                let isPinching = false;
+
+                // Zoom controls
+                const zoomInBtn = container.querySelector('.zoom-in');
+                const zoomOutBtn = container.querySelector('.zoom-out');
+                const resetBtn = container.querySelector('.reset-zoom');
+                const fullscreenBtn = container.querySelector('.fullscreen');
+
+                function updateTransform() {
+                    mermaidElement.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+
+                    if (scale > 1) {
+                        container.classList.add('zoomed');
+                    } else {
+                        container.classList.remove('zoomed');
+                    }
+
+                    mermaidElement.style.cursor = isDragging ? 'grabbing' : 'grab';
+                }
+
+                if (zoomInBtn) {
+                    zoomInBtn.addEventListener('click', () => {
+                        scale = Math.min(scale * 1.25, 4);
+                        updateTransform();
+                    });
+                }
+
+                if (zoomOutBtn) {
+                    zoomOutBtn.addEventListener('click', () => {
+                        scale = Math.max(scale / 1.25, 0.3);
+                        if (scale <= 1) {
+                            translateX = 0;
+                            translateY = 0;
+                        }
+                        updateTransform();
+                    });
+                }
+
+                if (resetBtn) {
+                    resetBtn.addEventListener('click', () => {
+                        scale = 1;
+                        translateX = 0;
+                        translateY = 0;
+                        updateTransform();
+                    });
+                }
+
+                if (fullscreenBtn) {
+                    fullscreenBtn.addEventListener('click', () => {
+                        if (container.requestFullscreen) {
+                            container.requestFullscreen();
+                        } else if (container.webkitRequestFullscreen) {
+                            container.webkitRequestFullscreen();
+                        } else if (container.msRequestFullscreen) {
+                            container.msRequestFullscreen();
+                        }
+                    });
+                }
+
+                // Mouse Events
+                mermaidElement.addEventListener('mousedown', (e) => {
+                    if (isTouch) return; // 如果是触摸设备，忽略鼠标事件
+
+                    isDragging = true;
+                    startX = e.clientX - translateX;
+                    startY = e.clientY - translateY;
+                    mermaidElement.style.cursor = 'grabbing';
+                    updateTransform();
+                    e.preventDefault();
+                });
+
+                document.addEventListener('mousemove', (e) => {
+                    if (isDragging && !isTouch) {
+                        translateX = e.clientX - startX;
+                        translateY = e.clientY - startY;
+                        updateTransform();
+                    }
+                });
+
+                document.addEventListener('mouseup', () => {
+                    if (isDragging && !isTouch) {
+                        isDragging = false;
+                        mermaidElement.style.cursor = 'grab';
+                        updateTransform();
+                    }
+                });
+
+                document.addEventListener('mouseleave', () => {
+                    if (isDragging && !isTouch) {
+                        isDragging = false;
+                        mermaidElement.style.cursor = 'grab';
+                        updateTransform();
+                    }
+                });
+
+                // 获取两点之间的距离
+                function getTouchDistance(touch1, touch2) {
+                    return Math.hypot(
+                        touch2.clientX - touch1.clientX,
+                        touch2.clientY - touch1.clientY
+                    );
+                }
+
+                // Touch Events - 触摸事件处理
+                mermaidElement.addEventListener('touchstart', (e) => {
+                    isTouch = true;
+                    touchStartTime = Date.now();
+
+                    if (e.touches.length === 1) {
+                        // 单指拖动
+                        isPinching = false;
+                        isDragging = true;
+
+                        const touch = e.touches[0];
+                        startX = touch.clientX - translateX;
+                        startY = touch.clientY - translateY;
+
+                    } else if (e.touches.length === 2) {
+                        // 双指缩放
+                        isPinching = true;
+                        isDragging = false;
+
+                        const touch1 = e.touches[0];
+                        const touch2 = e.touches[1];
+                        initialDistance = getTouchDistance(touch1, touch2);
+                        initialScale = scale;
+                    }
+
+                    e.preventDefault();
+                }, { passive: false });
+
+                mermaidElement.addEventListener('touchmove', (e) => {
+                    if (e.touches.length === 1 && isDragging && !isPinching) {
+                        // 单指拖动
+                        const touch = e.touches[0];
+                        translateX = touch.clientX - startX;
+                        translateY = touch.clientY - startY;
+                        updateTransform();
+
+                    } else if (e.touches.length === 2 && isPinching) {
+                        // 双指缩放
+                        const touch1 = e.touches[0];
+                        const touch2 = e.touches[1];
+                        const currentDistance = getTouchDistance(touch1, touch2);
+
+                        if (initialDistance > 0) {
+                            const newScale = Math.min(Math.max(
+                                initialScale * (currentDistance / initialDistance),
+                                0.3
+                            ), 4);
+                            scale = newScale;
+                            updateTransform();
+                        }
+                    }
+
+                    e.preventDefault();
+                }, { passive: false });
+
+                mermaidElement.addEventListener('touchend', (e) => {
+                    // 重置状态
+                    if (e.touches.length === 0) {
+                        isDragging = false;
+                        isPinching = false;
+                        initialDistance = 0;
+
+                        // 延迟重置isTouch，避免鼠标事件立即触发
+                        setTimeout(() => {
+                            isTouch = false;
+                        }, 100);
+                    } else if (e.touches.length === 1 && isPinching) {
+                        // 从双指变为单指，切换为拖动模式
+                        isPinching = false;
+                        isDragging = true;
+
+                        const touch = e.touches[0];
+                        startX = touch.clientX - translateX;
+                        startY = touch.clientY - translateY;
+                    }
+
+                    updateTransform();
+                });
+
+                mermaidElement.addEventListener('touchcancel', (e) => {
+                    isDragging = false;
+                    isPinching = false;
+                    initialDistance = 0;
+
+                    setTimeout(() => {
+                        isTouch = false;
+                    }, 100);
+
+                    updateTransform();
+                });
+
+                // Enhanced wheel zoom with better center point handling
+                container.addEventListener('wheel', (e) => {
+                    e.preventDefault();
+                    const rect = container.getBoundingClientRect();
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+
+                    const delta = e.deltaY > 0 ? 0.9 : 1.1;
+                    const newScale = Math.min(Math.max(scale * delta, 0.3), 4);
+
+                    // Adjust translation to zoom towards center
+                    if (newScale !== scale) {
+                        const scaleDiff = newScale / scale;
+                        translateX = translateX * scaleDiff;
+                        translateY = translateY * scaleDiff;
+                        scale = newScale;
+
+                        if (scale <= 1) {
+                            translateX = 0;
+                            translateY = 0;
+                        }
+
+                        updateTransform();
+                    }
+                });
+
+                // Initialize display
+                updateTransform();
+            });
+        }
+
+        // Initialize the mermaid controls after the DOM is loaded
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize Mermaid diagrams
+            mermaid.initialize({
+                startOnLoad: true,
+                theme: 'base',
+                themeVariables: {
+                    // Primary colors with good contrast
+                    primaryColor: '#ffffff',
+                    primaryTextColor: '#1e293b',
+                    primaryBorderColor: '#2563eb',
+
+                    // Secondary colors
+                    secondaryColor: '#e0f2fe',
+                    secondaryTextColor: '#1e293b',
+                    secondaryBorderColor: '#0277bd',
+
+                    // Tertiary colors
+                    tertiaryColor: '#f0f9ff',
+                    tertiaryTextColor: '#374151',
+                    tertiaryBorderColor: '#0284c7',
+
+                    // Background and lines
+                    background: '#ffffff',
+                    mainBkg: '#ffffff',
+                    secondBkg: '#f8fafc',
+                    tertiaryBkg: '#f1f5f9',
+
+                    // Lines and borders
+                    lineColor: '#64748b',
+                    edgeLabelBackground: '#ffffff',
+
+                    // Node specific colors with good contrast
+                    cScale0: '#ffffff',
+                    cScale1: '#e0f2fe',
+                    cScale2: '#f0f9ff',
+                    cScale3: '#f8fafc',
+
+                    // Text colors for better readability
+                    textColor: '#1e293b',
+                    nodeTextColor: '#1e293b',
+
+                    // Timeline specific colors
+                    section0: '#e0f2fe',
+                    section1: '#f0f9ff',
+                    section2: '#f8fafc',
+                    section3: '#ffffff',
+
+                    // Task colors in timeline
+                    taskBkgColor: '#ffffff',
+                    taskTextColor: '#1e293b',
+                    taskTextLightColor: '#374151',
+                    taskTextOutsideColor: '#1e293b',
+                    taskTextClickableColor: '#2563eb',
+
+                    // Grid and axis
+                    gridColor: '#e2e8f0',
+                    axisTextColor: '#64748b'
+                },
+                timeline: {
+                    numberSectionStyles: 4,
+                    axisFormat: '%Y'
+                },
+                flowchart: {
+                    useMaxWidth: false,
+                    htmlLabels: true,
+                    curve: 'basis'
+                }
+            });
+
+            // Initialize mermaid controls
+            initializeMermaidControls();
+        });
+
+        // Initialize the mermaid controls after the DOM is loaded
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize Mermaid diagrams
+            mermaid.initialize({
+                startOnLoad: true,
+                theme: 'base',
+                themeVariables: {
+                    // Primary colors with good contrast
+                    primaryColor: '#ffffff',
+                    primaryTextColor: '#1e293b',
+                    primaryBorderColor: '#2563eb',
+
+                    // Secondary colors
+                    secondaryColor: '#e0f2fe',
+                    secondaryTextColor: '#1e293b',
+                    secondaryBorderColor: '#0277bd',
+
+                    // Tertiary colors
+                    tertiaryColor: '#f0f9ff',
+                    tertiaryTextColor: '#374151',
+                    tertiaryBorderColor: '#0284c7',
+
+                    // Background and lines
+                    background: '#ffffff',
+                    mainBkg: '#ffffff',
+                    secondBkg: '#f8fafc',
+                    tertiaryBkg: '#f1f5f9',
+
+                    // Lines and borders
+                    lineColor: '#64748b',
+                    edgeLabelBackground: '#ffffff',
+
+                    // Node specific colors with good contrast
+                    cScale0: '#ffffff',
+                    cScale1: '#e0f2fe',
+                    cScale2: '#f0f9ff',
+                    cScale3: '#f8fafc',
+
+                    // Text colors for better readability
+                    textColor: '#1e293b',
+                    nodeTextColor: '#1e293b',
+
+                    // Timeline specific colors
+                    section0: '#e0f2fe',
+                    section1: '#f0f9ff',
+                    section2: '#f8fafc',
+                    section3: '#ffffff',
+
+                    // Task colors in timeline
+                    taskBkgColor: '#ffffff',
+                    taskTextColor: '#1e293b',
+                    taskTextLightColor: '#374151',
+                    taskTextOutsideColor: '#1e293b',
+                    taskTextClickableColor: '#2563eb',
+
+                    // Grid and axis
+                    gridColor: '#e2e8f0',
+                    axisTextColor: '#64748b'
+                },
+                timeline: {
+                    numberSectionStyles: 4,
+                    axisFormat: '%Y'
+                },
+                flowchart: {
+                    useMaxWidth: false,
+                    htmlLabels: true,
+                    curve: 'basis'
+                }
+            });
+
+            // Initialize mermaid controls
+            initializeMermaidControls();
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Active navigation highlighting
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.toc-link');
+
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+
+
+</body>
+
+</html>
