@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>RF Superconducting Cavity Tuners: Evolution and Future Trends</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --secondary: #8b5cf6;
+            --accent: #c0c0c0;
+            --neutral: #374151;
+            --base-100: #ffffff;
+            --base-200: #f8fafc;
+            --base-300: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--neutral);
+        }
+
+        .serif {
+            font-family: 'Crimson Text', serif;
+        }
+
+        .hero-overlay {
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.9) 0%, rgba(139, 92, 246, 0.8) 50%, rgba(192, 192, 192, 0.7) 100%);
+        }
+
+        .toc-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 280px;
+            height: 100vh;
+            background: var(--base-100);
+            border-right: 1px solid var(--base-300);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 2rem 1.5rem;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .main-content {
+            margin-left: 280px;
+            min-height: 100vh;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            align-items: center;
+            min-height: 60vh;
+        }
+
+        .citation {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted var(--secondary);
+            transition: all 0.3s ease;
+        }
+
+        .citation:hover {
+            background: rgba(139, 92, 246, 0.1);
+            border-bottom: 1px solid var(--secondary);
+        }
+
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--base-300), transparent);
+            margin: 4rem 0;
+        }
+
+        .chart-container {
+            background: var(--base-100);
+            border: 1px solid var(--base-300);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .insight-highlight {
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.1), rgba(139, 92, 246, 0.1));
+            border-left: 4px solid var(--secondary);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .trend-card {
+            background: var(--base-100);
+            border: 1px solid var(--base-300);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1rem 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .trend-card:hover {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            margin: 2rem 0;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            background: var(--secondary);
+            border-radius: 50%;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 1.5rem;
+            width: 2px;
+            height: calc(100% + 1rem);
+            background: var(--base-300);
+        }
+
+        .timeline-item:last-child::after {
+            display: none;
+        }
+
+        @media (max-width: 1024px) {
+            .toc-fixed {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+
+            .toc-fixed.open {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            /* Ensure text wraps in hero section */
+            .hero-grid>div {
+                overflow-wrap: break-word;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-grid {
+                padding: 1rem;
+            }
+
+            .hero-grid h1 {
+                font-size: 1.5rem;
+            }
+
+            .hero-grid p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <!-- Table of Contents -->
+    <nav class="toc-fixed" id="toc">
+        <div class="mb-8">
+            <h2 class="text-lg font-bold text-gray-900 mb-4">Contents</h2>
+            <ul class="space-y-2 text-sm">
+                <li>
+                    <a href="#executive-summary"
+                        class="block py-1 px-2 rounded hover:bg-gray-100 transition-colors">Executive Summary</a>
+                </li>
+                <li>
+                    <a href="#hardware-development"
+                        class="block py-1 px-2 rounded hover:bg-gray-100 transition-colors">Hardware Development</a>
+                </li>
+                <li>
+                    <a href="#software-control"
+                        class="block py-1 px-2 rounded hover:bg-gray-100 transition-colors">Software &amp; Control</a>
+                </li>
+                <li>
+                    <a href="#future-trends" class="block py-1 px-2 rounded hover:bg-gray-100 transition-colors">Future
+                        Trends</a>
+                </li>
+                <li>
+                    <a href="#emerging-technologies"
+                        class="block py-1 px-2 rounded hover:bg-gray-100 transition-colors">Emerging Technologies</a>
+                </li>
+                <li>
+                    <a href="#conclusions"
+                        class="block py-1 px-2 rounded hover:bg-gray-100 transition-colors">Conclusions</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="border-t pt-4">
+            <h3 class="text-sm font-semibold text-gray-700 mb-2">Key Insights</h3>
+            <div class="space-y-2 text-xs text-gray-600">
+                <div class="p-2 bg-blue-50 rounded">
+                    <i class="fas fa-lightbulb text-blue-600 mr-1"></i>
+                    AI-driven adaptive tuning
+                </div>
+                <div class="p-2 bg-purple-50 rounded">
+                    <i class="fas fa-atom text-purple-600 mr-1"></i>
+                    Nb₃Sn material advances
+                </div>
+                <div class="p-2 bg-gray-100 rounded">
+                    <i class="fas fa-cogs text-gray-600 mr-1"></i>
+                    Non-contact tuning
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section text-white relative">
+            <div class="hero-overlay absolute inset-0"></div>
+            <div class="relative z-10 container mx-auto px-8 py-16">
+                <div class="hero-grid">
+                    <div>
+                        <h1 class="serif text-5xl font-bold mb-6 leading-tight">
+                            <em class="text-purple-200">Precision in Motion:</em>
+                            <br />
+                            The Evolution of RF Superconducting Cavity Tuners
+                        </h1>
+                        <p class="text-xl text-blue-100 mb-8 leading-relaxed">
+                            From mechanical actuators to AI-driven control systems, explore the technological
+                            transformation shaping the future of particle acceleration.
+                        </p>
+                        <div class="flex items-center space-x-6 text-sm text-blue-200">
+                            <div class="flex items-center">
+                                <i class="fas fa-calendar mr-2"></i>
+                                <span>2025 Technology Review</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-flask mr-2"></i>
+                                <span>Accelerator Physics</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <img src="https://kimi-web-img.moonshot.cn/img/cds.cern.ch/3107ea39bd5769622fe09007576fa125e9d0e8f8"
+                            alt="Superconducting RF cavity in particle accelerator"
+                            class="rounded-lg shadow-2xl opacity-90" size="large" aspect="wide"
+                            query="superconducting RF cavity particle accelerator" referrerpolicy="no-referrer"
+                            data-modified="1" data-score="11599.00" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-lg"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Executive Summary -->
+        <section id="executive-summary" class="bg-white py-16">
+            <div class="container mx-auto px-8">
+                <div class="max-w-4xl mx-auto">
+                    <h2 class="serif text-3xl font-bold text-gray-900 mb-8">Executive Summary</h2>
+
+                    <div class="prose prose-lg max-w-none">
+                        <p class="text-xl text-gray-700 leading-relaxed mb-6">
+                            RF superconducting cavity tuners have undergone a remarkable transformation, evolving from
+                            simple mechanical systems to sophisticated, AI-enhanced control architectures. This
+                            evolution addresses the increasingly demanding requirements of modern particle accelerators
+                            for precision, stability, and operational efficiency.
+                        </p>
+
+                        <div class="grid md:grid-cols-3 gap-6 my-8">
+                            <div class="trend-card">
+                                <div class="text-blue-600 text-2xl mb-3">
+                                    <i class="fas fa-cogs"></i>
+                                </div>
+                                <h3 class="font-semibold text-gray-900 mb-2">Hardware Innovation</h3>
+                                <p class="text-sm text-gray-600">Transition from mechanical actuators to non-contact
+                                    ferroelectric tuners with microsecond response times</p>
+                            </div>
+
+                            <div class="trend-card">
+                                <div class="text-purple-600 text-2xl mb-3">
+                                    <i class="fas fa-brain"></i>
+                                </div>
+                                <h3 class="font-semibold text-gray-900 mb-2">AI Integration</h3>
+                                <p class="text-sm text-gray-600">Machine learning algorithms achieving 10 Hz frequency
+                                    stability through adaptive control systems</p>
+                            </div>
+
+                            <div class="trend-card">
+                                <div class="text-gray-600 text-2xl mb-3">
+                                    <i class="fas fa-atom"></i>
+                                </div>
+                                <h3 class="font-semibold text-gray-900 mb-2">Material Science</h3>
+                                <p class="text-sm text-gray-600">Nb₃Sn and advanced superconductors enabling higher
+                                    temperature operation and enhanced performance</p>
+                            </div>
+                        </div>
+
+                        <div class="insight-highlight">
+                            <h3 class="font-semibold text-gray-900 mb-3">
+                                <i class="fas fa-chart-line text-purple-600 mr-2"></i>
+                                Key Performance Metrics
+                            </h3>
+                            <ul class="space-y-2 text-gray-700">
+                                <li><strong>Traditional Mechanical Tuners:</strong> ±1-2 MHz range, seconds response
+                                    time</li>
+                                <li><strong>Piezoelectric Fast Tuners:</strong> ±50 kHz range, millisecond response</li>
+                                <li><strong>Ferroelectric Tuners:</strong> Microsecond response, non-contact operation
+                                </li>
+                                <li><strong>AI-Controlled Systems:</strong> 10 Hz stability, adaptive compensation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hardware Development -->
+        <section id="hardware-development" class="bg-gray-50 py-16">
+            <div class="container mx-auto px-8">
+                <div class="max-w-6xl mx-auto">
+                    <h2 class="serif text-4xl font-bold text-gray-900 mb-12">Hardware Development and Current Status
+                    </h2>
+
+                    <div class="mb-12">
+                        <h3 class="serif text-2xl font-semibold text-gray-900 mb-6">Tuner Mechanisms</h3>
+
+                        <div class="grid lg:grid-cols-2 gap-8">
+                            <div>
+                                <h4 class="text-xl font-semibold text-gray-900 mb-4">Traditional Systems</h4>
+                                <div class="space-y-4">
+                                    <div class="timeline-item">
+                                        <h5 class="font-semibold text-gray-900">Slow Tuners</h5>
+                                        <p class="text-gray-700 text-sm mb-2">Stepper motor-driven mechanical systems
+                                            for coarse frequency adjustments</p>
+                                        <div class="text-xs text-gray-600">
+                                            <span class="bg-blue-100 px-2 py-1 rounded">±1-2 MHz range</span>
+                                            <span class="bg-red-100 px-2 py-1 rounded ml-2">Seconds response</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="timeline-item">
+                                        <h5 class="font-semibold text-gray-900">Fast Tuners</h5>
+                                        <p class="text-gray-700 text-sm mb-2">Piezoelectric (PZT) and magnetostrictive
+                                            actuators for dynamic compensation</p>
+                                        <div class="text-xs text-gray-600">
+                                            <span class="bg-green-100 px-2 py-1 rounded">±50 kHz range</span>
+                                            <span class="bg-blue-100 px-2 py-1 rounded ml-2">Millisecond response</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h4 class="text-xl font-semibold text-gray-900 mb-4">Emerging Technologies</h4>
+                                <div class="space-y-4">
+                                    <div class="trend-card">
+                                        <h5 class="font-semibold text-gray-900 mb-2">Cavity Tuners</h5>
+                                        <p class="text-sm text-gray-700 mb-3">Non-contact electromagnetic coupling with
+                                            auxiliary resonant structures</p>
+                                        <div class="text-xs">
+                                            <span class="bg-purple-100 px-2 py-1 rounded">Non-contact</span>
+                                            <span class="bg-green-100 px-2 py-1 rounded ml-2">Nb₃Sn compatible</span>
+                                        </div>
+                                        <p class="text-xs text-gray-600 mt-2">
+                                            <a href="https://arxiv.org/html/2504.16645" class="citation">Research at
+                                                Fermilab and CERN</a>
+                                        </p>
+                                    </div>
+
+                                    <div class="trend-card">
+                                        <h5 class="font-semibold text-gray-900 mb-2">Ferroelectric FRTs</h5>
+                                        <p class="text-sm text-gray-700 mb-3">Ultra-fast electronic tuning using
+                                            dielectric constant modulation</p>
+                                        <div class="text-xs">
+                                            <span class="bg-red-100 px-2 py-1 rounded">Microsecond response</span>
+                                            <span class="bg-blue-100 px-2 py-1 rounded ml-2">Electronic control</span>
+                                        </div>
+                                        <p class="text-xs text-gray-600 mt-2">
+                                            <a href="https://cds.cern.ch/record/2807796/files/2204.01178.pdf"
+                                                class="citation">Proof-of-principle at CERN</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section-divider"></div>
+
+                    <div class="mb-12">
+                        <h3 class="serif text-2xl font-semibold text-gray-900 mb-6">Materials Evolution</h3>
+
+                        <div class="grid lg:grid-cols-3 gap-6">
+                            <div class="trend-card">
+                                <h4 class="font-semibold text-gray-900 mb-3">Tuner Construction</h4>
+                                <ul class="text-sm text-gray-700 space-y-1">
+                                    <li>• High-strength stainless steels</li>
+                                    <li>• Titanium alloys</li>
+                                    <li>• Specialized PZT ceramics</li>
+                                    <li>• Terfenol-D magnetostrictive</li>
+                                    <li>• Barium strontium titanate (BST)</li>
+                                </ul>
+                            </div>
+
+                            <div class="trend-card">
+                                <h4 class="font-semibold text-gray-900 mb-3">Cavity Materials</h4>
+                                <ul class="text-sm text-gray-700 space-y-1">
+                                    <li>• High-purity niobium (Nb)</li>
+                                    <li>• Large-grain/single-crystal Nb</li>
+                                    <li>• Niobium-tin (Nb₃Sn) coatings</li>
+                                    <li>• Magnesium diboride (MgB₂)</li>
+                                    <li>• High-temperature superconductors</li>
+                                </ul>
+                            </div>
+
+                            <div class="trend-card">
+                                <h4 class="font-semibold text-gray-900 mb-3">Material Properties</h4>
+                                <div class="text-sm text-gray-700 space-y-2">
+                                    <div>
+                                        <strong>Nb:</strong> T<sub>c</sub> ≈ 9.2 K
+                                        <br />
+                                        <span class="text-xs text-gray-500">Traditional workhorse</span>
+                                    </div>
+                                    <div>
+                                        <strong>Nb₃Sn:</strong> T<sub>c</sub> ≈ 18 K
+                                        <br />
+                                        <span class="text-xs text-gray-500">Higher temperature operation</span>
+                                    </div>
+                                    <div>
+                                        <strong>YBCO:</strong> T<sub>c</sub> &gt; 77 K
+                                        <br />
+                                        <span class="text-xs text-gray-500">Liquid nitrogen compatible</span>
+                                    </div>
+                                </div>
+                                <p class="text-xs text-gray-600 mt-3">
+                                    <a href="https://accelconf.web.cern.ch/linac2024/classification/mc4.8/index.html"
+                                        class="citation">Recent material advances</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Software and Control -->
+        <section id="software-control" class="bg-white py-16">
+            <div class="container mx-auto px-8">
+                <div class="max-w-6xl mx-auto">
+                    <h2 class="serif text-4xl font-bold text-gray-900 mb-12">Software and Control Algorithms</h2>
+
+                    <div class="mb-12">
+                        <h3 class="serif text-2xl font-semibold text-gray-900 mb-6">Control Algorithm Evolution</h3>
+
+                        <div class="grid lg:grid-cols-2 gap-8">
+                            <div>
+                                <h4 class="text-xl font-semibold text-gray-900 mb-4">Traditional Approaches</h4>
+                                <div class="space-y-4">
+                                    <div class="trend-card">
+                                        <h5 class="font-semibold text-gray-900 mb-2">PID Controllers</h5>
+                                        <p class="text-sm text-gray-700 mb-3">Proportional-Integral-Derivative control
+                                            for basic feedback stabilization</p>
+                                        <div class="text-xs text-gray-600">
+                                            <span class="bg-blue-100 px-2 py-1 rounded">Simple implementation</span>
+                                            <span class="bg-yellow-100 px-2 py-1 rounded ml-2">Limited bandwidth</span>
+                                        </div>
+                                        <p class="text-xs text-gray-500 mt-2">
+                                            <a href="https://addi.ehu.es/bitstream/handle/10810/72260/TESIS_ANDER_ELEJAGA_ESTIBALLES.pdf?sequence=1&amp;isAllowed=y"
+                                                class="citation">Control system analysis</a>
+                                        </p>
+                                    </div>
+
+                                    <div class="trend-card">
+                                        <h5 class="font-semibold text-gray-900 mb-2">Feedforward Control</h5>
+                                        <p class="text-sm text-gray-700 mb-3">Proactive disturbance compensation using
+                                            measured inputs</p>
+                                        <div class="text-xs text-gray-600">
+                                            <span class="bg-green-100 px-2 py-1 rounded">Predictive action</span>
+                                            <span class="bg-red-100 px-2 py-1 rounded ml-2">Known disturbances
+                                                only</span>
+                                        </div>
+                                        <p class="text-xs text-gray-500 mt-2">
+                                            NANC techniques for microphonics reduction
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h4 class="text-xl font-semibold text-gray-900 mb-4">AI-Enhanced Systems</h4>
+                                <div class="space-y-4">
+                                    <div class="trend-card">
+                                        <h5 class="font-semibold text-gray-900 mb-2">Gaussian Processes</h5>
+                                        <p class="text-sm text-gray-700 mb-3">Bayesian modeling for predictive control
+                                            with uncertainty quantification</p>
+                                        <div class="text-xs text-gray-600">
+                                            <span class="bg-purple-100 px-2 py-1 rounded">Probabilistic modeling</span>
+                                            <span class="bg-blue-100 px-2 py-1 rounded ml-2">Uncertainty bounds</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="trend-card">
+                                        <h5 class="font-semibold text-gray-900 mb-2">Deep Neural Networks</h5>
+                                        <p class="text-sm text-gray-700 mb-3">Complex pattern recognition and direct
+                                            inverse control mapping</p>
+                                        <div class="text-xs text-gray-600">
+                                            <span class="bg-green-100 px-2 py-1 rounded">High-dimensional
+                                                learning</span>
+                                            <span class="bg-orange-100 px-2 py-1 rounded ml-2">HPC requirements</span>
+                                        </div>
+                                        <p class="text-xs text-gray-500 mt-2">
+                                            <a href="https://accelconf.web.cern.ch/icalepcs2019/papers/mopha114.pdf"
+                                                class="citation">SLAC LCLS-II implementation</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section-divider"></div>
+
+                    <div class="mb-12">
+                        <h3 class="serif text-2xl font-semibold text-gray-900 mb-6">Feedback System Architecture</h3>
+
+                        <div class="grid lg:grid-cols-3 gap-6">
+                            <div class="trend-card">
+                                <h4 class="font-semibold text-gray-900 mb-3">
+                                    <i class="fas fa-sensors text-blue-600 mr-2"></i>
+                                    Sensing Components
+                                </h4>
+                                <ul class="text-sm text-gray-700 space-y-2">
+                                    <li>• Phase detectors</li>
+                                    <li>• RF mixers</li>
+                                    <li>• Analog-to-digital converters</li>
+                                    <li>• Frequency discriminators</li>
+                                </ul>
+                            </div>
+
+                            <div class="trend-card">
+                                <h4 class="font-semibold text-gray-900 mb-3">
+                                    <i class="fas fa-microchip text-purple-600 mr-2"></i>
+                                    Processing Units
+                                </h4>
+                                <ul class="text-sm text-gray-700 space-y-2">
+                                    <li>• Digital Signal Processors</li>
+                                    <li>• Field-Programmable Gate Arrays</li>
+                                    <li>• Microprocessors</li>
+                                    <li>• High-Performance Computing</li>
+                                </ul>
+                            </div>
+
+                            <div class="trend-card">
+                                <h4 class="font-semibold text-gray-900 mb-3">
+                                    <i class="fas fa-cog text-gray-600 mr-2"></i>
+                                    Actuation Systems
+                                </h4>
+                                <ul class="text-sm text-gray-700 space-y-2">
+                                    <li>• Digital-to-analog converters</li>
+                                    <li>• High-voltage amplifiers</li>
+                                    <li>• Piezoelectric drivers</li>
+                                    <li>• Electromagnetic actuators</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="insight-highlight mt-8">
+                            <h4 class="font-semibold text-gray-900 mb-3">
+                                <i class="fas fa-exclamation-triangle text-orange-600 mr-2"></i>
+                                Key Challenges in Control Systems
+                            </h4>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <h5 class="font-semibold text-gray-900 mb-2">Mechanical Eigenmodes</h5>
+                                    <p class="text-sm text-gray-700">Structural resonances can cause instability and
+                                        require careful loop shaping with notch filters</p>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold text-gray-900 mb-2">Time Delay Effects</h5>
+                                    <p class="text-sm text-gray-700">Signal processing delays limit achievable bandwidth
+                                        and require advanced compensation techniques</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Future Trends -->
+        <section id="future-trends" class="bg-gray-50 py-16">
+            <div class="container mx-auto px-8">
+                <div class="max-w-6xl mx-auto">
+                    <h2 class="serif text-4xl font-bold text-gray-900 mb-12">Future Trends and Emerging Technologies
+                    </h2>
+
+                    <div class="mb-12">
+                        <h3 class="serif text-2xl font-semibold text-gray-900 mb-8">AI in Control Systems</h3>
+
+                        <div class="grid lg:grid-cols-2 gap-8">
+                            <div>
+                                <img src="https://kimi-web-img.moonshot.cn/img/cdn.lanl.gov/fb74c867ed89a1568b845daf747c1fc1b7a933d7.jpg"
+                                    alt="Artificial intelligence control system in particle accelerator facility"
+                                    class="rounded-lg shadow-lg mb-6" size="medium" aspect="wide" style="photo"
+                                    query="AI control system particle accelerator" referrerpolicy="no-referrer"
+                                    data-modified="1" data-score="11599.00" />
+
+                                <div class="trend-card">
+                                    <h4 class="font-semibold text-gray-900 mb-3">Adaptive Tuning Algorithms</h4>
+                                    <p class="text-sm text-gray-700 mb-3">
+                                        Dynamic optimization of control parameters using real-time sensor data and
+                                        learned system behavior patterns.
+                                    </p>
+                                    <div class="text-xs text-gray-600">
+                                        <span class="bg-blue-100 px-2 py-1 rounded">Continuous optimization</span>
+                                        <span class="bg-green-100 px-2 py-1 rounded ml-2">10 Hz stability target</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="space-y-6">
+                                <div class="trend-card">
+                                    <h4 class="font-semibold text-gray-900 mb-3">Predictive Maintenance</h4>
+                                    <p class="text-sm text-gray-700 mb-3">
+                                        AI algorithms trained on historical data to identify fault precursors and enable
+                                        proactive interventions.
+                                    </p>
+                                    <ul class="text-xs text-gray-600 space-y-1">
+                                        <li>• Quench prediction and prevention</li>
+                                        <li>• Automated fault diagnosis</li>
+                                        <li>• Optimized maintenance scheduling</li>
+                                    </ul>
+                                    <p class="text-xs text-gray-500 mt-2">
+                                        <a href="https://science.osti.gov/-/media/np/pdf/research/2020/2-DOE_AI_TELECON_TENNANT_JLAB-final-(2020).pdf"
+                                            class="citation">DOE AI initiatives</a>
+                                    </p>
+                                </div>
+
+                                <div class="trend-card">
+                                    <h4 class="font-semibold text-gray-900 mb-3">Reinforcement Learning</h4>
+                                    <p class="text-sm text-gray-700 mb-3">
+                                        Autonomous agents learning optimal control policies through system interaction
+                                        and feedback.
+                                    </p>
+                                    <div class="text-xs text-gray-600">
+                                        <span class="bg-purple-100 px-2 py-1 rounded">Autonomous discovery</span>
+                                        <span class="bg-orange-100 px-2 py-1 rounded ml-2">Novel strategies</span>
+                                    </div>
+                                </div>
+
+                                <div class="trend-card">
+                                    <h4 class="font-semibold text-gray-900 mb-3">Real-Time Optimization</h4>
+                                    <p class="text-sm text-gray-700 mb-3">
+                                        Microsecond-scale control decisions for Lorentz force detuning compensation and
+                                        beam stability.
+                                    </p>
+                                    <div class="text-xs text-gray-600">
+                                        <span class="bg-red-100 px-2 py-1 rounded">Microsecond response</span>
+                                        <span class="bg-blue-100 px-2 py-1 rounded ml-2">Sub-nanometer precision</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section-divider"></div>
+
+                    <div class="mb-12">
+                        <h3 class="serif text-2xl font-semibold text-gray-900 mb-8">New Superconducting Materials</h3>
+
+                        <div class="grid lg:grid-cols-3 gap-6">
+                            <div class="trend-card">
+                                <h4 class="font-semibold text-gray-900 mb-3">Niobium-Tin (Nb₃Sn)</h4>
+                                <div class="text-sm text-gray-700 mb-3">
+                                    <div class="flex justify-between mb-2">
+                                        <span>Critical Temperature:</span>
+                                        <span class="font-semibold">18 K</span>
+                                    </div>
+                                    <div class="flex justify-between mb-2">
+                                        <span>vs. Niobium:</span>
+                                        <span class="font-semibold text-green-600">2x Higher</span>
+                                    </div>
+                                </div>
+                                <p class="text-xs text-gray-600 mb-3">
+                                    Enables 4.2 K operation with potential for higher accelerating gradients
+                                </p>
+                                <div class="text-xs">
+                                    <span class="bg-green-100 px-2 py-1 rounded">Higher T<sub>c</sub></span>
+                                    <span class="bg-red-100 px-2 py-1 rounded ml-1">Brittle</span>
+                                    <span class="bg-blue-100 px-2 py-1 rounded ml-1">Non-contact tuning</span>
+                                </div>
+                            </div>
+
+                            <div class="trend-card">
+                                <h4 class="font-semibold text-gray-900 mb-3">High-Temperature SC</h4>
+                                <div class="text-sm text-gray-700 mb-3">
+                                    <div class="flex justify-between mb-2">
+                                        <span>YBCO (T<sub>c</sub>):</span>
+                                        <span class="font-semibold">&gt; 77 K</span>
+                                    </div>
+                                    <div class="flex justify-between mb-2">
+                                        <span>Cryogen:</span>
+                                        <span class="font-semibold text-blue-600">Liquid N₂</span>
+                                    </div>
+                                </div>
+                                <p class="text-xs text-gray-600 mb-3">
+                                    Potential for dramatic cryogenic system simplification
+                                </p>
+                                <div class="text-xs">
+                                    <span class="bg-orange-100 px-2 py-1 rounded">Higher R<sub>s</sub></span>
+                                    <span class="bg-purple-100 px-2 py-1 rounded ml-1">Fabrication challenges</span>
+                                </div>
+                            </div>
+
+                            <div class="trend-card">
+                                <h4 class="font-semibold text-gray-900 mb-3">Alternative Materials</h4>
+                                <ul class="text-sm text-gray-700 space-y-2 mb-3">
+                                    <li>• <strong>MgB₂:</strong> Balanced Tc and fabrication</li>
+                                    <li>• <strong>Iron-based SC:</strong> Exploratory research</li>
+                                    <li>• <strong>Nitrogen-doped Nb:</strong> Enhanced Q-factor</li>
+                                </ul>
+                                <div class="text-xs text-gray-600">
+                                    <span class="bg-gray-100 px-2 py-1 rounded">Research phase</span>
+                                    <span class="bg-blue-100 px-2 py-1 rounded ml-1">Performance optimization</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Emerging Technologies -->
+        <section id="emerging-technologies" class="bg-white py-16">
+            <div class="container mx-auto px-8">
+                <div class="max-w-6xl mx-auto">
+                    <h2 class="serif text-4xl font-bold text-gray-900 mb-12">Other Emerging Technologies</h2>
+
+                    <div class="grid lg:grid-cols-2 gap-8">
+                        <div class="space-y-6">
+                            <div class="trend-card">
+                                <h3 class="font-semibold text-gray-900 mb-3">
+                                    <i class="fas fa-bolt text-yellow-600 mr-2"></i>
+                                    Fast Non-Mechanical Tuning
+                                </h3>
+                                <div class="space-y-3">
+                                    <div>
+                                        <h4 class="font-semibold text-gray-900 text-sm mb-1">Ferroelectric FRTs</h4>
+                                        <p class="text-xs text-gray-700">Electric field control of dielectric properties
+                                            for microsecond response</p>
+                                        <p class="text-xs text-gray-500 mt-1">
+                                            <a href="https://cds.cern.ch/record/2807796/files/2204.01178.pdf"
+                                                class="citation">CERN development</a>
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-gray-900 text-sm mb-1">SQUID Metamaterials</h4>
+                                        <p class="text-xs text-gray-700">Magnetic flux control for quantum applications
+                                        </p>
+                                        <p class="text-xs text-gray-500 mt-1">
+                                            <a href="https://www.nature.com/articles/s41598-019-40891-1"
+                                                class="citation">Nature Scientific Reports</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="trend-card">
+                                <h3 class="font-semibold text-gray-900 mb-3">
+                                    <i class="fas fa-print text-blue-600 mr-2"></i>
+                                    Advanced Manufacturing
+                                </h3>
+                                <ul class="text-sm text-gray-700 space-y-2">
+                                    <li>• Additive manufacturing (3D printing) of RF components</li>
+                                    <li>• Integrated tuner-cavity designs</li>
+                                    <li>• Customized geometries for optimized performance</li>
+                                    <li>• Reduced part counts and assembly complexity</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="space-y-6">
+                            <div class="trend-card">
+                                <h3 class="font-semibold text-gray-900 mb-3">
+                                    <i class="fas fa-microscope text-purple-600 mr-2"></i>
+                                    Surface Treatment Technologies
+                                </h3>
+                                <ul class="text-sm text-gray-700 space-y-2">
+                                    <li>• Ultra-smooth surface finishing techniques</li>
+                                    <li>• Specialized coatings for secondary electron suppression</li>
+                                    <li>• Enhanced thermal conductivity treatments</li>
+                                    <li>• Nb₃Sn coating uniformity optimization</li>
+                                </ul>
+                            </div>
+
+                            <div class="trend-card">
+                                <h3 class="font-semibold text-gray-900 mb-3">
+                                    <i class="fas fa-chart-line text-green-600 mr-2"></i>
+                                    Advanced Diagnostics
+                                </h3>
+                                <div class="space-y-3">
+                                    <div>
+                                        <h4 class="font-semibold text-gray-900 text-sm mb-1">High-Speed Data Acquisition
+                                        </h4>
+                                        <p class="text-xs text-gray-700">Real-time cavity detuning computation from RF
+                                            power probes</p>
+                                        <p class="text-xs text-gray-500 mt-1">
+                                            <a href="https://cds.cern.ch/record/1118577/files/care-thesis-08-001.pdf"
+                                                class="citation">CARE thesis research</a>
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-gray-900 text-sm mb-1">Pulse-to-Pulse Correction
+                                        </h4>
+                                        <p class="text-xs text-gray-700">Intra-pulse detuning control beyond simple
+                                            feedforward</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-12">
+                        <img src="https://kimi-web-img.moonshot.cn/img/media.springernature.com/77ea526c4d105e7bf510c13d16910e73a8604045.png"
+                            alt="3D printed superconducting RF cavity component"
+                            class="rounded-lg shadow-lg w-full max-w-4xl mx-auto" size="medium" aspect="wide"
+                            style="photo" query="3D printed superconducting RF cavity component"
+                            referrerpolicy="no-referrer" data-modified="1" data-score="11590.00" />
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conclusions -->
+        <section id="conclusions" class="bg-gray-900 text-white py-16">
+            <div class="container mx-auto px-8">
+                <div class="max-w-4xl mx-auto">
+                    <h2 class="serif text-4xl font-bold mb-8">Conclusions and Outlook</h2>
+
+                    <div class="prose prose-lg prose-invert max-w-none">
+                        <p class="text-xl leading-relaxed mb-8">
+                            The evolution of RF superconducting cavity tuners represents a convergence of advanced
+                            materials science, precision engineering, and artificial intelligence. This technological
+                            transformation is enabling unprecedented levels of control and stability in particle
+                            accelerator systems.
+                        </p>
+
+                        <div class="grid md:grid-cols-2 gap-8 mb-8">
+                            <div class="bg-gray-800 p-6 rounded-lg">
+                                <h3 class="font-semibold text-xl mb-4 text-blue-300">
+                                    <i class="fas fa-rocket mr-2"></i>
+                                    Key Achievements
+                                </h3>
+                                <ul class="space-y-2 text-sm">
+                                    <li>• Transition from mechanical to non-contact tuning</li>
+                                    <li>• AI-driven adaptive control systems</li>
+                                    <li>• Ferroelectric tuners with microsecond response</li>
+                                    <li>• Nb₃Sn material development for higher temperature operation</li>
+                                    <li>• Integrated hardware-software control architectures</li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-gray-800 p-6 rounded-lg">
+                                <h3 class="font-semibold text-xl mb-4 text-purple-300">
+                                    <i class="fas fa-telescope mr-2"></i>
+                                    Future Directions
+                                </h3>
+                                <ul class="space-y-2 text-sm">
+                                    <li>• Widespread AI integration in control systems</li>
+                                    <li>• Commercial adoption of high-temperature superconductors</li>
+                                    <li>• Additive manufacturing of complex RF components</li>
+                                    <li>• Autonomous operation and predictive maintenance</li>
+                                    <li>• Quantum-inspired control algorithms</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="bg-gradient-to-r from-blue-900 to-purple-900 p-8 rounded-lg">
+                            <h3 class="font-semibold text-2xl mb-4">The Path Forward</h3>
+                            <p class="text-lg leading-relaxed">
+                                As we look toward the next generation of particle accelerators, the continued
+                                integration of advanced materials, AI-driven control systems, and novel tuning
+                                mechanisms will be essential for achieving the performance goals of future high-energy
+                                physics experiments. The convergence of these technologies promises to deliver more
+                                compact, efficient, and cost-effective accelerator systems that will drive scientific
+                                discovery for decades to come.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Smooth scrolling for TOC links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Mobile TOC toggle
+        const tocToggle = document.createElement('button');
+        tocToggle.innerHTML = '<i class="fas fa-bars"></i>';
+        tocToggle.className = 'fixed top-4 left-4 z-50 bg-white p-2 rounded shadow-lg lg:hidden';
+        tocToggle.onclick = () => {
+            const toc = document.getElementById('toc');
+            toc.classList.toggle('open');
+        };
+        document.body.appendChild(tocToggle);
+
+        // Close TOC when clicking outside on mobile
+        document.addEventListener('click', (e) => {
+            const toc = document.getElementById('toc');
+            if (window.innerWidth <= 1024 && !toc.contains(e.target) && !tocToggle.contains(e.target)) {
+                toc.classList.remove('open');
+            }
+        });
+
+        // Reset TOC state on window resize
+        window.addEventListener('resize', () => {
+            const toc = document.getElementById('toc');
+            if (window.innerWidth > 1024) {
+                toc.classList.remove('open');
+            }
+        });
+    </script>
+
+
+</body>
+
+</html>
