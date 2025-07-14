@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RF Superconducting Technology in Quantum Computing</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'quantum-blue': '#0f172a',
+                        'quantum-silver': '#e2e8f0',
+                        'quantum-gold': '#fbbf24',
+                        'quantum-purple': '#7c3aed',
+                        'quantum-teal': '#14b8a6'
+                    },
+                    fontFamily: {
+                        'serif': ['Crimson Text', 'serif'],
+                        'sans': ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .toc-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 280px;
+            height: 100vh;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            z-index: 50;
+            overflow-y: auto;
+            padding: 2rem 1.5rem;
+            border-right: 3px solid #fbbf24;
+        }
+
+        .main-content {
+            margin-left: 280px;
+            min-height: 100vh;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23fbbf2410" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .quantum-pulse {
+            animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 0.3;
+            }
+
+            50% {
+                opacity: 0.8;
+            }
+        }
+
+        .toc-link {
+            transition: all 0.3s ease;
+        }
+
+        .toc-link:hover {
+            background: rgba(251, 191, 36, 0.1);
+            border-left: 4px solid #fbbf24;
+        }
+
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent 0%, #fbbf24 50%, transparent 100%);
+            margin: 3rem 0;
+        }
+
+        .citation-link {
+            color: #7c3aed;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted #7c3aed;
+        }
+
+        .citation-link:hover {
+            color: #fbbf24;
+            border-bottom-color: #fbbf24;
+        }
+
+        .chart-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        @media (max-width: 1024px) {
+            .toc-fixed {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+
+            .toc-fixed.mobile-open {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+
+<body class="font-sans bg-gray-50 text-gray-900">
+    <!-- Mobile Menu Toggle -->
+    <button id="mobile-menu-toggle"
+        class="lg:hidden fixed top-4 left-4 z-50 bg-quantum-blue text-white p-3 rounded-lg shadow-lg">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Table of Contents -->
+    <nav id="toc" class="toc-fixed text-white">
+        <div class="mb-8">
+            <h2 class="text-xl font-bold text-quantum-gold mb-4">Contents</h2>
+            <div class="space-y-2">
+                <a href="#introduction"
+                    class="toc-link block py-2 px-3 rounded text-sm hover:bg-quantum-gold hover:bg-opacity-10">Introduction</a>
+                <a href="#foundations"
+                    class="toc-link block py-2 px-3 rounded text-sm hover:bg-quantum-gold hover:bg-opacity-10">Foundations</a>
+                <a href="#components"
+                    class="toc-link block py-2 px-3 rounded text-sm hover:bg-quantum-gold hover:bg-opacity-10">RF
+                    Components</a>
+                <a href="#applications"
+                    class="toc-link block py-2 px-3 rounded text-sm hover:bg-quantum-gold hover:bg-opacity-10">Accelerator
+                    Applications</a>
+                <a href="#control"
+                    class="toc-link block py-2 px-3 rounded text-sm hover:bg-quantum-gold hover:bg-opacity-10">Control
+                    &amp; Readout</a>
+                <a href="#institutions"
+                    class="toc-link block py-2 px-3 rounded text-sm hover:bg-quantum-gold hover:bg-opacity-10">Research
+                    Institutions</a>
+                <a href="#future"
+                    class="toc-link block py-2 px-3 rounded text-sm hover:bg-quantum-gold hover:bg-opacity-10">Future
+                    Trends</a>
+            </div>
+        </div>
+
+        <div class="mt-8 pt-8 border-t border-gray-600">
+            <p class="text-xs text-gray-400 mb-2">Research Focus</p>
+            <div class="flex flex-wrap gap-2">
+                <span class="px-2 py-1 bg-quantum-purple bg-opacity-20 text-xs rounded">SRF Cavities</span>
+                <span class="px-2 py-1 bg-quantum-teal bg-opacity-20 text-xs rounded">Qubit Control</span>
+                <span class="px-2 py-1 bg-quantum-gold bg-opacity-20 text-xs rounded">Quantum Memory</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section relative">
+            <div class="relative z-10 px-4 sm:px-6 md:px-8 py-8 sm:py-12 md:py-16">
+                <div class="max-w-7xl mx-auto">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                        <!-- Hero Content -->
+                        <div class="lg:col-span-7">
+                            <div class="mb-6">
+                                <span
+                                    class="inline-block px-4 py-2 bg-quantum-gold bg-opacity-20 text-quantum-gold text-sm font-medium rounded-full mb-4">
+                                    Quantum Computing Research
+                                </span>
+                                <h1
+                                    class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+                                    <span class="italic text-quantum-gold">Radio Frequency</span>
+                                    <br />
+                                    Superconducting Technology
+                                </h1>
+                                <p class="text-lg sm:text-xl text-gray-300 leading-relaxed mb-8">
+                                    Exploring the convergence of particle accelerator technology and quantum computing
+                                    through superconducting RF systems
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Hero Visual -->
+                        <div class="lg:col-span-5">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div
+                                    class="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-6 border border-white border-opacity-20">
+                                    <div class="quantum-pulse">
+                                        <i class="fas fa-atom text-3xl text-quantum-gold mb-3"></i>
+                                    </div>
+                                    <h3 class="font-semibold text-white mb-2">Superconducting Qubits</h3>
+                                    <p class="text-sm text-gray-300">Artificial atoms operating at microwave frequencies
+                                    </p>
+                                </div>
+                                <div
+                                    class="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-6 border border-white border-opacity-20">
+                                    <div class="quantum-pulse" style="animation-delay: 1s;">
+                                        <i class="fas fa-wave-square text-3xl text-quantum-teal mb-3"></i>
+                                    </div>
+                                    <h3 class="font-semibold text-white mb-2">SRF Cavities</h3>
+                                    <p class="text-sm text-gray-300">High-Q resonators with 2-second coherence times</p>
+                                </div>
+                                <div
+                                    class="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-6 border border-white border-opacity-20 sm:col-span-2">
+                                    <div class="quantum-pulse" style="animation-delay: 2s;">
+                                        <i class="fas fa-microchip text-3xl text-quantum-purple mb-3"></i>
+                                    </div>
+                                    <h3 class="font-semibold text-white mb-2">Quantum Control</h3>
+                                    <p class="text-sm text-gray-300">Precise microwave pulses for quantum gate
+                                        operations and readout</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Introduction Section -->
+        <section id="introduction" class="px-4 sm:px-6 md:px-8 py-8 sm:py-12 md:py-16 bg-white">
+            <div class="max-w-4xl mx-auto">
+                <div class="prose prose-lg max-w-none">
+                    <p class="text-xl text-gray-700 leading-relaxed mb-8 font-light">
+                        Radio frequency (RF) superconducting technology, pivotal in particle accelerators, is
+                        extensively utilized in quantum computing for <strong>controlling and reading out
+                            superconducting qubits</strong>, which are artificial atoms operating at microwave
+                        frequencies. This involves <strong>generating precise microwave pulses for quantum gate
+                            operations</strong> and employing <strong>high-quality factor superconducting resonators and
+                            parametric amplifiers for sensitive qubit state measurement</strong>.
+                    </p>
+
+                    <div class="bg-gradient-to-r from-quantum-blue to-quantum-purple text-white p-8 rounded-xl mb-8">
+                        <h3 class="text-2xl font-bold mb-4 text-quantum-gold">Key Applications</h3>
+                        <div class="grid md:grid-cols-3 gap-6">
+                            <div>
+                                <i class="fas fa-cog text-3xl text-quantum-gold mb-3"></i>
+                                <h4 class="font-semibold mb-2">Qubit Control</h4>
+                                <p class="text-sm text-gray-200">Precise microwave pulses for quantum gate operations
+                                </p>
+                            </div>
+                            <div>
+                                <i class="fas fa-search text-3xl text-quantum-teal mb-3"></i>
+                                <h4 class="font-semibold mb-2">State Readout</h4>
+                                <p class="text-sm text-gray-200">High-fidelity measurement using parametric amplifiers
+                                </p>
+                            </div>
+                            <div>
+                                <i class="fas fa-memory text-3xl text-quantum-purple mb-3"></i>
+                                <h4 class="font-semibold mb-2">Quantum Memory</h4>
+                                <p class="text-sm text-gray-200">Long-coherence SRF cavities for information storage</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Foundations Section -->
+        <section id="foundations" class="px-4 sm:px-6 md:px-8 py-8 sm:py-12 md:py-16 bg-gray-50">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="font-serif text-4xl font-bold text-quantum-blue mb-12">Foundations of Superconducting Qubits
+                    and RF Control</h2>
+
+                <div class="grid lg:grid-cols-2 gap-12 mb-12">
+                    <div>
+                        <h3 class="text-2xl font-bold text-quantum-blue mb-6">Historical Development</h3>
+                        <div class="space-y-6">
+                            <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-quantum-gold">
+                                <h4 class="font-semibold text-quantum-blue mb-2">1957-1962: Theoretical Foundations</h4>
+                                <p class="text-gray-700 text-sm">BCS theory and Josephson&#39;s prediction of the
+                                    Josephson effect laid the groundwork for understanding superconducting phenomena <a
+                                        href="https://link.springer.com/article/10.1140/epja/s10050-023-01006-7"
+                                        class="citation-link">[455]</a>.</p>
+                            </div>
+                            <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-quantum-purple">
+                                <h4 class="font-semibold text-quantum-blue mb-2">1998-1999: First Qubits</h4>
+                                <p class="text-gray-700 text-sm">The Cooper Pair Box was realized in 1998, with the
+                                    first demonstration of quantum coherent superposition in 1999 at NEC Labs, Japan <a
+                                        href="https://link.springer.com/article/10.1140/epja/s10050-023-01006-7"
+                                        class="citation-link">[379, 455]</a>.</p>
+                            </div>
+                            <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-quantum-teal">
+                                <h4 class="font-semibold text-quantum-blue mb-2">2006: Transmon Revolution</h4>
+                                <p class="text-gray-700 text-sm">The transmon qubit design from Yale University
+                                    significantly reduced charge noise sensitivity, leading to substantially longer
+                                    coherence times <a
+                                        href="https://link.springer.com/article/10.1140/epja/s10050-023-01006-7"
+                                        class="citation-link">[379, 429]</a>.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-2xl font-bold text-quantum-blue mb-6">Qubit Types Comparison</h3>
+                        <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                            <div class="overflow-x-auto">
+                                <table class="w-full min-w-[600px]">
+                                    <thead class="bg-quantum-blue text-white">
+                                        <tr>
+                                            <th class="px-6 py-4 text-left text-sm font-semibold">Qubit Type</th>
+                                            <th class="px-6 py-4 text-left text-sm font-semibold">Key Principle</th>
+                                            <th class="px-6 py-4 text-left text-sm font-semibold">Frequency</th>
+                                            <th class="px-6 py-4 text-left text-sm font-semibold">Advantages</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-gray-200">
+                                        <tr class="hover:bg-gray-50">
+                                            <td class="px-6 py-4 font-semibold text-quantum-blue">Transmon</td>
+                                            <td class="px-6 py-4 text-sm text-gray-700">Shunted CPB (EJ/EC ≫ 1)</td>
+                                            <td class="px-6 py-4 text-sm text-gray-700">3-6 GHz</td>
+                                            <td class="px-6 py-4 text-sm text-gray-700">Good coherence, reproducible
+                                            </td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50">
+                                            <td class="px-6 py-4 font-semibold text-quantum-blue">Fluxonium</td>
+                                            <td class="px-6 py-4 text-sm text-gray-700">JJ + large inductance</td>
+                                            <td class="px-6 py-4 text-sm text-gray-700">&lt;1-3 GHz</td>
+                                            <td class="px-6 py-4 text-sm text-gray-700">Very long coherence, high
+                                                anharmonicity</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50">
+                                            <td class="px-6 py-4 font-semibold text-quantum-blue">Flux Qubit</td>
+                                            <td class="px-6 py-4 text-sm text-gray-700">Persistent current states</td>
+                                            <td class="px-6 py-4 text-sm text-gray-700">1-10 GHz</td>
+                                            <td class="px-6 py-4 text-sm text-gray-700">Tunable, strong dipole moment
+                                            </td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50">
+                                            <td class="px-6 py-4 font-semibold text-quantum-blue">Cooper Pair Box</td>
+                                            <td class="px-6 py-4 text-sm text-gray-700">Discrete Cooper pairs</td>
+                                            <td class="px-6 py-4 text-sm text-gray-700">3-6 GHz</td>
+                                            <td class="px-6 py-4 text-sm text-gray-700">Conceptual simplicity</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-xl shadow-sm">
+                    <h3 class="text-2xl font-bold text-quantum-blue mb-6">Circuit Quantum Electrodynamics (cQED)</h3>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <p class="text-gray-700 mb-4">
+                                The cQED framework describes the <strong>interaction between superconducting artificial
+                                    atoms (qubits) and quantized electromagnetic fields</strong> confined within
+                                superconducting microwave resonators. This is the cornerstone of modern superconducting
+                                quantum computing <a href="https://arxiv.org/abs/1904.06560"
+                                    class="citation-link">[114]</a>, <a
+                                    href="https://medium.com/qiskit/how-the-first-superconducting-qubit-changed-quantum-computing-forever-96cf261b8498"
+                                    class="citation-link">[287]</a>.
+                            </p>
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-quantum-blue mb-2">Key Features:</h4>
+                                <ul class="text-sm text-gray-700 space-y-1">
+                                    <li>• Quantum bus for coherent energy exchange</li>
+                                    <li>• Dispersive regime for QND readout</li>
+                                    <li>• Purcell protection for enhanced coherence</li>
+                                    <li>• Multi-mode interaction capabilities</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div>
+                            <img src="https://kimi-web-img.moonshot.cn/img/ars.els-cdn.com/4fe84f26a34fd00557b599a033987b94626545e2.gif"
+                                alt="Diagram of circuit quantum electrodynamics showing qubit-resonator coupling"
+                                class="w-full rounded-lg shadow-sm" size="medium" aspect="wide" style="linedrawing"
+                                query="circuit quantum electrodynamics diagram" referrerpolicy="no-referrer"
+                                data-modified="1" data-score="11488.00" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Components Section -->
+        <section id="components" class="px-4 sm:px-6 md:px-8 py-8 sm:py-12 md:py-16 bg-white">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="font-serif text-4xl font-bold text-quantum-blue mb-12">RF Superconducting Components in
+                    Quantum Computing</h2>
+
+                <div class="grid lg:grid-cols-2 gap-12 mb-12">
+                    <div class="bg-gray-50 p-8 rounded-xl">
+                        <div class="flex items-center mb-6">
+                            <i class="fas fa-wave-square text-3xl text-quantum-gold mr-4"></i>
+                            <h3 class="text-2xl font-bold text-quantum-blue">Superconducting Resonators</h3>
+                        </div>
+                        <p class="text-gray-700 mb-4">
+                            Superconducting resonators and cavities are <strong>indispensable components</strong>
+                            serving as interfaces for qubit control, readout, and inter-qubit coupling. These structures
+                            confine microwave photons with very low loss, characterized by their high quality factor
+                            (Q-factor) <a href="https://www.nepjol.info/index.php/JNPhysSoc/article/view/42179/32080"
+                                class="citation-link">[84, 103]</a>.
+                        </p>
+                        <div class="space-y-3">
+                            <div class="flex items-center">
+                                <div class="w-3 h-3 bg-quantum-gold rounded-full mr-3"></div>
+                                <span class="text-sm text-gray-700">Q-factors exceeding 10⁵-10⁶ for 2D resonators</span>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-3 h-3 bg-quantum-purple rounded-full mr-3"></div>
+                                <span class="text-sm text-gray-700">Up to 10¹⁰ for 3D cavities</span>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-3 h-3 bg-quantum-teal rounded-full mr-3"></div>
+                                <span class="text-sm text-gray-700">Materials: Niobium (Nb) and Aluminum (Al)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-50 p-8 rounded-xl">
+                        <div class="flex items-center mb-6">
+                            <i class="fas fa-microchip text-3xl text-quantum-purple mr-4"></i>
+                            <h3 class="text-2xl font-bold text-quantum-blue">SQUIDs for Control</h3>
+                        </div>
+                        <p class="text-gray-700 mb-4">
+                            Superconducting Quantum Interference Devices (SQUIDs) are pivotal for <strong>qubit
+                                frequency tuning and control</strong>. The RF SQUID&#39;s effective Josephson energy can
+                            be modulated by applied magnetic flux <a href="https://arxiv.org/html/2407.21415v2"
+                                class="citation-link">[90, 240]</a>.
+                        </p>
+                        <div class="bg-white p-4 rounded-lg">
+                            <h4 class="font-semibold text-quantum-blue mb-2">Recent Innovation:</h4>
+                            <p class="text-sm text-gray-700">
+                                Scalable scheme using RF SQUIDs to modulate qubit transition frequency with single
+                                square wave pulses, reducing control cables from ~3n to ~log₂(3n) + 1 <a
+                                    href="https://arxiv.org/html/2407.21415v1" class="citation-link">[1]</a>.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-r from-quantum-blue to-quantum-purple text-white p-8 rounded-xl">
+                    <h3 class="text-2xl font-bold text-quantum-gold mb-6">Parametric Amplifiers for Quantum-Limited
+                        Readout</h3>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div>
+                            <i class="fas fa-signal text-3xl text-quantum-gold mb-3"></i>
+                            <h4 class="font-semibold mb-2">Ultra-Low Noise</h4>
+                            <p class="text-sm text-gray-200">Approaching quantum limit of adding only half a photon of
+                                noise</p>
+                        </div>
+                        <div>
+                            <i class="fas fa-tachometer-alt text-3xl text-quantum-teal mb-3"></i>
+                            <h4 class="font-semibold mb-2">High Gain</h4>
+                            <p class="text-sm text-gray-200">Gain &gt; 20 dB with large bandwidth (tens to hundreds of
+                                MHz)</p>
+                        </div>
+                        <div>
+                            <i class="fas fa-thermometer-empty text-3xl text-quantum-purple mb-3"></i>
+                            <h4 class="font-semibold mb-2">Cryogenic Operation</h4>
+                            <p class="text-sm text-gray-200">Operating at millikelvin temperatures closest to qubits</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Applications Section -->
+        <section id="applications" class="px-4 sm:px-6 md:px-8 py-8 sm:py-12 md:py-16 bg-gray-50">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="font-serif text-4xl font-bold text-quantum-blue mb-12">Applications of Accelerator-Derived RF
+                    Technology</h2>
+
+                <div class="grid lg:grid-cols-3 gap-8 mb-12">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-quantum-gold">
+                        <i class="fas fa-memory text-3xl text-quantum-gold mb-4"></i>
+                        <h3 class="text-xl font-bold text-quantum-blue mb-3">High-Q SRF Cavities</h3>
+                        <p class="text-gray-700 mb-4">
+                            Fermilab researchers have demonstrated coherence lifetimes of <strong>up to two
+                                seconds</strong> for quantum states stored in SRF cavities <a
+                                href="https://physicsworld.com/a/superconducting-innovation-sqms-shapes-up-for-scalable-success-in-quantum-computing/"
+                                class="citation-link">[71, 149]</a>.
+                        </p>
+                        <div class="text-sm text-gray-600">
+                            <div class="flex justify-between mb-1">
+                                <span>Q-factor</span>
+                                <span>10¹⁰ - 10¹¹</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-quantum-gold h-2 rounded-full" style="width: 95%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-quantum-purple">
+                        <i class="fas fa-layer-group text-3xl text-quantum-purple mb-4"></i>
+                        <h3 class="text-xl font-bold text-quantum-blue mb-3">Qudit Computing</h3>
+                        <p class="text-gray-700 mb-4">
+                            SRF cavities enable <strong>qudit-based quantum computing</strong> with d-dimensional
+                            quantum systems (d&gt;2), offering compact information encoding <a
+                                href="https://lss.fnal.gov/archive/2024/conf/fermilab-conf-24-0026-sqms.pdf"
+                                class="citation-link">[54, 56]</a>.
+                        </p>
+                        <div class="bg-gray-50 p-3 rounded-lg">
+                            <p class="text-xs text-gray-600">
+                                Single 9-cell SRF cavity + 1 transmon = 100+ qubit-equivalent QPU
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-quantum-teal">
+                        <i class="fas fa-atom text-3xl text-quantum-teal mb-4"></i>
+                        <h3 class="text-xl font-bold text-quantum-blue mb-3">Advanced Materials</h3>
+                        <p class="text-gray-700 mb-4">
+                            SRF research has yielded <strong>3-5 times improvement in transmon coherence times</strong>
+                            via niobium surface encapsulation <a
+                                href="https://lss.fnal.gov/archive/2024/conf/fermilab-conf-24-0026-sqms.pdf"
+                                class="citation-link">[56]</a>.
+                        </p>
+                        <div class="text-sm text-gray-600">
+                            <div class="flex items-center">
+                                <span class="mr-2">Coherence improvement:</span>
+                                <span class="font-semibold text-quantum-teal">Up to 0.45 ms</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-xl shadow-sm">
+                    <h3 class="text-2xl font-bold text-quantum-blue mb-6">SRF Cavity Performance for Quantum
+                        Applications</h3>
+                    <div class="mt-6 grid md:grid-cols-2 gap-6">
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-quantum-blue mb-2">Key Advantages:</h4>
+                            <ul class="text-sm text-gray-700 space-y-1">
+                                <li>• Exceptionally long coherence times (up to 2 seconds)</li>
+                                <li>• Natural platform for qudit encoding</li>
+                                <li>• Reduced hardware complexity</li>
+                                <li>• Leverages decades of accelerator R&amp;D</li>
+                            </ul>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-quantum-blue mb-2">Research Focus:</h4>
+                            <ul class="text-sm text-gray-700 space-y-1">
+                                <li>• Multi-mode cavity optimization</li>
+                                <li>• Integration with transmon ancillas</li>
+                                <li>• Surface treatment improvements</li>
+                                <li>• Scalable architectures</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Control Section -->
+        <section id="control" class="px-4 sm:px-6 md:px-8 py-8 sm:py-12 md:py-16 bg-white">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="font-serif text-4xl font-bold text-quantum-blue mb-12">Qubit Control and Readout Techniques
+                </h2>
+
+                <div class="grid lg:grid-cols-2 gap-12 mb-12">
+                    <div>
+                        <h3 class="text-2xl font-bold text-quantum-blue mb-6">Microwave Pulse Generation</h3>
+                        <div class="space-y-6">
+                            <div class="bg-gray-50 p-6 rounded-lg">
+                                <h4 class="font-semibold text-quantum-blue mb-3">Precision Requirements</h4>
+                                <p class="text-gray-700 text-sm mb-3">
+                                    Quantum gate fidelity is extremely sensitive to microwave pulse characteristics:
+                                    <strong>frequency, amplitude, phase, and duration</strong> <a
+                                        href="https://arxiv.org/html/2312.08699v2" class="citation-link">[151, 211]</a>.
+                                </p>
+                                <div class="grid grid-cols-2 gap-3 text-xs">
+                                    <div class="bg-white p-2 rounded">
+                                        <div class="font-semibold text-quantum-purple">Frequency</div>
+                                        <div class="text-gray-600">3-10 GHz</div>
+                                    </div>
+                                    <div class="bg-white p-2 rounded">
+                                        <div class="font-semibold text-quantum-teal">Phase</div>
+                                        <div class="text-gray-600">Nanosecond precision</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-white p-6 rounded-lg border border-gray-200">
+                                <h4 class="font-semibold text-quantum-blue mb-3">Advanced Pulse Shaping</h4>
+                                <div class="space-y-2 text-sm text-gray-700">
+                                    <div class="flex items-center">
+                                        <div class="w-2 h-2 bg-quantum-gold rounded-full mr-2"></div>
+                                        <span>Gaussian pulses for smooth transitions</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <div class="w-2 h-2 bg-quantum-purple rounded-full mr-2"></div>
+                                        <span>DRAG pulses to minimize leakage</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <div class="w-2 h-2 bg-quantum-teal rounded-full mr-2"></div>
+                                        <span>Real-time feedback capabilities</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-2xl font-bold text-quantum-blue mb-6">Dispersive Readout</h3>
+                        <div class="bg-gradient-to-br from-quantum-blue to-quantum-purple text-white p-6 rounded-lg">
+                            <div class="mb-4">
+                                <h4 class="font-semibold mb-2">Quantum Non-Demolition (QND) Measurement</h4>
+                                <p class="text-sm text-gray-200">
+                                    The qubit state is inferred by probing a coupled cavity, where the resonance
+                                    frequency shifts by χ (dispersive shift) depending on the qubit state <a
+                                        href="https://link.springer.com/article/10.1007/s10948-025-06968-x"
+                                        class="citation-link">[147, 227]</a>.
+                                </p>
+                            </div>
+
+                            <div class="space-y-3">
+                                <div class="bg-white bg-opacity-10 p-3 rounded">
+                                    <div class="flex items-center mb-2">
+                                        <i class="fas fa-wave-square text-quantum-gold mr-2"></i>
+                                        <span class="font-semibold">Probe Tone</span>
+                                    </div>
+                                    <p class="text-xs text-gray-200">Microwave tone at cavity resonance frequency</p>
+                                </div>
+
+                                <div class="bg-white bg-opacity-10 p-3 rounded">
+                                    <div class="flex items-center mb-2">
+                                        <i class="fas fa-signal text-quantum-teal mr-2"></i>
+                                        <span class="font-semibold">Phase Modulation</span>
+                                    </div>
+                                    <p class="text-xs text-gray-200">Qubit state modulates phase/amplitude</p>
+                                </div>
+
+                                <div class="bg-white bg-opacity-10 p-3 rounded">
+                                    <div class="flex items-center mb-2">
+                                        <i class="fas fa-search text-quantum-purple mr-2"></i>
+                                        <span class="font-semibold">Detection</span>
+                                    </div>
+                                    <p class="text-xs text-gray-200">Amplified and demodulated at room temperature</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-900 text-white p-8 rounded-xl">
+                    <h3 class="text-2xl font-bold text-quantum-gold mb-6">Cryogenic RF Engineering Challenges</h3>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="font-semibold mb-4 text-quantum-teal">Thermal Management</h4>
+                            <div class="space-y-3 text-sm">
+                                <div class="flex items-center">
+                                    <i class="fas fa-thermometer-quarter text-quantum-gold mr-3"></i>
+                                    <span>Operating temperature: &lt; 100 mK</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-snowflake text-quantum-teal mr-3"></i>
+                                    <span>Minimize heat load on cryogenic system</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-shield-alt text-quantum-purple mr-3"></i>
+                                    <span>Attenuate thermal noise from higher temperatures</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-4 text-quantum-teal">Signal Integrity</h4>
+                            <div class="space-y-3 text-sm">
+                                <div class="flex items-center">
+                                    <i class="fas fa-cable-car text-quantum-gold mr-3"></i>
+                                    <span>Specialized cryogenic cables and connectors</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-filter text-quantum-teal mr-3"></i>
+                                    <span>Advanced filtering and attenuation</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-microchip text-quantum-purple mr-3"></i>
+                                    <span>Impedance matching throughout signal chain</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Institutions Section -->
+        <section id="institutions" class="px-4 sm:px-6 md:px-8 py-8 sm:py-12 md:py-16 bg-gray-50">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="font-serif text-4xl font-bold text-quantum-blue mb-12">Key Research Institutions and
+                    Collaborations</h2>
+
+                <div class="space-y-8">
+                    <!-- Fermilab -->
+                    <div class="bg-white p-8 rounded-xl shadow-sm border-l-4 border-quantum-gold">
+                        <div class="flex items-start">
+                            <div class="mr-6">
+                                <img src="https://kimi-web-img.moonshot.cn/img/pbs.twimg.com/589ac9c4ee85e2a5d029b3fe202f3ad7d263eb04.jpg"
+                                    alt="Fermilab particle physics laboratory complex"
+                                    class="w-24 h-24 rounded-lg object-cover" size="small" aspect="square" style="photo"
+                                    query="Fermilab laboratory building exterior" referrerpolicy="no-referrer"
+                                    data-modified="1" data-score="11498.00" />
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-2xl font-bold text-quantum-blue mb-2">Fermilab (SQMS Center)</h3>
+                                <p class="text-gray-700 mb-4">
+                                    Leading SRF technology application to quantum computing through the Superconducting
+                                    Quantum Materials and Systems Center. Focus on <strong>qudit-based quantum computing
+                                        using 3D SRF cavities</strong> with coherence times up to 2 seconds <a
+                                        href="https://lss.fnal.gov/archive/2024/conf/fermilab-conf-24-0026-sqms.pdf"
+                                        class="citation-link">[147, 194]</a>.
+                                </p>
+                                <div class="grid md:grid-cols-2 gap-4">
+                                    <div class="bg-gray-50 p-4 rounded-lg">
+                                        <h4 class="font-semibold text-quantum-blue mb-2">Key Achievements</h4>
+                                        <ul class="text-sm text-gray-700 space-y-1">
+                                            <li>• 2-second coherence in SRF cavities</li>
+                                            <li>• Compact control electronics development</li>
+                                            <li>• Multi-qudit processor architecture</li>
+                                            <li>• World&#39;s largest dilution refrigerator &#34;Colossus&#34;</li>
+                                        </ul>
+                                    </div>
+                                    <div class="bg-gray-50 p-4 rounded-lg">
+                                        <h4 class="font-semibold text-quantum-blue mb-2">Research Focus</h4>
+                                        <ul class="text-sm text-gray-700 space-y-1">
+                                            <li>• Transmon-SRF cavity integration</li>
+                                            <li>• Advanced materials (ZrNb(CO) films)</li>
+                                            <li>• Quantum memory applications</li>
+                                            <li>• Scalable control systems</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CERN -->
+                    <div class="bg-white p-8 rounded-xl shadow-sm border-l-4 border-quantum-purple">
+                        <div class="flex items-start">
+                            <div class="mr-6">
+                                <img src="https://kimi-web-img.moonshot.cn/img/images.tagesschau.de/3537f7229f3ac2ea04c70e1d4e76d365f05cb2b0.jpg"
+                                    alt="CERN Large Hadron Collider particle accelerator tunnel"
+                                    class="w-24 h-24 rounded-lg object-cover" size="small" aspect="square" style="photo"
+                                    query="CERN LHC tunnel" referrerpolicy="no-referrer" data-modified="1"
+                                    data-score="11588.00" />
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-2xl font-bold text-quantum-blue mb-2">CERN Quantum Technology Initiative
+                                </h3>
+                                <p class="text-gray-700 mb-4">
+                                    Leveraging decades of SRF expertise from particle accelerators for quantum
+                                    technologies. From <strong>Nb-coated Cu cavities for LEP</strong> to advanced
+                                    surface treatments and materials characterization <a
+                                        href="https://cds.cern.ch/record/2928989/files/document.pdf"
+                                        class="citation-link">[33, 34]</a>.
+                                </p>
+                                <div class="bg-gray-50 p-4 rounded-lg">
+                                    <h4 class="font-semibold text-quantum-blue mb-2">Contributions</h4>
+                                    <div class="grid md:grid-cols-3 gap-4 text-sm text-gray-700">
+                                        <div>
+                                            <i class="fas fa-atom text-quantum-purple mr-2"></i>
+                                            <span>High-Q niobium-film cavities</span>
+                                        </div>
+                                        <div>
+                                            <i class="fas fa-microscope text-quantum-teal mr-2"></i>
+                                            <span>Surface analysis techniques</span>
+                                        </div>
+                                        <div>
+                                            <i class="fas fa-network-wired text-quantum-gold mr-2"></i>
+                                            <span>Academic-industry collaborations</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- NIST and Others -->
+                    <div class="bg-white p-8 rounded-xl shadow-sm border-l-4 border-quantum-teal">
+                        <h3 class="text-2xl font-bold text-quantum-blue mb-4">NIST and Industry Leaders</h3>
+                        <div class="grid lg:grid-cols-2 gap-8">
+                            <div>
+                                <h4 class="font-semibold text-quantum-blue mb-3">NIST Innovations</h4>
+                                <div class="space-y-3">
+                                    <div class="bg-gray-50 p-3 rounded-lg">
+                                        <h5 class="font-semibold text-sm text-quantum-purple">Single Flux Quantum (SFQ)
+                                            Control</h5>
+                                        <p class="text-xs text-gray-700">Digital pulse control with &gt;99.5% gate
+                                            fidelity <a
+                                                href="https://www.nist.gov/programs-projects/flux-quantum-electronics"
+                                                class="citation-link">[274]</a>
+                                        </p>
+                                    </div>
+                                    <div class="bg-gray-50 p-3 rounded-lg">
+                                        <h5 class="font-semibold text-sm text-quantum-teal">Cryogenic RF Switches</h5>
+                                        <p class="text-xs text-gray-700">High-throughput testing and calibration systems
+                                        </p>
+                                    </div>
+                                    <div class="bg-gray-50 p-3 rounded-lg">
+                                        <h5 class="font-semibold text-sm text-quantum-gold">Quantum Voltage Standards
+                                        </h5>
+                                        <p class="text-xs text-gray-700">Josephson Arbitrary Waveform Synthesizers</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-quantum-blue mb-3">Industry &amp; Academia</h4>
+                                <div class="space-y-2 text-sm text-gray-700">
+                                    <div class="flex items-center">
+                                        <div class="w-2 h-2 bg-blue-500 rounded-full mr-3"></div>
+                                        <span><strong>IBM:</strong> 30+ years in quantum computing, scalability
+                                            focus</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <div class="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
+                                        <span><strong>Google Quantum AI:</strong> Quantum supremacy demonstration</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <div class="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
+                                        <span><strong>Yale University:</strong> Transmon qubit and cQED
+                                            birthplace</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <div class="w-2 h-2 bg-purple-500 rounded-full mr-3"></div>
+                                        <span><strong>Rigetti Computing:</strong> Hybrid quantum-classical
+                                            systems</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Future Trends Section -->
+        <section id="future" class="px-4 sm:px-6 md:px-8 py-8 sm:py-12 md:py-16 bg-white">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="font-serif text-4xl font-bold text-quantum-blue mb-12">Future Trends and Challenges</h2>
+
+                <div class="grid lg:grid-cols-2 gap-12 mb-12">
+                    <div>
+                        <h3 class="text-2xl font-bold text-quantum-blue mb-6">Improving Qubit Coherence</h3>
+                        <div class="space-y-6">
+                            <div class="bg-gradient-to-r from-quantum-blue to-quantum-purple text-white p-6 rounded-lg">
+                                <h4 class="font-semibold mb-3 text-quantum-gold">RF Engineering Solutions</h4>
+                                <div class="space-y-2 text-sm">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-shield-alt mr-2"></i>
+                                        <span>Optimized qubit/resonator design to reduce dielectric losses</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-cog mr-2"></i>
+                                        <span>Advanced surface treatments to minimize TLS density</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-wave-square mr-2"></i>
+                                        <span>Dynamical decoupling pulse sequences</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-gray-50 p-6 rounded-lg">
+                                <h4 class="font-semibold text-quantum-blue mb-3">Decoherence Sources</h4>
+                                <div class="space-y-2 text-sm text-gray-700">
+                                    <div class="flex items-center">
+                                        <div class="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
+                                        <span>Dielectric losses from substrates and oxides</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <div class="w-2 h-2 bg-orange-500 rounded-full mr-3"></div>
+                                        <span>Magnetic flux and charge noise</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <div class="w-2 h-2 bg-yellow-500 rounded-full mr-3"></div>
+                                        <span>Two-level system (TLS) coupling</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-2xl font-bold text-quantum-blue mb-6">Scalability Challenges</h3>
+                        <div class="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+                            <div class="mb-4">
+                                <h4 class="font-semibold text-quantum-blue mb-2">Wiring Bottleneck</h4>
+                                <p class="text-sm text-gray-700 mb-3">
+                                    IBM&#39;s Osprey (433 qubits) required over 500 RF lines, straining cryogenic
+                                    infrastructure <a
+                                        href="https://indico.cern.ch/event/1168385/contributions/5356125/attachments/2680218/4649207/2023-07-13_Nicholas_Masluk,_CEC_ICMC,_Qubit_Cryogenic_Infrastructure.pdf"
+                                        class="citation-link">[324]</a>.
+                                </p>
+                            </div>
+
+                            <div class="space-y-4">
+                                <div class="bg-gray-50 p-4 rounded-lg">
+                                    <h5 class="font-semibold text-sm text-quantum-purple mb-2">Multiplexing Solutions
+                                    </h5>
+                                    <ul class="text-xs text-gray-700 space-y-1">
+                                        <li>• Frequency multiplexing for control/readout</li>
+                                        <li>• Time-domain multiplexing for control functions</li>
+                                    </ul>
+                                </div>
+
+                                <div class="bg-gray-50 p-4 rounded-lg">
+                                    <h5 class="font-semibold text-sm text-quantum-teal mb-2">Cryogenic Integration</h5>
+                                    <ul class="text-xs text-gray-700 space-y-1">
+                                        <li>• Cryogenic CMOS controllers at 4K</li>
+                                        <li>• Advanced packaging (flip-chip, TSVs)</li>
+                                        <li>• RF System-on-Chip solutions</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-900 text-white p-8 rounded-xl">
+                    <h3 class="text-2xl font-bold text-quantum-gold mb-6">Emerging Architectures and Error Correction
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="font-semibold mb-4 text-quantum-teal">Novel Qubit Designs</h4>
+                            <div class="space-y-3">
+                                <div class="bg-white bg-opacity-10 p-3 rounded">
+                                    <div class="font-semibold text-sm text-quantum-gold">Fluxonium Qubits</div>
+                                    <p class="text-xs text-gray-300">Lower frequencies, high anharmonicity, millisecond
+                                        coherence</p>
+                                </div>
+                                <div class="bg-white bg-opacity-10 p-3 rounded">
+                                    <div class="font-semibold text-sm text-quantum-teal">0-π Qubits</div>
+                                    <p class="text-xs text-gray-300">Intrinsic protection against noise sources</p>
+                                </div>
+                                <div class="bg-white bg-opacity-10 p-3 rounded">
+                                    <div class="font-semibold text-sm text-quantum-purple">Qudit Systems</div>
+                                    <p class="text-xs text-gray-300">SRF cavity-based multi-level quantum systems</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-4 text-quantum-teal">Quantum Error Correction</h4>
+                            <div class="space-y-3 text-sm">
+                                <div class="flex items-center">
+                                    <i class="fas fa-search text-quantum-gold mr-3"></i>
+                                    <span>High-fidelity QND readout for syndrome extraction</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-tachometer-alt text-quantum-teal mr-3"></i>
+                                    <span>Real-time feedback with low latency</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-shield-alt text-quantum-purple mr-3"></i>
+                                    <span>Surface code implementation requirements</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-cog text-quantum-gold mr-3"></i>
+                                    <span>Co-design of architecture and control systems</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-12 bg-gradient-to-r from-quantum-gold to-quantum-teal text-white p-8 rounded-xl">
+                    <div class="text-center">
+                        <h3 class="text-2xl font-bold mb-4">The Path Forward</h3>
+                        <p class="text-lg mb-6">
+                            The future of RF superconducting technology in quantum computing lies in the
+                            <strong>seamless integration of materials science, device engineering, and RF/microwave
+                                technology</strong> to overcome current limitations and unlock the full potential of
+                            large-scale quantum computation.
+                        </p>
+                        <div class="flex justify-center space-x-8 text-sm">
+                            <div class="text-center">
+                                <i class="fas fa-atom text-2xl mb-2"></i>
+                                <div class="font-semibold">Materials Innovation</div>
+                            </div>
+                            <div class="text-center">
+                                <i class="fas fa-microchip text-2xl mb-2"></i>
+                                <div class="font-semibold">Device Engineering</div>
+                            </div>
+                            <div class="text-center">
+                                <i class="fas fa-wave-square text-2xl mb-2"></i>
+                                <div class="font-semibold">RF Technology</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-quantum-blue text-white px-4 sm:px-6 md:px-8 py-8 sm:py-12">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center">
+                    <h3 class="text-2xl font-bold mb-4 text-quantum-gold">RF Superconducting Technology in Quantum
+                        Computing</h3>
+                    <p class="text-gray-300 mb-6">
+                        Bridging particle accelerator technology with the quantum computing revolution
+                    </p>
+                    <div class="flex justify-center space-x-6 text-sm text-gray-400">
+                        <span>Research Paper</span>
+                        <span>•</span>
+                        <span>Technical Analysis</span>
+                        <span>•</span>
+                        <span>Quantum Computing</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-toggle').addEventListener('click', function () {
+            document.getElementById('toc').classList.toggle('mobile-open');
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+                // Close mobile menu after clicking a link
+                if (window.innerWidth < 1024) {
+                    document.getElementById('toc').classList.remove('mobile-open');
+                }
+            });
+        });
+
+        // Highlight active section in TOC
+        const sections = document.querySelectorAll('section[id]');
+        const tocLinks = document.querySelectorAll('.toc-link');
+
+        function highlightActiveSection() {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            tocLinks.forEach(link => {
+                link.classList.remove('bg-quantum-gold', 'bg-opacity-20', 'border-l-4', 'border-quantum-gold');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('bg-quantum-gold', 'bg-opacity-20', 'border-l-4', 'border-quantum-gold');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', highlightActiveSection);
+        highlightActiveSection(); // Initial call
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function (e) {
+            const toc = document.getElementById('toc');
+            const toggle = document.getElementById('mobile-menu-toggle');
+
+            if (window.innerWidth < 1024 &&
+                !toc.contains(e.target) &&
+                !toggle.contains(e.target) &&
+                toc.classList.contains('mobile-open')) {
+                toc.classList.remove('mobile-open');
+            }
+        });
+    </script>
+
+
+</body>
+
+</html>
