@@ -1,0 +1,1983 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>铌材剩余电阻比(RRR)测量方法与设备深度研究</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e293b',
+                        secondary: '#475569',
+                        accent: '#3b82f6',
+                        neutral: '#64748b',
+                        'base-100': '#ffffff',
+                        'base-200': '#f8fafc',
+                        'base-300': '#e2e8f0'
+                    },
+                    fontFamily: {
+                        'serif': ['Playfair Display', 'serif'],
+                        'sans': ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            overflow-x: hidden;
+        }
+
+        .toc-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 280px;
+            height: 100vh;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-right: 2px solid #3b82f6;
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 2rem 1.5rem;
+            box-shadow: 4px 0 20px rgba(59, 130, 246, 0.1);
+        }
+
+        .main-content {
+            margin-left: 280px;
+            min-height: 100vh;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 50%, #475569 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-overlay {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(2px);
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 2rem;
+            height: 100%;
+        }
+
+        .bento-main {
+            grid-row: 1 / 3;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .bento-stats {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .bento-insight {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+            padding: 3rem 2rem;
+            margin-bottom: 3rem;
+            border-radius: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .section-header h1 {
+            position: relative;
+            z-index: 1;
+        }
+
+        .citation {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted #3b82f6;
+            transition: all 0.2s ease;
+        }
+
+        .citation:hover {
+            color: #1d4ed8;
+            border-bottom-style: solid;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(147, 197, 253, 0.05) 100%);
+            border-left: 4px solid #3b82f6;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0.5rem;
+        }
+
+        .formula-box {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            font-family: 'Courier New', monospace;
+            font-size: 1.25rem;
+            text-align: center;
+            margin: 2rem 0;
+            border: 2px solid #3b82f6;
+        }
+
+        .toc-link {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: #475569;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .toc-link:hover {
+            background: rgba(59, 130, 246, 0.1);
+            color: #3b82f6;
+            border-left-color: #3b82f6;
+            transform: translateX(4px);
+        }
+
+        .toc-link.active {
+            background: rgba(59, 130, 246, 0.15);
+            color: #3b82f6;
+            border-left-color: #3b82f6;
+            font-weight: 600;
+        }
+
+        .equipment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .equipment-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border: 1px solid #e2e8f0;
+            border-radius: 1rem;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .equipment-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+            border-color: #3b82f6;
+        }
+
+        .mermaid-container {
+            display: flex;
+            justify-content: center;
+            min-height: 300px;
+            max-height: 800px;
+            background: #ffffff;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mermaid-container .mermaid {
+            width: 100%;
+            max-width: 100%;
+            height: 100%;
+            cursor: grab;
+            transition: transform 0.3s ease;
+            transform-origin: center center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            touch-action: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .mermaid-container .mermaid svg {
+            max-width: 100%;
+            height: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .mermaid-container .mermaid:active {
+            cursor: grabbing;
+        }
+
+        .mermaid-container.zoomed .mermaid {
+            height: 100%;
+            width: 100%;
+            cursor: grab;
+        }
+
+        .mermaid-controls {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 20;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 8px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .mermaid-control-btn {
+            background: #ffffff;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #374151;
+            font-size: 14px;
+            min-width: 36px;
+            height: 36px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mermaid-control-btn:hover {
+            background: #f8fafc;
+            border-color: #3b82f6;
+            color: #3b82f6;
+            transform: translateY(-1px);
+        }
+
+        .mermaid-control-btn:active {
+            transform: scale(0.95);
+        }
+
+        @media (max-width: 1024px) {
+            .toc-fixed {
+                display: none;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .mermaid-control-btn:not(.reset-zoom) {
+                display: none;
+            }
+
+            .mermaid-controls {
+                top: auto;
+                bottom: 15px;
+                right: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .bento-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto auto;
+            }
+
+            .bento-main {
+                grid-row: 1;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-base-100 font-sans">
+    <!-- Fixed Table of Contents -->
+    <nav class="toc-fixed">
+        <div class="mb-8">
+            <h3 class="text-lg font-bold text-primary mb-4">目录导航</h3>
+            <div class="space-y-2">
+                <a href="#introduction" class="toc-link">1. 剩余电阻比的定义与测量原理</a>
+                <a href="#standards" class="toc-link">2. 国际与国家标准</a>
+                <a href="#methods" class="toc-link">3. 主要测量方法与技术</a>
+                <a href="#equipment" class="toc-link">4. 测量设备与系统</a>
+                <a href="#applications" class="toc-link">5. 不同形态铌材的测量实践</a>
+                <a href="#case-studies" class="toc-link">6. 实际应用案例与研究进展</a>
+                <a href="#challenges" class="toc-link">7. 技术挑战与展望</a>
+            </div>
+        </div>
+
+        <div class="mt-8 p-4 bg-white rounded-lg border border-base-300">
+            <h4 class="font-semibold text-sm text-primary mb-2">关键指标</h4>
+            <div class="space-y-2 text-sm">
+                <div class="flex justify-between">
+                    <span class="text-secondary">RRR范围</span>
+                    <span class="font-semibold text-accent">150-600</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-secondary">测量精度</span>
+                    <span class="font-semibold text-green-600">≤5%</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-secondary">重复性</span>
+                    <span class="font-semibold text-green-600">≤3%</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section min-h-screen flex items-center">
+            <div class="hero-overlay w-full h-full flex items-center">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="bento-grid">
+                        <div class="bento-main">
+                            <div class="mb-8">
+                                <h1
+                                    class="font-serif text-4xl sm:text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+                                    铌材剩余电阻比
+                                    <span class="italic text-blue-300 block">(RRR)测量</span>
+                                    <span class="text-2xl sm:text-3xl font-normal text-blue-200">方法与设备深度研究</span>
+                                </h1>
+                                <p class="text-base sm:text-xl text-blue-100 leading-relaxed max-w-3xl">
+                                    深入探讨符合IEC 61788-23:2021与GB/T
+                                    45506-2025标准的谐振腔级铌超导体剩余电阻比测量技术，涵盖铌板、铌管、铌棒等多种形态材料的精确测量方法。
+                                </p>
+                            </div>
+
+                            <div class="flex flex-wrap gap-4">
+                                <div class="bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2 text-white">
+                                    <i class="fas fa-atom mr-2"></i>超导材料
+                                </div>
+                                <div class="bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2 text-white">
+                                    <i class="fas fa-thermometer-half mr-2"></i>低温测量
+                                </div>
+                                <div class="bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2 text-white">
+                                    <i class="fas fa-microscope mr-2"></i>精密检测
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div class="bento-stats">
+                                <h3 class="text-lg font-semibold text-white mb-3">标准覆盖范围</h3>
+                                <div class="space-y-2 text-sm text-blue-100">
+                                    <div class="flex justify-between">
+                                        <span>IEC 61788-23:2024</span>
+                                        <span class="text-green-300">国际标准</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>GB/T 45506-2025</span>
+                                        <span class="text-green-300">国家标准</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>RRR测量范围</span>
+                                        <span class="font-semibold">150-600</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bento-insight">
+                                <h3 class="text-lg font-semibold text-white mb-3">核心洞察</h3>
+                                <p class="text-sm text-green-100 leading-relaxed">
+                                    四探针法是RRR测量的金标准，通过消除引线电阻影响实现超高精度测量，为超导腔等高端应用提供关键质量保证。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 1: Introduction -->
+        <section id="introduction" class="py-16 bg-base-100">
+            <div class="container mx-auto px-8">
+                <div class="section-header">
+                    <h1 class="text-4xl font-serif font-bold mb-4">剩余电阻比的定义与测量原理</h1>
+                    <p class="text-xl text-blue-100">RRR值作为评估铌材纯度与超导性能的关键参数</p>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-12 mb-12">
+                    <div>
+                        <h2 class="text-2xl font-semibold text-primary mb-6">RRR值的定义及其重要性</h2>
+                        <p class="text-lg text-secondary leading-relaxed mb-6">
+                            <strong>剩余电阻比（Residual Resistance Ratio, RRR）是评估金属材料纯度，特别是高纯铌等超导材料纯度的一个关键参数</strong>
+                            <a href="#ref-107" class="citation">[107]</a>
+                            <a href="#ref-131" class="citation">[131]</a>。
+                            它通常定义为材料在室温（例如293 K或300 K）下的电阻值 (R₁) 与在极低温度下（通常为刚超过超导转变温度，
+                            例如约10 K，或在液氦温度4.2 K下，若材料仍处于正常态）的剩余电阻值 (R₂) 之比。
+                        </p>
+
+                        <div class="formula-box">
+                            <strong>RRR = R₁ / R₂</strong>
+                        </div>
+
+                        <p class="text-lg text-secondary leading-relaxed">
+                            RRR值越高，表明材料中的晶格缺陷和化学杂质浓度越低，从而材料的纯度越高。对于谐振腔级铌超导体而言，
+                            <strong>高RRR值是保证其在高频超导应用中具有低微波表面电阻和高品质因数（Q₀值）的前提</strong>，
+                            这对于粒子加速器、核磁共振等大科学装置的性能至关重要
+                            <a href="#ref-130" class="citation">[130]</a>
+                            <a href="#ref-133" class="citation">[133]</a>。
+                        </p>
+                    </div>
+
+                    <div>
+                        <h2 class="text-2xl font-semibold text-primary mb-6">测量基本原理</h2>
+                        <div class="highlight-box">
+                            <h3 class="font-semibold text-primary mb-3">四探针法测量原理</h3>
+                            <p class="text-secondary leading-relaxed">
+                                RRR测量的基本原理在于比较材料在两个特定温度下的电阻值。首先，在室温（通常记为T₁，如293 K或300 K）下测量样品的电阻R₁。
+                                然后，将样品冷却至极低温度，测量其在超导转变温度以上或特定低温（通常记为T₂，如约10 K或4.2 K）下的剩余电阻R₂。
+                            </p>
+                        </div>
+
+                        <div class="bg-base-200 rounded-lg p-6 mt-6">
+                            <h4 class="font-semibold text-primary mb-3">超导材料的特殊性</h4>
+                            <p class="text-secondary leading-relaxed">
+                                对于像铌这样的超导材料，其RRR测量具有特殊性。<strong>铌的超导转变温度 (T_c) 约为9.26 K</strong>
+                                <a href="#ref-208" class="citation">[208]</a>。
+                                当温度低于T_c时，铌进入超导态，其直流电阻为零。因此，无法直接测量超导态下的电阻来计算RRR值。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Standards -->
+        <section id="standards" class="py-16 bg-base-200">
+            <div class="container mx-auto px-8">
+                <div class="section-header">
+                    <h1 class="text-4xl font-serif font-bold mb-4">国际与国家标准</h1>
+                    <p class="text-xl text-blue-100">IEC 61788-23 与 GB/T 45506-2025 标准体系</p>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-8 mb-12">
+                    <div class="bg-white rounded-xl p-8 shadow-lg">
+                        <div class="flex items-center mb-6">
+                            <div class="bg-blue-100 rounded-full p-3 mr-4">
+                                <i class="fas fa-globe text-blue-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-primary">IEC 61788-23:2024</h3>
+                                <p class="text-sm text-secondary">国际电工委员会标准</p>
+                            </div>
+                        </div>
+
+                        <p class="text-secondary leading-relaxed mb-4">
+                            <strong>IEC 61788-23:2021 是一项针对谐振腔级铌超导体剩余电阻比（RRR）测量的国际标准</strong>
+                            <a href="#ref-64" class="citation">[64]</a>
+                            <a href="#ref-67" class="citation">[67]</a>。
+                            该标准详细规定了一种测试方法，用于确定高纯度铌材的RRR值，其适用范围通常为<strong>150 < RRR < 600的铌材</strong>
+                                    <a href="#ref-65" class="citation">[65]</a>
+                                    <a href="#ref-67" class="citation">[67]</a>。
+                        </p>
+
+                        <div class="bg-blue-50 rounded-lg p-4">
+                            <h4 class="font-semibold text-primary mb-2">标准要点</h4>
+                            <ul class="text-sm text-secondary space-y-1">
+                                <li>• 详细描述测量装置与样品制备要求</li>
+                                <li>• 规定数据采集与分析方法</li>
+                                <li>• 包含不确定度评估方法</li>
+                                <li>• 最新版本：IEC 61788-23:2024</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-8 shadow-lg">
+                        <div class="flex items-center mb-6">
+                            <div class="bg-red-100 rounded-full p-3 mr-4">
+                                <i class="fas fa-flag text-red-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-primary">GB/T 45506-2025</h3>
+                                <p class="text-sm text-secondary">中华人民共和国国家标准</p>
+                            </div>
+                        </div>
+
+                        <p class="text-secondary leading-relaxed mb-4">
+                            <strong>GB/T 45506-2025《剩余电阻比测量 谐振腔级铌超导体剩余电阻比测量》是中华人民共和国国家标准，
+                                该标准等同采用（IDT）了国际标准 IEC 61788-23:2024</strong>
+                            <a href="#ref-159" class="citation">[159]</a>
+                            <a href="#ref-183" class="citation">[183]</a>。
+                            该标准于<strong>2025年4月25日发布，并计划于2025年11月1日实施</strong>
+                            <a href="#ref-184" class="citation">[184]</a>
+                            <a href="#ref-503" class="citation">[503]</a>。
+                        </p>
+
+                        <div class="bg-red-50 rounded-lg p-4">
+                            <h4 class="font-semibold text-primary mb-2">主要起草单位</h4>
+                            <ul class="text-sm text-secondary space-y-1">
+                                <li>• 中国科学院高能物理研究所</li>
+                                <li>• 西部超导材料科技股份有限公司</li>
+                                <li>• 宁夏东方超导科技有限公司</li>
+                                <li>• 北京大学、中科院电工研究所等</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl p-8 shadow-lg">
+                    <h2 class="text-2xl font-semibold text-primary mb-6">标准适用范围与技术规范</h2>
+
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="text-center">
+                            <div
+                                class="bg-accent/10 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-cube text-accent text-2xl"></i>
+                            </div>
+                            <h3 class="font-semibold text-primary mb-2">适用材料</h3>
+                            <p class="text-sm text-secondary">谐振腔级高纯铌超导体</p>
+                        </div>
+
+                        <div class="text-center">
+                            <div
+                                class="bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-calculator text-green-600 text-2xl"></i>
+                            </div>
+                            <h3 class="font-semibold text-primary mb-2">RRR范围</h3>
+                            <p class="text-sm text-secondary">150 - 600</p>
+                        </div>
+
+                        <div class="text-center">
+                            <div
+                                class="bg-purple-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-ruler text-purple-600 text-2xl"></i>
+                            </div>
+                            <h3 class="font-semibold text-primary mb-2">样品尺寸</h3>
+                            <p class="text-sm text-secondary">横截面积 1-20 mm²</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-8">
+                        <h3 class="font-semibold text-primary mb-4">几何形状要求</h3>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="bg-base-200 rounded-lg p-4">
+                                <h4 class="font-semibold mb-2">截面形状</h4>
+                                <p class="text-secondary">矩形或圆形截面</p>
+                            </div>
+                            <div class="bg-base-200 rounded-lg p-4">
+                                <h4 class="font-semibold mb-2">长径比</h4>
+                                <p class="text-secondary">长度不小于宽度/直径的10倍，不大于25倍</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Methods -->
+        <section id="methods" class="py-16 bg-base-100">
+            <div class="container mx-auto px-8">
+                <div class="section-header">
+                    <h1 class="text-4xl font-serif font-bold mb-4">RRR值测量的主要方法与技术</h1>
+                    <p class="text-xl text-blue-100">直流四探针法作为标准测量方法的核心技术体系</p>
+                </div>
+
+                <div class="mb-12">
+                    <h2 class="text-3xl font-semibold text-primary mb-8">直流四探针法标准测量</h2>
+
+                    <div class="grid lg:grid-cols-2 gap-8">
+                        <div>
+                            <p class="text-lg text-secondary leading-relaxed mb-6">
+                                <strong>直流四探针法，也称为四线法，是测量铌材RRR值的标准方法，被IEC 61788-23:2021及GB/T 45506-2025等标准所采用</strong>
+                                <a href="#ref-130" class="citation">[130]</a>
+                                <a href="#ref-135" class="citation">[135]</a>。
+                                该方法通过在样品两端施加一对电流引线通入恒定直流电流，然后在样品中间段的两电压探针之间测量电压降，从而计算出样品的电阻。
+                            </p>
+
+                            <div class="highlight-box">
+                                <h3 class="font-semibold text-primary mb-3">核心优势</h3>
+                                <p class="text-secondary leading-relaxed">
+                                    <strong>四线法的核心优势在于能够有效消除电流引线和接触电阻对测量结果的影响</strong>，
+                                    这对于精确测量低电阻值（尤其是在低温下的剩余电阻）至关重要。
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="bg-base-200 rounded-xl p-6">
+                            <h3 class="text-xl font-semibold text-primary mb-4">测量流程</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-start">
+                                    <div
+                                        class="bg-accent text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 mt-1 text-sm font-bold">
+                                        1</div>
+                                    <div>
+                                        <h4 class="font-semibold">室温电阻测量</h4>
+                                        <p class="text-sm text-secondary">在293K下测量样品电阻R₁</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div
+                                        class="bg-accent text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 mt-1 text-sm font-bold">
+                                        2</div>
+                                    <div>
+                                        <h4 class="font-semibold">低温冷却</h4>
+                                        <p class="text-sm text-secondary">将样品冷却至约10K</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div
+                                        class="bg-accent text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 mt-1 text-sm font-bold">
+                                        3</div>
+                                    <div>
+                                        <h4 class="font-semibold">剩余电阻测量</h4>
+                                        <p class="text-sm text-secondary">测量超导转变温度以上的剩余电阻R₂</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div
+                                        class="bg-accent text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 mt-1 text-sm font-bold">
+                                        4</div>
+                                    <div>
+                                        <h4 class="font-semibold">RRR计算</h4>
+                                        <p class="text-sm text-secondary">计算RRR = R₁ / R₂</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-12">
+                    <h2 class="text-3xl font-semibold text-primary mb-8">样品制备的关键要求</h2>
+
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="bg-white rounded-xl p-6 shadow-lg">
+                            <div class="bg-blue-100 rounded-full w-12 h-12 flex items-center justify-center mb-4">
+                                <i class="fas fa-cut text-blue-600"></i>
+                            </div>
+                            <h3 class="font-semibold text-primary mb-3">切割加工</h3>
+                            <p class="text-secondary text-sm leading-relaxed">
+                                采用线切割、电火花加工等方法，避免引入机械应力或热影响区，确保样品尺寸精度。
+                            </p>
+                        </div>
+
+                        <div class="bg-white rounded-xl p-6 shadow-lg">
+                            <div class="bg-green-100 rounded-full w-12 h-12 flex items-center justify-center mb-4">
+                                <i class="fas fa-sparkles text-green-600"></i>
+                            </div>
+                            <h3 class="font-semibold text-primary mb-3">表面处理</h3>
+                            <p class="text-secondary text-sm leading-relaxed">
+                                通过化学抛光或电解抛光去除氧化层和加工损伤层，获得清洁、平整的表面。
+                            </p>
+                        </div>
+
+                        <div class="bg-white rounded-xl p-6 shadow-lg">
+                            <div class="bg-purple-100 rounded-full w-12 h-12 flex items-center justify-center mb-4">
+                                <i class="fas fa-plug text-purple-600"></i>
+                            </div>
+                            <h3 class="font-semibold text-primary mb-3">电接触制备</h3>
+                            <p class="text-secondary text-sm leading-relaxed">
+                                采用点焊、压接或铟焊等方式连接引线，确保电接触的牢固和低电阻。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-12">
+                    <h2 class="text-3xl font-semibold text-primary mb-8">低温环境的实现与控制</h2>
+
+                    <div class="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-xl p-8">
+                        <div class="grid lg:grid-cols-2 gap-8">
+                            <div>
+                                <h3 class="text-xl font-semibold text-primary mb-4">液氦杜瓦系统</h3>
+                                <p class="text-secondary leading-relaxed mb-4">
+                                    最常用的低温设备是<strong>液氦杜瓦瓶</strong>，它能够提供4.2 K（液氦在标准大气压下的沸点）的低温环境。
+                                    样品通过样品杆插入杜瓦瓶中，并浸没在液氦中或置于液氦上方的冷蒸气中。
+                                </p>
+
+                                <div class="space-y-3">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-thermometer-quarter text-blue-600 mr-3"></i>
+                                        <span class="text-secondary">温度范围：4.2K - 300K</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-snowflake text-blue-600 mr-3"></i>
+                                        <span class="text-secondary">控温精度：±0.1K</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-clock text-blue-600 mr-3"></i>
+                                        <span class="text-secondary">稳定时间：≥30分钟</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h3 class="text-xl font-semibold text-primary mb-4">温度控制技术</h3>
+                                <div class="space-y-4">
+                                    <div class="bg-white rounded-lg p-4">
+                                        <h4 class="font-semibold text-primary mb-2">加热器控温</h4>
+                                        <p class="text-sm text-secondary">使用加热器和温度控制器，通过调节加热功率平衡漏热</p>
+                                    </div>
+                                    <div class="bg-white rounded-lg p-4">
+                                        <h4 class="font-semibold text-primary mb-2">减压降温</h4>
+                                        <p class="text-sm text-secondary">通过降低液氦杜瓦内气压来获得更低且可调的温度</p>
+                                    </div>
+                                    <div class="bg-white rounded-lg p-4">
+                                        <h4 class="font-semibold text-primary mb-2">闭循环制冷</h4>
+                                        <p class="text-sm text-secondary">使用G-M制冷机或脉冲管制冷机提供无液氦低温环境</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-12">
+                    <h2 class="text-3xl font-semibold text-primary mb-8">测量不确定度评估</h2>
+
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="bg-white rounded-xl p-6 shadow-lg">
+                            <h3 class="text-xl font-semibold text-primary mb-4">不确定度来源</h3>
+                            <div class="space-y-3">
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-red-500 rounded-full mr-3"></div>
+                                    <span class="text-secondary">电阻测量：电流源稳定性、电压表精度</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-orange-500 rounded-full mr-3"></div>
+                                    <span class="text-secondary">温度测量：传感器校准精度、温度漂移</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-yellow-500 rounded-full mr-3"></div>
+                                    <span class="text-secondary">几何尺寸：长度、直径测量误差</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-green-500 rounded-full mr-3"></div>
+                                    <span class="text-secondary">样品自身：不均匀性、缺陷分布</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-xl p-6 shadow-lg">
+                            <h3 class="text-xl font-semibold text-primary mb-4">精度控制目标</h3>
+                            <div class="space-y-4">
+                                <div class="bg-green-50 rounded-lg p-4">
+                                    <div class="flex justify-between items-center">
+                                        <span class="font-semibold text-primary">系统误差</span>
+                                        <span class="text-2xl font-bold text-green-600">≤5%</span>
+                                    </div>
+                                </div>
+                                <div class="bg-blue-50 rounded-lg p-4">
+                                    <div class="flex justify-between items-center">
+                                        <span class="font-semibold text-primary">重复性误差</span>
+                                        <span class="text-2xl font-bold text-blue-600">≤3%</span>
+                                    </div>
+                                </div>
+                                <p class="text-sm text-secondary">
+                                    通过优化测量系统和操作流程，可以有效控制测量不确定度
+                                    <a href="#ref-105" class="citation">[105]</a>。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Equipment -->
+        <section id="equipment" class="py-16 bg-base-200">
+            <div class="container mx-auto px-8">
+                <div class="section-header">
+                    <h1 class="text-4xl font-serif font-bold mb-4">RRR值测量设备与系统</h1>
+                    <p class="text-xl text-blue-100">样品架、低温恒温器、数据采集硬件的集成系统</p>
+                </div>
+
+                <div class="equipment-grid">
+                    <div class="equipment-card">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-blue-100 rounded-full p-3 mr-4">
+                                <i class="fas fa-cube text-blue-600 text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold text-primary">样品架系统</h3>
+                        </div>
+                        <p class="text-secondary mb-4">
+                            用于固定待测铌样品，确保电流引线和电压引线与样品形成良好且稳定的电接触。
+                            针对不同形态铌材（板、管、棒）设计专门的夹具结构。
+                        </p>
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-secondary">适用形态</span>
+                                <span class="font-semibold">板、管、棒</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-secondary">接触方式</span>
+                                <span class="font-semibold">点焊、压接</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-secondary">材料要求</span>
+                                <span class="font-semibold">低热导、无磁性</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="equipment-card">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-cyan-100 rounded-full p-3 mr-4">
+                                <i class="fas fa-snowflake text-cyan-600 text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold text-primary">低温恒温器</h3>
+                        </div>
+                        <p class="text-secondary mb-4">
+                            提供并维持测量所需的低温环境，通常为液氦温度（4.2 K）或略高于铌超导转变温度（约10 K）的环境。
+                        </p>
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-secondary">温度范围</span>
+                                <span class="font-semibold">4.2K - 300K</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-secondary">控温精度</span>
+                                <span class="font-semibold">±0.1K</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-secondary">绝热性能</span>
+                                <span class="font-semibold">高真空</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="equipment-card">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-green-100 rounded-full p-3 mr-4">
+                                <i class="fas fa-microchip text-green-600 text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold text-primary">数据采集系统</h3>
+                        </div>
+                        <p class="text-secondary mb-4">
+                            进行电学测量的核心，包括高稳定度直流恒流源、高精度数字电压表、温度控制器和计算机数据采集系统。
+                        </p>
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-secondary">电流源</span>
+                                <span class="font-semibold">≤1.5A DC</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-secondary">电压测量</span>
+                                <span class="font-semibold">nV级精度</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-secondary">采集方式</span>
+                                <span class="font-semibold">自动控制</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-12">
+                    <h2 class="text-3xl font-semibold text-primary mb-8">针对不同形态铌材的样品架设计</h2>
+
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div class="bg-white rounded-xl p-6 shadow-lg">
+                            <div class="text-center mb-4">
+                                <div
+                                    class="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3">
+                                    <i class="fas fa-square text-blue-600 text-2xl"></i>
+                                </div>
+                                <h3 class="text-lg font-semibold text-primary">铌板材样品架</h3>
+                            </div>
+                            <ul class="text-sm text-secondary space-y-2">
+                                <li>• 平整固定样品设计</li>
+                                <li>• 均匀电流分布结构</li>
+                                <li>• 中间电压抽头配置</li>
+                                <li>• 低应力夹持机构</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-white rounded-xl p-6 shadow-lg">
+                            <div class="text-center mb-4">
+                                <div
+                                    class="bg-cyan-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3">
+                                    <i class="fas fa-circle text-cyan-600 text-2xl"></i>
+                                </div>
+                                <h3 class="text-lg font-semibold text-primary">铌管材样品架</h3>
+                            </div>
+                            <ul class="text-sm text-secondary space-y-2">
+                                <li>• 特殊管状夹具设计</li>
+                                <li>• 环形电极配置</li>
+                                <li>• 轴向/周向测量选择</li>
+                                <li>• 壁厚适应性结构</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-white rounded-xl p-6 shadow-lg">
+                            <div class="text-center mb-4">
+                                <div
+                                    class="bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3">
+                                    <i class="fas fa-circle-notch text-green-600 text-2xl"></i>
+                                </div>
+                                <h3 class="text-lg font-semibold text-primary">铌棒材样品架</h3>
+                            </div>
+                            <ul class="text-sm text-secondary space-y-2">
+                                <li>• 圆柱形夹持结构</li>
+                                <li>• 轴向电流引导</li>
+                                <li>• 侧面电压接触</li>
+                                <li>• 直径适应范围广</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-12 bg-white rounded-xl p-8 shadow-lg">
+                    <h2 class="text-2xl font-semibold text-primary mb-6">数据采集硬件技术要求</h2>
+
+                    <div class="grid lg:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-lg font-semibold text-primary mb-4">恒流源技术要求</h3>
+                            <div class="space-y-3">
+                                <div class="bg-base-200 rounded-lg p-3">
+                                    <div class="flex justify-between">
+                                        <span class="text-secondary">稳定性</span>
+                                        <span class="font-semibold">低纹波、低漂移</span>
+                                    </div>
+                                </div>
+                                <div class="bg-base-200 rounded-lg p-3">
+                                    <div class="flex justify-between">
+                                        <span class="text-secondary">输出范围</span>
+                                        <span class="font-semibold">0-1.5A DC</span>
+                                    </div>
+                                </div>
+                                <div class="bg-base-200 rounded-lg p-3">
+                                    <div class="flex justify-between">
+                                        <span class="text-secondary">精度</span>
+                                        <span class="font-semibold">≤0.1%</span>
+                                    </div>
+                                </div>
+                                <div class="bg-base-200 rounded-lg p-3">
+                                    <div class="flex justify-between">
+                                        <span class="text-secondary">反向功能</span>
+                                        <span class="font-semibold">支持</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-semibold text-primary mb-4">电压测量技术要求</h3>
+                            <div class="space-y-3">
+                                <div class="bg-base-200 rounded-lg p-3">
+                                    <div class="flex justify-between">
+                                        <span class="text-secondary">分辨率</span>
+                                        <span class="font-semibold">nV级别</span>
+                                    </div>
+                                </div>
+                                <div class="bg-base-200 rounded-lg p-3">
+                                    <div class="flex justify-between">
+                                        <span class="text-secondary">输入阻抗</span>
+                                        <span class="font-semibold">>10GΩ</span>
+                                    </div>
+                                </div>
+                                <div class="bg-base-200 rounded-lg p-3">
+                                    <div class="flex justify-between">
+                                        <span class="text-secondary">噪声水平</span>
+                                        <span class="font-semibold">≤1nV</span>
+                                    </div>
+                                </div>
+                                <div class="bg-base-200 rounded-lg p-3">
+                                    <div class="flex justify-between">
+                                        <span class="text-secondary">通道数</span>
+                                        <span class="font-semibold">多通道</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 bg-blue-50 rounded-lg p-4">
+                        <p class="text-sm text-secondary">
+                            <i class="fas fa-info-circle text-blue-600 mr-2"></i>
+                            如Keithley公司的2001型数字万用表配合前置放大器可以测量2mV范围内的电压，系统误差约1nV
+                            <a href="#ref-148" class="citation">[148]</a>。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Applications -->
+        <section id="applications" class="py-16 bg-base-100">
+            <div class="container mx-auto px-8">
+                <div class="section-header">
+                    <h1 class="text-4xl font-serif font-bold mb-4">针对不同形态铌材的RRR测量实践</h1>
+                    <p class="text-xl text-blue-100">铌板、铌管、铌棒等材料的专项测量技术与工艺要点</p>
+                </div>
+
+                <div class="grid lg:grid-cols-3 gap-8 mb-12">
+                    <div class="bg-white rounded-xl p-8 shadow-lg">
+                        <div class="text-center mb-6">
+                            <div
+                                class="bg-blue-100 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-th text-blue-600 text-3xl"></i>
+                            </div>
+                            <h2 class="text-2xl font-semibold text-primary">铌板材测量</h2>
+                        </div>
+
+                        <div class="mb-6">
+                            <h3 class="font-semibold text-primary mb-3">样品制备要点</h3>
+                            <ul class="text-sm text-secondary space-y-2">
+                                <li>• 电火花线切割加工</li>
+                                <li>• 化学抛光(BCP)或电解抛光</li>
+                                <li>• 表面清洁度控制</li>
+                                <li>• 引线点焊或压接</li>
+                            </ul>
+                        </div>
+
+                        <div class="mb-6">
+                            <h3 class="font-semibold text-primary mb-3">测试注意事项</h3>
+                            <ul class="text-sm text-secondary space-y-2">
+                                <li>• 电流分布均匀性</li>
+                                <li>• 电压引线准确定位</li>
+                                <li>• 避免焦耳热效应</li>
+                                <li>• 平板式样品架固定</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-blue-50 rounded-lg p-4">
+                            <h4 class="font-semibold text-primary mb-2">应用场景</h4>
+                            <p class="text-sm text-secondary">超导腔主要原材料，RRR值直接影响腔体品质因数</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-8 shadow-lg">
+                        <div class="text-center mb-6">
+                            <div
+                                class="bg-cyan-100 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-circle text-cyan-600 text-3xl"></i>
+                            </div>
+                            <h2 class="text-2xl font-semibold text-primary">铌管材测量</h2>
+                        </div>
+
+                        <div class="mb-6">
+                            <h3 class="font-semibold text-primary mb-3">样品制备要点</h3>
+                            <ul class="text-sm text-secondary space-y-2">
+                                <li>• 管段截取或展开加工</li>
+                                <li>• 内外壁同步清洁</li>
+                                <li>• 环形电极制备</li>
+                                <li>• 特殊夹具设计</li>
+                            </ul>
+                        </div>
+
+                        <div class="mb-6">
+                            <h3 class="font-semibold text-primary mb-3">测试注意事项</h3>
+                            <ul class="text-sm text-secondary space-y-2">
+                                <li>• 曲率对电流分布影响</li>
+                                <li>• 壁厚均匀性检测</li>
+                                <li>• 轴向/周向测量选择</li>
+                                <li>• 薄壁温升控制</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-cyan-50 rounded-lg p-4">
+                            <h4 class="font-semibold text-primary mb-2">应用场景</h4>
+                            <p class="text-sm text-secondary">超导腔束流管等部件，几何复杂性要求更高的测量精度</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-8 shadow-lg">
+                        <div class="text-center mb-6">
+                            <div
+                                class="bg-green-100 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-grip-lines text-green-600 text-3xl"></i>
+                            </div>
+                            <h2 class="text-2xl font-semibold text-primary">铌棒材测量</h2>
+                        </div>
+
+                        <div class="mb-6">
+                            <h3 class="font-semibold text-primary mb-3">样品制备要点</h3>
+                            <ul class="text-sm text-secondary space-y-2">
+                                <li>• 直接截取或中线切割</li>
+                                <li>• 圆柱面抛光处理</li>
+                                <li>• 轴向电流引导</li>
+                                <li>• 侧面电压接触</li>
+                            </ul>
+                        </div>
+
+                        <div class="mb-6">
+                            <h3 class="font-semibold text-primary mb-3">测试注意事项</h3>
+                            <ul class="text-sm text-secondary space-y-2">
+                                <li>• 圆周方向接触均匀性</li>
+                                <li>• 晶粒取向影响评估</li>
+                                <li>• 各向异性检测</li>
+                                <li>• 大截面电流调整</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-green-50 rounded-lg p-4">
+                            <h4 class="font-semibold text-primary mb-2">应用场景</h4>
+                            <p class="text-sm text-secondary">超导腔端盖等部件，或铌材本征特性研究</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl p-8">
+                    <h2 class="text-2xl font-semibold text-primary mb-6">不同形态铌材测量的共性与差异</h2>
+
+                    <div class="grid lg:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-lg font-semibold text-primary mb-4">测量共性</h3>
+                            <div class="space-y-3">
+                                <div class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-600 mr-3 mt-1"></i>
+                                    <span class="text-secondary">基本原理相同：测量室温R₁和低温R₂</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-600 mr-3 mt-1"></i>
+                                    <span class="text-secondary">核心测量技术：四探针法消除引线电阻</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-600 mr-3 mt-1"></i>
+                                    <span class="text-secondary">低温环境要求：精确温度控制</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-600 mr-3 mt-1"></i>
+                                    <span class="text-secondary">质量标准：遵循IEC 61788-23标准</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-semibold text-primary mb-4">主要差异</h3>
+                            <div class="space-y-3">
+                                <div class="bg-white rounded-lg p-4">
+                                    <h4 class="font-semibold text-primary mb-2">尺寸差异</h4>
+                                    <p class="text-sm text-secondary">
+                                        铌材横截面尺寸通常在毫米级别，而超导线材在微米级别，需要更高的测量电流
+                                        <a href="#ref-60" class="citation">[60]</a>
+                                    </p>
+                                </div>
+                                <div class="bg-white rounded-lg p-4">
+                                    <h4 class="font-semibold text-primary mb-2">电流分布</h4>
+                                    <p class="text-sm text-secondary">
+                                        铌样品长度相对于直径的比值较小，需要精心设计电流引线和电压抽头连接方式
+                                    </p>
+                                </div>
+                                <div class="bg-white rounded-lg p-4">
+                                    <h4 class="font-semibold text-primary mb-2">样品制备</h4>
+                                    <p class="text-sm text-secondary">
+                                        不同形态铌材需要专门的切割、表面处理和夹具设计工艺
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: Case Studies -->
+        <section id="case-studies" class="py-16 bg-base-200">
+            <div class="container mx-auto px-8">
+                <div class="section-header">
+                    <h1 class="text-4xl font-serif font-bold mb-4">实际应用案例与国内研究进展</h1>
+                    <p class="text-xl text-blue-100">国内企业在高纯铌RRR测量方面的实践与研究机构技术进展</p>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-8 mb-12">
+                    <div class="bg-white rounded-xl p-8 shadow-lg">
+                        <div class="flex items-center mb-6">
+                            <div class="bg-blue-100 rounded-full p-3 mr-4">
+                                <i class="fas fa-industry text-blue-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-primary">宁夏东方超导科技有限公司</h3>
+                                <p class="text-sm text-secondary">高纯铌材研发制造基地</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div class="bg-blue-50 rounded-lg p-4">
+                                <h4 class="font-semibold text-primary mb-2">技术实力</h4>
+                                <ul class="text-sm text-secondary space-y-1">
+                                    <li>• RRR值超过300的高纯铌材料
+                                        <a href="#ref-236" class="citation">[236]</a>
+                                        <a href="#ref-250" class="citation">[250]</a>
+                                    </li>
+                                    <li>• 高纯超导铌材RRR值稳定突破500
+                                        <a href="#ref-246" class="citation">[246]</a>
+                                        <a href="#ref-249" class="citation">[249]</a>
+                                    </li>
+                                    <li>• 达到国际顶尖水平</li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-green-50 rounded-lg p-4">
+                                <h4 class="font-semibold text-primary mb-2">标准化贡献</h4>
+                                <p class="text-sm text-secondary">
+                                    GB/T 45506-2025国家标准起草单位之一
+                                    <a href="#ref-242" class="citation">[242]</a>
+                                    <a href="#ref-243" class="citation">[243]</a>，
+                                    体现了在RRR测量领域的专业性和权威性。
+                                </p>
+                            </div>
+
+                            <div class="bg-purple-50 rounded-lg p-4">
+                                <h4 class="font-semibold text-primary mb-2">设备投入</h4>
+                                <p class="text-sm text-secondary">
+                                    RRR值检测系统作为募投项目设备，预算金额76.00万元
+                                    <a href="#ref-256" class="citation">[256]</a>
+                                    <a href="#ref-258" class="citation">[258]</a>，
+                                    实现了西北地区RRR检测零的突破
+                                    <a href="#ref-259" class="citation">[259]</a>。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-8 shadow-lg">
+                        <div class="flex items-center mb-6">
+                            <div class="bg-green-100 rounded-full p-3 mr-4">
+                                <i class="fas fa-university text-green-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-primary">中科院高能物理研究所</h3>
+                                <p class="text-sm text-secondary">GB/T 45506-2025标准牵头起草单位</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div class="bg-green-50 rounded-lg p-4">
+                                <h4 class="font-semibold text-primary mb-2">标准化工作</h4>
+                                <p class="text-sm text-secondary">
+                                    作为GB/T 45506-2025国家标准的牵头起草单位
+                                    <a href="#ref-189" class="citation">[189]</a>
+                                    <a href="#ref-242" class="citation">[242]</a>，
+                                    等同采用国际标准IEC 61788-23:2021。
+                                </p>
+                            </div>
+
+                            <div class="bg-blue-50 rounded-lg p-4">
+                                <h4 class="font-semibold text-primary mb-2">验证实验</h4>
+                                <p class="text-sm text-secondary">
+                                    在西部超导材料科技股份有限公司进行实验测量工作，
+                                    按照IEC 61788-23国际标准文件建立剩余电阻比测量装置，
+                                    验证标准技术指标和试验方法
+                                    <a href="#ref-194" class="citation">[194]</a>。
+                                </p>
+                            </div>
+
+                            <div class="bg-orange-50 rounded-lg p-4">
+                                <h4 class="font-semibold text-primary mb-2">技术合作</h4>
+                                <p class="text-sm text-secondary">
+                                    与宁夏东方超导科技有限公司等企业在超导腔制造和铌材性能研究方面深度合作，
+                                    促进RRR测量技术交流与发展
+                                    <a href="#ref-264" class="citation">[264]</a>
+                                    <a href="#ref-265" class="citation">[265]</a>。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl p-8 shadow-lg">
+                    <h2 class="text-2xl font-semibold text-primary mb-6">RRR测量技术在超导腔用铌材质量控制中的应用</h2>
+
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="text-center">
+                            <div
+                                class="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-shopping-cart text-blue-600 text-xl"></i>
+                            </div>
+                            <h3 class="font-semibold text-primary mb-3">原材料采购</h3>
+                            <p class="text-sm text-secondary">
+                                供应商提供的铌锭或铌板材的RRR值是核心质量参数，
+                                需要通过可靠RRR测量验证是否符合规格要求。
+                            </p>
+                        </div>
+
+                        <div class="text-center">
+                            <div
+                                class="bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-cogs text-green-600 text-xl"></i>
+                            </div>
+                            <h3 class="font-semibold text-primary mb-3">生产过程控制</h3>
+                            <p class="text-sm text-secondary">
+                                加工步骤（如焊接、热处理）可能影响材料RRR值，
+                                需要在关键节点进行RRR测量监控材料性能变化。
+                            </p>
+                        </div>
+
+                        <div class="text-center">
+                            <div
+                                class="bg-purple-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-check-circle text-purple-600 text-xl"></i>
+                            </div>
+                            <h3 class="font-semibold text-primary mb-3">最终产品验收</h3>
+                            <p class="text-sm text-secondary">
+                                交付给用户的超导腔用铌材，其RRR值必须满足设计要求，
+                                如ESS项目对RRR值及晶相检测的严格要求。
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-6">
+                        <h3 class="font-semibold text-primary mb-4">实际应用案例</h3>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-semibold text-primary mb-2">欧洲散裂中子源(ESS)项目</h4>
+                                <p class="text-sm text-secondary">
+                                    宁夏东方超导为ESS项目提供高β腔用超导铌材，
+                                    在产品验收中与客户就RRR值及晶相检测方法进行深入交流，
+                                    产品获得客户充分肯定
+                                    <a href="#ref-235" class="citation">[235]</a>
+                                    <a href="#ref-237" class="citation">[237]</a>。
+                                </p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-primary mb-2">华南师范大学采购</h4>
+                                <p class="text-sm text-secondary">
+                                    华南师范大学采购的1.5cell超导腔明确要求采用RRR≥300的高纯铌材
+                                    <a href="#ref-257" class="citation">[257]</a>，
+                                    体现了RRR值在超导腔质量评价中的核心地位。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 7: Challenges -->
+        <section id="challenges" class="py-16 bg-base-100">
+            <div class="container mx-auto px-8">
+                <div class="section-header">
+                    <h1 class="text-4xl font-serif font-bold mb-4">RRR测量技术的挑战与展望</h1>
+                    <p class="text-xl text-blue-100">提高测量精度、发展新技术与标准化对产业发展的意义</p>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-8 mb-12">
+                    <div class="bg-white rounded-xl p-8 shadow-lg">
+                        <h2 class="text-2xl font-semibold text-primary mb-6">提高测量精度与重复性的关键技术</h2>
+
+                        <div class="space-y-6">
+                            <div class="border-l-4 border-blue-500 pl-4">
+                                <h3 class="font-semibold text-primary mb-2">样品制备工艺优化</h3>
+                                <p class="text-sm text-secondary">
+                                    确保样品尺寸精确、表面清洁无污染、电接触电阻低且稳定，
+                                    避免引入机械应力影响测量结果。
+                                </p>
+                            </div>
+
+                            <div class="border-l-4 border-green-500 pl-4">
+                                <h3 class="font-semibold text-primary mb-2">低温恒温器设计改进</h3>
+                                <p class="text-sm text-secondary">
+                                    实现更精确的温度控制和更均匀的温度分布，
+                                    特别是在超导转变温度附近，减小热梯度对测量的影响。
+                                </p>
+                            </div>
+
+                            <div class="border-l-4 border-purple-500 pl-4">
+                                <h3 class="font-semibold text-primary mb-2">高精度测量仪器</h3>
+                                <p class="text-sm text-secondary">
+                                    采用更高稳定度的恒流源、更高分辨率和更低噪声的纳伏表，
+                                    并对仪器进行定期校准以保证测量准确性。
+                                </p>
+                            </div>
+
+                            <div class="border-l-4 border-orange-500 pl-4">
+                                <h3 class="font-semibold text-primary mb-2">先进数据处理方法</h3>
+                                <p class="text-sm text-secondary">
+                                    发展更精确的算法从电阻-温度曲线中提取R₂值，
+                                    更有效地消除热电势等干扰信号。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-8 shadow-lg">
+                        <h2 class="text-2xl font-semibold text-primary mb-6">非接触式RRR测量技术发展</h2>
+
+                        <div class="bg-gradient-to-r from-cyan-50 to-blue-50 rounded-lg p-6 mb-6">
+                            <h3 class="font-semibold text-primary mb-3">涡流感应法优势</h3>
+                            <ul class="text-sm text-secondary space-y-2">
+                                <li>• <strong>无需直接电接触</strong>，实现快速、无损测量</li>
+                                <li>• 适用于在线检测或成品部件无损评估</li>
+                                <li>• 可减少样品制备时间和成本</li>
+                                <li>• 对某些特殊形状样品测量更方便</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-gradient-to-r from-red-50 to-orange-50 rounded-lg p-6 mb-6">
+                            <h3 class="font-semibold text-primary mb-3">技术挑战</h3>
+                            <ul class="text-sm text-secondary space-y-2">
+                                <li>• 测量精度受探头与样品距离影响</li>
+                                <li>• 样品形状和尺寸对测量结果的影响</li>
+                                <li>• 材料磁导率变化引入的误差</li>
+                                <li>• 边缘效应和提离效应控制</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-green-50 rounded-lg p-4">
+                            <p class="text-sm text-secondary">
+                                <strong>发展前景：</strong>随着传感器技术、信号处理算法和标定技术的进步，
+                                涡流感应法有望在特定应用场景下成为传统直流法的重要补充或替代方案。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl p-8 text-white">
+                    <h2 class="text-2xl font-semibold mb-6">标准化测量对于铌超导材料产业发展的意义</h2>
+
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="text-center">
+                            <div
+                                class="bg-white/20 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-handshake text-2xl"></i>
+                            </div>
+                            <h3 class="font-semibold mb-2">统一技术依据</h3>
+                            <p class="text-sm opacity-90">
+                                为RRR值测量提供共同的技术依据和操作规范，
+                                确保不同实验室测量结果的可比性
+                            </p>
+                        </div>
+
+                        <div class="text-center">
+                            <div
+                                class="bg-white/20 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-chart-line text-2xl"></i>
+                            </div>
+                            <h3 class="font-semibold mb-2">提升产业水平</h3>
+                            <p class="text-sm opacity-90">
+                                促使企业加强技术研发和质量管理，
+                                提高铌材产品的纯度和性能稳定性
+                            </p>
+                        </div>
+
+                        <div class="text-center">
+                            <div
+                                class="bg-white/20 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-bridge text-2xl"></i>
+                            </div>
+                            <h3 class="font-semibold mb-2">技术交流桥梁</h3>
+                            <p class="text-sm opacity-90">
+                                促进国内外研究机构和企业之间的沟通与互认，
+                                推动技术进步和产业升级
+                            </p>
+                        </div>
+
+                        <div class="text-center">
+                            <div
+                                class="bg-white/20 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-rocket text-2xl"></i>
+                            </div>
+                            <h3 class="font-semibold mb-2">应用领域拓展</h3>
+                            <p class="text-sm opacity-90">
+                                为超导器件设计提供可靠材料参数，
+                                推动超导技术在更多领域的应用
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 bg-white/10 rounded-lg p-6">
+                        <h3 class="font-semibold mb-4">战略意义</h3>
+                        <p class="text-sm leading-relaxed">
+                            持续完善和推广RRR测量标准，对于保障我国铌超导材料产业的国际竞争力和可持续发展具有深远的战略意义。
+                            从原材料生产到最终应用的全产业链质量控制，标准化的RRR测量技术发挥着不可替代的核心作用。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- References Section -->
+        <section class="py-12 bg-base-200">
+            <div class="container mx-auto px-8">
+                <h2 class="text-2xl font-semibold text-primary mb-8">参考文献</h2>
+                <div class="grid md:grid-cols-2 gap-4 text-sm text-secondary">
+                    <div id="ref-107">[107] <a href="https://in.iphy.ac.cn/upload/s41/a/03393_2024071613462568839.pdf"
+                            class="citation">中国科学院高能物理研究所技术报告</a>
+                    </div>
+                    <div id="ref-131">[131] <a href="https://in.iphy.ac.cn/upload/s41/a/03393_2024071613462568839.pdf"
+                            class="citation">铌材RRR测量标准研究</a>
+                    </div>
+                    <div id="ref-130">[130] <a href="https://in.iphy.ac.cn/upload/s41/a/03393_2024092516590245143.docx"
+                            class="citation">超导材料性能表征技术</a>
+                    </div>
+                    <div id="ref-133">[133] <a href="https://www.researching.cn/ArticlePdf/m00012/2022/34/10/104014.pdf"
+                            class="citation">超导腔品质因数研究</a>
+                    </div>
+                    <div id="ref-208">[208] <a href="https://www.gb-gbt.com/PDF/Related.aspx/GBT45506-2025"
+                            class="citation">GB/T 45506-2025国家标准</a>
+                    </div>
+                    <div id="ref-64">[64] <a
+                            href="https://cdn.standards.iteh.ai/samples/68853/bb9f5f44262a45a6a5dc1acc6ef1b874/SIST-EN-IEC-61788-23-2021.pdf"
+                            class="citation">IEC 61788-23:2021标准文档</a>
+                    </div>
+                    <div id="ref-67">[67] <a
+                            href="https://www.sis.se/produkter/metrologi-och-matning-fysikaliska-fenomen/elektricitet-magnetism/iec-61788-232021/"
+                            class="citation">IEC 61788-23标准信息</a>
+                    </div>
+                    <div id="ref-159">[159] <a href="https://in.iphy.ac.cn/upload/s41/a/03393_2024071613462568839.pdf"
+                            class="citation">国家标准制定过程</a>
+                    </div>
+                    <div id="ref-183">[183] <a href="https://www.antpedia.com/standard/1916025038-9.html"
+                            class="citation">GB/T 45506-2025标准信息</a>
+                    </div>
+                    <div id="ref-184">[184] <a
+                            href="https://www.ndls.org.cn/standard/detail/2456240731e21a477c9b8329d90b21f5"
+                            class="citation">GB/T 45506-2025发布信息</a>
+                    </div>
+                    <div id="ref-503">[503] <a href="https://www.gb-gbt.com/PDF/Related.aspx/GBT45506-2025"
+                            class="citation">国家标准实施信息</a>
+                    </div>
+                    <div id="ref-135">[135] <a
+                            href="https://indico.ihep.ac.cn/event/17020/contributions/118218/attachments/64181/74882/%E5%AE%81%E5%A4%8F%E8%B6%85%E5%AF%BC%E5%85%AC%E5%8F%B8%E6%8A%A5%E5%91%8A221024.pdf"
+                            class="citation">宁夏东方超导技术报告</a>
+                    </div>
+                    <div id="ref-246">[246] <a href="http://mp.cnfol.com/26828/article/1751848548-141879287.html"
+                            class="citation">宁夏东方超导技术突破</a>
+                    </div>
+                    <div id="ref-249">[249] <a href="https://caifuhao.eastmoney.com/news/20250515001637239844070"
+                            class="citation">高纯铌材技术发展</a>
+                    </div>
+                    <div id="ref-242">[242] <a
+                            href="https://std.samr.gov.cn/gb/search/gbDetailed?id=33D40F11612A5D92E06397BE0A0A5B93"
+                            class="citation">国家标准详细信息</a>
+                    </div>
+                    <div id="ref-243">[243] <a href="https://www.11bz.com/a/808396.html" class="citation">标准起草单位信息</a>
+                    </div>
+                    <div id="ref-256">[256] <a
+                            href="https://vip.stock.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=&id=9197279"
+                            class="citation">设备投资公告</a>
+                    </div>
+                    <div id="ref-258">[258] <a
+                            href="https://vip.stock.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=&id=9197279"
+                            class="citation">募投项目详情</a>
+                    </div>
+                    <div id="ref-259">[259] <a href="http://gzw.nx.gov.cn/zzb/tzgg_72386/202503/t20250304_4845165.html"
+                            class="citation">技术创新突破报道</a>
+                    </div>
+                    <div id="ref-189">[189] <a href="https://www.11bz.com/a/808396.html"
+                            class="citation">中科院高能所标准化工作</a>
+                    </div>
+                    <div id="ref-194">[194] <a href="https://in.iphy.ac.cn/upload/s41/a/03393_2024071613462551403.docx"
+                            class="citation">标准验证实验</a>
+                    </div>
+                    <div id="ref-264">[264] <a
+                            href="https://indico.ihep.ac.cn/event/19316/contributions/142255/attachments/72750/88674/%E8%B6%85%E5%AF%BC%E8%85%94%E5%88%B6%E9%80%A0%E8%83%BD%E5%8A%9B%E4%BB%8B%E7%BB%8D%EF%BC%88%E8%8B%B1%E6%96%87%EF%BC%89%E2%80%9420231010.pdf"
+                            class="citation">超导腔制造能力</a>
+                    </div>
+                    <div id="ref-265">[265] <a
+                            href="https://agenda.linearcollider.org/event/10134/contributions/54759/attachments/39495/62355/CEPC%E4%BA%A7%E4%B8%9A%E4%BF%83%E8%BF%9B%E4%BC%9A%EF%BC%88CIPC%EF%BC%89-%E6%B1%87%E6%8A%A5%E7%89%88-20240703.pdf"
+                            class="citation">产业促进会报告</a>
+                    </div>
+                    <div id="ref-235">[235] <a
+                            href="https://albetter.cnmc.com.cn/cnmc/xwzx/czqy/2022/8/I1006261574505070592.html"
+                            class="citation">ESS项目合作</a>
+                    </div>
+                    <div id="ref-237">[237] <a
+                            href="https://albetter.cnmc.com.cn/cnmc/xwzx/czqy/2022/8/I1006261574505070592.html"
+                            class="citation">产品验收标准</a>
+                    </div>
+                    <div id="ref-257">[257] <a
+                            href="https://cgzx.scnu.edu.cn/portalwebController.do?goArticleDetail&id=8a78b89d91c0d87c0191c81784d81695"
+                            class="citation">华南师范大学采购</a>
+                    </div>
+                    <div id="ref-148">[148] <a
+                            href="https://bib-pubdb1.desy.de/record/91801/files/TTC-Report%202010-02.pdf"
+                            class="citation">精密测量设备技术报告</a>
+                    </div>
+                    <div id="ref-105">[105] <a href="https://www.sohu.com/a/753510074_121106869"
+                            class="citation">RRR测量系统改进研究</a>
+                    </div>
+                    <div id="ref-60">[60] <a href="https://in.iphy.ac.cn/upload/s41/a/03393_2024071613462568839.pdf"
+                            class="citation">铌材与线材测量差异</a>
+                    </div>
+                    <div id="ref-236">[236] <a href="https://patents.google.com/patent/CN113373483A/zh"
+                            class="citation">高纯铌材料专利</a>
+                    </div>
+                    <div id="ref-250">[250] <a
+                            href="https://indico.ihep.ac.cn/event/17020/contributions/118218/attachments/64181/74882/%E5%AE%81%E5%A4%8F%E8%B6%85%E5%AF%BC%E5%85%AC%E5%8F%B8%E6%8A%A5%E5%91%8A221024.pdf"
+                            class="citation">RRR值技术指标</a>
+                    </div>
+                    <div id="ref-136">[136] <a href="https://patents.google.com/patent/CN101581743B/zh"
+                            class="citation">金属铌剩余电阻率测量装置专利</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Initialize Mermaid with custom configuration
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#3b82f6',
+                primaryTextColor: '#1e293b',
+                primaryBorderColor: '#1e40af',
+                lineColor: '#64748b',
+                secondaryColor: '#f1f5f9',
+                tertiaryColor: '#e2e8f0',
+                background: '#ffffff',
+                mainBkg: '#ffffff',
+                secondaryBkg: '#f8fafc',
+                tertiaryBkg: '#e2e8f0',
+                nodeBkg: '#ffffff',
+                nodeTextColor: '#1e293b',
+                edgeLabelBackground: '#ffffff',
+                clusterBkg: '#f8fafc',
+                clusterBorder: '#cbd5e1',
+                defaultLinkColor: '#64748b',
+                titleColor: '#1e293b',
+                darkMode: false
+            },
+            flowchart: {
+                nodeSpacing: 60,
+                rankSpacing: 80,
+                curve: 'basis',
+                padding: 20,
+                useMaxWidth: true,
+                htmlLabels: true
+            },
+            sequence: {
+                diagramMarginX: 50,
+                diagramMarginY: 10,
+                actorMargin: 50,
+                width: 150,
+                height: 65,
+                boxMargin: 10,
+                boxTextMargin: 5,
+                noteMargin: 10,
+                messageMargin: 35
+            },
+            gantt: {
+                leftPadding: 75,
+                gridLineStartPadding: 35,
+                fontSize: 11,
+                sectionFontSize: 24,
+                numberSectionStyles: 4
+            }
+        });
+
+        // Initialize Mermaid Controls for zoom and pan
+        function initializeMermaidControls() {
+            const containers = document.querySelectorAll('.mermaid-container');
+
+            containers.forEach(container => {
+                const mermaidElement = container.querySelector('.mermaid');
+                let scale = 1;
+                let isDragging = false;
+                let startX, startY, translateX = 0, translateY = 0;
+
+                // 触摸相关状态
+                let isTouch = false;
+                let touchStartTime = 0;
+                let initialDistance = 0;
+                let initialScale = 1;
+                let isPinching = false;
+
+                // Zoom controls
+                const zoomInBtn = container.querySelector('.zoom-in');
+                const zoomOutBtn = container.querySelector('.zoom-out');
+                const resetBtn = container.querySelector('.reset-zoom');
+                const fullscreenBtn = container.querySelector('.fullscreen');
+
+                function updateTransform() {
+                    mermaidElement.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+
+                    if (scale > 1) {
+                        container.classList.add('zoomed');
+                    } else {
+                        container.classList.remove('zoomed');
+                    }
+
+                    mermaidElement.style.cursor = isDragging ? 'grabbing' : 'grab';
+                }
+
+                if (zoomInBtn) {
+                    zoomInBtn.addEventListener('click', () => {
+                        scale = Math.min(scale * 1.25, 4);
+                        updateTransform();
+                    });
+                }
+
+                if (zoomOutBtn) {
+                    zoomOutBtn.addEventListener('click', () => {
+                        scale = Math.max(scale / 1.25, 0.3);
+                        if (scale <= 1) {
+                            translateX = 0;
+                            translateY = 0;
+                        }
+                        updateTransform();
+                    });
+                }
+
+                if (resetBtn) {
+                    resetBtn.addEventListener('click', () => {
+                        scale = 1;
+                        translateX = 0;
+                        translateY = 0;
+                        updateTransform();
+                    });
+                }
+
+                if (fullscreenBtn) {
+                    fullscreenBtn.addEventListener('click', () => {
+                        if (container.requestFullscreen) {
+                            container.requestFullscreen();
+                        } else if (container.webkitRequestFullscreen) {
+                            container.webkitRequestFullscreen();
+                        } else if (container.msRequestFullscreen) {
+                            container.msRequestFullscreen();
+                        }
+                    });
+                }
+
+                // Mouse Events
+                mermaidElement.addEventListener('mousedown', (e) => {
+                    if (isTouch) return; // 如果是触摸设备，忽略鼠标事件
+
+                    isDragging = true;
+                    startX = e.clientX - translateX;
+                    startY = e.clientY - translateY;
+                    mermaidElement.style.cursor = 'grabbing';
+                    updateTransform();
+                    e.preventDefault();
+                });
+
+                document.addEventListener('mousemove', (e) => {
+                    if (isDragging && !isTouch) {
+                        translateX = e.clientX - startX;
+                        translateY = e.clientY - startY;
+                        updateTransform();
+                    }
+                });
+
+                document.addEventListener('mouseup', () => {
+                    if (isDragging && !isTouch) {
+                        isDragging = false;
+                        mermaidElement.style.cursor = 'grab';
+                        updateTransform();
+                    }
+                });
+
+                document.addEventListener('mouseleave', () => {
+                    if (isDragging && !isTouch) {
+                        isDragging = false;
+                        mermaidElement.style.cursor = 'grab';
+                        updateTransform();
+                    }
+                });
+
+                // 获取两点之间的距离
+                function getTouchDistance(touch1, touch2) {
+                    return Math.hypot(
+                        touch2.clientX - touch1.clientX,
+                        touch2.clientY - touch1.clientY
+                    );
+                }
+
+                // Touch Events - 触摸事件处理
+                mermaidElement.addEventListener('touchstart', (e) => {
+                    isTouch = true;
+                    touchStartTime = Date.now();
+
+                    if (e.touches.length === 1) {
+                        // 单指拖动
+                        isPinching = false;
+                        isDragging = true;
+
+                        const touch = e.touches[0];
+                        startX = touch.clientX - translateX;
+                        startY = touch.clientY - translateY;
+
+                    } else if (e.touches.length === 2) {
+                        // 双指缩放
+                        isPinching = true;
+                        isDragging = false;
+
+                        const touch1 = e.touches[0];
+                        const touch2 = e.touches[1];
+                        initialDistance = getTouchDistance(touch1, touch2);
+                        initialScale = scale;
+                    }
+
+                    e.preventDefault();
+                }, { passive: false });
+
+                mermaidElement.addEventListener('touchmove', (e) => {
+                    if (e.touches.length === 1 && isDragging && !isPinching) {
+                        // 单指拖动
+                        const touch = e.touches[0];
+                        translateX = touch.clientX - startX;
+                        translateY = touch.clientY - startY;
+                        updateTransform();
+
+                    } else if (e.touches.length === 2 && isPinching) {
+                        // 双指缩放
+                        const touch1 = e.touches[0];
+                        const touch2 = e.touches[1];
+                        const currentDistance = getTouchDistance(touch1, touch2);
+
+                        if (initialDistance > 0) {
+                            const newScale = Math.min(Math.max(
+                                initialScale * (currentDistance / initialDistance),
+                                0.3
+                            ), 4);
+                            scale = newScale;
+                            updateTransform();
+                        }
+                    }
+
+                    e.preventDefault();
+                }, { passive: false });
+
+                mermaidElement.addEventListener('touchend', (e) => {
+                    // 重置状态
+                    if (e.touches.length === 0) {
+                        isDragging = false;
+                        isPinching = false;
+                        initialDistance = 0;
+
+                        // 延迟重置isTouch，避免鼠标事件立即触发
+                        setTimeout(() => {
+                            isTouch = false;
+                        }, 100);
+                    } else if (e.touches.length === 1 && isPinching) {
+                        // 从双指变为单指，切换为拖动模式
+                        isPinching = false;
+                        isDragging = true;
+
+                        const touch = e.touches[0];
+                        startX = touch.clientX - translateX;
+                        startY = touch.clientY - translateY;
+                    }
+
+                    updateTransform();
+                });
+
+                mermaidElement.addEventListener('touchcancel', (e) => {
+                    isDragging = false;
+                    isPinching = false;
+                    initialDistance = 0;
+
+                    setTimeout(() => {
+                        isTouch = false;
+                    }, 100);
+
+                    updateTransform();
+                });
+
+                // Enhanced wheel zoom with better center point handling
+                container.addEventListener('wheel', (e) => {
+                    e.preventDefault();
+                    const rect = container.getBoundingClientRect();
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+
+                    const delta = e.deltaY > 0 ? 0.9 : 1.1;
+                    const newScale = Math.min(Math.max(scale * delta, 0.3), 4);
+
+                    // Adjust translation to zoom towards center
+                    if (newScale !== scale) {
+                        const scaleDiff = newScale / scale;
+                        translateX = translateX * scaleDiff;
+                        translateY = translateY * scaleDiff;
+                        scale = newScale;
+
+                        if (scale <= 1) {
+                            translateX = 0;
+                            translateY = 0;
+                        }
+
+                        updateTransform();
+                    }
+                });
+
+                // Initialize display
+                updateTransform();
+            });
+        }
+
+        // Initialize Mermaid Controls for zoom and pan
+        document.addEventListener('DOMContentLoaded', function () {
+            initializeMermaidControls();
+        });
+
+        // Table of Contents functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            const tocLinks = document.querySelectorAll('.toc-link');
+            const sections = document.querySelectorAll('section[id]');
+
+            // Smooth scrolling for TOC links
+            tocLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetSection = document.getElementById(targetId);
+
+                    if (targetSection) {
+                        targetSection.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Active section highlighting
+            function updateActiveSection() {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (window.pageYOffset >= sectionTop - 100) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                tocLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + current) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', updateActiveSection);
+            updateActiveSection(); // Initial call
+        });
+    </script>
+</body>
+
+</html>
