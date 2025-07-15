@@ -1,0 +1,1775 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>自动电阻测量系统：基于Python与RS232的泰克2182A和LPS305控制</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'serif': ['Crimson Text', 'serif'],
+                        'sans': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'earth': {
+                            50: '#faf8f5',
+                            100: '#f5f1ea',
+                            200: '#e8ddd0',
+                            300: '#d9c7b0',
+                            400: '#c7a882',
+                            500: '#b89266',
+                            600: '#a67f5a',
+                            700: '#8a684c',
+                            800: '#705541',
+                            900: '#5c4637',
+                        },
+                        'teal': {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            200: '#99f6e4',
+                            300: '#5eead4',
+                            400: '#2dd4bf',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e',
+                            800: '#115e59',
+                            900: '#134e4a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gradient-mask {
+            background: linear-gradient(135deg, rgba(20, 184, 166, 0.1) 0%, rgba(156, 163, 175, 0.05) 100%);
+        }
+
+        .hero-overlay {
+            background: linear-gradient(135deg, rgba(15, 118, 110, 0.9) 0%, rgba(31, 41, 55, 0.8) 100%);
+        }
+
+        .toc-fixed {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            width: 280px;
+            max-height: calc(100vh - 4rem);
+            overflow-y: auto;
+            z-index: 50;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(229, 231, 235, 0.5);
+        }
+
+        .main-content {
+            margin-left: 320px;
+            padding-right: 2rem;
+        }
+
+        .citation-link {
+            color: #0d9488;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted #0d9488;
+        }
+
+        .citation-link:hover {
+            color: #0f766e;
+            border-bottom-style: solid;
+        }
+
+        /* Mermaid chart styling */
+        .mermaid-container {
+            display: flex;
+            justify-content: center;
+            min-height: 300px;
+            max-height: 800px;
+            background: #ffffff;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mermaid-container .mermaid {
+            width: 100%;
+            max-width: 100%;
+            height: 100%;
+            cursor: grab;
+            transition: transform 0.3s ease;
+            transform-origin: center center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            touch-action: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .mermaid-container .mermaid svg {
+            max-width: 100%;
+            height: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .mermaid-container .mermaid:active {
+            cursor: grabbing;
+        }
+
+        .mermaid-container.zoomed .mermaid {
+            height: 100%;
+            width: 100%;
+            cursor: grab;
+        }
+
+        .mermaid-controls {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 20;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 8px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .mermaid-control-btn {
+            background: #ffffff;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #374151;
+            font-size: 14px;
+            min-width: 36px;
+            height: 36px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mermaid-control-btn:hover {
+            background: #f8fafc;
+            border-color: #3b82f6;
+            color: #3b82f6;
+            transform: translateY(-1px);
+        }
+
+        .mermaid-control-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Enhanced mermaid node styling for better contrast */
+        .mermaid .node rect,
+        .mermaid .node circle,
+        .mermaid .node ellipse,
+        .mermaid .node polygon {
+            stroke: #0f766e !important;
+            stroke-width: 2px !important;
+        }
+
+        .mermaid .node .label {
+            color: #1f2937 !important;
+            font-weight: 500 !important;
+            font-size: 14px !important;
+        }
+
+        .mermaid .edgePath .path {
+            stroke: #6b7280 !important;
+            stroke-width: 2px !important;
+        }
+
+        .mermaid .edgeLabel {
+            background-color: rgba(255, 255, 255, 0.9) !important;
+            color: #374151 !important;
+            font-weight: 500 !important;
+        }
+
+        /* Specific node color styling for better contrast */
+        .mermaid .node[style*="fill:#e0f2fe"] .label,
+        .mermaid .node[style*="fill:#f0f9ff"] .label {
+            color: #0c4a6e !important;
+            font-weight: 600 !important;
+        }
+
+        .mermaid .node[style*="fill:#ecfdf5"] .label {
+            color: #064e3b !important;
+            font-weight: 600 !important;
+        }
+
+        .mermaid .node[style*="fill:#fef3c7"] .label {
+            color: #92400e !important;
+            font-weight: 600 !important;
+        }
+
+        .mermaid .node[style*="fill:#f3e8ff"] .label {
+            color: #581c87 !important;
+            font-weight: 600 !important;
+        }
+
+        .mermaid .node[style*="fill:#fef2f2"] .label {
+            color: #991b1b !important;
+            font-weight: 600 !important;
+        }
+
+        @media (max-width: 1024px) {
+            .mermaid-control-btn:not(.reset-zoom) {
+                display: none;
+            }
+
+            .mermaid-controls {
+                top: auto;
+                bottom: 15px;
+                right: 15px;
+            }
+        }
+
+        @media (max-width: 1280px) {
+            .toc-fixed {
+                display: none;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding-left: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                overflow-x: hidden;
+            }
+
+            .main-content {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-section .relative.z-10 {
+                padding: 1rem;
+            }
+
+            .hero-section .grid {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 font-sans text-gray-900 leading-relaxed">
+
+    <!-- Table of Contents -->
+    <nav class="toc-fixed rounded-lg shadow-lg p-6">
+        <h3 class="font-serif font-semibold text-lg text-teal-800 mb-4">目录</h3>
+        <ul class="space-y-2 text-sm">
+            <li>
+                <a href="#system-overview" class="text-gray-700 hover:text-teal-700 transition-colors">系统概述与功能</a>
+            </li>
+            <li>
+                <a href="#hardware-config" class="text-gray-700 hover:text-teal-700 transition-colors">硬件配置与连接</a>
+            </li>
+            <li>
+                <a href="#software-env" class="text-gray-700 hover:text-teal-700 transition-colors">软件环境配置</a>
+            </li>
+            <li>
+                <a href="#comm-protocol" class="text-gray-700 hover:text-teal-700 transition-colors">设备通信协议与命令</a>
+            </li>
+            <li>
+                <a href="#python-prog" class="text-gray-700 hover:text-teal-700 transition-colors">Python程序设计与实现</a>
+            </li>
+            <li>
+                <a href="#usage-guide" class="text-gray-700 hover:text-teal-700 transition-colors">操作说明与使用流程</a>
+            </li>
+            <li>
+                <a href="#troubleshooting" class="text-gray-700 hover:text-teal-700 transition-colors">注意事项与故障排除</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="main-content">
+        <!-- Hero Section -->
+        <section class="relative min-h-screen flex items-center gradient-mask hero-section">
+            <div class="absolute inset-0">
+                <img src="https://kimi-web-img.moonshot.cn/img/placeholder-0620/%E5%9B%BE%E7%89%8719.png"
+                    alt="泰克2182A电压表和LPS305电流源在实验室环境中的设置" class="w-full h-full object-cover opacity-20" size="large"
+                    aspect="wide" style="photo" query="泰克2182A电压表 LPS305电流源 实验室设置" referrerpolicy="no-referrer"
+                    data-modified="1" data-score="10000.00" />
+                <div class="hero-overlay absolute inset-0"></div>
+            </div>
+
+            <div class="relative z-10 max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="text-white">
+                    <h1 class="font-serif text-5xl lg:text-6xl font-bold leading-tight mb-6">
+                        <em class="text-teal-300">自动电阻测量系统</em>
+                        <br />
+                        基于Python与RS232的精密控制
+                    </h1>
+                    <p class="text-xl text-gray-200 leading-relaxed mb-8">
+                        通过Python编程语言，结合RS232串口通信技术，实现对泰克2182A精密电压表和LPS305可调电流源的自动化控制，简化电阻测量流程，提高测量效率和数据记录的准确性。
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <div class="bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2">
+                            <i class="fab fa-python text-teal-300 mr-2"></i>
+                            <span class="text-sm">Python 3.6+</span>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2">
+                            <i class="fas fa-microchip text-teal-300 mr-2"></i>
+                            <span class="text-sm">RS232通信</span>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2">
+                            <i class="fas fa-chart-line text-teal-300 mr-2"></i>
+                            <span class="text-sm">实时数据可视化</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white/95 backdrop-blur-sm rounded-2xl p-8 shadow-2xl">
+                    <h3 class="font-serif text-2xl font-semibold text-teal-800 mb-6">核心功能特点</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-2 h-2 bg-teal-500 rounded-full"></div>
+                            <span class="text-sm text-gray-700">设备通信与控制</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-2 h-2 bg-teal-500 rounded-full"></div>
+                            <span class="text-sm text-gray-700">自定义测量参数</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-2 h-2 bg-teal-500 rounded-full"></div>
+                            <span class="text-sm text-gray-700">实时数据显示</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-2 h-2 bg-teal-500 rounded-full"></div>
+                            <span class="text-sm text-gray-700">数据保存与导出</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-2 h-2 bg-teal-500 rounded-full"></div>
+                            <span class="text-sm text-gray-700">用户友好的GUI</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-2 h-2 bg-teal-500 rounded-full"></div>
+                            <span class="text-sm text-gray-700">四线法精密测量</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- System Overview -->
+        <section id="system-overview" class="py-16 bg-white">
+            <div class="max-w-6xl mx-auto px-8">
+                <div class="text-center mb-12">
+                    <h2 class="font-serif text-4xl font-bold text-gray-900 mb-4">系统概述与功能</h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                        本系统旨在通过Python编程语言实现对泰克2182A电压表和LPS305电流源的自动化控制，为材料特性研究、元器件质量检测等应用提供高效、精确的电阻测量解决方案。
+                    </p>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-12 mb-16">
+                    <div>
+                        <h3 class="font-serif text-2xl font-semibold text-teal-800 mb-6">系统目标</h3>
+                        <div class="space-y-4 text-gray-700">
+                            <p>本自动电阻测量系统的<strong>核心目标是简化电阻测量流程，提高测量效率和数据记录的准确性。</strong>用户可以通过图形化操作界面，方便地设置测量参数，系统将自动执行测量任务。
+                            </p>
+                            <p>系统特别适用于需要长时间、周期性或大量样本电阻测量的应用场景，通过自动化控制，可以有效减少人工操作的繁琐性和潜在错误，确保测量过程的一致性和可重复性。</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="font-serif text-2xl font-semibold text-teal-800 mb-6">技术选型</h3>
+                        <div class="space-y-4">
+                            <div class="border-l-4 border-teal-500 pl-4">
+                                <h4 class="font-semibold text-gray-900">编程语言</h4>
+                                <p class="text-gray-600"><strong>Python</strong> - 简洁易学、拥有丰富的第三方库以及良好的跨平台特性</p>
+                            </div>
+                            <div class="border-l-4 border-teal-500 pl-4">
+                                <h4 class="font-semibold text-gray-900">串口通信库</h4>
+                                <p class="text-gray-600"><strong>PySerial</strong> - 提供对多种操作系统的串口访问支持</p>
+                            </div>
+                            <div class="border-l-4 border-teal-500 pl-4">
+                                <h4 class="font-semibold text-gray-900">图形用户界面</h4>
+                                <p class="text-gray-600"><strong>Tkinter</strong> - Python的标准GUI库，具有良好的跨平台性</p>
+                            </div>
+                            <div class="border-l-4 border-teal-500 pl-4">
+                                <h4 class="font-semibold text-gray-900">数据可视化</h4>
+                                <p class="text-gray-600"><strong>Matplotlib</strong> - 功能强大的绘图库，用于实时绘制测量曲线</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- System Architecture Diagram -->
+                <div class="bg-gray-50 rounded-2xl p-8">
+                    <h3 class="font-serif text-2xl font-semibold text-teal-800 mb-6 text-center">系统架构图</h3>
+                    <div class="mermaid-container">
+                        <div class="mermaid-controls">
+                            <button class="mermaid-control-btn zoom-in" title="放大">
+                                <i class="fas fa-search-plus"></i>
+                            </button>
+                            <button class="mermaid-control-btn zoom-out" title="缩小">
+                                <i class="fas fa-search-minus"></i>
+                            </button>
+                            <button class="mermaid-control-btn reset-zoom" title="重置">
+                                <i class="fas fa-expand-arrows-alt"></i>
+                            </button>
+                            <button class="mermaid-control-btn fullscreen" title="全屏查看">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                        </div>
+                        <div class="mermaid">
+                            graph TD
+                            A[&#34;用户界面
+                            <br />Tkinter GUI&#34;] --&gt; B[&#34;主控制模块
+                            <br />Main Controller&#34;]
+                            B --&gt; C[&#34;串口通信模块
+                            <br />Serial Communication&#34;]
+                            C --&gt; D[&#34;设备控制模块
+                            <br />Device Control&#34;]
+                            D --&gt; E[&#34;泰克2182A电压表
+                            <br />RS232&#34;]
+                            D --&gt; F[&#34;LPS305电流源
+                            <br />RS232&#34;]
+                            B --&gt; G[&#34;数据采集模块
+                            <br />Data Acquisition&#34;]
+                            G --&gt; H[&#34;数据处理与计算
+                            <br />欧姆定律 R=V/I&#34;]
+                            H --&gt; I[&#34;数据可视化
+                            <br />Matplotlib&#34;]
+                            H --&gt; J[&#34;数据保存
+                            <br />CSV导出&#34;]
+                            I --&gt; A
+                            J --&gt; A
+
+                            style A fill:#e0f2fe,stroke:#0f766e,stroke-width:2px,color:#1f2937
+                            style B fill:#ecfdf5,stroke:#0f766e,stroke-width:2px,color:#1f2937
+                            style C fill:#fef3c7,stroke:#0f766e,stroke-width:2px,color:#1f2937
+                            style D fill:#f3e8ff,stroke:#0f766e,stroke-width:2px,color:#1f2937
+                            style E fill:#fef2f2,stroke:#0f766e,stroke-width:2px,color:#1f2937
+                            style F fill:#fef2f2,stroke:#0f766e,stroke-width:2px,color:#1f2937
+                            style G fill:#fed7aa,stroke:#0f766e,stroke-width:2px,color:#1f2937
+                            style H fill:#dcfce7,stroke:#0f766e,stroke-width:2px,color:#1f2937
+                            style I fill:#f0f9ff,stroke:#0f766e,stroke-width:2px,color:#1f2937
+                            style J fill:#f0f9ff,stroke:#0f766e,stroke-width:2px,color:#1f2937
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hardware Configuration -->
+        <section id="hardware-config" class="py-16 bg-earth-50">
+            <div class="max-w-6xl mx-auto px-8">
+                <div class="text-center mb-12">
+                    <h2 class="font-serif text-4xl font-bold text-gray-900 mb-4">硬件配置与连接</h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                        正确的硬件连接是系统正常工作的基础。本部分详细介绍了所需的设备清单和连接步骤。
+                    </p>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-12 mb-16">
+                    <div>
+                        <h3 class="font-serif text-2xl font-semibold text-teal-800 mb-6">所需设备</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start space-x-4 p-4 bg-white rounded-lg shadow-sm">
+                                <div
+                                    class="w-8 h-8 bg-teal-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-desktop text-teal-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900">计算机</h4>
+                                    <p class="text-gray-600 text-sm">运行Windows, Linux或macOS，配备可用RS232串口或USB转RS232适配器</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start space-x-4 p-4 bg-white rounded-lg shadow-sm">
+                                <div
+                                    class="w-8 h-8 bg-teal-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-bolt text-teal-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900">泰克2182A纳伏电压表</h4>
+                                    <p class="text-gray-600 text-sm">配备RS232通信接口，用于精确测量电压降</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start space-x-4 p-4 bg-white rounded-lg shadow-sm">
+                                <div
+                                    class="w-8 h-8 bg-teal-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-plug text-teal-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900">LPS305可编程直流电源</h4>
+                                    <p class="text-gray-600 text-sm">作为电流源使用，配备RS232通信接口</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start space-x-4 p-4 bg-white rounded-lg shadow-sm">
+                                <div
+                                    class="w-8 h-8 bg-teal-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-cable-car text-teal-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900">连接线缆与配件</h4>
+                                    <p class="text-gray-600 text-sm">RS232串口电缆两条，连接导线与夹具，被测电阻</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="font-serif text-2xl font-semibold text-teal-800 mb-6">四线法连接示意图</h3>
+                        <div class="bg-white rounded-lg p-6 shadow-sm">
+                            <img src="https://kimi-web-img.moonshot.cn/img/placeholder-0620/%E5%9B%BE%E7%89%8723.png"
+                                alt="四线法电阻测量接线示意图" class="w-full rounded-lg mb-4" size="medium" aspect="wide"
+                                style="linedrawing" query="四线法电阻测量连接图" referrerpolicy="no-referrer" data-modified="1"
+                                data-score="10000.00" />
+                            <div class="space-y-3 text-sm text-gray-700">
+                                <p><strong>电流源输出连接：</strong></p>
+                                <ul class="list-disc list-inside space-y-1 ml-4">
+                                    <li>LPS305正极（Force HI）→ 被测电阻一端</li>
+                                    <li>LPS305负极（Force LO）→ 被测电阻另一端</li>
+                                </ul>
+
+                                <p><strong>电压表输入连接：</strong></p>
+                                <ul class="list-disc list-inside space-y-1 ml-4">
+                                    <li>2182A正极（Sense HI）→ 被测电阻电流注入点</li>
+                                    <li>2182A负极（Sense LO）→ 被测电阻另一端注入点</li>
+                                </ul>
+
+                                <div class="bg-amber-50 border border-amber-200 rounded-lg p-3 mt-4">
+                                    <p class="text-amber-800"><i class="fas fa-exclamation-triangle mr-2"></i>
+                                        <strong>强烈推荐使用四线（Kelvin）测量法</strong>，可消除引线电阻和接触电阻对测量结果的影响。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-8 shadow-sm">
+                    <h3 class="font-serif text-2xl font-semibold text-teal-800 mb-6">RS232通信连接步骤</h3>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 mb-4 flex items-center">
+                                <span
+                                    class="w-8 h-8 bg-teal-500 text-white rounded-full flex items-center justify-center mr-3 text-sm">1</span>
+                                电压表（2182A）连接
+                            </h4>
+                            <div class="space-y-3 text-gray-700 ml-11">
+                                <p>• 使用RS232电缆连接2182A背面板的&#34;RS232&#34;接口与计算机串口</p>
+                                <p>• 确认电缆连接牢固，驱动程序已安装</p>
+                                <p>• 在操作系统中确认电压表连接的串口号（如COM3, /dev/ttyUSB0）</p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="font-semibold text-gray-900 mb-4 flex items-center">
+                                <span
+                                    class="w-8 h-8 bg-teal-500 text-white rounded-full flex items-center justify-center mr-3 text-sm">2</span>
+                                电流源（LPS305）连接
+                            </h4>
+                            <div class="space-y-3 text-gray-700 ml-11">
+                                <p>• 使用另一条RS232电缆连接LPS305的&#34;RS232&#34;接口</p>
+                                <p class="text-red-600">• <strong>重要：</strong>必须连接到计算机上独立的串口，不能共享</p>
+                                <p>• 确认LPS305的RS232通信参数（2400 bps, 8N1）</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Software Environment -->
+        <section id="software-env" class="py-16 bg-white">
+            <div class="max-w-6xl mx-auto px-8">
+                <div class="text-center mb-12">
+                    <h2 class="font-serif text-4xl font-bold text-gray-900 mb-4">软件环境配置</h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                        配置适当的Python环境和必要的库是系统正常运行的前提条件。
+                    </p>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-12 mb-16">
+                    <div>
+                        <h3 class="font-serif text-2xl font-semibold text-teal-800 mb-6">Python环境要求</h3>
+                        <div class="bg-gray-50 rounded-lg p-6 mb-6">
+                            <h4 class="font-semibold text-gray-900 mb-3">版本要求</h4>
+                            <p class="text-gray-700 mb-4">系统要求<strong>Python 3.6或更高版本</strong>。可通过以下命令检查版本：</p>
+                            <div class="bg-gray-800 text-green-400 rounded-lg p-4 font-mono text-sm">
+                                <div>python --version</div>
+                                <div class="text-gray-400"># 或</div>
+                                <div>python3 --version</div>
+                            </div>
+                        </div>
+
+                        <div class="bg-teal-50 border border-teal-200 rounded-lg p-6">
+                            <h4 class="font-semibold text-teal-800 mb-3 flex items-center">
+                                <i class="fas fa-lightbulb mr-2"></i>
+                                虚拟环境推荐
+                            </h4>
+                            <p class="text-teal-700 text-sm mb-3">
+                                <strong>强烈建议使用Python虚拟环境</strong>来管理本项目所需的库，避免不同项目之间的库依赖冲突。
+                            </p>
+                            <div class="bg-gray-800 text-green-400 rounded-lg p-4 font-mono text-sm">
+                                <div># 创建虚拟环境</div>
+                                <div>python -m venv my_resistance_measurement_env</div>
+                                <div class="text-gray-400"># 激活虚拟环境</div>
+                                <div class="text-gray-400"># Windows:</div>
+                                <div>my_resistance_measurement_env\Scripts\activate</div>
+                                <div class="text-gray-400"># Linux/macOS:</div>
+                                <div>source my_resistance_measurement_env/bin/activate</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="font-serif text-2xl font-semibold text-teal-800 mb-6">必要Python库安装</h3>
+                        <div class="space-y-4">
+                            <div class="bg-white border border-gray-200 rounded-lg p-4">
+                                <h4 class="font-semibold text-gray-900 mb-2">PySerial</h4>
+                                <p class="text-gray-600 text-sm mb-3">用于实现与设备的RS232串口通信</p>
+                                <div class="bg-gray-800 text-green-400 rounded p-3 font-mono text-sm">
+                                    pip install pyserial
+                                </div>
+                            </div>
+
+                            <div class="bg-white border border-gray-200 rounded-lg p-4">
+                                <h4 class="font-semibold text-gray-900 mb-2">NumPy</h4>
+                                <p class="text-gray-600 text-sm mb-3">提供高效的数值计算功能</p>
+                                <div class="bg-gray-800 text-green-400 rounded p-3 font-mono text-sm">
+                                    pip install numpy
+                                </div>
+                            </div>
+
+                            <div class="bg-white border border-gray-200 rounded-lg p-4">
+                                <h4 class="font-semibold text-gray-900 mb-2">Matplotlib</h4>
+                                <p class="text-gray-600 text-sm mb-3">用于实时数据显示和绘图</p>
+                                <div class="bg-gray-800 text-green-400 rounded p-3 font-mono text-sm">
+                                    pip install matplotlib
+                                </div>
+                            </div>
+
+                            <div class="bg-white border border-gray-200 rounded-lg p-4">
+                                <h4 class="font-semibold text-gray-900 mb-2">Tkinter</h4>
+                                <p class="text-gray-600 text-sm mb-3">Python的标准GUI库，构建用户界面</p>
+                                <div class="bg-gray-800 text-green-400 rounded p-3 font-mono text-sm">
+                                    <div># 通常Python内置</div>
+                                    <div># Linux可能需要:</div>
+                                    <div>sudo apt-get install python3-tk</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 bg-gray-50 rounded-lg p-4">
+                            <h4 class="font-semibold text-gray-900 mb-2">验证安装</h4>
+                            <p class="text-gray-600 text-sm mb-3">安装完成后，可以验证库是否成功安装：</p>
+                            <div class="bg-gray-800 text-green-400 rounded p-3 font-mono text-sm">
+                                <div>python -c &#34;import serial; print(serial.__version__)&#34;</div>
+                                <div>python -c &#34;import numpy; import matplotlib; import tkinter;
+                                    print(&#39;OK&#39;)&#34;</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Communication Protocol -->
+        <section id="comm-protocol" class="py-16 bg-earth-50">
+            <div class="max-w-6xl mx-auto px-8">
+                <div class="text-center mb-12">
+                    <h2 class="font-serif text-4xl font-bold text-gray-900 mb-4">设备通信协议与命令</h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                        深入理解设备的RS232通信协议是成功实现自动化控制的关键。
+                    </p>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-12 mb-16">
+                    <div>
+                        <h3 class="font-serif text-2xl font-semibold text-teal-800 mb-6">泰克2182A电压表</h3>
+                        <div class="bg-white rounded-lg p-6 shadow-sm mb-6">
+                            <h4 class="font-semibold text-gray-900 mb-4">通信参数</h4>
+                            <div class="space-y-2 text-sm text-gray-700">
+                                <div class="flex justify-between">
+                                    <span>波特率：</span>
+                                    <span class="font-mono bg-gray-100 px-2 py-1 rounded">9600 bps</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>数据位：</span>
+                                    <span class="font-mono bg-gray-100 px-2 py-1 rounded">8位</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>校验位：</span>
+                                    <span class="font-mono bg-gray-100 px-2 py-1 rounded">无</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>停止位：</span>
+                                    <span class="font-mono bg-gray-100 px-2 py-1 rounded">1位</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>终止符：</span>
+                                    <span class="font-mono bg-gray-100 px-2 py-1 rounded">\n 或 \r\n</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-lg p-6 shadow-sm">
+                            <h4 class="font-semibold text-gray-900 mb-4">常用SCPI命令</h4>
+                            <div class="space-y-3 text-sm">
+                                <div class="border-l-4 border-teal-500 pl-3">
+                                    <div class="font-mono bg-gray-100 p-2 rounded mb-1">*IDN?</div>
+                                    <p class="text-gray-600">查询设备标识信息</p>
+                                </div>
+                                <div class="border-l-4 border-teal-500 pl-3">
+                                    <div class="font-mono bg-gray-100 p-2 rounded mb-1">*RST</div>
+                                    <p class="text-gray-600">复位设备到默认设置</p>
+                                </div>
+                                <div class="border-l-4 border-teal-500 pl-3">
+                                    <div class="font-mono bg-gray-100 p-2 rounded mb-1">:SENS:FUNC &#34;VOLT:DC&#34;
+                                    </div>
+                                    <p class="text-gray-600">设置直流电压测量功能</p>
+                                </div>
+                                <div class="border-l-4 border-teal-500 pl-3">
+                                    <div class="font-mono bg-gray-100 p-2 rounded mb-1">:READ?</div>
+                                    <p class="text-gray-600">读取测量值</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="font-serif text-2xl font-semibold text-teal-800 mb-6">LPS305电流源</h3>
+                        <div class="bg-white rounded-lg p-6 shadow-sm mb-6">
+                            <h4 class="font-semibold text-gray-900 mb-4">通信参数</h4>
+                            <div class="space-y-2 text-sm text-gray-700">
+                                <div class="flex justify-between">
+                                    <span>波特率：</span>
+                                    <span class="font-mono bg-gray-100 px-2 py-1 rounded">2400 bps</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>数据位：</span>
+                                    <span class="font-mono bg-gray-100 px-2 py-1 rounded">8位</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>校验位：</span>
+                                    <span class="font-mono bg-gray-100 px-2 py-1 rounded">无</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>停止位：</span>
+                                    <span class="font-mono bg-gray-100 px-2 py-1 rounded">1位</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>终止符：</span>
+                                    <span class="font-mono bg-gray-100 px-2 py-1 rounded">\r 或 \r\n</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-lg p-6 shadow-sm">
+                            <h4 class="font-semibold text-gray-900 mb-4">核心控制命令</h4>
+                            <div class="space-y-3 text-sm">
+                                <div class="border-l-4 border-teal-500 pl-3">
+                                    <div class="font-mono bg-gray-100 p-2 rounded mb-1">ISET1 0.010</div>
+                                    <p class="text-gray-600">设置通道1输出电流为10mA</p>
+                                </div>
+                                <div class="border-l-4 border-teal-500 pl-3">
+                                    <div class="font-mono bg-gray-100 p-2 rounded mb-1">OUT 1</div>
+                                    <p class="text-gray-600">开启输出</p>
+                                </div>
+                                <div class="border-l-4 border-teal-500 pl-3">
+                                    <div class="font-mono bg-gray-100 p-2 rounded mb-1">OUT 0</div>
+                                    <p class="text-gray-600">关闭输出</p>
+                                </div>
+                                <div class="border-l-4 border-teal-500 pl-3">
+                                    <div class="font-mono bg-gray-100 p-2 rounded mb-1">STATUS</div>
+                                    <p class="text-gray-600">查询设备工作状态</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-amber-50 border border-amber-200 rounded-2xl p-8">
+                    <h3 class="font-serif text-2xl font-semibold text-amber-800 mb-6 flex items-center">
+                        <i class="fas fa-exclamation-triangle mr-3"></i>
+                        重要通信约束
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="font-semibold text-amber-800 mb-3">命令间隔要求</h4>
+                            <p class="text-amber-700 text-sm">
+                                在收到设备对前一条命令的响应（通常是&#34;OK&#34;）之前，不应发送新的命令，否则新命令将被设备忽略。
+                                <a href="https://sigrok.org/wiki/Motech_LPS-300_series" class="citation-link">[5]</a>
+                            </p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-amber-800 mb-3">电平转换注意</h4>
+                            <p class="text-amber-700 text-sm">
+                                LPS305的DB9连接器可能提供TTL电平信号而非标准RS232电平，直接连接可能损坏设备。建议使用隔离通信模块。
+                                <a href="https://webbuilder.asiannet.com/ftp/810/LPS%20305B-TC%20User%20Manual.pdf"
+                                    class="citation-link">[9]</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Python Program Design -->
+        <section id="python-prog" class="py-16 bg-white">
+            <div class="max-w-6xl mx-auto px-8">
+                <div class="text-center mb-12">
+                    <h2 class="font-serif text-4xl font-bold text-gray-900 mb-4">Python程序设计与实现</h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                        程序采用模块化设计，确保代码的可读性、可维护性和可扩展性。
+                    </p>
+                </div>
+
+                <div class="grid lg:grid-cols-3 gap-8 mb-16">
+                    <div class="bg-gray-50 rounded-lg p-6">
+                        <div class="w-12 h-12 bg-teal-100 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fas fa-cogs text-teal-600 text-xl"></i>
+                        </div>
+                        <h3 class="font-serif text-xl font-semibold text-gray-900 mb-3">串口通信模块</h3>
+                        <p class="text-gray-600 text-sm mb-4">
+                            封装与设备RS232通信的底层细节，提供简洁的接口供上层调用。
+                        </p>
+                        <ul class="text-sm text-gray-700 space-y-1">
+                            <li>• 串口初始化与配置</li>
+                            <li>• 命令发送与响应接收</li>
+                            <li>• 错误处理与超时管理</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-gray-50 rounded-lg p-6">
+                        <div class="w-12 h-12 bg-teal-100 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fas fa-microchip text-teal-600 text-xl"></i>
+                        </div>
+                        <h3 class="font-serif text-xl font-semibold text-gray-900 mb-3">设备控制模块</h3>
+                        <p class="text-gray-600 text-sm mb-4">
+                            基于串口通信模块，实现具体的设备操作逻辑和命令序列。
+                        </p>
+                        <ul class="text-sm text-gray-700 space-y-1">
+                            <li>• 电流源参数设置</li>
+                            <li>• 电压表数据读取</li>
+                            <li>• 设备状态监控</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-gray-50 rounded-lg p-6">
+                        <div class="w-12 h-12 bg-teal-100 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fas fa-chart-line text-teal-600 text-xl"></i>
+                        </div>
+                        <h3 class="font-serif text-xl font-semibold text-gray-900 mb-3">数据处理模块</h3>
+                        <p class="text-gray-600 text-sm mb-4">
+                            管理测量流程，处理原始数据，计算电阻值。
+                        </p>
+                        <ul class="text-sm text-gray-700 space-y-1">
+                            <li>• 测量序列控制</li>
+                            <li>• 欧姆定律计算</li>
+                            <li>• 实时数据更新</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-12 mb-16">
+                    <div>
+                        <h3 class="font-serif text-2xl font-semibold text-teal-800 mb-6">GUI设计要点</h3>
+                        <div class="bg-white border border-gray-200 rounded-lg p-6">
+                            <img src="https://kimi-web-img.moonshot.cn/img/i0.wp.com/9aa012d0e2c42fbb66beb60889f8b1c004786289.jpg"
+                                alt="电阻测量系统软件界面" class="w-full rounded-lg mb-4" size="medium" aspect="wide"
+                                style="photo" query="电阻测量软件界面" referrerpolicy="no-referrer" data-modified="1"
+                                data-score="11599.00" />
+                            <div class="space-y-4 text-sm text-gray-700">
+                                <div class="flex items-start space-x-3">
+                                    <div class="w-2 h-2 bg-teal-500 rounded-full mt-2 flex-shrink-0"></div>
+                                    <div>
+                                        <strong>设备连接配置区域：</strong>串口号选择、波特率设置、连接/断开按钮
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-3">
+                                    <div class="w-2 h-2 bg-teal-500 rounded-full mt-2 flex-shrink-0"></div>
+                                    <div>
+                                        <strong>测量参数设置：</strong>电流值、采样间隔、测量次数、保存文件名
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-3">
+                                    <div class="w-2 h-2 bg-teal-500 rounded-full mt-2 flex-shrink-0"></div>
+                                    <div>
+                                        <strong>操作按钮区域：</strong>开始测量、保存数据、退出按钮
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-3">
+                                    <div class="w-2 h-2 bg-teal-500 rounded-full mt-2 flex-shrink-0"></div>
+                                    <div>
+                                        <strong>实时数据显示：</strong>Matplotlib图表显示电压和电阻曲线
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="font-serif text-2xl font-semibold text-teal-800 mb-6">数据保存功能</h3>
+                        <div class="bg-gray-50 rounded-lg p-6 mb-6">
+                            <h4 class="font-semibold text-gray-900 mb-3">CSV数据格式</h4>
+                            <div class="bg-gray-800 text-green-400 rounded-lg p-4 font-mono text-sm">
+                                <div>Timestamp, Voltage (V), Resistance (Ohm), Set Current (A)</div>
+                                <div>2025-01-15 14:30:25, 0.9987, 99.87, 0.010</div>
+                                <div>2025-01-15 14:30:26, 0.9992, 99.92, 0.010</div>
+                                <div>2025-01-15 14:30:27, 0.9989, 99.89, 0.010</div>
+                            </div>
+                        </div>
+
+                        <div class="bg-teal-50 border border-teal-200 rounded-lg p-6">
+                            <h4 class="font-semibold text-teal-800 mb-3">文件操作流程</h4>
+                            <div class="space-y-3 text-sm text-teal-700">
+                                <div class="flex items-center space-x-3">
+                                    <span
+                                        class="w-6 h-6 bg-teal-500 text-white rounded-full flex items-center justify-center text-xs">1</span>
+                                    <span>检查文件是否存在，决定追加或新建</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <span
+                                        class="w-6 h-6 bg-teal-500 text-white rounded-full flex items-center justify-center text-xs">2</span>
+                                    <span>写入CSV表头（如果是新文件）</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <span
+                                        class="w-6 h-6 bg-teal-500 text-white rounded-full flex items-center justify-center text-xs">3</span>
+                                    <span>逐行写入测量数据</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <span
+                                        class="w-6 h-6 bg-teal-500 text-white rounded-full flex items-center justify-center text-xs">4</span>
+                                    <span>错误处理与状态反馈</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 rounded-2xl p-8">
+                    <h3 class="font-serif text-2xl font-semibold text-teal-800 mb-6 text-center">数据采集流程</h3>
+                    <div class="mermaid-container">
+                        <div class="mermaid-controls">
+                            <button class="mermaid-control-btn zoom-in" title="放大">
+                                <i class="fas fa-search-plus"></i>
+                            </button>
+                            <button class="mermaid-control-btn zoom-out" title="缩小">
+                                <i class="fas fa-search-minus"></i>
+                            </button>
+                            <button class="mermaid-control-btn reset-zoom" title="重置">
+                                <i class="fas fa-expand-arrows-alt"></i>
+                            </button>
+                            <button class="mermaid-control-btn fullscreen" title="全屏查看">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                        </div>
+                        <div class="mermaid">
+                            flowchart TD
+                            A[&#34;开始测量&#34;] --&gt; B[&#34;设置电流源参数&#34;]
+                            B --&gt; C[&#34;开启电流源输出&#34;]
+                            C --&gt; D[&#34;等待稳定时间&#34;]
+                            D --&gt; E[&#34;进入测量循环&#34;]
+                            E --&gt; F[&#34;等待采样间隔&#34;]
+                            F --&gt; G[&#34;读取电压值&#34;]
+                            G --&gt; H[&#34;计算电阻值&#34;]
+                            H --&gt; I[&#34;记录数据&#34;]
+                            I --&gt; J{&#34;是否达到测量次数?&#34;}
+                            J --&gt;|否| E
+                            J --&gt;|是| K[&#34;关闭电流源输出&#34;]
+                            K --&gt; L[&#34;完成测量&#34;]
+                            L --&gt; M[&#34;数据保存选项&#34;]
+
+                            style A fill:#ecfdf5,stroke:#0f766e,stroke-width:2px,color:#1f2937
+                            style B fill:#fef3c7,stroke:#0f766e,stroke-width:2px,color:#1f2937
+                            style C fill:#fef3c7,stroke:#0f766e,stroke-width:2px,color:#1f2937
+                            style D fill:#fed7aa,stroke:#0f766e,stroke-width:2px,color:#1f2937
+                            style E fill:#e0f2fe,stroke:#0f766e,stroke-width:2px,color:#1f2937
+                            style F fill:#f3e8ff,stroke:#0f766e,stroke-width:2px,color:#1f2937
+                            style G fill:#dcfce7,stroke:#0f766e,stroke-width:2px,color:#1f2937
+                            style H fill:#dcfce7,stroke:#0f766e,stroke-width:2px,color:#1f2937
+                            style I fill:#f0f9ff,stroke:#0f766e,stroke-width:2px,color:#1f2937
+                            style J fill:#fef2f2,stroke:#0f766e,stroke-width:2px,color:#1f2937
+                            style K fill:#fef2f2,stroke:#0f766e,stroke-width:2px,color:#1f2937
+                            style L fill:#ecfdf5,stroke:#0f766e,stroke-width:2px,color:#1f2937
+                            style M fill:#e0f2fe,stroke:#0f766e,stroke-width:2px,color:#1f2937
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Usage Guide -->
+        <section id="usage-guide" class="py-16 bg-earth-50">
+            <div class="max-w-6xl mx-auto px-8">
+                <div class="text-center mb-12">
+                    <h2 class="font-serif text-4xl font-bold text-gray-900 mb-4">操作说明与使用流程</h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                        详细的步骤指南，帮助用户快速上手并正确操作系统。
+                    </p>
+                </div>
+
+                <div class="space-y-12">
+                    <!-- Step 1 -->
+                    <div class="bg-white rounded-2xl p-8 shadow-sm">
+                        <div class="flex items-center mb-6">
+                            <div
+                                class="w-12 h-12 bg-teal-500 text-white rounded-full flex items-center justify-center mr-4 text-xl font-bold">
+                                1</div>
+                            <h3 class="font-serif text-2xl font-semibold text-gray-900">程序启动与设备连接</h3>
+                        </div>
+
+                        <div class="grid lg:grid-cols-2 gap-8">
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-4">启动步骤</h4>
+                                <div class="space-y-3 text-sm text-gray-700">
+                                    <div class="flex items-start space-x-3">
+                                        <i class="fas fa-terminal text-teal-600 mt-1"></i>
+                                        <span>打开终端或命令行界面</span>
+                                    </div>
+                                    <div class="flex items-start space-x-3">
+                                        <i class="fas fa-folder text-teal-600 mt-1"></i>
+                                        <span>切换到程序目录：<code
+                                                class="bg-gray-100 px-2 py-1 rounded">cd /path/to/program</code></span>
+                                    </div>
+                                    <div class="flex items-start space-x-3">
+                                        <i class="fab fa-python text-teal-600 mt-1"></i>
+                                        <span>运行程序：<code
+                                                class="bg-gray-100 px-2 py-1 rounded">python resistance_measurement.py</code></span>
+                                    </div>
+                                    <div class="flex items-start space-x-3">
+                                        <i class="fas fa-window-maximize text-teal-600 mt-1"></i>
+                                        <span>等待GUI界面加载完成</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-4">连接配置</h4>
+                                <div class="bg-gray-50 rounded-lg p-4 space-y-2 text-sm">
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-600">电压表端口：</span>
+                                        <span class="font-mono">COM3 (示例)</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-600">电压表波特率：</span>
+                                        <span class="font-mono">9600 bps</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-600">电流源端口：</span>
+                                        <span class="font-mono">COM4 (示例)</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-600">电流源波特率：</span>
+                                        <span class="font-mono">2400 bps</span>
+                                    </div>
+                                    <button
+                                        class="w-full mt-3 bg-teal-500 text-white py-2 px-4 rounded-lg hover:bg-teal-600 transition-colors">
+                                        <i class="fas fa-plug mr-2"></i>连接设备
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="bg-white rounded-2xl p-8 shadow-sm">
+                        <div class="flex items-center mb-6">
+                            <div
+                                class="w-12 h-12 bg-teal-500 text-white rounded-full flex items-center justify-center mr-4 text-xl font-bold">
+                                2</div>
+                            <h3 class="font-serif text-2xl font-semibold text-gray-900">参数设置与测量启动</h3>
+                        </div>
+
+                        <div class="grid lg:grid-cols-2 gap-8">
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-4">测量参数设置</h4>
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">电流值 (A)</label>
+                                        <input type="text" value="0.010"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500" />
+                                        <p class="text-xs text-gray-500 mt-1">例如：0.010 表示 10mA</p>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">采样间隔 (s)</label>
+                                        <input type="text" value="1.0"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500" />
+                                        <p class="text-xs text-gray-500 mt-1">两次采样之间的时间间隔</p>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">测量次数</label>
+                                        <input type="text" value="100"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500" />
+                                        <p class="text-xs text-gray-500 mt-1">总采样次数</p>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">保存文件名</label>
+                                        <input type="text" value="measurement_data.csv"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-4">测量状态监控</h4>
+                                <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <span class="text-sm font-medium text-gray-700">当前进度</span>
+                                        <span class="text-sm text-gray-600">45/100</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-teal-500 h-2 rounded-full" style="width: 45%"></div>
+                                    </div>
+                                    <p class="text-xs text-gray-500 mt-2">预计剩余时间: 55秒</p>
+                                </div>
+
+                                <div class="space-y-2 text-sm">
+                                    <div class="flex items-center space-x-2">
+                                        <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                        <span class="text-gray-700">电压表: 已连接</span>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                        <span class="text-gray-700">电流源: 已连接</span>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+                                        <span class="text-gray-700">当前状态: 测量中...</span>
+                                    </div>
+                                </div>
+
+                                <button
+                                    class="w-full mt-4 bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 transition-colors">
+                                    <i class="fas fa-stop mr-2"></i>停止测量
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="bg-white rounded-2xl p-8 shadow-sm">
+                        <div class="flex items-center mb-6">
+                            <div
+                                class="w-12 h-12 bg-teal-500 text-white rounded-full flex items-center justify-center mr-4 text-xl font-bold">
+                                3</div>
+                            <h3 class="font-serif text-2xl font-semibold text-gray-900">数据保存与分析</h3>
+                        </div>
+
+                        <div class="grid lg:grid-cols-2 gap-8">
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-4">实时数据显示</h4>
+                                <div class="bg-gray-50 rounded-lg p-4">
+                                    <img src="https://kimi-web-img.moonshot.cn/img/i0.wp.com/9aa012d0e2c42fbb66beb60889f8b1c004786289.jpg"
+                                        alt="电阻测量软件实时数据显示界面" class="w-full rounded-lg" size="medium" aspect="wide"
+                                        query="电阻测量软件界面" referrerpolicy="no-referrer" data-modified="1"
+                                        data-score="11599.00" />
+                                    <div class="mt-4 space-y-2 text-sm text-gray-600">
+                                        <p>• 电压曲线（蓝色）：显示测量过程中的电压变化</p>
+                                        <p>• 电阻曲线（绿色）：显示计算得到的电阻值</p>
+                                        <p>• X轴：采样序号或时间</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-4">数据导出与后续处理</h4>
+                                <div class="space-y-4">
+                                    <div class="bg-teal-50 border border-teal-200 rounded-lg p-4">
+                                        <h5 class="font-semibold text-teal-800 mb-2">数据保存成功</h5>
+                                        <p class="text-sm text-teal-700">
+                                            测量数据已成功保存到：
+                                            <br />
+                                            <code
+                                                class="bg-white px-2 py-1 rounded">C:\Users\username\Documents\measurement_data.csv</code>
+                                        </p>
+                                    </div>
+
+                                    <div>
+                                        <h5 class="font-semibold text-gray-900 mb-2">数据分析工具</h5>
+                                        <div class="grid grid-cols-2 gap-2 text-sm text-gray-700">
+                                            <div class="flex items-center space-x-2">
+                                                <i class="fab fa-microsoft text-blue-600"></i>
+                                                <span>Microsoft Excel</span>
+                                            </div>
+                                            <div class="flex items-center space-x-2">
+                                                <i class="fab fa-python text-blue-600"></i>
+                                                <span>Python Pandas</span>
+                                            </div>
+                                            <div class="flex items-center space-x-2">
+                                                <i class="fas fa-chart-bar text-blue-600"></i>
+                                                <span>MATLAB</span>
+                                            </div>
+                                            <div class="flex items-center space-x-2">
+                                                <i class="fas fa-file-csv text-blue-600"></i>
+                                                <span>LibreOffice Calc</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button
+                                        class="w-full bg-teal-500 text-white py-2 px-4 rounded-lg hover:bg-teal-600 transition-colors">
+                                        <i class="fas fa-download mr-2"></i>导出数据
+                                    </button>
+
+                                    <button
+                                        class="w-full border border-gray-300 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-50 transition-colors">
+                                        <i class="fas fa-redo mr-2"></i>新的测量
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Troubleshooting -->
+        <section id="troubleshooting" class="py-16 bg-white">
+            <div class="max-w-6xl mx-auto px-8">
+                <div class="text-center mb-12">
+                    <h2 class="font-serif text-4xl font-bold text-gray-900 mb-4">注意事项与故障排除</h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                        使用过程中可能遇到的问题及其解决方案，确保系统稳定可靠运行。
+                    </p>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-12 mb-16">
+                    <div>
+                        <h3 class="font-serif text-2xl font-semibold text-teal-800 mb-6">硬件安全注意事项</h3>
+                        <div class="space-y-4">
+                            <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+                                <h4 class="font-semibold text-red-800 mb-2 flex items-center">
+                                    <i class="fas fa-power-off mr-2"></i>
+                                    断电操作
+                                </h4>
+                                <p class="text-sm text-red-700">
+                                    在进行任何线路连接、断开或更改之前，务必确保所有设备均已关闭电源，避免电击或设备损坏。
+                                </p>
+                            </div>
+
+                            <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+                                <h4 class="font-semibold text-red-800 mb-2 flex items-center">
+                                    <i class="fas fa-bolt mr-2"></i>
+                                    避免短路
+                                </h4>
+                                <p class="text-sm text-red-700">
+                                    确保电流源的正负极输出端不会直接短路，短路会产生大电流，可能损坏设备或引发火灾风险。
+                                </p>
+                            </div>
+
+                            <div class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+                                <h4 class="font-semibold text-amber-800 mb-2 flex items-center">
+                                    <i class="fas fa-tachometer-alt mr-2"></i>
+                                    设备额定值
+                                </h4>
+                                <p class="text-sm text-amber-700">
+                                    确保施加到被测电阻上的电流和电压不超过其额定值，避免损坏被测件或测量设备。
+                                </p>
+                            </div>
+
+                            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                                <h4 class="font-semibold text-blue-800 mb-2 flex items-center">
+                                    <i class="fas fa-shield-alt mr-2"></i>
+                                    接地与屏蔽
+                                </h4>
+                                <p class="text-sm text-blue-700">
+                                    对于高精度测量，需要考虑接地和屏蔽问题，使用屏蔽电缆并正确接地，减少噪声干扰。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="font-serif text-2xl font-semibold text-teal-800 mb-6">常见问题与解决方案</h3>
+                        <div class="space-y-4">
+                            <div class="bg-white border border-gray-200 rounded-lg p-4">
+                                <h4 class="font-semibold text-gray-900 mb-2 flex items-center">
+                                    <i class="fas fa-times-circle text-red-500 mr-2"></i>
+                                    程序无法启动或导入错误
+                                </h4>
+                                <p class="text-sm text-gray-700 mb-2">
+                                    <strong>问题：</strong>运行Python脚本时出现
+                                    <code class="bg-gray-100 px-1">ImportError: No module named &#39;serial&#39;</code>
+                                </p>
+                                <p class="text-sm text-gray-700">
+                                    <strong>解决：</strong>使用
+                                    <code class="bg-gray-100 px-1">pip list</code> 检查已安装库，缺少的库使用
+                                    <code class="bg-gray-100 px-1">pip install 库名</code> 安装。
+                                    <a href="https://accusrc.com/product-Amrel-LPS305-5838?srsltid=AfmBOopjYQo2S2AywwF7z81ffbeDTjRAxaHFXLJWolEhH7uQbtMFOCpZ"
+                                        class="citation-link">[17]</a>
+                                </p>
+                            </div>
+
+                            <div class="bg-white border border-gray-200 rounded-lg p-4">
+                                <h4 class="font-semibold text-gray-900 mb-2 flex items-center">
+                                    <i class="fas fa-plug text-red-500 mr-2"></i>
+                                    设备连接失败
+                                </h4>
+                                <p class="text-sm text-gray-700 mb-2">
+                                    <strong>问题：</strong>点击&#34;Connect&#34;按钮后无法与设备建立通信
+                                </p>
+                                <p class="text-sm text-gray-700">
+                                    <strong>解决：</strong>检查串口号选择是否正确，波特率是否匹配（2182A为9600，LPS305为2400），确认设备已通电。
+                                    <a href="https://sigrok.org/wiki/Motech_LPS-300_series"
+                                        class="citation-link">[5]</a>
+                                </p>
+                            </div>
+
+                            <div class="bg-white border border-gray-200 rounded-lg p-4">
+                                <h4 class="font-semibold text-gray-900 mb-2 flex items-center">
+                                    <i class="fas fa-chart-line text-red-500 mr-2"></i>
+                                    无法读取电压或读数不稳定
+                                </h4>
+                                <p class="text-sm text-gray-700 mb-2">
+                                    <strong>问题：</strong>电压表读数始终为0、超量程或读数跳动剧烈
+                                </p>
+                                <p class="text-sm text-gray-700">
+                                    <strong>解决：</strong>检查电压表输入连接，确认电流源正常输出，检查被测电阻连接是否正确。
+                                </p>
+                            </div>
+
+                            <div class="bg-white border border-gray-200 rounded-lg p-4">
+                                <h4 class="font-semibold text-gray-900 mb-2 flex items-center">
+                                    <i class="fas fa-save text-red-500 mr-2"></i>
+                                    数据保存失败
+                                </h4>
+                                <p class="text-sm text-gray-700 mb-2">
+                                    <strong>问题：</strong>无法将数据保存到CSV文件，或文件内容错误
+                                </p>
+                                <p class="text-sm text-gray-700">
+                                    <strong>解决：</strong>检查文件路径是否合法，程序是否有写入权限，确保文件未被其他程序独占打开。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 rounded-2xl p-8">
+                    <h3 class="font-serif text-2xl font-semibold text-teal-800 mb-6 text-center">通信参数校验清单</h3>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 mb-4">泰克2182A电压表</h4>
+                            <div class="space-y-3">
+                                <div class="flex items-center space-x-3">
+                                    <input type="checkbox" class="w-4 h-4 text-teal-600 rounded" />
+                                    <span class="text-sm text-gray-700">串口号选择正确（如COM3）</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <input type="checkbox" class="w-4 h-4 text-teal-600 rounded" />
+                                    <span class="text-sm text-gray-700">波特率设置为9600 bps</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <input type="checkbox" class="w-4 h-4 text-teal-600 rounded" />
+                                    <span class="text-sm text-gray-700">数据位：8位，停止位：1位</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <input type="checkbox" class="w-4 h-4 text-teal-600 rounded" />
+                                    <span class="text-sm text-gray-700">设备已通电并处于就绪状态</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="font-semibold text-gray-900 mb-4">LPS305电流源</h4>
+                            <div class="space-y-3">
+                                <div class="flex items-center space-x-3">
+                                    <input type="checkbox" class="w-4 h-4 text-teal-600 rounded" />
+                                    <span class="text-sm text-gray-700">串口号选择正确（如COM4）</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <input type="checkbox" class="w-4 h-4 text-teal-600 rounded" />
+                                    <span class="text-sm text-gray-700">波特率设置为2400 bps</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <input type="checkbox" class="w-4 h-4 text-teal-600 rounded" />
+                                    <span class="text-sm text-gray-700">校验位：无，流控制：无</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <input type="checkbox" class="w-4 h-4 text-teal-600 rounded" />
+                                    <span class="text-sm text-gray-700">RS232线缆连接牢固</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 p-4 bg-teal-50 border border-teal-200 rounded-lg">
+                        <h4 class="font-semibold text-teal-800 mb-2 flex items-center">
+                            <i class="fas fa-lightbulb mr-2"></i>
+                            高级故障排除提示
+                        </h4>
+                        <ul class="text-sm text-teal-700 space-y-1">
+                            <li>• 使用串口调试工具（如Putty、Tera Term）单独测试设备通信</li>
+                            <li>• 检查RS232线缆是否为直连线缆（straight-through cable）</li>
+                            <li>• 对于USB转串口适配器，确认驱动程序正确安装</li>
+                            <li>• 尝试降低波特率或缩短线缆长度以提高通信稳定性</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-gray-900 text-white py-12">
+            <div class="max-w-6xl mx-auto px-8 text-center">
+                <h3 class="font-serif text-2xl font-semibold mb-4">自动电阻测量系统</h3>
+                <p class="text-gray-400 mb-6">
+                    基于Python与RS232的泰克2182A和LPS305控制解决方案
+                </p>
+                <div class="flex justify-center space-x-8 text-sm text-gray-400">
+                    <span>© 2025 电阻测量系统</span>
+                    <span>•</span>
+                    <span>技术文档</span>
+                    <span>•</span>
+                    <span>版本 1.0</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#f0fdfa',
+                primaryTextColor: '#1f2937',
+                primaryBorderColor: '#0f766e',
+                lineColor: '#6b7280',
+                secondaryColor: '#ecfdf5',
+                tertiaryColor: '#fef3c7',
+                background: '#ffffff',
+                mainBkg: '#f0fdfa',
+                secondBkg: '#ecfdf5',
+                tertiaryBkg: '#fef3c7',
+                nodeBorder: '#0f766e',
+                clusterBkg: '#f9fafb',
+                clusterBorder: '#d1d5db',
+                defaultLinkColor: '#6b7280',
+                titleColor: '#1f2937',
+                edgeLabelBackground: 'rgba(255, 255, 255, 0.9)',
+                nodeTextColor: '#1f2937'
+            },
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis'
+            },
+            fontFamily: 'Inter, sans-serif',
+            fontSize: 14
+        });
+
+        // Initialize Mermaid Controls for zoom and pan
+        function initializeMermaidControls() {
+            const containers = document.querySelectorAll('.mermaid-container');
+
+            containers.forEach(container => {
+                const mermaidElement = container.querySelector('.mermaid');
+                let scale = 1;
+                let isDragging = false;
+                let startX, startY, translateX = 0, translateY = 0;
+
+                // 触摸相关状态
+                let isTouch = false;
+                let touchStartTime = 0;
+                let initialDistance = 0;
+                let initialScale = 1;
+                let isPinching = false;
+
+                // Zoom controls
+                const zoomInBtn = container.querySelector('.zoom-in');
+                const zoomOutBtn = container.querySelector('.zoom-out');
+                const resetBtn = container.querySelector('.reset-zoom');
+                const fullscreenBtn = container.querySelector('.fullscreen');
+
+                function updateTransform() {
+                    mermaidElement.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+
+                    if (scale > 1) {
+                        container.classList.add('zoomed');
+                    } else {
+                        container.classList.remove('zoomed');
+                    }
+
+                    mermaidElement.style.cursor = isDragging ? 'grabbing' : 'grab';
+                }
+
+                if (zoomInBtn) {
+                    zoomInBtn.addEventListener('click', () => {
+                        scale = Math.min(scale * 1.25, 4);
+                        updateTransform();
+                    });
+                }
+
+                if (zoomOutBtn) {
+                    zoomOutBtn.addEventListener('click', () => {
+                        scale = Math.max(scale / 1.25, 0.3);
+                        if (scale <= 1) {
+                            translateX = 0;
+                            translateY = 0;
+                        }
+                        updateTransform();
+                    });
+                }
+
+                if (resetBtn) {
+                    resetBtn.addEventListener('click', () => {
+                        scale = 1;
+                        translateX = 0;
+                        translateY = 0;
+                        updateTransform();
+                    });
+                }
+
+                if (fullscreenBtn) {
+                    fullscreenBtn.addEventListener('click', () => {
+                        if (container.requestFullscreen) {
+                            container.requestFullscreen();
+                        } else if (container.webkitRequestFullscreen) {
+                            container.webkitRequestFullscreen();
+                        } else if (container.msRequestFullscreen) {
+                            container.msRequestFullscreen();
+                        }
+                    });
+                }
+
+                // Mouse Events
+                mermaidElement.addEventListener('mousedown', (e) => {
+                    if (isTouch) return; // 如果是触摸设备，忽略鼠标事件
+
+                    isDragging = true;
+                    startX = e.clientX - translateX;
+                    startY = e.clientY - translateY;
+                    mermaidElement.style.cursor = 'grabbing';
+                    updateTransform();
+                    e.preventDefault();
+                });
+
+                document.addEventListener('mousemove', (e) => {
+                    if (isDragging && !isTouch) {
+                        translateX = e.clientX - startX;
+                        translateY = e.clientY - startY;
+                        updateTransform();
+                    }
+                });
+
+                document.addEventListener('mouseup', () => {
+                    if (isDragging && !isTouch) {
+                        isDragging = false;
+                        mermaidElement.style.cursor = 'grab';
+                        updateTransform();
+                    }
+                });
+
+                document.addEventListener('mouseleave', () => {
+                    if (isDragging && !isTouch) {
+                        isDragging = false;
+                        mermaidElement.style.cursor = 'grab';
+                        updateTransform();
+                    }
+                });
+
+                // 获取两点之间的距离
+                function getTouchDistance(touch1, touch2) {
+                    return Math.hypot(
+                        touch2.clientX - touch1.clientX,
+                        touch2.clientY - touch1.clientY
+                    );
+                }
+
+                // Touch Events - 触摸事件处理
+                mermaidElement.addEventListener('touchstart', (e) => {
+                    isTouch = true;
+                    touchStartTime = Date.now();
+
+                    if (e.touches.length === 1) {
+                        // 单指拖动
+                        isPinching = false;
+                        isDragging = true;
+
+                        const touch = e.touches[0];
+                        startX = touch.clientX - translateX;
+                        startY = touch.clientY - translateY;
+
+                    } else if (e.touches.length === 2) {
+                        // 双指缩放
+                        isPinching = true;
+                        isDragging = false;
+
+                        const touch1 = e.touches[0];
+                        const touch2 = e.touches[1];
+                        initialDistance = getTouchDistance(touch1, touch2);
+                        initialScale = scale;
+                    }
+
+                    e.preventDefault();
+                }, { passive: false });
+
+                mermaidElement.addEventListener('touchmove', (e) => {
+                    if (e.touches.length === 1 && isDragging && !isPinching) {
+                        // 单指拖动
+                        const touch = e.touches[0];
+                        translateX = touch.clientX - startX;
+                        translateY = touch.clientY - startY;
+                        updateTransform();
+
+                    } else if (e.touches.length === 2 && isPinching) {
+                        // 双指缩放
+                        const touch1 = e.touches[0];
+                        const touch2 = e.touches[1];
+                        const currentDistance = getTouchDistance(touch1, touch2);
+
+                        if (initialDistance > 0) {
+                            const newScale = Math.min(Math.max(
+                                initialScale * (currentDistance / initialDistance),
+                                0.3
+                            ), 4);
+                            scale = newScale;
+                            updateTransform();
+                        }
+                    }
+
+                    e.preventDefault();
+                }, { passive: false });
+
+                mermaidElement.addEventListener('touchend', (e) => {
+                    // 重置状态
+                    if (e.touches.length === 0) {
+                        isDragging = false;
+                        isPinching = false;
+                        initialDistance = 0;
+
+                        // 延迟重置isTouch，避免鼠标事件立即触发
+                        setTimeout(() => {
+                            isTouch = false;
+                        }, 100);
+                    } else if (e.touches.length === 1 && isPinching) {
+                        // 从双指变为单指，切换为拖动模式
+                        isPinching = false;
+                        isDragging = true;
+
+                        const touch = e.touches[0];
+                        startX = touch.clientX - translateX;
+                        startY = touch.clientY - translateY;
+                    }
+
+                    updateTransform();
+                });
+
+                mermaidElement.addEventListener('touchcancel', (e) => {
+                    isDragging = false;
+                    isPinching = false;
+                    initialDistance = 0;
+
+                    setTimeout(() => {
+                        isTouch = false;
+                    }, 100);
+
+                    updateTransform();
+                });
+
+                // Enhanced wheel zoom with better center point handling
+                container.addEventListener('wheel', (e) => {
+                    e.preventDefault();
+                    const rect = container.getBoundingClientRect();
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+
+                    const delta = e.deltaY > 0 ? 0.9 : 1.1;
+                    const newScale = Math.min(Math.max(scale * delta, 0.3), 4);
+
+                    // Adjust translation to zoom towards center
+                    if (newScale !== scale) {
+                        const scaleDiff = newScale / scale;
+                        translateX = translateX * scaleDiff;
+                        translateY = translateY * scaleDiff;
+                        scale = newScale;
+
+                        if (scale <= 1) {
+                            translateX = 0;
+                            translateY = 0;
+                        }
+
+                        updateTransform();
+                    }
+                });
+
+                // Initialize display
+                updateTransform();
+            });
+        }
+
+        // Initialize mermaid controls after diagrams are rendered
+        setTimeout(initializeMermaidControls, 1000);
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Update active navigation item on scroll
+        window.addEventListener('scroll', function () {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.toc-fixed a');
+
+            let currentSection = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (window.scrollY >= sectionTop) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('text-teal-700', 'font-semibold');
+                link.classList.add('text-gray-700');
+                if (link.getAttribute('href') === '#' + currentSection) {
+                    link.classList.remove('text-gray-700');
+                    link.classList.add('text-teal-700', 'font-semibold');
+                }
+            });
+        });
+    </script>
+
+
+</body>
+
+</html>
