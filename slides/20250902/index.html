@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reinforcement Learning for Frequency Control in Superconducting RF Particle Accelerators</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --secondary: #0f766e;
+            --accent: #d97706;
+            --neutral: #374151;
+            --base-100: #ffffff;
+            --base-200: #f8fafc;
+            --base-300: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+
+        .serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .toc-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 280px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid #e2e8f0;
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .main-content {
+            margin-left: 280px;
+            min-height: 100vh;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #1e3a8a 0%, #0f766e 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            line-height: 1.1;
+            font-style: italic;
+            word-break: break-word;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            opacity: 0.9;
+        }
+
+        .insight-highlight {
+            background: linear-gradient(120deg, #fef3c7 0%, #fde68a 100%);
+            border-left: 4px solid #d97706;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .citation-link {
+            color: #0f766e;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted #0f766e;
+        }
+
+        .citation-link:hover {
+            background-color: rgba(15, 118, 110, 0.1);
+            border-bottom-style: solid;
+        }
+
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(90deg, #d97706 0%, transparent 100%);
+            margin: 3rem 0;
+        }
+
+        .mermaid-container {
+            display: flex;
+            justify-content: center;
+            min-height: 300px;
+            max-height: 800px;
+            background: #ffffff;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mermaid-container .mermaid {
+            width: 100%;
+            max-width: 100%;
+            height: 100%;
+            cursor: grab;
+            transition: transform 0.3s ease;
+            transform-origin: center center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            touch-action: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .mermaid-container .mermaid svg {
+            max-width: 100%;
+            height: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .mermaid-container .mermaid:active {
+            cursor: grabbing;
+        }
+
+        .mermaid-container.zoomed .mermaid {
+            height: 100%;
+            width: 100%;
+            cursor: grab;
+        }
+
+        .mermaid-controls {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 20;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 8px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .mermaid-control-btn {
+            background: #ffffff;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #374151;
+            font-size: 14px;
+            min-width: 36px;
+            height: 36px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mermaid-control-btn:hover {
+            background: #f8fafc;
+            border-color: #3b82f6;
+            color: #3b82f6;
+            transform: translateY(-1px);
+        }
+
+        .mermaid-control-btn:active {
+            transform: scale(0.95);
+        }
+
+        @media (max-width: 1024px) {
+            .toc-fixed {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+                z-index: 1000;
+            }
+
+            .toc-fixed.show {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .mermaid-control-btn:not(.reset-zoom) {
+                display: none;
+            }
+
+            .mermaid-controls {
+                top: auto;
+                bottom: 15px;
+                right: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                min-height: auto;
+                height: auto;
+                padding: 2rem 1rem;
+            }
+
+            .bento-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .hero-title {
+                font-size: 1.8rem;
+                line-height: 1.2;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+                word-break: break-word;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <!-- Table of Contents -->
+    <nav class="toc-fixed">
+        <div class="mb-8">
+            <h3 class="text-lg font-bold text-gray-900 mb-4">Contents</h3>
+            <ul class="space-y-2 text-sm">
+                <li>
+                    <a href="#introduction"
+                        class="block py-1 text-gray-700 hover:text-blue-600 transition-colors">Introduction</a>
+                </li>
+                <li>
+                    <a href="#kit-kara" class="block py-1 text-gray-700 hover:text-blue-600 transition-colors">KIT: KARA
+                        Control</a>
+                </li>
+                <li>
+                    <a href="#cas-tbsac" class="block py-1 text-gray-700 hover:text-blue-600 transition-colors">CAS:
+                        TBSAC Algorithm</a>
+                </li>
+                <li>
+                    <a href="#hzb-srf" class="block py-1 text-gray-700 hover:text-blue-600 transition-colors">HZB: SRF
+                        Gun Optimization</a>
+                </li>
+                <li>
+                    <a href="#unm-slac" class="block py-1 text-gray-700 hover:text-blue-600 transition-colors">UNM &amp;
+                        SLAC: Neural Networks</a>
+                </li>
+                <li>
+                    <a href="#cern-rl4aa" class="block py-1 text-gray-700 hover:text-blue-600 transition-colors">CERN:
+                        RL4AA Collaboration</a>
+                </li>
+                <li>
+                    <a href="#fermilab" class="block py-1 text-gray-700 hover:text-blue-600 transition-colors">Fermilab:
+                        AI Applications</a>
+                </li>
+                <li>
+                    <a href="#global-landscape"
+                        class="block py-1 text-gray-700 hover:text-blue-600 transition-colors">Global Research
+                        Landscape</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="border-t pt-4">
+            <h4 class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Research Institutions</h4>
+            <div class="space-y-2 text-xs text-gray-600">
+                <div class="flex items-center">
+                    <div class="w-2 h-2 bg-blue-600 rounded-full mr-2"></div>
+                    KIT - Germany
+                </div>
+                <div class="flex items-center">
+                    <div class="w-2 h-2 bg-teal-600 rounded-full mr-2"></div>
+                    CAS - China
+                </div>
+                <div class="flex items-center">
+                    <div class="w-2 h-2 bg-amber-600 rounded-full mr-2"></div>
+                    HZB - Germany
+                </div>
+                <div class="flex items-center">
+                    <div class="w-2 h-2 bg-indigo-600 rounded-full mr-2"></div>
+                    CERN - Switzerland
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section text-white relative">
+            <div class="hero-overlay"></div>
+            <div class="hero-content px-8 py-16">
+                <div class="max-w-6xl mx-auto">
+                    <div class="bento-grid">
+                        <div class="space-y-6">
+                            <h1 class="hero-title serif text-white">
+                                Reinforcement Learning for Frequency Control in Superconducting RF Particle Accelerators
+                            </h1>
+                            <p class="hero-subtitle">
+                                A comprehensive overview of global research initiatives applying AI to achieve
+                                autonomous, stable, and efficient accelerator systems
+                            </p>
+                            <div class="flex flex-wrap gap-4 text-sm">
+                                <span class="bg-white/20 px-3 py-1 rounded-full backdrop-blur-sm">
+                                    <i class="fas fa-microchip mr-2"></i>SRF Systems
+                                </span>
+                                <span class="bg-white/20 px-3 py-1 rounded-full backdrop-blur-sm">
+                                    <i class="fas fa-brain mr-2"></i>AI Control
+                                </span>
+                                <span class="bg-white/20 px-3 py-1 rounded-full backdrop-blur-sm">
+                                    <i class="fas fa-atom mr-2"></i>Particle Physics
+                                </span>
+                            </div>
+                        </div>
+                        <div class="relative">
+                            <img src="https://kimi-web-img.moonshot.cn/img/cds.cern.ch/3107ea39bd5769622fe09007576fa125e9d0e8f8"
+                                alt="Superconducting radiofrequency cavity particle accelerator"
+                                class="w-full h-80 object-cover rounded-lg shadow-2xl opacity-90" size="large"
+                                aspect="wide" style="photo" query="superconducting RF cavity particle accelerator"
+                                referrerpolicy="no-referrer" data-modified="1" data-score="0.00" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent rounded-lg">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Highlights -->
+        <div class="max-w-6xl mx-auto px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+                <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-blue-600">
+                    <h3 class="font-bold text-lg mb-2">Real-Time Implementation</h3>
+                    <p class="text-gray-600">KIT&#39;s KINGFISHER system achieves microsecond-level latency for online
+                        RL training in live accelerator environments</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-teal-600">
+                    <h3 class="font-bold text-lg mb-2">Zero-Shot Transfer</h3>
+                    <p class="text-gray-600">CAS demonstrates successful simulation-to-reality transfer with TBSAC
+                        algorithm for RFQ optimization</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-amber-600">
+                    <h3 class="font-bold text-lg mb-2">Global Collaboration</h3>
+                    <p class="text-gray-600">RL4AA initiative connects 15+ institutions worldwide advancing autonomous
+                        accelerator systems</p>
+                </div>
+            </div>
+
+            <!-- Introduction -->
+            <section id="introduction" class="mb-16">
+                <h2 class="text-3xl font-bold serif text-gray-900 mb-6">Introduction to RL in SRF Control</h2>
+                <div class="prose prose-lg max-w-none">
+                    <p class="text-gray-700 leading-relaxed">
+                        The application of Reinforcement Learning (RL) to the control of superconducting radiofrequency
+                        (SRF) systems in particle accelerators represents a paradigm shift from traditional model-based
+                        control to autonomous, adaptive systems. Research institutions worldwide are actively exploring
+                        RL to address complex beam dynamics challenges that have traditionally resisted conventional
+                        control approaches.
+                    </p>
+
+                    <div class="insight-highlight">
+                        <h4 class="font-semibold text-amber-800 mb-2">
+                            <i class="fas fa-lightbulb mr-2"></i>Key Insight
+                        </h4>
+                        <p class="text-amber-700">
+                            RL enables controllers to learn optimal strategies directly from interaction with the
+                            accelerator environment, without requiring complete and accurate a-priori models of complex,
+                            non-linear systems.
+                        </p>
+                    </div>
+
+                    <p class="text-gray-700 leading-relaxed">
+                        These efforts span from stabilizing beam orbits and optimizing injector performance to
+                        controlling high-dimensional systems like superconducting linear accelerators. The research
+                        demonstrates a clear trend toward creating more autonomous, stable, and efficient accelerator
+                        systems through AI integration.
+                    </p>
+                </div>
+            </section>
+
+            <div class="section-divider"></div>
+
+            <!-- KIT Research -->
+            <section id="kit-kara" class="mb-16">
+                <h2 class="text-3xl font-bold serif text-gray-900 mb-6">Karlsruhe Institute of Technology: Real-Time
+                    Control at KARA</h2>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4">KINGFISHER System Architecture</h3>
+                        <p class="text-gray-700 leading-relaxed mb-4">
+                            The KIT team developed the <strong>KINGFISHER</strong> system (Karat Intelligent
+                            Next-Generation Feedback Implementation System High-speed and Enhanced Response) to meet
+                            stringent real-time constraints for controlling microbunching instability (MBI) at the
+                            Karlsruhe Research Accelerator (KARA).
+                        </p>
+
+                        <div class="bg-blue-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-semibold text-blue-800 mb-2">Technical Specifications</h4>
+                            <ul class="text-blue-700 space-y-1 text-sm">
+                                <li>• AMD-Xilinx Versal heterogeneous computing platform</li>
+                                <li>• Microsecond-level latency execution</li>
+                                <li>• Online learning through &#34;experience accumulator&#34;</li>
+                                <li>• Direct RF system modulation capability</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div>
+                        <img src="https://kimi-web-img.moonshot.cn/img/www.amd.com/2b7dc53d8151f829fca53aaff0000b51b2b3827f.png"
+                            alt="AMD Versal FPGA processor board" class="w-full h-64 object-cover rounded-lg shadow-lg"
+                            size="medium" aspect="wide" style="photo" query="AMD Versal FPGA board"
+                            referrerpolicy="no-referrer" data-modified="1" data-score="0.00" />
+                    </div>
+                </div>
+
+                <p class="text-gray-700 leading-relaxed">
+                    The RL agent at KARA controls microbunching instability by modulating the accelerator&#39;s RF
+                    system, with two primary approaches: using the kicker cavity of the existing bunch-by-bunch feedback
+                    system or directly modulating the accelerating cavities of the main RF system. This represents the
+                    first experimental attempt to control MBI using RL with online training <a
+                        href="https://publikationen.bibliothek.kit.edu/1000173416" class="citation-link"
+                        target="_blank">[725]</a>.
+                </p>
+            </section>
+
+            <div class="section-divider"></div>
+
+            <!-- CAS Research -->
+            <section id="cas-tbsac" class="mb-16">
+                <h2 class="text-3xl font-bold serif text-gray-900 mb-6">Chinese Academy of Sciences: TBSAC Algorithm
+                </h2>
+
+                <div class="bg-gradient-to-r from-teal-50 to-blue-50 p-8 rounded-lg mb-8">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Trend-Based Soft Actor-Critic (TBSAC)</h3>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        The CAS team developed TBSAC, a novel RL algorithm specifically tailored for robust control of
+                        particle beams in superconducting linear accelerators. The algorithm incorporates temporal
+                        information (trends of beam position monitor readings) directly into the agent&#39;s observation
+                        space.
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                        <div>
+                            <h4 class="font-semibold text-teal-800 mb-2">Algorithm Components</h4>
+                            <ul class="text-teal-700 space-y-1 text-sm">
+                                <li>• Soft Actor-Critic (SAC) framework</li>
+                                <li>• Trend-based observation space</li>
+                                <li>• Entropy maximization for exploration</li>
+                                <li>• Off-policy learning stability</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-teal-800 mb-2">Performance Achievements</h4>
+                            <ul class="text-teal-700 space-y-1 text-sm">
+                                <li>• RFQ transmission efficiency &gt;85%</li>
+                                <li>• Optimization time: 2 minutes</li>
+                                <li>• Zero-shot transfer capability</li>
+                                <li>• Robust to noise and non-linearities</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="insight-highlight">
+                    <h4 class="font-semibold text-amber-800 mb-2">
+                        <i class="fas fa-rocket mr-2"></i>Breakthrough Achievement
+                    </h4>
+                    <p class="text-amber-700">
+                        The TBSAC agent successfully achieved &#34;zero-shot&#34; transfer from simulation to real
+                        accelerator, eliminating the need for time-consuming and potentially disruptive online learning
+                        on operational machines <a href="https://inspirehep.net/literature/2662047"
+                            class="citation-link" target="_blank">[506]</a>.
+                    </p>
+                </div>
+            </section>
+
+            <div class="section-divider"></div>
+
+            <!-- HZB Research -->
+            <section id="hzb-srf" class="mb-16">
+                <h2 class="text-3xl font-bold serif text-gray-900 mb-6">Helmholtz-Zentrum Berlin &amp; University of
+                    Kassel: SRF Gun Optimization</h2>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                    <div class="lg:col-span-2">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4">Deep Reinforcement Learning for SRF
+                            Photoelectron Injectors</h3>
+                        <p class="text-gray-700 leading-relaxed mb-4">
+                            A collaboration between HZB and the University of Kassel has developed a Deep Reinforcement
+                            Learning (DRL) system for optimizing superconducting RF photoelectron injectors (SRF guns),
+                            which are critical for generating high-brightness electron beams.
+                        </p>
+
+                        <p class="text-gray-700 leading-relaxed mb-4">
+                            The DRL agent learns to control the SRF gun by interacting with a high-fidelity simulation,
+                            exploring a vast parameter space including RF phase and amplitude, laser timing, and cathode
+                            conditions. The objective is to maximize beam quality metrics such as minimizing transverse
+                            emittance and maximizing bunch charge <a
+                                href="https://rl4aa.github.io/categories/publications/" class="citation-link"
+                                target="_blank">[798]</a>.
+                        </p>
+                    </div>
+
+                    <div>
+                        <div class="bg-amber-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-amber-800 mb-2">Optimization Goals</h4>
+                            <ul class="text-amber-700 space-y-1 text-sm">
+                                <li>• Minimize beam transverse emittance</li>
+                                <li>• Maximize bunch charge</li>
+                                <li>• Optimize RF phase/amplitude</li>
+                                <li>• Control laser parameters</li>
+                                <li>• Manage cathode conditions</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h4 class="font-semibold text-gray-800 mb-4">Simulation-Based Training Approach</h4>
+                    <p class="text-gray-700 leading-relaxed">
+                        The research relies on a high-fidelity &#34;digital twin&#34; simulation that models the entire
+                        process of electron beam generation, including photoemission, RF field interaction, space charge
+                        effects, and beam transport. This simulation-based training methodology allows the DRL agent to
+                        undergo millions of training episodes safely and efficiently <a
+                            href="https://rl4aa.github.io/categories/publications/" class="citation-link"
+                            target="_blank">[802]</a>.
+                    </p>
+                </div>
+            </section>
+
+            <div class="section-divider"></div>
+
+            <!-- UNM &amp; SLAC Research -->
+            <section id="unm-slac" class="mb-16">
+                <h2 class="text-3xl font-bold serif text-gray-900 mb-6">University of New Mexico &amp; SLAC: Neural
+                    Networks for Resonance Control</h2>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4">LCLS-II Application</h3>
+                        <p class="text-gray-700 leading-relaxed mb-4">
+                            The collaborative research between UNM and SLAC is directly motivated by the operational
+                            requirements of the LCLS-II project, which features SRF cavities operating with extremely
+                            high loaded quality factors (Q_L) and bandwidths as narrow as 10 Hz.
+                        </p>
+
+                        <div class="bg-indigo-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-semibold text-indigo-800 mb-2">Technical Challenges</h4>
+                            <ul class="text-indigo-700 space-y-1 text-sm">
+                                <li>• Microphonics-induced detuning</li>
+                                <li>• Lorentz force detuning compensation</li>
+                                <li>• 10 Hz bandwidth requirements</li>
+                                <li>• Real-time adaptive control</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div>
+                        <img src="https://kimi-web-img.moonshot.cn/img/media.springernature.com/460d42e97779ffe1519202d7fdd5bf013bb9d3a9.png"
+                            alt="Superconducting RF cavity with piezoelectric actuator assembly"
+                            class="w-full h-64 object-cover rounded-lg shadow-lg" size="medium" aspect="wide"
+                            style="photo" query="superconducting RF cavity piezoelectric actuator"
+                            referrerpolicy="no-referrer" data-modified="1" data-score="0.00" />
+                    </div>
+                </div>
+
+                <p class="text-gray-700 leading-relaxed">
+                    The ML-based system utilizes piezoelectric actuators for adaptive tuning of cavity frequency, with
+                    the controller learning to distinguish between microphonics and Lorentz force detuning signatures.
+                    The research demonstrates the potential for improved resonance control compared to traditional
+                    fixed-parameter controllers <a href="https://inspirehep.net/literature/1962429"
+                        class="citation-link" target="_blank">[41]</a>.
+                </p>
+            </section>
+
+            <div class="section-divider"></div>
+
+            <!-- CERN RL4AA -->
+            <section id="cern-rl4aa" class="mb-16">
+                <h2 class="text-3xl font-bold serif text-gray-900 mb-6">CERN: RL4AA Collaboration and Autonomous LLRF
+                    Systems</h2>
+
+                <div class="mb-8">
+                    <div class="mermaid-container">
+                        <div class="mermaid-controls">
+                            <button class="mermaid-control-btn zoom-in" title="放大">
+                                <i class="fas fa-search-plus"></i>
+                            </button>
+                            <button class="mermaid-control-btn zoom-out" title="缩小">
+                                <i class="fas fa-search-minus"></i>
+                            </button>
+                            <button class="mermaid-control-btn reset-zoom" title="重置">
+                                <i class="fas fa-expand-arrows-alt"></i>
+                            </button>
+                            <button class="mermaid-control-btn fullscreen" title="全屏查看">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                        </div>
+                        <div class="mermaid">
+                            graph TB
+                            A[&#34;RL4AA Collaboration&#34;] --&gt; B[&#34;CERN&#34;]
+                            A --&gt; C[&#34;DESY&#34;]
+                            A --&gt; D[&#34;KIT&#34;]
+                            A --&gt; E[&#34;University of Salzburg&#34;]
+                            B --&gt; F[&#34;Autonomous LLRF Systems&#34;]
+                            B --&gt; G[&#34;Detuning Control&#34;]
+                            C --&gt; H[&#34;Online Tuning Systems&#34;]
+                            D --&gt; I[&#34;KINGFISHER Platform&#34;]
+                            E --&gt; J[&#34;Algorithm Development&#34;]
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-r from-purple-50 to-indigo-50 p-8 rounded-lg mb-8">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Reinforcement Learning for Autonomous
+                        Accelerators (RL4AA)</h3>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        The RL4AA collaboration brings together researchers from CERN, DESY, KIT, and other institutions
+                        to advance the application of Reinforcement Learning in accelerator physics. The collaboration
+                        focuses on developing high-fidelity simulations, addressing transfer learning challenges, and
+                        creating robust RL algorithms for safety-critical applications <a
+                            href="https://rl4aa.github.io/" class="citation-link" target="_blank">[306]</a>.
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                        <div>
+                            <h4 class="font-semibold text-purple-800 mb-2">Research Focus Areas</h4>
+                            <ul class="text-purple-700 space-y-1 text-sm">
+                                <li>• Detuning control optimization</li>
+                                <li>• Power consumption reduction</li>
+                                <li>• Predictive disturbance compensation</li>
+                                <li>• Adaptive feedback systems</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-purple-800 mb-2">Collaborative Activities</h4>
+                            <ul class="text-purple-700 space-y-1 text-sm">
+                                <li>• RL4AA&#39;23 workshop at KIT</li>
+                                <li>• Knowledge sharing platforms</li>
+                                <li>• Joint algorithm development</li>
+                                <li>• Benchmarking and validation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="section-divider"></div>
+
+            <!-- Fermilab Research -->
+            <section id="fermilab" class="mb-16">
+                <h2 class="text-3xl font-bold serif text-gray-900 mb-6">Fermilab: AI Applications in Accelerator Systems
+                </h2>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4">FPGA Implementation of Neural Networks</h3>
+                        <p class="text-gray-700 leading-relaxed mb-4">
+                            Fermilab researchers developed a neural network trained via Reinforcement Learning to
+                            regulate the Gradient Magnet Power Supply (GMPS) at the Fermilab Booster. The breakthrough
+                            achievement was compiling the trained neural network to execute on a Field-Programmable Gate
+                            Array (FPGA) for real-time control with predictable latency <a
+                                href="https://link.aps.org/doi/10.1103/PhysRevAccelBeams.24.104601"
+                                class="citation-link" target="_blank">[393]</a>.
+                        </p>
+
+                        <div class="bg-green-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-semibold text-green-800 mb-2">Key Innovation</h4>
+                            <p class="text-green-700 text-sm">
+                                First machine-learning-based control algorithm implemented on FPGA for controls at the
+                                Fermilab accelerator complex, enabling real-time AI control with microsecond-scale
+                                response times.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4">Iterative Learning Control for SRF Cavities
+                        </h3>
+                        <p class="text-gray-700 leading-relaxed mb-4">
+                            Fermilab has pioneered the application of Iterative Learning Control (ILC) for compensating
+                            transient beam loading in high-current SRF accelerators. The modified ILC algorithm,
+                            designed for FPGA implementation, successfully suppresses beam-induced gradient fluctuations
+                            <a href="https://www.sciencedirect.com/science/article/abs/pii/S0168900221010809"
+                                class="citation-link" target="_blank">[821]</a>.
+                        </p>
+
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-blue-800 mb-2">Implementation Features</h4>
+                            <ul class="text-blue-700 space-y-1 text-sm">
+                                <li>• Rectangle-pulse beam profile approximation</li>
+                                <li>• Reduced computational complexity</li>
+                                <li>• Real-time FPGA execution</li>
+                                <li>• Experimental validation at CAFe facility</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="section-divider"></div>
+
+            <!-- Global Research Landscape -->
+            <section id="global-landscape" class="mb-16">
+                <h2 class="text-3xl font-bold serif text-gray-900 mb-6">Global Research Landscape and Future Directions
+                </h2>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-white p-6 rounded-lg shadow-lg">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">
+                            <i class="fas fa-university text-blue-600 mr-2"></i>Leading Institutions
+                        </h3>
+                        <ul class="text-gray-700 space-y-2 text-sm">
+                            <li><strong>KIT (Germany)</strong> - Real-time RL implementation</li>
+                            <li><strong>CAS (China)</strong> - TBSAC algorithm development</li>
+                            <li><strong>CERN (Switzerland)</strong> - RL4AA coordination</li>
+                            <li><strong>Fermilab (USA)</strong> - FPGA-based AI control</li>
+                            <li><strong>SLAC (USA)</strong> - LCLS-II applications</li>
+                            <li><strong>HZB (Germany)</strong> - SRF gun optimization</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg shadow-lg">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">
+                            <i class="fas fa-cogs text-teal-600 mr-2"></i>Technical Approaches
+                        </h3>
+                        <ul class="text-gray-700 space-y-2 text-sm">
+                            <li><strong>Deep RL</strong> - High-dimensional control</li>
+                            <li><strong>Zero-shot transfer</strong> - Simulation to reality</li>
+                            <li><strong>Hardware acceleration</strong> - FPGA implementation</li>
+                            <li><strong>Digital twins</strong> - Simulation-based training</li>
+                            <li><strong>Adaptive feedback</strong> - Real-time tuning</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg shadow-lg">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">
+                            <i class="fas fa-chart-line text-amber-600 mr-2"></i>Future Applications
+                        </h3>
+                        <ul class="text-gray-700 space-y-2 text-sm">
+                            <li><strong>Fusion energy devices</strong> - Plasma control</li>
+                            <li><strong>Medical accelerators</strong> - Treatment optimization</li>
+                            <li><strong>Industrial applications</strong> - Process control</li>
+                            <li><strong>Next-gen colliders</strong> - Autonomous operation</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-r from-gray-50 to-blue-50 p-8 rounded-lg">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Emerging Research Directions</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-semibold text-gray-800 mb-2">Technical Challenges</h4>
+                            <ul class="text-gray-700 space-y-1 text-sm">
+                                <li>• Real-time hardware constraints</li>
+                                <li>• Safety-critical system validation</li>
+                                <li>• Transfer learning robustness</li>
+                                <li>• High-fidelity simulation accuracy</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800 mb-2">Research Opportunities</h4>
+                            <ul class="text-gray-700 space-y-1 text-sm">
+                                <li>• Multi-agent RL systems</li>
+                                <li>• Federated learning approaches</li>
+                                <li>• Explainable AI for physics insight</li>
+                                <li>• Cross-institutional benchmarking</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="insight-highlight mt-8">
+                    <h4 class="font-semibold text-amber-800 mb-2">
+                        <i class="fas fa-globe mr-2"></i>Global Impact
+                    </h4>
+                    <p class="text-amber-700">
+                        The convergence of AI and accelerator physics through initiatives like RL4AA is paving the way
+                        for a new generation of autonomous scientific facilities that will enable discoveries impossible
+                        with current technology, while fostering international collaboration in fundamental research.
+                    </p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        // Initialize Mermaid with enhanced styling and contrast
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                // High contrast colors for better readability
+                primaryColor: '#dbeafe',
+                primaryTextColor: '#1f2937',
+                primaryBorderColor: '#1e3a8a',
+                lineColor: '#374151',
+                secondaryColor: '#fef3c7',
+                secondaryTextColor: '#1f2937',
+                secondaryBorderColor: '#d97706',
+                tertiaryColor: '#e0f2fe',
+                tertiaryTextColor: '#1f2937',
+                tertiaryBorderColor: '#0f766e',
+                background: '#ffffff',
+                mainBkg: '#dbeafe',
+                secondBkg: '#fef3c7',
+                tertiaryBkg: '#e0f2fe',
+                // Enhanced text styling
+                textColor: '#1f2937',
+                fontFamily: 'Inter, sans-serif',
+                fontSize: '14px',
+                // Node styling with better contrast
+                nodeBkg: '#ffffff',
+                nodeTextColor: '#1f2937',
+                nodeBorder: '#374151',
+                // Edge styling
+                edgeLabelBackground: '#ffffff',
+                edgeLabelText: '#1f2937',
+                // Cluster styling
+                clusterBkg: '#f8fafc',
+                clusterBorder: '#d1d5db',
+                // Special node colors with high contrast
+                cScale0: '#dbeafe',
+                cScale1: '#fef3c7',
+                cScale2: '#e0f2fe',
+                cScale3: '#fdf2f8',
+                cScale4: '#f0fdf4',
+                cScale5: '#fef2f2',
+                cScale6: '#f3e8ff',
+                cScale7: '#f0f9ff',
+                // Text colors for each scale to ensure contrast
+                cScaleLabel0: '#1f2937',
+                cScaleLabel1: '#1f2937',
+                cScaleLabel2: '#1f2937',
+                cScaleLabel3: '#1f2937',
+                cScaleLabel4: '#1f2937',
+                cScaleLabel5: '#1f2937',
+                cScaleLabel6: '#1f2937',
+                cScaleLabel7: '#1f2937'
+            },
+            flowchart: {
+                useMaxWidth: false,
+                htmlLabels: true,
+                curve: 'basis',
+                padding: 20
+            },
+            fontFamily: 'Inter, sans-serif',
+            fontSize: '14px'
+        });
+
+        // Initialize Mermaid Controls for zoom and pan
+        function initializeMermaidControls() {
+            const containers = document.querySelectorAll('.mermaid-container');
+
+            containers.forEach(container => {
+                const mermaidElement = container.querySelector('.mermaid');
+                let scale = 1;
+                let isDragging = false;
+                let startX, startY, translateX = 0, translateY = 0;
+
+                // 触摸相关状态
+                let isTouch = false;
+                let touchStartTime = 0;
+                let initialDistance = 0;
+                let initialScale = 1;
+                let isPinching = false;
+
+                // Zoom controls
+                const zoomInBtn = container.querySelector('.zoom-in');
+                const zoomOutBtn = container.querySelector('.zoom-out');
+                const resetBtn = container.querySelector('.reset-zoom');
+                const fullscreenBtn = container.querySelector('.fullscreen');
+
+                function updateTransform() {
+                    mermaidElement.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+
+                    if (scale > 1) {
+                        container.classList.add('zoomed');
+                    } else {
+                        container.classList.remove('zoomed');
+                    }
+
+                    mermaidElement.style.cursor = isDragging ? 'grabbing' : 'grab';
+                }
+
+                if (zoomInBtn) {
+                    zoomInBtn.addEventListener('click', () => {
+                        scale = Math.min(scale * 1.25, 4);
+                        updateTransform();
+                    });
+                }
+
+                if (zoomOutBtn) {
+                    zoomOutBtn.addEventListener('click', () => {
+                        scale = Math.max(scale / 1.25, 0.3);
+                        if (scale <= 1) {
+                            translateX = 0;
+                            translateY = 0;
+                        }
+                        updateTransform();
+                    });
+                }
+
+                if (resetBtn) {
+                    resetBtn.addEventListener('click', () => {
+                        scale = 1;
+                        translateX = 0;
+                        translateY = 0;
+                        updateTransform();
+                    });
+                }
+
+                if (fullscreenBtn) {
+                    fullscreenBtn.addEventListener('click', () => {
+                        if (container.requestFullscreen) {
+                            container.requestFullscreen();
+                        } else if (container.webkitRequestFullscreen) {
+                            container.webkitRequestFullscreen();
+                        } else if (container.msRequestFullscreen) {
+                            container.msRequestFullscreen();
+                        }
+                    });
+                }
+
+                // Mouse Events
+                mermaidElement.addEventListener('mousedown', (e) => {
+                    if (isTouch) return; // 如果是触摸设备，忽略鼠标事件
+
+                    isDragging = true;
+                    startX = e.clientX - translateX;
+                    startY = e.clientY - translateY;
+                    mermaidElement.style.cursor = 'grabbing';
+                    updateTransform();
+                    e.preventDefault();
+                });
+
+                document.addEventListener('mousemove', (e) => {
+                    if (isDragging && !isTouch) {
+                        translateX = e.clientX - startX;
+                        translateY = e.clientY - startY;
+                        updateTransform();
+                    }
+                });
+
+                document.addEventListener('mouseup', () => {
+                    if (isDragging && !isTouch) {
+                        isDragging = false;
+                        mermaidElement.style.cursor = 'grab';
+                        updateTransform();
+                    }
+                });
+
+                document.addEventListener('mouseleave', () => {
+                    if (isDragging && !isTouch) {
+                        isDragging = false;
+                        mermaidElement.style.cursor = 'grab';
+                        updateTransform();
+                    }
+                });
+
+                // 获取两点之间的距离
+                function getTouchDistance(touch1, touch2) {
+                    return Math.hypot(
+                        touch2.clientX - touch1.clientX,
+                        touch2.clientY - touch1.clientY
+                    );
+                }
+
+                // Touch Events - 触摸事件处理
+                mermaidElement.addEventListener('touchstart', (e) => {
+                    isTouch = true;
+                    touchStartTime = Date.now();
+
+                    if (e.touches.length === 1) {
+                        // 单指拖动
+                        isPinching = false;
+                        isDragging = true;
+
+                        const touch = e.touches[0];
+                        startX = touch.clientX - translateX;
+                        startY = touch.clientY - translateY;
+
+                    } else if (e.touches.length === 2) {
+                        // 双指缩放
+                        isPinching = true;
+                        isDragging = false;
+
+                        const touch1 = e.touches[0];
+                        const touch2 = e.touches[1];
+                        initialDistance = getTouchDistance(touch1, touch2);
+                        initialScale = scale;
+                    }
+
+                    e.preventDefault();
+                }, { passive: false });
+
+                mermaidElement.addEventListener('touchmove', (e) => {
+                    if (e.touches.length === 1 && isDragging && !isPinching) {
+                        // 单指拖动
+                        const touch = e.touches[0];
+                        translateX = touch.clientX - startX;
+                        translateY = touch.clientY - startY;
+                        updateTransform();
+
+                    } else if (e.touches.length === 2 && isPinching) {
+                        // 双指缩放
+                        const touch1 = e.touches[0];
+                        const touch2 = e.touches[1];
+                        const currentDistance = getTouchDistance(touch1, touch2);
+
+                        if (initialDistance > 0) {
+                            const newScale = Math.min(Math.max(
+                                initialScale * (currentDistance / initialDistance),
+                                0.3
+                            ), 4);
+                            scale = newScale;
+                            updateTransform();
+                        }
+                    }
+
+                    e.preventDefault();
+                }, { passive: false });
+
+                mermaidElement.addEventListener('touchend', (e) => {
+                    // 重置状态
+                    if (e.touches.length === 0) {
+                        isDragging = false;
+                        isPinching = false;
+                        initialDistance = 0;
+
+                        // 延迟重置isTouch，避免鼠标事件立即触发
+                        setTimeout(() => {
+                            isTouch = false;
+                        }, 100);
+                    } else if (e.touches.length === 1 && isPinching) {
+                        // 从双指变为单指，切换为拖动模式
+                        isPinching = false;
+                        isDragging = true;
+
+                        const touch = e.touches[0];
+                        startX = touch.clientX - translateX;
+                        startY = touch.clientY - translateY;
+                    }
+
+                    updateTransform();
+                });
+
+                mermaidElement.addEventListener('touchcancel', (e) => {
+                    isDragging = false;
+                    isPinching = false;
+                    initialDistance = 0;
+
+                    setTimeout(() => {
+                        isTouch = false;
+                    }, 100);
+
+                    updateTransform();
+                });
+
+                // Enhanced wheel zoom with better center point handling
+                container.addEventListener('wheel', (e) => {
+                    e.preventDefault();
+                    const rect = container.getBoundingClientRect();
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+
+                    const delta = e.deltaY > 0 ? 0.9 : 1.1;
+                    const newScale = Math.min(Math.max(scale * delta, 0.3), 4);
+
+                    // Adjust translation to zoom towards center
+                    if (newScale !== scale) {
+                        const scaleDiff = newScale / scale;
+                        translateX = translateX * scaleDiff;
+                        translateY = translateY * scaleDiff;
+                        scale = newScale;
+
+                        if (scale <= 1) {
+                            translateX = 0;
+                            translateY = 0;
+                        }
+
+                        updateTransform();
+                    }
+                });
+
+                // Initialize display
+                updateTransform();
+            });
+        }
+
+        // Initialize the mermaid controls when the page loads
+        document.addEventListener('DOMContentLoaded', function () {
+            initializeMermaidControls();
+        });
+
+        // Smooth scrolling for TOC links
+        document.querySelectorAll('.toc-fixed a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Mobile TOC toggle
+        function toggleTOC() {
+            const toc = document.querySelector('.toc-fixed');
+            toc.classList.toggle('show');
+
+            // Lock/unlock body scroll when TOC is shown/hidden on mobile
+            if (window.innerWidth < 1024) {
+                if (toc.classList.contains('show')) {
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    document.body.style.overflow = '';
+                }
+            }
+        }
+
+        // Add mobile menu button for smaller screens
+        if (window.innerWidth < 1024) {
+            const mobileMenuBtn = document.createElement('button');
+            mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            mobileMenuBtn.className = 'fixed top-4 left-4 z-50 bg-white p-3 rounded-lg shadow-lg lg:hidden';
+            mobileMenuBtn.onclick = toggleTOC;
+            document.body.appendChild(mobileMenuBtn);
+        }
+
+        // Close TOC when clicking outside on mobile
+        document.addEventListener('click', function (e) {
+            const toc = document.querySelector('.toc-fixed');
+            const mobileMenuBtn = document.querySelector('button[onclick="toggleTOC()"]');
+
+            if (window.innerWidth < 1024 &&
+                toc.classList.contains('show') &&
+                !toc.contains(e.target) &&
+                (!mobileMenuBtn || !mobileMenuBtn.contains(e.target))) {
+                toggleTOC();
+            }
+        });
+
+        // Reset TOC state on window resize
+        window.addEventListener('resize', function () {
+            const toc = document.querySelector('.toc-fixed');
+            if (window.innerWidth >= 1024) {
+                // On large screens, ensure TOC is visible and body scroll is unlocked
+                toc.classList.remove('show');
+                document.body.style.overflow = '';
+            }
+        });
+    </script>
+
+
+</body>
+
+</html>
