@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Frequency to Standard State (20°C, 50%RH, 101325 Pa)</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            margin: 0 0 12px;
+            font-size: 22px;
+            color: #a5b4fc;
+        }
+
+        .container {
+            max-width: 1080px;
+            margin: 24px auto;
+            padding: 24px;
+            background: #1e293b;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            color: #cbd5e1;
+            margin-bottom: 4px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 8px 10px;
+            border-radius: 8px;
+            border: 1px solid #334155;
+            background: #0b1220;
+            color: #e2e8f0;
+        }
+
+        button {
+            background: linear-gradient(90deg, #6366f1, #22d3ee);
+            border: none;
+            color: #0b1220;
+            padding: 10px 16px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        button:hover {
+            filter: brightness(1.05);
+        }
+
+        .card {
+            background: #111827;
+            border: 1px solid #1f2937;
+            border-radius: 10px;
+            padding: 14px 16px;
+        }
+
+        .result {
+            font-size: 20px;
+            font-weight: 700;
+            color: #34d399;
+        }
+
+        pre {
+            background: #0b1220;
+            padding: 12px;
+            border-radius: 10px;
+            overflow-x: auto;
+            font-size: 12px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            border-bottom: 1px solid #1f2937;
+            text-align: left;
+        }
+
+        th {
+            color: #a5b4fc;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Frequency conversion to standard state (20°C, 50%RH, 101325 Pa)</h1>
+        <div class="grid">
+            <div class="card">
+                <div class="grid">
+                    <div>
+                        <label>Cavity medium</label>
+                        <select id="medium" onchange="toggleDfdp()">
+                            <option value="vacuum">Vacuum</option>
+                            <option value="air">Air</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Ambient temperature (°C)</label>
+                        <input id="temp" type="number" value="20" step="0.1">
+                    </div>
+                    <div>
+                        <label>Ambient humidity (%)</label>
+                        <input id="rh" type="number" value="50" step="0.1">
+                    </div>
+                    <div>
+                        <label>Ambient pressure (Pa)</label>
+                        <input id="press" type="number" value="101325" step="1">
+                    </div>
+                    <div>
+                        <label>Measured frequency (Hz)</label>
+                        <input id="fmeas" type="number" value="324000000" step="1000">
+                    </div>
+                    <div id="dfdp-wrap">
+                        <label>df/dp (Hz/Pa) [Vacuum only]</label>
+                        <input id="dfdp" type="number" value="0" step="0.001">
+                    </div>
+                </div>
+                <div style="margin-top:14px; display:flex; gap:10px; align-items:center;">
+                    <button onclick="compute()">Calculate and log</button>
+                    <div class="result" id="result">Standard-state frequency: --</div>
+                </div>
+            </div>
+            <div class="card">
+                <strong>Debug info</strong>
+                <pre id="debug">--</pre>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top:18px;">
+            <strong>Log (session)</strong>
+            <table id="log-table">
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Medium</th>
+                        <th>T(°C)</th>
+                        <th>RH(%)</th>
+                        <th>P(Pa)</th>
+                        <th>f_meas(Hz)</th>
+                        <th>dfdp</th>
+                        <th>f_std(Hz)</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        const T_STD_C = 20.0, RH_STD = 50.0, P_STD_PA = 101325.0;
+        const THERM_COEFFS = [
+            [0.0, 100.0, -0.147, -5.542e-5, 1.723e-6, 9.001e-9],
+            [100.0, 293.0, -0.125, 5.164e-4, 9.858e-7, -1.525e-9],
+            [293.0, 2300.0, 0.0, 7.265e-4, 1.026e-7, -1.032e-11],
+        ];
+
+        function toggleDfdp() {
+            const show = document.getElementById('medium').value === 'vacuum';
+            document.getElementById('dfdp-wrap').style.display = show ? 'block' : 'none';
+        }
+
+        function satVaporPressure_hPa(tC) { // IAPWS97 saturated line (x=0)
+            // simplified direct call: IAPWS97 is not available in browser; use built-in approx (good near 0-200C)
+            const T = tC + 273.15;
+            const a1 = -7.85951783, a2 = 1.84408259, a3 = -11.7866497, a4 = 22.6807411, a5 = -15.9618719, a6 = 1.80122502;
+            const Tc = 647.096, Pc = 22.064e6; // Pa
+            const tau = 1 - T / Tc;
+            const lnPs = Tc / T * (a1 * tau + a2 * Math.pow(tau, 1.5) + a3 * Math.pow(tau, 3) + a4 * Math.pow(tau, 3.5) + a5 * Math.pow(tau, 4) + a6 * Math.pow(tau, 7.5));
+            const Ps_pa = Math.exp(lnPs) * Pc; // Pa
+            return Ps_pa / 100.0; // hPa
+        }
+
+        function epsilonAir_mmHg(tC, rhPercent, pPa) {
+            const psat_hPa = satVaporPressure_hPa(tC);
+            const psat_kPa = psat_hPa / 10.0;
+            const rh = Math.min(Math.max(rhPercent, 0), 100) / 100.0;
+            const p_total_mmHg = pPa * 760.0 / 101325.0;
+            const p_water_mmHg = rh * psat_kPa * 760.0 / 101.325;
+            const p_air_mmHg = Math.max(p_total_mmHg - p_water_mmHg, 0);
+            const T = tC + 273.15;
+            const eps = 1.0 + 210e-6 * (p_air_mmHg / T) + 180e-6 * (1 + 5580 / T) * (p_water_mmHg / T);
+            return { eps, psat_kPa, p_water_mmHg, p_air_mmHg };
+        }
+
+        function deltaV_over_V_percent(Tk, Tref = 293.0) {
+            for (const [tmin, tmax, c0, c1, c2, c3] of THERM_COEFFS) {
+                if (Tk >= tmin && Tk <= tmax) {
+                    const dt = Tk - Tref;
+                    return c0 + c1 * dt + c2 * dt * dt + c3 * dt * dt * dt;
+                }
+            }
+            const [tmin, tmax, c0, c1, c2, c3] = Tk < THERM_COEFFS[0][0] ? THERM_COEFFS[0] : THERM_COEFFS[THERM_COEFFS.length - 1];
+            const dt = Tk - Tref;
+            return c0 + c1 * dt + c2 * dt * dt + c3 * dt * dt * dt;
+        }
+
+        function freqVacuumToStandard(f_meas, tC, pPa, dfdp) {
+            const Tm = tC + 273.15, Ts = T_STD_C + 273.15;
+            const dv_meas = deltaV_over_V_percent(Tm), dv_std = deltaV_over_V_percent(Ts);
+            const dv_diff = dv_std - dv_meas;
+            const f_temp = f_meas * (1 - dv_diff / 100.0);
+            const f_std = f_temp + dfdp * (P_STD_PA - pPa);
+            return { f_std, dbg: { dv_meas, dv_std, dv_diff, f_temp, df_dp_term: dfdp * (P_STD_PA - pPa) } };
+        }
+
+        function freqAirToStandard(f_meas, tC, rh, pPa) {
+            const m = epsilonAir_mmHg(tC, rh, pPa);
+            const s = epsilonAir_mmHg(T_STD_C, RH_STD, P_STD_PA);
+            const f_vac = f_meas * Math.sqrt(m.eps);
+            const f_std = f_vac / Math.sqrt(s.eps);
+            return { f_std, dbg: { ...m, eps_std: s.eps, psat_kpa_std: s.psat_kPa, pwater_mmhg_std: s.p_water_mmHg, pair_mmhg_std: s.p_air_mmHg, f_vac } };
+        }
+
+        function compute() {
+            const medium = document.getElementById('medium').value;
+            const t = parseFloat(document.getElementById('temp').value);
+            const rh = parseFloat(document.getElementById('rh').value);
+            const p = parseFloat(document.getElementById('press').value);
+            const f = parseFloat(document.getElementById('fmeas').value);
+            const dfdp = parseFloat(document.getElementById('dfdp').value || "0");
+
+            let res, dbg;
+            if (medium === 'vacuum') {
+                const out = freqVacuumToStandard(f, t, p, dfdp);
+                res = out.f_std; dbg = out.dbg;
+            } else {
+                const out = freqAirToStandard(f, t, rh, p);
+                res = out.f_std; dbg = out.dbg;
+            }
+            document.getElementById('result').textContent = `Standard-state frequency: ${res.toFixed(3)} Hz`;
+            document.getElementById('debug').textContent = JSON.stringify(dbg, null, 2);
+
+            // append log row
+            const tr = document.createElement('tr');
+            const now = new Date().toISOString().slice(0, 19);
+            [now, medium, t, rh, p, f, medium === 'vacuum' ? dfdp : "", res.toFixed(6)].forEach(v => {
+                const td = document.createElement('td'); td.textContent = v; tr.appendChild(td);
+            });
+            document.querySelector('#log-table tbody').appendChild(tr);
+        }
+
+        toggleDfdp();
+    </script>
+</body>
+
+</html>
