@@ -1,0 +1,2913 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>芯片集成激光驱动粒子加速器技术调研报告</title>
+    <script src="https://statics.moonshot.cn/kimi-ppt/html-gen/static/tailwindcss@4_0805.js"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Chiron+Hei+HK:wght@400;700&family=Noto+Sans+SC:wght@400;500;700&family=Quattrocento+Sans:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.0/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdmirror.com/npm/mathjax@3.2.2/es5/tex-svg.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .ppt-slide {
+                @apply relative w-[1280px] h-[720px] mx-auto p-[40px] box-border overflow-hidden mb-[40px];
+            }
+        }
+    </style>
+    <style>
+        body {
+            color: #E0E2E6;
+            font-family: 'Noto Sans SC', 'Quattrocento Sans', sans-serif;
+        }
+
+        .font-heading {
+            font-family: 'Chiron Hei HK', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 py-8">
+
+    <!-- Slide 1: Cover -->
+    <div class="ppt-slide !bg-[#1A1D21]" type="cover">
+        <div class="absolute inset-0 bg-gradient-to-br from-[#3D8F8A]/15 via-transparent to-[#1A1D21]"></div>
+        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-[#3D8F8A]/5 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#E5A044]/10 rounded-full blur-3xl"></div>
+
+        <div class="relative z-10 h-full flex items-center">
+            <div class="w-full">
+                <div class="mb-12">
+                    <div
+                        class="inline-flex items-center gap-3 px-5 py-2 bg-[#3D8F8A]/10 border border-[#3D8F8A]/30 rounded-full mb-8">
+                        <div class="w-2 h-2 bg-[#E5A044] rounded-full animate-pulse"></div>
+                        <span class="text-[#3D8F8A] text-sm font-medium tracking-wider">ADVANCED ACCELERATOR
+                            TECHNOLOGY</span>
+                    </div>
+                    <h1 class="font-heading text-7xl font-bold text-[#E0E2E6] leading-tight mb-6">
+                        芯片集成<br />激光驱动粒子加速器
+                    </h1>
+                    <div class="text-2xl text-[#5A6370] font-light tracking-wide mb-8">
+                        On-chip Integrated Laser-driven Particle Accelerator
+                    </div>
+                    <div class="h-1 w-32 bg-gradient-to-r from-[#3D8F8A] to-[#E5A044] rounded-full"></div>
+                </div>
+
+                <div class="flex items-center gap-16 text-base">
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-calendar-alt text-[#E5A044] text-xl"></i>
+                        <span class="text-[#5A6370]">2025年1月</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-microchip text-[#E5A044] text-xl"></i>
+                        <span class="text-[#5A6370]">技术调研报告</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-atom text-[#E5A044] text-xl"></i>
+                        <span class="text-[#5A6370]">介电激光加速器</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 2: Table of Contents -->
+    <div class="ppt-slide !bg-[#1A1D21] flex flex-col" type="table_of_contents">
+        <div class="mb-8">
+            <h2 class="font-heading text-5xl font-bold text-[#E0E2E6] mb-3">目录</h2>
+            <div class="h-1 w-24 bg-[#3D8F8A] rounded-full"></div>
+        </div>
+        <div class="flex-grow flex flex-col justify-center">
+            <div class="grid grid-cols-2 gap-x-16 gap-y-12">
+                <div class="flex items-start gap-5 group cursor-pointer">
+                    <div
+                        class="w-16 h-16 rounded-xl bg-[#3D8F8A]/15 flex items-center justify-center shrink-0 group-hover:bg-[#3D8F8A]/25 transition-all">
+                        <span class="font-heading text-3xl font-bold text-[#3D8F8A]">01</span>
+                    </div>
+                    <div class="flex-1 pt-2">
+                        <h3 class="font-heading text-2xl font-bold text-[#E0E2E6] mb-2">技术概述与基本原理</h3>
+                        <p class="text-base text-[#5A6370] leading-relaxed">介电激光加速器(DLA)的核心机制、工作原理与技术优势</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-5 group cursor-pointer">
+                    <div
+                        class="w-16 h-16 rounded-xl bg-[#E5A044]/15 flex items-center justify-center shrink-0 group-hover:bg-[#E5A044]/25 transition-all">
+                        <span class="font-heading text-3xl font-bold text-[#E5A044]">02</span>
+                    </div>
+                    <div class="flex-1 pt-2">
+                        <h3 class="font-heading text-2xl font-bold text-[#E0E2E6] mb-2">发展历程与重要里程碑</h3>
+                        <p class="text-base text-[#5A6370] leading-relaxed">从2013年首次演示到2024年聚焦加速的技术演进</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-5 group cursor-pointer">
+                    <div
+                        class="w-16 h-16 rounded-xl bg-[#3D8F8A]/15 flex items-center justify-center shrink-0 group-hover:bg-[#3D8F8A]/25 transition-all">
+                        <span class="font-heading text-3xl font-bold text-[#3D8F8A]">03</span>
+                    </div>
+                    <div class="flex-1 pt-2">
+                        <h3 class="font-heading text-2xl font-bold text-[#E0E2E6] mb-2">最新研究进展(2023-2024)</h3>
+                        <p class="text-base text-[#5A6370] leading-relaxed">Stanford聚焦加速突破、长波红外激光驱动DLA等前沿成果</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-5 group cursor-pointer">
+                    <div
+                        class="w-16 h-16 rounded-xl bg-[#E5A044]/15 flex items-center justify-center shrink-0 group-hover:bg-[#E5A044]/25 transition-all">
+                        <span class="font-heading text-3xl font-bold text-[#E5A044]">04</span>
+                    </div>
+                    <div class="flex-1 pt-2">
+                        <h3 class="font-heading text-2xl font-bold text-[#E0E2E6] mb-2">主要研究机构与合作</h3>
+                        <p class="text-base text-[#5A6370] leading-relaxed">ACHIP国际合作项目及全球主要研究团队贡献</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-5 group cursor-pointer">
+                    <div
+                        class="w-16 h-16 rounded-xl bg-[#3D8F8A]/15 flex items-center justify-center shrink-0 group-hover:bg-[#3D8F8A]/25 transition-all">
+                        <span class="font-heading text-3xl font-bold text-[#3D8F8A]">05</span>
+                    </div>
+                    <div class="flex-1 pt-2">
+                        <h3 class="font-heading text-2xl font-bold text-[#E0E2E6] mb-2">关键技术挑战</h3>
+                        <p class="text-base text-[#5A6370] leading-relaxed">小束流孔径、时空同步、纳米加工等六大核心挑战</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-5 group cursor-pointer">
+                    <div
+                        class="w-16 h-16 rounded-xl bg-[#E5A044]/15 flex items-center justify-center shrink-0 group-hover:bg-[#E5A044]/25 transition-all">
+                        <span class="font-heading text-3xl font-bold text-[#E5A044]">06</span>
+                    </div>
+                    <div class="flex-1 pt-2">
+                        <h3 class="font-heading text-2xl font-bold text-[#E0E2E6] mb-2">解决方案与创新</h3>
+                        <p class="text-base text-[#5A6370] leading-relaxed">逆设计方法、波导集成、级联加速等创新技术</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-5 group cursor-pointer">
+                    <div
+                        class="w-16 h-16 rounded-xl bg-[#3D8F8A]/15 flex items-center justify-center shrink-0 group-hover:bg-[#3D8F8A]/25 transition-all">
+                        <span class="font-heading text-3xl font-bold text-[#3D8F8A]">07</span>
+                    </div>
+                    <div class="flex-1 pt-2">
+                        <h3 class="font-heading text-2xl font-bold text-[#E0E2E6] mb-2">应用前景分析</h3>
+                        <p class="text-base text-[#5A6370] leading-relaxed">医疗、工业、科研等多领域的应用潜力</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-5 group cursor-pointer">
+                    <div
+                        class="w-16 h-16 rounded-xl bg-[#E5A044]/15 flex items-center justify-center shrink-0 group-hover:bg-[#E5A044]/25 transition-all">
+                        <span class="font-heading text-3xl font-bold text-[#E5A044]">08</span>
+                    </div>
+                    <div class="flex-1 pt-2">
+                        <h3 class="font-heading text-2xl font-bold text-[#E0E2E6] mb-2">未来发展趋势</h3>
+                        <p class="text-base text-[#5A6370] leading-relaxed">技术路线图与未来5-10年发展预测</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Chapter 1 -->
+    <div class="ppt-slide !bg-[#1A1D21]" type="chapter">
+        <div class="absolute inset-0 bg-gradient-to-br from-[#3D8F8A]/10 via-transparent to-transparent"></div>
+        <div class="absolute top-1/2 right-0 w-[600px] h-[600px] bg-[#3D8F8A]/5 rounded-full blur-3xl -translate-y-1/2">
+        </div>
+
+        <div class="relative z-10 h-full flex flex-col justify-center">
+            <div class="max-w-4xl">
+                <div
+                    class="inline-flex items-center gap-3 px-4 py-2 bg-[#3D8F8A]/15 border border-[#3D8F8A]/30 rounded-full mb-8">
+                    <span class="text-[#E5A044] text-base font-bold">CHAPTER</span>
+                    <span class="text-[#3D8F8A] text-2xl font-bold">01</span>
+                </div>
+                <h2 class="font-heading text-7xl font-bold text-[#E0E2E6] leading-tight mb-8">
+                    技术概述与<br />基本原理
+                </h2>
+                <p class="text-2xl text-[#5A6370] leading-relaxed mb-12">
+                    探索介电激光加速器(DLA)的核心机制与优势<br />
+                    理解纳米级粒子加速的物理原理
+                </p>
+                <div class="flex items-center gap-8">
+                    <div class="flex items-center gap-3">
+                        <div class="w-3 h-3 bg-[#3D8F8A] rounded-full"></div>
+                        <span class="text-[#5A6370] text-lg">介电激光加速</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-3 h-3 bg-[#E5A044] rounded-full"></div>
+                        <span class="text-[#5A6370] text-lg">芯片集成技术</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-3 h-3 bg-[#3D8F8A] rounded-full"></div>
+                        <span class="text-[#5A6370] text-lg">纳米光子学</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: What is DLA -->
+    <div class="ppt-slide !bg-[#1A1D21]" type="content">
+        <div class="mb-8">
+            <div class="flex items-center gap-4 mb-3">
+                <div class="w-10 h-10 rounded-lg bg-[#3D8F8A]/20 flex items-center justify-center">
+                    <span class="text-[#3D8F8A] font-bold text-lg">01</span>
+                </div>
+                <h2 class="font-heading text-4xl font-bold text-[#E0E2E6]">什么是芯片集成激光驱动粒子加速器?</h2>
+            </div>
+            <div class="h-1 w-32 bg-gradient-to-r from-[#3D8F8A] to-[#E5A044] rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-6">
+            <div class="space-y-5">
+                <div class="bg-[#3D8F8A]/10 border-l-4 border-[#3D8F8A] p-5 rounded-lg">
+                    <h3 class="font-heading text-xl font-bold text-[#E0E2E6] mb-3 flex items-center gap-2">
+                        <i class="fas fa-atom text-[#E5A044]"></i>
+                        核心定义
+                    </h3>
+                    <p class="text-base text-[#E0E2E6] leading-relaxed">
+                        <strong class="text-[#3D8F8A]">芯片集成激光驱动粒子加速器</strong>是基于<span
+                            style="color: #E5A044;">介电激光加速器(DLA)</span>技术的微型化粒子加速器。它使用<span
+                            style="color: #E5A044;">可见光或近红外脉冲激光</span>驱动纳米级介电结构,产生高达<span
+                            style="color: #E5A044;">GV/m</span>的加速梯度,相比传统射频加速器,尺寸缩小<span
+                            style="color: #E5A044;">10,000倍</span>。
+                    </p>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-lg bg-[#E5A044]/15 flex items-center justify-center shrink-0">
+                            <i class="fas fa-microchip text-[#E5A044] text-xl"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-heading text-lg font-bold text-[#E0E2E6] mb-2">纳米级加工精度</h4>
+                            <p class="text-base text-[#5A6370] leading-relaxed">
+                                采用半导体工业的微纳加工工艺,在硅基或熔融石英芯片上制作周期性的纳米结构,通道宽度仅约1μm。</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-lg bg-[#3D8F8A]/15 flex items-center justify-center shrink-0">
+                            <i class="fas fa-bolt text-[#3D8F8A] text-xl"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-heading text-lg font-bold text-[#E0E2E6] mb-2">超高加速梯度</h4>
+                            <p class="text-base text-[#5A6370] leading-relaxed">介电材料在光学频率下的损伤阈值比金属在微波频率下高1-2个数量级,可实现300
+                                MV/m至1.8 GV/m的加速梯度。</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-lg bg-[#E5A044]/15 flex items-center justify-center shrink-0">
+                            <i class="fas fa-wave-square text-[#E5A044] text-xl"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-heading text-lg font-bold text-[#E0E2E6] mb-2">相位匹配同步</h4>
+                            <p class="text-base text-[#5A6370] leading-relaxed">通过精确设计结构周期,使激光产生的近场与电子速度匹配,确保电子持续获得能量增益。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-5">
+                <div class="bg-[#3D8F8A]/5 border border-[#3D8F8A]/20 rounded-lg p-5">
+                    <h3 class="font-heading text-xl font-bold text-[#E0E2E6] mb-4 flex items-center gap-2">
+                        <i class="fas fa-chart-bar text-[#E5A044]"></i>
+                        技术参数对比
+                    </h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-base text-[#E0E2E6]">加速梯度</span>
+                                <span class="text-xl font-bold text-[#E5A044]">1.8 GV/m</span>
+                            </div>
+                            <div class="h-2 bg-[#3D8F8A]/20 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-[#3D8F8A] to-[#E5A044]" style="width: 90%">
+                                </div>
+                            </div>
+                            <div class="text-sm text-[#5A6370] mt-1">传统RF: 10-30 MV/m</div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-base text-[#E0E2E6]">尺寸缩小</span>
+                                <span class="text-xl font-bold text-[#E5A044]">10⁴×</span>
+                            </div>
+                            <div class="h-2 bg-[#3D8F8A]/20 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-[#3D8F8A] to-[#E5A044]" style="width: 100%">
+                                </div>
+                            </div>
+                            <div class="text-sm text-[#5A6370] mt-1">从公里级到毫米级</div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-base text-[#E0E2E6]">束流能量</span>
+                                <span class="text-xl font-bold text-[#E5A044]">1 MeV</span>
+                            </div>
+                            <div class="h-2 bg-[#3D8F8A]/20 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-[#3D8F8A] to-[#E5A044]" style="width: 60%">
+                                </div>
+                            </div>
+                            <div class="text-sm text-[#5A6370] mt-1">目标: 10 MeV+</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-[#E5A044]/10 border border-[#E5A044]/30 rounded-lg p-4">
+                    <h4 class="font-heading text-lg font-bold text-[#E0E2E6] mb-3">核心优势</h4>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="flex items-center gap-2">
+                            <div class="w-2 h-2 bg-[#3D8F8A] rounded-full"></div>
+                            <span class="text-base text-[#E0E2E6]">紧凑便携</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-2 h-2 bg-[#3D8F8A] rounded-full"></div>
+                            <span class="text-base text-[#E0E2E6]">成本低廉</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-2 h-2 bg-[#E5A044] rounded-full"></div>
+                            <span class="text-base text-[#E0E2E6]">高重复频率</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-2 h-2 bg-[#E5A044] rounded-full"></div>
+                            <span class="text-base text-[#E0E2E6]">阿秒束流</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Two Acceleration Mechanisms -->
+    <div class="ppt-slide !bg-[#1A1D21]" type="content">
+        <div class="mb-4">
+            <div class="flex items-center gap-4 mb-3">
+                <div class="w-10 h-10 rounded-lg bg-[#3D8F8A]/20 flex items-center justify-center">
+                    <span class="text-[#3D8F8A] font-bold text-lg">01</span>
+                </div>
+                <h2 class="font-heading text-4xl font-bold text-[#E0E2E6]">两种主要加速机制</h2>
+            </div>
+            <div class="h-1 w-32 bg-gradient-to-r from-[#3D8F8A] to-[#E5A044] rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+            <div class="bg-[#3D8F8A]/10 border border-[#3D8F8A]/40 rounded-lg p-4">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-12 h-12 rounded-lg bg-[#3D8F8A]/25 flex items-center justify-center">
+                        <i class="fas fa-layer-group text-[#3D8F8A] text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-heading text-2xl font-bold text-[#E0E2E6]">逆史密斯-珀塞尔效应</h3>
+                        <p class="text-sm text-[#5A6370]">Inverse Smith-Purcell Effect (ISP-DLA)</p>
+                    </div>
+                </div>
+
+                <div class="space-y-3">
+                    <div>
+                        <h4 class="font-heading text-lg font-bold text-[#E0E2E6] mb-2 flex items-center gap-2">
+                            <i class="fas fa-cog text-[#E5A044] text-sm"></i>
+                            工作原理
+                        </h4>
+                        <p class="text-base text-[#E0E2E6] leading-relaxed">
+                            线性偏振激光脉冲<strong class="text-[#3D8F8A]">垂直入射</strong>到光栅平面,在真空通道内产生一系列光栅衍射模式。通过匹配<strong
+                                class="text-[#E5A044]">光栅周期与激光波长</strong>(λₚ=λ),实现电子束与激光脉冲的相位速度匹配。
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="bg-[#3D8F8A]/15 rounded-lg p-3">
+                            <div class="text-sm text-[#5A6370] mb-1">加速梯度(实验)</div>
+                            <div class="text-xl font-bold text-[#E0E2E6]">1.8 GV/m</div>
+                            <div class="text-xs text-[#5A6370] mt-1">UCLA, 2018</div>
+                        </div>
+                        <div class="bg-[#3D8F8A]/15 rounded-lg p-3">
+                            <div class="text-sm text-[#5A6370] mb-1">结构特点</div>
+                            <div class="text-lg font-bold text-[#E0E2E6]">双光栅</div>
+                            <div class="text-xs text-[#5A6370] mt-1">熔融石英</div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="font-heading text-base font-bold text-[#E0E2E6] mb-2">技术优势</h4>
+                        <div class="space-y-1">
+                            <div class="flex items-start gap-2">
+                                <div class="w-1.5 h-1.5 bg-[#3D8F8A] rounded-full mt-2"></div>
+                                <span class="text-sm text-[#E0E2E6]">实验加速梯度最高</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <div class="w-1.5 h-1.5 bg-[#3D8F8A] rounded-full mt-2"></div>
+                                <span class="text-sm text-[#E0E2E6]">适用于相对论性电子</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <div class="w-1.5 h-1.5 bg-[#3D8F8A] rounded-full mt-2"></div>
+                                <span class="text-sm text-[#E0E2E6]">结构相对简单</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="font-heading text-base font-bold text-[#E0E2E6] mb-2">技术挑战</h4>
+                        <div class="space-y-1">
+                            <div class="flex items-start gap-2">
+                                <div class="w-1.5 h-1.5 bg-[#E5A044] rounded-full mt-2"></div>
+                                <span class="text-sm text-[#E0E2E6]">需要脉冲前沿倾斜技术</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <div class="w-1.5 h-1.5 bg-[#E5A044] rounded-full mt-2"></div>
+                                <span class="text-sm text-[#E0E2E6]">横向场导致电子偏转</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-[#E5A044]/10 border border-[#E5A044]/40 rounded-lg p-4">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-12 h-12 rounded-lg bg-[#E5A044]/25 flex items-center justify-center">
+                        <i class="fas fa-play text-[#E5A044] text-xl transform rotate-90"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-heading text-2xl font-bold text-[#E0E2E6]">逆切伦科夫效应</h3>
+                        <p class="text-sm text-[#5A6370]">Inverse Cherenkov Effect (ICR-DLA)</p>
+                    </div>
+                </div>
+
+                <div class="space-y-3">
+                    <div>
+                        <h4 class="font-heading text-lg font-bold text-[#E0E2E6] mb-2 flex items-center gap-2">
+                            <i class="fas fa-cog text-[#3D8F8A] text-sm"></i>
+                            工作原理
+                        </h4>
+                        <p class="text-base text-[#E0E2E6] leading-relaxed">
+                            利用激光在棱镜表面产生的<strong class="text-[#E5A044]">倏逝波</strong>加速电子。当电子速度<strong
+                                class="text-[#3D8F8A]">超过介质中的光速</strong>(vₑ > c/n)时,满足切伦科夫辐射条件,实现持续加速。
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="bg-[#E5A044]/15 rounded-lg p-3">
+                            <div class="text-sm text-[#5A6370] mb-1">加速梯度(模拟)</div>
+                            <div class="text-xl font-bold text-[#E0E2E6]">1.5 GV/m</div>
+                            <div class="text-xs text-[#5A6370] mt-1">中国团队, 2021</div>
+                        </div>
+                        <div class="bg-[#E5A044]/15 rounded-lg p-3">
+                            <div class="text-sm text-[#5A6370] mb-1">结构特点</div>
+                            <div class="text-lg font-bold text-[#E0E2E6]">对称棱镜</div>
+                            <div class="text-xs text-[#5A6370] mt-1">石英材料</div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="font-heading text-base font-bold text-[#E0E2E6] mb-2">技术优势</h4>
+                        <div class="space-y-1">
+                            <div class="flex items-start gap-2">
+                                <div class="w-1.5 h-1.5 bg-[#E5A044] rounded-full mt-2"></div>
+                                <span class="text-sm text-[#E0E2E6]">无需脉冲前沿倾斜</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <div class="w-1.5 h-1.5 bg-[#E5A044] rounded-full mt-2"></div>
+                                <span class="text-sm text-[#E0E2E6]">加工难度较低</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <div class="w-1.5 h-1.5 bg-[#E5A044] rounded-full mt-2"></div>
+                                <span class="text-sm text-[#E0E2E6]">可级联加速</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="font-heading text-base font-bold text-[#E0E2E6] mb-2">技术挑战</h4>
+                        <div class="space-y-1">
+                            <div class="flex items-start gap-2">
+                                <div class="w-1.5 h-1.5 bg-[#3D8F8A] rounded-full mt-2"></div>
+                                <span class="text-sm text-[#E0E2E6]">实验梯度相对较低</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <div class="w-1.5 h-1.5 bg-[#3D8F8A] rounded-full mt-2"></div>
+                                <span class="text-sm text-[#E0E2E6]">需要对称结构抵消偏转</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-3 bg-[#3D8F8A]/5 border border-[#3D8F8A]/20 rounded-lg p-3">
+            <p class="text-base text-[#E0E2E6] leading-relaxed">
+                <i class="fas fa-lightbulb text-[#E5A044] mr-2"></i>
+                <strong class="text-[#3D8F8A]">关键洞察:</strong>
+                两种机制各有优势,ISP-DLA在实验上已实现最高加速梯度,而ICR-DLA在加工难度和系统集成方面更具优势。未来的实用化系统可能结合两种方案的互补特性。
+            </p>
+        </div>
+    </div>
+
+    <!-- Slide 6: Chapter 2 -->
+    <div class="ppt-slide !bg-[#1A1D21]" type="chapter">
+        <div class="absolute inset-0 bg-gradient-to-br from-[#E5A044]/10 via-transparent to-transparent"></div>
+        <div class="absolute bottom-0 left-0 w-[700px] h-[700px] bg-[#E5A044]/5 rounded-full blur-3xl"></div>
+
+        <div class="relative z-10 h-full flex items-center justify-end">
+            <div class="max-w-4xl text-right">
+                <div
+                    class="inline-flex items-center gap-3 px-4 py-2 bg-[#E5A044]/15 border border-[#E5A044]/30 rounded-full mb-8">
+                    <span class="text-[#E5A044] text-2xl font-bold">02</span>
+                    <span class="text-[#E5A044] text-base font-bold">CHAPTER</span>
+                </div>
+                <h2 class="font-heading text-7xl font-bold text-[#E0E2E6] leading-tight mb-8">
+                    发展历程与<br />重要里程碑
+                </h2>
+                <p class="text-2xl text-[#5A6370] leading-relaxed mb-12">
+                    从概念到实现的十年技术演进之路<br />
+                    见证粒子加速器小型化的革命性突破
+                </p>
+                <div class="flex items-center justify-end gap-8">
+                    <div class="flex items-center gap-3">
+                        <span class="text-lg text-[#5A6370]">2013年 首次演示</span>
+                        <div class="w-3 h-3 bg-[#E5A044] rounded-full"></div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="text-lg text-[#5A6370]">2020年 片上集成</span>
+                        <div class="w-3 h-3 bg-[#3D8F8A] rounded-full"></div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="text-lg text-[#5A6370]">2024年 聚焦加速</span>
+                        <div class="w-3 h-3 bg-[#E5A044] rounded-full"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Timeline -->
+    <div class="ppt-slide !bg-[#1A1D21]" type="content">
+        <div class="mb-6">
+            <div class="flex items-center gap-4 mb-3">
+                <div class="w-10 h-10 rounded-lg bg-[#E5A044]/20 flex items-center justify-center">
+                    <span class="text-[#E5A044] font-bold text-lg">02</span>
+                </div>
+                <h2 class="font-heading text-4xl font-bold text-[#E0E2E6]">关键技术突破时间线</h2>
+            </div>
+            <div class="h-1 w-32 bg-gradient-to-r from-[#E5A044] to-[#3D8F8A] rounded-full"></div>
+        </div>
+
+        <div class="relative">
+            <div
+                class="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#3D8F8A] via-[#E5A044] to-[#3D8F8A]">
+            </div>
+
+            <div class="space-y-4">
+                <div class="flex items-start gap-6">
+                    <div
+                        class="relative z-10 w-16 h-16 rounded-xl bg-[#3D8F8A]/15 border-2 border-[#3D8F8A] flex items-center justify-center shrink-0">
+                        <div class="text-center">
+                            <div class="text-xl font-bold text-[#3D8F8A]">2013</div>
+                        </div>
+                    </div>
+                    <div class="flex-1 bg-[#3D8F8A]/10 border border-[#3D8F8A]/30 rounded-lg p-4">
+                        <h3 class="font-heading text-xl font-bold text-[#E0E2E6] mb-2">首次实验演示</h3>
+                        <p class="text-base text-[#E0E2E6] leading-relaxed mb-2">
+                            <strong class="text-[#E5A044]">SLAC/Stanford</strong>和<strong
+                                class="text-[#E5A044]">德国FAU/MPQ</strong>团队独立演示DLA,加速梯度达<span
+                                style="color: #E5A044;">300 MeV/m</span>和<span style="color: #E5A044;">25 MeV/m</span>。
+                        </p>
+                        <div class="flex items-center gap-3 text-sm text-[#5A6370]">
+                            <span><i class="fas fa-flask text-[#3D8F8A] mr-1"></i>概念验证</span>
+                            <span><i class="fas fa-chart-line text-[#E5A044] mr-1"></i>里程碑突破</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-6">
+                    <div
+                        class="relative z-10 w-16 h-16 rounded-xl bg-[#E5A044]/15 border-2 border-[#E5A044] flex items-center justify-center shrink-0">
+                        <div class="text-center">
+                            <div class="text-xl font-bold text-[#E5A044]">2015</div>
+                        </div>
+                    </div>
+                    <div class="flex-1 bg-[#E5A044]/10 border border-[#E5A044]/30 rounded-lg p-4">
+                        <h3 class="font-heading text-xl font-bold text-[#E0E2E6] mb-2">ACHIP项目启动</h3>
+                        <p class="text-base text-[#E0E2E6] leading-relaxed mb-2">
+                            <strong class="text-[#E5A044]">Accelerator on a Chip International
+                                Program</strong>启动,六国机构合作,目标实现<span style="color: #E5A044;">1 MeV芯片加速器</span>。
+                        </p>
+                        <div class="flex items-center gap-3 text-sm text-[#5A6370]">
+                            <span><i class="fas fa-users text-[#E5A044] mr-1"></i>国际合作</span>
+                            <span><i class="fas fa-dollar-sign text-[#3D8F8A] mr-1"></i>Moore基金会资助</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-6">
+                    <div
+                        class="relative z-10 w-16 h-16 rounded-xl bg-[#3D8F8A]/15 border-2 border-[#3D8F8A] flex items-center justify-center shrink-0">
+                        <div class="text-center">
+                            <div class="text-xl font-bold text-[#3D8F8A]">2018</div>
+                        </div>
+                    </div>
+                    <div class="flex-1 bg-[#3D8F8A]/10 border border-[#3D8F8A]/30 rounded-lg p-4">
+                        <h3 class="font-heading text-xl font-bold text-[#E0E2E6] mb-2">加速梯度破纪录</h3>
+                        <p class="text-base text-[#E0E2E6] leading-relaxed mb-2">
+                            <strong class="text-[#E5A044]">UCLA团队</strong>使用熔融石英结构实现<span style="color: #E5A044;">1.8
+                                GV/m</span>加速梯度,创DLA世界纪录。
+                        </p>
+                        <div class="flex items-center gap-3 text-sm text-[#5A6370]">
+                            <span><i class="fas fa-trophy text-[#E5A044] mr-1"></i>世界纪录</span>
+                            <span><i class="fas fa-bolt text-[#3D8F8A] mr-1"></i>1.8 GV/m</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-6">
+                    <div
+                        class="relative z-10 w-16 h-16 rounded-xl bg-[#E5A044]/15 border-2 border-[#E5A044] flex items-center justify-center shrink-0">
+                        <div class="text-center">
+                            <div class="text-xl font-bold text-[#E5A044]">2020</div>
+                        </div>
+                    </div>
+                    <div class="flex-1 bg-[#E5A044]/10 border border-[#E5A044]/30 rounded-lg p-4">
+                        <h3 class="font-heading text-xl font-bold text-[#E0E2E6] mb-2">首个波导集成DLA</h3>
+                        <p class="text-base text-[#E0E2E6] leading-relaxed mb-2">
+                            <strong class="text-[#E5A044]">Stanford团队</strong>在Science发表首个波导集成DLA,加速梯度<span
+                                style="color: #E5A044;">30.5 MV/m</span>。
+                        </p>
+                        <div class="flex items-center gap-3 text-sm text-[#5A6370]">
+                            <span><i class="fas fa-microchip text-[#E5A044] mr-1"></i>片上集成</span>
+                            <span><i class="fas fa-journal-whills text-[#3D8F8A] mr-1"></i>Science</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 8: Performance Evolution -->
+    <div class="ppt-slide !bg-[#1A1D21]" type="content">
+        <div class="mb-6">
+            <div class="flex items-center gap-4 mb-3">
+                <div class="w-10 h-10 rounded-lg bg-[#E5A044]/20 flex items-center justify-center">
+                    <span class="text-[#E5A044] font-bold text-lg">02</span>
+                </div>
+                <h2 class="font-heading text-4xl font-bold text-[#E0E2E6]">加速梯度性能进阶</h2>
+            </div>
+            <div class="h-1 w-32 bg-gradient-to-r from-[#E5A044] to-[#3D8F8A] rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-6">
+            <div class="col-span-2">
+                <div class="bg-[#3D8F8A]/5 border border-[#3D8F8A]/20 rounded-lg p-5" style="height: 520px;">
+                    <div id="gradient-chart" style="width: 100%; height: 100%;"></div>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <div class="bg-[#3D8F8A]/10 border border-[#3D8F8A]/30 rounded-lg p-4">
+                    <h3 class="font-heading text-xl font-bold text-[#E0E2E6] mb-3 flex items-center gap-2">
+                        <i class="fas fa-chart-line text-[#E5A044]"></i>
+                        性能提升驱动因素
+                    </h3>
+                    <div class="space-y-3">
+                        <div>
+                            <h4 class="font-heading text-base font-bold text-[#E0E2E6] mb-1 flex items-center gap-2">
+                                <span
+                                    class="w-6 h-6 rounded-full bg-[#3D8F8A]/25 flex items-center justify-center text-xs font-bold text-[#3D8F8A]">1</span>
+                                材料优化
+                            </h4>
+                            <p class="text-sm text-[#5A6370] leading-relaxed">
+                                从硅基→熔融石英→金刚石,损伤阈值不断提升
+                            </p>
+                        </div>
+
+                        <div>
+                            <h4 class="font-heading text-base font-bold text-[#E0E2E6] mb-1 flex items-center gap-2">
+                                <span
+                                    class="w-6 h-6 rounded-full bg-[#E5A044]/25 flex items-center justify-center text-xs font-bold text-[#E5A044]">2</span>
+                                激光技术
+                            </h4>
+                            <p class="text-sm text-[#5A6370] leading-relaxed">
+                                飞秒激光脉冲宽度缩短,峰值功率提升
+                            </p>
+                        </div>
+
+                        <div>
+                            <h4 class="font-heading text-base font-bold text-[#E0E2E6] mb-1 flex items-center gap-2">
+                                <span
+                                    class="w-6 h-6 rounded-full bg-[#3D8F8A]/25 flex items-center justify-center text-xs font-bold text-[#3D8F8A]">3</span>
+                                结构设计
+                            </h4>
+                            <p class="text-sm text-[#5A6370] leading-relaxed">
+                                逆设计方法优化场分布,双光栅结构提升耦合效率
+                            </p>
+                        </div>
+
+                        <div>
+                            <h4 class="font-heading text-base font-bold text-[#E0E2E6] mb-1 flex items-center gap-2">
+                                <span
+                                    class="w-6 h-6 rounded-full bg-[#E5A044]/25 flex items-center justify-center text-xs font-bold text-[#E5A044]">4</span>
+                                加工精度
+                            </h4>
+                            <p class="text-sm text-[#5A6370] leading-relaxed">
+                                电子束光刻和反应离子刻蚀技术成熟
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-[#E5A044]/10 border border-[#E5A044]/30 rounded-lg p-4">
+                    <h3 class="font-heading text-lg font-bold text-[#E0E2E6] mb-3">关键里程碑</h3>
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-[#E0E2E6]">300 MV/m</span>
+                            <span class="text-xs text-[#5A6370]">2013</span>
+                        </div>
+                        <div class="h-1 bg-[#3D8F8A]/20 rounded-full overflow-hidden">
+                            <div class="h-full bg-[#3D8F8A]" style="width: 17%"></div>
+                        </div>
+
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-[#E0E2E6]">850 MV/m</span>
+                            <span class="text-xs text-[#5A6370]">2018</span>
+                        </div>
+                        <div class="h-1 bg-[#3D8F8A]/20 rounded-full overflow-hidden">
+                            <div class="h-full bg-[#E5A044]" style="width: 47%"></div>
+                        </div>
+
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-[#E0E2E6]">1.8 GV/m</span>
+                            <span class="text-xs text-[#5A6370]">2018</span>
+                        </div>
+                        <div class="h-1 bg-[#3D8F8A]/20 rounded-full overflow-hidden">
+                            <div class="h-full bg-[#E5A044]" style="width: 100%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var gradientChart = echarts.init(document.getElementById('gradient-chart'));
+        var gradientOption = {
+            backgroundColor: 'transparent',
+            tooltip: {
+                trigger: 'axis',
+                backgroundColor: 'rgba(26, 29, 33, 0.9)',
+                borderColor: '#3D8F8A',
+                textStyle: {
+                    color: '#E0E2E6',
+                    fontSize: 14
+                },
+                formatter: function (params) {
+                    let result = '<strong style="color: #E5A044;">' + params[0].axisValue + '</strong><br/>';
+                    params.forEach(function (item) {
+                        result += item.marker + ' ' + item.seriesName + ': <strong style="color: #E5A044;">' + item.value + ' MV/m</strong><br/>';
+                    });
+                    return result;
+                }
+            },
+            legend: {
+                data: ['实验结果', '模拟预测'],
+                top: 10,
+                textStyle: {
+                    color: '#E0E2E6',
+                    fontSize: 14,
+                    fontWeight: 'bold'
+                },
+                itemWidth: 25,
+                itemHeight: 14
+            },
+            grid: {
+                left: '8%',
+                right: '5%',
+                bottom: '12%',
+                top: '20%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'category',
+                data: ['2013', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2023', '2024'],
+                axisLine: {
+                    lineStyle: {
+                        color: '#3D8F8A',
+                        width: 2
+                    }
+                },
+                axisLabel: {
+                    color: '#E0E2E6',
+                    fontSize: 13,
+                    fontWeight: 'bold'
+                },
+                splitLine: {
+                    show: false
+                }
+            },
+            yAxis: {
+                type: 'value',
+                name: '加速梯度 (MV/m)',
+                nameTextStyle: {
+                    color: '#E0E2E6',
+                    fontSize: 14,
+                    fontWeight: 'bold'
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: '#3D8F8A',
+                        width: 2
+                    }
+                },
+                axisLabel: {
+                    color: '#E0E2E6',
+                    fontSize: 13
+                },
+                splitLine: {
+                    lineStyle: {
+                        color: '#5A6370',
+                        type: 'dashed',
+                        opacity: 0.3
+                    }
+                }
+            },
+            series: [
+                {
+                    name: '实验结果',
+                    type: 'line',
+                    data: [300, 350, 500, 600, 1800, 850, 40, 370, 120, 50],
+                    lineStyle: {
+                        color: '#3D8F8A',
+                        width: 3
+                    },
+                    itemStyle: {
+                        color: '#3D8F8A',
+                        borderWidth: 3,
+                        borderColor: '#E0E2E6'
+                    },
+                    symbol: 'circle',
+                    symbolSize: 10,
+                    label: {
+                        show: true,
+                        position: 'top',
+                        color: '#E5A044',
+                        fontSize: 12,
+                        fontWeight: 'bold',
+                        formatter: function (params) {
+                            return params.value >= 1000 ? (params.value / 1000).toFixed(1) + ' GV/m' : params.value + ' MV/m';
+                        }
+                    }
+                },
+                {
+                    name: '模拟预测',
+                    type: 'line',
+                    data: [null, null, null, null, null, null, null, 1500, 2500, 2620],
+                    lineStyle: {
+                        color: '#E5A044',
+                        width: 3,
+                        type: 'dashed'
+                    },
+                    itemStyle: {
+                        color: '#E5A044',
+                        borderWidth: 3,
+                        borderColor: '#E0E2E6'
+                    },
+                    symbol: 'diamond',
+                    symbolSize: 12,
+                    label: {
+                        show: true,
+                        position: 'top',
+                        color: '#E5A044',
+                        fontSize: 12,
+                        fontWeight: 'bold',
+                        formatter: function (params) {
+                            return params.value ? (params.value / 1000).toFixed(1) + ' GV/m' : '';
+                        }
+                    }
+                }
+            ]
+        };
+        gradientChart.setOption(gradientOption);
+
+        window.addEventListener('resize', function () {
+            gradientChart.resize();
+        });
+    </script>
+
+    <!-- Slide 9: Chapter 3 -->
+    <div class="ppt-slide !bg-[#1A1D21]" type="chapter">
+        <div class="absolute inset-0 bg-gradient-to-br from-[#3D8F8A]/10 via-transparent to-transparent"></div>
+        <div class="absolute top-1/4 right-0 w-[800px] h-[800px] bg-[#3D8F8A]/5 rounded-full blur-3xl"></div>
+
+        <div class="relative z-10 h-full flex flex-col justify-center items-center text-center">
+            <div
+                class="inline-flex items-center gap-3 px-4 py-2 bg-[#3D8F8A]/15 border border-[#3D8F8A]/30 rounded-full mb-8">
+                <span class="text-[#E5A044] text-base font-bold">CHAPTER</span>
+                <span class="text-[#3D8F8A] text-2xl font-bold">03</span>
+            </div>
+            <h2 class="font-heading text-7xl font-bold text-[#E0E2E6] leading-tight mb-8">
+                最新研究进展<br />
+                <span class="text-6xl">(2023-2024)</span>
+            </h2>
+            <p class="text-2xl text-[#5A6370] leading-relaxed mb-12 max-w-3xl">
+                聚焦当前最前沿的技术突破<br />
+                探索长波红外驱动与聚焦加速的创新成果
+            </p>
+            <div class="grid grid-cols-3 gap-6">
+                <div class="bg-[#3D8F8A]/10 border border-[#3D8F8A]/30 rounded-lg px-6 py-4">
+                    <div class="text-3xl font-bold text-[#E5A044] mb-1">1.8 GV/m</div>
+                    <div class="text-base text-[#5A6370]">最高加速梯度</div>
+                </div>
+                <div class="bg-[#E5A044]/10 border border-[#E5A044]/30 rounded-lg px-6 py-4">
+                    <div class="text-3xl font-bold text-[#E5A044] mb-1">4 mm</div>
+                    <div class="text-base text-[#5A6370]">最长加速距离</div>
+                </div>
+                <div class="bg-[#3D8F8A]/10 border border-[#3D8F8A]/30 rounded-lg px-6 py-4">
+                    <div class="text-3xl font-bold text-[#E5A044] mb-1">270 as</div>
+                    <div class="text-base text-[#5A6370]">最短束流脉宽</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 10: Stanford 2024 Breakthrough -->
+    <div class="ppt-slide !bg-[#1A1D21]" type="content">
+        <div class="mb-6">
+            <div class="flex items-center gap-4 mb-3">
+                <div class="w-10 h-10 rounded-lg bg-[#3D8F8A]/20 flex items-center justify-center">
+                    <span class="text-[#3D8F8A] font-bold text-lg">03</span>
+                </div>
+                <h2 class="font-heading text-4xl font-bold text-[#E0E2E6]">2024年Stanford突破性成果</h2>
+            </div>
+            <div class="h-1 w-32 bg-gradient-to-r from-[#3D8F8A] to-[#E5A044] rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-5 gap-6">
+            <div class="col-span-3 space-y-5">
+                <div class="bg-[#3D8F8A]/10 border-l-4 border-[#E5A044] p-5 rounded-lg">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="w-12 h-12 rounded-lg bg-[#E5A044]/20 flex items-center justify-center shrink-0">
+                            <i class="fas fa-bullseye text-[#E5A044] text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-heading text-2xl font-bold text-[#E0E2E6] mb-2">首次实现聚焦与加速</h3>
+                            <p class="text-base text-[#5A6370]">Payton Broaddus等, Physical Review Letters, 2024年2月</p>
+                        </div>
+                    </div>
+                    <p class="text-base text-[#E0E2E6] leading-relaxed">
+                        Stanford团队成功演示了<strong
+                            class="text-[#E5A044]">既能加速又能约束电子</strong>的硅基介电激光加速器。通过精确设计的纳米结构和特殊形状的激光脉冲,在加速通道内产生聚焦电场,实现<span
+                            style="color: #E5A044;">0.708 mm</span>距离的持续加速,能量提升<span style="color: #E5A044;">24
+                            keV</span>。
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-[#3D8F8A]/15 border border-[#3D8F8A]/30 rounded-lg p-4">
+                        <h4 class="font-heading text-lg font-bold text-[#E0E2E6] mb-3 flex items-center gap-2">
+                            <i class="fas fa-atom text-[#E5A044]"></i>
+                            技术突破
+                        </h4>
+                        <div class="space-y-2">
+                            <div class="flex items-start gap-2">
+                                <div class="w-1.5 h-1.5 bg-[#E5A044] rounded-full mt-2"></div>
+                                <span class="text-sm text-[#E0E2E6]">电子束聚焦与加速同步实现</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <div class="w-1.5 h-1.5 bg-[#E5A044] rounded-full mt-2"></div>
+                                <span class="text-sm text-[#E0E2E6]">交替相位聚焦(APF)方案</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <div class="w-1.5 h-1.5 bg-[#E5A044] rounded-full mt-2"></div>
+                                <span class="text-sm text-[#E0E2E6]">毫升级真空系统突破</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <div class="w-1.5 h-1.5 bg-[#E5A044] rounded-full mt-2"></div>
+                                <span class="text-sm text-[#E0E2E6]">可提取传统加速器参数</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-[#E5A044]/15 border border-[#E5A044]/30 rounded-lg p-4">
+                        <h4 class="font-heading text-lg font-bold text-[#E0E2E6] mb-3 flex items-center gap-2">
+                            <i class="fas fa-chart-bar text-[#3D8F8A]"></i>
+                            性能指标
+                        </h4>
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-[#E0E2E6]">加速距离</span>
+                                <span class="text-base font-bold text-[#E5A044]">0.708 mm</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-[#E0E2E6]">能量增益</span>
+                                <span class="text-base font-bold text-[#E5A044]">24 keV</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-[#E0E2E6]">加速梯度</span>
+                                <span class="text-base font-bold text-[#E5A044]">35-50 MV/m</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-[#E0E2E6]">能量提升</span>
+                                <span class="text-base font-bold text-[#E5A044]">25%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-[#E5A044]/10 border border-[#E5A044]/30 rounded-lg p-4">
+                    <h4 class="font-heading text-lg font-bold text-[#E0E2E6] mb-2 flex items-center gap-2">
+                        <i class="fas fa-lightbulb text-[#E5A044]"></i>
+                        重要意义
+                    </h4>
+                    <p class="text-base text-[#E0E2E6] leading-relaxed">
+                        这一突破标志着<strong
+                            class="text-[#E5A044]">DLA从概念验证迈向实际加速器技术</strong>。正如Broaddus所说:"DLA现在可以被视为一种实际的加速器技术,我们可以从中提取传统加速器参数,并与其他技术进行比较。"
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-span-2 space-y-5">
+                <div class="bg-[#3D8F8A]/5 border border-[#3D8F8A]/20 rounded-lg p-5">
+                    <h3 class="font-heading text-xl font-bold text-[#E0E2E6] mb-4">三大技术支柱</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-lg bg-[#3D8F8A]/20 flex items-center justify-center shrink-0">
+                                <span class="text-[#3D8F8A] font-bold">1</span>
+                            </div>
+                            <div>
+                                <h4 class="font-heading text-base font-bold text-[#E0E2E6] mb-1">精密纳米结构</h4>
+                                <p class="text-sm text-[#5A6370] leading-relaxed">半导体工艺实现亚微米级精度</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-lg bg-[#E5A044]/20 flex items-center justify-center shrink-0">
+                                <span class="text-[#E5A044] font-bold">2</span>
+                            </div>
+                            <div>
+                                <h4 class="font-heading text-base font-bold text-[#E0E2E6] mb-1">飞秒激光脉冲</h4>
+                                <p class="text-sm text-[#5A6370] leading-relaxed">高稳定重复频率的相干脉冲</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-lg bg-[#3D8F8A]/20 flex items-center justify-center shrink-0">
+                                <span class="text-[#3D8F8A] font-bold">3</span>
+                            </div>
+                            <div>
+                                <h4 class="font-heading text-base font-bold text-[#E0E2E6] mb-1">超高真空环境</h4>
+                                <p class="text-sm text-[#5A6370] leading-relaxed">毫米级半导体腔体真空技术</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-[#3D8F8A]/10 border border-[#3D8F8A]/30 rounded-lg p-5">
+                    <h4 class="font-heading text-lg font-bold text-[#E0E2E6] mb-4">应用场景展望</h4>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="bg-[#3D8F8A]/15 rounded-lg p-3 text-center">
+                            <i class="fas fa-microscope text-[#E5A044] text-2xl mb-2"></i>
+                            <div class="text-sm text-[#E0E2E6] font-medium">超快电子显微镜</div>
+                        </div>
+                        <div class="bg-[#E5A044]/15 rounded-lg p-3 text-center">
+                            <i class="fas fa-atom text-[#3D8F8A] text-2xl mb-2"></i>
+                            <div class="text-sm text-[#E0E2E6] font-medium">量子信息处理</div>
+                        </div>
+                        <div class="bg-[#3D8F8A]/15 rounded-lg p-3 text-center">
+                            <i class="fas fa-flask text-[#E5A044] text-2xl mb-2"></i>
+                            <div class="text-sm text-[#E0E2E6] font-medium">材料科学分析</div>
+                        </div>
+                        <div class="bg-[#E5A044]/15 rounded-lg p-3 text-center">
+                            <i class="fas fa-heartbeat text-[#3D8F8A] text-2xl mb-2"></i>
+                            <div class="text-sm text-[#E0E2E6] font-medium">医疗成像设备</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 11: LWIR-DLA -->
+    <div class="ppt-slide !bg-[#1A1D21]" type="content">
+        <div class="mb-6">
+            <div class="flex items-center gap-4 mb-3">
+                <div class="w-10 h-10 rounded-lg bg-[#3D8F8A]/20 flex items-center justify-center">
+                    <span class="text-[#3D8F8A] font-bold text-lg">03</span>
+                </div>
+                <h2 class="font-heading text-4xl font-bold text-[#E0E2E6]">长波红外(LWIR)激光驱动DLA</h2>
+            </div>
+            <div class="h-1 w-32 bg-gradient-to-r from-[#3D8F8A] to-[#E5A044] rounded-full"></div>
+        </div>
+
+        <div class="space-y-5">
+            <div class="grid grid-cols-2 gap-6">
+                <div class="bg-[#3D8F8A]/10 border-l-4 border-[#E5A044] p-5 rounded-lg">
+                    <h3 class="font-heading text-xl font-bold text-[#E0E2E6] mb-3 flex items-center gap-2">
+                        <i class="fas fa-wave-square text-[#E5A044]"></i>
+                        技术原理与优势
+                    </h3>
+                    <p class="text-base text-[#E0E2E6] leading-relaxed mb-4">
+                        使用<strong class="text-[#E5A044]">CO₂激光</strong>(波长10.6 μm)驱动DLA,相比近红外激光具有显著优势。长波长使结构尺寸增大,降低<span
+                            style="color: #E5A044;">纳米加工难度</span>。
+                    </p>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="bg-[#3D8F8A]/15 rounded-lg p-3 text-center">
+                            <div class="text-2xl font-bold text-[#E5A044] mb-1">10.6 μm</div>
+                            <div class="text-sm text-[#5A6370]">CO₂激光波长</div>
+                        </div>
+                        <div class="bg-[#E5A044]/15 rounded-lg p-3 text-center">
+                            <div class="text-2xl font-bold text-[#E5A044] mb-1">10×</div>
+                            <div class="text-sm text-[#5A6370]">结构尺寸增大</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-[#E5A044]/10 border-l-4 border-[#3D8F8A] p-5 rounded-lg">
+                    <h3 class="font-heading text-xl font-bold text-[#E0E2E6] mb-3 flex items-center gap-2">
+                        <i class="fas fa-chart-line text-[#3D8F8A]"></i>
+                        模拟成果
+                    </h3>
+                    <p class="text-base text-[#E0E2E6] leading-relaxed mb-4">
+                        中国团队(2021)提出<strong class="text-[#3D8F8A]">少周期飞秒激光</strong>驱动ICR-DLA,通过级联加速方案实现<span
+                            style="color: #E5A044;">1.5 GV/m</span>加速梯度。
+                    </p>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="bg-[#E5A044]/15 rounded-lg p-3 text-center">
+                            <div class="text-2xl font-bold text-[#E5A044] mb-1">1.5 GV/m</div>
+                            <div class="text-sm text-[#5A6370]">模拟加速梯度</div>
+                        </div>
+                        <div class="bg-[#3D8F8A]/15 rounded-lg p-3 text-center">
+                            <div class="text-2xl font-bold text-[#E5A044] mb-1">3级</div>
+                            <div class="text-sm text-[#5A6370]">级联加速</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-5">
+                <div class="bg-[#3D8F8A]/10 border border-[#3D8F8A]/30 rounded-lg p-5">
+                    <h3 class="font-heading text-lg font-bold text-[#E0E2E6] mb-3 flex items-center gap-2">
+                        <i class="fas fa-plus text-[#E5A044]"></i>
+                        技术优势
+                    </h3>
+                    <div class="space-y-2">
+                        <div class="flex items-start gap-2">
+                            <div class="w-1.5 h-1.5 bg-[#E5A044] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">加工难度大幅降低</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <div class="w-1.5 h-1.5 bg-[#E5A044] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">束流接受度提高</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <div class="w-1.5 h-1.5 bg-[#E5A044] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">击穿阈值更高</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <div class="w-1.5 h-1.5 bg-[#E5A044] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">多普勒展宽影响小</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-[#E5A044]/10 border border-[#E5A044]/30 rounded-lg p-5">
+                    <h3 class="font-heading text-lg font-bold text-[#E0E2E6] mb-3 flex items-center gap-2">
+                        <i class="fas fa-cogs text-[#3D8F8A]"></i>
+                        技术挑战
+                    </h3>
+                    <div class="space-y-2">
+                        <div class="flex items-start gap-2">
+                            <div class="w-1.5 h-1.5 bg-[#3D8F8A] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">CO₂激光技术复杂</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <div class="w-1.5 h-1.5 bg-[#3D8F8A] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">重复频率受限</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <div class="w-1.5 h-1.5 bg-[#3D8F8A] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">实验验证较少</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <div class="w-1.5 h-1.5 bg-[#3D8F8A] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">系统体积较大</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-[#3D8F8A]/10 border border-[#3D8F8A]/30 rounded-lg p-5">
+                    <h3 class="font-heading text-lg font-bold text-[#E0E2E6] mb-3 flex items-center gap-2">
+                        <i class="fas fa-rocket text-[#E5A044]"></i>
+                        未来方向
+                    </h3>
+                    <div class="space-y-2">
+                        <div class="flex items-start gap-2">
+                            <div class="w-1.5 h-1.5 bg-[#E5A044] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">全固态LWIR技术</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <div class="w-1.5 h-1.5 bg-[#E5A044] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">TeV级对撞机设计</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <div class="w-1.5 h-1.5 bg-[#E5A044] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">高功率重复频率</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <div class="w-1.5 h-1.5 bg-[#E5A044] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">实验验证推进</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-[#3D8F8A]/5 border border-[#3D8F8A]/20 rounded-lg p-4">
+                <p class="text-base text-[#E0E2E6] leading-relaxed">
+                    <i class="fas fa-lightbulb text-[#E5A044] mr-2"></i>
+                    <strong class="text-[#3D8F8A]">关键洞察:</strong>
+                    LWIR激光驱动DLA代表了实用化方向的重要探索。随着CO₂激光技术进步和全固态LWIR激光器的发展,这一方案有望在未来5-10年实现突破,特别是在降低制造成本和提高系统稳定性方面。
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 12: Chapter 4 -->
+    <div class="ppt-slide !bg-[#1A1D21]" type="chapter">
+        <div class="absolute inset-0 bg-gradient-to-br from-[#E5A044]/10 via-transparent to-transparent"></div>
+        <div class="absolute bottom-1/4 left-0 w-[600px] h-[600px] bg-[#E5A044]/5 rounded-full blur-3xl"></div>
+
+        <div class="relative z-10 h-full flex items-center">
+            <div class="max-w-4xl">
+                <div
+                    class="inline-flex items-center gap-3 px-4 py-2 bg-[#E5A044]/15 border border-[#E5A044]/30 rounded-full mb-8">
+                    <span class="text-[#E5A044] text-base font-bold">CHAPTER</span>
+                    <span class="text-[#E5A044] text-2xl font-bold">04</span>
+                </div>
+                <h2 class="font-heading text-7xl font-bold text-[#E0E2E6] leading-tight mb-8">
+                    主要研究机构<br />与合作
+                </h2>
+                <p class="text-2xl text-[#5A6370] leading-relaxed mb-12">
+                    全球协作推动技术突破<br />
+                    汇聚顶尖智慧，加速创新进程
+                </p>
+                <div class="flex items-center gap-8">
+                    <div class="flex items-center gap-3">
+                        <div class="w-3 h-3 bg-[#E5A044] rounded-full"></div>
+                        <span class="text-lg text-[#5A6370]">6所大学</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-3 h-3 bg-[#3D8F8A] rounded-full"></div>
+                        <span class="text-lg text-[#5A6370]">3个国家实验室</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-3 h-3 bg-[#E5A044] rounded-full"></div>
+                        <span class="text-lg text-[#5A6370]">2个工业伙伴</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 13: ACHIP Collaboration -->
+    <div class="ppt-slide !bg-[#1A1D21]" type="content">
+        <div class="mb-6">
+            <div class="flex items-center gap-4 mb-3">
+                <div class="w-10 h-10 rounded-lg bg-[#E5A044]/20 flex items-center justify-center">
+                    <span class="text-[#E5A044] font-bold text-lg">04</span>
+                </div>
+                <h2 class="font-heading text-4xl font-bold text-[#E0E2E6]">ACHIP国际合作项目</h2>
+            </div>
+            <div class="h-1 w-32 bg-gradient-to-r from-[#E5A044] to-[#3D8F8A] rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-6">
+            <div class="col-span-2 space-y-5">
+                <div class="bg-[#3D8F8A]/10 border-l-4 border-[#E5A044] p-5 rounded-lg">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="w-14 h-14 rounded-lg bg-[#E5A044]/20 flex items-center justify-center shrink-0">
+                            <i class="fas fa-globe text-[#E5A044] text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-heading text-2xl font-bold text-[#E0E2E6] mb-2">Accelerator on a Chip
+                                International Program</h3>
+                            <p class="text-base text-[#5A6370]">2015年成立 | Gordon and Betty Moore Foundation资助</p>
+                        </div>
+                    </div>
+                    <p class="text-base text-[#E0E2E6] leading-relaxed">
+                        ACHIP是一个<strong class="text-[#E5A044]">跨国、跨学科</strong>的合作项目,旨在将激光加速从原理演示推进到<span
+                            style="color: #E5A044;">完全功能的反馈控制粒子加速器</span>。项目汇集了加速器科学、光子学、激光技术、材料科学等领域的顶尖专家。
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-[#3D8F8A]/15 border border-[#3D8F8A]/30 rounded-lg p-4">
+                        <h4 class="font-heading text-lg font-bold text-[#E0E2E6] mb-3 flex items-center gap-2">
+                            <i class="fas fa-university text-[#E5A044]"></i>
+                            大学成员
+                        </h4>
+                        <div class="space-y-2">
+                            <div class="flex items-center gap-2">
+                                <div class="w-1.5 h-1.5 bg-[#3D8F8A] rounded-full"></div>
+                                <span class="text-sm text-[#E0E2E6]">Stanford University (美国)</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <div class="w-1.5 h-1.5 bg-[#3D8F8A] rounded-full"></div>
+                                <span class="text-sm text-[#E0E2E6]">FAU Erlangen-Nuremberg (德国)</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <div class="w-1.5 h-1.5 bg-[#3D8F8A] rounded-full"></div>
+                                <span class="text-sm text-[#E0E2E6]">Purdue University (美国)</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <div class="w-1.5 h-1.5 bg-[#3D8F8A] rounded-full"></div>
+                                <span class="text-sm text-[#E0E2E6]">UCLA (美国)</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <div class="w-1.5 h-1.5 bg-[#3D8F8A] rounded-full"></div>
+                                <span class="text-sm text-[#E0E2E6]">TU Darmstadt (德国)</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <div class="w-1.5 h-1.5 bg-[#3D8F8A] rounded-full"></div>
+                                <span class="text-sm text-[#E0E2E6]">University of Hamburg (德国)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-[#E5A044]/15 border border-[#E5A044]/30 rounded-lg p-4">
+                        <h4 class="font-heading text-lg font-bold text-[#E0E2E6] mb-3 flex items-center gap-2">
+                            <i class="fas fa-atom text-[#3D8F8A]"></i>
+                            国家实验室
+                        </h4>
+                        <div class="space-y-2">
+                            <div class="flex items-center gap-2">
+                                <div class="w-1.5 h-1.5 bg-[#E5A044] rounded-full"></div>
+                                <span class="text-sm text-[#E0E2E6]">SLAC (美国)</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <div class="w-1.5 h-1.5 bg-[#E5A044] rounded-full"></div>
+                                <span class="text-sm text-[#E0E2E6]">DESY (德国)</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <div class="w-1.5 h-1.5 bg-[#E5A044] rounded-full"></div>
+                                <span class="text-sm text-[#E0E2E6]">Paul Scherrer Institute (瑞士)</span>
+                            </div>
+                        </div>
+                        <h4 class="font-heading text-lg font-bold text-[#E0E2E6] mb-2 mt-4 flex items-center gap-2">
+                            <i class="fas fa-industry text-[#E5A044]"></i>
+                            工业伙伴
+                        </h4>
+                        <div class="space-y-2">
+                            <div class="flex items-center gap-2">
+                                <div class="w-1.5 h-1.5 bg-[#3D8F8A] rounded-full"></div>
+                                <span class="text-sm text-[#E0E2E6]">Tech-X</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-5">
+                <div class="bg-[#3D8F8A]/10 border border-[#3D8F8A]/30 rounded-lg p-5">
+                    <h3 class="font-heading text-xl font-bold text-[#E0E2E6] mb-4 flex items-center gap-2">
+                        <i class="fas fa-bullseye text-[#E5A044]"></i>
+                        研究目标
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="bg-[#3D8F8A]/15 rounded-lg p-3">
+                            <h4 class="font-heading text-base font-bold text-[#E0E2E6] mb-2">核心技术目标</h4>
+                            <div class="space-y-1">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-1.5 h-1.5 bg-[#E5A044] rounded-full"></div>
+                                    <span class="text-sm text-[#E0E2E6]">1 MeV芯片加速器</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <div class="w-1.5 h-1.5 bg-[#E5A044] rounded-full"></div>
+                                    <span class="text-sm text-[#E0E2E6]">光学控制横向效应</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <div class="w-1.5 h-1.5 bg-[#E5A044] rounded-full"></div>
+                                    <span class="text-sm text-[#E0E2E6]">XUV/X射线产生</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-[#E5A044]/15 rounded-lg p-3">
+                            <h4 class="font-heading text-base font-bold text-[#E0E2E6] mb-2">系统尺寸目标</h4>
+                            <p class="text-sm text-[#E0E2E6] leading-relaxed">
+                                整个真空腔室(电子源、光学元件、DLA芯片、探测器)可装入<strong class="text-[#E5A044]">鞋盒大小</strong>的系统中
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-[#E5A044]/10 border border-[#E5A044]/30 rounded-lg p-5">
+                    <h3 class="font-heading text-xl font-bold text-[#E0E2E6] mb-4 flex items-center gap-2">
+                        <i class="fas fa-trophy text-[#3D8F8A]"></i>
+                        主要成果
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-[#E0E2E6]">波导集成DLA</span>
+                            <span class="text-xs text-[#5A6370] bg-[#3D8F8A]/20 px-2 py-1 rounded">2020</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-[#E0E2E6]">束流控制演示</span>
+                            <span class="text-xs text-[#5A6370] bg-[#E5A044]/20 px-2 py-1 rounded">2021</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-[#E0E2E6]">高梯度记录</span>
+                            <span class="text-xs text-[#5A6370] bg-[#3D8F8A]/20 px-2 py-1 rounded">2018</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-[#E0E2E6]">聚焦加速突破</span>
+                            <span class="text-xs text-[#5A6370] bg-[#E5A044]/20 px-2 py-1 rounded">2024</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 14: Research Teams -->
+    <div class="ppt-slide !bg-[#1A1D21]" type="content">
+        <div class="mb-6">
+            <div class="flex items-center gap-4 mb-3">
+                <div class="w-10 h-10 rounded-lg bg-[#E5A044]/20 flex items-center justify-center">
+                    <span class="text-[#E5A044] font-bold text-lg">04</span>
+                </div>
+                <h2 class="font-heading text-4xl font-bold text-[#E0E2E6]">主要研究团队及其贡献</h2>
+            </div>
+            <div class="h-1 w-32 bg-gradient-to-r from-[#E5A044] to-[#3D8F8A] rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-5">
+            <div class="space-y-4">
+                <div class="bg-[#3D8F8A]/10 border border-[#3D8F8A]/40 rounded-lg p-5">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-lg bg-[#E5A044]/20 flex items-center justify-center">
+                            <i class="fas fa-university text-[#E5A044] text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-heading text-xl font-bold text-[#E0E2E6]">Stanford University</h3>
+                            <p class="text-sm text-[#5A6370]">美国 | 电气工程系</p>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="bg-[#3D8F8A]/15 rounded-lg p-3">
+                            <h4 class="font-heading text-base font-bold text-[#E0E2E6] mb-1 flex items-center gap-2">
+                                <i class="fas fa-star text-[#E5A044] text-xs"></i>
+                                核心贡献
+                            </h4>
+                            <div class="space-y-1">
+                                <div class="flex items-start gap-2">
+                                    <div class="w-1 h-1 bg-[#E5A044] rounded-full mt-2"></div>
+                                    <span class="text-sm text-[#E0E2E6]">首个波导集成DLA (Science 2020)</span>
+                                </div>
+                                <div class="flex items-start gap-2">
+                                    <div class="w-1 h-1 bg-[#E5A044] rounded-full mt-2"></div>
+                                    <span class="text-sm text-[#E0E2E6]">光子逆设计方法</span>
+                                </div>
+                                <div class="flex items-start gap-2">
+                                    <div class="w-1 h-1 bg-[#E5A044] rounded-full mt-2"></div>
+                                    <span class="text-sm text-[#E0E2E6]">聚焦加速突破 (PRL 2024)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-xs text-[#5A6370] bg-[#E5A044]/10 px-2 py-1 rounded">
+                            <strong class="text-[#E0E2E6]">关键人物:</strong> Jelena Vučković, Robert L. Byer, Payton
+                            Broaddus
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-[#E5A044]/10 border border-[#E5A044]/40 rounded-lg p-5">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-lg bg-[#3D8F8A]/20 flex items-center justify-center">
+                            <i class="fas fa-atom text-[#3D8F8A] text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-heading text-xl font-bold text-[#E0E2E6]">SLAC National Lab</h3>
+                            <p class="text-sm text-[#5A6370]">美国 | 国家加速器实验室</p>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="bg-[#E5A044]/15 rounded-lg p-3">
+                            <h4 class="font-heading text-base font-bold text-[#E0E2E6] mb-1 flex items-center gap-2">
+                                <i class="fas fa-star text-[#3D8F8A] text-xs"></i>
+                                核心贡献
+                            </h4>
+                            <div class="space-y-1">
+                                <div class="flex items-start gap-2">
+                                    <div class="w-1 h-1 bg-[#3D8F8A] rounded-full mt-2"></div>
+                                    <span class="text-sm text-[#E0E2E6]">2013年首次DLA演示</span>
+                                </div>
+                                <div class="flex items-start gap-2">
+                                    <div class="w-1 h-1 bg-[#3D8F8A] rounded-full mt-2"></div>
+                                    <span class="text-sm text-[#E0E2E6]">ACHIP项目协调</span>
+                                </div>
+                                <div class="flex items-start gap-2">
+                                    <div class="w-1 h-1 bg-[#3D8F8A] rounded-full mt-2"></div>
+                                    <span class="text-sm text-[#E0E2E6]">Next Linear Collider测试</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-xs text-[#5A6370] bg-[#3D8F8A]/10 px-2 py-1 rounded">
+                            <strong class="text-[#E0E2E6]">关键人物:</strong> R. Joel England, Edgar Peralta, Ken Soong
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <div class="bg-[#3D8F8A]/10 border border-[#3D8F8A]/40 rounded-lg p-5">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-lg bg-[#E5A044]/20 flex items-center justify-center">
+                            <i class="fas fa-university text-[#E5A044] text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-heading text-xl font-bold text-[#E0E2E6]">FAU Erlangen</h3>
+                            <p class="text-sm text-[#5A6370]">德国 | 激光物理研究所</p>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="bg-[#3D8F8A]/15 rounded-lg p-3">
+                            <h4 class="font-heading text-base font-bold text-[#E0E2E6] mb-1 flex items-center gap-2">
+                                <i class="fas fa-star text-[#E5A044] text-xs"></i>
+                                核心贡献
+                            </h4>
+                            <div class="space-y-1">
+                                <div class="flex items-start gap-2">
+                                    <div class="w-1 h-1 bg-[#E5A044] rounded-full mt-2"></div>
+                                    <span class="text-sm text-[#E0E2E6]">2013年独立DLA演示</span>
+                                </div>
+                                <div class="flex items-start gap-2">
+                                    <div class="w-1 h-1 bg-[#E5A044] rounded-full mt-2"></div>
+                                    <span class="text-sm text-[#E0E2E6]">纳米光子学设计</span>
+                                </div>
+                                <div class="flex items-start gap-2">
+                                    <div class="w-1 h-1 bg-[#E5A044] rounded-full mt-2"></div>
+                                    <span class="text-sm text-[#E0E2E6]">束流聚焦方案</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-xs text-[#5A6370] bg-[#E5A044]/10 px-2 py-1 rounded">
+                            <strong class="text-[#E0E2E6]">关键人物:</strong> Peter Hommelhoff, Roy Shiloh, John Breuer
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-[#E5A044]/10 border border-[#E5A044]/40 rounded-lg p-5">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-lg bg-[#3D8F8A]/20 flex items-center justify-center">
+                            <i class="fas fa-atom text-[#3D8F8A] text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-heading text-xl font-bold text-[#E0E2E6]">DESY Germany</h3>
+                            <p class="text-sm text-[#5A6370]">德国 | 电子同步加速器中心</p>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="bg-[#E5A044]/15 rounded-lg p-3">
+                            <h4 class="font-heading text-base font-bold text-[#E0E2E6] mb-1 flex items-center gap-2">
+                                <i class="fas fa-star text-[#3D8F8A] text-xs"></i>
+                                核心贡献
+                            </h4>
+                            <div class="space-y-1">
+                                <div class="flex items-start gap-2">
+                                    <div class="w-1 h-1 bg-[#3D8F8A] rounded-full mt-2"></div>
+                                    <span class="text-sm text-[#E0E2E6]">2050nm激光能量调制</span>
+                                </div>
+                                <div class="flex items-start gap-2">
+                                    <div class="w-1 h-1 bg-[#3D8F8A] rounded-full mt-2"></div>
+                                    <span class="text-sm text-[#E0E2E6]">高电荷传输(60 fC)</span>
+                                </div>
+                                <div class="flex items-start gap-2">
+                                    <div class="w-1 h-1 bg-[#3D8F8A] rounded-full mt-2"></div>
+                                    <span class="text-sm text-[#E0E2E6]">ARES加速器应用</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-xs text-[#5A6370] bg-[#3D8F8A]/10 px-2 py-1 rounded">
+                            <strong class="text-[#E0E2E6]">关键人物:</strong> Florian Burkart, Jann Wilken
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4 bg-[#3D8F8A]/5 border border-[#3D8F8A]/20 rounded-lg p-4">
+            <div class="flex items-start gap-4">
+                <div class="w-12 h-12 rounded-lg bg-[#E5A044]/15 flex items-center justify-center shrink-0">
+                    <i class="fas fa-flag text-[#E5A044] text-xl"></i>
+                </div>
+                <div>
+                    <h4 class="font-heading text-lg font-bold text-[#E0E2E6] mb-2">中国研究团队贡献</h4>
+                    <p class="text-base text-[#E0E2E6] leading-relaxed">
+                        中国多机构团队(2021)提出<strong class="text-[#E5A044]">少周期飞秒激光驱动ICR-DLA</strong>,通过级联加速方案实现<span
+                            style="color: #E5A044;">1.5
+                            GV/m</span>加速梯度,为LWIR-DLA实用化奠定理论基础。主要贡献包括逆切伦科夫效应DLA、级联加速方案和LWIR激光驱动DLA等方向。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 15: Chapter 5 -->
+    <div class="ppt-slide !bg-[#1A1D21]" type="chapter">
+        <div class="absolute inset-0 bg-gradient-to-br from-[#3D8F8A]/10 via-transparent to-transparent"></div>
+        <div class="absolute top-1/3 right-0 w-[700px] h-[700px] bg-[#3D8F8A]/5 rounded-full blur-3xl"></div>
+
+        <div class="relative z-10 h-full flex flex-col justify-center items-start">
+            <div class="max-w-4xl">
+                <div
+                    class="inline-flex items-center gap-3 px-4 py-2 bg-[#3D8F8A]/15 border border-[#3D8F8A]/30 rounded-full mb-8">
+                    <span class="text-[#E5A044] text-base font-bold">CHAPTER</span>
+                    <span class="text-[#3D8F8A] text-2xl font-bold">05</span>
+                </div>
+                <h2 class="font-heading text-7xl font-bold text-[#E0E2E6] leading-tight mb-8">
+                    关键技术挑战
+                </h2>
+                <p class="text-2xl text-[#5A6370] leading-relaxed mb-12">
+                    技术商业化前必须克服的障碍<br />
+                    从纳米加工到系统集成全方位挑战
+                </p>
+                <div class="grid grid-cols-3 gap-6">
+                    <div class="bg-[#3D8F8A]/10 border border-[#3D8F8A]/30 rounded-lg px-6 py-4">
+                        <div class="text-lg font-bold text-[#E5A044] mb-1">~1 μm</div>
+                        <div class="text-base text-[#5A6370]">束流孔径限制</div>
+                    </div>
+                    <div class="bg-[#E5A044]/10 border border-[#E5A044]/30 rounded-lg px-6 py-4">
+                        <div class="text-lg font-bold text-[#E5A044] mb-1">fs级</div>
+                        <div class="text-base text-[#5A6370]">同步精度要求</div>
+                    </div>
+                    <div class="bg-[#3D8F8A]/10 border border-[#3D8F8A]/30 rounded-lg px-6 py-4">
+                        <div class="text-lg font-bold text-[#E5A044] mb-1">nm级</div>
+                        <div class="text-base text-[#5A6370]">加工精度需求</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 16: Six Core Challenges -->
+    <div class="ppt-slide !bg-[#1A1D21]" type="content">
+        <div class="mb-6">
+            <div class="flex items-center gap-4 mb-3">
+                <div class="w-10 h-10 rounded-lg bg-[#3D8F8A]/20 flex items-center justify-center">
+                    <span class="text-[#3D8F8A] font-bold text-lg">05</span>
+                </div>
+                <h2 class="font-heading text-4xl font-bold text-[#E0E2E6]">六大核心挑战分析</h2>
+            </div>
+            <div class="h-1 w-32 bg-gradient-to-r from-[#3D8F8A] to-[#E5A044] rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-5">
+            <div class="bg-[#3D8F8A]/10 border border-[#3D8F8A]/40 rounded-lg p-5">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="w-10 h-10 rounded-lg bg-[#E5A044]/20 flex items-center justify-center">
+                        <span class="text-[#E5A044] font-bold text-lg">1</span>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold text-[#E0E2E6]">小束流孔径</h3>
+                </div>
+                <p class="text-base text-[#E0E2E6] leading-relaxed mb-3">
+                    DLA加速通道宽度仅<strong class="text-[#E5A044]">~1 μm</strong>,与激光波长相当,这限制了束流电荷量和横向接受度。
+                </p>
+                <div class="bg-[#3D8F8A]/15 rounded-lg p-3">
+                    <h4 class="font-heading text-sm font-bold text-[#E0E2E6] mb-2">影响</h4>
+                    <div class="space-y-1">
+                        <div class="flex items-start gap-2">
+                            <div class="w-1 h-1 bg-[#E5A044] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">束流电荷量仅fC级</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <div class="w-1 h-1 bg-[#E5A044] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">横向动力学控制困难</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <div class="w-1 h-1 bg-[#E5A044] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">束流损失率较高</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-[#E5A044]/10 border border-[#E5A044]/40 rounded-lg p-5">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="w-10 h-10 rounded-lg bg-[#3D8F8A]/20 flex items-center justify-center">
+                        <span class="text-[#3D8F8A] font-bold text-lg">2</span>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold text-[#E0E2E6]">时空同步</h3>
+                </div>
+                <p class="text-base text-[#E0E2E6] leading-relaxed mb-3">
+                    需要<strong class="text-[#3D8F8A]">飞秒级</strong>时间同步和<strong
+                        class="text-[#3D8F8A]">亚微米级</strong>空间对准精度。
+                </p>
+                <div class="bg-[#E5A044]/15 rounded-lg p-3">
+                    <h4 class="font-heading text-sm font-bold text-[#E0E2E6] mb-2">影响</h4>
+                    <div class="space-y-1">
+                        <div class="flex items-start gap-2">
+                            <div class="w-1 h-1 bg-[#3D8F8A] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">激光-束流相位锁定</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <div class="w-1 h-1 bg-[#3D8F8A] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">光学路径稳定控制</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <div class="w-1 h-1 bg-[#3D8F8A] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">振动和热漂移抑制</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-[#3D8F8A]/10 border border-[#3D8F8A]/40 rounded-lg p-5">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="w-10 h-10 rounded-lg bg-[#E5A044]/20 flex items-center justify-center">
+                        <span class="text-[#E5A044] font-bold text-lg">3</span>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold text-[#E0E2E6]">纳米加工</h3>
+                </div>
+                <p class="text-base text-[#E0E2E6] leading-relaxed mb-3">
+                    需要<strong class="text-[#E5A044]">亚百纳米</strong>加工精度,结构均匀性和表面质量直接影响加速性能。
+                </p>
+                <div class="bg-[#3D8F8A]/15 rounded-lg p-3">
+                    <h4 class="font-heading text-sm font-bold text-[#E0E2E6] mb-2">影响</h4>
+                    <div class="space-y-1">
+                        <div class="flex items-start gap-2">
+                            <div class="w-1 h-1 bg-[#E5A044] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">大面积均匀性难保证</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <div class="w-1 h-1 bg-[#E5A044] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">加工误差累积效应</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <div class="w-1 h-1 bg-[#E5A044] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">制造成本居高不下</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-[#E5A044]/10 border border-[#E5A044]/40 rounded-lg p-5">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="w-10 h-10 rounded-lg bg-[#3D8F8A]/20 flex items-center justify-center">
+                        <span class="text-[#3D8F8A] font-bold text-lg">4</span>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold text-[#E0E2E6]">束流传输</h3>
+                </div>
+                <p class="text-base text-[#E0E2E6] leading-relaxed mb-3">
+                    低能电子束在<strong class="text-[#3D8F8A]">微米级</strong>通道中长距离传输,需要精确控制横向动力学。
+                </p>
+                <div class="bg-[#E5A044]/15 rounded-lg p-3">
+                    <h4 class="font-heading text-sm font-bold text-[#E0E2E6] mb-2">影响</h4>
+                    <div class="space-y-1">
+                        <div class="flex items-start gap-2">
+                            <div class="w-1 h-1 bg-[#3D8F8A] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">束流发散角控制</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <div class="w-1 h-1 bg-[#3D8F8A] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">聚焦元件集成</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <div class="w-1 h-1 bg-[#3D8F8A] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">相空间匹配</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-[#3D8F8A]/10 border border-[#3D8F8A]/40 rounded-lg p-5">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="w-10 h-10 rounded-lg bg-[#E5A044]/20 flex items-center justify-center">
+                        <span class="text-[#E5A044] font-bold text-lg">5</span>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold text-[#E0E2E6]">热管理</h3>
+                </div>
+                <p class="text-base text-[#E0E2E6] leading-relaxed mb-3">
+                    高重复频率激光产生的<strong class="text-[#E5A044]">热积累</strong>可能影响结构稳定性和加速性能。
+                </p>
+                <div class="bg-[#3D8F8A]/15 rounded-lg p-3">
+                    <h4 class="font-heading text-sm font-bold text-[#E0E2E6] mb-2">影响</h4>
+                    <div class="space-y-1">
+                        <div class="flex items-start gap-2">
+                            <div class="w-1 h-1 bg-[#E5A044] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">材料热膨胀</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <div class="w-1 h-1 bg-[#E5A044] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">折射率温度依赖</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <div class="w-1 h-1 bg-[#E5A044] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">散热方案设计</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-[#E5A044]/10 border border-[#E5A044]/40 rounded-lg p-5">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="w-10 h-10 rounded-lg bg-[#3D8F8A]/20 flex items-center justify-center">
+                        <span class="text-[#3D8F8A] font-bold text-lg">6</span>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold text-[#E0E2E6]">材料损伤</h3>
+                </div>
+                <p class="text-base text-[#E0E2E6] leading-relaxed mb-3">
+                    尽管介电材料损伤阈值高,但在<strong class="text-[#3D8F8A]">GV/m级</strong>场强下仍面临损伤风险。
+                </p>
+                <div class="bg-[#E5A044]/15 rounded-lg p-3">
+                    <h4 class="font-heading text-sm font-bold text-[#E0E2E6] mb-2">影响</h4>
+                    <div class="space-y-1">
+                        <div class="flex items-start gap-2">
+                            <div class="w-1 h-1 bg-[#3D8F8A] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">多光子电离</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <div class="w-1 h-1 bg-[#3D8F8A] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">表面粗糙度影响</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <div class="w-1 h-1 bg-[#3D8F8A] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">长期稳定性</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 17: Chapter 6 -->
+    <div class="ppt-slide !bg-[#1A1D21]" type="chapter">
+        <div class="absolute inset-0 bg-gradient-to-br from-[#E5A044]/10 via-transparent to-transparent"></div>
+        <div
+            class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#E5A044]/5 rounded-full blur-3xl">
+        </div>
+
+        <div class="relative z-10 h-full flex flex-col justify-center items-center text-center">
+            <div
+                class="inline-flex items-center gap-3 px-4 py-2 bg-[#E5A044]/15 border border-[#E5A044]/30 rounded-full mb-8">
+                <span class="text-[#E5A044] text-base font-bold">CHAPTER</span>
+                <span class="text-[#E5A044] text-2xl font-bold">06</span>
+            </div>
+            <h2 class="font-heading text-7xl font-bold text-[#E0E2E6] leading-tight mb-8">
+                解决方案与创新
+            </h2>
+            <p class="text-2xl text-[#5A6370] leading-relaxed mb-12 max-w-3xl">
+                突破技术瓶颈的创新方法<br />
+                逆设计、波导集成与级联加速的革命性进展
+            </p>
+            <div class="flex items-center gap-8">
+                <div class="flex items-center gap-3">
+                    <div class="w-3 h-3 bg-[#E5A044] rounded-full"></div>
+                    <span class="text-lg text-[#5A6370]">逆设计优化</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="w-3 h-3 bg-[#3D8F8A] rounded-full"></div>
+                    <span class="text-lg text-[#5A6370]">波导集成</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="w-3 h-3 bg-[#E5A044] rounded-full"></div>
+                    <span class="text-lg text-[#5A6370]">级联加速</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 18: Inverse Design -->
+    <div class="ppt-slide !bg-[#1A1D21]" type="content">
+        <div class="mb-6">
+            <div class="flex items-center gap-4 mb-3">
+                <div class="w-10 h-10 rounded-lg bg-[#E5A044]/20 flex items-center justify-center">
+                    <span class="text-[#E5A044] font-bold text-lg">06</span>
+                </div>
+                <h2 class="font-heading text-4xl font-bold text-[#E0E2E6]">逆设计方法与波导集成</h2>
+            </div>
+            <div class="h-1 w-32 bg-gradient-to-r from-[#E5A044] to-[#3D8F8A] rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-5 gap-6">
+            <div class="col-span-3 space-y-5">
+                <div class="bg-[#3D8F8A]/10 border-l-4 border-[#E5A044] p-5 rounded-lg">
+                    <h3 class="font-heading text-xl font-bold text-[#E0E2E6] mb-3 flex items-center gap-2">
+                        <i class="fas fa-brain text-[#E5A044]"></i>
+                        光子逆设计方法
+                    </h3>
+                    <p class="text-base text-[#E0E2E6] leading-relaxed mb-4">
+                        Stanford团队采用<strong
+                            class="text-[#E5A044]">光子逆设计方法</strong>,突破传统参数化设计的局限。通过优化算法自动搜索最优结构,扩展设计空间,实现<span
+                            style="color: #E5A044;">高度非直观、有机形状</span>的优化结构。
+                    </p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-[#3D8F8A]/15 rounded-lg p-3">
+                            <h4 class="font-heading text-base font-bold text-[#E0E2E6] mb-2">优势</h4>
+                            <div class="space-y-1">
+                                <div class="flex items-start gap-2">
+                                    <div class="w-1 h-1 bg-[#E5A044] rounded-full mt-2"></div>
+                                    <span class="text-sm text-[#E0E2E6]">设计空间扩大</span>
+                                </div>
+                                <div class="flex items-start gap-2">
+                                    <div class="w-1 h-1 bg-[#E5A044] rounded-full mt-2"></div>
+                                    <span class="text-sm text-[#E0E2E6]">性能自动优化</span>
+                                </div>
+                                <div class="flex items-start gap-2">
+                                    <div class="w-1 h-1 bg-[#E5A044] rounded-full mt-2"></div>
+                                    <span class="text-sm text-[#E0E2E6]">多场约束同步</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-[#E5A044]/15 rounded-lg p-3">
+                            <h4 class="font-heading text-base font-bold text-[#E0E2E6] mb-2">应用</h4>
+                            <div class="space-y-1">
+                                <div class="flex items-start gap-2">
+                                    <div class="w-1 h-1 bg-[#3D8F8A] rounded-full mt-2"></div>
+                                    <span class="text-sm text-[#E0E2E6]">波导-加速器耦合</span>
+                                </div>
+                                <div class="flex items-start gap-2">
+                                    <div class="w-1 h-1 bg-[#3D8F8A] rounded-full mt-2"></div>
+                                    <span class="text-sm text-[#E0E2E6]">宽带光栅耦合器</span>
+                                </div>
+                                <div class="flex items-start gap-2">
+                                    <div class="w-1 h-1 bg-[#3D8F8A] rounded-full mt-2"></div>
+                                    <span class="text-sm text-[#E0E2E6]">场均匀性优化</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-[#E5A044]/10 border border-[#E5A044]/40 rounded-lg p-5">
+                    <h3 class="font-heading text-xl font-bold text-[#E0E2E6] mb-3 flex items-center gap-2">
+                        <i class="fas fa-microchip text-[#3D8F8A]"></i>
+                        波导集成技术
+                    </h3>
+                    <p class="text-base text-[#E0E2E6] leading-relaxed mb-4">
+                        将激光耦合到<strong class="text-[#3D8F8A]">片上波导</strong>,通过波导网络精确分配激光到各级加速器,替代笨重的自由空间光学元件。
+                    </p>
+                    <div class="grid grid-cols-3 gap-3">
+                        <div class="bg-[#3D8F8A]/15 rounded-lg p-3 text-center">
+                            <i class="fas fa-arrow-right text-[#E5A044] text-xl mb-2"></i>
+                            <div class="text-sm text-[#E0E2E6] font-medium">输入耦合</div>
+                            <div class="text-xs text-[#5A6370] mt-1">光栅耦合器</div>
+                        </div>
+                        <div class="bg-[#E5A044]/15 rounded-lg p-3 text-center">
+                            <i class="fas fa-network-wired text-[#3D8F8A] text-xl mb-2"></i>
+                            <div class="text-sm text-[#E0E2E6] font-medium">波导传输</div>
+                            <div class="text-xs text-[#5A6370] mt-1">相位控制</div>
+                        </div>
+                        <div class="bg-[#3D8F8A]/15 rounded-lg p-3 text-center">
+                            <i class="fas fa-bolt text-[#E5A044] text-xl mb-2"></i>
+                            <div class="text-sm text-[#E0E2E6] font-medium">场激发</div>
+                            <div class="text-xs text-[#5A6370] mt-1">加速器耦合</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-span-2 space-y-5">
+                <div class="bg-[#3D8F8A]/5 border border-[#3D8F8A]/20 rounded-lg p-5" style="height: 240px;">
+                    <h4 class="font-heading text-lg font-bold text-[#E0E2E6] mb-3">逆设计流程</h4>
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-lg bg-[#E5A044]/20 flex items-center justify-center shrink-0">
+                                <span class="text-[#E5A044] font-bold text-sm">1</span>
+                            </div>
+                            <div>
+                                <div class="text-sm text-[#E0E2E6] font-medium">定义目标函数</div>
+                                <div class="text-xs text-[#5A6370]">加速梯度、带宽、均匀性</div>
+                            </div>
+                        </div>
+                        <div class="h-4 w-0.5 bg-[#3D8F8A]/30 ml-4"></div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-lg bg-[#3D8F8A]/20 flex items-center justify-center shrink-0">
+                                <span class="text-[#3D8F8A] font-bold text-sm">2</span>
+                            </div>
+                            <div>
+                                <div class="text-sm text-[#E0E2E6] font-medium">初始结构生成</div>
+                                <div class="text-xs text-[#5A6370]">随机或经验设计</div>
+                            </div>
+                        </div>
+                        <div class="h-4 w-0.5 bg-[#3D8F8A]/30 ml-4"></div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-lg bg-[#E5A044]/20 flex items-center justify-center shrink-0">
+                                <span class="text-[#E5A044] font-bold text-sm">3</span>
+                            </div>
+                            <div>
+                                <div class="text-sm text-[#E0E2E6] font-medium">电磁仿真</div>
+                                <div class="text-xs text-[#5A6370]">FDTD/FEM计算</div>
+                            </div>
+                        </div>
+                        <div class="h-4 w-0.5 bg-[#3D8F8A]/30 ml-4"></div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-lg bg-[#3D8F8A]/20 flex items-center justify-center shrink-0">
+                                <span class="text-[#3D8F8A] font-bold text-sm">4</span>
+                            </div>
+                            <div>
+                                <div class="text-sm text-[#E0E2E6] font-medium">梯度下降优化</div>
+                                <div class="text-xs text-[#5A6370]">参数迭代更新</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-[#E5A044]/10 border border-[#E5A044]/30 rounded-lg p-5">
+                    <h4 class="font-heading text-lg font-bold text-[#E0E2E6] mb-3">性能提升</h4>
+                    <div class="space-y-3">
+                        <div>
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-sm text-[#E0E2E6]">加速梯度</span>
+                                <span class="text-base font-bold text-[#E5A044]">30.5 MV/m</span>
+                            </div>
+                            <div class="h-1.5 bg-[#3D8F8A]/20 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-[#3D8F8A] to-[#E5A044]" style="width: 60%">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-sm text-[#E0E2E6]">能量增益</span>
+                                <span class="text-base font-bold text-[#E5A044]">0.915 keV</span>
+                            </div>
+                            <div class="h-1.5 bg-[#3D8F8A]/20 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-[#3D8F8A] to-[#E5A044]" style="width: 45%">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-sm text-[#E0E2E6]">结构因子</span>
+                                <span class="text-base font-bold text-[#E5A044]">0.12</span>
+                            </div>
+                            <div class="h-1.5 bg-[#3D8F8A]/20 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-[#3D8F8A] to-[#E5A044]" style="width: 80%">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-[#3D8F8A]/5 border border-[#3D8F8A]/20 rounded-lg p-4">
+                    <p class="text-sm text-[#E0E2E6] leading-relaxed">
+                        <i class="fas fa-lightbulb text-[#E5A044] mr-2"></i>
+                        <strong class="text-[#3D8F8A]">关键洞察:</strong> 逆设计+波导集成实现了从自由空间到片上系统的跨越,为完全集成的MeV级DLA奠定基础。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 19: Cascading and Focusing -->
+    <div class="ppt-slide !bg-[#1A1D21]" type="content">
+        <div class="mb-6">
+            <div class="flex items-center gap-4 mb-3">
+                <div class="w-10 h-10 rounded-lg bg-[#E5A044]/20 flex items-center justify-center">
+                    <span class="text-[#E5A044] font-bold text-lg">06</span>
+                </div>
+                <h2 class="font-heading text-4xl font-bold text-[#E0E2E6]">级联加速与聚焦方案</h2>
+            </div>
+            <div class="h-1 w-32 bg-gradient-to-r from-[#E5A044] to-[#3D8F8A] rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-6">
+            <div class="space-y-5">
+                <div class="bg-[#3D8F8A]/10 border-l-4 border-[#E5A044] p-5 rounded-lg">
+                    <h3 class="font-heading text-xl font-bold text-[#E0E2E6] mb-3 flex items-center gap-2">
+                        <i class="fas fa-layer-group text-[#E5A044]"></i>
+                        级联多级加速
+                    </h3>
+                    <p class="text-base text-[#E0E2E6] leading-relaxed mb-4">
+                        通过<strong class="text-[#E5A044]">级联多个加速段</strong>,每段增益叠加,实现MeV级总能量增益。采用波导网络精确控制各段相位。
+                    </p>
+                    <div class="bg-[#3D8F8A]/15 rounded-lg p-3">
+                        <h4 class="font-heading text-base font-bold text-[#E0E2E6] mb-2">技术方案</h4>
+                        <div class="space-y-1">
+                            <div class="flex items-start gap-2">
+                                <div class="w-1 h-1 bg-[#E5A044] rounded-full mt-2"></div>
+                                <span class="text-sm text-[#E0E2E6]">分束器网络</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <div class="w-1 h-1 bg-[#E5A044] rounded-full mt-2"></div>
+                                <span class="text-sm text-[#E0E2E6]">相位延迟控制</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <div class="w-1 h-1 bg-[#E5A044] rounded-full mt-2"></div>
+                                <span class="text-sm text-[#E0E2E6]">能量啁啾管理</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-[#E5A044]/10 border border-[#E5A044]/40 rounded-lg p-5">
+                    <h3 class="font-heading text-xl font-bold text-[#E0E2E6] mb-3 flex items-center gap-2">
+                        <i class="fas fa-bullseye text-[#3D8F8A]"></i>
+                        交替相位聚焦(APF)
+                    </h3>
+                    <p class="text-base text-[#E0E2E6] leading-relaxed mb-4">
+                        利用<strong class="text-[#3D8F8A]">不同相位</strong>的DLA场实现聚焦。在加速相位间插入聚焦相位,实现横向约束。
+                    </p>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="bg-[#E5A044]/15 rounded-lg p-3 text-center">
+                            <div class="text-xl font-bold text-[#E5A044] mb-1">43%</div>
+                            <div class="text-sm text-[#5A6370]">能量提升</div>
+                        </div>
+                        <div class="bg-[#3D8F8A]/15 rounded-lg p-3 text-center">
+                            <div class="text-xl font-bold text-[#E5A044] mb-1">500 μm</div>
+                            <div class="text-sm text-[#5A6370]">加速距离</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-5">
+                <div class="bg-[#3D8F8A]/10 border border-[#3D8F8A]/40 rounded-lg p-5">
+                    <h3 class="font-heading text-xl font-bold text-[#E0E2E6] mb-3 flex items-center gap-2">
+                        <i class="fas fa-magnet text-[#E5A044]"></i>
+                        Ponderomotive聚焦
+                    </h3>
+                    <p class="text-base text-[#E0E2E6] leading-relaxed mb-4">
+                        利用<strong class="text-[#E5A044]">缓慢变化</strong>的场包络产生ponderomotive力,实现横向聚焦,对相位变化不敏感。
+                    </p>
+                    <div class="bg-[#3D8F8A]/15 rounded-lg p-3">
+                        <h4 class="font-heading text-base font-bold text-[#E0E2E6] mb-2">特点</h4>
+                        <div class="space-y-1">
+                            <div class="flex items-start gap-2">
+                                <div class="w-1 h-1 bg-[#E5A044] rounded-full mt-2"></div>
+                                <span class="text-sm text-[#E0E2E6]">相位不敏感</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <div class="w-1 h-1 bg-[#E5A044] rounded-full mt-2"></div>
+                                <span class="text-sm text-[#E0E2E6]">平滑场分布</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <div class="w-1 h-1 bg-[#E5A044] rounded-full mt-2"></div>
+                                <span class="text-sm text-[#E0E2E6]">适合长距离传输</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-[#E5A044]/10 border border-[#E5A044]/30 rounded-lg p-5">
+                    <h4 class="font-heading text-lg font-bold text-[#E0E2E6] mb-3">模拟预测</h4>
+                    <div class="space-y-3">
+                        <div class="bg-[#3D8F8A]/15 rounded-lg p-3">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-sm text-[#E0E2E6]">能量增益</span>
+                                <span class="text-xl font-bold text-[#E5A044]">2.4 MeV</span>
+                            </div>
+                            <div class="text-xs text-[#5A6370]">5 mm距离, 20%捕获效率</div>
+                        </div>
+
+                        <div class="bg-[#E5A044]/15 rounded-lg p-3">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-sm text-[#E0E2E6]">加速梯度</span>
+                                <span class="text-xl font-bold text-[#E5A044]">10 GV/m</span>
+                            </div>
+                            <div class="text-xs text-[#5A6370]">理想条件, 0.12结构因子</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 20: Chapter 7 -->
+    <div class="ppt-slide !bg-[#1A1D21]" type="chapter">
+        <div class="absolute inset-0 bg-gradient-to-br from-[#3D8F8A]/10 via-transparent to-transparent"></div>
+        <div class="absolute bottom-0 right-0 w-[800px] h-[800px] bg-[#3D8F8A]/5 rounded-full blur-3xl"></div>
+
+        <div class="relative z-10 h-full flex items-end pb-16">
+            <div class="max-w-4xl">
+                <div
+                    class="inline-flex items-center gap-3 px-4 py-2 bg-[#3D8F8A]/15 border border-[#3D8F8A]/30 rounded-full mb-8">
+                    <span class="text-[#E5A044] text-base font-bold">CHAPTER</span>
+                    <span class="text-[#3D8F8A] text-2xl font-bold">07</span>
+                </div>
+                <h2 class="font-heading text-7xl font-bold text-[#E0E2E6] leading-tight mb-8">
+                    应用前景分析
+                </h2>
+                <p class="text-2xl text-[#5A6370] leading-relaxed mb-12">
+                    从实验室走向实际应用的无限可能<br />
+                    医疗、工业、科研多领域的革命性影响
+                </p>
+                <div class="flex items-center gap-8">
+                    <div class="flex items-center gap-3">
+                        <div class="w-3 h-3 bg-[#3D8F8A] rounded-full"></div>
+                        <span class="text-lg text-[#5A6370]">医疗应用</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-3 h-3 bg-[#E5A044] rounded-full"></div>
+                        <span class="text-lg text-[#5A6370]">工业检测</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-3 h-3 bg-[#3D8F8A] rounded-full"></div>
+                        <span class="text-lg text-[#5A6370]">科学研究</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 21: Medical and Industrial Applications -->
+    <div class="ppt-slide !bg-[#1A1D21]" type="content">
+        <div class="mb-6">
+            <div class="flex items-center gap-4 mb-3">
+                <div class="w-10 h-10 rounded-lg bg-[#3D8F8A]/20 flex items-center justify-center">
+                    <span class="text-[#3D8F8A] font-bold text-lg">07</span>
+                </div>
+                <h2 class="font-heading text-4xl font-bold text-[#E0E2E6]">医疗与工业应用</h2>
+            </div>
+            <div class="h-1 w-32 bg-gradient-to-r from-[#3D8F8A] to-[#E5A044] rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-6">
+            <div class="space-y-5">
+                <div class="bg-[#3D8F8A]/10 border-l-4 border-[#E5A044] p-5 rounded-lg">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-12 h-12 rounded-lg bg-[#E5A044]/20 flex items-center justify-center">
+                            <i class="fas fa-heartbeat text-[#E5A044] text-xl"></i>
+                        </div>
+                        <h3 class="font-heading text-2xl font-bold text-[#E0E2E6]">癌症治疗</h3>
+                    </div>
+                    <p class="text-base text-[#E0E2E6] leading-relaxed mb-4">
+                        DLA可用于<strong class="text-[#E5A044]">精准放疗</strong>,通过内窥镜将微型加速器置入肿瘤部位,实现<span
+                            style="color: #E5A044;">局部高剂量照射</span>,保护周围健康组织。
+                    </p>
+                    <div class="space-y-2">
+                        <div class="flex items-start gap-2">
+                            <div class="w-1 h-1 bg-[#E5A044] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">精准剂量递送</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <div class="w-1 h-1 bg-[#E5A044] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">微创治疗</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <div class="w-1 h-1 bg-[#E5A044] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">副作用降低</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-[#E5A044]/10 border border-[#E5A044]/30 rounded-lg p-5">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-12 h-12 rounded-lg bg-[#3D8F8A]/20 flex items-center justify-center">
+                            <i class="fas fa-eye text-[#3D8F8A] text-xl"></i>
+                        </div>
+                        <h3 class="font-heading text-2xl font-bold text-[#E0E2E6]">医学成像</h3>
+                    </div>
+                    <p class="text-base text-[#E0E2E6] leading-relaxed mb-4">
+                        紧凑型<strong class="text-[#3D8F8A]">X射线源</strong>可用于高分辨率医学成像,便携式设备使诊断更普及。
+                    </p>
+                    <div class="space-y-2">
+                        <div class="flex items-start gap-2">
+                            <div class="w-1 h-1 bg-[#3D8F8A] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">高亮度X射线源</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <div class="w-1 h-1 bg-[#3D8F8A] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">便携成像设备</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <div class="w-1 h-1 bg-[#3D8F8A] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">实时诊断能力</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-5">
+                <div class="bg-[#3D8F8A]/10 border border-[#3D8F8A]/40 rounded-lg p-5">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-12 h-12 rounded-lg bg-[#E5A044]/20 flex items-center justify-center">
+                            <i class="fas fa-wrench text-[#E5A044] text-xl"></i>
+                        </div>
+                        <h3 class="font-heading text-2xl font-bold text-[#E0E2E6]">工业检测</h3>
+                    </div>
+                    <p class="text-base text-[#E0E2E6] leading-relaxed mb-4">
+                        便携式<strong class="text-[#E5A044]">无损检测设备</strong>可用于航空、核电等领域的高价值部件检测。
+                    </p>
+                    <div class="space-y-2">
+                        <div class="flex items-start gap-2">
+                            <div class="w-1 h-1 bg-[#E5A044] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">现场检测能力</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <div class="w-1 h-1 bg-[#E5A044] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">高空间分辨率</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <div class="w-1 h-1 bg-[#E5A044] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">成本大幅降低</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-[#E5A044]/10 border border-[#E5A044]/30 rounded-lg p-5">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-12 h-12 rounded-lg bg-[#3D8F8A]/20 flex items-center justify-center">
+                            <i class="fas fa-flask text-[#3D8F8A] text-xl"></i>
+                        </div>
+                        <h3 class="font-heading text-2xl font-bold text-[#E0E2E6]">材料分析</h3>
+                    </div>
+                    <p class="text-base text-[#E0E2E6] leading-relaxed mb-4">
+                        桌面级<strong class="text-[#3D8F8A]">电子衍射仪</strong>可用于材料结构分析,使先进表征技术普及化。
+                    </p>
+                    <div class="space-y-2">
+                        <div class="flex items-start gap-2">
+                            <div class="w-1 h-1 bg-[#3D8F8A] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">原子级分辨率</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <div class="w-1 h-1 bg-[#3D8F8A] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">超快时间分辨</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <div class="w-1 h-1 bg-[#3D8F8A] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">实验室级别</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 22: Scientific Applications -->
+    <div class="ppt-slide !bg-[#1A1D21]" type="content">
+        <div class="mb-6">
+            <div class="flex items-center gap-4 mb-3">
+                <div class="w-10 h-10 rounded-lg bg-[#3D8F8A]/20 flex items-center justify-center">
+                    <span class="text-[#3D8F8A] font-bold text-lg">07</span>
+                </div>
+                <h2 class="font-heading text-4xl font-bold text-[#E0E2E6]">科研与前沿应用</h2>
+            </div>
+            <div class="h-1 w-32 bg-gradient-to-r from-[#3D8F8A] to-[#E5A044] rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-5">
+            <div class="bg-[#3D8F8A]/10 border border-[#3D8F8A]/40 rounded-lg p-5">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-12 h-12 rounded-lg bg-[#E5A044]/20 flex items-center justify-center">
+                        <i class="fas fa-atom text-[#E5A044] text-xl"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold text-[#E0E2E6]">桌面X射线自由电子激光</h3>
+                </div>
+                <p class="text-base text-[#E0E2E6] leading-relaxed mb-4">
+                    DLA驱动的<strong class="text-[#E5A044]">紧凑型FEL</strong>可产生相干X射线,使先进光源实验室化。
+                </p>
+                <div class="bg-[#3D8F8A]/15 rounded-lg p-3">
+                    <h4 class="font-heading text-sm font-bold text-[#E0E2E6] mb-2">应用</h4>
+                    <div class="space-y-1">
+                        <div class="flex items-start gap-2">
+                            <div class="w-1 h-1 bg-[#E5A044] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">分子结构解析</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <div class="w-1 h-1 bg-[#E5A044] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">化学反应动力学</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <div class="w-1 h-1 bg-[#E5A044] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">生物大分子成像</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-[#E5A044]/10 border border-[#E5A044]/40 rounded-lg p-5">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-12 h-12 rounded-lg bg-[#3D8F8A]/20 flex items-center justify-center">
+                        <i class="fas fa-microscope text-[#3D8F8A] text-xl"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold text-[#E0E2E6]">超快电子衍射</h3>
+                </div>
+                <p class="text-base text-[#E0E2E6] leading-relaxed mb-4">
+                    <strong class="text-[#3D8F8A]">阿秒电子束</strong>可实现原子运动和化学键断裂的实时观测。
+                </p>
+                <div class="bg-[#E5A044]/15 rounded-lg p-3">
+                    <h4 class="font-heading text-sm font-bold text-[#E0E2E6] mb-2">时间尺度</h4>
+                    <div class="space-y-1">
+                        <div class="flex items-start gap-2">
+                            <div class="w-1 h-1 bg-[#3D8F8A] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">270阿秒束长</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <div class="w-1 h-1 bg-[#3D8F8A] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">原子尺度分辨</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <div class="w-1 h-1 bg-[#3D8F8A] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">电子动力学追踪</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-[#3D8F8A]/10 border border-[#3D8F8A]/40 rounded-lg p-5">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-12 h-12 rounded-lg bg-[#E5A044]/20 flex items-center justify-center">
+                        <i class="fas fa-atom text-[#E5A044] text-xl"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold text-[#E0E2E6]">量子信息</h3>
+                </div>
+                <p class="text-base text-[#E0E2E6] leading-relaxed mb-4">
+                    超小电子束可用于<strong class="text-[#E5A044]">量子比特</strong>实现,推动量子计算和通信发展。
+                </p>
+                <div class="bg-[#3D8F8A]/15 rounded-lg p-3">
+                    <h4 class="font-heading text-sm font-bold text-[#E0E2E6] mb-2">优势</h4>
+                    <div class="space-y-1">
+                        <div class="flex items-start gap-2">
+                            <div class="w-1 h-1 bg-[#E5A044] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">纳米级尺寸</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <div class="w-1 h-1 bg-[#E5A044] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">长相干时间</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <div class="w-1 h-1 bg-[#E5A044] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">可扩展架构</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-[#E5A044]/10 border border-[#E5A044]/40 rounded-lg p-5">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-12 h-12 rounded-lg bg-[#3D8F8A]/20 flex items-center justify-center">
+                        <i class="fas fa-clock text-[#3D8F8A] text-xl"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold text-[#E0E2E6]">阿秒科学</h3>
+                </div>
+                <p class="text-base text-[#E0E2E6] leading-relaxed mb-4">
+                    <strong class="text-[#3D8F8A]">阿秒电子束</strong>为研究超快过程提供新工具,推动阿秒物理学发展。
+                </p>
+                <div class="bg-[#E5A044]/15 rounded-lg p-3">
+                    <h4 class="font-heading text-sm font-bold text-[#E0E2E6] mb-2">研究方向</h4>
+                    <div class="space-y-1">
+                        <div class="flex items-start gap-2">
+                            <div class="w-1 h-1 bg-[#3D8F8A] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">光电发射过程</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <div class="w-1 h-1 bg-[#3D8F8A] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">电荷迁移动力学</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <div class="w-1 h-1 bg-[#3D8F8A] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">量子相干控制</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-[#3D8F8A]/10 border border-[#3D8F8A]/40 rounded-lg p-5">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-12 h-12 rounded-lg bg-[#E5A044]/20 flex items-center justify-center">
+                        <i class="fas fa-layer-group text-[#E5A044] text-xl"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold text-[#E0E2E6]">纳米光子学</h3>
+                </div>
+                <p class="text-base text-[#E0E2E6] leading-relaxed mb-4">
+                    DLA与<strong class="text-[#E5A044]">纳米光子器件</strong>集成,实现量子态工程和超快光学控制。
+                </p>
+                <div class="bg-[#3D8F8A]/15 rounded-lg p-3">
+                    <h4 class="font-heading text-sm font-bold text-[#E0E2E6] mb-2">应用</h4>
+                    <div class="space-y-1">
+                        <div class="flex items-start gap-2">
+                            <div class="w-1 h-1 bg-[#E5A044] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">光子晶体表征</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <div class="w-1 h-1 bg-[#E5A044] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">等离激元探测</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <div class="w-1 h-1 bg-[#E5A044] rounded-full mt-2"></div>
+                            <span class="text-sm text-[#E0E2E6]">超材料表征</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 23: Chapter 8 -->
+    <div class="ppt-slide !bg-[#1A1D21]" type="chapter">
+        <div class="absolute inset-0 bg-gradient-to-br from-[#E5A044]/10 via-transparent to-transparent"></div>
+        <div class="absolute top-0 left-0 w-[700px] h-[700px] bg-[#E5A044]/5 rounded-full blur-3xl"></div>
+
+        <div class="relative z-10 h-full flex items-center justify-end">
+            <div class="max-w-4xl text-right">
+                <div
+                    class="inline-flex items-center gap-3 px-4 py-2 bg-[#E5A044]/15 border border-[#E5A044]/30 rounded-full mb-8">
+                    <span class="text-[#E5A044] text-2xl font-bold">08</span>
+                    <span class="text-[#E5A044] text-base font-bold">CHAPTER</span>
+                </div>
+                <h2 class="font-heading text-7xl font-bold text-[#E0E2E6] leading-tight mb-8">
+                    未来发展<br />趋势
+                </h2>
+                <p class="text-2xl text-[#5A6370] leading-relaxed mb-12">
+                    技术演进的方向与预期突破<br />
+                    展望DLA的未来5-10年发展蓝图
+                </p>
+                <div class="flex items-center justify-end gap-8">
+                    <div class="flex items-center gap-3">
+                        <span class="text-lg text-[#5A6370]">10 MeV+</span>
+                        <div class="w-3 h-3 bg-[#E5A044] rounded-full"></div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="text-lg text-[#5A6370]">高重复频率</span>
+                        <div class="w-3 h-3 bg-[#3D8F8A] rounded-full"></div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="text-lg text-[#5A6370]">实用化系统</span>
+                        <div class="w-3 h-3 bg-[#E5A044] rounded-full"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 24: Future Roadmap -->
+    <div class="ppt-slide !bg-[#1A1D21]" type="content">
+        <div class="mb-6">
+            <div class="flex items-center gap-4 mb-3">
+                <div class="w-10 h-10 rounded-lg bg-[#E5A044]/20 flex items-center justify-center">
+                    <span class="text-[#E5A044] font-bold text-lg">08</span>
+                </div>
+                <h2 class="font-heading text-4xl font-bold text-[#E0E2E6]">技术路线图与发展预测</h2>
+            </div>
+            <div class="h-1 w-32 bg-gradient-to-r from-[#E5A044] to-[#3D8F8A] rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-6">
+            <div class="col-span-2">
+                <div class="bg-[#3D8F8A]/5 border border-[#3D8F8A]/20 rounded-lg p-5" style="height: 520px;">
+                    <div id="roadmap-chart" style="width: 100%; height: 100%;"></div>
+                </div>
+            </div>
+
+            <div class="space-y-5">
+                <div class="bg-[#3D8F8A]/10 border border-[#3D8F8A]/30 rounded-lg p-5">
+                    <h3 class="font-heading text-xl font-bold text-[#E0E2E6] mb-4 flex items-center gap-2">
+                        <i class="fas fa-road text-[#E5A044]"></i>
+                        发展阶段
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="bg-[#3D8F8A]/15 rounded-lg p-3">
+                            <div class="flex items-center gap-2 mb-2">
+                                <div
+                                    class="w-6 h-6 rounded-full bg-[#E5A044]/20 flex items-center justify-center text-xs font-bold text-[#E5A044]">
+                                    1</div>
+                                <h4 class="font-heading text-base font-bold text-[#E0E2E6]">近期(2025-2027)</h4>
+                            </div>
+                            <p class="text-sm text-[#E0E2E6] leading-relaxed">
+                                10 MeV级能量, 医疗/工业应用
+                            </p>
+                        </div>
+
+                        <div class="bg-[#E5A044]/15 rounded-lg p-3">
+                            <div class="flex items-center gap-2 mb-2">
+                                <div
+                                    class="w-6 h-6 rounded-full bg-[#3D8F8A]/20 flex items-center justify-center text-xs font-bold text-[#3D8F8A]">
+                                    2</div>
+                                <h4 class="font-heading text-base font-bold text-[#E0E2E6]">中期(2028-2030)</h4>
+                            </div>
+                            <p class="text-sm text-[#E0E2E6] leading-relaxed">
+                                100 MeV级能量, 科研应用
+                            </p>
+                        </div>
+
+                        <div class="bg-[#3D8F8A]/15 rounded-lg p-3">
+                            <div class="flex items-center gap-2 mb-2">
+                                <div
+                                    class="w-6 h-6 rounded-full bg-[#E5A044]/20 flex items-center justify-center text-xs font-bold text-[#E5A044]">
+                                    3</div>
+                                <h4 class="font-heading text-base font-bold text-[#E0E2E6]">远期(2030+)</h4>
+                            </div>
+                            <p class="text-sm text-[#E0E2E6] leading-relaxed">
+                                GeV级能量, 对撞机应用
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-[#E5A044]/10 border border-[#E5A044]/30 rounded-lg p-5">
+                    <h3 class="font-heading text-xl font-bold text-[#E0E2E6] mb-4 flex items-center gap-2">
+                        <i class="fas fa-bullseye text-[#3D8F8A]"></i>
+                        关键指标
+                    </h3>
+                    <div class="space-y-3">
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-sm text-[#E0E2E6]">能量增益</span>
+                                <span class="text-base font-bold text-[#E5A044]">10 MeV</span>
+                            </div>
+                            <div class="h-1.5 bg-[#3D8F8A]/20 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-[#3D8F8A] to-[#E5A044]" style="width: 50%">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-sm text-[#E0E2E6]">重复频率</span>
+                                <span class="text-base font-bold text-[#E5A044]">1 MHz</span>
+                            </div>
+                            <div class="h-1.5 bg-[#3D8F8A]/20 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-[#3D8F8A] to-[#E5A044]" style="width: 30%">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-sm text-[#E0E2E6]">束流电荷</span>
+                                <span class="text-base font-bold text-[#E5A044]">1 pC</span>
+                            </div>
+                            <div class="h-1.5 bg-[#3D8F8A]/20 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-[#3D8F8A] to-[#E5A044]" style="width: 20%">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-sm text-[#E0E2E6]">系统尺寸</span>
+                                <span class="text-base font-bold text-[#E5A044]">鞋盒大小</span>
+                            </div>
+                            <div class="h-1.5 bg-[#3D8F8A]/20 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-[#3D8F8A] to-[#E5A044]" style="width: 80%">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var roadmapChart = echarts.init(document.getElementById('roadmap-chart'));
+        var roadmapOption = {
+            backgroundColor: 'transparent',
+            tooltip: {
+                trigger: 'axis',
+                backgroundColor: 'rgba(26, 29, 33, 0.9)',
+                borderColor: '#3D8F8A',
+                textStyle: {
+                    color: '#E0E2E6',
+                    fontSize: 14
+                },
+                formatter: function (params) {
+                    let result = '<strong style="color: #E5A044;">' + params[0].axisValue + '</strong><br/>';
+                    params.forEach(function (item) {
+                        result += item.marker + ' ' + item.seriesName + ': <strong style="color: #E5A044;">' + item.value + '</strong><br/>';
+                    });
+                    return result;
+                }
+            },
+            legend: {
+                data: ['能量增益 (MeV)', '加速梯度 (GV/m)', '重复频率 (MHz)'],
+                top: 10,
+                textStyle: {
+                    color: '#E0E2E6',
+                    fontSize: 14,
+                    fontWeight: 'bold'
+                },
+                itemWidth: 25,
+                itemHeight: 14
+            },
+            grid: {
+                left: '8%',
+                right: '5%',
+                bottom: '12%',
+                top: '20%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'category',
+                data: ['2020', '2022', '2024', '2026', '2028', '2030', '2032', '2035'],
+                axisLine: {
+                    lineStyle: {
+                        color: '#3D8F8A',
+                        width: 2
+                    }
+                },
+                axisLabel: {
+                    color: '#E0E2E6',
+                    fontSize: 13,
+                    fontWeight: 'bold'
+                },
+                splitLine: {
+                    show: false
+                }
+            },
+            yAxis: [
+                {
+                    type: 'value',
+                    name: '能量增益 (MeV)',
+                    nameTextStyle: {
+                        color: '#E0E2E6',
+                        fontSize: 14,
+                        fontWeight: 'bold'
+                    },
+                    axisLine: {
+                        lineStyle: {
+                            color: '#3D8F8A',
+                            width: 2
+                        }
+                    },
+                    axisLabel: {
+                        color: '#E0E2E6',
+                        fontSize: 13
+                    },
+                    splitLine: {
+                        lineStyle: {
+                            color: '#5A6370',
+                            type: 'dashed',
+                            opacity: 0.3
+                        }
+                    }
+                },
+                {
+                    type: 'value',
+                    name: '加速梯度 (GV/m)',
+                    nameTextStyle: {
+                        color: '#E0E2E6',
+                        fontSize: 14,
+                        fontWeight: 'bold'
+                    },
+                    axisLine: {
+                        lineStyle: {
+                            color: '#E5A044',
+                            width: 2
+                        }
+                    },
+                    axisLabel: {
+                        color: '#E0E2E6',
+                        fontSize: 13
+                    },
+                    splitLine: {
+                        show: false
+                    }
+                }
+            ],
+            series: [
+                {
+                    name: '能量增益 (MeV)',
+                    type: 'line',
+                    data: [0.001, 0.01, 0.024, 1, 10, 50, 100, 500],
+                    lineStyle: {
+                        color: '#3D8F8A',
+                        width: 3
+                    },
+                    itemStyle: {
+                        color: '#3D8F8A',
+                        borderWidth: 3,
+                        borderColor: '#E0E2E6'
+                    },
+                    symbol: 'circle',
+                    symbolSize: 8,
+                    label: {
+                        show: false
+                    }
+                },
+                {
+                    name: '加速梯度 (GV/m)',
+                    type: 'line',
+                    yAxisIndex: 1,
+                    data: [0.03, 0.3, 0.05, 0.5, 1.0, 2.0, 3.0, 5.0],
+                    lineStyle: {
+                        color: '#E5A044',
+                        width: 3
+                    },
+                    itemStyle: {
+                        color: '#E5A044',
+                        borderWidth: 3,
+                        borderColor: '#E0E2E6'
+                    },
+                    symbol: 'diamond',
+                    symbolSize: 10,
+                    label: {
+                        show: false
+                    }
+                },
+                {
+                    name: '重复频率 (MHz)',
+                    type: 'line',
+                    data: [0.1, 0.5, 1, 5, 10, 50, 100, 1000],
+                    lineStyle: {
+                        color: '#5A6370',
+                        width: 3,
+                        type: 'dashed'
+                    },
+                    itemStyle: {
+                        color: '#5A6370',
+                        borderWidth: 3,
+                        borderColor: '#E0E2E6'
+                    },
+                    symbol: 'triangle',
+                    symbolSize: 10,
+                    label: {
+                        show: false
+                    }
+                }
+            ]
+        };
+        roadmapChart.setOption(roadmapOption);
+
+        window.addEventListener('resize', function () {
+            roadmapChart.resize();
+        });
+    </script>
+
+    <!-- Slide 25: Final Page -->
+    <div class="ppt-slide !bg-[#1A1D21]" type="final">
+        <div class="absolute inset-0 bg-gradient-to-br from-[#3D8F8A]/10 via-transparent to-[#E5A044]/10"></div>
+        <div
+            class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-[#3D8F8A]/5 rounded-full blur-3xl">
+        </div>
+
+        <div class="relative z-10 h-full flex flex-col justify-center items-center text-center">
+            <div class="max-w-5xl">
+                <div
+                    class="inline-flex items-center gap-3 px-6 py-3 bg-[#3D8F8A]/15 border border-[#3D8F8A]/30 rounded-full mb-8">
+                    <div class="w-3 h-3 bg-[#E5A044] rounded-full animate-pulse"></div>
+                    <span class="text-[#3D8F8A] text-lg font-medium tracking-wider">CONCLUSION & OUTLOOK</span>
+                </div>
+
+                <h2 class="font-heading text-6xl font-bold text-[#E0E2E6] leading-tight mb-8">
+                    总结与展望
+                </h2>
+
+                <div class="grid grid-cols-3 gap-8 mb-8">
+                    <div class="bg-[#3D8F8A]/10 border border-[#3D8F8A]/30 rounded-lg p-6">
+                        <div
+                            class="w-16 h-16 rounded-full bg-[#E5A044]/15 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-rocket text-[#E5A044] text-2xl"></i>
+                        </div>
+                        <h3 class="font-heading text-xl font-bold text-[#E0E2E6] mb-3">技术突破</h3>
+                        <p class="text-base text-[#E0E2E6] leading-relaxed">
+                            从300 MV/m到<strong class="text-[#E5A044]">1.8 GV/m</strong>的跨越，加速梯度提升6倍
+                        </p>
+                    </div>
+
+                    <div class="bg-[#E5A044]/10 border border-[#E5A044]/30 rounded-lg p-6">
+                        <div
+                            class="w-16 h-16 rounded-full bg-[#3D8F8A]/15 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-globe text-[#3D8F8A] text-2xl"></i>
+                        </div>
+                        <h3 class="font-heading text-xl font-bold text-[#E0E2E6] mb-3">全球协作</h3>
+                        <p class="text-base text-[#E0E2E6] leading-relaxed">
+                            <strong class="text-[#3D8F8A]">ACHIP</strong>国际合作推动技术快速迭代
+                        </p>
+                    </div>
+
+                    <div class="bg-[#3D8F8A]/10 border border-[#3D8F8A]/30 rounded-lg p-6">
+                        <div
+                            class="w-16 h-16 rounded-full bg-[#E5A044]/15 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-lightbulb text-[#E5A044] text-2xl"></i>
+                        </div>
+                        <h3 class="font-heading text-xl font-bold text-[#E0E2E6] mb-3">应用前景</h3>
+                        <p class="text-base text-[#E0E2E6] leading-relaxed">
+                            医疗、工业、科研多领域<strong class="text-[#E5A044]">革命性应用</strong>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-[#3D8F8A]/5 border border-[#3D8F8A]/20 rounded-lg p-8 mb-8">
+                    <p class="text-xl text-[#E0E2E6] leading-relaxed mb-6">
+                        芯片集成激光驱动粒子加速器代表了<span style="color: #E5A044;">加速器技术的小型化革命</span>。从2013年首次演示到2024年聚焦加速突破，<strong
+                            class="text-[#3D8F8A]">十年间技术飞速进步</strong>，加速梯度提升近6倍，国际合作推动创新边界不断拓展。
+                    </p>
+                    <p class="text-xl text-[#E0E2E6] leading-relaxed">
+                        虽然仍面临<span
+                            style="color: #E5A044;">小束流孔径、时空同步、纳米加工</span>等挑战，但逆设计方法、波导集成、级联加速等创新方案正在逐一突破。预计在未来5-10年内，<strong
+                            class="text-[#3D8F8A]">10 MeV级实用化系统</strong>将成为现实，为科学研究和人类健康做出重要贡献。
+                    </p>
+                </div>
+
+                <div class="flex items-center justify-center gap-12 text-lg">
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-calendar-alt text-[#E5A044] text-xl"></i>
+                        <span class="text-[#5A6370]">2025年展望</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-chart-line text-[#E5A044] text-xl"></i>
+                        <span class="text-[#5A6370]">持续突破</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-hands-helping text-[#E5A044] text-xl"></i>
+                        <span class="text-[#5A6370]">合作共赢</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
