@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.2.0">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/manifest.json">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"iuming.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.20.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":null},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":true,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="如果科学要进步，我们需要的是实验的能力。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="超导量子比特的控制硬件">
+<meta property="og:url" content="http://iuming.github.io/2026/03/09/%E8%B6%85%E5%AF%BC%E9%87%8F%E5%AD%90%E6%AF%94%E7%89%B9%E7%9A%84%E6%8E%A7%E5%88%B6%E7%A1%AC%E4%BB%B6/index.html">
+<meta property="og:site_name" content="REALIUMING&#39;BLOG">
+<meta property="og:description" content="如果科学要进步，我们需要的是实验的能力。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-09T02:17:32.000Z">
+<meta property="article:modified_time" content="2026-03-09T02:19:29.855Z">
+<meta property="article:author" content="Liu Ming">
+<meta property="article:tag" content="superconducting">
+<meta property="article:tag" content="quantum">
+<meta property="article:tag" content="physics">
+<meta name="twitter:card" content="&lt;twitter:card&gt;">
+<meta name="twitter:image" content="http://iuming.github.io/2026/03/09/%E8%B6%85%E5%AF%BC%E9%87%8F%E5%AD%90%E6%AF%94%E7%89%B9%E7%9A%84%E6%8E%A7%E5%88%B6%E7%A1%AC%E4%BB%B6/%3Ctwitter:image%3E">
+<meta name="twitter:creator" content="@&lt;twitter:creator&gt;">
+<meta name="twitter:site" content="<twitter:site>">
+<meta property="fb:admins" content="&lt;fb:admin_id&gt;">
+<meta property="fb:app_id" content="&lt;fb:app_id&gt;">
+
+
+<link rel="canonical" href="http://iuming.github.io/2026/03/09/%E8%B6%85%E5%AF%BC%E9%87%8F%E5%AD%90%E6%AF%94%E7%89%B9%E7%9A%84%E6%8E%A7%E5%88%B6%E7%A1%AC%E4%BB%B6/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://iuming.github.io/2026/03/09/%E8%B6%85%E5%AF%BC%E9%87%8F%E5%AD%90%E6%AF%94%E7%89%B9%E7%9A%84%E6%8E%A7%E5%88%B6%E7%A1%AC%E4%BB%B6/","path":"2026/03/09/超导量子比特的控制硬件/","title":"超导量子比特的控制硬件"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>超导量子比特的控制硬件 | REALIUMING'BLOG</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">REALIUMING'BLOG</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">283</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">21</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">116</span></a></li><li class="menu-item menu-item-books"><a href="/book/" rel="section"><i class="fa fa-book fa-fw"></i>books</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fab fa-algolia fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E7%9A%84%E9%AB%98%E7%BA%A7%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">设置的高级描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E7%9A%84%E4%BD%8E%E7%BA%A7%E6%8F%8F%E8%BF%B0"><span class="nav-number">2.</span> <span class="nav-text">设置的低级描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%A4%E6%B8%A9%E8%AE%BE%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">室温设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%A1%E5%8F%B7%E7%94%9F%E6%88%90"><span class="nav-number">3.1.</span> <span class="nav-text">信号生成</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A8%A1%E6%8B%9F%E4%BF%A1%E5%8F%B7%E7%94%9F%E6%88%90"><span class="nav-number">3.1.1.</span> <span class="nav-text">模拟信号生成</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E7%94%9F%E6%88%90"><span class="nav-number">3.1.2.</span> <span class="nav-text">数字信号生成</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86"><span class="nav-number">3.2.</span> <span class="nav-text">信号处理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%A4%E6%B8%A9%E6%BB%A4%E6%B3%A2"><span class="nav-number">3.2.1.</span> <span class="nav-text">室温滤波</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%A1%E5%8F%B7%E6%A3%80%E6%B5%8B"><span class="nav-number">3.2.2.</span> <span class="nav-text">信号检测</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%A4%E6%B8%A9%E7%9A%84%E8%BF%9B%E4%B8%80%E6%AD%A5%E8%80%83%E8%99%91"><span class="nav-number">3.3.</span> <span class="nav-text">室温的进一步考虑</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%8C%E6%AD%A5"><span class="nav-number">3.3.1.</span> <span class="nav-text">同步</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A5%E5%9C%B0"><span class="nav-number">3.3.2.</span> <span class="nav-text">接地</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%8E%E6%B8%A9%E8%AE%BE%E7%BD%AE"><span class="nav-number">4.</span> <span class="nav-text">低温设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B4%E6%B5%81%E5%B8%83%E7%BA%BF"><span class="nav-number">4.1.</span> <span class="nav-text">直流布线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%83%AD%E8%B4%9F%E8%BD%BD"><span class="nav-number">4.2.</span> <span class="nav-text">热负载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%99%AA%E5%A3%B0%E6%8A%91%E5%88%B6%E6%8A%80%E6%9C%AF"><span class="nav-number">4.3.</span> <span class="nav-text">噪声抑制技术</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%A0%E5%AF%BC%E8%B7%AF%E5%BE%84%E7%9A%84%E5%99%AA%E5%A3%B0%E6%8A%91%E5%88%B6"><span class="nav-number">4.3.1.</span> <span class="nav-text">传导路径的噪声抑制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BE%90%E5%B0%84%E8%B7%AF%E5%BE%84%E7%9A%84%E5%99%AA%E5%A3%B0%E6%8A%91%E5%88%B6"><span class="nav-number">4.3.2.</span> <span class="nav-text">辐射路径的噪声抑制</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%A1%E5%8F%B7%E6%94%BE%E5%A4%A7"><span class="nav-number">4.4.</span> <span class="nav-text">信号放大</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E9%87%8F%E6%94%BE%E5%A4%A7%E5%99%A8"><span class="nav-number">4.4.1.</span> <span class="nav-text">参量放大器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%8E%E6%B8%A9HEMT%E6%94%BE%E5%A4%A7%E5%99%A8"><span class="nav-number">4.4.2.</span> <span class="nav-text">低温HEMT放大器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SLUG%E6%94%BE%E5%A4%A7%E5%99%A8"><span class="nav-number">4.4.3.</span> <span class="nav-text">SLUG放大器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%8E%E6%B8%A9%E8%AE%BE%E7%BD%AE%E7%9A%84%E8%BF%9B%E4%B8%80%E6%AD%A5%E8%80%83%E8%99%91"><span class="nav-number">4.5.</span> <span class="nav-text">低温设置的进一步考虑</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A8%E6%A0%BC"><span class="nav-number">5.</span> <span class="nav-text">表格</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A87-1-%E5%9B%BE7-2-a-%E6%89%80%E7%A4%BA%E7%9A%84%E5%AE%A4%E6%B8%A9%E5%92%8C%E4%BD%8E%E6%B8%A9%E7%A1%AC%E4%BB%B6%E8%AE%BE%E7%BD%AE%E8%AF%B4%E6%98%8E"><span class="nav-number">5.1.</span> <span class="nav-text">表7.1 图7.2(a)所示的室温和低温硬件设置说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A87-2-%E5%AE%A4%E6%B8%A9%E5%92%8C%E4%BD%8E%E6%B8%A9%E4%BD%BF%E7%94%A8%E7%9A%84%E4%BD%8E%E9%80%9A%E6%BB%A4%E6%B3%A2%E5%99%A8"><span class="nav-number">5.2.</span> <span class="nav-text">表7.2 室温和低温使用的低通滤波器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A87-3-Bluefors-XLD400%E7%A8%80%E9%87%8A%E5%88%B6%E5%86%B7%E6%9C%BA%E5%90%84%E7%BA%A7%E7%9A%84%E6%B8%A9%E5%BA%A6%E5%92%8C%E5%8F%AF%E7%94%A8%E5%86%B7%E5%8D%B4%E5%8A%9F%E7%8E%87"><span class="nav-number">5.3.</span> <span class="nav-text">表7.3 Bluefors XLD400稀释制冷机各级的温度和可用冷却功率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A87-4-%E5%88%B6%E5%86%B7%E6%9C%BA%E4%B8%AD%E4%BD%BF%E7%94%A8%E7%9A%84%E5%99%AA%E5%A3%B0%E6%8A%91%E5%88%B6%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93"><span class="nav-number">5.4.</span> <span class="nav-text">表7.4 制冷机中使用的噪声抑制技术总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A87-5-%E8%B6%85%E5%AF%BC%E9%87%8F%E5%AD%90%E6%AF%94%E7%89%B9%E7%A1%AC%E4%BB%B6%E8%AE%BE%E7%BD%AE%E4%B8%AD%E4%BD%BF%E7%94%A8%E7%9A%84%E7%94%B5%E7%BC%86%E7%B1%BB%E5%9E%8B"><span class="nav-number">5.5.</span> <span class="nav-text">表7.5 超导量子比特硬件设置中使用的电缆类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A87-6-%E4%BD%8E%E6%B8%A9%E4%BD%BF%E7%94%A8%E7%9A%84%E4%BD%8E%E9%80%9A%E6%BB%A4%E6%B3%A2%E5%99%A8"><span class="nav-number">5.6.</span> <span class="nav-text">表7.6 低温使用的低通滤波器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A87-7-%E6%9F%90%E4%BA%9B%E6%9D%90%E6%96%99%E7%9A%84%E5%8D%8A%E7%90%83%E5%8F%91%E5%B0%84%E7%8E%87"><span class="nav-number">5.7.</span> <span class="nav-text">表7.7 某些材料的半球发射率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A87-8-%E8%B6%85%E5%AF%BC%E9%87%8F%E5%AD%90%E6%AF%94%E7%89%B9%E5%AE%9E%E9%AA%8C%E4%B8%AD%E7%9A%84%E6%94%BE%E5%A4%A7"><span class="nav-number">5.8.</span> <span class="nav-text">表7.8 超导量子比特实验中的放大</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Liu Ming"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Liu Ming</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">116</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">283</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button animated">
+    <button><i class="fa fa-comment"></i>
+      Chat
+    </button>
+  </div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2l1bWluZw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;iuming"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOjUyMDBsaXVtaW5nQGdtYWlsLmNvbQ==" title="E-Mail → mailto:5200liuming@gmail.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vdS8zMTQ3OTEyODky" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;3147912892"><i class="fab fa-weibo fa-fw"></i>Weibo</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9yZWFsaXVtaW5n" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;realiuming"><i class="fab fa-twitter fa-fw"></i>Twitter</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL3JlYWxpdW1pbmc=" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;realiuming"><i class="fab fa-facebook fa-fw"></i>FB Page</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8xMjE4NTI3My9pdW1pbmc=" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;12185273&#x2F;iuming"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly95b3V0dWJlLmNvbS9jaGFubmVsL1VDaUNCSHJ4cDJ4Tlc3T1ZaTlFzZHROdw==" title="YouTube → https:&#x2F;&#x2F;youtube.com&#x2F;channel&#x2F;UCiCBHrxp2xNW7OVZNQsdtNw"><i class="fab fa-youtube fa-fw"></i>YouTube</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9pbnN0YWdyYW0uY29tL3JlYWxpdW1pbmc=" title="Instagram → https:&#x2F;&#x2F;instagram.com&#x2F;realiuming"><i class="fab fa-instagram fa-fw"></i>Instagram</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="c2t5cGU6ODQyNjczNTU2P2NhbGx8Y2hhdA==" title="Skype → skype:842673556?call|chat"><i class="fab fa-skype fa-fw"></i>Skype</span>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="Back to top">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://iuming.github.io/" title="https:&#x2F;&#x2F;iuming.github.io&#x2F;">Title</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://iuming.github.io/2026/03/09/%E8%B6%85%E5%AF%BC%E9%87%8F%E5%AD%90%E6%AF%94%E7%89%B9%E7%9A%84%E6%8E%A7%E5%88%B6%E7%A1%AC%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Liu Ming">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="REALIUMING'BLOG">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="超导量子比特的控制硬件 | REALIUMING'BLOG">
+      <meta itemprop="description" content="如果科学要进步，我们需要的是实验的能力。">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          超导量子比特的控制硬件
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2026-03-09 10:17:32 / Modified: 10:19:29" itemprop="dateCreated datePublished" datetime="2026-03-09T10:17:32+08:00">2026-03-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/note/" itemprop="url" rel="index"><span itemprop="name">note</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2026/03/09/%E8%B6%85%E5%AF%BC%E9%87%8F%E5%AD%90%E6%AF%94%E7%89%B9%E7%9A%84%E6%8E%A7%E5%88%B6%E7%A1%AC%E4%BB%B6/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2026/03/09/超导量子比特的控制硬件/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+            <div class="post-description">如果科学要进步，我们需要的是实验的能力。</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><blockquote>
+<p>“如果科学要进步，我们需要的是实验的能力。”<br>——理查德·费曼</p>
+</blockquote>
+<p>本章将迄今为止所学的内容整合在一起，以全面理解超导量子比特的控制硬件。由于超导、自旋和拓扑量子比特的控制硬件之间存在显著的相似性，本章获得的知识可以广泛应用于半导体量子比特。</p>
+<p>我们首先考察室温设置，其中信号生成和检测在此进行。接下来，我们探索低温设置和各种技术，包括降噪和低噪声放大。</p>
+<p>本章最后探讨控制和测量自动化，提供关于如何自动化这些流程以提高效率和准确性的见解。</p>
+<hr>
+<h2 id="设置的高级描述"><a href="#设置的高级描述" class="headerlink" title="设置的高级描述"></a>设置的高级描述</h2><p>就像今天的计算机一样，量子计算机预计将沿着将分立元件集成到芯片中的道路发展，从而实现尺寸和成本的降低，同时提高性能。然而，超导量子比特系统中微波信号生成、处理、传输和检测的基本原理保持不变。理解这些原理对于推进和增强量子计算技术至关重要。第1-6章为量子比特操作和微波工程奠定了坚实的基础，包括量子比特控制和读出以及超导量子计算机作为微波链路的概念的讨论，该链路结合了微波工程所有四个领域（生成、传输、处理和检测）的技术，以确保正确运行。</p>
+<p>本章将这些思想应用于超导量子比特的低温和室温硬件设置[1-4]。为了更好地理解该设置，让我们首先提供一个高级描述，将设置的每个部分映射到我们在第3章学到的量子比特控制和读出概念。本节旨在考察硬件如何作为一个整体运行。</p>
+<p>随后，以下各节将深入研究构成该设置的各个构建模块，彻底研究每个组件。</p>
+<hr>
+<p>图7.1所示的设置代表了超导量子比特的典型配置，也可以经过修改用于拓扑量子比特（如顶部transmon）和自旋量子比特。输入涉及生成脉冲和微波信号以控制和读出量子比特的信号源。这些室温信号进入稀释制冷机，并与量子处理单元（QPU）中的量子比特相互作用。制冷机的主要目的是创建一个受控的低噪声环境，使量子比特能够在较长时间内保持相干性。一旦与量子比特相互作用，读出信号将被放大、下变频和数字化，以便在主机计算机中进行后处理，如图7.1所示。</p>
+<p>现在让我们关注图7.1所示的信号生成模块。第3章解释了微波脉冲如何在布洛赫球上控制量子比特的状态。此外，连续和脉冲光谱技术能够使用微波信号读出量子比特的状态。此外，第3章展示了磁场如何通过直流和脉冲信号耦合到量子比特的SQUID，用于量子比特的全局和局部调谐。第5章讨论了操作低温参量放大器需要泵浦信号，该信号由微波源生成。这些是量子比特控制、调谐和读出所需的信号。</p>
+<p>低温温度下的设置有两个主要功能。首先，它旨在通过实施各种噪声抑制技术（如衰减器、低电导率微波电缆、滤波器以及热和电磁屏蔽）来最小化耦合到量子比特的噪声。其次，它需要读出谐振器信号的超低噪声放大，以通过最大化信噪比（SNR）确保在室温下成功检测。</p>
+<p>室温信号检测涉及几个步骤。它从室温下的低噪声放大开始。下变频是将信号频移到适合数字化的频率范围所必需的。最后，使用数字化仪对模拟信号进行采样，以便在主机计算机中进行后续后处理。</p>
+<hr>
+<h2 id="设置的低级描述"><a href="#设置的低级描述" class="headerlink" title="设置的低级描述"></a>设置的低级描述</h2><p>图7.2(a)提供了图7.1中呈现的每个方框图的详细信息。此外，图7.2(b)说明了稀释制冷机内的实际设置。为了提供额外的清晰度，表7.1解释了设置的每个部分。</p>
+<p>目前，几乎所有研究超导量子计算机的实验室都采用在室温下运行的控制和读出链的设置。然而，一个显著的趋势正在出现，即向集成和微型化室温设置并将其重新定位到制冷机的低温环境中转变。这种方法不仅显著减少了从室温耦合到制冷机的噪声量，而且促进了量子比特的扩展。第7.5.2节讨论了低温CMOS芯片，以实现低温控制和检测方案。</p>
+<p>第7.3和7.4节对图7.2中描绘的每个构建模块进行了更详细的调查。</p>
+<hr>
+<h2 id="室温设置"><a href="#室温设置" class="headerlink" title="室温设置"></a>室温设置</h2><p>本节讨论室温下的信号生成、处理和检测。尽管行业正在向全数字信号生成和检测发展，但研究模拟和数字技术都是必不可少的。模拟技术的思想和原理极具洞察力，有助于更深入地理解系统。此外，许多实验室由于其简单性、相对低成本和易于实施，特别是在处理少量量子比特时，继续使用模拟技术。</p>
+<h3 id="信号生成"><a href="#信号生成" class="headerlink" title="信号生成"></a>信号生成</h3><p>在量子比特实验中，使用三种类型的信号源：AWG（任意波形发生器）、微波信号发生器和直流电压源，如图7.2(a)所示。正如我们很快将发现的，所有信号生成都可以数字化完成，提供许多优势，包括减少元件数量和每个通道更具成本效益的解决方案。</p>
+<h4 id="模拟信号生成"><a href="#模拟信号生成" class="headerlink" title="模拟信号生成"></a>模拟信号生成</h4><p>让我们首先讨论量子比特控制。如第2章所述，任何单量子比特门都可以表示为布洛赫球上的旋转。在量子比特的跃迁频率处，微波脉冲能够围绕布洛赫球的x轴和y轴进行任意旋转，其中脉冲幅度和相位分别定义旋转角度和轴方向。通过组合围绕布洛赫球轴的旋转，如第3章所述，可以实现围绕任意轴的旋转。例如，第3.3.1.5节讨论了使用脉冲整形技术（如高斯脉冲和DRAG脉冲）来防止激发到更高量子比特能级的跃迁。</p>
+<p>图7.3说明了使用AWG的I和Q分量生成脉冲的过程。应用于LO端口的微波信号发生器允许将高斯脉冲上变频到量子比特的跃迁频率。使用Python和MATLAB等软件包来设计这些脉冲。然后将生成的代码导入AWG并存储在内存中。（参见第5章了解AWG操作。）</p>
+<p>现在，让我们讨论量子比特读出。在图7.2(a)中，相同的输入线用于量子比特控制和读出，使用功率合成器来组合这两个信号。然而，具有单独的驱动和读出线是有利的，因为它允许对片上耦合进行完全控制。此外，具有单独的线路可以实现更快的门操作，因为驱动不通过谐振器进行[1]。</p>
+<h4 id="数字信号生成"><a href="#数字信号生成" class="headerlink" title="数字信号生成"></a>数字信号生成</h4><p>我们已经观察到，要控制单个量子比特，需要两个AWG通道（I和Q）、一个微波信号发生器和一个IQ混频器，如图7.5(a)所示。脉冲通常用于读出，需要其自己的AWG通道、混频器、微波信号发生器和额外的功率合成器，因为读出脉冲有时与控制线共享同一线路[见图7.5(a)]。除了元件数量之外，这种设置需要校准以实现高门保真度。一个重要的校准步骤涉及校准IQ混频器的偏移和增益，以最小化载波泄漏和杂散的影响，这可能导致不期望的跃迁。</p>
+<p>如第5章所示，数字源的采样率已达到显著高的水平，导致宽带宽可以有效地产生高达几十GHz的微波信号。这一进步消除了上变频的需要，使用一种称为宽带DDS（直接数字合成）的技术。使用DDS，单个通道可以在不同频率下生成控制和读出脉冲，在操作单量子比特和多量子比特方面提供显著优势。图7.5(b)说明了这种能力如何通过减少元件数量并消除混频器校准的需要来简化设置。这种简化对于扩展量子硬件、减少潜在的保真度损失来源以及降低每个量子比特的硬件成本至关重要。此外，这种技术能够在不同频率和跨多个通道的信号之间实现精确的相位关系，促进多量子比特门[5, 6]。</p>
+<p>数字信号生成的一个缺点是其相位噪声与模拟源相比较差，如第5章所述。然而，随机基准测试方案已证明数字生成技术可以实现高保真度量子比特控制脉冲，平均门错误率小于5×10⁻⁴[5]。</p>
+<p>如第5章所述，现代RF DAC可以使用第二奈奎斯特区模式直接合成高于其采样率的音调。这一特性使系统时钟速率与数字逻辑系统保持兼容，同时仍允许生成具有任意轮廓的高频脉冲[6]。</p>
+<h3 id="信号处理"><a href="#信号处理" class="headerlink" title="信号处理"></a>信号处理</h3><p>室温下的信号处理有两个主要目的：滤波和信号检测。第7.3.2.1和7.3.2.2节深入探讨了这两个功能并探索了它们的重要性。</p>
+<h4 id="室温滤波"><a href="#室温滤波" class="headerlink" title="室温滤波"></a>室温滤波</h4><p>回顾第5.4.3.1节中关于不同类型滤波器及其相应操作参数的讨论。表7.2重点介绍了在直流控制线中使用低通滤波器，并在混频器后使用以消除检测链中的谐波和杂散信号。现在，让我们讨论在量子比特设置中实现这些滤波器。</p>
+<p>有必要在直流和低频信号进入制冷机之前对其进行滤波，以确保相干时间不受电网60Hz频率和电子仪器1&#x2F;f噪声的影响。滤波过程如图7.6(a)所示，在分线盒内进行。分线盒的前面板通常具有BNC连接器[图7.6(b)]，而盒子内部包含低通滤波器。连接到制冷机输入的屏蔽电缆位于后面板上，如图7.6(c)所示。</p>
+<p>在设计或选择量子比特实验的低通滤波器时，应仔细考虑截止频率。为了快速调谐量子比特跃迁频率，将纳秒级磁通脉冲应用于FBL（磁通偏置线）。为了传输10纳秒脉冲而不产生显著的波形衰减和衰减，需要超过100 MHz的带宽。为了防止脉冲衰减，必须保留高达第四或第五次谐波的频率分量。因此，低通滤波器的截止频率应在400-500 MHz范围内，其中平滑的滚降特性有助于防止脉冲波形衰减。</p>
+<p>在某些情况下，低通滤波器也用于检测链中混频器之后，以减轻由混频器非线性产生的杂散的影响，如图7.2(a)所示。</p>
+<h4 id="信号检测"><a href="#信号检测" class="headerlink" title="信号检测"></a>信号检测</h4><p>回顾第5.4节中解释的信号检测原理，包括使用零差和外差架构。虽然零差检测方案更简单，但其效率低于商业量子比特检测系统中使用的更复杂的外差方案。</p>
+<p>根据图7.2(b)，零差检测链涉及以下步骤：</p>
+<ol>
+<li>读出信号的放大在制冷机内部开始，使用低温参量放大器和HEMT放大器。信号在室温下使用LNA进一步放大。</li>
+<li>使用IQ混频器和微波信号发生器对信号进行下变频。</li>
+<li>可以应用滤波，在混频器后添加低通滤波器以消除倍频和其他杂散信号。</li>
+<li>下变频信号使用数字化仪进行数字化或采样。</li>
+</ol>
+<p>为了准备信号进行检测，放大是必要的。读出谐振器的信号首先在制冷机内使用JPA或TWA放大，然后是HEMT放大器。如第4章所述，链中第一个元件的噪声系数对整体噪声系数影响最大。因此，在谐振器输出后使用具有尽可能低噪声系数的放大器至关重要。（参见表4.1了解各种放大器噪声系数的比较。）因此，参量放大器优先作为检测链中的第一个元件。信号通常使用安装在4K级的低温HEMT放大器进一步放大。</p>
+<p>在制冷机内放大后，室温下的信号需要额外放大40-60 dB，以将信号电平提高到成功检测的检测阈值以上（参见第4章中最小可检测信号的讨论）。通常，室温LNA的噪声系数约为1-3 dB，增益约为20-30 dB。</p>
+<p>下一步是对放大信号进行下变频，将频率降低到适合采样的范围。可以使用数字化仪（如1 GS&#x2F;s的Acqiris AP240采集板）对信号进行采样，并为主机计算机上的后处理做准备。</p>
+<p>放大信号被引导至IQ混频器进行下变频，LO微波音调由微波信号发生器有意偏离腔体信号1~10 MHz提供。需要调整该信号的频率，使下变频信号落在数字化仪的工作带宽内。请注意，IQ混频器必须经过校准以实现优化性能。第5.4.3.2节解释了必须通过校准解决IQ混频器的相位和幅度不平衡，以消除直流偏移和边带。</p>
+<p>数字零差技术还允许数字重建I和Q信号。在这种方法中，利用IQ混频器的单个输出S_IF(t)，其中IF处的正弦和余弦信号与输入信号进行数字相乘。得到的输出是数字I和Q，可以组合产生[7]：</p>
+<p>$$I &#x3D; \frac{2}{T}\int_T S_{IF}(t)\cos(\omega_{IF}t)dt, \quad Q &#x3D; \frac{2}{T}\int_T S_{IF}(t)\sin(\omega_{IF}t)dt \tag{7.1}$$</p>
+<p>$$S_{IF}(t) &#x3D; A\cos(\omega_{IF}t + \phi) &#x3D; I\cos(\omega_{IF}t) - Q\sin(\omega_{IF}t) \tag{7.2}$$</p>
+<p>到目前为止，我们的讨论一直基于模拟下变频技术。然而，行业已转向第5章讨论的直接RF采样技术。对于足够高的采样率，这种架构减少了所需元件的数量（如混频器和LO）；消除了下变频的需要，因此消除了IQ混频器及其校准；并降低了每个量子比特的成本。</p>
+<p>图7.7描绘了一个全数字量子控制解决方案，包括生成和检测模块。这个全面的解决方案解决了室温下的量子比特控制和读出需求。</p>
+<h3 id="室温的进一步考虑"><a href="#室温的进一步考虑" class="headerlink" title="室温的进一步考虑"></a>室温的进一步考虑</h3><p>除了室温下运行的控制、读出、调谐和检测组件外，许多其他细节在超导量子比特系统的成功运行中起着关键作用。第7.3.3.1和7.3.3.2节探讨了这些方面的一些内容。</p>
+<h4 id="同步"><a href="#同步" class="headerlink" title="同步"></a>同步</h4><p>在处理量子叠加中的相位自由度时，保持相干性超出了量子比特的内部相干性。它还包括量子比特与其操作主时钟之间的同步[8]。温度变化和长时间采集等因素可能导致显著的相位漂移。</p>
+<p>为了确保长期相位稳定性和同步，使用超低相位噪声10 MHz铷频率标准将所有信号发生器、测量仪器（如网络分析仪）、AWG和采集卡进行相位锁定至关重要。这个频率标准，也称为参考信号，提供稳定的10 MHz输出，可以连接到信号发生器和数据采集卡等仪器。铷钟通常在10 Hz偏移处表现出约-130 dBc&#x2F;Hz的相位噪声。</p>
+<p>时钟的不稳定性不仅影响主时钟，还影响量子比特的相位相干性[3]。如第4章所述，相位噪声导致频谱展宽。假设以下两种情况：一种是LO与稳定的量子比特相互作用但不稳定的LO；另一种是量子比特表现出具有波动跃迁频率的噪声，但LO保持干净和相位稳定。这两种情况具有等效的退相位效应，突出了LO相位不稳定性对退相位的贡献[4]。</p>
+<h4 id="接地"><a href="#接地" class="headerlink" title="接地"></a>接地</h4><p>第6章讨论了接地，并确定了由于接地回路影响量子比特实验的潜在问题。这些问题包括：</p>
+<ul>
+<li>由于接地电压差异，互连电缆上的共模电流产生的不需要的噪声信号；</li>
+<li>强磁场感应的噪声电压耦合到接地回路，随后影响量子比特和低温测温。</li>
+</ul>
+<p>第6章建议使用隔离变压器或光耦合器通过消除电气接触来打破两个电路之间的接地回路。众所周知，修改制冷机接地可以改善退相位时间[4]。因此，第一步涉及使用称为1:1变压器的隔离变压器将实验的电源与电网隔离。</p>
+<p>所有低温恒温器连接，包括真空管线，都是直流隔离的，以防止接地回路，除了单个明确定义的接地电缆。标准SMA真空馈通，如Huber和Sühner的34_SMA-50-0-3&#x2F;111_NE，用于稀释制冷机的300 K板，以提供进入制冷机的微波通道。</p>
+<p>微波线路上的直流模块将微波接地与低温恒温器接地隔离。因此，应使用两端带有电容器的直流模块，如Inmet 8039，用于此目的。</p>
+<p>对于GPIB连接，可以使用基于光耦合器的隔离器，如National Instruments的GPIB-120A总线扩展器&#x2F;隔离器。USB和以太网连接也有隔离器可用[5]。</p>
+<hr>
+<h2 id="低温设置"><a href="#低温设置" class="headerlink" title="低温设置"></a>低温设置</h2><p>回想一下，低温设置有两个主要功能：抑制耦合到制冷机的噪声和放大量子比特读出信号。各节探讨了这两个功能并提供了更全面的讨论。</p>
+<h3 id="直流布线"><a href="#直流布线" class="headerlink" title="直流布线"></a>直流布线</h3><p>回想一下，直流线路通过外部超导线圈产生的磁通来调整量子比特跃迁频率，如图7.1(a)所示。通常，超导线圈可以在每安培几百高斯的范围内产生磁场。为了使每个量子比特能够在广泛的Φ₀值范围内进行调谐，使用带有直流电压源的偏置电阻。此外，利用片上FBL，消除了对外部磁场的需要。每个量子比特都有自己的FBL，连接到驱动室温衰减器的电压源。每个FBL连接到AWG的一个通道，用于快速调谐量子比特。</p>
+<p>回想一下，这些直流信号由室温源生成，并通过分线盒传输到制冷机的输入。由于其高热导率，铜或磷青铜（PhBr）双绞线束，线径为AWG35和AWG36，仅在室温到4K级之间使用。从4K到混合室（MXC），使用超导NbTi双绞线，因为它们具有低电导率和低热导率，绕过了维德曼-弗朗兹定律施加的限制。所有电线通过在铜柱上缠绕并用GE清漆固定，在每个温度级进行热锚定。微D型连接器通常用于低温恒温器内部的连接，而在线圈布线的低温部分避免使用电阻连接器以防止加热。</p>
+<p>如第7.2节所述，在直流线路中实施滤波器以减少带外噪声。</p>
+<h3 id="热负载"><a href="#热负载" class="headerlink" title="热负载"></a>热负载</h3><p>稀释制冷机的热负载可分为以下三个主要组件，以及较小的贡献[4]：</p>
+<ol>
+<li><strong>被动负载</strong>：这是指从较高温度级到较低温度级的热传递。它包括通过安装的电缆传导的热量和通过分离稀释制冷机不同板的柱子流动的热量。</li>
+<li><strong>主动负载</strong>：这与耗散的热量有关，即由于施加的微波信号在衰减器和微波电缆中产生的焦耳热，用于在4K偏置HEMT放大器的耗散直流信号，以及在MXC对量子比特进行磁通偏置。</li>
+<li><strong>辐射负载</strong>：这涉及从较高温度的级和屏蔽向较低温度的级和屏蔽的黑体辐射传递。</li>
+<li><strong>残余气体负载</strong>：虽然在正常运行期间通常可以忽略不计（因为压力保持在10⁻⁵ mbar以下），残余气体会对整体热负载产生贡献。</li>
+</ol>
+<p>如我们将在第7.4.3节中探讨的，通过使用低热导率电缆来最小化被动负载是可能的。然而，根据维德曼-弗朗兹定律，导热性能差的材料导电性能也差，导致施加微波信号时耗散增加。这一挑战可以通过有效地将电缆、衰减器和微波组件热锚定来解决，这将在第7.4.3.1节中讨论。</p>
+<p>表7.3说明了Bluefors XLD400稀释制冷机的不同阶段以及每个阶段可用的相应冷却功率。重要的是要注意，随着我们移动到较低温度级，冷却功率会降低。任何级的过度热负载都会显著影响制冷机的冷却性能，并可能导致操作问题。因此，确保每个级的热负载保持在可用冷却功率以下是至关重要的。</p>
+<h3 id="噪声抑制技术"><a href="#噪声抑制技术" class="headerlink" title="噪声抑制技术"></a>噪声抑制技术</h3><p>如第3章所述，量子比特与其环境之间的相互作用导致量子比特弛豫和退相位，导致退相干。此外，第6章解释了噪声可以通过中介从噪声源耦合到接收器。可以在所有三个组件（源、中介和接收器）上实施各种措施来缓解这个问题，以减少或消除噪声。例如，识别和消除噪声源或通过屏蔽和滤波技术最小化其影响是可能的方法。此外，可以通过结合屏蔽、考虑QPU板的设计方面、探索3D量子比特等替代平台，甚至采用拓扑量子比特等不同技术来增强量子比特的噪声弹性。本节的主要目标是探索有效阻断噪声耦合到量子比特路径的技术。</p>
+<p>如图7.8所示，耦合到量子比特的路径可分为以下几类：</p>
+<ul>
+<li><strong>传导路径</strong>：在此路径中，噪声源直接连接到量子比特。例如，室温下的热噪声通过量子比特控制和读出线传导到量子比特。</li>
+<li><strong>辐射路径</strong>：在此路径中，噪声源发射影响量子比特的辐射。这种噪声的一个例子是电磁和红外辐射。</li>
+</ul>
+<p>为了减轻通过传导和辐射路径耦合的噪声，可以采用表7.4中强调的各种技术。每种技术都在后续章节中进行了详细解释。</p>
+<h4 id="传导路径的噪声抑制"><a href="#传导路径的噪声抑制" class="headerlink" title="传导路径的噪声抑制"></a>传导路径的噪声抑制</h4><p>本节涵盖抑制由传导路径介导的噪声的技术。</p>
+<p><strong>微波布线</strong></p>
+<p>如前所述，室温下产生的噪声可以通过用于量子比特控制和读出的传导路径耦合到量子比特。接下来的两节考察室温和低温微波布线。</p>
+<p><strong>室温微波布线</strong></p>
+<p>表7.5概述了室温应用所需的三种微波电缆。首先，低损耗和相位稳定的电缆与微波仪器（如网络分析仪和微波信号发生器）一起使用。请注意，弯曲电缆会改变弯曲点的物理长度，并可能导致中心导体周围的电介质、屏蔽和编织松动或收缩，导致电长度变化和随后的相位变化。因此，常规微波电缆在弯曲时会引入相位变化。其次，可手工成型的微波电缆用于建立室温检测链组件之间的连接，包括放大器、混频器和滤波器，如图7.9(a)所示。</p>
+<p>第三，UT-85-TP电缆用于将室温组件连接到制冷机的输入和输出端口。</p>
+<p><strong>低温微波布线</strong></p>
+<p>为了减轻耦合到制冷机的噪声，使用低热导率的微波电缆，如不锈钢电缆。这有助于最小化传递到制冷机的热量。然而，使用低热导率电缆以增加信号损耗为代价。根据维德曼-弗朗兹定律，低热导率的材料也表现出低电导率。表7.5表明，不锈钢电缆在10 GHz下运行时的单位长度插入损耗几乎是典型微波电缆的六倍。</p>
+<p>在没有微波信号施加到不锈钢电缆的情况下，从室温传导到制冷机的热噪声低于典型微波电缆。然而，当施加微波信号时，从不锈钢电缆在制冷机中产生的热量超过了典型电缆。为了缓解这种情况，通过在每个制冷机级热锚定电缆，有效地将产生的热量从制冷机中排出，如图7.9(b)所示。电缆的外导体使用无氧高导热（OFHC）铜支架夹紧和热沉。电缆的内导体通过衰减器间接热化（参见下一节）。由于电缆的电介质具有非常低的热导率，来自中心引脚的热量不能有效地传递到外导体，在那里被热化。然而，从衰减器中心引脚到其主体的热传递更有效。因此，电缆中心引脚可以有效热化的唯一点是连接到衰减器的地方。与电缆一样，OFHC夹具可以热化衰减器，如图7.9(b)所示。</p>
+<p>图7.9(c)展示了低温微波电缆中约1厘米弯曲半径的弯曲。这种弯曲配置有助于在冷却过程中减轻连接器上的应变。</p>
+<p>在制冷机的输出侧使用不锈钢电缆来减少噪声耦合是不切实际的，那里传输量子比特读出信号以进行检测。这是由于量子比特读出信号的电平极低，这使得在存在大信号损耗的情况下几乎不可能检测。因此，在制冷机的输出侧使用低损耗电缆。</p>
+<p>超导体不遵循维德曼-弗朗兹定律，这意味着它们可以同时具有低热导率和低损耗。表7.5表明，超导SC-219&#x2F;50-NbTi-NbTi-1000电缆在超导状态下低于4K时表现出非常低的0.3 dB&#x2F;m插入损耗。当电缆在4K以上转变出超导相时，插入损耗显著增加。超导电缆用于从量子比特输出到温度低于4K的制冷机级，如图7.2(a)所示。对于4K以上的温度，使用具有低热导率和低损耗的UT-85B-SS低温电缆。</p>
+<p>关于微波电缆之间的被动热负载，制冷机输出侧的UT-85-SS电缆具有最高的热负载，其次是不锈钢电缆UT-85-SS-SS和超导电缆UT-85-NbTi[4]。</p>
+<p>布线对扩展量子计算机构成重大瓶颈，因为与增加互连密度相关的挑战，包括制冷机尺寸、热负载、噪声耦合、信号完整性和校准问题。为了解决这一扩展挑战，最近的重点放在柔性低温微波电缆或低温柔性电缆上。与传统微波同轴电缆相比，这些电缆具有多项优势，如较低的热导率、高密度互连、更小的外形尺寸和易于安装。它们可以使用OFHC铜夹具方便地在制冷机的每个级别进行热锚定，如图7.9(d)所示。此外，这些电缆可以集成滤波和信号调理组件，提供额外的功能。</p>
+<p>已经开发了诸如单线上的交叉开关寻址和多路复用等技术，以在多个量子比特上驱动单量子比特操作，从而减少所需的微波线路数量。这种方法允许每条电缆用于多种功能。然而，虽然这种方法对于有限数量的量子比特是可行的，但由于串扰和频率多路复用的有限带宽等问题，对于扩展到数千或数百万量子比特来说，这不是一个实用的解决方案。</p>
+<p><strong>微波连接器</strong></p>
+<p>回想一下我们在第5章中对微波连接器和适配器的讨论。现在让我们快速回顾一下制冷机内部使用的微波连接器。购买电缆时提供特定长度，SMA连接器需要压接或焊接到电缆上。焊接超导电缆可能具有挑战性，因此在这种情况经常使用压接来连接SMA连接器。对于其他类型的低温电缆，通常将SMA连接器焊接到电缆上。或者，可以要求电缆供应商提供完全组装的电缆组，尽管此选项通常更昂贵。</p>
+<p>如第5章所述，卡扣式连接器（如MMPX或SMP）具有快速轻松连接和断开的优势，无需螺纹配合。这一特性使它们非常适合连接器空间有限且需要频繁更换电缆的应用。由于其节省空间的设计，它们对于量子芯片样品架上的微波连接特别有用。为了适应制冷机内的高密度连接，使用组合连接器。</p>
+<p><strong>使用衰减器进行噪声抑制</strong></p>
+<p>除了利用低热导率电缆外，还将微波衰减器纳入制冷机的输入微波线路中以减轻热噪声。本节全面解释了必要的衰减水平及其在各个温度级之间的分配，以有效最小化热噪声。</p>
+<p>使用衰减器的想法是衰减噪声水平。在此过程中产生的热量通过热化衰减器从制冷机中泵出。这是通过使用OFHC夹具将衰减器主体连接到每个级来实现的，如图7.2所示。如果没有适当的热化，衰减器的损耗会导致更高的噪声水平，热量积累会导致热辐射，影响较低制冷机级的温度。例如，20 dB衰减器将信号电平降低100倍，在衰减器内耗散99%的信号，从而强调了有效热化的重要性。</p>
+<p>回想一下第4.3.2.4节中关于电阻R中电荷载流子的热运动如何产生平均值为零但均方根值非零的随机电压，如普朗克黑体辐射定律所述。</p>
+<p>在微波频率和高温下，其中ℏω &lt;&lt; k_BT，结果可以简化为V_n &#x3D; √(4kTBR)，最大可用噪声功率为P_n &#x3D; kTB。</p>
+<p>上述线性关系近似于普朗克的黑体辐射公式，仅对几开尔文以上的温度有效。低于4K时，噪声功率与温度之间的关系不再是线性的；因此，对于4K以下的噪声计算，必须使用公式(4.5)。如图7.10(a)所示，温度变化10倍导致高温下热噪声功率变化10 dB。在非常低的温度下，噪声功率成为温度的二次函数（即，温度变化10倍导致热噪声功率变化20 dB）。图7.13(a)中的图显示，噪声功率从300K的室温到10mK变化60 dB。因此，必须在制冷机的各个级之间分配60 dB的衰减，以有效降低混合室的热噪声。</p>
+<p>在制冷机的各个级之间分配衰减器有两个原因：每个级可实现的有噪底限和有限的冷却功率。</p>
+<p>如图7.10(a)所示，源自室温（300K）的噪声在到达2K级时只能衰减20 dB。因此，20 dB的衰减就足够了，因为进一步的衰减不会将噪声水平降低到2K级的热噪声底限以下。</p>
+<p>现在让我们深入研究基于每个级有限冷却功率的衰减器分配。有人可能想知道为什么我们在各个级之间分配衰减，而不是仅在最后一级施加60 dB的衰减。答案在于每个级可用的冷却功率。当我们移动到较低温度级时，冷却功率会降低（参见表7.3）。此外，每个级的过度热负载会显著影响制冷机的冷却性能，并可能破坏其正常运行。因此，如果我们要在MXC耗散60 dB的衰减，可用的冷却功率将不足以有效移除如此高衰减产生的热量。因此，我们不能在MXC级添加超过20 dB的衰减。因此，将总衰减分布在不同的温度级之间至关重要，以确保较低级的主动负载远低于这些级可用的冷却功率。</p>
+<p>已经表明，在MXC的低噪声光子数和MXC的低热负载之间取得平衡的最佳选择是总共60 dB的衰减，包括热锚定在4K、冷板（100 mK）和MXC（10 mK）级的20 dB衰减器[4]。</p>
+<p>传统的室温衰减器由于几个因素而不适合低温环境。首先，低温衰减器中使用的材料必须是非磁性的，并且专门设计以承受低温系统中遇到的极端温度。此外，低温衰减器需要在宽温度范围内具有稳定的衰减特性，以确保一致的性能。最后，最小化低温衰减器中的自热对于有效实现所需的低温至关重要。</p>
+<p>从光子占据数的角度考虑衰减器实现的噪声抑制也是很有见地的。根据玻色-爱因斯坦分布，光子占据数可以表示为：</p>
+<p>$$n_{BE}(T,\omega) &#x3D; \frac{1}{\exp\left(\frac{\hbar\omega}{k_BT}\right)-1} \tag{7.3}$$</p>
+<p>光子占据数n_BE(T, ω)是无量纲的，可以被认为是光子通量谱密度（即，每秒每赫兹频率间隔的光子数）[4]。例如，在室温T &#x3D; 300K和频率为6 GHz时，n_BE(300K, 2π×6 GHz) ≈ 1,043。对于超导量子比特，样品处的热光子占据数必须在10⁻³光子的范围内。</p>
+<p>具有衰减A_i的第i级的噪声光子占据数n_i由[4]给出：</p>
+<p>$$n_i(\omega) &#x3D; \frac{n_{i-1}(\omega)}{A_i} + n_{BE}(T_{i,att},\omega) - \frac{1}{A_i}n_{BE}(T_{i,att},\omega) \tag{7.4}$$</p>
+<p>第i级的噪声光子数由三个分量组成。第一个分量是来自前一级的噪声，被因子A_i衰减。第二个分量是第i级本身的噪声底限，第三个分量是被衰减因子A_i降低的噪声底限。公式(8.6)说明衰减有效地减少了源自前一级的噪声光子数。同时，它对安装该级的噪声底限影响可忽略不计，特别是对于高衰减值。最终，每个级的光子噪声主要由该特定级的热噪声底限决定。因此，使用大于必要的衰减值将入射辐射场热化到该级是不必要的，如图7.10(b)所示。</p>
+<p>第i级所需的衰减可以估计为A_{i,ref} &#x3D; (n_BE(T_{i-1},ω))&#x2F;(n_BE(T_i,ω))。通过忽略噪声底限光子数，我们可以确定实现n_MXC &#x3D; 10⁻³所需的总衰减的下限，其中n_BE(T&#x3D;300K, ω)&#x2F;10⁻³ &#x3D; 60 dB。</p>
+<p>这展示了在忽略所有其他温度级衰减器发射的黑体辐射的情况下的下限。这些发现验证了先前从普朗克黑体辐射定律得出的结果。</p>
+<p><strong>低温滤波和屏蔽</strong></p>
+<p>到目前为止，我们已经深入研究了使用低热导率电缆和衰减器降低噪声的技术。现在，让我们看看滤波和屏蔽方法如何进一步提高噪声抑制的有效性。</p>
+<p><strong>低温滤波</strong></p>
+<p>图7.2(a)和表7.6说明了在制冷机内的直流和微波线路中使用滤波器。在直流线路中，由于潜在的加热问题，使用衰减技术是不可行的。因此，使用低通滤波器来抑制热噪声。回想一下，将信号的频率分量传输到第五次谐波对于防止脉冲衰减至关重要。因此，对于纳秒脉冲，低通滤波器的截止频率应设置在400到500 MHz之间，确保平滑滚降以保持脉冲形状。</p>
+<p>在量子比特控制和测量中，出现不同的滤波器要求。XY控制和读出需要高截止频率的滤波器，通常在GHz范围内。另一方面，Z控制需要低截止频率的滤波器。如图7.1(a)所示，微波控制线路使用高截止频率的滤波器。相比之下，FBL包含截止频率为几百MHz的低通滤波器。</p>
+<p><strong>铜粉滤波器</strong></p>
+<p>让我们讨论一个与集总元件和传输线滤波器在高频下的行为相关的有趣现象。如果我们在宽频率范围内绘制微带低通滤波器的传输响应（|S₂₁|），就会出现一个有趣的模式。最初，传输（衰减）通常以单调方式减少（增加），如图7.11(a)所示。然而，超过3.2 GHz后，由于再入模式，传输（衰减）增加（减少）。因此，低通滤波器在特定频率以上有效地转变为高通滤波器，如图7.11(b)所示。如果系统的工作带宽有限，这种行为可能不会带来重大问题。</p>
+<p>集总元件滤波器中的电容器和电感器可以观察到与微带滤波器中再入模式类似的现象。在现实场景中，电容器和电感器不是纯粹的容性或感性；它们具有寄生元件。电容器和电感器的寄生模型如图7.11(c, d)所示。电容器不仅仅是电容器，而是电容器、电感器和电阻器的组合。随着频率的增加，电容器的行为越来越不像电容器，而更像电感器，如图7.11(c)所示。电感器也是如此，如图7.11(d)所示。因此，在足够高的频率下，超过自谐振频率，电容器转变为电感器，电感器变为电容器。因此，低通滤波器在足够大的频率下表现出高通滤波器的特性，如图7.11(b)所示。</p>
+<p>为了规避再入模式问题，Martinis等人设计了铜粉滤波器[8]，它在宽带宽内表现出低通频率响应。该滤波器在高频下实现显著衰减，如图7.12(a)所示。</p>
+<p>如图7.12(b)所示，铜粉滤波器包括一个绝缘螺旋线圈，缠绕在填充有金属粉末颗粒（通常在几十微米范围内）的金属棒上。当交流电流通过线圈时，它产生交流磁场，在金属颗粒中感应涡流。趋肤效应导致电流主要在表面附近流动，导致有效电阻增加和能量耗散。每个颗粒自然涂有氧化层，提供与相邻颗粒的绝缘，并创建大量有效表面积。该表面积通过趋肤效应阻尼在高频下产生显著衰减。</p>
+<p>金属粉末通常与环氧树脂（如Stycast 2850）混合，以改善热导率并消散金属颗粒的热量。滤波器的性能取决于各种参数，包括线径、线长、粉末材料和颗粒大小。较长的线提供改进的衰减，但也增加插入损耗。由于其较高的电阻率，不锈钢粉末与铜或青铜相比表现出更优越的衰减。然而，对于对磁场敏感的实验，优选青铜和铜等非磁性粉末，即使它们提供稍差的衰减。线圈以半顺时针和半逆时针方向缠绕，以最小化流过线圈的电流产生的磁场。</p>
+<p>两个粉末滤波器串联排列，一个在4.2K级，另一个在10 mK级，如图7.2(a)所示。4.2K滤波器的目的是消除热噪声、杂散RF信号和微波辐射。然而，在量子比特温度下需要额外的滤波器，以减轻源自4.2K滤波器的热噪声。</p>
+<p>尽管有效，粉末滤波器具有某些缺点，如其尺寸、重量以及制造过程中涉及的劳动密集型过程。为了简化制造过程，研究人员开发了基于PCB的铜粉滤波器[9]。然而，粉末滤波器可能表现出不期望的寄生谐振，导致非线性频率响应，如图7.12(a)所示。此外，它们具有约10Ω的直流电阻，当受到1 mA范围内的磁通偏置时，会导致10 μW的功率耗散。这超过了最低温度级可用的冷却功率，约为5 μW。解决此问题的一个方案是加入超导铌线。</p>
+<p>铜粉滤波器通常具有相对较高的截止频率。为了降低截止频率，可以将具有较低截止频率的滤波器（如π滤波器）与粉末滤波器结合使用。由于铜粉滤波器内的线圈起电感器的作用，在滤波器两端添加两个电容器就足够了。为了实现这一点，将盘式电容器焊接到滤波器每端的插头上，如图7.12(c)所示。盘式电容器比表面贴装器件（SMD）芯片电容器具有更低的寄生电感，使其适合此应用。</p>
+<p><strong>红外滤波器</strong></p>
+<p>红外辐射导致准粒子激发并影响量子比特的相干时间。为了保护在1K以下运行的设备免受红外辐射的有害影响，使用红外（IR）滤波器，通常位于MXC的衰减器之前。生产这种滤波器的一种方法涉及使用Eccosorb吸收器[4]。</p>
+<p>IR滤波器是一种低通吸收滤波器，耗散测量频带以上的高频噪声。其通带通常从直流到6 GHz。与其他低温系统组件一样，IR滤波器必须热锚定到制冷机。使用热锚定的IR滤波器还可以改善同轴线路中心导体的热化。IR滤波器的外壳使用OFHC铜制造，以提供最佳的热导率。</p>
+<h4 id="辐射路径的噪声抑制"><a href="#辐射路径的噪声抑制" class="headerlink" title="辐射路径的噪声抑制"></a>辐射路径的噪声抑制</h4><p>如第7.4.3.1节所述，噪声可以通过辐射路径耦合到量子比特，并采用屏蔽技术来阻断此辐射路径。本讨论涵盖电磁和热屏蔽，以展示这些技术如何保护量子比特免受通过辐射路径耦合的噪声。</p>
+<p><strong>电磁屏蔽</strong></p>
+<p>回想一下第6章讨论的电磁屏蔽原理。在量子比特硬件设置背景下，我们现在探讨这些原理如何有效地保护量子比特免受外部电磁干扰。量子比特读出、控制和调谐电路在硅芯片上制造，并使用键合线连接到微波PCB，如图7.13(a)所示。微波PCB使用SMP或MMPX微波连接器（比SMA连接器具有更小的外形尺寸）连接到制冷机内部的微波电缆。</p>
+<p>图7.13(b)展示了电磁屏蔽的实现，以抑制杂散电磁场和电路连接中阻抗失配引起的反射。如图7.13(b)所示，微波PCB位于最右侧的样品架上，而中间使用加工部件覆盖硅芯片和传输线。在安装最左侧的较大外壳之前，利用这个具有较高谐振频率的较小中间腔体，以防止能量耦合到较大外壳腔体的谐振模式。有时将红外吸收环氧树脂涂在外壳盖面向样品的表面上，以提高屏蔽效果。</p>
+<p>将量子比特放入外壳后，采用额外的屏蔽层以达到所需的总屏蔽效果水平，如图7.14(a, b)所示。如第6章所述，高磁导率材料可用于屏蔽磁场。然而，这些材料的磁导率通常随温度降低而降低，如图7.14(c)所示。在稀释制冷机中使用cryoperm等特殊材料来解决此问题，因为其磁导率在低温下保持较高。cryoperm在2.7K的制冷机中作为最外层屏蔽，如图7.14(a)所示。</p>
+<p>图7.14(a, b)展示了在500 mK和100 mK处使用两个镀金铜罐。两个罐都具有薄的超导磁屏蔽层，由锡（Sn）制成，在镀金之前电镀到铜表面。100 mK处的最内层铜罐还额外涂有2毫米厚的红外吸收环氧树脂。IR滤波器吸收红外光子以热稳定输入和输出线路，如图7.14(a)所示。</p>
+<p><strong>热屏蔽</strong></p>
+<p>热辐射是低温恒温器热预算的主要贡献者，需要特别考虑。当物体表面接收到电磁辐射时，它吸收一部分α，反射一部分β，并透射一部分τ。这遵循能量守恒条件α + β + τ &#x3D; 1。在大多数低温恒温器应用中，当τ &#x3D; 0时，物体是不透明的。这意味着所有能量要么被吸收，要么被反射。如果β &#x3D; 0（根据能量守恒α &#x3D; 1），则该物体被称为黑体并吸收所有能量。</p>
+<p>在低温恒温器中，热屏蔽中的孔径可以像黑体一样，内部表面通过多次反射逐渐吸收辐射。因此，在设计热屏蔽时避免间隙和槽是至关重要的。然而，在需要间隙进行热收缩补偿的情况下，可以使用多层绝缘（MLI）垫来覆盖它们。在MLI不可行的超高真空（UHV）应用中，高吸收率材料陷阱可以围绕间隙并吸收热屏蔽壁上的光，减少内部的多径反射。</p>
+<p>黑体在所有波长上每单位表面积每单位时间辐射的总能量由下式给出：</p>
+<p>$$E_b(T) &#x3D; \sigma \cdot T^4 \tag{7.5}$$</p>
+<p>其中σ是斯特藩-玻尔兹曼常数，T是温度。引入总半球发射率0 &lt; ε &lt; 1，它定义了相对于黑体发射的辐射比例，由下式给出E(T) &#x3D; ε·σ·T⁴。</p>
+<p>发射率值取决于材料、表面光洁度和清洁度。例如，清洁且抛光良好的金属表面具有小的发射率，而非金属表面具有更高的发射率。因此，低温恒温器热屏蔽通常由具有清洁和反射表面光洁度（如金）的金属表面（铜或铝）制成。表7.7显示了一些材料的半球发射率值。</p>
+<p>发射率是温度的函数，对于低温下的金属，发射率几乎与温度成比例降低。这是理想的，因为它增强了低温恒温器中低温冷却热屏蔽的低发射率特性。如前所述，镀金铜罐涂有红外吸收环氧树脂，在稀释制冷机中用作热屏蔽。</p>
+<p><strong>使用环行器进行输出噪声抑制</strong></p>
+<p>阻止下游测量级产生的噪声到达量子比特至关重要。低温HEMT放大器通常表现出2到5K的噪声温度，使其成为输出线路上的主要噪声源。</p>
+<p>回想一下，在输出线路上使用衰减技术是不切实际的，因为它与放大器的目的相矛盾。因此，阻止放大器产生的噪声到达量子比特势在必行。这可以通过在参量放大器的输出端加入环行器或隔离器来实现，如图7.2(a)所示。</p>
+<p>如第4章所述，环行器充当单向微波阀，允许来自参量放大器的信号以最小衰减通过到HEMT放大器。它有效地将来自HEMT放大器的反射噪声转移，并将其重定向到50Ω终端，而不是允许其到达样品，如第5章所述。确保环行器或隔离器被正确热化至关重要。如第5.4.2.3节所述，双结环行器以更高的插入损耗为代价提供改进的隔离。</p>
+<p>对于多量子比特实验，使用隔离器阵列以节省空间。确保相邻端口到端口的隔离对于隔离器阵列至关重要，并考虑第5.4.2.3节中提到的品质因数。</p>
+<p>传统的环行器往往体积庞大且沉重，通常使用由铁氧体组成的永磁体。因此，建议避免将它们放置在靠近量子比特的地方，因为磁场可能对其性能产生不利影响。为了解决量子计算中的扩展挑战，物理学家在开发紧凑、可扩展、无磁、低噪声和可调谐的片上环行器方面投入了大量精力。虽然信号带宽仍然相对有限，但这些新型环行器还提供频率可调性。然而，这些环行器的制造工艺复杂。或者，可以使用SLUG微波放大器进行量子比特读出。SLUG放大器结合了低噪声放大和反向隔离，这比商业低温隔离器更好。</p>
+<h3 id="信号放大"><a href="#信号放大" class="headerlink" title="信号放大"></a>信号放大</h3><p>我们需要牢记的两个关键概念描述如下：</p>
+<ul>
+<li>首先，如第3.3.2.2节所示，量子比特读出保真度F由SNR决定，可以使用公式F &#x3D; (1 + erf(√SNR&#x2F;2))&#x2F;2[10]计算。例如，当SNR &#x3D; 10时，相应的读出保真度为F &#x3D; 99.99%。虽然时间平均可以将SNR提高√N倍，其中N是平均信号的数量，但将SNR提高十倍可能会将所需的平均时间减少100倍。这引出了下一点。</li>
+<li>其次，如第4.3.2.4节所述，链中的初始放大器显著影响整体噪声系数NF，从而影响输出SNR，其中SNR_out &#x3D; SNR_in&#x2F;NF。因此，在读出谐振器之后立即使用超低噪声放大器（如参量放大器）以最大化输出SNR至关重要。这允许快速单次读出。</li>
+</ul>
+<p>表7.8列出了低温温度下使用的放大器。放大器的噪声温度，记为T_a，帮助我们计算放大器在每个频率ω处添加的热光子数n_th，表示为n_th &#x3D; 1&#x2F;(e^(ℏω&#x2F;k_BT_a) - 1)。</p>
+<p>对于在6到7 GHz频率之间运行的传统HEMT读出，添加的系统噪声通常约为20个量子，n_th ~ 20。使用典型参数，这在500纳秒时间范围内导致约50%的单次量子比特测量保真度[11]。为了实现快速和高保真度的单次读出，有必要使用噪声性能接近标准量子极限的放大器，n_th &#x3D; 1&#x2F;2。此极限表示相位不敏感线性放大器可实现的最小噪声水平[11]。</p>
+<p>本节讨论各种低温放大器的使用，包括JPA、SLUG放大器和低温HEMT放大器。有关这些放大器的全面回顾，请参阅第5.4.2.1节。</p>
+<h4 id="参量放大器"><a href="#参量放大器" class="headerlink" title="参量放大器"></a>参量放大器</h4><p>如果在量子比特读出谐振器输出端使用噪声温度约为T_N ≈ 2-4K的HEMT放大器作为第一级放大器，则系统噪声温度将约为7-10K。这对应于在约5 GHz处每个信号光子添加约10-20个噪声光子。实际上，这种噪声水平通常被认为太高，无法实现具有满意SNR的单次读出。SNR的局限性引起了对开发量子极限参量放大器的兴趣，这些放大器添加的噪声接近量子力学允许的最小量。</p>
+<p>从第5章对参量放大器基本原理的讨论中，我们了解到平均N次将SNR提高√N倍。因此，实现10 dB的SNR改进可以将所需的平均次数减少100倍。基于约瑟夫森结的参量放大器提供改进的噪声温度，如图7.15所示。因此，参量放大器可以消除信号平均的需要，并实现量子比特的高保真度单次读出。</p>
+<p>如第5章所述，TWPA比JPA提供更高的带宽，使其适用于多个量子比特的多路复用读出。图7.15说明了TWPA在量子比特设置中的使用。从读出谐振器出现的信号通过定向耦合器（参见第5章）并到达TWPA的输入。同时，如图7.2(a)所示，源自室温的泵浦信号通过定向耦合器施加到TWPA的输入。重要的是要记住，参量放大器具有极低的P1dB，通常在-100到-80 dBm范围内，因此必须小心避免使其饱和。</p>
+<h4 id="低温HEMT放大器"><a href="#低温HEMT放大器" class="headerlink" title="低温HEMT放大器"></a>低温HEMT放大器</h4><p>通过参量放大器后，信号在制冷机内使用HEMT放大器进行进一步放大，然后是一个或两个室温LNA，如图7.2(a)所示。（有关这些放大器的讨论，请参阅第5章。）</p>
+<p>HEMT放大器需要稳定且精确可调的电压供应以确保最佳性能。避免超过最大额定值至关重要，因为这很容易损坏HEMT放大器。在量子比特实验中，不太可能达到损坏放大器的RF输入驱动水平。然而，在设置漏源电压(V_ds)、电流(I_ds)和栅源电压(V_gs)的偏置值时，必须格外小心。还应特别注意这些敏感设备的上电和下电过程。</p>
+<h4 id="SLUG放大器"><a href="#SLUG放大器" class="headerlink" title="SLUG放大器"></a>SLUG放大器</h4><p>在第7.4.3.2节中，我们讨论了使用环行器将量子电路与有噪声的下游测量级隔离。然而，环行器在尺寸和可扩展性方面存在挑战。SLUG放大器结合了接近量子极限的噪声性能和比商业低温隔离器更高的反向隔离，为解决这些问题提供了一个引人注目的解决方案[11]。此外，SLUG放大器提供大的瞬时带宽和动态范围，实现多路复用的单次量子比特读出。</p>
+<p>虽然SLUG放大器的噪声水平永远不会与优化的JPA相匹配，但在接近10 GHz的频率下可以实现约一个量子的添加噪声[11]。与JPA不同，SLUG放大器不需要单独的强微波泵浦音调，这意味着量子比特不需要受到多级低温隔离的保护。SLUG放大器的接线和操作特别简单，只需要两个直流电流偏置，不需要微波泵浦音调。SLUG放大器的脉冲模式操作使得无需低温环行器即可表征transmon量子比特，并且不会导致测量链中量子比特性能的任何可测量退化[11]。有关SLUG放大器的详细讨论，请参阅第5章。</p>
+<h3 id="低温设置的进一步考虑"><a href="#低温设置的进一步考虑" class="headerlink" title="低温设置的进一步考虑"></a>低温设置的进一步考虑</h3><p>可以在制冷机内使用RF开关来增强连接性和可重配置性。这允许在测量期间在不同样品之间进行有效切换。在测试多个样品的场景中，该过程通常涉及加热制冷机、更改连接，然后再次冷却，这可能非常耗时。然而，使用RF开关，如图7.16所示，可以在制冷机内快速切换样品，而无需预热时间或更改连接。</p>
+<p>室温下的直流源用于控制RF开关。然而，将开关控制电路布线到制冷机内部至关重要。机械RF开关由电激励线圈操纵的线圈和机械触点组成。这些线圈在4K时与室温相比表现出不同的电阻，需要低温专用控制电子设备。这些电子设备必须是电流驱动的，而不是制造商最初设计的电压驱动。此外，将电子设备与制冷机隔离至关重要。</p>
+<hr>
+<h2 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h2><h3 id="表7-1-图7-2-a-所示的室温和低温硬件设置说明"><a href="#表7-1-图7-2-a-所示的室温和低温硬件设置说明" class="headerlink" title="表7.1 图7.2(a)所示的室温和低温硬件设置说明"></a>表7.1 图7.2(a)所示的室温和低温硬件设置说明</h3><table>
+<thead>
+<tr>
+<th align="left">操作</th>
+<th align="left">仪器&#x2F;组件</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>信号生成（室温）</strong></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">量子比特控制</td>
+<td align="left"><strong>模拟技术</strong>：微波信号发生器、任意波形发生器、混频器</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><strong>数字技术</strong>：直接数字合成</td>
+</tr>
+<tr>
+<td align="left">量子比特频率调谐</td>
+<td align="left">用于全局量子比特调谐的直流源、用于单个量子比特调谐快速控制脉冲的AWG</td>
+</tr>
+<tr>
+<td align="left">量子比特读出</td>
+<td align="left"><strong>模拟技术</strong>：连续读出（微波信号发生器）、脉冲读出（微波信号发生器、任意波形发生器、混频器）</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><strong>数字技术</strong>：直接RF采样</td>
+</tr>
+<tr>
+<td align="left"><strong>制冷机中的量子比特（低温）</strong></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">噪声抑制</td>
+<td align="left">低热导率电缆、衰减器、滤波器、环行器</td>
+</tr>
+<tr>
+<td align="left">信号放大</td>
+<td align="left">定向耦合器、TWPA、HEMT放大器</td>
+</tr>
+<tr>
+<td align="left"><strong>信号检测（室温）</strong></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">信号放大</td>
+<td align="left">LNA</td>
+</tr>
+<tr>
+<td align="left">下变频</td>
+<td align="left"><strong>模拟技术</strong>：混频器、微波信号发生器</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><strong>数字技术</strong>：直接RF采样</td>
+</tr>
+<tr>
+<td align="left">模数转换</td>
+<td align="left">数字化仪</td>
+</tr>
+</tbody></table>
+<h3 id="表7-2-室温和低温使用的低通滤波器"><a href="#表7-2-室温和低温使用的低通滤波器" class="headerlink" title="表7.2 室温和低温使用的低通滤波器"></a>表7.2 室温和低温使用的低通滤波器</h3><table>
+<thead>
+<tr>
+<th align="left">阶段</th>
+<th align="left">位置</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">室温</td>
+<td align="left">超导体的直流控制线</td>
+<td align="left">抑制60 Hz和1&#x2F;f噪声以及高频噪声</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left">检测链</td>
+<td align="left">放置在混频器后，以消除检测链中的谐波和杂散</td>
+</tr>
+</tbody></table>
+<h3 id="表7-3-Bluefors-XLD400稀释制冷机各级的温度和可用冷却功率"><a href="#表7-3-Bluefors-XLD400稀释制冷机各级的温度和可用冷却功率" class="headerlink" title="表7.3 Bluefors XLD400稀释制冷机各级的温度和可用冷却功率"></a>表7.3 Bluefors XLD400稀释制冷机各级的温度和可用冷却功率</h3><table>
+<thead>
+<tr>
+<th align="left">级名称</th>
+<th align="left">温度（开尔文）</th>
+<th align="left">冷却功率（瓦特）</th>
+<th align="left">电缆长度（毫米）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">50K</td>
+<td align="left">35</td>
+<td align="left">30（在45K时）</td>
+<td align="left">200</td>
+</tr>
+<tr>
+<td align="left">4K</td>
+<td align="left">2.85</td>
+<td align="left">1.5（在4.2K时）</td>
+<td align="left">290</td>
+</tr>
+<tr>
+<td align="left">Still</td>
+<td align="left">882×10⁻³</td>
+<td align="left">40×10⁻³（在1.2K时）</td>
+<td align="left">250</td>
+</tr>
+<tr>
+<td align="left">CP</td>
+<td align="left">82×10⁻³</td>
+<td align="left">200×10⁻⁶（在140 mK时）</td>
+<td align="left">170</td>
+</tr>
+<tr>
+<td align="left">MXC</td>
+<td align="left">6×10⁻³</td>
+<td align="left">19×10⁻⁶（在20 mK时）</td>
+<td align="left">140</td>
+</tr>
+</tbody></table>
+<h3 id="表7-4-制冷机中使用的噪声抑制技术总结"><a href="#表7-4-制冷机中使用的噪声抑制技术总结" class="headerlink" title="表7.4 制冷机中使用的噪声抑制技术总结"></a>表7.4 制冷机中使用的噪声抑制技术总结</h3><table>
+<thead>
+<tr>
+<th align="left">技术</th>
+<th align="left">位置</th>
+<th align="left">工具</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>传导路径</strong></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">衰减</td>
+<td align="left">制冷机RF线路输入</td>
+<td align="left">低热导率电缆、衰减器</td>
+<td align="left">减少和衰减制冷机输入处的热噪声</td>
+</tr>
+<tr>
+<td align="left">隔离</td>
+<td align="left">制冷机输出RF线路</td>
+<td align="left">环行器&#x2F;隔离器</td>
+<td align="left">阻止热噪声到达量子比特</td>
+</tr>
+<tr>
+<td align="left">滤波</td>
+<td align="left">制冷机输入、检测链</td>
+<td align="left">Pi滤波器&#x2F;RC滤波器&#x2F;铜粉滤波器&#x2F;珀塞尔滤波器</td>
+<td align="left">低通滤波器、高通滤波器、带通滤波器</td>
+</tr>
+<tr>
+<td align="left">接地回路断开</td>
+<td align="left">室温</td>
+<td align="left">1:1变压器、光耦合器、直流模块</td>
+<td align="left">通过在直流处提供断开连接来断开接地回路</td>
+</tr>
+<tr>
+<td align="left">振动阻尼和解耦</td>
+<td align="left">制冷机内部</td>
+<td align="left">电缆修改</td>
+<td align="left">将柔性电缆套入护套中以限制电缆内的移动</td>
+</tr>
+<tr>
+<td align="left"><strong>辐射路径</strong></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">屏蔽</td>
+<td align="left">制冷机中的量子比特</td>
+<td align="left">超导屏蔽、磁屏蔽、热屏蔽</td>
+<td align="left">保护量子比特免受电磁辐射和磁场的影响</td>
+</tr>
+</tbody></table>
+<h3 id="表7-5-超导量子比特硬件设置中使用的电缆类型"><a href="#表7-5-超导量子比特硬件设置中使用的电缆类型" class="headerlink" title="表7.5 超导量子比特硬件设置中使用的电缆类型"></a>表7.5 超导量子比特硬件设置中使用的电缆类型</h3><table>
+<thead>
+<tr>
+<th align="left">电缆类型</th>
+<th align="left">位置</th>
+<th align="left">接地&#x2F;中心导体</th>
+<th align="left">损耗@0.5, 10, 20 GHz (dB&#x2F;m)</th>
+<th align="left">原因</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">标准微波同轴电缆</td>
+<td align="left">微波测试设备</td>
+<td align="left"></td>
+<td align="left">0.7, 1.6, 2</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">可手工成型微波电缆</td>
+<td align="left">微波前端</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">用于微波检测链不同组件之间的连接</td>
+</tr>
+<tr>
+<td align="left">UT-85-TP</td>
+<td align="left">室温</td>
+<td align="left">镀银或镀锡铜线&#x2F;镀锡铜</td>
+<td align="left">0.45, 2.21, 3.29</td>
+<td align="left">用于从室温制冷机输出到微波检测链输入的微波连接</td>
+</tr>
+<tr>
+<td align="left">UT-85-SS-SS</td>
+<td align="left">输入侧</td>
+<td align="left">不锈钢&#x2F;不锈钢</td>
+<td align="left">2.92, 9.32, 18.91</td>
+<td align="left">低热导率</td>
+</tr>
+<tr>
+<td align="left">SC-219&#x2F;50-NbTi-NbTi-1000</td>
+<td align="left">从样品到制冷机内第一放大器</td>
+<td align="left"></td>
+<td align="left">0.3 @&lt;4K, 3 @300K</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">UT-85B-SS</td>
+<td align="left">制冷机内部，从2.1K到室温的信号输出侧</td>
+<td align="left">不锈钢&#x2F;SP BeCu</td>
+<td align="left">1.02, 3.33, 6.94</td>
+<td align="left">输出侧最小信号损耗</td>
+</tr>
+</tbody></table>
+<h3 id="表7-6-低温使用的低通滤波器"><a href="#表7-6-低温使用的低通滤波器" class="headerlink" title="表7.6 低温使用的低通滤波器"></a>表7.6 低温使用的低通滤波器</h3><table>
+<thead>
+<tr>
+<th align="left">阶段</th>
+<th align="left">位置</th>
+<th align="left">特性</th>
+<th align="left">滤波器类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">低温</td>
+<td align="left">直流和磁通偏置线</td>
+<td align="left">低截止频率</td>
+<td align="left">铜粉滤波器、RC和LC滤波器</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left">微波线</td>
+<td align="left">高截止频率</td>
+<td align="left">IR滤波器、微波滤波器</td>
+</tr>
+</tbody></table>
+<h3 id="表7-7-某些材料的半球发射率"><a href="#表7-7-某些材料的半球发射率" class="headerlink" title="表7.7 某些材料的半球发射率"></a>表7.7 某些材料的半球发射率</h3><table>
+<thead>
+<tr>
+<th align="left">材料&#x2F;温度</th>
+<th align="left">4K</th>
+<th align="left">80K</th>
+<th align="left">300K</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">机械抛光铜</td>
+<td align="left">0.02</td>
+<td align="left">0.06</td>
+<td align="left">0.1</td>
+</tr>
+<tr>
+<td align="left">金</td>
+<td align="left">0.02</td>
+<td align="left">0.02</td>
+<td align="left">0.02</td>
+</tr>
+<tr>
+<td align="left">电抛光铝</td>
+<td align="left">0.04</td>
+<td align="left">0.08</td>
+<td align="left">0.15</td>
+</tr>
+</tbody></table>
+<h3 id="表7-8-超导量子比特实验中的放大"><a href="#表7-8-超导量子比特实验中的放大" class="headerlink" title="表7.8 超导量子比特实验中的放大"></a>表7.8 超导量子比特实验中的放大</h3><table>
+<thead>
+<tr>
+<th align="left">技术</th>
+<th align="left">描述</th>
+<th align="left">噪声温度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">JPA</td>
+<td align="left">量子极限噪声性能</td>
+<td align="left">T_noise &lt; 1K</td>
+</tr>
+<tr>
+<td align="left">TWA</td>
+<td align="left">多量子比特多路复用读出的更高带宽和动态范围</td>
+<td align="left">T_noise &lt; 1K</td>
+</tr>
+<tr>
+<td align="left">SLUG放大器</td>
+<td align="left">量子极限噪声性能；结合放大和反向隔离，消除对外部环行器的需要</td>
+<td align="left">T_noise &lt; 1K</td>
+</tr>
+<tr>
+<td align="left">低温HEMT放大器</td>
+<td align="left">用于4K级</td>
+<td align="left">T_noise &#x3D; 2-5K</td>
+</tr>
+<tr>
+<td align="left">室温LNA</td>
+<td align="left">用于室温检测链</td>
+<td align="left">T_noise &#x3D; 75-100K</td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="Liu Ming WeChat Pay">
+        <span>WeChat Pay</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="Liu Ming Alipay">
+        <span>Alipay</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>Liu Ming
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="http://iuming.github.io/2026/03/09/%E8%B6%85%E5%AF%BC%E9%87%8F%E5%AD%90%E6%AF%94%E7%89%B9%E7%9A%84%E6%8E%A7%E5%88%B6%E7%A1%AC%E4%BB%B6/" title="超导量子比特的控制硬件">http://iuming.github.io/2026/03/09/超导量子比特的控制硬件/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/realiuming">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+U5yo-Zxuw1OgbU6P">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </span>
+
+          <img class="social-item-img" src="/images/wechat_channel.jpg">
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/superconducting/" rel="tag"><i class="fa fa-tag"></i> superconducting</a>
+              <a href="/tags/quantum/" rel="tag"><i class="fa fa-tag"></i> quantum</a>
+              <a href="/tags/physics/" rel="tag"><i class="fa fa-tag"></i> physics</a>
+          </div>
+
+        
+  <div class="social-like a2a_kit a2a_kit_size_32 a2a_default_style">
+    <a class="a2a_dd" target="_blank" rel="noopener" href="https://www.addtoany.com/share"></a>
+      <a class="a2a_button_facebook"></a>
+      <a class="a2a_button_twitter"></a>
+      <a class="a2a_button_wechat"></a>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/03/09/%E7%94%B5%E7%A3%81%E5%85%BC%E5%AE%B9%E5%8E%9F%E7%90%86/" rel="prev" title="电磁兼容原理">
+                  <i class="fa fa-angle-left"></i> 电磁兼容原理
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Ming Liu. All rights reserved.</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL2l1bWluZw==" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.1.0/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/4.23.3/algoliasearch-lite.umd.js" integrity="sha256-1QNshz86RqXe/qsCBldsUu13eAX6n/O98uubKQs87UI=" crossorigin="anonymous"></script><script src="/js/third-party/search/algolia-search.js"></script>
+<script class="next-config" data-name="chatra" type="application/json">{"enable":true,"async":true,"id":"gTXKphrmKGf5QSb5L"}</script>
+<script src="/js/third-party/chat/chatra.js"></script>
+<script async src="https://call.chatra.io/chatra.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.0/pdfobject.min.js","integrity":"sha256-JJZNsid68vnh3/zyj0lY9BN5ynxVX/12XgOa1TlaYN0="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.0/mermaid.min.js","integrity":"sha256-stuqcu2FrjYCXDOytWFA5SoUE/r3nkp6gTglzNSlavU="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+  <script class="next-config" data-name="wavedrom" type="application/json">{"enable":true,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.5.0/wavedrom.min.js","integrity":"sha256-INLAoJc6quTNfiMWkGZniYO2cxE8mHpddnLow1m6RFs="}}</script>
+  <script class="next-config" data-name="wavedrom_skin" type="application/json">{"enable":true,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.5.0/skins/default.js","integrity":"sha256-fduc/Zszk5ezWws2uInY/ALWVmIrmV6VTgXbsYSReFI="}}</script>
+  <script src="/js/third-party/tags/wavedrom.js"></script>
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+  <script src="/js/third-party/addtoany.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":"ture","archive":true,"delay":true,"timeout":3000,"priority":true,"url":"http://iuming.github.io/2026/03/09/%E8%B6%85%E5%AF%BC%E9%87%8F%E5%AD%90%E6%AF%94%E7%89%B9%E7%9A%84%E6%8E%A7%E5%88%B6%E7%A1%AC%E4%BB%B6/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"realiuming","count":true,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+
+</body>
+</html>
