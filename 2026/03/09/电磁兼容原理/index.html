@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.2.0">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/manifest.json">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"iuming.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.20.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":null},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":true,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="一个新想法不应以其 immediate results（即时结果）来评判。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="电磁兼容原理">
+<meta property="og:url" content="http://iuming.github.io/2026/03/09/%E7%94%B5%E7%A3%81%E5%85%BC%E5%AE%B9%E5%8E%9F%E7%90%86/index.html">
+<meta property="og:site_name" content="REALIUMING&#39;BLOG">
+<meta property="og:description" content="一个新想法不应以其 immediate results（即时结果）来评判。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-09T02:13:47.000Z">
+<meta property="article:modified_time" content="2026-03-09T02:15:27.493Z">
+<meta property="article:author" content="Liu Ming">
+<meta property="article:tag" content="quantum">
+<meta property="article:tag" content="physics">
+<meta property="article:tag" content="EMC">
+<meta name="twitter:card" content="&lt;twitter:card&gt;">
+<meta name="twitter:image" content="http://iuming.github.io/2026/03/09/%E7%94%B5%E7%A3%81%E5%85%BC%E5%AE%B9%E5%8E%9F%E7%90%86/%3Ctwitter:image%3E">
+<meta name="twitter:creator" content="@&lt;twitter:creator&gt;">
+<meta name="twitter:site" content="<twitter:site>">
+<meta property="fb:admins" content="&lt;fb:admin_id&gt;">
+<meta property="fb:app_id" content="&lt;fb:app_id&gt;">
+
+
+<link rel="canonical" href="http://iuming.github.io/2026/03/09/%E7%94%B5%E7%A3%81%E5%85%BC%E5%AE%B9%E5%8E%9F%E7%90%86/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://iuming.github.io/2026/03/09/%E7%94%B5%E7%A3%81%E5%85%BC%E5%AE%B9%E5%8E%9F%E7%90%86/","path":"2026/03/09/电磁兼容原理/","title":"电磁兼容原理"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>电磁兼容原理 | REALIUMING'BLOG</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">REALIUMING'BLOG</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">283</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">21</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">115</span></a></li><li class="menu-item menu-item-books"><a href="/book/" rel="section"><i class="fa fa-book fa-fw"></i>books</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fab fa-algolia fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%A1%E5%8F%B7%E5%AE%8C%E6%95%B4%E6%80%A7"><span class="nav-number">1.</span> <span class="nav-text">信号完整性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE6-1"><span class="nav-number">1.1.</span> <span class="nav-text">图6.1</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EMC"><span class="nav-number">2.</span> <span class="nav-text">EMC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B5%E5%AD%90%E7%B3%BB%E7%BB%9F%E4%B8%8E%E7%8E%AF%E5%A2%83%E7%9A%84%E7%9B%B8%E4%BA%92%E4%BD%9C%E7%94%A8"><span class="nav-number">2.1.</span> <span class="nav-text">电子系统与环境的相互作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE6-2"><span class="nav-number">2.2.</span> <span class="nav-text">图6.2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B2%E6%89%B0%E6%BA%90"><span class="nav-number">2.3.</span> <span class="nav-text">干扰源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE6-3"><span class="nav-number">2.4.</span> <span class="nav-text">图6.3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%B2%E6%89%B0"><span class="nav-number">2.5.</span> <span class="nav-text">串扰</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE6-4"><span class="nav-number">2.6.</span> <span class="nav-text">图6.4</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%B5%E7%A3%81%E5%B1%8F%E8%94%BD"><span class="nav-number">3.</span> <span class="nav-text">电磁屏蔽</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE6-5"><span class="nav-number">3.1.</span> <span class="nav-text">图6.5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%8F%E8%94%BD%E6%95%88%E8%83%BD"><span class="nav-number">3.2.</span> <span class="nav-text">屏蔽效能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE6-6"><span class="nav-number">3.3.</span> <span class="nav-text">图6.6</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A86-1-%E4%B8%8D%E5%90%8C%E7%B1%BB%E5%9E%8B%E6%BA%90%E7%9A%84%E5%B1%8F%E8%94%BD%E6%9C%BA%E5%88%B6"><span class="nav-number">3.4.</span> <span class="nav-text">表6.1 不同类型源的屏蔽机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE6-7"><span class="nav-number">3.5.</span> <span class="nav-text">图6.7</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE6-8"><span class="nav-number">3.6.</span> <span class="nav-text">图6.8</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%8F%E8%94%BD%E7%A9%BF%E9%80%8F%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="nav-number">3.7.</span> <span class="nav-text">屏蔽穿透的影响</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE6-9"><span class="nav-number">3.8.</span> <span class="nav-text">图6.9</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE6-10"><span class="nav-number">3.9.</span> <span class="nav-text">图6.10</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%8F%E8%94%BD%E6%8E%A5%E5%9C%B0%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="nav-number">3.10.</span> <span class="nav-text">屏蔽接地的影响</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE6-11"><span class="nav-number">3.11.</span> <span class="nav-text">图6.11</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8F%E5%AD%90%E6%AF%94%E7%89%B9%E7%9A%84%E5%B1%8F%E8%94%BD%E6%8A%80%E6%9C%AF"><span class="nav-number">3.12.</span> <span class="nav-text">量子比特的屏蔽技术</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE6-12"><span class="nav-number">3.13.</span> <span class="nav-text">图6.12</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BB%A4%E6%B3%A2"><span class="nav-number">4.</span> <span class="nav-text">滤波</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE6-13"><span class="nav-number">4.1.</span> <span class="nav-text">图6.13</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A5%E5%9C%B0"><span class="nav-number">5.</span> <span class="nav-text">接地</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE6-14"><span class="nav-number">5.1.</span> <span class="nav-text">图6.14</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%BC%E7%BA%BF%E6%8E%A5%E5%9C%B0"><span class="nav-number">5.2.</span> <span class="nav-text">导线接地</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">6.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Liu Ming"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Liu Ming</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">115</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">283</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button animated">
+    <button><i class="fa fa-comment"></i>
+      Chat
+    </button>
+  </div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2l1bWluZw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;iuming"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOjUyMDBsaXVtaW5nQGdtYWlsLmNvbQ==" title="E-Mail → mailto:5200liuming@gmail.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vdS8zMTQ3OTEyODky" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;3147912892"><i class="fab fa-weibo fa-fw"></i>Weibo</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9yZWFsaXVtaW5n" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;realiuming"><i class="fab fa-twitter fa-fw"></i>Twitter</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL3JlYWxpdW1pbmc=" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;realiuming"><i class="fab fa-facebook fa-fw"></i>FB Page</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8xMjE4NTI3My9pdW1pbmc=" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;12185273&#x2F;iuming"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly95b3V0dWJlLmNvbS9jaGFubmVsL1VDaUNCSHJ4cDJ4Tlc3T1ZaTlFzZHROdw==" title="YouTube → https:&#x2F;&#x2F;youtube.com&#x2F;channel&#x2F;UCiCBHrxp2xNW7OVZNQsdtNw"><i class="fab fa-youtube fa-fw"></i>YouTube</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9pbnN0YWdyYW0uY29tL3JlYWxpdW1pbmc=" title="Instagram → https:&#x2F;&#x2F;instagram.com&#x2F;realiuming"><i class="fab fa-instagram fa-fw"></i>Instagram</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="c2t5cGU6ODQyNjczNTU2P2NhbGx8Y2hhdA==" title="Skype → skype:842673556?call|chat"><i class="fab fa-skype fa-fw"></i>Skype</span>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="Back to top">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://iuming.github.io/" title="https:&#x2F;&#x2F;iuming.github.io&#x2F;">Title</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://iuming.github.io/2026/03/09/%E7%94%B5%E7%A3%81%E5%85%BC%E5%AE%B9%E5%8E%9F%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Liu Ming">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="REALIUMING'BLOG">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="电磁兼容原理 | REALIUMING'BLOG">
+      <meta itemprop="description" content="一个新想法不应以其 immediate results（即时结果）来评判。">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          电磁兼容原理
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2026-03-09 10:13:47 / Modified: 10:15:27" itemprop="dateCreated datePublished" datetime="2026-03-09T10:13:47+08:00">2026-03-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/note/" itemprop="url" rel="index"><span itemprop="name">note</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2026/03/09/%E7%94%B5%E7%A3%81%E5%85%BC%E5%AE%B9%E5%8E%9F%E7%90%86/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2026/03/09/电磁兼容原理/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+            <div class="post-description">一个新想法不应以其 immediate results（即时结果）来评判。</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><blockquote>
+<p>“一个新想法不应以其 immediate results（即时结果）来评判。”<br>——尼古拉·特斯拉</p>
+</blockquote>
+<p>本章介绍操作超导量子比特硬件设置所需的电磁兼容（EMC）基本概念。本章首先探讨信号完整性和EMC在量子比特硬件设置中的关键作用。然后深入研究确保超导量子比特可靠高效运行的关键技术，包括屏蔽、滤波和接地。随后，第七章将本章学到的概念和技术应用于量子比特硬件设置。</p>
+<hr>
+<h2 id="信号完整性"><a href="#信号完整性" class="headerlink" title="信号完整性"></a>信号完整性</h2><p>第三章解释了微波脉冲在控制和读取超导量子比特量子态中的关键作用。应用于量子比特的脉冲参数，如形状、幅度和宽度，决定了量子比特在布洛赫球上的最终状态。因此，用于应用量子门的脉冲参数的任何变化都可能损害量子门保真度。</p>
+<p>第四章进一步讨论了衰减、失真、噪声和干扰如何负面影响信号形状。此外，如第三章所述，噪声和干扰也可能导致量子比特退相干和弛豫。图6.1显示了高斯脉冲在微波传输线上传播时失真的影响。脉冲参数的变化，如宽度和幅度，可能导致最终状态偏离其理想点，影响量子门保真度。第三章还描述了脉冲校准如何帮助提高门保真度并最小化信号损伤的影响。</p>
+<p>信号完整性分析研究信号在系统中传播时形状的变化，并使我们能够评估信号是否能被成功检测。在板级和系统级采用分析和仿真工具以及测量技术来确保良好的信号完整性。本章重点讨论减轻干扰的技术，这是EMC的主题。下一章（第七章）讨论各种噪声抑制技术。</p>
+<hr>
+<h3 id="图6-1"><a href="#图6-1" class="headerlink" title="图6.1"></a>图6.1</h3><p><strong>(a)</strong> 由于色散效应导致的脉冲展宽。高斯脉冲的幅度和宽度影响量子比特在布洛赫球上的最终状态。</p>
+<p><strong>(b)</strong> 目标是将量子比特状态带到布洛赫球上的点A处的叠加态。然而，由于高斯脉冲的展宽，最终状态偏离点A并终止于点B。</p>
+<hr>
+<h2 id="EMC"><a href="#EMC" class="headerlink" title="EMC"></a>EMC</h2><p>第四章涵盖了干扰的概念。处理干扰是EMC的主题。必须满足以下三个条件才能满足系统的EMC要求[1-3]：</p>
+<ul>
+<li>系统不应干扰其他系统</li>
+<li>系统不应干扰自身</li>
+<li>系统应能抵抗其他系统的辐射和干扰</li>
+</ul>
+<p>在使用窄脉冲的电子系统中，频谱内容跨越很宽的频率范围。这种宽频率范围增加了电子系统中干扰的可能性。因此，设计人员必须将EMC考虑因素纳入其电子系统设计中，以确保在外部干扰存在时的正常运行，并防止可能破坏其他系统的干扰产生。这些考虑因素在当今的射频环境中变得更加关键，因为存在众多无线电信号。如第七章所述，在最小化耦合到半导体量子比特系统的干扰和噪声方面投入了大量精力，因为这些不需要的信号会导致量子信息的丢失。</p>
+<p>EMC可以在两个主要层面进行处理：板级设计和系统设计。板级EMC设计涉及印刷电路板（PCB）层面的技术和考虑因素，以确保良好的信号完整性。这包括对电路板布局、元件放置以及管理电源、模拟和数字信号的考虑。另一方面，系统设计考虑侧重于使用滤波、屏蔽和接地等技术在系统层面满足EMC要求。本章讨论的系统级EMC设计考虑将直接应用于第七章的量子比特硬件设置。</p>
+<hr>
+<h3 id="电子系统与环境的相互作用"><a href="#电子系统与环境的相互作用" class="headerlink" title="电子系统与环境的相互作用"></a>电子系统与环境的相互作用</h3><p>电子系统与其周围环境的相互作用包括三个主要组成部分：发生器、耦合路径和接收器。发生器的信号通过耦合路径耦合到接收器。耦合路径可以是传导路径，如电缆和电线，或者是辐射路径，如电磁辐射。图6.2显示，室温下的热噪声（发生器）可以通过冰箱内部的电缆（传导耦合路径）或辐射（辐射耦合路径）耦合到量子比特（接收器）。</p>
+<hr>
+<h3 id="图6-2"><a href="#图6-2" class="headerlink" title="图6.2"></a>图6.2</h3><p>噪声通过传导或辐射路径耦合到量子比特。</p>
+<hr>
+<p>这两种耦合情况的EMC术语是：直接耦合情况下的<strong>传导发射</strong>和<strong>传导敏感性</strong>，以及间接耦合情况下的<strong>辐射发射</strong>和<strong>辐射敏感性</strong>。术语”发射”用于发生器，而”敏感性”用于接收器。在EMC术语中，源被称为<strong>干扰源（aggressor）</strong>，而受源影响的系统被称为<strong>受害者（victim）</strong>。</p>
+<p>我们可以操纵发生器、耦合路径或接收器来保护系统免受不需要的信号。例如，我们可以识别并消除干扰或噪声源。然而，这可能并不总是可行的，因此我们必须使用滤波和屏蔽技术来阻断耦合路径。我们还可以实施措施和设计考虑，使接收器对干扰的敏感性降低，如板载滤波、屏蔽和布局优化。</p>
+<hr>
+<h3 id="干扰源"><a href="#干扰源" class="headerlink" title="干扰源"></a>干扰源</h3><p>电子系统中干扰的主要来源是远场或天线耦合以及近场或串扰，如图6.3所示。根据工作频率和源的性质（远场与近场、电场与磁场），采用各种技术来抑制耦合效应。</p>
+<p>近场源分为电场和磁场。如图6.3所示，近场磁源（如磁偶极子）在近场具有低阻抗，其中阻抗Z定义为电场E与磁场H的比值（即Z &#x3D; E&#x2F;H）。当我们远离源时，磁场比电场衰减得更快。电动机和变压器是近场磁源的例子。</p>
+<p>相比之下，如图6.3所示，电源（如电偶极子的近场）在源附近具有高阻抗，当我们远离源时，电场比磁场衰减得更快。近场电场和磁场探头可以与频谱分析仪一起使用，以定位近场干扰源。</p>
+<p>如图6.3所示，在远场中，电场和磁场的比值称为自由空间特性阻抗 $Z &#x3D; E&#x2F;H &#x3D; \eta_0 &#x3D; \sqrt{\mu_0&#x2F;\epsilon_0} &#x3D; 377\Omega$，对于两种源都是恒定的。电视台和手机是远场源的例子。</p>
+<hr>
+<h3 id="图6-3"><a href="#图6-3" class="headerlink" title="图6.3"></a>图6.3</h3><p>电偶极子和磁偶极子阻抗随距离的变化。</p>
+<hr>
+<h3 id="串扰"><a href="#串扰" class="headerlink" title="串扰"></a>串扰</h3><p>串扰是指系统内的近场干扰，其中电磁发射的源和接收器位于同一系统内。串扰的一个例子是近距离PCB走线之间的无意耦合。PCB中的电场和磁场延伸到附近区域，当电路走线或电缆的密度很高时，串扰可能成为一个严重问题。如图6.4所示，有两种类型的串扰：容性串扰和感性串扰。各种技术可以最小化串扰，包括屏蔽和特定的设计考虑，如信号布线技术。</p>
+<p>在多量子比特系统中，由于虚假的量子比特间耦合可能发生串扰[4-6]。修改量子比特设计和使用控制脉冲去耦量子比特的技术（称为动态去耦）用于抑制串扰的影响[5, 6]。此外，当使用大量电缆进入冰箱时，串扰也可能成为一个问题，如第二章[7]所讨论的。</p>
+<hr>
+<h3 id="图6-4"><a href="#图6-4" class="headerlink" title="图6.4"></a>图6.4</h3><p>两条耦合传输线的电路模型。走线之间发生容性和感性耦合。</p>
+<hr>
+<h2 id="电磁屏蔽"><a href="#电磁屏蔽" class="headerlink" title="电磁屏蔽"></a>电磁屏蔽</h2><p>如第四章所述，噪声和干扰可以通过辐射路径耦合到设备。电磁屏蔽可以阻断辐射路径，保护设备免受噪声和干扰。此外，屏蔽可以防止设备产生的辐射逃逸到屏蔽外部，从而保护其他设备免受产生的噪声和干扰。图6.5说明了屏蔽的这两个功能。</p>
+<p>虽然通过传导路径耦合的干扰通过滤波处理，但屏蔽阻断辐射路径。因此，屏蔽量子比特和设置中的所有仪器和组件对于阻断到量子比特的辐射耦合路径至关重要。第6.3.1至6.3.4节讨论如何设计有效的屏蔽并避免可能降低其有效性的错误，如在机壳上留下孔洞或接地不良。</p>
+<hr>
+<h3 id="图6-5"><a href="#图6-5" class="headerlink" title="图6.5"></a>图6.5</h3><p>屏蔽用于(a)包含辐射发射和(b)阻断辐射发射。</p>
+<hr>
+<h3 id="屏蔽效能"><a href="#屏蔽效能" class="headerlink" title="屏蔽效能"></a>屏蔽效能</h3><p>屏蔽通常是将设备与其周围环境隔离的金属外壳。图6.6显示了使用屏蔽材料时的入射、反射和透射信号。各种机制，如反射、衰减和多次反射，都有助于屏蔽的有效性。</p>
+<p>屏蔽的有效性由称为<strong>屏蔽效能（SE）</strong>的参数定义，它是屏蔽上的入射电场 $\hat{E}_i$ 与屏蔽另一侧的透射电场 $\hat{E}_t$ 的比值（见图6.6）[1, 2]。屏蔽效能由下式给出：</p>
+<p>$$SE &#x3D; 20\log_{10}\left|\frac{\hat{E}_i}{\hat{E}_t}\right| \quad (6.1)$$</p>
+<p>120 dB的屏蔽效能表示透射场幅度降低了 $10^6$ 倍。磁场的屏蔽效能定义为：</p>
+<p>$$SE &#x3D; 20\log_{10}\left|\frac{\hat{H}_i}{\hat{H}_t}\right| \quad (6.2)$$</p>
+<hr>
+<h3 id="图6-6"><a href="#图6-6" class="headerlink" title="图6.6"></a>图6.6</h3><p>屏蔽中的反射损耗、吸收损耗和多次反射。</p>
+<hr>
+<p>介质的本征阻抗定义了均匀平面波的电场和磁场之间的关系。如果入射场是均匀平面波，且屏蔽两侧的介质相同，则屏蔽效能的两种定义是等效的。然而，对于近场或屏蔽两侧不同介质的情况，它们并不相同。</p>
+<p>如图6.6所示，三种机制对屏蔽效能有贡献：反射损耗R、吸收损耗A和多次反射M，它们由以下方程表示：</p>
+<p>$$SE_{dB} &#x3D; R_{dB} + A_{dB} + M_{dB} \quad (6.3)$$</p>
+<p>第一项反射损耗与屏蔽界面处反射的入射场部分相关。根据表6.1，反射损耗是屏蔽低频近场和远场电源的主要机制。为此，薄金属板就足够了，因为大部分电场在第一个界面处被反射。</p>
+<p>(6.3)中的第二项描述了波通过屏蔽时的吸收损耗。这是由波幅度的指数衰减引起的，衰减因子为 $e^{-\alpha z}$，其中 $\alpha$ 是材料的衰减常数，z是距屏蔽第一个界面的距离。在良导体中，衰减常数 $\alpha$ 是趋肤深度 $\delta$ 的倒数（即 $\alpha &#x3D; 1&#x2F;\delta$）。趋肤深度由 $\delta &#x3D; 1&#x2F;\sqrt{\pi f \mu \sigma}$ 给出，其中f是频率，$\mu$ 是磁导率，$\sigma$ 是屏蔽的电导率。屏蔽必须足够厚才能有效吸收损耗，特别是在高频下，趋肤效应成为主要的屏蔽机制。表6.1建议使用厚导体来屏蔽高频电源和磁源。</p>
+<hr>
+<h3 id="表6-1-不同类型源的屏蔽机制"><a href="#表6-1-不同类型源的屏蔽机制" class="headerlink" title="表6.1 不同类型源的屏蔽机制"></a>表6.1 不同类型源的屏蔽机制</h3><table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">远场</th>
+<th align="left"></th>
+<th align="left">近场</th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">电源（高阻抗）</td>
+<td align="left"></td>
+<td align="left">磁源（低阻抗）</td>
+</tr>
+<tr>
+<td align="left">源频率</td>
+<td align="left">低频</td>
+<td align="left">高频</td>
+<td align="left">低频</td>
+<td align="left">高频</td>
+</tr>
+<tr>
+<td align="left">主要屏蔽机制</td>
+<td align="left">反射</td>
+<td align="left">吸收</td>
+<td align="left">反射</td>
+<td align="left">吸收</td>
+</tr>
+<tr>
+<td align="left">屏蔽类型</td>
+<td align="left">良导体</td>
+<td align="left">厚良导体</td>
+<td align="left">良导体</td>
+<td align="left">厚良导体</td>
+</tr>
+<tr>
+<td align="left">反射和吸收公式</td>
+<td align="left">$R_{dB} &#x3D; 168 + 10\log_{10}\left(\frac{\sigma_r}{\mu_r f}\right)$</td>
+<td align="left"></td>
+<td align="left">$R_{e,dB} &#x3D; 322 + 10\log_{10}\left(\frac{\sigma_r}{\mu_r f^3 r^2}\right)$</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left">$A_{dB} &#x3D; 131.4t\sqrt{f\mu_r\sigma_r}$</td>
+<td align="left"></td>
+<td align="left">$A_{dB} &#x3D; 131.4t\sqrt{f\mu_r\sigma_r}$</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left">$&#x3D; \frac{8.686t}{\delta}$ (t以米为单位)</td>
+<td align="left"></td>
+<td align="left">$&#x3D; \frac{8.686t}{\delta}$ (t以米为单位)</td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<hr>
+<p>低频磁源可以使用高磁导率材料（如铁磁材料或Mu金属）进行屏蔽。高磁导率材料的屏蔽效果如图6.7(a)所示，其中材料充当磁场的低电阻路径，将其从受害者转移开。</p>
+<p>以下三个因素可能降低高磁导率磁屏蔽的有效性：</p>
+<ul>
+<li>铁磁材料的磁导率随频率增加而降低</li>
+<li>铁磁材料的磁导率随磁场强度增加而降低，因为大磁场可能使材料饱和</li>
+<li>传统铁磁材料的磁导率随温度降低而降低</li>
+</ul>
+<p>因此，高磁导率材料在高频、低温和大磁场下效果不佳。</p>
+<p>使用两个屏蔽可以减轻大磁场引起的饱和效应。外屏蔽具有低磁导率和低饱和敏感性，可降低入射磁场的强度，以防止内屏蔽饱和。</p>
+<p>量子比特实验的另一个考虑因素是，传统铁磁材料的磁导率随温度降低而降低，如图6.7(b)所示。因此，在毫开尔文温度下进行量子比特实验时必须使用特殊的铁磁材料，如<strong>低温磁导合金（cryoperm）</strong>[8]。</p>
+<p>(6.3)中的第三项M代表多次反射和透射的贡献，当波在屏蔽界面之间来回反弹时发生。这些反射可以产生场，这些场叠加到通过右侧界面透射的初始场上，从而降低屏蔽效能。与反射和吸收损耗不同，多次反射因子M通常为负。然而，对于大多数实际屏蔽场景，多次反射的影响可以忽略不计。</p>
+<p>图6.8比较了铜和铝屏蔽的屏蔽效能，两者厚度均为0.508 mm。从图6.8可以看出，反射损耗是低频时的主要屏蔽机制，而吸收损耗随频率增加成为主导。</p>
+<p>请注意，屏蔽效能可能在以下条件下降低：</p>
+<ul>
+<li>任何对屏蔽的穿透，如孔洞、电缆、槽缝或接缝，都可能大大降低其有效性。因此，必须适当处理对屏蔽的穿透。</li>
+<li>未接地的屏蔽不如预期有效。因此，屏蔽必须接地。</li>
+</ul>
+<hr>
+<h3 id="图6-7"><a href="#图6-7" class="headerlink" title="图6.7"></a>图6.7</h3><p>(a) 使用高磁导率铁磁材料转移磁场；(b) 低温磁导合金、超磁导合金和Mu金属的磁导率与温度的关系[8]。</p>
+<hr>
+<h3 id="图6-8"><a href="#图6-8" class="headerlink" title="图6.8"></a>图6.8</h3><p>(a) 厚度为0.508 mm的铜的屏蔽效能；(b) 厚度为0.508 mm的铝的屏蔽效能。</p>
+<hr>
+<h3 id="屏蔽穿透的影响"><a href="#屏蔽穿透的影响" class="headerlink" title="屏蔽穿透的影响"></a>屏蔽穿透的影响</h3><p>除非适当处理，否则屏蔽中的任何穿透都可能大大降低其屏蔽效能。接缝、电缆、孔洞或槽缝对于冷却或当某些东西进出外壳时是必需的。孔洞或槽缝的电尺寸（即物理尺寸与波长的比值）决定了有多少能量可以通过外壳泄漏。如果开口大于半波长，功率很容易泄漏进出外壳。因此，避免大孔洞或槽缝至关重要。</p>
+<p>典型的穿透是屏蔽壁上的孔洞或槽缝。<strong>巴比涅原理（Babinet’s principle）</strong>可用于解释外壳中的槽缝效应。根据巴比涅原理，屏蔽内部的场可以通过槽缝开口向外辐射，降低其有效性。此外，屏蔽外部的场可以通过槽缝开口被拾取到内部。在这两种情况下，槽缝都充当天线。</p>
+<p>图6.9显示了一个槽缝及其互补结构。如果图6.9左侧的槽缝具有半波长的线性尺寸，则该槽缝的辐射特性将与相同长度的偶极天线相同，E和H分量互换，如图6.9右侧所示。请注意，槽缝宽度对辐射没有显著影响。</p>
+<hr>
+<h3 id="图6-9"><a href="#图6-9" class="headerlink" title="图6.9"></a>图6.9</h3><p>巴比涅原理。槽缝等效于互补辐射结构。</p>
+<hr>
+<p>巴比涅原理表示，槽缝辐射的远场 $(E_{\theta s}, E_{\phi s}, H_{\theta s}, H_{\phi s})$ 与互补结构辐射的远场 $(E_{\theta c}, E_{\phi c}, H_{\theta c}, H_{\phi c})$ 之间的关系为：$E_{\theta s} &#x3D; H_{\theta c}$，$E_{\phi s} &#x3D; H_{\phi c}$，$H_{\theta s} &#x3D; -E_{\theta c}&#x2F;\eta_0^2$，以及 $H_{\phi s} &#x3D; -E_{\phi c}&#x2F;\eta_0^2$（其中 $\eta_0$ 是自由空间特性阻抗）。根据这一点，可以看出孔径可以作为有效天线，其导体尺寸与孔径相同。辐射的产生是因为槽缝在很大程度上扰动了电流路径。因此，如果需要在机壳上创建开口以用于通风目的，避免槽缝并使用孔洞是必要的，因为孔洞不会像大槽缝那样显著改变电流路径，如图6.10(a, b)所示。</p>
+<p>下一个考虑因素是提供进入屏蔽外壳内部的盖子。有时盖子周围有槽缝，如图6.10(c)所示。因此，通过在间隙中放置导电垫片材料或紧密间隔的螺钉来”短路”槽缝天线来处理这些间隙[2]。</p>
+<p>PCB上的组件可以被屏蔽（见第6.2节），PCB本身也可以被屏蔽，甚至整个房间都可以被屏蔽。用于高精度电磁测试或高安全性环境的房间必须被屏蔽。然而，这些房间也需要通风。为此，在屏蔽室墙壁中使用低于截止频率的波导蜂窝阵列。这种设计允许空气流入房间，同时防止低于波导截止频率的频率传播进入外壳[2]。</p>
+<hr>
+<h3 id="图6-10"><a href="#图6-10" class="headerlink" title="图6.10"></a>图6.10</h3><p>(a) 屏蔽上的槽缝扰动电流流动并充当天线；(b) 使用许多小孔洞，提供与大槽缝相同的通风效果，但不会像大槽缝那样扰动电流；(c) 根据巴比涅原理辐射的槽缝，使用紧密间隔的螺钉来打破槽缝长度。（来源：[2]）</p>
+<hr>
+<h3 id="屏蔽接地的影响"><a href="#屏蔽接地的影响" class="headerlink" title="屏蔽接地的影响"></a>屏蔽接地的影响</h3><p>屏蔽接地有两个基本目的。首先，它通过防止触摸屏蔽时的高压冲击来确保安全。任何由墙壁插座供电的仪器或组件的屏蔽必须连接到插座的安全地。这种接地连接确保外壳的电位不会太高，否则可能给触摸它的人带来电击。</p>
+<p>屏蔽接地的第二个原因是防止电路之间的不需要耦合。如图6.11(a)所示，未接地的屏蔽可以促进外壳内部电路之间或进入外壳的电缆与电路之间的耦合[1, 2]。这可能导致系统内的串扰并降低外壳的屏蔽效能。另一方面，接地的屏蔽不会在系统内产生串扰，如图6.11(b)所示。因此，将所有屏蔽接地到电路中性点以防止不需要的耦合并确保屏蔽的正常功能至关重要。</p>
+<hr>
+<h3 id="图6-11"><a href="#图6-11" class="headerlink" title="图6.11"></a>图6.11</h3><p>未接地和接地屏蔽的比较：(a) 封闭在未接地屏蔽中的电路及其等效电路，以及(c) 封闭在接地屏蔽中的电路及其等效电路。</p>
+<hr>
+<h3 id="量子比特的屏蔽技术"><a href="#量子比特的屏蔽技术" class="headerlink" title="量子比特的屏蔽技术"></a>量子比特的屏蔽技术</h3><p>对于量子比特或任何其他微波系统，识别噪声源并尽可能使其远离系统至关重要。例如，产生主要是磁场的高电流或低电压水平的源，如稀释冰箱的泵和压缩机，应远离量子比特硬件设置。然而，为量子比特提供足够的屏蔽以抑制各种近场和远场源引起的噪声和干扰也是必不可少的。</p>
+<p>对于室温电子设备，使用由良导体（如铝）制成的几毫米厚的屏蔽来提供屏蔽。屏蔽的PCB版本称为<strong>屏蔽罐（shield can）</strong>，如图6.12(a)所示。屏蔽罐通常用于保护敏感组件（如检测器或接收器）或包含组件（如放大器）的辐射。选择屏蔽尺寸时必须谨慎，因为大体积的屏蔽可能激发可能与PCB上的电路和组件耦合的腔体模式，产生不需要的不稳定性（见第5.4.3.3节中的微波腔体）。因此，最小化屏蔽的体积对于抑制腔体模式至关重要。在某些情况下，屏蔽内部的微波吸收器有助于抑制腔体模式，特别是当无法识别共振源或无法修改屏蔽本身时。</p>
+<p>以下两种类型的屏蔽用于保护量子比特：</p>
+<ul>
+<li><p>相对较厚的<strong>无氧高电导率（OFHC）铜</strong>外壳，如图6.12(b)所示，屏蔽安装在样品架上的量子芯片。在放置较大的外壳之前（在图6.12(a)的最左侧），使用具有较高共振频率的较小中间腔体，以防止能量耦合到较大外壳腔体的共振模式。使用OFHC铜是由于其高热导率，这在低温环境中对于将热量从实验传导出去至关重要。这种屏蔽对高频的远场和近场电源和磁源有效。</p>
+</li>
+<li><p>具有高磁导率的<strong>低温Mu金属屏蔽</strong>，用于屏蔽低频磁源。例如，可以使用由回火低温磁导合金10制成的双壁磁屏蔽。第七章提供了关于屏蔽的更多细节。</p>
+</li>
+</ul>
+<hr>
+<h3 id="图6-12"><a href="#图6-12" class="headerlink" title="图6.12"></a>图6.12</h3><p>(a) 用于屏蔽板载电子组件的屏蔽罐；(b) 量子比特的电磁屏蔽。</p>
+<hr>
+<h2 id="滤波"><a href="#滤波" class="headerlink" title="滤波"></a>滤波</h2><p>第五章讨论了各种类型的滤波器；第七章展示了各种低通滤波器，如铜粉滤波器和红外滤波器，如何滤除高频噪声和干扰。</p>
+<p>滤波器用于去除不需要的频率成分，如谐波和杂散，跨越生成、处理和检测链的不同阶段。电子仪器的1&#x2F;f噪声和电网的50&#x2F;60 Hz频率如果到达量子比特，可能对相干时间产生负面影响。图6.13(a)显示了用于进入冰箱信号的室温滤波的<strong>分线盒（breakout box）</strong>。通常，前面板使用BNC连接器，低通滤波器在盒子内部。分线盒后面板的屏蔽电缆连接到冰箱的输入。图6.13(b)显示了典型分线盒的内部。屏蔽阻断辐射噪声，面板安装穿心滤波器用于最小化通过传导路径耦合的噪声的影响。第七章全面概述了超导量子比特硬件设置中的室温和低温滤波。</p>
+<hr>
+<h3 id="图6-13"><a href="#图6-13" class="headerlink" title="图6.13"></a>图6.13</h3><p>(a) 使用分线盒进行室温滤波，分线盒的滤波输出进入稀释冰箱；(b) 典型分线盒的内部，面板安装滤波模块传导干扰，屏蔽阻断辐射干扰。</p>
+<hr>
+<h2 id="接地"><a href="#接地" class="headerlink" title="接地"></a>接地</h2><p>接地对于电子系统的功能至关重要，特别是在高频下；然而，它经常被忽视。本节讨论接地对电路性能的显著影响，特别是在高频下。</p>
+<p>有两种类型的地：<strong>安全地</strong>和<strong>信号地</strong>。安全地，称为<strong>机壳地</strong>，通常需要用于防止电击危险[1, 2]。除了提供电击保护外，安全地在排出电荷和将ESD电流从精密电子设备转移开方面发挥着关键作用。在设计外壳中的组件或仪器时，我们必须始终考虑提供安全地和适当的外壳接地，通过将电路的地连接到外壳。</p>
+<p>信号地是电流返回其源的路径。然而，重要的是要注意，即使这是设计者的意图，也不能保证信号将沿着指定路径返回其源。必须确定信号返回路径并有意设计以成功进行EMC设计。原因解释如下。</p>
+<p>地平面，如PCB的地平面，理想情况下是零阻抗的等势面 $Z &#x3D; R + jL\omega &#x3D; 0$，其中R是电阻，L是电感，$\omega$ 是角频率。这个想法在直流或低频下可能是合适的，但在较高频率下从不准确。在高频下，导体由于Z的电感部分而具有显著的阻抗，其中导体的电阻（包括趋肤效应）与其电感相比可以忽略不计。由于这种阻抗，任何流过假定的”地”的电流将导致地表面各点的电位不同。因此，假定的地不能被视为等势面。地两点之间的电压差 $V_G &#x3D; V_{G1} - V_{G2}$ 充当电压源，驱动信号和返回线中的共模电流 $I_{C1}$ 和 $I_{C2}$，如图6.14(a)所示。这些共模电流类似于天线电流，可能引起辐射。</p>
+<p>重要的是要注意，电流通过最低阻抗的路径返回其源。由于地的阻抗Z随频率变化，信号的每个频率分量的最低阻抗路径可能不同。因此，不同的频率分量可能通过不同的路径返回，这可能使波形失真（见第四章）。因此，不良的接地可能导致失真和辐射等其他影响。</p>
+<p>精心设计的接地策略对于在硬件设置中保持信号完整性和最小化噪声至关重要。虽然设计良好的高频地有各种技术和考虑因素，但我们专注于半导体量子比特硬件设置中使用的一种关键技术：<strong>打破接地环路</strong>。修改冰箱的接地已被证明可以改善退相干时间[9, 10]。</p>
+<p>量子比特实验中由于接地环路引起的潜在问题包括通过互连电缆上的共模电流产生不需要的噪声信号。此外，穿过接地环路的附近磁场会感应噪声信号。这些不需要的信号可能耦合到冰箱中，进而耦合到量子比特，导致退相干和量子信息损坏。</p>
+<p>有必要确保电路之间没有电气接触，以打破它们之间的接地环路。这种在没有电气接触的情况下隔离两个电路的过程称为<strong>电流隔离（galvanic isolation）</strong>。两个电路之间没有任何电气接触的电信号传输可以通过以下方法实现：</p>
+<ul>
+<li><strong>隔离变压器（1:1变压器）</strong>：电感耦合，如使用变压器，如图6.14(b)所示。</li>
+<li><strong>光耦合器</strong>：或者，电信号可以转换为电磁波或光波，在两个电路之间的介质中传播，并在另一端转换回电信号。这可以通过具有不同带宽的光耦合器实现，用于模拟和数字信号，如图6.14(c)所示。</li>
+</ul>
+<p>改善设置中接地的第一步是使用称为1:1变压器的隔离变压器将量子比特硬件设置的电源与电网隔离。对于GPIB连接，可以使用National Instruments的GPIB-120A总线扩展器&#x2F;隔离器等隔离器。该隔离器使用光耦合器隔离仪器侧的GPIB端口和PC侧的端口。类似地，隔离器可用于USB和以太网连接。</p>
+<p>第八章显示，AC电桥用于精确测量稀释冰箱的内部温度。当连接到冰箱时，仪器机壳的地与冰箱的地之间可能存在显著差异。如果两个地连接，50&#x2F;60 Hz噪声电流可能引入传感器布线[11]。因此，在这种情况下使用电流隔离打破接地环路也是必不可少的。</p>
+<hr>
+<h3 id="图6-14"><a href="#图6-14" class="headerlink" title="图6.14"></a>图6.14</h3><p>(a) 由于地电压差在互连电缆上产生的共模电流；(b) 使用隔离变压器打破接地环路；(c) 光耦合器。</p>
+<hr>
+<h3 id="导线接地"><a href="#导线接地" class="headerlink" title="导线接地"></a>导线接地</h3><p>通过最小化信号与其返回路径之间的环路面积来实现对磁场的保护（例如，使用双绞线或扁平电缆中的相邻导体）。如果使用相对于参考导体在两端具有平衡终端的双绞线电缆，它在减少电场耦合方面也很有效[2]。建议对室温量子比特硬件设置使用屏蔽电缆或双绞线，以最小化串扰和外部电磁干扰。此外，适当的接地对于电缆屏蔽属性的有效功能是必要的。</p>
+<p>用屏蔽包围电缆线可能不会减少电缆的辐射发射。电缆屏蔽必须连接到地以有效减少辐射发射。请注意，只要屏蔽的任一端接地，有效的电缆屏蔽就会减少电场耦合（容性耦合）。屏蔽必须在两端接地以减轻磁场耦合（感性耦合）。这允许电流沿屏蔽回流，产生抵消噪声发生器感应电流产生的磁通的磁通。</p>
+<p>未接地或接地不良的电缆可能引起许多不良问题。例如，将电缆屏蔽外围连接到外壳可能导致内部噪声电流沿屏蔽外部流出外壳，导致辐射。因此，移除整体屏蔽有时可能会减少电缆的辐射发射。如果连接屏蔽”猪尾”的点的电压变化，电缆屏蔽也可能成为单极天线，如电子PCB的逻辑地[2]。如果电缆屏蔽的长度约为四分之一波长，它就成为有效的辐射器。由于未接地或接地不良的屏蔽电缆上产生的共模电流，辐射发射中经常观察到共振。消除这些共振及其增强的辐射发射通常可以在断开电缆时实现。</p>
+<hr>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1] Ott, H. W., <em>Electromagnetic Compatibility Engineering</em> (Second Edition), New York, NY: Wiley, 2009.</p>
+<p>[2] Paul, C. R., <em>Introduction to Electromagnetic Compatibility</em> (Third Edition), Hoboken, NJ: Wiley, 2006.</p>
+<p>[3] McLaren, P. D., <em>EMI Troubleshooting Cookbook for Product Designers</em>, New York, NY: Springer, 2014.</p>
+<p>[4] Sarovar, M., “Detecting Crosstalk Errors in Quantum Information Processors,” <em>Quantum</em>, Vol. 4, September 2020, arXiv:1908.09855.</p>
+<p>[5] Da Silva, M. P., A. Melville, and A. Megrant, “Reducing Crosstalk in Superconducting Qubits,” <em>Physical Review Applied</em>, Vol. 16, 2021.</p>
+<p>[6] Nuerbolati, W., et al., “Canceling Microwave Crosstalk With Fixed-Frequency Qubits,” <em>Appl. Phys. Lett.</em>, Vol. 120, No. 17, April 25, 2022, <span class="exturl" data-url="aHR0cHM6Ly9kb2kub3JnLzEwLjEwNjMvNS4wMDg4MDk0">https://doi.org/10.1063/5.0088094<i class="fa fa-external-link-alt"></i></span>.</p>
+<p>[7] Reilly, D. J., “Challenges in Scaling-up the Control Interface of a Quantum Computer,” <em>2019 IEEE International Electron Devices Meeting (IEDM)</em>, San Francisco, CA, 2019, pp. 31.7.1–31.7.6, doi: 10.1109&#x2F;IEDM19573.2019.8993497.</p>
+<p>[8] Cryoperm, <span class="exturl" data-url="aHR0cHM6Ly93d3cubXVzaGllbGQuY29tL21hdGVyaWFsLXNhbGVzL2NyeW9wZXJtLw==">https://www.mushield.com/material-sales/cryoperm/<i class="fa fa-external-link-alt"></i></span>.</p>
+<p>[9] Finnegan, et al., “Vibration-Induced Electrical Noise in a Cryogen-Free Dilution Refrigerator: Characterization, Mitigation, And Impact on Qubit Coherence,” <em>Applied Physics Letters</em>, Vol. 114, No. 24.</p>
+<p>[10] Birenbaum, J. S., <em>The C-shunt Flux Qubit: A New Generation of Superconducting Flux Qubit</em> (PhD thesis), University of California, Berkeley, CA, 2014.</p>
+<p>[11] Lakeshore Cryotronics, “Model 372 AC Resistance Bridge Installation Best Practices for Measurement in a Dilution Refrigerator.”</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="Liu Ming WeChat Pay">
+        <span>WeChat Pay</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="Liu Ming Alipay">
+        <span>Alipay</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>Liu Ming
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="http://iuming.github.io/2026/03/09/%E7%94%B5%E7%A3%81%E5%85%BC%E5%AE%B9%E5%8E%9F%E7%90%86/" title="电磁兼容原理">http://iuming.github.io/2026/03/09/电磁兼容原理/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/realiuming">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+U5yo-Zxuw1OgbU6P">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </span>
+
+          <img class="social-item-img" src="/images/wechat_channel.jpg">
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/quantum/" rel="tag"><i class="fa fa-tag"></i> quantum</a>
+              <a href="/tags/physics/" rel="tag"><i class="fa fa-tag"></i> physics</a>
+              <a href="/tags/EMC/" rel="tag"><i class="fa fa-tag"></i> EMC</a>
+          </div>
+
+        
+  <div class="social-like a2a_kit a2a_kit_size_32 a2a_default_style">
+    <a class="a2a_dd" target="_blank" rel="noopener" href="https://www.addtoany.com/share"></a>
+      <a class="a2a_button_facebook"></a>
+      <a class="a2a_button_twitter"></a>
+      <a class="a2a_button_wechat"></a>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/03/09/%E5%BE%AE%E6%B3%A2%E7%BB%84%E4%BB%B6/" rel="prev" title="微波组件">
+                  <i class="fa fa-angle-left"></i> 微波组件
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Ming Liu. All rights reserved.</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL2l1bWluZw==" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.1.0/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/4.23.3/algoliasearch-lite.umd.js" integrity="sha256-1QNshz86RqXe/qsCBldsUu13eAX6n/O98uubKQs87UI=" crossorigin="anonymous"></script><script src="/js/third-party/search/algolia-search.js"></script>
+<script class="next-config" data-name="chatra" type="application/json">{"enable":true,"async":true,"id":"gTXKphrmKGf5QSb5L"}</script>
+<script src="/js/third-party/chat/chatra.js"></script>
+<script async src="https://call.chatra.io/chatra.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.0/pdfobject.min.js","integrity":"sha256-JJZNsid68vnh3/zyj0lY9BN5ynxVX/12XgOa1TlaYN0="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.0/mermaid.min.js","integrity":"sha256-stuqcu2FrjYCXDOytWFA5SoUE/r3nkp6gTglzNSlavU="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+  <script class="next-config" data-name="wavedrom" type="application/json">{"enable":true,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.5.0/wavedrom.min.js","integrity":"sha256-INLAoJc6quTNfiMWkGZniYO2cxE8mHpddnLow1m6RFs="}}</script>
+  <script class="next-config" data-name="wavedrom_skin" type="application/json">{"enable":true,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.5.0/skins/default.js","integrity":"sha256-fduc/Zszk5ezWws2uInY/ALWVmIrmV6VTgXbsYSReFI="}}</script>
+  <script src="/js/third-party/tags/wavedrom.js"></script>
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+  <script src="/js/third-party/addtoany.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":"ture","archive":true,"delay":true,"timeout":3000,"priority":true,"url":"http://iuming.github.io/2026/03/09/%E7%94%B5%E7%A3%81%E5%85%BC%E5%AE%B9%E5%8E%9F%E7%90%86/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"realiuming","count":true,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+
+</body>
+</html>
