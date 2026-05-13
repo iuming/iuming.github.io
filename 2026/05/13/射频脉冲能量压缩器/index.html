@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.2.0">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/manifest.json">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"iuming.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.20.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":null},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":true,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="调研射频脉冲能量压缩器的原理、国内外研究现状以及应用和未来发展趋势。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="射频脉冲能量压缩器">
+<meta property="og:url" content="http://iuming.github.io/2026/05/13/%E5%B0%84%E9%A2%91%E8%84%89%E5%86%B2%E8%83%BD%E9%87%8F%E5%8E%8B%E7%BC%A9%E5%99%A8/index.html">
+<meta property="og:site_name" content="REALIUMING&#39;BLOG">
+<meta property="og:description" content="调研射频脉冲能量压缩器的原理、国内外研究现状以及应用和未来发展趋势。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-05-13T10:06:26.000Z">
+<meta property="article:modified_time" content="2026-05-13T10:18:13.524Z">
+<meta property="article:author" content="Liu Ming">
+<meta property="article:tag" content="加速器">
+<meta property="article:tag" content="射频">
+<meta property="article:tag" content="微波">
+<meta name="twitter:card" content="&lt;twitter:card&gt;">
+<meta name="twitter:image" content="http://iuming.github.io/2026/05/13/%E5%B0%84%E9%A2%91%E8%84%89%E5%86%B2%E8%83%BD%E9%87%8F%E5%8E%8B%E7%BC%A9%E5%99%A8/%3Ctwitter:image%3E">
+<meta name="twitter:creator" content="@&lt;twitter:creator&gt;">
+<meta name="twitter:site" content="<twitter:site>">
+<meta property="fb:admins" content="&lt;fb:admin_id&gt;">
+<meta property="fb:app_id" content="&lt;fb:app_id&gt;">
+
+
+<link rel="canonical" href="http://iuming.github.io/2026/05/13/%E5%B0%84%E9%A2%91%E8%84%89%E5%86%B2%E8%83%BD%E9%87%8F%E5%8E%8B%E7%BC%A9%E5%99%A8/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://iuming.github.io/2026/05/13/%E5%B0%84%E9%A2%91%E8%84%89%E5%86%B2%E8%83%BD%E9%87%8F%E5%8E%8B%E7%BC%A9%E5%99%A8/","path":"2026/05/13/射频脉冲能量压缩器/","title":"射频脉冲能量压缩器"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>射频脉冲能量压缩器 | REALIUMING'BLOG</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">REALIUMING'BLOG</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">287</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">21</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">118</span></a></li><li class="menu-item menu-item-books"><a href="/book/" rel="section"><i class="fa fa-book fa-fw"></i>books</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fab fa-algolia fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81-%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E8%AF%A6%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">一、 工作原理详述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E7%BB%8F%E5%85%B8-SLED-%E5%8E%9F%E7%90%86%EF%BC%88SLAC-Energy-Doubler%EF%BC%89%E4%B8%8E%E5%85%AC%E5%BC%8F%E6%8E%A8%E5%AF%BC"><span class="nav-number">1.1.</span> <span class="nav-text">1. 经典 SLED 原理（SLAC Energy Doubler）与公式推导</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-SLED-%E6%BC%94%E8%BF%9B%E4%B8%8E%E6%96%B0%E5%9E%8B%E6%B3%A2%E5%BD%A2%E5%B9%B3%E6%95%B4%E6%8A%80%E6%9C%AF%EF%BC%88SLED-II-AM-PM%E8%B0%83%E5%88%B6%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">2. SLED 演进与新型波形平整技术（SLED-II &#x2F; AM-PM调制）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E6%96%B0%E4%B8%80%E4%BB%A3%E8%85%94%E4%BD%93%E7%89%A9%E7%90%86%E8%AE%BE%E8%AE%A1%EF%BC%9ABOC-%E4%B8%8E%E5%A4%A7%E5%B0%BA%E5%AF%B8%E9%AB%98%E9%98%B6%E6%A8%A1"><span class="nav-number">1.3.</span> <span class="nav-text">3. 新一代腔体物理设计：BOC 与大尺寸高阶模</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81-%E5%9B%BD%E5%86%85%E5%A4%96%E5%AD%A6%E6%9C%AF%E7%A0%94%E7%A9%B6%E4%B8%8E%E5%B7%A5%E7%A8%8B%E7%8E%B0%E7%8A%B6"><span class="nav-number">2.</span> <span class="nav-text">二、 国内外学术研究与工程现状</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%9B%BD%E9%99%85%E7%A0%94%E7%A9%B6%E8%84%89%E7%BB%9C"><span class="nav-number">2.1.</span> <span class="nav-text">1. 国际研究脉络</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%9B%BD%E5%86%85%E7%AA%81%E9%A3%9E%E7%8C%9B%E8%BF%9B%E7%9A%84%E6%8A%80%E6%9C%AF%E7%AA%81%E7%A0%B4"><span class="nav-number">2.2.</span> <span class="nav-text">2. 国内突飞猛进的技术突破</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81-%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%E4%B8%8E%E6%9C%AA%E6%9D%A5%E5%8F%91%E5%B1%95%E8%B6%8B%E5%8A%BF"><span class="nav-number">3.</span> <span class="nav-text">三、 应用场景与未来发展趋势</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E5%BA%94%E7%94%A8"><span class="nav-number">3.1.</span> <span class="nav-text">主要应用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%AA%E6%9D%A5%E8%B6%8B%E5%8A%BF"><span class="nav-number">3.2.</span> <span class="nav-text">未来趋势</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E3%80%81-%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE%E4%BB%A3%E8%A1%A8"><span class="nav-number">4.</span> <span class="nav-text">四、 参考文献代表</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Liu Ming"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Liu Ming</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">118</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">287</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button animated">
+    <button><i class="fa fa-comment"></i>
+      Chat
+    </button>
+  </div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2l1bWluZw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;iuming"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOjUyMDBsaXVtaW5nQGdtYWlsLmNvbQ==" title="E-Mail → mailto:5200liuming@gmail.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vdS8zMTQ3OTEyODky" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;3147912892"><i class="fab fa-weibo fa-fw"></i>Weibo</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9yZWFsaXVtaW5n" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;realiuming"><i class="fab fa-twitter fa-fw"></i>Twitter</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL3JlYWxpdW1pbmc=" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;realiuming"><i class="fab fa-facebook fa-fw"></i>FB Page</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8xMjE4NTI3My9pdW1pbmc=" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;12185273&#x2F;iuming"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly95b3V0dWJlLmNvbS9jaGFubmVsL1VDaUNCSHJ4cDJ4Tlc3T1ZaTlFzZHROdw==" title="YouTube → https:&#x2F;&#x2F;youtube.com&#x2F;channel&#x2F;UCiCBHrxp2xNW7OVZNQsdtNw"><i class="fab fa-youtube fa-fw"></i>YouTube</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9pbnN0YWdyYW0uY29tL3JlYWxpdW1pbmc=" title="Instagram → https:&#x2F;&#x2F;instagram.com&#x2F;realiuming"><i class="fab fa-instagram fa-fw"></i>Instagram</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="c2t5cGU6ODQyNjczNTU2P2NhbGx8Y2hhdA==" title="Skype → skype:842673556?call|chat"><i class="fab fa-skype fa-fw"></i>Skype</span>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="Back to top">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://iuming.github.io/" title="https:&#x2F;&#x2F;iuming.github.io&#x2F;">Title</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://iuming.github.io/2026/05/13/%E5%B0%84%E9%A2%91%E8%84%89%E5%86%B2%E8%83%BD%E9%87%8F%E5%8E%8B%E7%BC%A9%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Liu Ming">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="REALIUMING'BLOG">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="射频脉冲能量压缩器 | REALIUMING'BLOG">
+      <meta itemprop="description" content="调研射频脉冲能量压缩器的原理、国内外研究现状以及应用和未来发展趋势。">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          射频脉冲能量压缩器
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2026-05-13 18:06:26 / Modified: 18:18:13" itemprop="dateCreated datePublished" datetime="2026-05-13T18:06:26+08:00">2026-05-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2026/05/13/%E5%B0%84%E9%A2%91%E8%84%89%E5%86%B2%E8%83%BD%E9%87%8F%E5%8E%8B%E7%BC%A9%E5%99%A8/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2026/05/13/射频脉冲能量压缩器/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+            <div class="post-description">调研射频脉冲能量压缩器的原理、国内外研究现状以及应用和未来发展趋势。</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>射频脉冲能量压缩器（RF Pulse Compressor）是加速器物理和微波技术领域的核心组件。其基本思想是通过“以时间换功率”，将经过速调管等微波源输出的较长脉冲、较低峰值功率的射频能量进行重组压缩，转换为较短脉冲、高峰值功率的射频能量，从而大幅度提高直线加速器的加速梯度（Acceleration Gradient）并有效降低工程造价。</p>
+<h3 id="一、-工作原理详述"><a href="#一、-工作原理详述" class="headerlink" title="一、 工作原理详述"></a>一、 工作原理详述</h3><p>射频脉冲能量压缩过程本质上依赖于微波谐振腔（或延迟线）的能量充放放电效应与波的三维相干叠加原理。物理过程可以分为<strong>“储能（Charging Phase）”</strong>与<strong>“释放叠加（Discharging &#x2F; Superposition Phase）”</strong>两个主要阶段。</p>
+<h4 id="1-经典-SLED-原理（SLAC-Energy-Doubler）与公式推导"><a href="#1-经典-SLED-原理（SLAC-Energy-Doubler）与公式推导" class="headerlink" title="1. 经典 SLED 原理（SLAC Energy Doubler）与公式推导"></a>1. 经典 SLED 原理（SLAC Energy Doubler）与公式推导</h4><p>1974 年，由 SLAC 的 Z. D. Farkas 等人首次提出了 SLED 系统。它通常由一个 3dB 定向耦合器（或微波魔T）和两个物理参数完全一致的极高品质因数（固有品质因数 $Q_0 \sim 10^5$ 量级）谐振腔（早期为 $TE_{015}$ 模无氧铜圆柱腔）组成。</p>
+<p>设定微波角频率为 $\omega$，谐振腔与波导的耦合系数为 $\beta$，则有载品质因数 $Q_L &#x3D; \frac{Q_0}{1+\beta}$，谐振腔的填充充放电时间常数 $\tau &#x3D; \frac{2Q_L}{\omega} &#x3D; \frac{2Q_0}{\omega(1+\beta)}$。<br>假设速调管入射电场复振幅为 $E_k$，从谐振腔辐射出的电场为 $E_e$，直接在耦合口反射的电场为 $-E_k$（由于过耦合特性对应的波导反射系数定义）。根据系统能量守恒和耦合理论，最终输出端的电场 $E_{out}$ 为腔体辐射场与直接反射场的叠加：<br>$$E_{out}(t) &#x3D; E_e(t) - E_k$$</p>
+<ul>
+<li><p><strong>储能阶段（$0 \le t &lt; t_1$）</strong>：<br>射频源输出长度为 $t_p$ 的长脉冲射频信号，经过 3dB 耦合器平分成两路射频波馈入高 Q 腔体。腔内辐射场随时间呈指数建立现象：<br>$$E_e(t) &#x3D; \alpha E_k \left(1 - e^{-t&#x2F;\tau}\right)$$<br>其中常数 $\alpha &#x3D; \frac{2\beta}{1+\beta}$。在这个阶段能量被约束在腔体内，输出的微波电场总体处于较低水平：<br>$$E_{out}(t) &#x3D; E_k \left[ \frac{2\beta}{1+\beta} \left(1 - e^{-t&#x2F;\tau}\right) - 1 \right]$$</p>
+</li>
+<li><p><strong>相位反转控制释放阶段（$t &#x3D; t_1$）</strong>：<br>在 $t &#x3D; t_1$ 时刻（通常选取 $t_1$ 使脉冲剩余时间正好等于加速结构的所需的微波填充时间），控制系统将速调管输出射频波的本征相位迅速反转 $180^\circ$（即发生 $\pi$ 相移），此时输入端场强反转变为 $-E_k$。</p>
+</li>
+<li><p><strong>共振功率叠加与能量增益（$t \ge t_1$）</strong>：<br>由于腔内极高 Q 值储能的大惯性，在调相瞬变的时刻（$t &#x3D; t_1^+$），腔体辐射场 $E_e(t_1)$ 幅值和相位无法突变，但波导界面处的入射波瞬间反号。反射射频波与辐射储能波在 3dB 耦合器输出端口形成<strong>空间上的同相相干叠加</strong>：<br>$$E_{out}(t_1^+) &#x3D; E_e(t_1) - (-E_k) &#x3D; E_e(t_1) + E_k$$<br>将 $E_e$ 代入方程，可以得出脉冲压缩器<strong>瞬态电压放大增益（Voltage Multiplication Factor, $M$）</strong>的最核心表达式：<br>$$M &#x3D; \frac{E_{out}(t_1^+)}{E_k} &#x3D; 1 + \frac{2\beta}{1+\beta} \left(1 - e^{-t_1&#x2F;\tau}\right)$$<br>公式推导显示，假设给予极长的储能时间 $t_1 \gg \tau$，且采用强耦合配置 $\beta \gg 1$，电压放大倍数理论上限 $M \to 3$。所以<strong>瞬时微波功率增益上限为 $|M|^2 \to 9$ 倍</strong>。实际工程应用中，抛弃理想条件（即考虑有限脉宽损失、腔壁趋肤热耗散及实际最佳的 $\beta \approx 4\sim 7$），功率最终倍增效果通常峰值设计在 3 到 4 倍左右。</p>
+</li>
+</ul>
+<h4 id="2-SLED-演进与新型波形平整技术（SLED-II-AM-PM调制）"><a href="#2-SLED-演进与新型波形平整技术（SLED-II-AM-PM调制）" class="headerlink" title="2. SLED 演进与新型波形平整技术（SLED-II &#x2F; AM-PM调制）"></a>2. SLED 演进与新型波形平整技术（SLED-II &#x2F; AM-PM调制）</h4><p>传统 SLED 的一个局限在于其输出的是一个能量逐步降低的指数衰减波形。由于电子往往会在脉冲的不同时刻注入加速管，指数波形将导致严重的束流能量色散（Energy Spread）。</p>
+<ul>
+<li><strong>SLED-II 技术与分布参数模型</strong>：1990年，为了满足 NLC（次世代直线对撞机）的需求，SLAC 提出了 SLED-II。该系统使用一对特征阻抗匹配的长过耦合<strong>波导延迟线（Delay Lines）</strong>替代了集总参数的谐振腔。微波在长度为 $L$ 的低损耗波导中往返传播一次需时间 $t_d &#x3D; 2L&#x2F;v_g$（$v_g$ 为群速度）。入射波在耦合孔径（反射系数 $R$，透射系数 $T$ 满足 $R^2+T^2&#x3D;1$）处经历多次透射和反射干涉。<br>当输入波在 $t&#x3D;n t_d$ 时刻反相后，能量从延迟线中被整体倒出，完美形成了一个恒幅不变的阶梯状“平顶脉冲（Flat-top Pulse）”。理论计算表明，当延迟线损耗极小且耦合孔满足最优设计 $R \approx 0.6$ 时，SLED-II 的理想功率倍增系数可以达到约 $M_{power} \approx 4\sim5$。</li>
+<li><strong>AM&#x2F;PM 精确调制（相位&#x2F;幅度补偿）</strong>：随着现代 LLRF（低电平射频反馈控制系统）技术日益发达，系统无需对微波做粗暴的 $\pi$ 相移反转。取而代之的是，在释放阶段对入射脉冲的相位 $\phi(t)$ 进行连续的斜坡扫描（Phase Ramping），或者是调幅预补偿，来人为削弱初期爆发的峰值并拉平后期的衰减，最终通过牺牲部分极限峰值获得一个理想的恒流平滑方波。</li>
+</ul>
+<h4 id="3-新一代腔体物理设计：BOC-与大尺寸高阶模"><a href="#3-新一代腔体物理设计：BOC-与大尺寸高阶模" class="headerlink" title="3. 新一代腔体物理设计：BOC 与大尺寸高阶模"></a>3. 新一代腔体物理设计：BOC 与大尺寸高阶模</h4><p>对于未来需要百兆瓦（~100 MW）级输出功率的 X&#x2F;C 波段系统，传统的 $TE_{015}$ 模圆柱腔面临着体积小造成的严重表面电场微波打火（RF Breakdown）危机，同时由于不可避免的多模简并（如与 $TM_{115}$ 模简并），极易引起破坏性谐振。</p>
+<ul>
+<li>**BOC (Barrel Open Cavity，桶状开腔)**：一种基于“回音壁模式（Whispering Gallery Mode, 典型如 $TM_{m,1,1}$, $m \gg 1$）”工作的概念。其物理几何是一个将两侧壁张开为喇叭状的金属环桶。微波被束缚在腔的赤道带附近贴壁旋转，有效削减了表面对流所引发的壁面欧姆耗损，显著提高了固有 $Q_0 \sim 2 \times 10^5$。同时，“开腔”特性意味着杂散低阶模式会直接辐射到外部空间自然损耗耗散掉，完美解决了高阶多模带来的简并污染问题。</li>
+<li>**球形&#x2F;半球形谐振腔 (Spherical Cavity)**：利用如 $TE_{113}, TE_{114}$ 等高阶本征模激发的球内腔体。相较于边缘效应明显的柱形 SLED，球腔完美的对称性质使得表面的最大磁场 $H_s$ 与最大电场 $E_s$ 分布异常均匀，将腔体承受微波打火阈值的极限能力提高了数倍，极大有利于装置的紧凑化与超级增益。</li>
+</ul>
+<h3 id="二、-国内外学术研究与工程现状"><a href="#二、-国内外学术研究与工程现状" class="headerlink" title="二、 国内外学术研究与工程现状"></a>二、 国内外学术研究与工程现状</h3><p>在该领域，过去几十年形成了基于高梯度、高紧凑化需求的发展图景，大量的学术论文对其展开了前沿研究：</p>
+<h4 id="1-国际研究脉络"><a href="#1-国际研究脉络" class="headerlink" title="1. 国际研究脉络"></a>1. 国际研究脉络</h4><ul>
+<li><strong>美国 SLAC</strong>：作为本技术的“祖师爷”，其早期的代表作为 Farkas 团队 1974 年发表的 _”SLED: A Method of Doubling SLAC’s Energy”_。此后为了 X 波段，团队陆续研发由于高功率受限改进的过耦合腔脉冲系统。</li>
+<li><strong>日本 KEK与俄日联合团队</strong>：为了 Spring-8 和 SCSS 等新光源以及直线对撞机，广泛主推 C 波段（5712 MHz）脉冲压缩的 BOC 结构研发。以 T. Shintake 及其成员的学术理论奠基，解决了一次成型无氧铜腔和极低热膨胀系数温控方案（参见 <em>“The Choke Mode Cavity”</em>_ 等文献）。</li>
+<li>**CERN (欧洲核子研究中心)**：在 CLIC 对撞机项目中，I. Syratchev 等人在高能会议中提出了应用于 12 GHz X 波段的双高表面打火预防结构的复杂脉冲压缩算法演进（2011年 IPAC）。</li>
+</ul>
+<h4 id="2-国内突飞猛进的技术突破"><a href="#2-国内突飞猛进的技术突破" class="headerlink" title="2. 国内突飞猛进的技术突破"></a>2. 国内突飞猛进的技术突破</h4><ul>
+<li><strong>清华大学加速器实验室</strong>：在高阶模球形脉冲压缩器理论和应用上取得了卓越成果。唐传祥教授、施将宇教授等人在知名期刊（如 <em>Review of Scientific Instruments</em>，2014） 上发表的文章，成功采用极化旋转机制替代了臃肿的 3dB 耦合器魔T配置，做到了极度紧凑。</li>
+<li><strong>上海中科院体系（SARI &#x2F; SINAP）</strong>：在国产重大科学装置软&#x2F;硬X射线自由电子激光（SXFEL &#x2F; SHINE）的大规模量产应用中，方文程团队等学者攻克了 C 波段 BOC 多模干涉与冷却测试问题，并在 <em>NIMA</em> 等期刊产出了包括高功率老练与调谐算法（High-power Processing）的详实专著。</li>
+<li><strong>中国科学院高能物理研究所（IHEP）</strong>：在北京正负电子对撞机和未来的先进光源项目（如 CEPC 环形正负电子对撞机预研）中实现了 S&#x2F;C&#x2F;X 全波段脉冲压缩技术的自主可控。</li>
+</ul>
+<h3 id="三、-应用场景与未来发展趋势"><a href="#三、-应用场景与未来发展趋势" class="headerlink" title="三、 应用场景与未来发展趋势"></a>三、 应用场景与未来发展趋势</h3><h4 id="主要应用"><a href="#主要应用" class="headerlink" title="主要应用"></a>主要应用</h4><ol>
+<li><strong>高能粒子加速器及对撞机工程</strong>：例如正在预研的诸如 ILC, CLIC，通过能量双倍极至三倍机制减小近半的速调管消耗需求与地下隧道长度成本。</li>
+<li><strong>X射线自由电子激光（XFEL）</strong>：对能量相位的抖动要求达到了极端的百飞秒和万分之一量级，平峰调制的RF压缩器成了刚需心脏。</li>
+<li><strong>医学放射与工业无损检测设备</strong>：车载探伤加速器或放疗设备无需大型速调管，仅依靠低廉的磁控管配以SLED就能激发出极强穿透力（MeV级别）的X射线光谱。</li>
+</ol>
+<h4 id="未来趋势"><a href="#未来趋势" class="headerlink" title="未来趋势"></a>未来趋势</h4><ol>
+<li><strong>向超高频段延伸微型化</strong>：随着更高梯度的需求（&gt;100~200 MV&#x2F;m），X波段已全面开花，未来正探索基于薄膜光刻技术的亚太赫兹（THz）频级脉冲压缩研究。</li>
+<li><strong>抗击穿与材料学革命（RF Field Breakdown）</strong>：在几百兆瓦的峰值输出下必然伴随金属表面的微波打火破坏。抛光退火工艺、极限无氧铜处理等表面科学技术将不断革新。</li>
+<li><strong>高度自适应的低电平调相技术</strong>：软&#x2F;硬件结合的 AI 与闭环实时 LLRF 数字跟踪，实现自反馈调整反射波包络衰减，最终输出极其标准理想的平稳“顶射方波”。</li>
+</ol>
+<h3 id="四、-参考文献代表"><a href="#四、-参考文献代表" class="headerlink" title="四、 参考文献代表"></a>四、 参考文献代表</h3><ol>
+<li>Farkas, Z. D., Hogg, H. A., Loew, G. A., &amp; Wilson, P. B. (1974). “SLED: A Method of Doubling SLAC’s Energy.” <em>Proceedings of the 9th International Conference on High Energy Accelerators</em>.</li>
+<li>Wilson, P. B., Farkas, Z. D., &amp; Ruth, R. D. (1990). “SLED II: A new method of RF pulse compression.” <em>SLAC-PUB-5330</em>.</li>
+<li>Syratchev, I. (2011). “RF pulse compression systems for CLIC.” <em>Proceedings of IPAC2011, San Sebastian, Spain</em>, 2900-2902.</li>
+<li>Dong, X., Shi, J., Chen, H., et al. (2014). “Design of a spherical RF pulse compressor.” <em>Review of Scientific Instruments</em>, 85(7), 073302. (清华大学球形压缩器经典理论文章)</li>
+<li>Fang, W., Gu, Q., et al. (2017). “Design and cold test of a C-band barrel open cavity pulse compressor.” <em>Nuclear Instruments and Methods in Physics Research Section A</em>, 853, 44-50. (上海中科院团队关于 C-band BOC 研发文献)</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="Liu Ming WeChat Pay">
+        <span>WeChat Pay</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="Liu Ming Alipay">
+        <span>Alipay</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>Liu Ming
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="http://iuming.github.io/2026/05/13/%E5%B0%84%E9%A2%91%E8%84%89%E5%86%B2%E8%83%BD%E9%87%8F%E5%8E%8B%E7%BC%A9%E5%99%A8/" title="射频脉冲能量压缩器">http://iuming.github.io/2026/05/13/射频脉冲能量压缩器/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/realiuming">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+U5yo-Zxuw1OgbU6P">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </span>
+
+          <img class="social-item-img" src="/images/wechat_channel.jpg">
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E5%8A%A0%E9%80%9F%E5%99%A8/" rel="tag"><i class="fa fa-tag"></i> 加速器</a>
+              <a href="/tags/%E5%B0%84%E9%A2%91/" rel="tag"><i class="fa fa-tag"></i> 射频</a>
+              <a href="/tags/%E5%BE%AE%E6%B3%A2/" rel="tag"><i class="fa fa-tag"></i> 微波</a>
+          </div>
+
+        
+  <div class="social-like a2a_kit a2a_kit_size_32 a2a_default_style">
+    <a class="a2a_dd" target="_blank" rel="noopener" href="https://www.addtoany.com/share"></a>
+      <a class="a2a_button_facebook"></a>
+      <a class="a2a_button_twitter"></a>
+      <a class="a2a_button_wechat"></a>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/03/09/%E4%BD%8E%E6%B8%A9%E5%AD%A6%E5%8E%9F%E7%90%86/" rel="prev" title="低温学原理">
+                  <i class="fa fa-angle-left"></i> 低温学原理
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Ming Liu. All rights reserved.</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL2l1bWluZw==" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.1.0/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/4.23.3/algoliasearch-lite.umd.js" integrity="sha256-1QNshz86RqXe/qsCBldsUu13eAX6n/O98uubKQs87UI=" crossorigin="anonymous"></script><script src="/js/third-party/search/algolia-search.js"></script>
+<script class="next-config" data-name="chatra" type="application/json">{"enable":true,"async":true,"id":"gTXKphrmKGf5QSb5L"}</script>
+<script src="/js/third-party/chat/chatra.js"></script>
+<script async src="https://call.chatra.io/chatra.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.0/pdfobject.min.js","integrity":"sha256-JJZNsid68vnh3/zyj0lY9BN5ynxVX/12XgOa1TlaYN0="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.0/mermaid.min.js","integrity":"sha256-stuqcu2FrjYCXDOytWFA5SoUE/r3nkp6gTglzNSlavU="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+  <script class="next-config" data-name="wavedrom" type="application/json">{"enable":true,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.5.0/wavedrom.min.js","integrity":"sha256-INLAoJc6quTNfiMWkGZniYO2cxE8mHpddnLow1m6RFs="}}</script>
+  <script class="next-config" data-name="wavedrom_skin" type="application/json">{"enable":true,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.5.0/skins/default.js","integrity":"sha256-fduc/Zszk5ezWws2uInY/ALWVmIrmV6VTgXbsYSReFI="}}</script>
+  <script src="/js/third-party/tags/wavedrom.js"></script>
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+  <script src="/js/third-party/addtoany.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":"ture","archive":true,"delay":true,"timeout":3000,"priority":true,"url":"http://iuming.github.io/2026/05/13/%E5%B0%84%E9%A2%91%E8%84%89%E5%86%B2%E8%83%BD%E9%87%8F%E5%8E%8B%E7%BC%A9%E5%99%A8/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"realiuming","count":true,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+
+</body>
+</html>
