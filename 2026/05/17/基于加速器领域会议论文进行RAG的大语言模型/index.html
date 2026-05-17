@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.2.0">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/manifest.json">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"iuming.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.20.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":null},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":true,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="针对加速器领域海量会议论文，开发基于本地大模型（LLaMA-3）和检索增强生成（RAG）技术的智能问答系统，解决幻觉与数据隐私问题。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于加速器领域会议论文进行RAG的大语言模型">
+<meta property="og:url" content="http://iuming.github.io/2026/05/17/%E5%9F%BA%E4%BA%8E%E5%8A%A0%E9%80%9F%E5%99%A8%E9%A2%86%E5%9F%9F%E4%BC%9A%E8%AE%AE%E8%AE%BA%E6%96%87%E8%BF%9B%E8%A1%8CRAG%E7%9A%84%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/index.html">
+<meta property="og:site_name" content="REALIUMING&#39;BLOG">
+<meta property="og:description" content="针对加速器领域海量会议论文，开发基于本地大模型（LLaMA-3）和检索增强生成（RAG）技术的智能问答系统，解决幻觉与数据隐私问题。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-05-17T12:01:16.000Z">
+<meta property="article:modified_time" content="2026-05-17T12:08:01.029Z">
+<meta property="article:author" content="Liu Ming">
+<meta property="article:tag" content="LLM">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="加速器">
+<meta property="article:tag" content="RAG">
+<meta property="article:tag" content="LLaMA-3">
+<meta name="twitter:card" content="&lt;twitter:card&gt;">
+<meta name="twitter:image" content="http://iuming.github.io/2026/05/17/%E5%9F%BA%E4%BA%8E%E5%8A%A0%E9%80%9F%E5%99%A8%E9%A2%86%E5%9F%9F%E4%BC%9A%E8%AE%AE%E8%AE%BA%E6%96%87%E8%BF%9B%E8%A1%8CRAG%E7%9A%84%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/%3Ctwitter:image%3E">
+<meta name="twitter:creator" content="@&lt;twitter:creator&gt;">
+<meta name="twitter:site" content="<twitter:site>">
+<meta property="fb:admins" content="&lt;fb:admin_id&gt;">
+<meta property="fb:app_id" content="&lt;fb:app_id&gt;">
+
+
+<link rel="canonical" href="http://iuming.github.io/2026/05/17/%E5%9F%BA%E4%BA%8E%E5%8A%A0%E9%80%9F%E5%99%A8%E9%A2%86%E5%9F%9F%E4%BC%9A%E8%AE%AE%E8%AE%BA%E6%96%87%E8%BF%9B%E8%A1%8CRAG%E7%9A%84%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://iuming.github.io/2026/05/17/%E5%9F%BA%E4%BA%8E%E5%8A%A0%E9%80%9F%E5%99%A8%E9%A2%86%E5%9F%9F%E4%BC%9A%E8%AE%AE%E8%AE%BA%E6%96%87%E8%BF%9B%E8%A1%8CRAG%E7%9A%84%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/","path":"2026/05/17/基于加速器领域会议论文进行RAG的大语言模型/","title":"基于加速器领域会议论文进行RAG的大语言模型"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>基于加速器领域会议论文进行RAG的大语言模型 | REALIUMING'BLOG</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">REALIUMING'BLOG</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">292</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">21</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">120</span></a></li><li class="menu-item menu-item-books"><a href="/book/" rel="section"><i class="fa fa-book fa-fw"></i>books</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fab fa-algolia fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E4%B8%8E%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">核心系统架构与技术选型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E7%8C%AE%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83%E7%BB%9F%E8%AE%A1"><span class="nav-number">1.1.</span> <span class="nav-text">文献数据分布统计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%86%E5%9F%9F%E6%95%B0%E6%8D%AE%E9%9B%86%E6%9E%84%E5%BB%BA%E4%B8%8E%E7%B2%BE%E7%BB%86%E5%8C%96%E8%AF%AD%E4%B9%89%E5%88%87%E5%88%86"><span class="nav-number">1.2.</span> <span class="nav-text">领域数据集构建与精细化语义切分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%91%E9%87%8F%E5%8C%96%E5%BB%BA%E6%A8%A1%E4%B8%8E%E6%AF%AB%E7%A7%92%E7%BA%A7%E7%9B%B8%E4%BC%BC%E5%BA%A6%E6%A3%80%E7%B4%A2"><span class="nav-number">1.3.</span> <span class="nav-text">向量化建模与毫秒级相似度检索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E5%8C%96-LLaMA-3-%E7%9A%84%E7%BB%BC%E5%90%88%E7%94%9F%E6%88%90%E4%B8%8E%E9%99%8D%E5%99%AA"><span class="nav-number">1.4.</span> <span class="nav-text">本地化 LLaMA-3 的综合生成与降噪</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0%E6%BC%94%E7%A4%BA-Python-LangChain"><span class="nav-number">1.5.</span> <span class="nav-text">核心代码实现演示 (Python&#x2F;LangChain)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%A5%E8%8B%9B%E6%B5%8B%E8%AF%95%E4%B8%8E%E5%BA%94%E7%94%A8%E5%AF%B9%E6%AF%94%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90"><span class="nav-number">2.</span> <span class="nav-text">严苛测试与应用对比案例分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B-1%EF%BC%9A%E5%89%94%E9%99%A4%E8%BF%87%E6%97%B6%E9%A2%84%E8%AE%AD%E7%BB%83%E5%99%AA%E5%A3%B0%E4%B8%8E%E5%B9%BB%E8%A7%89%E8%BF%87%E6%BB%A4"><span class="nav-number">2.1.</span> <span class="nav-text">案例 1：剔除过时预训练噪声与幻觉过滤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B-2%EF%BC%9A%E7%A1%AC%E6%A0%B8%E6%8A%80%E6%9C%AF%E5%8F%82%E6%95%B0%E4%B8%8E%E5%BE%AE%E8%A7%82%E6%95%B0%E6%8D%AE%E7%9A%84%E2%80%9C%E6%B5%B7%E5%BA%95%E6%8D%9E%E9%92%88%E2%80%9D"><span class="nav-number">2.2.</span> <span class="nav-text">案例 2：硬核技术参数与微观数据的“海底捞针”</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA%E4%B8%8E%E5%AF%B9%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%89%A9%E7%90%86%E5%AD%A6%E8%BE%85%E5%8A%A9%E7%9A%84%E6%9C%AA%E6%9D%A5%E5%B1%95%E6%9C%9B"><span class="nav-number">3.</span> <span class="nav-text">结论与对大模型物理学辅助的未来展望</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Liu Ming"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Liu Ming</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">120</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">292</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button animated">
+    <button><i class="fa fa-comment"></i>
+      Chat
+    </button>
+  </div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2l1bWluZw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;iuming"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOjUyMDBsaXVtaW5nQGdtYWlsLmNvbQ==" title="E-Mail → mailto:5200liuming@gmail.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vdS8zMTQ3OTEyODky" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;3147912892"><i class="fab fa-weibo fa-fw"></i>Weibo</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9yZWFsaXVtaW5n" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;realiuming"><i class="fab fa-twitter fa-fw"></i>Twitter</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL3JlYWxpdW1pbmc=" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;realiuming"><i class="fab fa-facebook fa-fw"></i>FB Page</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8xMjE4NTI3My9pdW1pbmc=" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;12185273&#x2F;iuming"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly95b3V0dWJlLmNvbS9jaGFubmVsL1VDaUNCSHJ4cDJ4Tlc3T1ZaTlFzZHROdw==" title="YouTube → https:&#x2F;&#x2F;youtube.com&#x2F;channel&#x2F;UCiCBHrxp2xNW7OVZNQsdtNw"><i class="fab fa-youtube fa-fw"></i>YouTube</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9pbnN0YWdyYW0uY29tL3JlYWxpdW1pbmc=" title="Instagram → https:&#x2F;&#x2F;instagram.com&#x2F;realiuming"><i class="fab fa-instagram fa-fw"></i>Instagram</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="c2t5cGU6ODQyNjczNTU2P2NhbGx8Y2hhdA==" title="Skype → skype:842673556?call|chat"><i class="fab fa-skype fa-fw"></i>Skype</span>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="Back to top">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://iuming.github.io/" title="https:&#x2F;&#x2F;iuming.github.io&#x2F;">Title</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://iuming.github.io/2026/05/17/%E5%9F%BA%E4%BA%8E%E5%8A%A0%E9%80%9F%E5%99%A8%E9%A2%86%E5%9F%9F%E4%BC%9A%E8%AE%AE%E8%AE%BA%E6%96%87%E8%BF%9B%E8%A1%8CRAG%E7%9A%84%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Liu Ming">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="REALIUMING'BLOG">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="基于加速器领域会议论文进行RAG的大语言模型 | REALIUMING'BLOG">
+      <meta itemprop="description" content="针对加速器领域海量会议论文，开发基于本地大模型（LLaMA-3）和检索增强生成（RAG）技术的智能问答系统，解决幻觉与数据隐私问题。">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          基于加速器领域会议论文进行RAG的大语言模型
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2026-05-17 20:01:16 / Modified: 20:08:01" itemprop="dateCreated datePublished" datetime="2026-05-17T20:01:16+08:00">2026-05-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/" itemprop="url" rel="index"><span itemprop="name">技术总结</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2026/05/17/%E5%9F%BA%E4%BA%8E%E5%8A%A0%E9%80%9F%E5%99%A8%E9%A2%86%E5%9F%9F%E4%BC%9A%E8%AE%AE%E8%AE%BA%E6%96%87%E8%BF%9B%E8%A1%8CRAG%E7%9A%84%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2026/05/17/基于加速器领域会议论文进行RAG的大语言模型/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+            <div class="post-description">针对加速器领域海量会议论文，开发基于本地大模型（LLaMA-3）和检索增强生成（RAG）技术的智能问答系统，解决幻觉与数据隐私问题。</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>现代加速器物理与工程是一个高度复杂、交叉且重度数据驱动的领域。从高品质因数的超导射频（SRF）腔研发，到下一代终极储存环（USR）和能量回收直线加速器（ERL）的光束动力学设计，研究人员高度依赖全球各大顶级学术会议（如在 JACoW 平台发布的 IPAC、FEL、SRF 和 NAPAC 会议论文）来追踪最新的技术创新和机器运行参数。</p>
+<p>然而，随着科研步伐的加快，学术文献呈现指数级增长。面对动辄数千篇的PDF会议文献，依靠传统的“关键词搜索”和人工阅读来提取某些具体的设计参数（如相空间发射度、束流流强、纵向耦合阻抗等），不仅耗时耗力，更是越来越不切实际。</p>
+<p>虽然大型语言模型（LLMs）在自然语言处理方面表现出色，但在处理高度专业化的科学文献时，往往面临着不可忽视的痛点：</p>
+<ol>
+<li><strong>严重的“幻觉”现象</strong>：通用模型极易捏造或混淆高度相似的专业概念、设施名称及关键运行参数，这在崇尚极其严谨的加速器物理中是灾难性的。</li>
+<li><strong>严重的知识滞后性</strong>：大模型的预训练数据具有截止日期，完全无法掌握近几个月甚至是最近一两年内刚刚在最新学术会议上发表的前沿设计指标和最新实验验证数据。</li>
+<li><strong>数据隐私与安全红线</strong>：大型国家实验室和高能物理研究所（如中科院高能所 IHEP）的加速器设施设计往往涉及高度保密的核心研发数据。直接将此类问题抛给云端调用 API 的商业大模型，有着不可控的数据泄露风险。</li>
+</ol>
+<p>为彻底解决这些局限性，我们开发了一套<strong>完全本地化、脱机运行的领域专属检索增强生成（RAG）系统</strong>。该系统化身为加速器领域的“资深文献研究员”，在保证绝对数据安全的前提下，实现了对庞大文献库的高保真解析与精准问答。</p>
+<span id="more"></span>
+
+<h2 id="核心系统架构与技术选型"><a href="#核心系统架构与技术选型" class="headerlink" title="核心系统架构与技术选型"></a>核心系统架构与技术选型</h2><p>检索增强生成（RAG，Retrieval-Augmented Generation）技术的核心原理在于“基于证据的定向生成”：在LLM回答用户问题前，系统会先在本地的高维矢量数据库中极速检索出语义最匹配的顶级论文片段，随后将这些片段作为“可靠的参考资料（Context）”与用户的提问进行拼接，引导LLM跳出固有训练参数的限制，“开卷考试”般地进行推理解答。</p>
+<p>为了直观地展示这套离线问答系统的数据流转逻辑，我们绘制了如下的系统架构流程图：</p>
+<pre class="mermaid">graph TD
+    subgraph 离线数据摄取路径
+        A[5,301份会议PDF文档] -->|读取与解析| B(PyPDFLoader & 文本切分器)
+        B -->|1000字符/块| C(BGE-M3 嵌入模型)
+        C -->|高维文本向量| D[(ChromaDB 向量数据库)]
+    end
+
+    subgraph 在线问答推理路径
+        E[用户的专业提问] -->|输入| F(BGE-M3 嵌入模型)
+        F -->|生成查询向量| G{Top-k 余弦相似度检索}
+        D -->|计算匹配度| G
+        G -->|返回最相关的 Top-5 段落| H[本地 LLaMA-3 模型 Ollama]
+        E -->|原始 Prompt| H
+        H --> I[生成严谨解答与引用出处]
+    end
+    
+    style A fill:#ffcc99,stroke:#333,stroke-width:2px
+    style D fill:#99ccff,stroke:#333,stroke-width:2px
+    style H fill:#cc99ff,stroke:#333,stroke-width:2px
+    style I fill:#ffffcc,stroke:#333,stroke-width:2px</pre>
+
+<p>本系统的流水线严格遵守上述的两大并行路径：“离线数据注入与向量化构建路径”与“在线实时查询与推理路径”。以下是该系统的核心参数配置与架构选型：</p>
+<table>
+<thead>
+<tr>
+<th align="left">系统参数项</th>
+<th align="left">具体配置详述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>知识库文献规模</strong></td>
+<td align="left">5,301 篇最新高能物理与加速器顶级会议论文</td>
+</tr>
+<tr>
+<td align="left"><strong>生语料提取引擎</strong></td>
+<td align="left"><code>PyPDFLoader</code>（专配 PDF 杂音清洗及多版式解析处理）</td>
+</tr>
+<tr>
+<td align="left"><strong>最佳分块大小</strong></td>
+<td align="left">1000 字符 (Chunk Size)</td>
+</tr>
+<tr>
+<td align="left"><strong>最佳重叠长度</strong></td>
+<td align="left">200 字符 (Chunk Overlap)</td>
+</tr>
+<tr>
+<td align="left"><strong>核心词嵌入模型</strong></td>
+<td align="left"><code>BAAI/bge-m3</code>（多语言、长文本微调，学术语境优异）</td>
+</tr>
+<tr>
+<td align="left"><strong>高维向量数据库</strong></td>
+<td align="left">ChromaDB (轻量级开源本地化部署引擎)</td>
+</tr>
+<tr>
+<td align="left"><strong>语义检索 Top-$k$</strong></td>
+<td align="left">5（每次提问返回最相关的 5 个学术段落）</td>
+</tr>
+<tr>
+<td align="left"><strong>底层推理大脑</strong></td>
+<td align="left">LLaMA-3 (通过 Ollama 框架进行轻量级无缝本地驱动)</td>
+</tr>
+</tbody></table>
+<h3 id="文献数据分布统计"><a href="#文献数据分布统计" class="headerlink" title="文献数据分布统计"></a>文献数据分布统计</h3><p>为了反映语料库的代表性与前沿性，我们对收录的近几年加速器核心会议文献进行了分布统计，涵盖了直线加速器、同步辐射、超导微波等各个维度的研讨记录：</p>
+<pre class="mermaid">pie title 5,301份顶级会议论文来源分布
+    "IPAC'24 (1520篇)" : 1520
+    "IPAC'23 (1450篇)" : 1450
+    "IPAC'25 (1200篇)" : 1200
+    "SRF'25 (450篇)" : 450
+    "NAPAC'25 (401篇)" : 401
+    "FEL'24 (280篇)" : 280</pre>
+
+<h3 id="领域数据集构建与精细化语义切分"><a href="#领域数据集构建与精细化语义切分" class="headerlink" title="领域数据集构建与精细化语义切分"></a>领域数据集构建与精细化语义切分</h3><p>本系统的知识基底汇聚了近期最具代表性的 5,301 份会议 PDF 文档（广泛涵盖 IPAC’23、IPAC’24、IPAC’25、FEL’24、SRF’25 和 NAPAC’25）。<br>在数据摄取阶段，仅仅粗暴地提取文字是不够的。我们在利用 <code>PyPDFLoader</code> 提取文本后，采用了优化的 <code>RecursiveCharacterTextSplitter</code> 策略，以 1000 个字符为步长拆分文档，并强制保留 200 个字符的语义重叠部分。<strong>重叠区域的设计至关重要</strong>——它有效地防止了长跨页的物理公式长句或连贯的技术设施描述被生硬截断而导致上下文结构破裂。<br>同时，我们专门设计了深度数据清洗管道，主动排查并过滤掉由于复杂高频电磁场图表或束流分布图转换而引入的各种乱码及 <code>\x00</code> 空字符干扰。</p>
+<h3 id="向量化建模与毫秒级相似度检索"><a href="#向量化建模与毫秒级相似度检索" class="headerlink" title="向量化建模与毫秒级相似度检索"></a>向量化建模与毫秒级相似度检索</h3><p>将专业晦涩的高能物理文本转化为可被机器高效运算计算的“高维连续向量”是 RAG 引擎的灵魂。为此系统采用了 <code>BAAI/bge-m3</code> 嵌入模型，该模型自带卓越的多语言多粒度特征，非常契合常常混合各类外文专有名词或缩写的国际学术会议文稿。</p>
+<p>所有的映射向量被持久化储存在轻量且响应极速的开源 Chroma 向量数据库内。面对使用者的每次极速“提问词向量化” $ \mathbf{q} $，底层将立即比对知识库中的海量切块向量 $ \mathbf{d} $，利用经典的<strong>余弦相似度（Cosine Similarity）</strong>执行严谨的距离判定：</p>
+<p>$$ \text{sim}(\mathbf{q}, \mathbf{d}) &#x3D; \frac{\mathbf{q} \cdot \mathbf{d}}{|\mathbf{q}| |\mathbf{d}|} &#x3D; \frac{\sum_{i&#x3D;1}^{n} q_i d_i}{\sqrt{\sum_{i&#x3D;1}^{n} q_i^2} \sqrt{\sum_{i&#x3D;1}^{n} d_i^2}} $$</p>
+<p>通过多线程加速的张量计算，系统能在毫秒内从五千多篇文献池中“打捞”出最具参考价值的 Top-5 段落。</p>
+<h3 id="本地化-LLaMA-3-的综合生成与降噪"><a href="#本地化-LLaMA-3-的综合生成与降噪" class="headerlink" title="本地化 LLaMA-3 的综合生成与降噪"></a>本地化 LLaMA-3 的综合生成与降噪</h3><p>捞出的高质量技术片段会流经 <code>RetrievalQA</code> 检索链送入由 Ollama 控制的本地 LLaMA-3 模型。这真正意义上将极具天赋的“通用语言学家”与“严谨的顶级学术档案室”结合在了一起，实现了断网环境下亦能运行如飞的数据安全隔离闭环系统。</p>
+<h3 id="核心代码实现演示-Python-LangChain"><a href="#核心代码实现演示-Python-LangChain" class="headerlink" title="核心代码实现演示 (Python&#x2F;LangChain)"></a>核心代码实现演示 (Python&#x2F;LangChain)</h3><p>为了让同行研究者能更直观地理解该系统的运作机制，这里附上基于 LangChain 框架将上述设计结合在一起的核心伪代码示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> langchain_community.document_loaders <span class="keyword">import</span> PyPDFLoader</span><br><span class="line"><span class="keyword">from</span> langchain.text_splitter <span class="keyword">import</span> RecursiveCharacterTextSplitter</span><br><span class="line"><span class="keyword">from</span> langchain_community.vectorstores <span class="keyword">import</span> Chroma</span><br><span class="line"><span class="keyword">from</span> langchain_community.embeddings <span class="keyword">import</span> HuggingFaceBgeEmbeddings</span><br><span class="line"><span class="keyword">from</span> langchain_community.llms <span class="keyword">import</span> Ollama</span><br><span class="line"><span class="keyword">from</span> langchain.chains <span class="keyword">import</span> RetrievalQA</span><br><span class="line"></span><br><span class="line"><span class="comment"># ---------------------------------------------------------</span></span><br><span class="line"><span class="comment"># 1. 离线阶段：文档加载与文本切块</span></span><br><span class="line"><span class="comment"># ---------------------------------------------------------</span></span><br><span class="line">loader = PyPDFLoader(<span class="string">&quot;accelerator_paper.pdf&quot;</span>)</span><br><span class="line">documents = loader.load()</span><br><span class="line"></span><br><span class="line">text_splitter = RecursiveCharacterTextSplitter(</span><br><span class="line">    chunk_size=<span class="number">1000</span>,</span><br><span class="line">    chunk_overlap=<span class="number">200</span></span><br><span class="line">)</span><br><span class="line">chunks = text_splitter.split_documents(documents)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ---------------------------------------------------------</span></span><br><span class="line"><span class="comment"># 2. 向量化建模：使用 BAAI/bge-m3 并存入 ChromaDB</span></span><br><span class="line"><span class="comment"># ---------------------------------------------------------</span></span><br><span class="line">model_name = <span class="string">&quot;BAAI/bge-m3&quot;</span></span><br><span class="line"><span class="comment"># 开启 GPU 硬件加速并对向量做归一化，以便后续执行准确的余弦相似度计算</span></span><br><span class="line">embeddings = HuggingFaceBgeEmbeddings(</span><br><span class="line">    model_name=model_name,</span><br><span class="line">    model_kwargs=&#123;<span class="string">&#x27;device&#x27;</span>: <span class="string">&#x27;cuda&#x27;</span>&#125;,</span><br><span class="line">    encode_kwargs=&#123;<span class="string">&#x27;normalize_embeddings&#x27;</span>: <span class="literal">True</span>&#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 建立并持久化本地向量数据库</span></span><br><span class="line">vector_db = Chroma.from_documents(</span><br><span class="line">    documents=chunks,</span><br><span class="line">    embedding=embeddings,</span><br><span class="line">    persist_directory=<span class="string">&quot;./chroma_db_storage&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ---------------------------------------------------------</span></span><br><span class="line"><span class="comment"># 3. 在线问答阶段：检索相似片段并接入 LLaMA-3 生成</span></span><br><span class="line"><span class="comment"># ---------------------------------------------------------</span></span><br><span class="line"><span class="comment"># 接入本地部署的 LLaMA 3</span></span><br><span class="line">llm = Ollama(model=<span class="string">&quot;llama3&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置 retriever 检索器，设定返回 Top-5 个相关证据</span></span><br><span class="line">retriever = vector_db.as_retriever(search_kwargs=&#123;<span class="string">&quot;k&quot;</span>: <span class="number">5</span>&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建面向领域的 Q&amp;A 问答链</span></span><br><span class="line">qa_chain = RetrievalQA.from_chain_type(</span><br><span class="line">    llm=llm,</span><br><span class="line">    chain_type=<span class="string">&quot;stuff&quot;</span>,</span><br><span class="line">    retriever=retriever,</span><br><span class="line">    return_source_documents=<span class="literal">True</span> <span class="comment"># 必须返回引用出处供物理学家验证</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ---------------------------------------------------------</span></span><br><span class="line"><span class="comment"># 4. 执行严苛提问</span></span><br><span class="line"><span class="comment"># ---------------------------------------------------------</span></span><br><span class="line">query = <span class="string">&quot;What is the energy spared at ESRF-EBS?&quot;</span></span><br><span class="line">result = qa_chain.invoke(&#123;<span class="string">&quot;query&quot;</span>: query&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;最终生成的回答：\n&quot;</span>, result[<span class="string">&quot;result&quot;</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;\n引用证据来源：\n&quot;</span>, result[<span class="string">&quot;source_documents&quot;</span>][<span class="number">0</span>].metadata)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="严苛测试与应用对比案例分析"><a href="#严苛测试与应用对比案例分析" class="headerlink" title="严苛测试与应用对比案例分析"></a>严苛测试与应用对比案例分析</h2><p>我们在研究的真实提问场景下，彻底验证了部署这套专属 RAG 系统用于克服学术幻觉和进行精细微观参数定位的压倒性优势。</p>
+<h3 id="案例-1：剔除过时预训练噪声与幻觉过滤"><a href="#案例-1：剔除过时预训练噪声与幻觉过滤" class="headerlink" title="案例 1：剔除过时预训练噪声与幻觉过滤"></a>案例 1：剔除过时预训练噪声与幻觉过滤</h3><p><strong>用户原始推断：</strong> <em>“How many colliders in the world now?”</em> （综合盘点目前世界上现存的高能对撞机情况）</p>
+<ul>
+<li><p>❌ <strong>原生 LLaMA-3 (裸模型基线)的灾难级表现</strong>：<br>原生模型进行了一段看似逻辑完美但在专家眼里满是漏洞的“胡说八道”。由于预训练数据的时间线滞后以及概念融合问题，它不仅将早在 2011 年便因资金问题关闭退役的 <strong>Tevatron</strong> 以及德国 DESY 的 <strong>HERA</strong> 当作“现役主力对撞机”，更荒谬的是，它堂而皇之地将 <strong>J-PARC</strong> 与 <strong>CEBAF</strong> 这类固定靶或单纯的强流质子&#x2F;电子加速器错误地归类为“高能对撞机设施”。</p>
+</li>
+<li><p>✨ <strong>领域专属 RAG 系统的完美作答</strong>：<br>引入文献向量池后，模型强制舍弃了那些似是而非的记忆，完全只依赖检索到的最新客观会议资料做分析。它展现出极高的专业敏锐度，不仅精准梳理了目前全球正在主导建设的两代最前沿项目——即大放异彩的 <strong>EIC (Electron-Ion Collider)</strong> 以及属于未来的巨无霸 **FCC-hh (Future Circular Collider)**，同时也点名了当前正常运营的现役巅峰设施如 <strong>LHC</strong> 及日本的 <strong>Super-KEKB</strong> 工厂。<br><strong>尤为硬核的是</strong>：它像一位极度严谨的学者一般说明了自己信息的来源范围并明确标注了诸如 (IPAC’24 FRYD3, IPAC’23 MOPA127) 这样的引文出处标签，随时等待用户的审核。</p>
+</li>
+</ul>
+<h3 id="案例-2：硬核技术参数与微观数据的“海底捞针”"><a href="#案例-2：硬核技术参数与微观数据的“海底捞针”" class="headerlink" title="案例 2：硬核技术参数与微观数据的“海底捞针”"></a>案例 2：硬核技术参数与微观数据的“海底捞针”</h3><p><strong>用户原始推断：</strong> <em>“What is energy spared?”</em> （目标设施升级项目在节能维度的具体功效数据提取）</p>
+<p>会议论文中有浩如烟海的表格和数据游离于不同设施模块，这个问题对普通的关键字搜索工具堪称噩梦。然而通过多维度的语义锚定，RAG 系统直接破除了理解障碍，直击靶心地锁定了最近刚完成重大升级的第四代高能光源——欧洲同步辐射装置极低发射度升级项目（<strong>ESRF-EBS</strong>）的能耗追踪记录：</p>
+<ul>
+<li>整体运作总节能指标 (Total energy savings): <strong>25 GWh&#x2F;year</strong></li>
+<li>由 EBS 核心设备升级直接促成的红利 (Savings from EBS): <strong>12 GWh&#x2F;year</strong></li>
+<li>处于理论评估及试运行期间的额外电力潜力 (Additional power savings under evaluation): <strong>6.1 GWh</strong></li>
+</ul>
+<p><strong>跨越式的体验升级</strong>：在极尽细节的返回回答末端，系统甚至能够原生绑定对应的 PDF 源文件名及其所在的物理页码范围。对前沿研发人员而言，这将数小时乃至数天的文献筛查过程压缩至短短的几十秒核验证伪工作。</p>
+<hr>
+<h2 id="结论与对大模型物理学辅助的未来展望"><a href="#结论与对大模型物理学辅助的未来展望" class="headerlink" title="结论与对大模型物理学辅助的未来展望"></a>结论与对大模型物理学辅助的未来展望</h2><p>借助这套部署在所内工作站上的全脱机 RAG 系统，通过 5,301 篇最具影响力的加速器顶级会议文献的彻底验证，我们成功展示了一种具备极高的数据保真度、惊人的准确检索率且每条结论都可溯源的安全学术数据问答范式。这一革新性工具将物理学家耗时的人工文献综述、横向数据比对过程成功转化为高效率的 AI 辅助检索，大幅释出了高能物理实验人才的核心研发生产力。</p>
+<p><strong>下一代系统的深度演进方向（Future Work）：</strong><br>尽管该系统已被证明在语义文字侧具备极高价值，但加速器相关文献中的知识精髓还有一大半寄托在图形信息中。<br>我们计划在后续迭代中大举引入<strong>多模态 RAG（Multi-modal RAG）视觉融合方案</strong>。未来将依托性能更为澎湃的视觉-语言模型（VLMs），赋予系统直接跨模态“看懂得”并“计算出”图形底层含义的能力。实现系统自主精确解构那些异常复杂的加速结构三维机械示意图、CST &#x2F; COMSOL 导出的高频电磁场仿真伪彩图以及反映束流物理极限的相空间切面图（Phase-space charts）。</p>
+<p>除此之外，我们将这套经过严苛清洗去噪及精磨结构化后的学术加速器文本块数据集进行了标准规范化打包，并正在推进将其部署开源至 <strong>Hugging Face Hub</strong> 的计划（将剥离敏感涉密信息），期待这项工作能像一剂催化剂，从底层语料维度推动更为前沿的大语言模型在专业高能物理微调（Fine-Tuning）研究上的进阶与突破。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="Liu Ming WeChat Pay">
+        <span>WeChat Pay</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="Liu Ming Alipay">
+        <span>Alipay</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>Liu Ming
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="http://iuming.github.io/2026/05/17/%E5%9F%BA%E4%BA%8E%E5%8A%A0%E9%80%9F%E5%99%A8%E9%A2%86%E5%9F%9F%E4%BC%9A%E8%AE%AE%E8%AE%BA%E6%96%87%E8%BF%9B%E8%A1%8CRAG%E7%9A%84%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/" title="基于加速器领域会议论文进行RAG的大语言模型">http://iuming.github.io/2026/05/17/基于加速器领域会议论文进行RAG的大语言模型/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/realiuming">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+U5yo-Zxuw1OgbU6P">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </span>
+
+          <img class="social-item-img" src="/images/wechat_channel.jpg">
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/LLM/" rel="tag"><i class="fa fa-tag"></i> LLM</a>
+              <a href="/tags/AI/" rel="tag"><i class="fa fa-tag"></i> AI</a>
+              <a href="/tags/%E5%8A%A0%E9%80%9F%E5%99%A8/" rel="tag"><i class="fa fa-tag"></i> 加速器</a>
+              <a href="/tags/RAG/" rel="tag"><i class="fa fa-tag"></i> RAG</a>
+              <a href="/tags/LLaMA-3/" rel="tag"><i class="fa fa-tag"></i> LLaMA-3</a>
+          </div>
+
+        
+  <div class="social-like a2a_kit a2a_kit_size_32 a2a_default_style">
+    <a class="a2a_dd" target="_blank" rel="noopener" href="https://www.addtoany.com/share"></a>
+      <a class="a2a_button_facebook"></a>
+      <a class="a2a_button_twitter"></a>
+      <a class="a2a_button_wechat"></a>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/05/13/%E5%A4%9Acell%E8%B6%85%E5%AF%BC%E8%85%94%E7%9E%AC%E6%80%81%E8%A1%8C%E4%B8%BA%E7%A0%94%E7%A9%B6/" rel="prev" title="多cell超导腔瞬态行为研究">
+                  <i class="fa fa-angle-left"></i> 多cell超导腔瞬态行为研究
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Ming Liu. All rights reserved.</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL2l1bWluZw==" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.1.0/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/4.23.3/algoliasearch-lite.umd.js" integrity="sha256-1QNshz86RqXe/qsCBldsUu13eAX6n/O98uubKQs87UI=" crossorigin="anonymous"></script><script src="/js/third-party/search/algolia-search.js"></script>
+<script class="next-config" data-name="chatra" type="application/json">{"enable":true,"async":true,"id":"gTXKphrmKGf5QSb5L"}</script>
+<script src="/js/third-party/chat/chatra.js"></script>
+<script async src="https://call.chatra.io/chatra.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.0/pdfobject.min.js","integrity":"sha256-JJZNsid68vnh3/zyj0lY9BN5ynxVX/12XgOa1TlaYN0="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.0/mermaid.min.js","integrity":"sha256-stuqcu2FrjYCXDOytWFA5SoUE/r3nkp6gTglzNSlavU="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+  <script class="next-config" data-name="wavedrom" type="application/json">{"enable":true,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.5.0/wavedrom.min.js","integrity":"sha256-INLAoJc6quTNfiMWkGZniYO2cxE8mHpddnLow1m6RFs="}}</script>
+  <script class="next-config" data-name="wavedrom_skin" type="application/json">{"enable":true,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.5.0/skins/default.js","integrity":"sha256-fduc/Zszk5ezWws2uInY/ALWVmIrmV6VTgXbsYSReFI="}}</script>
+  <script src="/js/third-party/tags/wavedrom.js"></script>
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+  <script src="/js/third-party/addtoany.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":"ture","archive":true,"delay":true,"timeout":3000,"priority":true,"url":"http://iuming.github.io/2026/05/17/%E5%9F%BA%E4%BA%8E%E5%8A%A0%E9%80%9F%E5%99%A8%E9%A2%86%E5%9F%9F%E4%BC%9A%E8%AE%AE%E8%AE%BA%E6%96%87%E8%BF%9B%E8%A1%8CRAG%E7%9A%84%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"realiuming","count":true,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+
+</body>
+</html>
