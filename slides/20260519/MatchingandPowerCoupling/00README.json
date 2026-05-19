@@ -1,0 +1,89 @@
+{
+   "sources" : [
+      {
+         "usage" : "toplevel",
+         "filename" : "main.tex"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "bibliography.bib"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "cernall.sty"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "cernchemsym.sty"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "cernmono.cls"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "cernrep.cls"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "cernrep.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "cernrepexa.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "cernunits.sty"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "cernyrep2.cls"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "figures/HOMcompcircuit.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "figures/LHCHOM.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "hepparticles.sty"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "heppennames2.sty"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "hepunits.sty"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "isotope.sty"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "maybemath.sty"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "pictexa.tex"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "showkeyscern.sty"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "vrb.sty"
+      }
+   ],
+   "spec_version" : 1,
+   "texlive_version" : "2025",
+   "process" : {
+      "compiler" : "pdflatex"
+   }
+}
