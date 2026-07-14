@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.2.0">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/manifest.json">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"iuming.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.20.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":null},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":true,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="粒子加速器中射频系统的正常运行，比其他任何部件都更依赖于与粒子束流的详细相互作用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="束腔相互作用">
+<meta property="og:url" content="http://iuming.github.io/2026/07/14/%E6%9D%9F%E8%85%94%E7%9B%B8%E4%BA%92%E4%BD%9C%E7%94%A8/index.html">
+<meta property="og:site_name" content="REALIUMING&#39;BLOG">
+<meta property="og:description" content="粒子加速器中射频系统的正常运行，比其他任何部件都更依赖于与粒子束流的详细相互作用">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-07-14T10:50:54.000Z">
+<meta property="article:modified_time" content="2026-07-14T10:53:40.325Z">
+<meta property="article:author" content="Liu Ming">
+<meta property="article:tag" content="cavity">
+<meta property="article:tag" content="accelerator">
+<meta property="article:tag" content="beam">
+<meta property="article:tag" content="interaction">
+<meta name="twitter:card" content="&lt;twitter:card&gt;">
+<meta name="twitter:image" content="http://iuming.github.io/2026/07/14/%E6%9D%9F%E8%85%94%E7%9B%B8%E4%BA%92%E4%BD%9C%E7%94%A8/%3Ctwitter:image%3E">
+<meta name="twitter:creator" content="@&lt;twitter:creator&gt;">
+<meta name="twitter:site" content="<twitter:site>">
+<meta property="fb:admins" content="&lt;fb:admin_id&gt;">
+<meta property="fb:app_id" content="&lt;fb:app_id&gt;">
+
+
+<link rel="canonical" href="http://iuming.github.io/2026/07/14/%E6%9D%9F%E8%85%94%E7%9B%B8%E4%BA%92%E4%BD%9C%E7%94%A8/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://iuming.github.io/2026/07/14/%E6%9D%9F%E8%85%94%E7%9B%B8%E4%BA%92%E4%BD%9C%E7%94%A8/","path":"2026/07/14/束腔相互作用/","title":"束腔相互作用"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>束腔相互作用 | REALIUMING'BLOG</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">REALIUMING'BLOG</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">295</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">21</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">124</span></a></li><li class="menu-item menu-item-books"><a href="/book/" rel="section"><i class="fa fa-book fa-fw"></i>books</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fab fa-algolia fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%84%E9%A2%91%E5%9C%BA%E4%B8%8E%E7%B2%92%E5%AD%90%E4%B9%8B%E9%97%B4%E7%9A%84%E8%80%A6%E5%90%88"><span class="nav-number">1.</span> <span class="nav-text">射频场与粒子之间的耦合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E9%80%9F%E8%85%94%E4%BD%93%E7%9A%84%E7%BD%91%E7%BB%9C%E5%BB%BA%E6%A8%A1"><span class="nav-number">1.1.</span> <span class="nav-text">加速腔体的网络建模</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%9F%E6%B5%81%E5%8A%A0%E8%BD%BD%E4%B8%8E%E5%B0%84%E9%A2%91%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.</span> <span class="nav-text">束流加载与射频系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%84%E9%A2%91%E8%85%94%E4%BD%93%E4%B8%AD%E7%9A%84%E9%AB%98%E9%98%B6%E6%A8%A1%E6%8D%9F%E8%80%97"><span class="nav-number">3.</span> <span class="nav-text">射频腔体中的高阶模损耗</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8E%E8%85%94%E4%BD%93%E5%88%B0%E6%9D%9F%E6%B5%81%E7%9A%84%E8%83%BD%E9%87%8F%E4%BC%A0%E8%BE%93%E6%95%88%E7%8E%87"><span class="nav-number">3.1.</span> <span class="nav-text">从腔体到束流的能量传输效率</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%9F%E6%B5%81%E8%B4%9F%E8%BD%BD"><span class="nav-number">4.</span> <span class="nav-text">束流负载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E4%BD%8D%E6%8C%AF%E8%8D%A1%E4%B8%8E%E7%A8%B3%E5%AE%9A%E6%80%A7"><span class="nav-number">5.</span> <span class="nav-text">相位振荡与稳定性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Robinson%E9%98%BB%E5%B0%BC"><span class="nav-number">5.1.</span> <span class="nav-text">Robinson阻尼</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%BF%E9%98%B1%E7%95%B8%E5%8F%98"><span class="nav-number">5.2.</span> <span class="nav-text">势阱畸变</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B9%A0%E9%A2%98"><span class="nav-number">6.</span> <span class="nav-text">习题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">7.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Liu Ming"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Liu Ming</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">124</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">295</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button animated">
+    <button><i class="fa fa-comment"></i>
+      Chat
+    </button>
+  </div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2l1bWluZw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;iuming"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOjUyMDBsaXVtaW5nQGdtYWlsLmNvbQ==" title="E-Mail → mailto:5200liuming@gmail.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vdS8zMTQ3OTEyODky" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;3147912892"><i class="fab fa-weibo fa-fw"></i>Weibo</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9yZWFsaXVtaW5n" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;realiuming"><i class="fab fa-twitter fa-fw"></i>Twitter</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL3JlYWxpdW1pbmc=" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;realiuming"><i class="fab fa-facebook fa-fw"></i>FB Page</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8xMjE4NTI3My9pdW1pbmc=" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;12185273&#x2F;iuming"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly95b3V0dWJlLmNvbS9jaGFubmVsL1VDaUNCSHJ4cDJ4Tlc3T1ZaTlFzZHROdw==" title="YouTube → https:&#x2F;&#x2F;youtube.com&#x2F;channel&#x2F;UCiCBHrxp2xNW7OVZNQsdtNw"><i class="fab fa-youtube fa-fw"></i>YouTube</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9pbnN0YWdyYW0uY29tL3JlYWxpdW1pbmc=" title="Instagram → https:&#x2F;&#x2F;instagram.com&#x2F;realiuming"><i class="fab fa-instagram fa-fw"></i>Instagram</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="c2t5cGU6ODQyNjczNTU2P2NhbGx8Y2hhdA==" title="Skype → skype:842673556?call|chat"><i class="fab fa-skype fa-fw"></i>Skype</span>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="Back to top">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://iuming.github.io/" title="https:&#x2F;&#x2F;iuming.github.io&#x2F;">Title</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://iuming.github.io/2026/07/14/%E6%9D%9F%E8%85%94%E7%9B%B8%E4%BA%92%E4%BD%9C%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Liu Ming">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="REALIUMING'BLOG">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="束腔相互作用 | REALIUMING'BLOG">
+      <meta itemprop="description" content="粒子加速器中射频系统的正常运行，比其他任何部件都更依赖于与粒子束流的详细相互作用">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          束腔相互作用
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2026-07-14 18:50:54 / Modified: 18:53:40" itemprop="dateCreated datePublished" datetime="2026-07-14T18:50:54+08:00">2026-07-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/note/" itemprop="url" rel="index"><span itemprop="name">note</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2026/07/14/%E6%9D%9F%E8%85%94%E7%9B%B8%E4%BA%92%E4%BD%9C%E7%94%A8/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2026/07/14/束腔相互作用/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+            <div class="post-description">粒子加速器中射频系统的正常运行，比其他任何部件都更依赖于与粒子束流的详细相互作用</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>粒子加速器中射频系统的正常运行，比其他任何部件都更依赖于与粒子束流的详细相互作用。这是由于观察到粒子束流可以在加速腔体中感应出与发生器产生电压相比具有显著幅值的场，因此我们不能忽视粒子束流的存在。这种现象称为束流加载（beam loading），它会对可加速的束流电流施加严重限制。在本节中，将讨论这种相互作用的主要特征以及最有效和稳定粒子加速的稳定性条件。</p>
+<h2 id="射频场与粒子之间的耦合"><a href="#射频场与粒子之间的耦合" class="headerlink" title="射频场与粒子之间的耦合"></a>射频场与粒子之间的耦合</h2><p>在关于粒子加速的讨论中，我们默认假设粒子只要满足同步条件就能从加速腔体的场中获得能量。这对于对腔体内场没有显著影响的弱粒子束流是成立的。然而，当我们试图加速强束流时，实际加速场会被相当大的电粒子束流电流的存在所改变。这种束流加载最终可能限制最大束流强度。</p>
+<p>束流加载现象将在本节中定义和表征，从而得出确保从射频功率源到束流的正向能量流的条件和参数。讨论的基本考虑是能量守恒和场的线性叠加原理，这使我们能够独立于其他源产生的场来研究某个源的场分量。具体来说，我们可以将束流感应场与射频功率源产生的场分开处理。</p>
+<h3 id="加速腔体的网络建模"><a href="#加速腔体的网络建模" class="headerlink" title="加速腔体的网络建模"></a>加速腔体的网络建模</h3><p>射频腔体的电激励可以准确地用一个振荡器来描述，如18.2.4节所讨论的，因此我们将在射频系统的进一步讨论中使用外部驱动阻尼振荡器的特征参数和术语。在电学上，加速腔体可以用一个并联谐振电路（图19.1）来表示，它由来自发生器的射频电流源 $I_g$ 和粒子束流 $I_b$ 驱动。</p>
+<p>腔体中从发生器获得的射频功率大小很大程度上取决于腔体和发生器的相对阻抗。两者必须匹配以确保最佳功率传输。为了推导这一条件，我们将电流源或射频发生器的内部阻抗用空腔的分路阻抗 $R_s$ 来定义，如(18.74)所定义：</p>
+<p>$$R_g &#x3D; \frac{R_s}{\beta} \tag{19.1}$$</p>
+<p>其中 $\beta$ 是尚待定义的耦合系数。该系数取决于射频功率从发生器进入腔体的耦合装置的实际硬件，并将发生器阻抗量化为从腔体看到的、以腔体分路阻抗 $R_s$ 为单位的值（图19.1）。由于此耦合系数取决于硬件，我们需要指定所需的工作条件以确定组装过程中耦合的适当调整。这种调整通过相对于腔体轴旋转环形耦合器或通过孔进行电容耦合时的孔径调整来完成。</p>
+<p>电感 $L$ 和电容 $C$ 构成一个并联谐振电路，其谐振频率为：</p>
+<p>$$\omega_r &#x3D; \frac{1}{\sqrt{LC}} \tag{19.2}$$</p>
+<p>从发生器在腔体处可获得的射频功率为：</p>
+<p>$$P_g &#x3D; \frac{1}{2}Y_L V_g^2 \tag{19.3}$$</p>
+<p>其中 $Y_L$ 是包括向束流传输能量的有载腔体导纳，$V_g$ 是发生器电压。除非另有说明，本节中使用的电压、电流和功率都是振荡量的幅值。在谐振时，所有无功功率消失，我们使用发生器电流 $I_g$ 和网络导纳 $Y &#x3D; Y_g + Y_L$ 来替代发生器电压：</p>
+<p>$$V_g &#x3D; \frac{I_g}{Y} &#x3D; \frac{I_g}{Y_g + Y_L}$$</p>
+<p>将其代入(19.3)，得到发生器功率的形式为：</p>
+<p>$$P_g &#x3D; \frac{1}{2}\frac{Y_L}{(Y_g + Y_L)^2}I_g^2 \tag{19.4}$$</p>
+<p>注意到发生器功率有一个最大值，可以从 $\partial P_g&#x2F;\partial Y_L &#x3D; 0$ 确定，我们得到众所周知的结果：当负载通过调整与发生器内部阻抗匹配时，从发生器到负载的射频功率传输达到最大：</p>
+<p>$$Y_g &#x3D; Y_L \quad \text{或} \quad R_L &#x3D; \frac{R_s}{\beta} \tag{19.5}$$</p>
+<p>用各自的阻抗替代导纳。腔体处可获得的最大射频功率因此为 $Y_g &#x3D; \beta&#x2F;R_s$：</p>
+<p>$$P_g &#x3D; \frac{1}{8}\frac{R_s}{\beta}I_g^2 \tag{19.6}$$</p>
+<p>为了计算腔体的品质因数，我们注意到储能 $W &#x3D; \frac{1}{2}CV^2$，能量损耗率 $P_{cy} &#x3D; \frac{1}{2}V^2&#x2F;R$。使用定义(18.80)，在谐振时 $R &#x3D; R_s$ 的无载品质因数为：</p>
+<p>$$Q_0 &#x3D; \omega_r C R_s \tag{19.7}$$</p>
+<p>从束流看到的总电路导纳是腔体加发生器的导纳，即：</p>
+<p>$$\frac{1}{R_b} &#x3D; \frac{\beta}{R_s} + \frac{1}{R_s} &#x3D; \frac{1+\beta}{R_s} \tag{19.8}$$</p>
+<p>由此和(19.7)我们得到有载品质因数：</p>
+<p>$$Q &#x3D; \omega_r C R_b &#x3D; \frac{Q_0}{1+\beta} \tag{19.9}$$</p>
+<p>偏离谐振时，发生器电压和电流不再同相。相位差可以从网络的复阻抗导出，从发生器和从束流看到的是相同的：</p>
+<p>$$\frac{1}{Z} &#x3D; \frac{1}{R_b} + i\omega C + \frac{1}{i\omega L} \tag{19.10}$$</p>
+<p>复阻抗由(19.2)、(19.9)变为：</p>
+<p>$$\frac{1}{Z} &#x3D; \frac{1}{R_b}\left(1 + iQ\frac{\omega^2 - \omega_r^2}{\omega \omega_r}\right) \tag{19.11}$$</p>
+<p>由 $I_g &#x3D; V_g&#x2F;Z$，发生器电流为：</p>
+<p>$$I_g &#x3D; \frac{V_g}{R_b}\left(1 + iQ\frac{\omega^2 - \omega_r^2}{\omega \omega_r}\right) &#x3D; \frac{V_g}{R_b}(1 - i\tan\Psi) \tag{19.12}$$</p>
+<p>接近谐振时，由(19.12)取 $\omega \approx \omega_r$，调谐角 $\Psi$ 变为：</p>
+<p>$$\tan\Psi \approx -Q\frac{\omega^2 - \omega_r^2}{\omega \omega_r} \approx -2Q\frac{\omega - \omega_r}{\omega_r} \tag{19.13}$$</p>
+<p>与(18.64)一致，除了此处引入了一个 $-90^\circ$ 的相移，以与我们定义的同步相位 $\psi_s$ 保持一致。调谐角的变化如图19.2所示，作为发生器频率的函数。由(19.12)，腔体处的发生器电压最终为：</p>
+<p>$$V_g &#x3D; \frac{I_g R_b}{1 - i\tan\Psi} &#x3D; I_g R_b \cos\Psi e^{i\Psi} \tag{19.14}$$</p>
+<p><strong>图19.1</strong> 射频发生器和加速腔体的网络模型</p>
+<p><strong>图19.2</strong> 调谐角 $\psi$ 作为发生器频率的函数</p>
+<p>在低于谐振频率的频率下，调谐角为正，因此发生器电流滞后电压相位 $\Psi$。这种情况也称为感性失谐，因为阻抗看起来主要是感性的。相反，当频率高于谐振频率时，失谐称为容性失谐，因为阻抗看起来主要是容性的。</p>
+<p>通过腔体的束状粒子束流像发生器电流一样充当电流，因此关于束流感应电压存在相同的关系。例如，在容性失谐的情况下，束流感应电压 $V_b$ 在相位上滞后于束流电流 $I_b$。</p>
+<p>腔体中的有效加速电压是发生器电压、感应电压以及它们之间和相对于粒子束流的相位关系的组合。为了确保束流稳定，产生的腔体电压必须满足粒子加速的要求，例如补偿同步辐射损失的能量。我们通过首先推导谐振时且无束流加载、电压和电流同相时的发生器电压 $V_{gr}$ 来确定这些条件。由图19.1我们得到：</p>
+<p>$$V_{gr} &#x3D; \frac{I_g}{Y_g + Y_L} &#x3D; \frac{I_g}{\frac{1}{R_s} + \frac{\beta}{R_s}} &#x3D; \frac{R_s I_g}{1+\beta} \tag{19.15}$$</p>
+<p>由(19.6)，谐振时的发生器电压变为：</p>
+<p>$$V_{gr} &#x3D; \frac{2\sqrt{2\beta}}{1+\beta}\sqrt{R_s P_g} \tag{19.16}$$</p>
+<p>因此，由(19.6)，腔体处的发生器电压为：</p>
+<p>$$V_g &#x3D; V_{gr}\cos\Psi e^{i\Psi} \tag{19.17}$$</p>
+<p>这是可忽略的小束流看到的腔体电压，可以通过改变调谐角 $\Psi$ 和射频功率 $P_g$ 来调整，以满足束流稳定性要求。</p>
+<h2 id="束流加载与射频系统"><a href="#束流加载与射频系统" class="headerlink" title="束流加载与射频系统"></a>束流加载与射频系统</h2><p>对于更实质性的束流电流，必须包括束流加载效应以获得有效腔体电压。类似于推导腔体中的发生器电压，我们可以从通过该腔体的束流电流推导感应电压。由于发生器电流和束流电流之间没有根本区别，类比于(19.17)，感应电压为：</p>
+<p>$$V_b &#x3D; -V_{br}\cos\Psi e^{i\Psi} \tag{19.18}$$</p>
+<p>其中负号表示感应电压使束流减速。束流中的粒子分布以束团形式出现，因此束流电流可以用傅里叶级数表示。这里我们只对束流电流的谐波 $I_h$ 感兴趣，对于与射频波长相比短的束团，发现：</p>
+<p>$$I_h &#x3D; 2I_b \tag{19.19}$$</p>
+<p>其中 $I_b$ 是平均束流电流，$h$ 是谐波数。对于短束团，$\ell \ll \lambda_{rf}$，只要 $\sin k_{rf}\ell \approx k_{rf}\ell$ 且 $k_{rf} &#x3D; 2\pi&#x2F;\lambda_{rf}$，近似成立。对于较长的束团，因子2变为可以从适当傅里叶展开导出的更复杂的形状因子。在谐振频率 $\omega_r &#x3D; h\omega_0$ 处，由(19.8)和(19.15)得到腔体中的束流感应电压为：</p>
+<p>$$V_{br} &#x3D; \frac{R_s I_h}{1+\beta} &#x3D; \frac{2R_s I_b}{1+\beta} \tag{19.20}$$</p>
+<p>产生的腔体电压是两个电压的叠加，即发生器电压和感应电压。这种叠加，包括适当的相位因子，通常用相量图表示。在这种图中，复数量 $\tilde{z}$ 用长度为 $|\tilde{z}|$ 的矢量表示，其水平和垂直分量分别是 $\tilde{z}$ 的实部和虚部。该矢量的相位逆时针增加，由 $\tan\varphi &#x3D; \text{Im}(\tilde{z})&#x2F;\text{Re}(\tilde{z})$ 给出。在射频参数的应用中，我们用长度等于电压或电流幅值的矢量表示电压和电流，矢量逆时针旋转相位角 $\varphi$。</p>
+<p>粒子束流电流可以选择为参考，平行于实轴，我们从迄今导出的量得到如图19.3所示的相量图。首先我们确定各个矢量和相位之间的关系，然后确定可变射频参数的正确调整。在图19.3中，假设发生器电流相对于束流电流具有尚待确定的相位 $\vartheta$，而发生器电压和束流感应电压滞后束流电流相位 $\Psi$。产生的腔体电压 $\tilde{V}_{cy}$ 是两个电压 $\tilde{V}_g + \tilde{V}_b$ 的相量相加，如图19.3所示。</p>
+<p><strong>图19.3</strong> 加速腔体和任意调谐角的相量图</p>
+<p><strong>图19.4</strong> 最佳调谐角的相量图</p>
+<p>射频系统的调整现在必须以这样的方式执行：提供所需的动能增益 $U_0 &#x3D; e\hat{V}<em>{cy}\sin\psi_s$，其中 $\hat{V}</em>{cy}$ 是腔体电压的最大值，$\psi_s$ 是同步相位。为了最大化从发生器到腔体的能量流，负载必须匹配，使其对发生器看起来是纯电阻性的。这通过调整相位 $\psi_g$ 使腔体电压 $V_{cy}$ 和发生器电流 $I_g$ 同相来实现，这发生在：</p>
+<p>$$\psi_g &#x3D; \frac{1}{2}\pi - \psi_s \tag{19.21}$$</p>
+<p>如图19.4所示。显然，这只对束流电流的特定值成立。一般操作会偏离此值，因此我们经常将调谐角调整匹配到最大期望束流电流。对于较低的电流，能量传输不再最佳，一些效率损失是可以接受的。</p>
+<p>最佳匹配的调谐角调整可以从图19.4推导，应用正弦定律，由(19.17)有：</p>
+<p>$$\frac{V_b}{V_{cy}} &#x3D; \frac{V_{br}\cos\Psi_m}{V_{cy}} &#x3D; \frac{\sin\Psi_m}{\sin\psi_g} &#x3D; \frac{\sin\Psi_m}{\cos\psi_s} \tag{19.22}$$</p>
+<p>由(19.22)得到最佳调谐角：</p>
+<p>$$\tan\Psi_m &#x3D; \frac{V_{br}}{V_{cy}}\cos\psi_s \tag{19.23}$$</p>
+<p>这种调谐通过将腔体谐振频率相对于发生器频率移动来实现，例如通过将调谐器移入或移出。由(19.13)，结合(19.9)、(19.20)、(19.23)，得到频率偏移或频率调谐：</p>
+<p>$$\delta\omega &#x3D; \omega - \omega_r &#x3D; -\frac{\omega_r}{2Q_0}\frac{P_b}{P_{cy}}\cot\psi_s \tag{19.24}$$</p>
+<p>其中腔体功率定义为：</p>
+<p>$$P_{cy} &#x3D; \frac{V_{cy}^2}{2R_s} \tag{19.25}$$</p>
+<p>束流功率为：</p>
+<p>$$P_b &#x3D; I_b V_{cy}\sin\psi_s \tag{19.26}$$</p>
+<p>为了确定所需的发生器功率，腔体电压矢量的分量可以用其他量表示，由图19.4我们得到：</p>
+<p>$$V_{cy}\sin\psi_s &#x3D; V_{gr}\cos\Psi_m\cos(\psi_g - \Psi_m) - V_{br}\cos^2\Psi_m \tag{19.27}$$</p>
+<p>和：</p>
+<p>$$V_{cy}\cos\psi_s &#x3D; V_{gr}\cos\Psi_m\sin(\psi_g - \Psi_m) + V_{br}\cos\Psi_m\sin\Psi_m \tag{19.28}$$</p>
+<p>将两个方程组合以消去相位 $(\psi_g - \Psi_m)$，我们得到：</p>
+<p>$$V_{gr}^2 &#x3D; \left(V_{cy}\frac{\sin\psi_s}{\cos\Psi_m} + V_{br}\cos\Psi_m\right)^2 + \left(V_{cy}\frac{\cos\psi_s}{\cos\Psi_m} - V_{br}\sin\Psi_m\right)^2 \tag{19.29}$$</p>
+<p>由(19.16)、(19.20)，最佳匹配条件下所需的发生器功率为：</p>
+<p>$$P_g &#x3D; \frac{V_{cy}^2}{2R_s}\frac{(1+\beta)^2}{4\beta}\left[\left(\frac{\sin\psi_s}{\cos\Psi_m} + \frac{2R_s I_b}{V_{cy}(1+\beta)}\cos\Psi_m\right)^2 + \left(\frac{\cos\psi_s}{\cos\Psi_m} - \frac{2R_s I_b}{V_{cy}(1+\beta)}\sin\Psi_m\right)^2\right] \tag{19.30}$$</p>
+<p>这个表达式可以用(19.23)大大简化为：</p>
+<p>$$P_{g,opt} &#x3D; \frac{(1+\beta)^2}{8\beta R_s}\left(V_{cy} + \frac{2R_s I_b}{1+\beta}\sin\psi_s\right)^2 \tag{19.31}$$</p>
+<p>方程(19.31)表示束流电流 $I_b$、射频发生器功率 $P_g$、耦合系数 $\beta$ 和分路阻抗 $R_s$ 的组合，以维持腔体电压 $V_{cy}$。具体来说，考虑到射频功率 $P_g$ 和耦合系数 $\beta$ 由安装的硬件固定，最大可支持束流电流可以作为期望或所需腔体电压的函数导出。求解腔体电压，(19.31)经过一些变换后变为：</p>
+<p>$$V_{cy} &#x3D; \frac{\sqrt{2\beta R_s}}{1+\beta}\left(\sqrt{P_{g,opt}} + \sqrt{P_{g,opt} - \frac{1+\beta}{\beta}P_b}\right) \tag{19.32}$$</p>
+<p>这个表达式显示了束流电流的一个极限，超过此极限第二个平方根变为虚数。实数解的条件要求：</p>
+<p>$$P_b \leq \frac{\beta}{1+\beta}P_{g,opt} \tag{19.33}$$</p>
+<p>导致最大可持续束流电流的极限为：</p>
+<p>$$I_b \leq \frac{\beta}{1+\beta}\frac{P_g}{V_{cy}\sin\psi_s} \tag{19.34}$$</p>
+<p>检查(19.31)表明，通过调整最佳耦合系数 $\beta$，可以进一步最小化所需的发生器功率。最佳耦合可以从 $\partial P_g&#x2F;\partial\beta &#x3D; 0$ 导出，解为：</p>
+<p>$$\beta_{opt} &#x3D; 1 + \frac{2R_s I_b}{V_{cy}}\sin\psi_s &#x3D; 1 + \frac{P_b}{P_{cy}} \tag{19.35}$$</p>
+<p>产生加速电压 $V_{cy}\sin\psi_s$ 所需的最小发生器功率因此由(19.31)和(19.35)得到：</p>
+<p>$$P_{g,min} &#x3D; \frac{V_{cy}^2}{2R_s}\beta_{opt} &#x3D; \beta_{opt}P_{cy} \tag{19.36}$$</p>
+<p>由(19.23)得到最佳调谐角：</p>
+<p>$$\tan\Psi_{opt} &#x3D; \frac{\beta_{opt}-1}{\beta_{opt}+1}\cot\psi_s \tag{19.37}$$</p>
+<p>在这种工作条件下，来自发生器的所有射频功率都被束流加载的腔体吸收，不发生功率反射。最大束流功率因此为 $P_b &#x3D; P_g - P_{cy}$，最大束流电流为：</p>
+<p>$$I_b \leq \frac{P_g}{V_{cy}\sin\psi_s} - \frac{V_{cy}}{2R_s\sin\psi_s} \tag{19.38}$$</p>
+<p>已经导出了确保通过适当调整腔体功率输入耦合器以获得最佳耦合系数，从而最有效地将功率传输到束流的条件。当然，这个耦合系数仅对特定束流电流是最佳的，在大多数情况下选择为最大期望束流电流。</p>
+<p>我们现在可以确定总的射频功率流。由能量守恒：</p>
+<p>$$P_g &#x3D; P_{cy} + P_b + P_r \tag{19.39}$$</p>
+<p>其中 $P_r$ 是反射功率，在最佳耦合情况下为零。</p>
+<h2 id="射频腔体中的高阶模损耗"><a href="#射频腔体中的高阶模损耗" class="headerlink" title="射频腔体中的高阶模损耗"></a>射频腔体中的高阶模损耗</h2><p>束流加载对于射频系统精确调整的重要性已经定性地讨论过，但尚未定量讨论。在本段中，将导出束流加载的定量表达式。加速腔体对粒子电流构成阻抗，具有电荷 $q$ 的粒子束团通过腔体时，会在宽频谱中感应出电磁场，高频端受束团长度的限制。腔体中激励频率的幅值取决于腔体阻抗的频率依赖性，这是特定腔体设计的函数，对于本讨论无需知道。腔体内感应的场称为模式，以不同频率振荡，最低模式是腔体的基本谐振频率。虽然腔体主要设计用于一个谐振频率，但许多高阶模式（HOM）可以在更高频率被激励。这种模式首先出现在基本频率以上，在更高频率处具有逐渐增加的谱密度。</p>
+<p>我们暂时只考虑基本频率，稍后处理高阶模式。由总束团电荷感应的场对单个粒子作用，改变粒子看到的总加速电压。为了量化这一点，我们使用Wilson[1]提出的束流加载基本定理，该定理指出束团中的每个粒子在通过腔体时看到感应场的一半。</p>
+<p>我们通过进行Wilson提出的思想实验来证明这个定理。考虑一个具有电荷 $q$ 的粒子束团通过无损耗腔体，在基本模式中感应出电压 $V_{i1}$。这个感应场与加速场相反，因为它描述了能量损失。当束团通过腔体时，这个场从零增加，在粒子束团离开腔体的时刻达到最大值。每个粒子都会与这个场相互作用，能量损失对应于感应电压 $V_{i,h}$ 的分数 $f$，其中下标 $h$ 表示我们只考虑基本模式。电荷 $q$ 的束团损失的总能量为：</p>
+<p>$$\Delta E_1 &#x3D; -q_1 f V_{i,h} \tag{19.40}$$</p>
+<p>这种能量以与电压平方成正比的场能形式出现：</p>
+<p>$$W_1 &#x3D; c_1 V_{i,h}^2 \tag{19.41}$$</p>
+<p>其中 $c_1$ 是常数。</p>
+<p>现在考虑另一个具有相同电荷 $q_2 &#x3D; q_1 &#x3D; q$ 的束团，跟随第一个束团之后，距离对应于基本腔体频率的半个振荡周期。除了它自己的感应电压外，这个第二个束团还会看到来自第一个束团的场，现在变成加速场，因此将获得能量：</p>
+<p>$$\Delta E_2 &#x3D; q_1 V_{i,h} - q_2 f V_{i,h} &#x3D; qV_{i,h}(1-f) \tag{19.42}$$</p>
+<p>第二个电荷通过后，腔体返回到第一个电荷到达之前的原始状态，因为第一个电荷的场改变了符号，恰好抵消了第二个电荷的感应场。腔体被假设为无损耗的，能量守恒要求 $\Delta E_1 + \Delta E_2 &#x3D; 0$，即 $-qfV_{i,h} + qV_{i,h}(1-f) &#x3D; 0$，由此我们得到：</p>
+<p>$$f &#x3D; \frac{1}{2} \tag{19.43}$$</p>
+<p>证明了束流加载基本定理的陈述。因此，电荷 $q$ 的束团由于其自身感应场而损失的能量为：</p>
+<p>$$\Delta E_1 &#x3D; -\frac{1}{2}qV_{i,h} \tag{19.44}$$</p>
+<p>这个定理将用于确定从腔体场到粒子束流的能量传输。为了计算射频腔体中的感应电压，或在为粒子束流提供某种阻抗的任意形状真空室中的感应电压，可能变得非常复杂。对于圆柱对称腔体，感应电压可以用SUPERFISH[2]、URMEL[3]或MAFIA[3]等程序数值计算。</p>
+<p>为了更实用的方法，Wilson[1]引入了一个损耗参数 $k$，可以通过电子测量或数值计算确定。对于具有电荷 $q$ 的束团的基本模式损耗，这个损耗参数定义为：</p>
+<p>$$\Delta E_h &#x3D; k_h q^2 \tag{19.45}$$</p>
+<p>与(19.44)一起，我们得到感应电压：</p>
+<p>$$V_{i,h} &#x3D; -2k_h q \tag{19.46}$$</p>
+<p>或消去电荷后：</p>
+<p>$$\Delta E_h &#x3D; \frac{V_{i,h}^2}{4k_h} \tag{19.47}$$</p>
+<p>其中下标 $h$ 表示该参数应在基本频率处取值。损耗参数可以用腔体参数表示。由腔体品质因数的定义(18.80)和腔体损耗(18.77)，我们得到：</p>
+<p>$$\frac{2R_{cy}}{Q} &#x3D; \frac{V^2}{\omega W} \tag{19.48}$$</p>
+<p>其中 $\omega$ 是频率，$W$ 是腔体中储存的场能。将其应用于感应场，我们注意到 $\Delta E_h$ 等于场能 $W_h$，结合(19.47)、(19.48)，具有分路阻抗 $R_h$ 和品质因数 $Q_h$ 的腔体中基本模式的损耗参数为：</p>
+<p>$$k_h &#x3D; \frac{\omega_h}{4}\frac{R_h}{Q_h} \tag{19.49}$$</p>
+<p>通过腔体的粒子束团激励高阶模场会导致额外的能量损失，这些损失方便地用基本模式能量损失的单位表示：</p>
+<p>$$\Delta E_{hom} &#x3D; (r_{hom}-1)\Delta E_h \tag{19.50}$$</p>
+<p>其中 $r_{hom}$ 是所有腔体模式的总能量损失与仅基本模式损失之比。腔体中感应的高阶场能因此为：</p>
+<p>$$W_{hom} &#x3D; (r_{hom}-1)W_h \tag{19.51}$$</p>
+<p>同样，我们可以为任意第 $n$ 模式定义损耗参数 $k_n$，类比于(19.49)：</p>
+<p>$$k_n &#x3D; \frac{\omega_n}{4}\frac{2R_n}{Q_n} \tag{19.52}$$</p>
+<p>其中 $R_n$ 和 $Q_n$ 分别是第 $n$ 模式或频率 $\omega_n$ 的分路阻抗和品质因数。所有模式的总损耗参数由线性叠加得到：</p>
+<p>$$k &#x3D; \sum_n k_n \tag{19.53}$$</p>
+<p>确定感应电压的任务已简化为确定各个模式的损耗参数，或者如果这不可能或不可取，我们可以使用可以通过实验确定的总损耗参数 $k$。这在难以计算模式损耗但更容易通过电子测量测量总损耗的情况下特别方便。</p>
+<p>高阶模损耗对于束流稳定性的讨论将变得重要，因为这些场将对后续粒子和束团作用，从而在一束团的不同部分或不同束团之间产生耦合。</p>
+<h3 id="从腔体到束流的能量传输效率"><a href="#从腔体到束流的能量传输效率" class="headerlink" title="从腔体到束流的能量传输效率"></a>从腔体到束流的能量传输效率</h3><p>高阶模损耗影响能量传输到粒子束流的效率。具体来说，由于高阶模损耗取决于束流电流，我们必须预期加速器电流能力存在某些限制。</p>
+<p>有了这些准备，我们现在拥有计算从腔体到粒子束流的能量传输的所有信息。在粒子束团到达之前，让射频功率源产生的腔体电压为：</p>
+<p>$$V_{cy} &#x3D; -V_g e^{i\Psi_g} \tag{19.54}$$</p>
+<p>其中 $V_g$ 是发生器电压，$\Psi_g$ 是发生器电压相对于粒子束流的相位。为了将发生器电压与感应电压结合，我们在复平面中使用相量图。</p>
+<p>发生器电压在图19.5中显示为一个从实轴旋转角度 $\Psi_g$ 的矢量，代表束流通过之前的腔体状态。束流感应电压平行于实轴且方向相反。两个矢量相加以得到束流离开腔体后的电压 $V$。</p>
+<p><strong>图19.5</strong> 具有束流加载的腔体电压相量图</p>
+<p>粒子束团通过前后基本场能之差等于传递给通过粒子束团的能量减去高阶场能，由相量图得到：</p>
+<p>$$\Delta E_{hom} &#x3D; \alpha(V_{cy}^2 - V^2) - W_{hom} &#x3D; \alpha(2V_{cy}V_b\cos\Psi_g - V_b^2) - W_{hom} \tag{19.55}$$</p>
+<p>其中 $\alpha$ 是能量增益 $\Delta E$ 与电压平方之间的比例因子，由 $\alpha &#x3D; \Delta E&#x2F;V^2$ 定义。由(19.45)、(19.46)，从(19.55)得到传递给粒子束团的净能量[4]：</p>
+<p>$$\Delta E_{hom} &#x3D; \alpha(2V_{cy}V_b\cos\Psi_g - r_{hom}V_b^2) \tag{19.56}$$</p>
+<p>束流到达前腔体中储存的能量为 $W_{cy} &#x3D; \alpha V_{cy}^2$，到束流的能量传输效率变为：</p>
+<p>$$\eta &#x3D; \frac{\Delta E_h}{W_{cy}} &#x3D; 2\frac{V_b}{V_{cy}}\cos\Psi_g - r_{hom}\frac{V_b^2}{V_{cy}^2} \tag{19.57}$$</p>
+<p>从(19.57)明显看出，能量传输不能仅由同步条件或发生器功率保证。具体来说，(19.57)中的第二项在大束流强度时变得占主导，效率甚至可能变为负值，表示从束流到腔体场的反向能量传输。能量传输效率在 $V_b &#x3D; \frac{\cos\Psi_g}{r_{hom}}V_{cy}$ 时有最大值，且为：</p>
+<p>$$\eta_{max} &#x3D; \frac{\cos^2\Psi_g}{r_{hom}} \tag{19.58}$$</p>
+<p>这是Keil等人[5]首先导出的结果，因此经常称为Keil-Schnell-Zotter判据。最大能量传输效率受发生器电压相位和腔体中高阶模损耗的限制。</p>
+<h2 id="束流负载"><a href="#束流负载" class="headerlink" title="束流负载"></a>束流负载</h2><p>前几节只考虑了束团通过腔体的一次通过。然而，在圆形加速器中，粒子束团周期性地通过加速腔体，我们必须考虑感应场的累积建立。每当粒子束团穿过腔体时，这次通过的感应电压会加到前几次束团通过仍然存在的电压上。为简单起见，我们假设环圆周上有等距分布的束团，相邻束团之间由基本射频波长的整数 $m_b$ 分隔。两个连续束团之间的感应电压以因子 $e^{-\rho}$ 指数衰减：</p>
+<p>$$\rho &#x3D; \frac{t_b}{t_d} \tag{19.59}$$</p>
+<p>其中 $t_b$ 是束团之间的时间，$t_d$ 是基本模式的腔体电压衰减时间。两个连续束团通过之间感应电压的相位变化为：</p>
+<p>$$\varphi &#x3D; \omega_h t_b - 2\pi m_b \tag{19.60}$$</p>
+<p>在束团通过腔体的时刻，总感应电压则是所有前序束团感应场的叠加：</p>
+<p>$$V_i &#x3D; V_{i,h}(1 + e^{-\rho}e^{i\varphi} + e^{-2\rho}e^{i2\varphi} + \cdots) \tag{19.61}$$</p>
+<p>如图19.6所示，以相量图形式显示所有感应电压的叠加以及合成感应电压 $V_i$。</p>
+<p><strong>图19.6</strong> 加速腔体中感应电压叠加的相量图</p>
+<p>和(19.61)可以计算为：</p>
+<p>$$V_i &#x3D; V_{i,h}\frac{1}{1 - e^{-\rho}e^{i\varphi}} \tag{19.62}$$</p>
+<p>这是最后一个束团通过后腔体中的总感应电压；然而，这个最后一个束团看到的电压只是感应电压的一半，因此作用于束团的总电压 $V_b$ 为：</p>
+<p>$$V_b &#x3D; V_{i,h}\left(\frac{1}{1 - e^{-\rho}e^{i\varphi}} - \frac{1}{2}\right) \tag{19.63}$$</p>
+<p>电压 $V_{i,h}$ 可以用更实用的单位表示。考虑腔体中场的衰减时间(18.62)，我们注意到存在两个衰减时间，一个是空载腔体的 $t_{d0}$，另一个是存在束流时的更短衰减时间 $t_d$。对于无载衰减时间，由(18.62)有：</p>
+<p>$$t_{d0} &#x3D; \frac{2Q_{0h}}{\omega_h} \tag{19.64}$$</p>
+<p>其中 $Q_{0h}$ 是无载品质因数。由(19.45)、(19.47)，取 $q &#x3D; I_0 t_b$，其中 $I_0$ 是平均束流电流：</p>
+<p>$$V_{i,h} &#x3D; \frac{\omega_h}{2Q_{0h}}R_h I_0 t_b$$</p>
+<p>由(19.64)：</p>
+<p>$$V_{i,h} &#x3D; R_h I_0 \frac{t_b}{t_{d0}} \tag{19.65}$$</p>
+<p>引入耦合系数 $\beta$，由(19.9)、(19.64)：</p>
+<p>$$t_{d0} &#x3D; (1+\beta)t_b \tag{19.66}$$</p>
+<p>类比于(19.59)我们定义：</p>
+<p>$$\rho_0 &#x3D; \frac{\rho}{1+\beta} &#x3D; \frac{t_b}{t_{d0}} \tag{19.67}$$</p>
+<p>(19.65)变为：</p>
+<p>$$V_{i,h} &#x3D; \rho_0 R_h I_0 \tag{19.68}$$</p>
+<p>我们终于可以从(19.63)、(19.68)计算圆形加速器基本模式中总束流感应腔体电压 $V_b$。</p>
+<h2 id="相位振荡与稳定性"><a href="#相位振荡与稳定性" class="headerlink" title="相位振荡与稳定性"></a>相位振荡与稳定性</h2><p>在讨论相位振荡时，我们发现必须仔细选择同步相位，取决于粒子能量是在跃迁能量之下还是之上。特别是，我们发现高于跃迁能量的粒子的相位稳定性要求射频电压随相位增加而减小。由(19.27)对 $\psi_s$ 的导数，结合(19.21)，且由于 $V_{gr}\cos\Psi &gt; 0$，相位稳定性的条件为 $\sin(\psi_g - \Psi_m) &lt; 0$，或：</p>
+<p>$$\frac{1}{2}\pi &lt; \psi_s + \Psi_m &lt; \frac{3}{2}\pi \tag{19.69}$$</p>
+<p>由(19.28)和(19.69)我们得到：</p>
+<p>$$-V_{cy}|\cos\psi_s| - V_{br}\sin\Psi_m\cos\Psi_m &lt; 0$$</p>
+<p>或由(19.23)：</p>
+<p>$$V_{br}\sin\psi_s &lt; V_{cy} \tag{19.70}$$</p>
+<p>这是Robinson的相位稳定性判据或加速器腔体调谐角的Robinson条件[6]。在具有稳定相位振荡的圆形加速器中可以加速的最大电流受有效腔体电压限制。以射频功率表示，(19.70)与(19.20)等价于：</p>
+<p>$$P_b \leq (1+\beta)P_{cy} \tag{19.71}$$</p>
+<p>耦合系数的稳定性条件由(19.35)得到：</p>
+<p>$$\beta &gt; \beta_{opt} - 2 \tag{19.72}$$</p>
+<p>对于具有最佳耦合 $\beta &#x3D; \beta_{opt}$ 的射频腔体，稳定性条件总是满足的。</p>
+<h3 id="Robinson阻尼"><a href="#Robinson阻尼" class="headerlink" title="Robinson阻尼"></a>Robinson阻尼</h3><p>射频系统的正确调谐是稳定相位振荡的必要但不充分条件。在第12章中，我们发现由于依赖于粒子能量的力而产生的阻尼或反阻尼。这种情况发生在束状粒子束流与加速腔体或真空室部件的相互作用中，这些部件就像窄带谐振腔。粒子束团的回旋时间取决于束团内粒子的平均能量，因此束团电流的傅里叶频谱由回旋频率的谐波组成，是能量依赖的。另一方面，由于腔体阻抗的频率依赖性，束流在腔体中由于束流加载造成的能量损失取决于回旋频率。因此我们有一个能量依赖的损耗机制，可能导致相干相位振荡的阻尼或更糟的反阻尼，我们将更详细地研究这一现象。Robinson[6]首先研究了这种效应的动力学，通常称为Robinson阻尼或Robinson不稳定性。</p>
+<p>高于跃迁能量时，与参考能量相比，更高束团能量的回旋频率更低，反之亦然。为了获得相干相位振荡的阻尼，我们因此将腔体调谐，使束团在更高能量时（较低频率）在相干同步振荡过程中在腔体中损失更多能量，在较低能量时（较高频率）损失更少能量。在这种情况下，腔体阻抗应随频率增加而减小，以产生阻尼，如图19.7所示。</p>
+<p><strong>图19.7</strong> 低于和高于跃迁能量时正Robinson阻尼的腔体调谐。(a) 低于跃迁能量。(b) 高于跃迁能量</p>
+<p>这里显示了谐振曲线或阻抗谱，图19.7a中谐振频率高于束流频率 $h\omega_0$，图19.7b中低于束流频率。与上述论证一致，我们预期在图19.7b情况下高于跃迁时产生阻尼，在图19.7a情况下产生反阻尼。将腔体谐振频率调整到低于束流频率 $h\omega_0$（其中 $\omega_0$ 是回旋频率）的值，称为容性失谐。相反，我们将腔体谐振频率调到高于束流频率（$\omega_r &gt; h\omega_0$）或在低于跃迁能量时感性失谐腔体以产生阻尼（图19.7a）。</p>
+<p>以更正式的方式，我们将束流电流频谱与腔体阻抗频谱折叠，并导出阻尼以及同步频率移动的标度律。在相位振荡期间，回旋频率被调制，因此束流频谱除了基本频率外还包括两个边带或卫星。束流电流频谱由回旋频率的谐波系列组成，直到频率达到束团长度的波长量级：</p>
+<p>$$I(t) &#x3D; I_b + \sum_{n&gt;0} I_n\cos(n\omega_0 t - \varphi) \tag{19.73}$$</p>
+<p>其中 $I_b$ 是平均回旋束流电流，$\varphi$ 是相对于参考粒子的相移。对于与谐波波长相比短的束团，傅里叶系数为：</p>
+<p>$$I_n &#x3D; 2I_b \tag{19.74}$$</p>
+<p>这里我们将讨论限制在束流与腔体在基本腔体频率的相互作用，束流频谱中唯一感兴趣的谐波因此是第 $h$ 次谐波：</p>
+<p>$$I_h(t) &#x3D; 2I_b\cos(h\omega_0 t - \varphi) \tag{19.75}$$</p>
+<p>由于相干同步振荡，束团中每个粒子的相位振荡为：</p>
+<p>$$\varphi(t) &#x3D; \varphi_0\sin\Omega_s t \tag{19.76}$$</p>
+<p>其中 $\varphi_0$ 是最大幅值，$\Omega_s$ 是相位振荡的同步振荡频率。将其代入(19.75)，对小振荡幅值 $\varphi_0 \ll 1$ 展开三角函数后得到：</p>
+<p>$$I_h(t) &#x3D; 2I_b\cos(h\omega_0 t) - I_b\varphi_0[\cos(h\omega_0 t + \Omega_s t) - \cos(h\omega_0 t - \Omega_s t)] \tag{19.77}$$</p>
+<p>这个表达式清楚地显示了束流频谱在 $h\omega_0 \pm \Omega_s$ 处的边带或卫星。将束流电流的表达式与腔体阻抗折叠，定义了粒子束团通过腔体时的能量损失。腔体阻抗是一个复数量，在(19.11)中导出，其实部与束流频谱一起显示在图19.8中。由束流 $I_h(t) &#x3D; I_h\cos h\omega_0 t$ 在腔体中感应的电压为：</p>
+<p>$$V_h &#x3D; -ZI_h(t) &#x3D; -Z_r I_h\cos(h\omega_0 t) - Z_i I_h\sin(h\omega_0 t) \tag{19.78}$$</p>
+<p><strong>图19.8</strong> 基本射频频率 $\omega_{rf} &#x3D; h\omega_0$ 附近腔体阻抗和束流频谱</p>
+<p>我们将阻抗分为实部和虚部，并用 $-\pi&#x2F;2$ 相移表示感应电压的虚部。将(19.78)应用于束流电流(19.77)的所有分量，我们得到腔体中的感应电压：</p>
+<p>$$\begin{aligned}<br>V_h &#x3D; &amp;-Z_r^0 2I_b\cos h\omega_0 t - Z_i^0 2I_b\sin h\omega_0 t \<br>&amp;+ Z_r^+ I_b\varphi_0\cos h\omega_0 t\cos\Omega_s t - Z_i^+ I_b\varphi_0\sin h\omega_0 t\sin\Omega_s t \<br>&amp;+ Z_i^+ I_b\varphi_0\sin h\omega_0 t\cos\Omega_s t + Z_r^+ I_b\varphi_0\cos h\omega_0 t\sin\Omega_s t \<br>&amp;- Z_r^- I_b\varphi_0\cos h\omega_0 t\cos\Omega_s t - Z_i^- I_b\varphi_0\sin h\omega_0 t\sin\Omega_s t \<br>&amp;- Z_i^- I_b\varphi_0\sin h\omega_0 t\cos\Omega_s t + Z_r^- I_b\varphi_0\cos h\omega_0 t\sin\Omega_s t<br>\end{aligned} \tag{19.79}$$</p>
+<p>其中 $Z^0$、$Z^+$ 和 $Z^-$ 分别是频率 $h\omega_0$、$h\omega_0 + \Omega_s$、$h\omega_0 - \Omega_s$ 处腔体阻抗的实部 r 和虚部 i。我们使用相位振荡表达式(19.76)及其导数：</p>
+<p>$$\dot{\varphi}(t) &#x3D; \varphi_0\Omega_s\cos\Omega_s t \tag{19.80}$$</p>
+<p>将感应电压频谱(19.79)乘以电流频谱(19.77)，并在频率 $h\omega_0$ 的快速振荡项上平均后得到：</p>
+<p>$$\langle V_h I_h \rangle &#x3D; -2I_b^2\left{Z_r^0 - \left[Z_i^0 - \frac{1}{2}(Z_i^+ + Z_i^-)\right]\varphi - \frac{Z_r^+ - Z_r^-}{2\Omega_s}\dot{\varphi}\right} \tag{19.81}$$</p>
+<p>这是粒子束团损失到腔体阻抗的能量的速率。除以总回旋电荷 $T_0 I_b$，我们得到每单位电荷的相对能量损失速率：</p>
+<p>$$\frac{d\varepsilon}{dt} &#x3D; -\frac{\langle eV_h I_h \rangle}{T_0 I_b E_0} &#x3D; +\frac{\ddot{\varphi}}{\beta c k_h |\eta_c|} \tag{19.82}$$</p>
+<p>其中 $T_0$ 是回旋时间，$I_b$ 是平均束流电流。</p>
+<p>我们使用了方程右侧能量偏差与相位变化率之间的关系(9.17)。由(19.81)、(19.82)，并利用(9.32)中同步频率的定义 $\Omega_{s0}^2 &#x3D; \frac{ck_h|\eta_c|}{E_0 T_0}eV_{cy}|\cos\psi_s|$，我们得到如下形式的微分方程：</p>
+<p>$$\ddot{\varphi} + 2\alpha_R\dot{\varphi} + \Delta\Omega^2\varphi &#x3D; 0 \tag{19.83}$$</p>
+<p>具有Robinson阻尼衰减率：</p>
+<p>$$\alpha_R &#x3D; -\frac{\beta\Omega_{s0}}{2V_{cy}|\cos\psi_s|}(Z_r^+ - Z_r^-)I_b \tag{19.84}$$</p>
+<p>和同步振荡频率的偏移：</p>
+<p>$$\Delta\Omega^2 &#x3D; -\frac{2\beta\Omega_{s0}^2}{V_{cy}|\cos\psi_s|}\left[Z_i^0 - \frac{1}{2}(Z_i^+ + Z_i^-)\right]I_b \tag{19.85}$$</p>
+<p>未扰动的相位方程(9.26)为：</p>
+<p>$$\ddot{\varphi} + 2\alpha_{s0}\dot{\varphi} + \Omega_{s0}^2\varphi &#x3D; 0 \tag{19.86}$$</p>
+<p>将两者结合，我们导出阻尼和振荡频率的修正。组合阻尼衰减率为：</p>
+<p>$$\alpha_s &#x3D; \alpha_{s0} - \frac{\beta\Omega_{s0}}{V_{cy}|\cos\psi_s|}(Z_r^+ - Z_r^-)I_b &gt; 0 \tag{19.87}$$</p>
+<p>其中 $\alpha_{s0}$ 是电子加速器中的辐射阻尼。总阻尼衰减率必须为正才能保证束流稳定性。在高于跃迁能量时，如果 $Z_r^+ &lt; Z_r^-$ 或腔体谐振频率是容性失谐的，则束流与加速腔体的相互作用对所有束流电流值都是稳定的。由于阻抗的虚部，束流与腔体的相互作用导致同步振荡频率偏移：</p>
+<p>$$\Omega_s^2 &#x3D; \Omega_{s0}^2 - \frac{2\beta\Omega_{s0}^2}{V_{cy}|\cos\psi_s|}\left[Z_i^0 - \frac{1}{2}(Z_i^+ + Z_i^-)\right]I_b \tag{19.88}$$</p>
+<p>这个频率偏移有两个分量，一个是由于在基本束流频率 $h\omega_0$ 处阻抗 $Z_i^0$ 引起的非相干频率偏移，另一个是由于腔体阻抗虚部引起的相干束团相位振荡频率偏移。对于小频率偏移 $\Delta\Omega_s &#x3D; \Omega_s - \Omega_{s0}$，(19.88)可以线性化为：</p>
+<p>$$\frac{\Delta\Omega_s}{\Omega_{s0}} &#x3D; -\frac{I_b\beta}{V_{cy}|\cos\psi_s|}\left[Z_i^0 - \frac{1}{2}(Z_i^+ + Z_i^-)\right] \tag{19.89}$$</p>
+<p>腔体阻抗由(19.10)得到：</p>
+<p>$$Z &#x3D; R_s\frac{1 - iQ_0\frac{\omega^2 - \omega_r^2}{\omega_r\omega}}{1 + Q_0^2\left(\frac{\omega^2 - \omega_r^2}{\omega_r\omega}\right)^2} \tag{19.90}$$</p>
+<p>由腔体阻抗的虚部和容性失谐，我们得出结论：高于跃迁能量时，非相干同步调谐偏移为正：</p>
+<p>$$\Delta\Omega_{s,incoh} &gt; 0 \tag{19.91}$$</p>
+<p>而相干同步调谐偏移为负：</p>
+<p>$$\Delta\Omega_{s,coh} &lt; 0 \tag{19.92}$$</p>
+<p>这个结论在特殊情况下可能由于加速器中其他无源腔体而有显著不同。同步调谐的偏移与束流电流成正比，可以用作诊断工具来确定腔体阻抗或其与理想模型(19.90)的偏差。</p>
+<p>在前面的讨论中，假设只有谐振腔体对Robinson阻尼有贡献。这在某种程度上是正确的，因为圆形加速器真空罩中的其他类似腔体的结构对整个频谱或至少在回旋频率的倍数处具有低品质因数 $Q$，因此不会通过多圈的持续能量损失对此效应产生显著贡献。稍后我们将看到真空室中这种低 $Q$ 结构可能导致其他类型的束流不稳定性。</p>
+<h3 id="势阱畸变"><a href="#势阱畸变" class="headerlink" title="势阱畸变"></a>势阱畸变</h3><p>同步频率由同步相位处射频电压的斜率决定。在上一小节中，讨论了腔体基本频率处束流加载效应，证明了在同步振荡频率计算中需要包括感应电压。这些感应电压引起势阱的扰动，从而导致束团长度的变化。在本小节中，我们因此还将包括束流与其环境相互作用的高阶效应。</p>
+<p>不可能导出圆形加速器真空室所有部件阻抗的一般表达式。然而，测量[7]表明，圆形加速器真空室的阻抗谱（不包括加速腔体）具有类似于SPEAR储存环的形式，如图19.9所示。</p>
+<p><strong>图19.9</strong> SPEAR阻抗谱[7]</p>
+<p>直到由真空室尺寸决定的跃迁频率 $f_t$，阻抗主要是感性的，在跃迁频率以上变为容性的。我们这里只寻找波长长于束团长度的场，这些场可能畸变射频电压波形，从而改变整个束团的斜率。稍后我们将考虑在束团内产生扰动的更短波长。因为束团长度通常是真空室尺寸的量级，我们只需要考虑跃迁频率以下的阻抗谱，它主要是感性的。然而，为了保持一般性，我们假设一个更一般但仍为纯虚数的阻抗：</p>
+<p>$$Z(\omega)<em>{\parallel} &#x3D; i\omega\mathcal{Z}</em>{\parallel} \tag{19.93}$$</p>
+<p>研究由于势阱畸变引起的有限束团长度的修正，为了数学简单，我们使用相空间中的抛物线粒子分布[8]（图19.10），归一化到束团电流 $\int_{-\varphi_\ell}^{\varphi_\ell} I(\varphi)d\varphi &#x3D; I_b$：</p>
+<p>$$I(\varphi) &#x3D; \frac{3I_b}{4\varphi_\ell}\left(1 - \frac{\varphi^2}{\varphi_\ell^2}\right) \tag{19.94}$$</p>
+<p>其中 $2\varphi_\ell$ 是相对于基本射频波长以相位表示的束团长度。整个真空室中的组合感应电压为：</p>
+<p>$$V_{\mathcal{Z}} &#x3D; \mathcal{Z}<em>{\parallel}\frac{dI}{dt} &#x3D; h\omega_0\mathcal{Z}</em>{\parallel}\frac{dI}{d\varphi} &#x3D; h\text{Im}\left(\frac{Z_{\parallel}}{n}\right)\frac{dI}{d\varphi} \tag{19.95}$$</p>
+<p>其中我们引入了归一化阻抗：</p>
+<p>$$\frac{Z_{\parallel}}{n} &#x3D; i\omega_0\mathcal{Z}_{\parallel} \tag{19.96}$$</p>
+<p>这是纵向阻抗除以回旋频率单位的频率，或除以模数 $n &#x3D; \omega&#x2F;\omega_0$。将(19.94)代入(19.95)，我们得到感应电压：</p>
+<p>$$V_{\mathcal{Z}} &#x3D; -\frac{3hI_b\text{Im}(Z_{\parallel}&#x2F;n)}{2\varphi_\ell^3}\varphi \tag{19.97}$$</p>
+<p>这必须加到射频电压 $V_{rf} &#x3D; V_{cy}\sin(\psi_s + \varphi)$ 上。形成有效电压，我们得到：</p>
+<p>$$V_{eff} &#x3D; V_{cy}\cos\psi_s\left(1 - \frac{3hI_b\text{Im}(Z_{\parallel}&#x2F;n)}{2\varphi_\ell^3 V_{cy}\cos\psi_s}\right)\varphi + V_{cy}\sin\psi_s \tag{19.98}$$</p>
+<p>这种有效腔体电压的修正导致同步振荡频率的非相干偏移：</p>
+<p>$$\frac{\Omega_s^2}{\Omega_{s0}^2} &#x3D; 1 - \frac{3\eta_c eI_b}{4\pi\varphi_\ell^3 E\nu_s^2}\text{Im}(Z_{\parallel}&#x2F;n) \tag{19.99}$$</p>
+<p>其中我们使用了同步调谐的定义 $\nu_s^2 &#x3D; \frac{\eta_c eV_{cy}\cos\psi_s}{2\pi hE}$。</p>
+<p>高于跃迁能量 $\eta_c\cos\psi_s &gt; 0$，因此当 $\text{Im}(Z_{\parallel}&#x2F;n) &lt; 0$ 时频率偏移为正，当 $\text{Im}(Z_{\parallel}&#x2F;n) &gt; 0$ 时为负。我们特别注意到，偏移强烈依赖于束团长度，并随束团长度减小而增加，这是我们在所有高阶模式相互作用中观察到的现象。</p>
+<p>注意，这种同步振荡频率的偏移不会出现在相干振荡中，因为感应电压也随束团振荡移动。束团中心实际上总是看到未改变的射频场，并根据未扰动射频电压的斜率振荡。因此相干同步振荡频率不需要与非相干频率相同。这对同步振荡频率的实验确定有一些影响。</p>
+<p>非相干同步振荡频率的偏移也反映了平衡束团长度的变化，这与电子束团相比，对于质子或离子束团是不同的。辐射电子束的能量扩散仅由同步辐射发射的量子涨落决定，与射频场无关。因此电子束团长度与同步振荡频率成反比变化，由 $\Omega_s&#x2F;\Omega_{s0} &#x3D; \sigma_{\ell 0}&#x2F;\sigma_\ell$ 和(19.99)求解 $\sigma_\ell&#x2F;\sigma_{\ell 0}$：</p>
+<p>$$\frac{\sigma_\ell^3}{\sigma_{\ell 0}^3} - \frac{\sigma_\ell}{\sigma_{\ell 0}} - \frac{8\eta_c eI_b}{9\pi^2\sqrt{2\pi}\sigma_{\ell 0}^3 E\nu_s^2}\text{Im}\left(\frac{Z_{\parallel}}{n}\right) &#x3D; 0 \tag{19.100}$$</p>
+<p>其中我们用具有相等总束团电流和束团中心相等强度的高斯分布替代了抛物线电流分布，设 $\varphi_\ell &#x3D; 3\sqrt{2\pi}&#x2F;4h\sigma_\ell&#x2F;R$，其中 $\sigma_{\ell 0}$ 是未扰动束团长度。</p>
+<p>非辐射粒子相反，必须遵守刘维尔定理，纵向束流发射度 $\ell\Delta p$ 不会因势阱畸变而改变。对于质子或离子束团，我们采用相同的束团伸长推导，但注意到束团长度以能量扩散的某种方式变化，使得束团长度 $\ell$ 和动量扩散 $\Delta p$ 的乘积保持不变。因此 $\ell \propto 1&#x2F;\sqrt{\Omega_s}$，由(19.99)取 $\ell &#x3D; (R&#x2F;h)\varphi_\ell$，扰动束团长度为：</p>
+<p>$$\frac{\ell^4}{\ell_0^4} - \frac{3\eta_c eI_b}{4\pi E\nu_s^2}\frac{R^3}{\ell_0^3}\text{Im}\left(\frac{Z_{\parallel}}{n}\right)\frac{\ell}{\ell_0} - 1 &#x3D; 0 \tag{19.101}$$</p>
+<p>当然，随着这种质子或离子束团长度的扰变，能量扩散会发生相反的扰变。</p>
+<h2 id="习题"><a href="#习题" class="headerlink" title="习题"></a>习题</h2><p>** 1 (S).** 考虑一个用作线性对撞机阻尼环的电子储存环。能量 $E &#x3D; 1.21$ GeV，周长 $C &#x3D; 35.27$ m，弯曲半径 $\rho &#x3D; 2.037$ m，动量压缩因子 $\alpha_c &#x3D; 0.01841$，射频谐波数 $h &#x3D; 84$，腔体分路阻抗 $R_{cy} &#x3D; 8.4$ M$\Omega$。一个包含 $N_e &#x3D; 5 \times 10^{10}$ 个粒子的强束团以单脉冲注入，并储存仅几毫秒以阻尼到小束流发射度。首先忽略束流加载，然后考虑束流加载，指定和优化合适的射频系统，并计算所需的射频腔体功率、腔体电压、耦合因子。假设量子寿命为1小时。</p>
+<p><strong>2 (S).</strong> 证明对于与射频波长相比短的束团，谐波幅值为 $I_h &#x3D; 2I_b$。</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ol>
+<li>P.B. Wilson, R. Servranckx, A.P. Sabersky, J. Gareyte, G.E. Fischer, A.W. Chao, IEEE Trans. Nucl. Sci. <strong>24</strong>, 1211 (1977)</li>
+<li>K. Halbach, F. Holsinger, Part. Accel. <strong>7</strong>, 213 (1976)</li>
+<li>T. Weiland, Nucl. Instrum. Methods <strong>212</strong>, 13 (1983)</li>
+<li>P.L. Morton, V.K. Neil, The interaction of a ring of charge passing through a cylindrical rf cavity. vol. UCRL-18103 (LBNL, Berkeley, 1968), p. 365</li>
+<li>E. Keil, W. Schnell, B. Zotter, Technical Report, CERN-ISR-LTD&#x2F;76-22, CERN, CERN, Geneva (1976)</li>
+<li>K.W. Robinson, Stability of beam in radiofrequency system. Technical Report, CEA-11, CEAL-1010, Harvard University, Cambridge (1956&#x2F;1966)</li>
+<li>A.W. Chao, J. Gareyte, Technical Report, Int Note-197, SLAC, Stanford, CA (1976)</li>
+<li>A. Hofmann, in <em>Lecture Notes of Physics</em>, vol. 296 (Springer, Berlin&#x2F;Heidelberg, 1986), p. 99</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="Liu Ming WeChat Pay">
+        <span>WeChat Pay</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="Liu Ming Alipay">
+        <span>Alipay</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>Liu Ming
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="http://iuming.github.io/2026/07/14/%E6%9D%9F%E8%85%94%E7%9B%B8%E4%BA%92%E4%BD%9C%E7%94%A8/" title="束腔相互作用">http://iuming.github.io/2026/07/14/束腔相互作用/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/realiuming">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+U5yo-Zxuw1OgbU6P">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </span>
+
+          <img class="social-item-img" src="/images/wechat_channel.jpg">
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/cavity/" rel="tag"><i class="fa fa-tag"></i> cavity</a>
+              <a href="/tags/accelerator/" rel="tag"><i class="fa fa-tag"></i> accelerator</a>
+              <a href="/tags/beam/" rel="tag"><i class="fa fa-tag"></i> beam</a>
+              <a href="/tags/interaction/" rel="tag"><i class="fa fa-tag"></i> interaction</a>
+          </div>
+
+        
+  <div class="social-like a2a_kit a2a_kit_size_32 a2a_default_style">
+    <a class="a2a_dd" target="_blank" rel="noopener" href="https://www.addtoany.com/share"></a>
+      <a class="a2a_button_facebook"></a>
+      <a class="a2a_button_twitter"></a>
+      <a class="a2a_button_wechat"></a>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/06/19/Luenberger-Observer/" rel="prev" title="Luenberger Observer">
+                  <i class="fa fa-angle-left"></i> Luenberger Observer
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Ming Liu. All rights reserved.</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL2l1bWluZw==" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.1.0/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/4.23.3/algoliasearch-lite.umd.js" integrity="sha256-1QNshz86RqXe/qsCBldsUu13eAX6n/O98uubKQs87UI=" crossorigin="anonymous"></script><script src="/js/third-party/search/algolia-search.js"></script>
+<script class="next-config" data-name="chatra" type="application/json">{"enable":true,"async":true,"id":"gTXKphrmKGf5QSb5L"}</script>
+<script src="/js/third-party/chat/chatra.js"></script>
+<script async src="https://call.chatra.io/chatra.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.0/pdfobject.min.js","integrity":"sha256-JJZNsid68vnh3/zyj0lY9BN5ynxVX/12XgOa1TlaYN0="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.0/mermaid.min.js","integrity":"sha256-stuqcu2FrjYCXDOytWFA5SoUE/r3nkp6gTglzNSlavU="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+  <script class="next-config" data-name="wavedrom" type="application/json">{"enable":true,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.5.0/wavedrom.min.js","integrity":"sha256-INLAoJc6quTNfiMWkGZniYO2cxE8mHpddnLow1m6RFs="}}</script>
+  <script class="next-config" data-name="wavedrom_skin" type="application/json">{"enable":true,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.5.0/skins/default.js","integrity":"sha256-fduc/Zszk5ezWws2uInY/ALWVmIrmV6VTgXbsYSReFI="}}</script>
+  <script src="/js/third-party/tags/wavedrom.js"></script>
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+  <script src="/js/third-party/addtoany.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":"ture","archive":true,"delay":true,"timeout":3000,"priority":true,"url":"http://iuming.github.io/2026/07/14/%E6%9D%9F%E8%85%94%E7%9B%B8%E4%BA%92%E4%BD%9C%E7%94%A8/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"realiuming","count":true,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+
+</body>
+</html>
