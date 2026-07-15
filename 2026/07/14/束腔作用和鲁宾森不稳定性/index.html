@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.2.0">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/manifest.json">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"iuming.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.20.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":null},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":true,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="粒子束对腔体的这种激发称为束流负载。束流负载对射频系统有两个影响">
+<meta property="og:type" content="article">
+<meta property="og:title" content="束腔作用和鲁宾森不稳定性">
+<meta property="og:url" content="http://iuming.github.io/2026/07/14/%E6%9D%9F%E8%85%94%E4%BD%9C%E7%94%A8%E5%92%8C%E9%B2%81%E5%AE%BE%E6%A3%AE%E4%B8%8D%E7%A8%B3%E5%AE%9A%E6%80%A7/index.html">
+<meta property="og:site_name" content="REALIUMING&#39;BLOG">
+<meta property="og:description" content="粒子束对腔体的这种激发称为束流负载。束流负载对射频系统有两个影响">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-07-14T15:35:08.000Z">
+<meta property="article:modified_time" content="2026-07-15T00:00:14.509Z">
+<meta property="article:author" content="Liu Ming">
+<meta property="article:tag" content="cavity">
+<meta property="article:tag" content="beam">
+<meta property="article:tag" content="loading">
+<meta name="twitter:card" content="&lt;twitter:card&gt;">
+<meta name="twitter:image" content="http://iuming.github.io/2026/07/14/%E6%9D%9F%E8%85%94%E4%BD%9C%E7%94%A8%E5%92%8C%E9%B2%81%E5%AE%BE%E6%A3%AE%E4%B8%8D%E7%A8%B3%E5%AE%9A%E6%80%A7/%3Ctwitter:image%3E">
+<meta name="twitter:creator" content="@&lt;twitter:creator&gt;">
+<meta name="twitter:site" content="<twitter:site>">
+<meta property="fb:admins" content="&lt;fb:admin_id&gt;">
+<meta property="fb:app_id" content="&lt;fb:app_id&gt;">
+
+
+<link rel="canonical" href="http://iuming.github.io/2026/07/14/%E6%9D%9F%E8%85%94%E4%BD%9C%E7%94%A8%E5%92%8C%E9%B2%81%E5%AE%BE%E6%A3%AE%E4%B8%8D%E7%A8%B3%E5%AE%9A%E6%80%A7/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://iuming.github.io/2026/07/14/%E6%9D%9F%E8%85%94%E4%BD%9C%E7%94%A8%E5%92%8C%E9%B2%81%E5%AE%BE%E6%A3%AE%E4%B8%8D%E7%A8%B3%E5%AE%9A%E6%80%A7/","path":"2026/07/14/束腔作用和鲁宾森不稳定性/","title":"束腔作用和鲁宾森不稳定性"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>束腔作用和鲁宾森不稳定性 | REALIUMING'BLOG</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">REALIUMING'BLOG</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">296</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">21</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">125</span></a></li><li class="menu-item menu-item-books"><a href="/book/" rel="section"><i class="fa fa-book fa-fw"></i>books</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fab fa-algolia fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AD%89%E6%95%88%E7%94%B5%E8%B7%AF"><span class="nav-number">1.</span> <span class="nav-text">等效电路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AD%89%E6%95%88%E7%94%B5%E8%B7%AF-1"><span class="nav-number">1.1.</span> <span class="nav-text">等效电路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E9%80%9F%E5%99%A8%E7%8E%AF%E4%B8%AD%E7%9A%84%E6%9D%9F%E6%B5%81%E5%8A%A0%E8%BD%BD"><span class="nav-number">1.2.</span> <span class="nav-text">加速器环中的束流加载</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A8%B3%E6%80%81%E8%A1%A5%E5%81%BF"><span class="nav-number">1.2.1.</span> <span class="nav-text">稳态补偿</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Robinson%E7%A8%B3%E5%AE%9A%E6%80%A7%E5%88%A4%E6%8D%AE"><span class="nav-number">1.3.</span> <span class="nav-text">Robinson稳定性判据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%8E%E5%BC%BA%E5%BA%A6%E4%B8%8B%E7%9A%84%E7%9B%B8%E4%BD%8D%E7%A8%B3%E5%AE%9A%E6%80%A7"><span class="nav-number">1.3.1.</span> <span class="nav-text">低强度下的相位稳定性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%AB%98%E5%BC%BA%E5%BA%A6%E4%B8%8B%E7%9A%84%E7%9B%B8%E4%BD%8D%E7%A8%B3%E5%AE%9A%E6%80%A7"><span class="nav-number">1.3.2.</span> <span class="nav-text">高强度下的相位稳定性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Robinson%E9%98%BB%E5%B0%BC"><span class="nav-number">1.3.3.</span> <span class="nav-text">Robinson阻尼</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9E%AC%E6%80%81%E6%9D%9F%E6%B5%81%E5%8A%A0%E8%BD%BD"><span class="nav-number">1.4.</span> <span class="nav-text">瞬态束流加载</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9D%9F%E6%B5%81%E5%8A%A0%E8%BD%BD%E5%9F%BA%E6%9C%AC%E5%AE%9A%E7%90%86"><span class="nav-number">1.4.1.</span> <span class="nav-text">束流加载基本定理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%8E%E7%9E%AC%E6%80%81%E5%88%B0%E7%A8%B3%E6%80%81"><span class="nav-number">1.4.2.</span> <span class="nav-text">从瞬态到稳态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9E%81%E9%99%90%E6%83%85%E5%86%B5-delta-0-rightarrow-0"><span class="nav-number">1.4.3.</span> <span class="nav-text">极限情况 (\delta_{0} \rightarrow 0)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9E%81%E9%99%90%E6%83%85%E5%86%B5-T-b-gg-T-f"><span class="nav-number">1.4.4.</span> <span class="nav-text">极限情况 (T_{b} \gg T_{f})</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9D%9F%E5%9B%A2%E7%9A%84%E7%9E%AC%E6%80%81%E6%9D%9F%E6%B5%81%E5%8A%A0%E8%BD%BD"><span class="nav-number">1.4.5.</span> <span class="nav-text">束团的瞬态束流加载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83"><span class="nav-number">1.4.6.</span> <span class="nav-text">高斯分布</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%9B%E7%89%A9%E7%BA%BF%E5%88%86%E5%B8%83"><span class="nav-number">1.4.7.</span> <span class="nav-text">抛物线分布</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%99%E5%BC%A6%E5%B9%B3%E6%96%B9%E5%88%86%E5%B8%83"><span class="nav-number">1.4.8.</span> <span class="nav-text">余弦平方分布</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%99%E5%BC%A6%E5%88%86%E5%B8%83"><span class="nav-number">1.4.9.</span> <span class="nav-text">余弦分布</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9E%AC%E6%80%81%E8%A1%A5%E5%81%BF"><span class="nav-number">1.4.10.</span> <span class="nav-text">瞬态补偿</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%80%A6%E5%90%88%E6%9D%9F%E5%9B%A2%E4%B8%8D%E7%A8%B3%E5%AE%9A%E6%80%A7"><span class="nav-number">1.4.11.</span> <span class="nav-text">耦合束团不稳定性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B"><span class="nav-number">1.5.</span> <span class="nav-text">实例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B4%B9%E7%B1%B3%E5%AE%9E%E9%AA%8C%E5%AE%A4%E4%B8%BB%E7%8E%AF"><span class="nav-number">1.5.1.</span> <span class="nav-text">费米实验室主环</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B4%B9%E7%B1%B3%E5%AE%9E%E9%AA%8C%E5%AE%A4%E5%8A%A9%E6%8E%A8%E5%99%A8"><span class="nav-number">1.5.2.</span> <span class="nav-text">费米实验室助推器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B4%B9%E7%B1%B3%E5%AE%9E%E9%AA%8C%E5%AE%A4%E4%B8%BB%E6%B3%A8%E5%85%A5%E5%99%A8"><span class="nav-number">1.5.3.</span> <span class="nav-text">费米实验室主注入器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%90%E8%AE%AE%E7%9A%84%E5%89%8D%E7%BD%AE%E5%8A%A9%E6%8E%A8%E5%99%A8"><span class="nav-number">1.5.4.</span> <span class="nav-text">提议的前置助推器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%9C%E5%9D%A1%E6%9B%B2%E7%BA%BF"><span class="nav-number">1.5.5.</span> <span class="nav-text">斜坡曲线</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%84%E9%A2%91%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.5.6.</span> <span class="nav-text">射频系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%BA%E5%AE%9A%E9%A2%91%E7%8E%87%E5%B0%84%E9%A2%91%E8%85%94"><span class="nav-number">1.5.7.</span> <span class="nav-text">固定频率射频腔</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%83%E4%B9%A0"><span class="nav-number">1.6.</span> <span class="nav-text">练习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">1.7.</span> <span class="nav-text">参考文献</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Liu Ming"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Liu Ming</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">125</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">296</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button animated">
+    <button><i class="fa fa-comment"></i>
+      Chat
+    </button>
+  </div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2l1bWluZw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;iuming"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOjUyMDBsaXVtaW5nQGdtYWlsLmNvbQ==" title="E-Mail → mailto:5200liuming@gmail.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vdS8zMTQ3OTEyODky" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;3147912892"><i class="fab fa-weibo fa-fw"></i>Weibo</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9yZWFsaXVtaW5n" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;realiuming"><i class="fab fa-twitter fa-fw"></i>Twitter</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL3JlYWxpdW1pbmc=" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;realiuming"><i class="fab fa-facebook fa-fw"></i>FB Page</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8xMjE4NTI3My9pdW1pbmc=" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;12185273&#x2F;iuming"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly95b3V0dWJlLmNvbS9jaGFubmVsL1VDaUNCSHJ4cDJ4Tlc3T1ZaTlFzZHROdw==" title="YouTube → https:&#x2F;&#x2F;youtube.com&#x2F;channel&#x2F;UCiCBHrxp2xNW7OVZNQsdtNw"><i class="fab fa-youtube fa-fw"></i>YouTube</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9pbnN0YWdyYW0uY29tL3JlYWxpdW1pbmc=" title="Instagram → https:&#x2F;&#x2F;instagram.com&#x2F;realiuming"><i class="fab fa-instagram fa-fw"></i>Instagram</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="c2t5cGU6ODQyNjczNTU2P2NhbGx8Y2hhdA==" title="Skype → skype:842673556?call|chat"><i class="fab fa-skype fa-fw"></i>Skype</span>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="Back to top">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://iuming.github.io/" title="https:&#x2F;&#x2F;iuming.github.io&#x2F;">Title</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://iuming.github.io/2026/07/14/%E6%9D%9F%E8%85%94%E4%BD%9C%E7%94%A8%E5%92%8C%E9%B2%81%E5%AE%BE%E6%A3%AE%E4%B8%8D%E7%A8%B3%E5%AE%9A%E6%80%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Liu Ming">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="REALIUMING'BLOG">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="束腔作用和鲁宾森不稳定性 | REALIUMING'BLOG">
+      <meta itemprop="description" content="粒子束对腔体的这种激发称为束流负载。束流负载对射频系统有两个影响">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          束腔作用和鲁宾森不稳定性
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2026-07-14 23:35:08" itemprop="dateCreated datePublished" datetime="2026-07-14T23:35:08+08:00">2026-07-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-07-15 08:00:14" itemprop="dateModified" datetime="2026-07-15T08:00:14+08:00">2026-07-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/note/" itemprop="url" rel="index"><span itemprop="name">note</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2026/07/14/%E6%9D%9F%E8%85%94%E4%BD%9C%E7%94%A8%E5%92%8C%E9%B2%81%E5%AE%BE%E6%A3%AE%E4%B8%8D%E7%A8%B3%E5%AE%9A%E6%80%A7/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2026/07/14/束腔作用和鲁宾森不稳定性/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+            <div class="post-description">粒子束对腔体的这种激发称为束流负载。束流负载对射频系统有两个影响</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>速调管或四极管*被用来驱动射频腔。当一个速调管或四极管耦合到一个射频腔时，腔内会产生电磁场。腔体间隙上的电场提供所需的功率，以补偿同步辐射和耦合阻抗造成的能量损失，并为粒子束提供必要的加速度。然而，粒子束在通过射频腔间隙时，也会以与速调管或射频源相同的方式激发腔内的电磁场。这种由粒子束对腔体的激发称为束流加载。束流加载对射频系统有两个影响。首先，束流加载产生的电场在腔体间隙上产生一个电势，称为束流加载电压，该电压与速调管提供的加速电压方向相反。因此，需要向射频腔提供更多功率以克服束流加载的影响。其次，为了优化速调管的功率，需要对腔体进行失谐。失谐必须正确进行。如果不正确，速调管输送的功率将不会有效。最糟糕的是，不正确的失谐会激发相振荡的不稳定性。我们首先研究稳态束流加载并推导相位稳定性判据。之后，将讨论瞬态束流加载。还将回顾抑制束流加载的通用方法。本章大部分材料来自Wilson [1]，Wiedemann [2]和Boussard [3]的讲义。</p>
+<h2 id="等效电路"><a href="#等效电路" class="headerlink" title="等效电路"></a>等效电路</h2><center>图8.1：表示射频发生器电流源 \(i_{g}\) 驱动带有束流加载电流 \(i_{im}\) 的射频腔的电路模型。</center>
+
+<p>射频系统可以用如图8.1上方的等效电路来表示。射频腔由一个具有角谐振频率的 (RLC) 电路表示</p>
+<p>[ \omega_{r} &#x3D; \frac{1}{\sqrt{LC}}, \quad (8.1) ]</p>
+<p>其中 (L) 和 (C) 是射频腔的等效电感和电容。速调管或四极管也用一个具有角谐振频率 (\omega_{r}) 的 (RLC) 电路表示，(\omega_{r}) 是加速器环的实际射频频率。速调管&#x2F;四极管通过波导或传输线经变压器连接到射频腔，如图所示。假设在射频腔之前有一个环形器或隔离器，这样任何从腔体反射并传回速调管的功率都将被吸收，这可以大大简化问题。这样的假设导致了图8.1下方的等效电路。电阻 (R_{s}) 称为射频系统的未加载并联阻抗，因为它是孤立腔体在其谐振频率下的阻抗。粒子束的镜像电流由一个电流源 (i_{im}) 表示。这是一个有效的表示，基于刚性束团近似，因为当束团通过腔体间隙时，粒子的速度以及因此的电流被假定为大致恒定。我们在这里引用镜像电流而不是束流 (i_{b})，因为流过腔体间隙并进入腔体的是镜像电流。镜像电流的方向与束流方向相反。</p>
+<p>另一方面，对于速调管来说情况不同。当电子通过速调管输出腔的间隙时，其速度会响应于速调管腔场而改变。因此，射频源由一个与负载电阻 (R_{g}) 或导纳 (Y_{g} &#x3D; 1 &#x2F; R_{g}) 并联的电流源 (i_{g}) 表示。后者用射频腔的并联导纳 (Y_{s}) 或并联阻抗 (R_{s}) 表示为</p>
+<p>[Y_{g} &#x3D; \beta Y_{s} &#x3D; \frac{\beta}{R_{s}}, \quad (8.2)]</p>
+<p>其中 (\beta) 是耦合系数，尚待定义。下方等效电路图中的发生器或速调管电流 (i_{g}) 和负载导纳 (Y_{g}) 是等效值，不同于图8.1上方电路中速调管电路中的实际发生器电流 (i_{gk}) 和实际负载导纳 (Y_{gk})。例如，在费米实验室主注入器的射频系统中，(i_{gk} &#x3D; 12i_{g})。</p>
+<p>射频发生器输出发生器电流 (I_{g}) 以产生用于束流的射频间隙电压 (V_{\mathrm{rf}})。所需的总输出功率为</p>
+<p>[P_{\mathrm{total}} &#x3D; \frac{1}{2}\frac{I_{g}^{2}}{Y_{g} + Y_{\mathrm{lead}}}, \quad (8.3)]</p>
+<p>其中 (Y_{\mathrm{load}}) 称为负载腔导纳，它包括腔体导纳 (Y_{s} &#x3D; 1 &#x2F; R_{s}) 以及来自粒子束的所有贡献。将在下面的公式(8.43)中给出显式表达式。在非常弱的束流 ((i_{b}\rightarrow 0)) 的情况下，(Y_{\mathrm{lead}}\rightarrow Y_{s})。总功率可以重写为</p>
+<p>[P_{\mathrm{total}} &#x3D; \frac{1}{2}\frac{Y_{g}I_{g}^{2}}{(Y_{g} + Y_{\mathrm{lead}})^{2}} +\frac{1}{2}\frac{Y_{\mathrm{lead}}I_{g}^{2}}{(Y_{g} + Y_{\mathrm{lead}})^{2}}. \quad (8.4)]</p>
+<p>右边第一项是耗散在发生器中的功率。第二项是需要传输到腔体和束流的功率，我们将其记为</p>
+<h3 id="等效电路-1"><a href="#等效电路-1" class="headerlink" title="等效电路"></a>等效电路</h3><p>并联阻抗 (R_{g}) 和腔体并联阻抗 (R_{s})。这称为腔体加载并联阻抗，以区别于腔体未加载并联阻抗 (R_{s})。因此我们有</p>
+<p>[R_{L} &#x3D; (Y_{s} + Y_{g})^{-1} &#x3D; \frac{R_{s}}{1 + \beta}. \quad (8.9)]</p>
+<p>相应地，束流镜像电流在腔体中看到的加载品质因数为</p>
+<p>[Q_{L} &#x3D; \omega_{r}C R_{L} &#x3D; \frac{Q_{0}}{1 + \beta}. \quad (8.10)]</p>
+<p>注意到</p>
+<p>[\frac{R_{s}}{Q_{0}} &#x3D; \frac{R_{L}}{Q_{L}}, \quad (8.11)]</p>
+<p>无论加载与否都成立。实际上，(R_{s} &#x2F; Q_{0}) 只是腔体的几何因子。</p>
+<p>束流加载电压是由镜像电流产生的电压，由下式给出</p>
+<p>[V_{br} &#x3D; \frac{i_{im}}{Y_{g} + Y_{s}} &#x3D; \frac{i_{im}}{Y_{s}(1 + \beta)}, \quad (8.12)]</p>
+<p>而发生器产生的电压为</p>
+<p>[V_{gr} &#x3D; \frac{i_{g}}{Y_{g} + Y_{s}} &#x3D; \frac{i_{g}}{Y_{s}(1 + \beta)}, \quad (8.13)]</p>
+<p>其中下标“r”表示工作在谐振频率，因此电流和电压同相，尽管它们可能有符号差异。用发生器功率 (P_{g}) (式(8.6))表示，谐振时的发生器电压变为</p>
+<p>[V_{gr} &#x3D; \frac{\sqrt{8\beta}}{1 + \beta}\sqrt{R_{s}P_{g}}. \quad (8.14)]</p>
+<p>很明显，束流加载电压与发生器电压方向相反。因此，净加速电压为</p>
+<p>[V_{\mathrm{rf}} &#x3D; V_{gr} - V_{br} &#x3D; \sqrt{R_{s}P_{g}}\left[\frac{\sqrt{8\beta}}{1 + \beta}\left(1 - \frac{K}{2\sqrt{\beta}}\right)\right], \quad (8.15)]</p>
+<p>其中</p>
+<p>[K^{2} &#x3D; \frac{i_{im}^{2}R_{s}}{2P_{g}} \quad (8.16)]</p>
+<p>扮演了束流加载功率与发生器功率之比的角色。由于超导腔的并联阻抗 (R_{s}) 非常高，束流加载变得更加重要。传输给束流的发生器功率份额为</p>
+<p>[\eta &#x3D; \frac{i_{m}V_{\mathrm{rf}}}{2P_{g}} &#x3D; \frac{2\sqrt{\beta}}{1 + \beta} K\left(1 - \frac{K}{2\sqrt{\beta}}\right). \quad (8.17)]</p>
+<p>腔体中耗散的功率为</p>
+<p>[P_{c} &#x3D; \frac{V_{\mathrm{rf}}^{2}}{2R_{s}} &#x3D; P_{g}\left(\frac{2\sqrt{\beta}}{1 + \beta}\right)^{2}\left(1 - \frac{K}{2\sqrt{\beta}}\right)^{2}. \quad (8.18)]</p>
+<p>根据能量守恒，我们必须有</p>
+<p>[P_{g} &#x3D; \eta P_{g} + P_{c} + P_{r}, \quad (8.19)]</p>
+<p>其中 (P_{r}) 是反射回发生器的功率，由下式给出</p>
+<p>[\frac{P_{r}}{P_{g}} &#x3D; \left(\frac{\beta - 1 - K\sqrt{\beta}}{1 + \beta}\right)^{2}. \quad (8.20)]</p>
+<p>到目前为止，我们还没有提到耦合系数 (\beta)。现在我们可以选择 (\beta)，使得发生器功率无反射地传输到腔体和束流，或者由式(8.20)，最佳耦合常数为</p>
+<p>[K &#x3D; \frac{\beta_{0p} - 1}{\sqrt{\beta_{0p}}}. \quad (8.21)]</p>
+<p>注意到这种优化也是对加速电压 (V_{\mathrm{rf}}) 的最大化，这可以通过对式(8.15)关于 (\beta) 求导来验证。</p>
+<h3 id="加速器环中的束流加载"><a href="#加速器环中的束流加载" class="headerlink" title="加速器环中的束流加载"></a>加速器环中的束流加载</h3><p>在同步加速器环或存储环中，有必要在加速电压波形的峰值之外运行射频系统，以便有足够大的相空间面积来容纳束团并确保相振荡的稳定性。速调管或射频发生器工作在射频频率 (\omega_{\mathrm{rf}} &#x2F; (2\pi) &#x3D; h\omega_{0} &#x2F; (2\pi))，其中 (h) 是一个称为射频谐波数的整数，(\omega_{0} &#x2F; (2\pi)) 是同步粒子的回旋频率。注意，这个射频频率是粒子在腔体间隙处经历的频率，它不同于由式(8.1)给出的腔体固有谐振频率 (\omega_{\mathrm{r}} &#x2F; (2\pi))。根据图8.1的电路图，粒子在射频频率 (\omega_{\mathrm{rf}} &#x2F; (2\pi)) 下看到的腔体阻抗可以写为</p>
+<p>[Z_{\mathrm{cav}} &#x3D; \frac{R_{L}}{1 - jQ_{L}\left(\frac{\omega_{\mathrm{rf}}}{\omega_{\mathrm{rf}}} - \frac{\omega_{\mathrm{rf}}}{\omega_{\mathrm{r}}}\right)} &#x3D; \frac{R_{L}\cos\psi e^{j\psi}}{1 - jQ_{L}\left(\frac{\omega_{\mathrm{rf}}}{\omega_{\mathrm{rf}}} - \frac{\omega_{\mathrm{rf}}}{\omega_{\mathrm{r}}}\right)} \quad (8.22)]</p>
+<p>其中 (\psi) 称为射频失谐角或简称失谐。如下所示，失谐是使束流粒子运动在射频系统影响下保持稳定的重要机制。需要指出的是，这里使用的是加载值，因为这是镜像电流所看到的。由式(8.22)，失谐角定义为</p>
+<p>[\tan \psi &#x3D; Q_{L}\left(\frac{\omega_{\mathrm{r}}}{\omega_{\mathrm{rf}}} - \frac{\omega_{\mathrm{rf}}}{\omega_{\mathrm{r}}}\right)~. \quad (8.23)]</p>
+<p>当 (\omega_{\mathrm{rf}}) 偏离 (\omega_{\mathrm{r}}) 很小时，近似给出</p>
+<p>[\tan \psi &#x3D; 2Q_{L}\frac{\omega_{\mathrm{r}} - \omega_{\mathrm{rf}}}{\omega_{\mathrm{r}}} \quad (8.24)]</p>
+<p>注意，在本节中我们使用了 (j) 而不是 (- i)，因为相量图通常使用这种约定绘制。如图8.2所示，如果环中只有一个束团，相量用带有波浪号的上标表示，以角频率 (\omega_{\mathrm{rf}}) 逆时针旋转。如果环中有 (N_{b}) 个等间距的束团，间隔为 (h_{b} &#x3D; h &#x2F; N_{b}) 个射频桶（其中 (h) 是射频谐波数），我们也可以想象相量以角频率 (\omega_{\mathrm{rf}} &#x2F; h_{b}) 旋转。因此，它们是射频频率或 (\omega_{\mathrm{rf}} &#x2F; h_{b}) 下的傅里叶分量。这意味着对于每个束团通过射频腔，我们将看到相同的相量图。为了做到这一点，束流加载电压在相邻两个束团之间的时间间隔 (T_{b} &#x3D; 2\pi h_{b} &#x2F; \omega_{\mathrm{rf}}) 内衰减应可忽略不计。换句话说，在本讨论中我们要求 (T_{b} \ll T_{f})，其中 (T_{f} &#x3D; 2Q_{L} &#x2F; \omega_{\mathrm{r}}) 是腔体的填充时间。</p>
+<p>大多数情况下，镜像电流相量 (\tilde{i}<em>{\mathrm{im}}) 与束流相量 (\tilde{i}</em>{b}) 大小相同，尽管方向相反。当镜像电流 (\tilde{i}<em>{\mathrm{im}}) 与加载腔体相互作用时，根据式(8.22)，将产生一个束流加载电压相量 (\tilde{V}</em>{b})，由下式给出</p>
+<p>[\tilde{V}<em>{b} &#x3D; \tilde{i}</em>{\mathrm{im}}R_{L}\cos \psi e^{j\psi}, \quad (8.25)]</p>
+<p>并且</p>
+<p>[V_{b} &#x3D; V_{b r}\cos \psi . \quad (8.26)]</p>
+<center>图8.2：相量图，显示了由镜像电流相量 \(\tilde{i}_{\mathrm{im}}\) 在射频腔中感应的束流加载电压相量 \(\tilde{V}_{b}\)，该镜像电流滞后于 \(\tilde{V}_{b}\) 一个失谐角 \(\psi\)。同时还绘制了束流加载电压相量 \(\tilde{V}_{br}\)，其中 \(V_{b} = V_{br}\cos \psi\) 当束流处于射频波峰且无失谐时。</center>
+
+<p>因此，电压相量总是超前电流相量一个失谐相位 (\psi)，并且相量 (\tilde{V}<em>{b}) 的幅度小于其在腔体谐振频率处的值 (V</em>{br})，因子为 (\cos \psi)。如果愿意，也可以引入相量 (\tilde{V}<em>{br})，它与电流相量 (\tilde{i}</em>{\mathrm{im}}) 同相，并且幅度由式(8.26)给出。如图8.2所示。</p>
+<p>需要做一些评论。这里，我们仅从镜像电流 (\tilde{i}<em>{\mathrm{im}}) 的一个傅里叶分量（频率为 (\omega</em>{\mathrm{rf}}) 或 (\omega_{\mathrm{rf}} &#x2F; h_{b}) 的那个）出发。束流所经历的束流加载电压 (\tilde{V}<em>{b}) 也是同一频率的傅里叶分量。由于我们是在频域中研究问题，这相当于时域中的一个很长的间隔。换句话说，结果描述了一个稳态问题，意味着束流已经无数次通过射频腔。因此，束流加载电压 (\tilde{V}</em>{b}) 在时间上是正弦波。然而，这并不是我们对腔体的确切预期。束流加载电压一旦离开射频腔就会指数衰减。当束流再次通过时，它又会像阶跃函数一样重新充电。因此，束流加载电压随时间的行为更像是锯齿波而不是正弦波。换句话说，需要多个傅里叶分量才能完全描述束流加载的图景。但是，如果指数衰减很慢，束流加载波将更接近正弦波。因此，我们在这里对束流加载问题的描述仅在腔体衰减时间常数（或填充时间）</p>
+<p>[T_{f} &#x3D; \frac{2Q_{L}}{\omega_{r}} \quad (8.27)]</p>
+<p>远长于连续束团通过之间的间隔 (T_{b}) 时才有效。我们稍后将讨论更精确的描述。</p>
+<p>失谐是必要的，这有充分的理由。第一个原因是为了补偿束流加载，我们将在下一小节中描述。有人可能会问，为什么我们不简单地使用一个与镜像电流相等且相反的发生器电流来进行简单的 (100%) 补偿。这需要发生器在不同于射频电压的相位角处提供不必要的大电流。不用说，这将导致射频激励系统效率的降低和成本的增加。第二个原因是相位稳定性。当束流中心偏离其正确的射频相位时，正确的失谐将阻尼该偏差并保证相位稳定性。这将在后面关于Robinson稳定性的章节中讨论。</p>
+<h4 id="稳态补偿"><a href="#稳态补偿" class="headerlink" title="稳态补偿"></a>稳态补偿</h4><p>在图8.3中，腔体内的总电流相量 (\tilde{\iota}<em>{t}) 是镜像电流相量 (\tilde{\iota}</em>{\mathrm{im}}) 和发生器电流相量 (\tilde{\iota}<em>{g}) 的矢量和。射频电压相量 (\tilde{V}</em>{\mathrm{rf}}) 处于同步角 (\phi_{s})，并超前总电流相量一个失谐角 (\psi)。电流相量 (\tilde{\iota}<em>{0}) 是 (\tilde{\iota}</em>{t}) 沿 (\tilde{V}<em>{\mathrm{rf}}) 方向的投影。因此，(\tilde{\iota}</em>{0}) 是当腔体处于谐振且无束流时建立射频电压所需的发生器电流。换句话说，(\dot{\iota}<em>{0} &#x3D; V</em>{\mathrm{rf}} &#x2F; R_{s} &#x3D; (1 + \beta)V_{\mathrm{rf}} &#x2F; R_{s})，其中 (\beta) 是发生器到射频腔的耦合系数，(R_{s}) 是未加载并联阻抗。</p>
+<p>我们希望求解负载角 (\theta_{t})，即发生器电流相量滞后于射频电压相量的角度。通过沿射频电压相量及其垂直方向投影，可以得到</p>
+<p>[\tan \theta_{L} &#x3D; \frac{i_{0}\tan\psi - i_{\mathrm{im}}\cos\phi_{s}}{i_{0} + i_{\mathrm{im}}\sin\phi_{s}}, \quad (8.28)]</p>
+<p>和</p>
+<p>[i_{g} &#x3D; \frac{i_{0} + i_{\mathrm{im}}\sin\phi_{s}}{\cos\psi}. \quad (8.29)]</p>
+<p>为了优化发生器的效率，发生器电流相量 (\tilde{\iota}<em>{g}) 和射频电压相量 (\tilde{V}</em>{\mathrm{rf}}) 应在同一方向，因为这样负载对发生器表现为纯电阻，储能将减至最小。</p>
+<center>图8.3：相量图，显示了镜像电流相量 \(\tilde{\gamma}_{\mathrm{im}}\) 和发生器电流相量 \(\tilde{\gamma}_{g}\) 的矢量和，得到总电流相量 \(\tilde{\gamma}_{t}\)。后者在同步相位 \(\phi_{s}\) 处滞后于射频电压相量 \(\tilde{V}_{\mathrm{rf}}\) 一个失谐角 \(\psi\)。注意，发生器电流相量不与射频电压相量同相。它滞后于 \(\tilde{V}_{\mathrm{rf}}\) 一个负载角 \(\theta_{L}\)。</center>
+
+<p>代入 (\theta_{L} &#x3D; 0)，我们得到同相条件</p>
+<p>[\tan \psi &#x3D; \frac{i_{\mathrm{im}}\cos\phi_{s}}{i_{0}} \quad (8.30)]</p>
+<p>和</p>
+<p>[i_{g} &#x3D; i_{0} + i_{\mathrm{im}}\sin \phi_{s}. \quad (8.31)]</p>
+<p>图8.4显示了腔体内的电压相量，其中射频电压相量 (\tilde{V}<em>{\mathrm{rf}}) 与发生器电流相量 (\tilde{\gamma}</em>{g}) 同相。这里，我们看到束流加载电压相量 (\tilde{V}<em>{b}) 超前镜像电流相量 (\tilde{\gamma}</em>{\mathrm{im}}) 一个失谐角 (\psi)。发生器电压相量 (\tilde{V}<em>{g}) 也超前发生器电流相量 (\tilde{\gamma}</em>{g}) 一个失谐角 (\psi)。这两个电压相量相加得到间隙电压相量 (\tilde{V}<em>{\mathrm{rf}})，其同步角为 (\phi</em>{s})。同相条件也可以从这个相量图中得到。由于垂直于 (\tilde{\gamma}_{g}) 的电压分量必须相加为</p>
+<center>图8.4：相量图，显示了射频腔中发生器电压相量 \(\tilde{V}_{g}\) 和束流加载电压相量 \(\tilde{V}_{b}\) 的矢量和，得到间隙电压相量 \(\tilde{V}_{\mathrm{rf}}\)。注意失谐角 \(\psi\) 使间隙电流相量 \(\tilde{\gamma}_{g}\) 与间隙电压相量同相。</center>
+
+<p>零，除以 (R_{s} \cos \psi) 后，我们得到</p>
+<p>[i_{g} \sin \psi &#x3D; i_{\mathrm{im}} \sin (\frac{\pi}{2} + \phi_{s} - \psi) \quad (8.32)]</p>
+<p>接下来，分解沿 (\tilde{\gamma}<em>{g}) 方向的电流贡献，我们得到式(8.31)。最后，消去 (i</em>{g})，得到式(8.30)的同相条件。</p>
+<p>注意到通过引入合适的发生器电流，稳态束流加载得到了补偿。这种带失谐的补偿方案比不带失谐的方案效率高得多，因为部分束流加载电压已被用于射频电压，并且发生器电流与射频电压同相。换句话说，所需的发生器功率将小于不失谐时的情况。实际上，通过对式(8.35)关于失谐角 (\psi) 求导，可以很容易地证明，当发生器电流相量和射频电压相量满足同相条件时，发生器功率最小。在束流强度非常高的情况下，束流加载电压 (V_{b}) 可能会远大于所需的间隙电压 (V_{\mathrm{rf}})。不用说，为了平衡如此大的电压，需要非常高功率的放大器来产生所需的发生器电流 (I_{g})。当发生这种情况时，可以安装低电平射频反馈来降低束流所见的有效腔体阻抗。低电平射频前馈也是可能的，以部分或</p>
+<p>完全抵消镜像电流。这些方法将在第8.4.4节中讨论。</p>
+<p>发生器功率 (P_{g}) 可以借助式(8.14)计算，即，</p>
+<p>[P_{g} &#x3D; \frac{(1 + \beta)^{2}V_{gr}^{2}}{8\beta R_{s}}, \quad (8.33)]</p>
+<p>其中 (V_{gr}) 是腔体谐振频率下的发生器电压，与射频频率下的发生器电压 (V_{g}) 的关系为 (V_{g} &#x3D; V_{gr}\cos \psi)。利用由 (\tilde{V}<em>{g})、(\tilde{V}</em>{b}) 和 (\tilde{V}_{\mathrm{rf}}) 组成的三角形的余弦定理，很容易得到</p>
+<p>[V_{g}^{2} &#x3D; V_{b}^{2} + V_{\mathrm{rf}}^{2} - 2V_{b}V_{\mathrm{rf}}\sin (\psi -\phi_{s}), \quad (8.34)]</p>
+<p>或</p>
+<p>[V_{gr}^{2} &#x3D; V_{br}^{2} + V_{\mathrm{rf}}^{2}(1 + \tan^{2}\psi) - 2V_{br}V_{\mathrm{rf}}(\tan \psi \cos \phi_{s} - \sin \phi_{s}), \quad (8.35)]</p>
+<p>其中 (V_{br} &#x3D; V_{b} &#x2F; \cos \psi) 是腔体谐振频率下的束流加载电压。由式(8.14)，腔体和束流所需的发生器功率可以表示为</p>
+<p>[P_{g} &#x3D; \frac{R_{s}}{8\beta}\left[(i_{0} + i_{\mathrm{im}}\sin \phi_{s})^{2} + (i_{0}\tan \psi -i_{\mathrm{im}}\cos \phi_{s})^{2}\right], \quad (8.36)]</p>
+<p>其中</p>
+<p>[V_{br} &#x3D; \frac{V_{b}}{\cos\psi} &#x3D; \frac{i_{\mathrm{im}}R_{s}}{1 + \beta} \quad (8.37)]</p>
+<p>是腔体谐振频率下的束流加载电压，并且使用了式(8.31)中 (i_{0}) 的定义。如果进行了正确的失谐，使得 (\tilde{I}<em>{g}) 和 (\tilde{V}</em>{\mathrm{rf}}) 同相，则右边的第二项消失，表达式大大简化。另一方面，我们注意到右边的两项类似于式(8.28)右边的分母和分子。因此，我们可以用负载角 (\theta_{L}) 重写发生器功率，</p>
+<p>[\begin{array}{r}P_{g} &#x3D; \frac{R_{s}}{8\beta}\frac{(i_{0} + i_{\mathrm{im}}\sin\phi_{s})^{2}}{\cos^{2}\theta_{L}}, \end{array} \quad (8.38)]</p>
+<p>当 (\theta_{L} &#x3D; 0) 时恢复到同相失谐的情况。因子 (\cos^{2}\theta_{L}) 很重要。它告诉我们，当负载角 (\theta_{L} \to \pi &#x2F;2) 时，需要无限大的发生器功率。这是因为只有 (\cos^{2}\theta_{L}) 部分的功率进入束流，而大部分 (\sin^{2}\theta_{L}) 用于改变腔体。</p>
+<p>我们再次可以通过选择最佳耦合常数 (\beta) 来优化发生器功率，结果为</p>
+<p>[\beta_{\mathrm{op}} &#x3D; 1 + \frac{i_{\mathrm{im}}R_{s}\sin\phi_{s}}{V_{\mathrm{rf}}} &#x3D; 1 + \frac{P_{b}}{P_{c}}, \quad (8.39)]</p>
+<p>其中</p>
+<p>[P_{c} &#x3D; \frac{V_{r}^{2}}{2R_{s}} \quad (8.40)]</p>
+<p>是腔体壁中耗散的功率，并且</p>
+<p>[P_{b} &#x3D; \frac{1}{2} i_{m}V_{\mathrm{rf}}\sin \phi_{s} &#x3D; I_{0}V_{\mathrm{rf}}\sin \phi_{s} \quad (8.41)]</p>
+<p>是用于加速束流的功率，因为 (V_{\mathrm{rf}}\sin \phi_{s}) 是加速电压。这里，我们使用了式(8.7)，即射频频率（或 (\omega_{\mathrm{rf}} &#x2F; h_{b})）下的傅里叶分量镜像电流在束团较短时近似为直流束流 (I_{0}) 的两倍。在最佳耦合常数下，发生器功率变为</p>
+<p>[P_{g\mathrm{op}} &#x3D; \frac{V_{\mathrm{rf}}^{2}}{2R_{g}} &#x3D; \frac{V_{\mathrm{rf}}^{2}}{2R_{s}}\beta_{\mathrm{op}} &#x3D; P_{b} + P_{c}, \quad (8.42)]</p>
+<p>这正好说明功率完全传输到腔体而没有反射。这里，我们可以将前面式(8.4)中定义的负载腔导纳 (Y_{\mathrm{load}}) 确定为</p>
+<p>[Y_{\mathrm{load}} &#x3D; \frac{i_{\mathrm{im}}\sin\phi_{s}}{V_{\mathrm{rf}}} +\frac{1}{R_{s}} \quad (8.43)]</p>
+<p>其中右边的第一项是束流的导纳，第二项是腔体的导纳。</p>
+<p>通常有一个伺服调谐器测量发生器电流相量和射频间隙电压相量之间的相位差，并通过机械柱塞或铁氧体偏置控制腔体调谐，使相位差为零。在伺服调谐器的平衡状态下，式(8.30)和(8.31)自动满足，腔体失谐对应于</p>
+<p>[\Delta \omega &#x3D; \omega_{r} - \omega_{\mathrm{rf}} &#x3D; \frac{\omega_{r}R_{L}i_{\mathrm{im}}\cos\phi_{s}}{2Q_{L}V_{\mathrm{rf}}} \quad (8.44)]</p>
+<h3 id="Robinson稳定性判据"><a href="#Robinson稳定性判据" class="headerlink" title="Robinson稳定性判据"></a>Robinson稳定性判据</h3><h4 id="低强度下的相位稳定性"><a href="#低强度下的相位稳定性" class="headerlink" title="低强度下的相位稳定性"></a>低强度下的相位稳定性</h4><p>我们现在可以讨论相位稳定性的条件。假设束团中心与同步粒子具有相同的能量，但处于一个小的</p>
+<center>图8.5：束团中心处于同步振荡中的点1，束流相量 \(\tilde{\psi}_{b}\) 在相量图中超前于 \(\mathcal{X}\) 轴一个小角度 \(\epsilon >0\) 而较早到达。如果同步相位 \(0< \phi_{s}< \frac{1}{2}\pi\)，束团看到的射频电压 \(V_{\mathrm{rf}}\sin (\phi_{s} - \epsilon)\) 较小。它被减速。在过渡能量以下，它在下一圈将不会来得那么早，因此相位稳定性得以建立。</center>
+
+<p>相位提前 (\phi_{\mathrm{rf}} &#x3D; \epsilon &gt;0)，如图8.5中同步振荡的点1和相量图 (\tilde{\psi}<em>{b}) 所示。相量 (\tilde{\psi}</em>{b}) 通过超前 (\mathcal{X}) 轴一个小角度 (\epsilon &gt;0) 而较早到达。那么它看到的加速电压将是 (V_{\mathrm{rf}}\sin (\phi_{s} - \epsilon)) 而不是 (V_{\mathrm{rf}}\sin \phi_{s})，或者如果 (0&lt; \phi_{s}&lt; \frac{1}{2}\pi)，则是一个额外的减速电压 (cV_{\mathrm{rf}}\cos \phi_{s})。从射频电压获得的能量少于同步粒子会使束团减速。如果束流在过渡能量以下，这意味着其回旋频率降低，因此在接下来的 (h) 个射频周期后，其提前于同步粒子的到达时间将减小，即 (\epsilon) 将变小。因此运动是稳定的。因此，在可以忽略束流加载的情况下建立稳定的相振荡，需要</p>
+<p>[\left{ \begin{array}{ll}0&lt; \phi_{s}&lt; \frac{\pi}{2} &amp; \mathrm{below<del>transition,}\ \frac{\pi}{2}&lt; \phi_{s}&lt; \pi &amp; \mathrm{above</del>transition.} \end{array} \right. \quad (8.45)]</p>
+<p>这正是我们从式(2.14)中同步振荡频移表达式得出的稳定相振荡条件。注意这只是相位稳定性的条件，没有任何阻尼。这里，推导依赖于射频电压相量 (\tilde{V}_{\mathrm{rf}}) 是未受扰动的，这在束流强度以及因此束流加载电压较小时近似成立。</p>
+<h4 id="高强度下的相位稳定性"><a href="#高强度下的相位稳定性" class="headerlink" title="高强度下的相位稳定性"></a>高强度下的相位稳定性</h4><p>当束流非常强时，我们不能再忽略束流加载电压的贡献。式(8.45)中的相位稳定性条件将被修改。现在，回到图8.5，当束流相量以角度 (\epsilon &gt;0) 超前于 (x) -轴到达，但能量与同步粒子相同时，镜像电流相量 (\hat{\imath}<em>{\mathrm{im}}) 在 (h) 个射频周期后也将超前相同的角度 (\epsilon)。因此，将有一个额外的束流加载电压相量 (c</em>{i\mathrm{m}}R_{t}\cos \psi_{t}c^{j(\psi_{t} + 3\pi &#x2F;2)})，它构成了射频电压相量 (\hat{V}<em>{\mathrm{rf}}) 的扰动。如果 (\psi &lt; 0)，这个相量将指向第三象限，并与 (cV_{\mathrm{rf}}\cos \phi_{s}) 一起减速粒子，从而在过渡能量以下不会引起不稳定性。另一方面，如果 (\psi &gt;0)，这个相量将指向第四象限并加速粒子。为了稳定，束流上的额外加速电压必须小于减速电压 (cV</em>{\mathrm{rf}}\cos \phi_{s}) 的量，即</p>
+<p>[\left[V_{\mathrm{rf}}\sin (\phi_{s} - c) - V_{\mathrm{rf}}\sin \phi_{s}\right] + c_{i\mathrm{m}}R_{t}\cos \psi_{t}\sin \psi \approx -cV_{\mathrm{rf}}\cos \phi_{s} + cV_{b}\cos \psi_{t}\sin \psi &lt; 0. \quad (8.46)]</p>
+<p>因此对于相位稳定性，我们需要</p>
+<p>[\frac{V_{b r}}{V_{\mathrm{rf}}} &lt; \frac{\cos\phi_{s}}{\sin\psi\cos\psi}\qquad \left{ \begin{array}{ll}\psi &gt;0 \mathrm{below<del>transition,}\ i &#x2F; &lt; 0 \mathrm{above</del>transition,} \end{array} \right. \quad (8.47)]</p>
+<p>这被称为Robinson高强度稳定性判据。上式中，(V_{b r} &#x3D; i_{\mathrm{im}}R_{t}) 是当束流与加载腔体阻抗同相时的同相束流加载电压。</p>
+<p>注意，这个Robinson高强度稳定性判据仅仅是类似于式(8.45)的相位稳定性判据。满足这个判据只是使振荡稳定，就像处于稳定的势阱中一样。违反这个判据将使粒子处于不稳定的势阱中，因此相振荡将不可能。为了包括由于束流与腔体阻抗相互作用而引起的阻尼或反阻尼，还必须满足另一个Robinson稳定性判据，即下面的式(8.57)。</p>
+<p>我们也可以用另一种方式来看待相位稳定性问题。为了使束流能够进行稳定的相振荡，当束流偏离其平衡位置时，它必须看到一个线性恢复力。这个力来自于当束流偏移时，束流看到的射频电压 (\hat{V}<em>{\mathrm{rf}}) 的变化。这解释了为什么我们在式(2.14)中有射频加速电压的梯度或 (V</em>{\mathrm{rf}}\cos \phi_{s})（同步振荡频移的表达式）。现在射频电压相量 (\tilde{V}<em>{\mathrm{rf}}) 是束流加载电压相量 (\tilde{V}</em>{b}) 和发生器电压相量 (\tilde{V}_{g}) 之和，即</p>
+<p>[\tilde{V}<em>{\mathrm{rf}} &#x3D; \tilde{V}</em>{b} + \tilde{V}_{g}. \quad (8.48)]</p>
+<p>注意，束流加载电压相量 (\tilde{V}<em>{b}) 随束流一起移动，因此不会对束流提供任何力梯度或恢复力。换句话说，(d\tilde{V}</em>{b} &#x2F; d\epsilon &#x3D; 0)。因此，只有发生器电压相量 (\tilde{V}<em>{g}) 能提供这样的恢复力。因此，我们应该计算 (d\tilde{V}</em>{g} &#x2F; d\epsilon)。如果这个梯度增强了束流偏离同步位置的位移，则系统不稳定；否则，它是稳定的。如图8.6所示，当发生器电压相量与束流同相时，很明显，对于束流到达时间的任何微小变化 (\epsilon)，束流在束流方向上不会看到发生器电压相量 (\tilde{V}<em>{g}) 的任何变化，即 (d\tilde{V}</em>{g} &#x2F; d\epsilon &#x3D; 0) 在束流方向上。换句话说，没有恢复力来改变束流的能量以将其推回平衡位置。因此，图8.6中的配置构成了Robinson相位稳定性极限。从图中可以明显看出，(\tilde{V}<em>{\mathrm{rf}}) 和 (\tilde{V}</em>{b}) 垂直于束流的投影必须相同，或者稳定性极限为</p>
+<p>[V_{\mathrm{rf}}\cos \phi_{s} &#x3D; i_{\mathrm{im}}R_{L}\cos \psi \sin \psi , \quad (8.49)]</p>
+<center>图8.6：当发生器电压相量 \(\tilde{V}_g\) 与束流相量同相时，它在束流方向上对束流不提供力梯度。由于对于束流到达时间的无穷小偏移，恢复力消失，束流处于相振荡不稳定的边缘。</center>
+
+<p>这与式(8.47)完全相同。</p>
+<p>现在让我们施加发生器电流 (\tilde{\iota}<em>{g}) 与射频电压 (\tilde{V}</em>{\mathrm{rf}}) 同相的条件。首先，我们有 (\tilde{\iota}<em>{0} &#x3D; \tilde{V}</em>{\mathrm{rf}} &#x2F; R_{L})，因此式(8.47)中的Robinson相位稳定性判据可以重写为</p>
+<p>[\frac{i_{\mathrm{im}}}{i_0} &lt; \frac{\cos\phi_s}{\sin\psi\cos\psi}\left{ \begin{array}{ll}\psi &gt;0 &amp; \mathrm{below<del>transition,}\ \psi &lt; 0 &amp; \mathrm{above</del>transition.} \end{array} \right. \quad (8.50)]</p>
+<p>其次，同相条件意味着式(8.30)，在消除失谐后，将上式简化为</p>
+<p>[\frac{i_{\mathrm{im}}}{i_0} &lt; \frac{1}{\sin\phi_s}, \quad (8.51)]</p>
+<p>如果我们进一步通过选择式(8.39)给出的耦合常数 (\beta_{\mathrm{op}}) 来优化发生器功率，很容易证明</p>
+<p>[\frac{i_{\mathrm{im}}\sin\phi_s}{i_0} &#x3D; \frac{\beta_{\mathrm{op}} - 1}{\beta_{\mathrm{op}} + 1} &lt; 1. \quad (8.52)]</p>
+<p>换句话说，当发生器电流相量 (\tilde{\iota}<em>{g}) 与射频电压相量 (\tilde{V}</em>{\mathrm{rf}}) 同相，并且发生器与射频腔之间的耦合被优化时，Robinson相位稳定性判据将始终得到满足。</p>
+<p>当发生器电流相量与射频电压相量同相时，图8.6立即给出失谐的相位稳定性极限判据为</p>
+<p>[\psi &#x3D; \frac{\pi}{2} -\phi_s. \quad (8.53)]</p>
+<p>代入同相条件式(8.30)即可重现稳定性判据式(8.51)。稳定性判据也可以重写为</p>
+<p>[\begin{array}{r}\frac{1}{2} V_{\mathrm{rf}}i_{\mathrm{im}}\sin \phi_s&lt; \frac{1}{2} V_{\mathrm{rf}}i_0, \end{array} \quad (8.54)]</p>
+<p>其中右边是 (P_{L})，耗散在腔体和发生器中的功率，而左边是 (P_{b})，提供给束流用于加速和&#x2F;或补偿辐射和阻抗能量损失的功率。因此，Robinson相位稳定性判据也可以表述为</p>
+<p>[P_{b}&lt; P_{L}, \quad (8.55)]</p>
+<p>或分配给耗散的功率大于传输给束流的功率。</p>
+<p>Robinson相位稳定性极限仅在没有其他稳定机制可用时才是正确的。在加速器环中，通常有一个回路监测束流加载并反馈到发生器电流，以维持所需的射频间隙电压和同步相位。然而，这种校正不是瞬时的，因为新的发生器电压在射频腔中建立需要时间。如果反馈增益很高，时间延迟可能远快于腔体的填充时间 (T_{f} &#x3D; 2Q_{L} &#x2F; \omega_{r})。如果这个时间延迟与同步振荡周期相比很短，即使判据 (P_{b}&lt; P_{L}) 被违反，相位稳定性也可以建立。前费米实验室主环在其峰值强度 (N_{p} &#x3D; 3.25\times 10^{13}) 质子&#x2F;脉冲（对于1000个束团，约 (3.25\times 10^{10}) 每个束团）时就是一个例子。该环的平均半径为 (1\mathrm{km})，因此回旋频率 (f_{0} &#x3D; 47.7\mathrm{kHz})。直流束流为 (I_{0} &#x3D; eN_{p}f_{0} &#x3D; 0.245\mathrm{A})，或者假设束团很短，镜像电流为 (i_{\mathrm{im}} &#x3D; 2I_{0} &#x3D; 0.490\mathrm{A})。有15个工作腔，每个提供 (213\mathrm{kV})，总射频电压为 (V_{\mathrm{rf}} &#x3D; 3.2\mathrm{MV})。加速速率为 (125\mathrm{GeV &#x2F; s}) 或 (2.62\mathrm{MeV &#x2F; turn})。因此，(\sin \phi_{s} &#x3D; 0.819) 且 (i_{\mathrm{im}}\sin \phi_{0} &#x3D; 0.407\mathrm{A})。每个腔的加载并联阻抗为 (0.60\mathrm{M}\Omega)，或总加载并联阻抗为 (R_{L} &#x3D; 9.00\mathrm{M}\Omega)。建立射频电压所需的电流为 (i_{0} &#x3D; V_{\mathrm{rf}} &#x2F; R_{L} &#x3D; 0.355\mathrm{A})，小于 (i_{\mathrm{im}}\sin \phi_{0})。因此，Robinson相位稳定性判据被违反了。有一个伺服调谐器保证了发生器电流相量与射频电压相量同相。还有射频电压幅度和相位回路来维持正确的射频电压和同步相位。射频腔的频率为 (\omega_{r} &#x2F; (2\pi) &#x3D; 53.1\mathrm{MHz})，加载品质因数 (Q_{L}\approx 5000)。腔体填充时间则为 (T_{f} &#x3D; 30.0\mu \mathrm{s}) 或约1.43个回旋圈数，远小于约100圈的同步振荡周期。失谐的修正通常是反馈过程中最慢的部分，但它肯定快于同步振荡频率。结果，即使在Robinson稳定性判据未被满足时，相位稳定性也得到了维持。</p>
+<h4 id="Robinson阻尼"><a href="#Robinson阻尼" class="headerlink" title="Robinson阻尼"></a>Robinson阻尼</h4><p>接下来，我们考虑束流与射频系统阻抗的相互作用。正如我们将看到的，正确的失谐会阻尼同步振荡，而不正确的失谐会导致振幅增大的振荡。在同步振荡周期的一半时间内，束团中心处于比同步粒子更高的能量。为方便起见，选择束团中心相位恰好与同步粒子同相的特殊时刻，使得相量 (\hat{i}_{b}) 正好沿 (x) -轴。</p>
+<center>图8.7：束团中心处于同步振荡中的点2，束流相量 \(\tilde{\tau}_{b}\) 在相量图中与 \(x\) -轴同相。在过渡能量以下，更高的能量意味着更高的有效射频频率 \(\omega_{\mathrm{rf}}\)。束团看到的有效失谐角更小，并且每圈损失的能量比处于同步位置时更多。因此同步振荡幅度被阻尼。</center>
+
+<p>这由图8.7中同步振荡的点2和束流相量与 (x) -轴同相来说明。然而，在过渡能量以下，更高的能量意味着更高的回旋频率 (\omega_{0})。由下式定义的失谐 (\psi)</p>
+<p>[\tan \psi &#x3D; 2Q_{i}\frac{\omega_{r} - \omega_{\mathrm{rf}}}{\omega_{r}} \quad (8.56)]</p>
+<p>从束团中心的角度来看，当我们考虑有效射频频率为 (\omega_{\mathrm{rf}} &#x3D; \hbar \omega_{0}) 时，看起来有效地变小了。每圈的能量损失 (i_{m} &#x2F; Z_{\mathrm{cav}} \cos \psi) 将大于束团中心同步时的能量损失。在同步振荡周期的另一半，束流粒子的能量小于同步粒子，并以较低的频率回旋，因此看到更大的有效失谐。我们再次选择束团中心相位恰好与同步粒子同相的时刻，即同步振荡中的点3。束团损失的能量将少于同步时的能量损失。结果是能量偏移振荡在每次振荡后逐渐减小。这种同步振荡幅度的减小称为Robinson阻尼。注意，如果在过渡能量以下失谐在另一个方向，(\psi &lt; 0)，则当束流粒子能量高于同步时，它损失的能量较少，而当能量较低时损失的能量较多。振荡幅度将逐圈</p>
+<p>增加，束流因此将发生Robinson不稳定性。如果束流在过渡能量以上，情况正好相反。因此我们得到Robinson稳定性判据：</p>
+<p>[\left{ \begin{array}{ll}\psi &gt;0 \mathrm{or} \omega_{r} &gt; \omega_{\mathrm{rf}} \mathrm{below transition,} \ \psi &lt; 0 \mathrm{or} \omega_{r} &lt; \omega_{\mathrm{rf}} \mathrm{above transition.} \end{array} \right. \quad (8.57)]</p>
+<p>注意，到目前为止我们还没有对射频系统施加任何优化条件。如果腔体调谐被调整得使发生器电流 (\tilde{\gamma}<em>{g}) 与射频电压 (\tilde{V}</em>{\mathrm{rf}}) 方向相同，使得束流-腔体阻抗表现为纯电阻，如图8.4所示，那么束流将始终是Robinson稳定的，因为根据式(8.30)，失谐将始终满足式(8.57)。</p>
+<h3 id="瞬态束流加载"><a href="#瞬态束流加载" class="headerlink" title="瞬态束流加载"></a>瞬态束流加载</h3><p>所谓瞬态，是指腔体的填充时间 (T_{f}) 不一定远长于连续束团通过腔体的时间间隔 (T_{b})。换句话说，第一个束团产生的束流加载电压在后续束团到达之前会有显著的衰减。</p>
+<p>首先，让我们了解瞬态束流加载是如何发生的。当电荷为 (q &gt; 0) 的束团通过腔体间隙时，镜像电流将在腔体间隙的上游端留下等于束团所带电荷的负电荷。由于负镜像电流将在束团之后从腔体间隙的下游端恢复，等量的正电荷将在那里积聚。因此，将在间隙处产生一个阻碍束流的电压，这就是瞬态束流加载电压，如图8.8所示。对于一个无限短的束团，这个瞬态电压是</p>
+<p>[V_{i0} &#x3D; \frac{q}{C} &#x3D; \frac{q\omega_{r}R_{s}}{Q_{0}}, \quad (8.58)]</p>
+<p>其中 (C) 是腔体间隙的等效电容。注意，如果使用加载并联阻抗 (R_{L}) 和加载品质因数 (Q_{L})，我们将得到相同的值。由于有限的品质因数 (Q_{0})，这个感应间隙电压立即开始衰减，因此称为瞬态束流加载。我们稍后将给出关于这个电压大小的具体例子。下一个问题是束团会看到多少这个束流加载电压。这个问题由P. Wilson首先推导的束流加载基本定理[1]来回答。</p>
+<center>图8.8：当一个正电荷束团通过腔体时，镜像电流在腔体间隙的上游端留下负电荷。当镜像电流在腔体下游侧恢复时，由于电荷守恒，在间隙的下游端产生正电荷，从而建立起电场 \(\vec{E}\) 并因此产生感应的束流加载电压。</center>
+
+<h4 id="束流加载基本定理"><a href="#束流加载基本定理" class="headerlink" title="束流加载基本定理"></a>束流加载基本定理</h4><p>当一个电荷为 (q) 的粒子通过一个无损耗（无限大 (R_{s}) 和无限大 (Q_{0})）的腔体时，它会感应出一个电压 (V_{i0})，该电压将以腔体的谐振频率开始振荡。假设粒子看到了 (V_{i0}) 的一部分 (f)，该部分阻碍其运动。在腔体振荡半个周期后，第二个电荷为 (q) 的粒子通过腔体。第一个粒子留下的感应电压现在沿着第二个粒子的运动方向，并加速该粒子。同时，第二个粒子将感应出另一个减速电压 (\tilde{V}_{i0})，它会看到其中的一部分 (f)。这个第二个减速电压将精确抵消腔体内的第一个感应电压，因为假设腔体是无损耗的。换句话说，在两个粒子通过后，腔体内不会留下任何场。第二个粒子获得的净能量为</p>
+<p>[\Delta E_{2} &#x3D; qV_{i0} - fqV_{i0}, \quad (8.59)]</p>
+<p>而第一个粒子获得的能量为</p>
+<p>[\Delta E_{1} &#x3D; -fqV_{i0}. \quad (8.60)]</p>
+<p>能量守恒要求两个粒子获得的总能量必须为零。这意味着 (f &#x3D; \frac{1}{2})。换句话说，粒子看到其瞬态束流加载电压的一半，这就是束流加载基本定理。</p>
+<center>图8.9：相量图显示了带电粒子第二次通过无损耗腔体后的瞬间。两次通过产生的感应束流加载电压相量分别标记为 \(V_{b0}^{(1)}\) 和 \(V_{b0}^{(2)}\)。</center>
+
+<p>以下是Wilson给出的更一般的证明。第一个粒子在无损耗腔体中感应出一个电压相量 (\tilde{V}<em>{b0}^{(1)})，它可能与粒子看到的电压 (\tilde{V}</em>{e}) 成角度 (\epsilon)。如前所述，我们假设 (V_{e} &#x3D; fV_{i0})，其中 (V_{e}) 和 (V_{i0}) 分别是 (\tilde{V}<em>{e}) 和 (\tilde{V}</em>{b0}^{(1)}) 的幅度。一段时间后，当腔体相位改变 (\theta) 时，同一个粒子通过弯曲磁铁等返回并再次通过腔体。它感应出第二个束流加载电压相量 (\tilde{V}<em>{b0}^{(2)})。此时，相量 (\tilde{V}</em>{b0}^{(1)}) 旋转到一个新的位置，如图8.9所示。粒子在两次通过中损失的净能量为</p>
+<p>[\Delta E &#x3D; 2fqV_{i0}\cos \epsilon +qV_{i0}\cos (\epsilon +\theta). \quad (8.61)]</p>
+<p>然而，腔体由于留下的束流加载场而获得能量。腔体内的能量与间隙电压的平方成正比。如果腔体最初没有任何场，那么最终储存在那里的能量变为</p>
+<p>[\Delta E_{c} &#x3D; \alpha \left(2V_{i0}\cos \frac{\theta}{2}\right)^{2} &#x3D; 2\alpha V_{i0}^{2}(1 + \cos \theta), \quad (8.62)]</p>
+<p>其中 (\alpha) 是比例常数。由能量守恒，我们得到</p>
+<p>[2fqV_{i0}\cos \epsilon +qV_{i0}(\cos \epsilon \cos \theta -\sin \epsilon \sin \theta) - 2\alpha V_{i0}^{2}(1 + \cos \theta) &#x3D; 0. \quad (8.63)]</p>
+<p>由于 (\theta) 是任意角度，我们得到</p>
+<p>[\begin{array}{c}{q V_{i0}\sin \epsilon &#x3D; 0,}\ {q V_{i0}\cos \epsilon &#x3D; 2\alpha V_{i0}^{2},}\ {2fq V_{i0}\cos \epsilon &#x3D; 2\alpha V_{i0}^{2}.} \end{array} \quad (8.64)]</p>
+<p>第一个方程给出 (\epsilon &#x3D; 0)，这意味着瞬态束流加载电压的相位必须使其最大限度地阻碍感应电荷的运动。显然，(\epsilon &#x3D; \pi) 是不允许的，因为这会导致粒子从虚无中获得能量的非物理情况。解另外两个方程，我们得到 (f &#x3D; \frac{1}{2})。</p>
+<h4 id="从瞬态到稳态"><a href="#从瞬态到稳态" class="headerlink" title="从瞬态到稳态"></a>从瞬态到稳态</h4><p>设束团间距为 (h_{b}) 个射频桶或时间为 (T_{b})。腔体时间常数或填充时间为 (T_{f} &#x3D; 2Q_{L} &#x2F; \omega_{r})，连续两次束团通过之间的 (e) - 指数电压衰减减量为 (\delta_{L} &#x3D; T_{b} &#x2F; T_{f})。在这段时间内，射频场的相位变化了 (\omega_{r}T_{b})，射频相位变化了 (\omega_{\mathrm{rf}}T_{b} &#x3D; 2\pi h_{b})。因此相量旋转的角度为 (\Psi &#x3D; \omega_{r}T_{b} - 2\pi h_{b})，也可以用失谐角表示为</p>
+<p>[\Psi &#x3D; (\omega_{r} - \omega_{\mathrm{rf}})T_{b} &#x3D; \delta_{L}\tan \psi , \quad (8.65)]</p>
+<p>其中使用了式(8.24)。第一个短束团（电荷为 (q)）通过后留下的瞬态束流加载电压为 (V_{i0} &#x3D; q &#x2F; C &#x3D; q\omega_{r}R_{L} &#x2F; Q_{L})。一个短束团看到的总束流加载电压 (V_{b}) 是通过将所有先前束团通过的束流加载电压相量相加得到的。结果是</p>
+<p>[V_{b} &#x3D; \frac{1}{2} V_{b0} + V_{b0}\left(e^{-\delta_{L}}e^{j\Psi} + e^{-2\delta_{L}}e^{j2\Psi} + \dots\right), \quad (8.66)]</p>
+<p>其中右边第一项中的 (\frac{1}{2}) 是Wilson束流加载基本定理的结果，该定理指出粒子只看到自己感应电压的一半。值得指出的是，这些电压是腔体的激励，因此以腔体谐振频率振荡（所有腔体的高阶模式都被忽略）。这个感应电压相量的无穷级数如图(8.10)所示。这个求和可以精确进行，得到结果</p>
+<p>[V_{b} &#x3D; V_{i0}\left[F_{1}(\delta_{L},\psi) + jF_{2}(\delta_{L},\psi)\right], \quad (8.67)]</p>
+<p>其中</p>
+<p>[F_{1} &#x3D; \frac{1 - e^{-2\delta_{L}}}{2D},\qquad F_{2} &#x3D; \frac{e^{-\delta_{L}}\sin(\delta_{L}\tan\psi)}{D}, \quad (8.68)]</p>
+<center>图8.10：来自等间距束团的瞬态束流加载电压。每个前面的电压相量由于失谐而具有相位超前 \(\psi\)，并衰减 \(e^{- \delta_{L}}\)。注意，刚通过的束团只看到其感应电压 \(\tilde{V}_{b0}\) 的一半。这些电压相量相加得到总束流加载电压相量 \(\tilde{V}_{b}\)。与发生器电压 \(\tilde{V}_{g}\) 一起，在同步角 \(\phi_{s}\) 处产生腔体间隙电压。</center>
+
+<p>[D &#x3D; 1 - 2e^{-\delta_{L}}\cos (\delta_{L}\tan \psi) + e^{-2\delta_{L}}. \quad (8.69)]</p>
+<p>用耦合常数 (\beta) 和失谐角 (\psi) 表示，我们有</p>
+<p>[\begin{array}{l}{\tan \psi &#x3D; 2Q_{L}\frac{\omega_{r} - \omega_{\mathrm{rf}}}{\omega_{r}},}\ {Q_{L} &#x3D; \frac{Q_{0}}{1 + \beta},}\ {\delta_{L} &#x3D; \delta_{0}(1 + \beta),} \end{array} \quad (8.70)]</p>
+<p>其中我们定义了 (\delta_{0} &#x3D; T_{b} &#x2F; T_{j0})，(T_{j0}) 是未加载腔体的填充时间。则单个束团感应的束流加载电压变为</p>
+<p>[V_{i0} &#x3D; 2I_{0}R_{s}\delta_{0}, \quad (8.71)]</p>
+<p>这里使用了短束团近似，因此束团在频率 (\omega_{\mathrm{rf}} &#x2F; I_{b}) 下的傅里叶分量电流等于其直流值的两倍，即 (i_{b} &#x3D; 2I_{0}) 且 (I_{0} &#x3D; q &#x2F; T_{b})。综合起来，我们得到</p>
+<p>[V_{i} &#x3D; 2I_{0}R_{s}\delta_{5}\left[F_{1}(\delta_{0},\beta ,\psi) + jF_{2}(\delta_{0},\beta ,\psi)\right], \quad (8.72)]</p>
+<p>其中</p>
+<p>[F_{1}(\delta_{0},\beta ,\psi) &#x3D; \frac{1 - e^{-\delta_{0}(1 + \beta)}}{2D}, \quad (8.73)]</p>
+<p>[F_{2}(\delta_{0},\beta ,\psi) &#x3D; \frac{e^{-\delta_{0}(1 + \beta)}\sin[\delta_{0}(1 + \beta)\tan\psi]}{D}, \quad (8.74)]</p>
+<p>[D &#x3D; 1 - 2e^{-\delta_{0}(1 + \beta)}\cos [\delta_{0}(1 + \beta)\tan \psi ] + e^{-2\delta_{0}(1 + \beta)}. \quad (8.75)]</p>
+<p>一些评论是有必要的。图8.10显示了束流加载的瞬态特性，如果旋转角度 (\Psi) 且幅度在每个时间段后减小因子 (e^{-\delta_{L}}) 的束流加载电压相量是一个短束团的激励。然而，我们考虑的实际上是来自连续束团的衰减束流加载电压相量，这些束团在较早的连续时间段 (nT_{b}) （(n &#x3D; 1,2,\dots)）通过腔体。因此，图8.10显示的实际上是束流加载电压的稳态情况，因为每个时间间隔 (T_{b}) 之后，我们将看到完全相同的螺旋束流加载相量图和相同的总束流加载电压相量 (\tilde{V}<em>{b})。因此，我们可以像图8.4一样，在图中加入发生器电压相量 (\tilde{V}</em>{g})。实际上，图8.4中的图只提供了一个近似的稳态图，因为那里的束流加载电压相量在相量旋转 (2\pi) 后确实会衰减一点，尽管假设了高 (Q_{L})。然而，这种衰减已经在图8.10中被考虑，从而绘制了一个精确的稳态。当束团到达时，束流加载电压相量为 (\tilde{V}<em>{b})，如图8.10所示。它逆时针旋转，其幅度由于腔体的有限品质因数而减小。就在下一个束团到达之前，束流加载电压相量变为 (\tilde{V}</em>{b} - \frac{1}{2}\tilde{V}<em>{i0})。注意，束流加载电压相量旋转超过 (2\pi)，因为图8.10中 (\omega</em>{r} &gt; \omega_{\mathrm{rf}}) 或失谐角 (\psi) 为正。当下一个束团到达时，它跳变 (\frac{1}{2}\tilde{V}<em>{i0}) 并回到 (\tilde{V}</em>{b})。因此，束流加载电压相量不是正弦的，也不以 (\omega_{\mathrm{rf}}) 或 (\omega_{\mathrm{rf}} &#x2F; h_{b}) 的速度旋转。只有当瞬态束流加载电压的跳变 (\frac{1}{2}\tilde{V}<em>{i0}) 很小时，它才接近正弦，这发生在加载品质因数 (Q</em>{L}) 很大时，或者腔体填充时间 (T_{f} &#x3D; 2Q_{L} &#x2F; \omega_{r}) 远大于连续束团通过的时间间隔 (T_{b}) 时。另一方面，图8.4中束团看到的束流加载电压相量 (\tilde{V}_{b}) 是正弦的，因为它是由束流的正弦分量感应的。实际上，在那里，我们只允许一个傅里叶分量。</p>
+<p>使用式(8.14)，发生器功率 (P_{g}) 现在可以计算：</p>
+<p>[P_{g} &#x3D; \frac{(1 + \beta)^{2}V_{\mathrm{rf}}^{2}}{8\beta R_{s}\cos^{2}\psi}\left{\left[\sin \phi_{s} - \frac{i_{b}R_{s}\delta_{0}}{V_{\mathrm{rf}}} F_{1}(\delta_{0},\beta ,\psi)\right]^{2} + \left[\cos \phi_{s} + \frac{i_{b}R_{s}\delta_{0}}{V_{\mathrm{rf}}} F_{2}(\delta_{0},\beta ,\psi)\right]^{2}\right} .]</p>
+<p>在发生器电流 (\tilde{\iota}<em>{g}) 与射频电压 (\tilde{V}</em>{\mathrm{rf}}) 同相的情况下，发生器功率可以最小化，从而不会有任何反射。同样，通过选择合适的耦合系数 (\beta) 也可以优化发生器功率。不幸的是，这些优化的功率不能写成简单的解析表达式。</p>
+<h4 id="极限情况-delta-0-rightarrow-0"><a href="#极限情况-delta-0-rightarrow-0" class="headerlink" title="极限情况 (\delta_{0} \rightarrow 0)"></a>极限情况 (\delta_{0} \rightarrow 0)</h4><p>当束团间距 (T_{b}) 远小于未加载腔体填充时间 (T_{j0}) 时，总束流加载电压 (V_{b}) 可以写成简化表达式。得到</p>
+<p>[F_{1}(\delta_{0},\beta ,\psi) &#x3D; \frac{1}{\delta_{0}(1 + \beta)(1 + \tan^{2}\psi)}, \quad (8.77)]</p>
+<p>[F_{2}(\delta_{0},\beta ,\psi) &#x3D; \frac{\tan\psi}{\delta_{0}(1 + \beta)(1 + \tan^{2}\psi)}, \quad (8.78)]</p>
+<p>因此</p>
+<p>[V_{b} &#x3D; \frac{i_{b}R_{s}}{1 + \beta}\frac{1}{1 - j\tan\psi}. \quad (8.79)]</p>
+<p>注意，这与式(8.25)中的表达式完全相同。实际上，这是意料之中的，因为我们处于 (T_{b} \ll T_{f}) 的情况，即高 (Q_{L}) 谐振腔的情况。</p>
+<p>在没有失谐的情况下，先前束团留下的束流加载电压只是相加得到</p>
+<p>[V_{b} &#x3D; \frac{V_{i0}}{2}\frac{1 + e^{-\delta_{L}}}{1 - e^{-\delta_{L}}}. \quad (8.80)]</p>
+<p>对于高 (Q_{L}) 腔体，这变为</p>
+<p>[V_{b} &#x3D; \frac{V_{i0}}{\delta_{L}} &#x3D; i_{b}R_{L}, \quad (8.81)]</p>
+<p>这是束流看到的最大束流加载电压。</p>
+<p>当 (\delta_{0} \rightarrow 0) 时，相位角 (\Psi &#x3D; \delta_{0}(1 + \beta) \tan \psi \rightarrow 0)，尽管失谐 (\psi) 可能是有限的。因此，瞬态束流加载电压 (\tilde{V}_{i0}) 不会衰减，并且</p>
+<p>对于连续的先前束团通过，它们也会排列起来，导致束团看到无限大的总束流加载电压 (V_{b})。然而，(\delta_{0} \rightarrow 0) 意味着在保持并联阻抗固定的同时，令 (Q_{0} \rightarrow \infty)。因此，瞬态束流加载电压 (V_{i0} &#x3D; q &#x2F; C &#x3D; q\omega_{r}R_{s} &#x2F; Q_{0} &#x3D; 2i_{b}R_{s}\delta_{0}) 也趋于零，这意味着求和必须谨慎进行。为了使连续的 (V_{i0}) 绕成一个圆，大约需要 (2\pi &#x2F;\Psi V_{i0}) 个。这个圆的半径将是 (V_{i0} &#x2F; \Psi)。当 (\delta_{0} \rightarrow 0) 时，这个半径变为</p>
+<p>[\lim_{\delta_0\to 0}\frac{V_{i0}}{\Psi} &#x3D; \frac{2i_bR_s}{\tan\psi}, \quad (8.82)]</p>
+<p>这是有限的。实际上，这大致与 (\delta_{0} \rightarrow 0) 时的总束流加载电压 (V_{b}) 相同。</p>
+<p>在逐束团注入期间，腔体中的瞬态束流加载电压将像图8.10中的螺旋所示那样逐渐累积。因此，如果衰减减量很小，总束流加载电压在螺旋达到其极限值之前将达到一个最大值，大约等于式(8.72)给出的电压的两倍。最大束流加载电压将是式(8.79)给出的值的两倍，就好像并联阻抗增加了一倍。</p>
+<h4 id="极限情况-T-b-gg-T-f"><a href="#极限情况-T-b-gg-T-f" class="headerlink" title="极限情况 (T_{b} \gg T_{f})"></a>极限情况 (T_{b} \gg T_{f})</h4><p>这是瞬态束流加载电压在第二个束团到来之前衰减到零的情况。很容易看出 (F_{1}(\delta_{0},\beta ,\psi)\to \frac{1}{2}) 且 (F_{2}(\delta_{0},\beta ,\psi)\to 0)。从式(8.76)可以清楚地看出，发生器功率随着 (\delta_{0}) 的平方迅速增加。这很容易理解，因为供给腔体的射频功率迅速耗散。在这种情况下，脉冲射频系统将是可取的。在这样的系统中，功率在束团到达前大约一个填充时间施加到腔体。在束团之间的大部分时间间隔内，腔体中没有存储能量，因此也没有功率耗散。</p>
+<h4 id="束团的瞬态束流加载"><a href="#束团的瞬态束流加载" class="headerlink" title="束团的瞬态束流加载"></a>束团的瞬态束流加载</h4><p>当一个线密度为 (\rho (\tau)) 的束团通过腔体间隙时，会激发电磁场。一个位于束团中心前方时间 (\tau) 处的粒子所看到的束流加载减速电压由下式给出</p>
+<p>[V(\tau) &#x3D; \int_{\tau}^{\infty}q\rho (\tau^{\prime})W_{0}^{\prime}(\tau^{\prime} - \tau)d\tau^{\prime}, \quad (8.83)]</p>
+<p>其中 (q) 是束团的总电荷，(\rho (\tau)) 在积分区间上归一化为1，(W_{0}^{\prime}(\tau)) 是一个点电荷在时间 (\tau) 之前留下的尾场势。如果我们将腔体近似为一个具有角谐振频率 (\omega_{r})、加载品质因数 (Q_{L}) 和加载并联阻抗 (R_{L}) 的并联 (RLC) 电路，则对于 (\tau &gt; 0)，尾场势可以写为</p>
+<p>[W_{0}^{\prime}(\tau) &#x3D; \frac{\omega_{r}R_{L}}{Q_{L}} e^{-\alpha \tau}\left[\cos \bar{\omega}\tau -\frac{\alpha}{\bar{\omega}}\sin \bar{\omega}\tau \right]. \quad (8.84)]</p>
+<p>对于 (\tau &lt; 0)，由于因果性，(W_{0}^{\prime}(\tau) &#x3D; 0)。对于 (\tau &#x3D; 0)，由于束流加载基本定理，(W_{0}^{\prime}(\tau) &#x3D; \omega_{r}R_{L} &#x2F; (2Q_{L}))。上式中，衰减率 (\alpha) 和偏移谐振角频率 (\bar{\omega}) 由下式给出</p>
+<p>[\alpha &#x3D; \frac{\omega_{r}}{2Q_{L}}\qquad \mathrm{and}\qquad \bar{\omega} &#x3D; \sqrt{\omega_{r}^{2} - \alpha^{2}}. \quad (8.85)]</p>
+<p>注意，这与我们在练习1.3的式(1.48)中研究的尾场势完全相同。为了方便推导，我们引入损耗角 (\theta)，其定义为†</p>
+<p>[\cos \theta &#x3D; \frac{\bar{\omega}}{\omega_{r}}\qquad \mathrm{and}\qquad \sin \theta &#x3D; \frac{\alpha}{\omega_{r}}. \quad (8.86)]</p>
+<p>通过引入这个定义，尾场势可以方便地重写为</p>
+<p>[W_{0}^{\prime}(\tau) &#x3D; \frac{\omega_{r}R_{L}}{Q_{L}\cos\theta}\mathcal{R}e^{i(e^{i\theta}\omega_{r}\tau +\theta)}. \quad (8.87)]</p>
+<p>第一个应用是对于分布为 (\rho (\tau) &#x3D; \delta (\tau)) 的点束团。代入式(8.83)得到 (V(\tau) &#x3D; qW_{0}^{\prime}(-\tau))，或</p>
+<p>[V(\tau) &#x3D; \left{ \begin{array}{ll}0 &amp; \tau &gt;0,\ \frac{q\omega_{r}R_{L}}{2Q_{L}} &amp; \tau &#x3D; 0,\ \frac{q\omega_{r}R_{L}}{Q_{L}\cos\theta}\mathcal{R}e^{i(e^{i\theta}\omega_{r}\tau +\theta)} &amp; \tau &lt; 0. \end{array} \right. \quad (8.88)]</p>
+<p>因此，束团头部（(\tau &#x3D; 0 +)）看不到束流加载电压。束团尾部（(\tau &#x3D; 0-)）看到瞬态束流加载电压 (V_{i0} &#x3D; q &#x2F; C)，如式(8.58)所示。束团中心看到 (V_{i0}) 的一半。</p>
+<h4 id="高斯分布"><a href="#高斯分布" class="headerlink" title="高斯分布"></a>高斯分布</h4><p>考虑一个均方根长度为 (\sigma_{\tau}) 的高斯分布束团。线密度为</p>
+<p>[\rho (\tau) &#x3D; \frac{1}{\sqrt{2\pi}\sigma_{\tau}} e^{-\tau^{2} &#x2F; (2\sigma_{\tau}^{2})}. \quad (8.89)]</p>
+<p>位于束团中心前方距离 (\tau) 处的束流粒子所经历的束流加载电压为（练习8.5）</p>
+<p>[V(\tau) &#x3D; \frac{q\omega_{\tau}R_{L}}{2Q_{L}\cos\theta}\mathcal{R}e e^{i\theta -\tau^{2} &#x2F; (2\sigma_{\tau}^{2})}w\left(\frac{\sigma_{\tau}\omega_{\tau}e^{i\theta}}{\sqrt{2}} +\frac{i\tau}{\sqrt{2}\sigma_{\tau}}\right), \quad (8.90)]</p>
+<p>其中 (q) 是束团总电荷，(w) 是复误差函数，定义为</p>
+<p>[w(z) &#x3D; e^{-z^{2}}\left[1 + \frac{2i}{\sqrt{\pi}}\int_{0}^{z}e^{t^{2}}dt\right]. \quad (8.91)]</p>
+<p>可以很容易地证明，当束团长度缩短到零时，束团的头部、中心和尾部看到的瞬态束流加载电压为（练习8.5）</p>
+<p>[V(\tau) &#x3D; \left{ \begin{array}{ll}0 &amp; \tau &#x3D; 0 + \mathrm{(head)}, \ \displaystyle \frac{q\omega_{\tau}R_{L}}{2Q_{L}} &amp; \tau &#x3D; 0 \mathrm{(center)}, \ \displaystyle \frac{q\omega_{\tau}R_{L}}{Q_{L}} &amp; \tau &#x3D; 0 - \mathrm{(tail)}, \end{array} \right. \quad (8.92)]</p>
+<p>这与点束团的结果完全相同。实际上，式(8.92)只是作为束流加载基本定理的另一个证明，即测试电荷看到其自身束流加载电压的一半。这个证明比上一小节中给出的证明更普遍，因为它涉及一个有损耗腔体或具有有限品质因数 (Q_{L}) 的腔体。</p>
+<p>高斯束团的束流加载电压绘制在图8.11中。它们都归一化为 (q\omega_{\tau}R_{L} &#x2F; Q_{L})，即束团收缩为一点时的束流加载电压。每条曲线由两个参数标识：((Q_{L},F))，其中 (F &#x3D; \sqrt{6}\omega_{\tau}\sigma_{\tau} &#x2F; \pi) 大致是束团占据的射频波长份额，因为我们通常将 (95%) 高斯束团半长度等同于 (\sqrt{6}\sigma_{\tau})。横坐标是测试粒子在束团中心前方距离，以 (\sigma_{\tau})（束团均方根长度）为单位。我们注意到，随着束团变短，束流加载电压变大。当它变得非常短时，曲线(1.0.01)，我们恢复了</p>
+<center>图8.11：高斯分布束团的束流加载电压，归一化为 \(q\omega_{r}R_{L} / Q_{L}\)，由位于束团中心前方距离 \(\tau /\sigma_{\tau}\) 处的粒子看到，其中 \(\sigma_{\tau}\) 是束团均方根长度，\(q\) 是束团总电荷。每条曲线标有 \((Q_{L},F)\)，其中 \(F = \sqrt{6}\omega_{r}\sigma_{\tau} / \pi\) 大致是束团占据的射频波长份额，\(Q_{L}\)，\(R_{L}\) 和 \(\omega_{r} / (2\pi)\) 分别是腔体的加载品质因数、加载并联阻抗和谐振频率。</center>
+
+<p>式(8.92)的结果，即束团中心的粒子看到束团束流加载电压的一半。当腔体的品质因数变大时，束流加载电压衰减不那么快，因此其降低的幅度更接近1。我们还注意到，束团中每个粒子看到的束流加载电压沿束团变化。这个结果很重要，因为很难补偿束团上每一点的束流加载电压。</p>
+<h4 id="抛物线分布"><a href="#抛物线分布" class="headerlink" title="抛物线分布"></a>抛物线分布</h4><p>考虑一个具有抛物线分布的束团，</p>
+<p>[\rho (\tau) &#x3D; \frac{3}{4\hat{\tau}}\left(1 - \frac{\tau^{2}}{\hat{\tau}^{2}}\right)\qquad |\tau |\leq \hat{\tau}, \quad (8.93)]</p>
+<p>其中 (\hat{\tau}) 是束团半长度。当总电荷为 (q) 的束团通过腔体时，位于束团头部后方距离 (T) 处的粒子看到的瞬态束流加载电压为（练习8.6），对于 (T \leq 2\hat{\tau})，</p>
+<p>[V(T) &#x3D; \frac{q\omega_{r}R_{L}}{Q_{L}}\frac{3p^{2}}{2\pi^{2}\cos\theta}\left{\frac{p}{\pi} [\omega_{r}(\hat{\tau} - T)\cos \theta +\sin 2\theta ]+\right.\ \left. + e^{-\alpha T}\left[\sin (\overline T - 2\theta) - \frac{p}{\pi}\cos (\overline T - \theta)\right]\right} , \quad (8.94)]</p>
+<p>对于 (T &gt; 2\hat{\tau})，</p>
+<p>[V(T) &#x3D; \frac{q\omega_{r}R_{L}}{Q_{L}}\frac{3p^{2}}{2\pi^{2}\cos\theta}\Bigg{e^{-\alpha (T - 2\hat{\tau})}\Big[\frac{p}{\pi}\sin \Big(\overline (T - 2\hat{\tau}) - 2\theta \Big) - \cos \Big(\overline (T - 2\hat{\tau}) - \theta \Big)\Big] + \Bigg.\ \left. + e^{-\alpha T}\Big[\sin (\overline T - 2\theta) - \frac{p}{\pi}\cos (\overline T - \theta)\Big]\Bigg} , \quad (8.95)]</p>
+<p>其中</p>
+<p>[p &#x3D; \frac{\pi}{\omega_{r}\hat{\tau}} \quad (8.96)]</p>
+<p>除了归一化因子 (q\omega_{r}R_{L} &#x2F; Q_{L}) 外，束流加载电压取决于两个参数：(\omega_{r}\hat{\tau}) 和加载品质因数 (Q_{L})。</p>
+<p>图8.12显示了抛物线分布束团看到的束流加载电压。归一化同样是 (q\omega_{r}R_{L} &#x2F; Q_{L})。横坐标是测试粒子在束团头部后方距离 (T &#x2F; (2\hat{\tau})) 的分数。每条电压曲线由两个参数 ((Q_{L},F)) 标识，其中 (F &#x3D; \omega_{r}\hat{\tau} &#x2F;\pi &#x3D; 1 &#x2F; p) 是束团总长度与射频波长之比。这里关于高斯束团束流加载电压的所有评论也适用。</p>
+<h4 id="余弦平方分布"><a href="#余弦平方分布" class="headerlink" title="余弦平方分布"></a>余弦平方分布</h4><p>考虑一个具有余弦平方线分布的束团，</p>
+<p>[\rho (\tau) &#x3D; \frac{1}{\hat{\tau}}\cos^{2}\frac{\pi\tau}{2\hat{\tau}}\qquad |\tau |\leq \hat{\tau}, \quad (8.97)]</p>
+<p>其中 (\hat{\tau}) 是束团半长度。当总电荷为 (q) 的束团通过腔体时，位于束团头部后方距离 (T) 处的粒子看到的瞬态束流加载电压为（练习8.6），对于 (T \leq 2 \hat{\tau})，</p>
+<p>[V(T) &#x3D; \frac{q\omega_{r}R_{L}}{Q_{L}\cos\theta}\frac{p^{2}}{4D}\left{\left(1 - \frac{p^{2}}{4}\right)\cos \frac{\pi T}{2\hat{\tau}}\cos \theta +\frac{p}{2}\sin \frac{\pi T}{2\hat{\tau}}\sin 2\theta +\right. \quad (8.99)]</p>
+<p>对于 (T &gt; 2 \hat{\tau})，</p>
+<p>[V(T) &#x3D; \frac{q\omega_{r}R_{L}}{Q_{L}\cos\theta}\frac{p^{2}}{4D}\left{e^{-\alpha (T - 2\hat{\tau})}\left[\frac{p^{2}}{4}\sin \left(\bar{\omega} (T - 2\hat{\tau}) - 2\theta\right) - \cos \left(\bar{\omega} (T - 2\hat{\tau}) - \theta\right)\right] + \right. \quad (8.99)]</p>
+<p>其中 (p) 和 (D) 由式(8.96)和(8.100)给出。</p>
+<p>除了花括号外的因子，束流加载电压取决于两个参数：(\omega_{r}\hat{\tau}) 和加载品质因数 (Q_{L})。</p>
+<p>图8.13显示了余弦平方分布束团看到的束流加载电压。归一化同样是 (q\omega_{r}R_{L} &#x2F; Q_{L})。测试粒子位于束团头部后方距离 (T &#x2F; (2\hat{\tau})) 的分数处。我们用 ((Q_{L},F)) 标记每条归一化束流加载电压曲线，其中 (F &#x3D; \omega_{r}\hat{\tau} &#x2F;\pi &#x3D; 1 &#x2F; p) 是束团总长度与射频波长之比。这里关于高斯束团束流加载电压的所有评论也适用。</p>
+<center>图8.13：余弦平方分布束团的束流加载电压，归一化为 \(q\omega_{r}R_{L} / Q_{L}\)，由位于束团头部后方距离 \(T / (2\hat{\tau})\) 处的粒子看到，其中 \(2\hat{\tau}\) 是束团总长度。每条曲线标有 \((Q_{L},F)\)，其中 \(F = \omega_{r}\hat{\tau} /\pi\) 是束团占据的射频波长份额，\(Q_{L}\)，\(R_{L}\) 和 \(\omega_{r} / (2\pi)\) 分别是腔体的加载品质因数、加载并联阻抗和谐振频率。</center>
+
+<h4 id="余弦分布"><a href="#余弦分布" class="headerlink" title="余弦分布"></a>余弦分布</h4><p>考虑一个具有余弦线分布的束团，</p>
+<p>[\rho (\tau) &#x3D; \frac{\pi}{4\hat{\tau}}\cos \frac{\pi\tau}{2\hat{\tau}}\qquad |\tau |\leq \hat{\tau}, \quad (8.101)]</p>
+<p>其中 (\hat{\tau}) 是束团半长度。当总电荷为 (q) 的束团通过腔体时，位于束团头部后方距离 (T) 处的粒子看到的瞬态束流加载电压为（练习8.6），对于 (T \leq 2 \hat{\tau})，</p>
+<p>[V(T) &#x3D; \frac{q\omega_{r}R_{L}}{Q_{L}\cos\theta}\frac{p^{2}}{8D}\left{\left(1 - \frac{p^{2}}{4}\right)\cos \frac{\pi T}{2\hat{\tau}}\cos \theta +\frac{p}{2}\sin \frac{\pi T}{2\hat{\tau}}\sin 2\theta +\right. \quad (8.102)]</p>
+<p>对于 (T &gt; 2 \hat{\tau})，</p>
+<p>[V(T) &#x3D; \frac{q\omega_{r}R_{L}}{Q_{L}\cos\theta}\frac{p^{2}}{8D}\left{e^{-\alpha (T - 2\hat{\tau})}\left[\frac{p^{2}}{4}\cos \left(\bar{\omega} (T - 2\hat{\tau}) + \theta\right) - \cos \left(\bar{\omega} (T - 2\hat{\tau}) - \theta\right)\right] + \right. \quad (8.103)]</p>
+<p>其中 (p) 和 (D) 由式(8.96)和(8.100)给出。除了花括号外的因子，束流加载电压取决于两个参数：(\omega_{r} \hat{\tau}) 和加载品质因数 (Q_{L})。</p>
+<p>图8.14显示了余弦平方分布束团看到的束流加载电压。归一化同样是 (q\omega_{r}R_{L} &#x2F; Q_{L})。测试粒子位于束团头部后方距离 (T\omega_{r} &#x2F; (2\pi)) 的分数处，或者时间归一化为一个射频波长。归一化束流加载电压取决于两个参数：(\omega_{r} \hat{\tau}) 和加载品质因数 (Q_{L})。我们用 ((Q_{L}, F)) 标记每条归一化束流加载电压曲线，其中 (F &#x3D; \omega_{r} \hat{\tau} &#x2F; \pi &#x3D; 1 &#x2F; p) 是束团总长度与射频波长之比。这里关于高斯束团束流加载电压的所有评论也适用。两条曲线都是针对高品质因数 (Q_{L} &#x3D; 5000) 的。对于 (F &#x3D; 0.3) 的例子，归一化瞬态束流加载电压在束团长度内最大值为0.681，之后以腔体频率 (\omega_{r} &#x2F; (2\pi)) 长时间振铃，幅度为0.918，衰减非常缓慢。这个幅度大致等于 (I_{1} &#x2F; (2I_{0}))，其中 (I_{1}) 是束团电流的射频分量，(I_{0}) 是平均束团电流。因为 (e) - 指数衰减时间是 (Q_{L} &#x2F; \pi) 个射频桶，束团正在看到其前辈留下的这些振铃幅度。对于所有桶都被占据的环，束团看到的束流加载电压为</p>
+<p>[V_{b} &#x3D; \frac{q\omega_{r}R_{L}}{Q_{L}}\left[A + B\left(1 + e^{-\delta_{L}} + e^{-2\delta_{L}} + \dots\right)\right], \quad (8.104)]</p>
+<p>其中 (\delta_{L}) 是衰减减量。这里，(A) 表示束团通过腔体间隙时瞬时激发的束流加载电压部分，而 (B) 表示</p>
+<center>图8.14：余弦分布束团的束流加载电压，归一化为 \(q\omega_{r}R_{L} / Q_{L}\)，由位于束团头部后方距离 \(T\)（归一化为射频波长）处的粒子看到。每条曲线标有 \((Q_{L},F)\)，其中 \(F = \omega_{r}\tau /\pi\) 是束团占据的射频波长份额，\(Q_{L}\)，\(R_{L}\) 和 \(\omega_{r} / (2\pi)\) 分别是腔体的加载品质因数、加载并联阻抗和谐振频率。</center>
+
+<p>先前通过留下的部分。与点束团 ((F &#x3D; 1)) 的式(8.66)比较，我们有 (A &#x3D; \frac{1}{2}) 和 (B &#x3D; 1)。对于有限长度的束团，例如余弦分布中的 (F &#x3D; 0.3)，我们有 (A &#x3D; 0.681) 和 (B &#x3D; I_{1} &#x2F; (2I_{0}) &#x3D; 0.918)。对于高 (Q_{L})，第二项占主导地位。我们可以得出结论，与点束团相比，有限长度的分布束团的束流加载电压仅降低少量，即降低分数 (I_{1} &#x2F; (2I_{0}))。</p>
+<p>(F &#x3D; 1) 的情况非常特殊，由虚线曲线表示。这里，束团与射频波长一样长。实际上，这种情况对应于束团均匀填充射频桶。虽然第一个最大值是 (A \sim 0.2)，但实际振铃幅度大约是 (B \approx 0.33)。很容易证明 (I_{1} &#x2F; (2I_{0}) &#x3D; 1 &#x2F; 3)。换句话说，即使束团填满了桶，束流加载电压也仅降低了3倍。</p>
+<p>我们在图8.15中绘制了 (I_{1} &#x2F; (2I_{0})) 作为 (F)（以射频波长单位表示的束团总长度）的函数，针对各种束团分布。我们看到，当束团较短时，(I_{1} &#x2F; (2I_{0}))</p>
+<p>随 (F) 下降非常缓慢，并且仅当束团较长时才弱依赖于分布。当束团总长度等于桶长度或 (F &#x3D; 1) 时，对于余弦平方、高斯、余弦和抛物线分布，(I_{1} &#x2F; (2I_{0})) 分别等于 (1 &#x2F; 2)，(\exp (-\pi^{2} &#x2F; 16))，(1 &#x2F; 3) 和 (3 &#x2F; \pi^{2})。</p>
+<center>图8.15：束团射频分量与两倍直流分量之比 \(I_{1} / (2I_{0})\)，作为 \(F\)（以桶长度单位表示的总束团长度）的函数，从上到下依次为：余弦平方、高斯、余弦和抛物线分布。</center>
+
+<h4 id="瞬态补偿"><a href="#瞬态补偿" class="headerlink" title="瞬态补偿"></a>瞬态补偿</h4><p>我们将简要概述一些应对瞬态束流加载的方法。有兴趣的读者可参考相关文献进一步阅读。</p>
+<p>对于处于存储模式且所有射频桶都被等电荷束团填充的环，每个束团看到的束流加载电压完全相同，除了其少量同步运动的影响。我们说束流加载处于稳态，如果束流强度不是太高，可以通过失谐腔体来进行补偿。</p>
+<p>然而，在许多情况下，当束流强度突然变化时，束流加载处于瞬态。一个例子是逐束团注入时。射频腔内的束流加载电压将随时间线性增加，束团看到的束流加载电压取决于时间以及其在环中的位置。显然，强束流的慢提取也会导致束流加载电压的突然变化。另一个例子是在加速器环中留出一个间隙，以允许注入和引出冲击磁铁触发。这样的间隙也有利于清除束流中捕获的相反电荷粒子，以消除集体双流不稳定性。在存在间隙的情况下，腔体中经历的总束流加载电压在不同的束团通过期间会不同。例如，紧接在间隙之后的束团将看到最小的束流加载电压，而紧接在间隙之前的束团将看到最大的束流加载电压。结果，束流串或批次中的最后一个束团总是看到比第一个束团更低的射频电压。最好的情况是束团之间出现同步相位差，导致纵向束团面积增加。最坏的情况是，批次的最后几个束团将没有足够的电压来维持稳定。严格来说，对于间隙问题，瞬态这个词被错误地使用了，因为这种效应即使在存储束流处于稳态时也会发生。批次中不同束团经历的不均匀束流加载电压是束流加载电压中存在许多频率分量的结果，除了射频频率及其倍频之外。正因为如此，我们应该将瞬态束流加载定义为在基频射频、其倍频及其同步边带以外的频率上的效应。</p>
+<p>减少束流加载（无论是稳态还是瞬态）的一种方法是降低束流看到的腔体加载并联阻抗 (R_{L}) [9]。一个显而易见的方法是并联一个电阻。虽然这降低了束流和功率放大器产生的电压，但是，放大器的功率需求增加了。如果功率放大器已经在满负荷运行，这不是一个适用的解决方案。</p>
+<p>另一种减少束流产生的束流加载电压的可能性是使用另一个功率放大器来提供与束流镜像电流相等且相反的附加发生器电流 (I_{g})。这两个电流在腔体间隙处抵消，使腔体对束流看起来像短路。这种方法非常快，因为不需要对抗腔体的填充时间，因为没有净电流流过腔体间隙，因此腔体内不会产生额外的场。这是一种强大但昂贵的解决方案，因为需要额外的放大器。它被称为高电平前馈补偿，仅适用于固定射频频率。它被添加到CERN交叉存储环（ISR）</p>
+<p>射频系统中，与其说是为了提高稳定性，不如说是由于射频功率放大器的功率限制。可以证明[3]，如果在注入前将腔体半预调谐，使得注入前后的峰值功率相同，则所需的额外功率可以减少一半。换句话说，即使束流被完全调制，功率也是未调制的。如果射频发生器和腔体之间实现最佳匹配，所需功率可以再降低一半。这可以通过在射频功率和腔体之间插入一个环形器来实现，这样用于束流加载补偿的附加电流也意味着实功率。</p>
+<p>为了避免高功耗，也有低电平补偿的方法。一种技术称为前馈[10]。在加速器环中腔体前的一个位置测量束团电流，并将信号加到功率放大器的低电平射频驱动中，以便在束团通过腔体间隙时产生一个与束流相等且相反的发生器电流 (I_{g})，如图8.16所示。经验和分析表明，不稳定性阈值显著提高。</p>
+<center>图8.16：直接射频前馈框图，其中 \(B(s)\) 是束流响应，\(S\) 是放大器的跨导。</center>
+
+<p>该方案已成功应用于CERN质子同步加速器（PS）和CERN质子同步加速器助推器（PSB）。不稳定性阈值可能可以提高一个数量级。这是因为腔体电压完全与束流信号解耦，从而消除了Robinson不稳定性。然而，当射频频率变化时，这很难应用。通过束流响应的反馈路径相当弱，因此产生不稳定系统响应的风险很低。然而，对于弱反馈，系统中的任何误差都不会被补偿，因此正确调整系统的延迟和相位超前以进行束流抵消非常重要。实际上，在需要大量阻抗降低时，维持一个无误差的系统非常困难。</p>
+<p>降低腔体阻抗的第二种技术是放大器反馈。测量腔体中的电压，放大后加到低电平射频驱动中，如图8.17所示。为了计算束流看到的阻抗，发生器的输入被</p>
+<center>图8.17：直接射频反馈框图，其中放大器增益为 \(G\)，跨导为 \(S\)。束流看到的有效阻抗从 \(R_{L}\) 降低到 \(R_{L} / (1 + SGR_{L})\)。</center>
+
+<p>关闭。腔体电压被放大到 (GV_{\mathrm{rf}})，其中 (G) 是增益。然后通过跨导 (S) 将其转换为电流 (- SGV_{\mathrm{rf}})。该电流接下来通过发生器馈送，并产生附加间隙电压 (- SGV_{\mathrm{rf}}Z)，得到总间隙电压 (V_{\mathrm{rf}} &#x3D; V_{b} - SGV_{\mathrm{rf}}Z)，其中 (V_{b} &#x3D; R_{L}i_{b}) 是在没有反馈回路的情况下束流 (i_{b}) 产生的束流加载电压。束流经历的有效阻抗变为</p>
+<p>[R_{\mathrm{eff}} &#x3D; \frac{R_{L}}{1 + SGR_{L}}, \quad (8.105)]</p>
+<p>其中 (H &#x3D; SGR_{L}) 称为开环增益。因此，通过增加增益，并联阻抗可以大大降低。该系统的反馈主路径不再包括束流响应，并且要强得多。低电平反馈非常快，延迟仅取决于反馈回路电缆的长度。这是已知的最强大的方法，甚至可以应用于变化的射频频率。它已应用于CERN ISR（9.5 MHz，(H &#x3D; 60)）、CERN反质子收集环（1.85 MHz，(H &#x3D; 120)）和CERN PSB（6至16 MHz，(H &#x3D; 5) 至12）。</p>
+<ol>
+<li>射频频率控制回路，它比较束团相位与射频相位比较器并输出误差信号。它是直流耦合的，带宽非常低。射频频率。(2) 束流径向位置控制回路，它通过微调同步相位角来控制束流的径向位置。它是直流耦合的，带宽约为 (10\mathrm{kHz})。(3) 腔体间隙电压相位与发生器电压相位的校正回路。它是交流耦合的，带宽为 (5\mathrm{MHz})，能够快速调整腔体激励相位以补偿瞬态束流加载效应。(4) 腔体电压幅度控制回路，它调整发生器电流，使得腔体间隙处产生的射频电压幅度等于其预定值。它具有非常高的直流增益 ((\sim 60\mathrm{db})) 和转折频率 (5\mathrm{Hz})。(5) 失谐回路，它监测发生器电流和腔体间隙电压之间的负载角，并通过铁氧体偏置调整腔体调谐，使得呈现给发生器的负载阻抗表现为纯电阻。它具有高直流增益 ((\sim 60\mathrm{db}))、低带宽和转折频率 (1\mathrm{Hz})。其中，第二个和第三个回路最快，而失谐回路最慢。这些回路不仅受其增益限制，因为它们在束流强度低时才是独立的。随着束流强度的增加，它们变得耦合并逐渐失去功能。</li>
+</ol>
+<p>对于大型射频系统，长延迟可能是不可避免的，传统的射频反馈带宽可能太受限，可能远小于腔体带宽本身。然而，在瞬态束流加载频谱中，只有那些需要消除的回旋谐波线，而在谐波之间没有信号。通过具有梳状滤波器形状的返回路径传递函数，其在每个回旋谐波处具有最大值，可以满足这一条件。系统的总延迟必须精确延长到一个机器回旋周期，以确保在谐波处相位正确。消除基频射频以外的回旋谐波处的束流信号可以治愈瞬态束流加载。</p>
+<h4 id="耦合束团不稳定性"><a href="#耦合束团不稳定性" class="headerlink" title="耦合束团不稳定性"></a>耦合束团不稳定性</h4><p>正如将在第9章中讨论的，位于同步边带的窄共振可能激发纵向耦合束团不稳定性。虽然这些窄共振主要来自腔体的高阶模式，但有些也可能来自由于存储束流的不对称填充而激发的束流加载电压的回旋谐波。这些谐波线由于束团的能散和由于射频相位偏移而发展的同步振荡而具有有限的宽度。因此，束流加载电压的这些谐波分量可以驱动耦合束团不稳定性，通过梳状滤波器形状反馈来消除它们是非常必要的。</p>
+<p>即使对于具有不对称间隙的束团环，腔体的失谐也可能驱动耦合束团不稳定性。这发生在回旋频率 (f_{0}) 较低的大型机器中。失谐通常可以将腔体固有谐振频率的峰值移动超过一个或多个回旋谐波。这里，我们以前超导超级对撞机（SSC）的设计为例[5]。平均束流为 (I_{0} &#x3D; 0.073) A，选择了374.7 MHz的射频系统。有8个腔体，每个腔体的并联阻抗 (R_{L} &#x3D; 2.01) MΩ，(R_{L} &#x2F; Q_{L} &#x3D; 125) Ω，或 (Q_{L} &#x3D; 1.608\times 10^{4})。在存储状态下，每个腔体的射频间隙电压为 (V_{\mathrm{rf}} &#x3D; 0.5) MV。因此，所需的失谐由下式给出</p>
+<p>[2Q_{L}\frac{\omega_{r} - \omega_{\mathrm{rf}}}{\omega_{r}} &#x3D; \tan \psi &#x3D; \frac{i_{m}\cos\phi_{s}}{i_{0}}. \quad (8.106)]</p>
+<p>在 (\phi_{s}\approx \pi) 且使用短束团近似时，我们得到</p>
+<p>[\frac{\omega_{r} - \omega_{\mathrm{rf}}}{\omega_{r}} &#x3D; -\frac{i_{\mathrm{im}}R_{L}}{2V_{\mathrm{rf}}Q_{L}} &#x3D; -0.183\times 10^{-4}, \quad (8.107)]</p>
+<p>或失谐 (\Delta f_{r} &#x3D; - 6.84) kHz。加载腔体的半带宽为 (\Delta f &#x3D;) (f_{r} &#x2F; (2Q_{L}) &#x3D; 11.68) kHz。然而，对撞机环的回旋频率仅为 (f_{0} &#x3D; 3.614) kHz。换句话说，腔体的谐振阻抗将出现在略大于 (f_{\mathrm{rf}} - 2f_{0}) 的频率处，并且其展宽覆盖约10个回旋谐波。这种阻抗可以驱动相当强度的纵向耦合束团不稳定性。如果我们用费米实验室主环（总共有 (3.25\times 10^{13}) 个质子）来计算，我们发现加速期间 (|\Delta f_{r} &#x2F; f_{f}| &#x3D; 1.33\times 10^{- 4}) 或 (|\Delta f_{r}| &#x3D; 7.1) kHz，而腔体的半带宽约为 (\sim 4.4) kHz。这些数字远小于回旋频率 (f_{0} &#x3D; 47.7) kHz。另一方面，CERN超级质子同步加速器（SPS）中的200 MHz行波加速结构具有相当大的带宽，因此对于小 (n)，在 (f_{\mathrm{rf}} \pm n f_{0}) 处的阻抗是可观的。由此阻抗引起的耦合束团不稳定性已有报道[6]。这也发生在SLAC B-工厂的低能环（LER）中。将速调管匹配到射频腔需要将腔体失谐到接近 (f_{\mathrm{rf}} - 1.5 f_{0}) 的频率，从而驱动 (-1) 和 (-2) 模式的纵向耦合束团不稳定性[7]。纵向耦合束团不稳定性通常通过被动阻尼腔体中的驱动共振或使用模式阻尼器来缓解。这里，问题完全不同。首先，我们不能被动阻尼这个基模，因为我们需要它来向束流提供能量。其次，通常驱动耦合束团不稳定的高阶共振远弱于基模。然而，这里驱动耦合束团不稳定的正是基模。换句话说，需要一个非常强大的阻尼器来消除不稳定性。由于这种复杂性，SSC概念设计报告中提出的解决方案是不失谐腔体，但代价是增加所需的射频功率。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><h4 id="费米实验室主环"><a href="#费米实验室主环" class="headerlink" title="费米实验室主环"></a>费米实验室主环</h4><p>前费米实验室主环曾经在过渡能量以上以 (M &#x3D; 567) 个连续束团运行，总强度为 (5 \times 10^{13}) 个质子。该环有 (h &#x3D; 1113) 个射频桶，射频频率为 (\omega_{r} &#x2F; (2\pi) &#x3D; 53.09 \mathrm{MHz})。有15个射频腔，每个腔的加载并联阻抗为 (R_{L} &#x3D; 500 \mathrm{k} \Omega)，加载品质因数为 (Q_{L} &#x3D; 5000)。</p>
+<p>在稳态下，束流串中第 (k) 个束团看到的束流加载电压为（练习8.7）</p>
+<p>[V_{b k} &#x3D; V_{0}e^{-(k - 1)\delta_{L}} + V_{i 0}\left(\frac{1}{2} +e^{-\delta_{L}} + \dots +e^{-(k - 1)\delta_{L}}\right)~, \quad (8.108)]</p>
+<p>其中 (\delta_{L} &#x3D; \pi &#x2F; Q_{L}) 是衰减减量，</p>
+<p>[V_{i 0} &#x3D; \frac{q B \omega_{r} R_{L}}{Q_{L}} \quad (8.109)]</p>
+<p>是电荷为 (q) 的束团留下的瞬态束流加载电压，(B) 是式(8.104)中定义的参数，用于考虑束团有限长度的影响，并且</p>
+<p>等于射频频率处的电流分量除以两倍直流电流，并且</p>
+<p>[V_{0} &#x3D; V_{i0}\frac{e^{-(h - M + 1)\delta_{L}}}{(1 - e^{-\delta_{L}})(1 - e^{-h\delta_{L}})} \quad (8.110)]</p>
+<p>是第一个束团由于先前束流通过激励而看到的束流加载电压。最后一个束团和第一个束团经历的束流加载电压差因此为</p>
+<p>[\Delta V_{b} &#x3D; V_{i0}\frac{e^{-\delta_{L}}[1 - e^{-(M - 1)\delta_{L}}][1 - e^{-(h - M)\delta_{L}}]}{(1 - e^{-\delta_{L}})(1 - e^{-h\delta_{L}})}. \quad (8.111)]</p>
+<p>对于 (B &#x3D; 0.872) 的费米实验室主环，我们得到一个腔体的 (V_{i0} &#x3D; 0.411 \mathrm{kV}) 和 (\Delta V_{b} &#x3D; 113 \mathrm{kV})。在存储模式下，每个腔体的间隙电压为 (V_{\mathrm{rf}} &#x3D; 66 \mathrm{kV})。因此，如果发生器电流 (I_{g}) 与间隙电压同相，并且第一个束团通过腔体时的同步角恰好是 (\phi_{s} &#x3D; \pi)，那么最后一个束团将看到同步角 (\phi_{s} &#x3D; \tan^{- 1}(\delta V_{b} &#x2F; V_{\mathrm{rf}}) \approx \frac{1}{3}\pi)。如此大的偏移是不可接受的，因为这将导致最后一个束团中心以 (\frac{1}{6}\pi) 的幅度进行同步振荡，并最终导致纵向发射度的显著增长。射频系统中有一个校正回路，能够将高达 (\sqrt{3}) 倍现有发生器电流的正交电流加到功率放大器的输入端[11]。通过这样的添加，同步角恢复到 (\pi)。响应时间约为 (300 \mathrm{ns})，约16个束团周期，受限于电缆回路的长度。在这段时间内，最多只能发展出 (2.8^{\circ}) 的最大同步相移，这是可以容忍的。</p>
+<p>式(8.111)表明，当环中连续束团数量较少时 ((M \rightarrow 1))，(\Delta V_{b}) 很小。这是意料之中的，因为它只是给出了这几个束团的束流加载电压之和，而 (V_{0} \rightarrow 0)。另一方面，如果环几乎被填满 ((M \rightarrow h))，(\Delta V_{b}) 也很小，因为这接近于环的对称填充。很容易证明，当环半填充时，或者当间隙长度等于束流串长度时，(\Delta V_{b}) 最大。</p>
+<h4 id="费米实验室助推器"><a href="#费米实验室助推器" class="headerlink" title="费米实验室助推器"></a>费米实验室助推器</h4><p>从费米实验室直线加速器到费米实验室助推器的注入是连续的，持续最多10个助推器圈数。之后，束流通过绝热捕获成束，这发生</p>
+<p>在大约 (150\mu \mathrm{s}) 内，同时射频电压增加到 (100\mathrm{kV})。在注入期间，束流是滑行的，不包含射频频率的任何分量。然而，在绝热捕获期间，射频电压和电流的射频分量都增加。如果前者增加不够快，Robinson稳定性判据将被违反。通常，最危险的时刻是桶面积等于束团面积时。之后，射频分量束流信号与射频电压之比减小。然而，助推器中绝热捕获期间的射频电压是通过反相来维持的。这是通过将18个腔体分成两组来实现的。所需的电压幅度和同步角通过改变两组之间的相对相位来获得。因此，每个腔体中的间隙电压并不小，并且在每个腔体中单独满足Robinson稳定性。反相在绝热捕获期间是必不可少的：首先，在腔体内维持过低的间隙电压会导致二次电子倍增。其次，通过改变发生器电流来提高捕获期间射频电压的响应很慢，因为需要克服腔体的品质因数，而通过改变相对相位来控制射频电压则很快。由于束流加载电压除了一个失谐角外始终指向同一方向，为了实现反相，两组腔体中的发生器电流必须不同。这意味着不可能使发生器电流与间隙电压同相。因此需要额外的射频功率[12]。</p>
+<p>在当前助推器周期中，传输到束流的最大功率为 (P_{b} &#x3D;) (265\mathrm{kW})，此时 (V_{\mathrm{rf}} &#x3D; 864\mathrm{kV})，而铁氧体中损失的最大功率为 (P_{L} &#x3D; 830\mathrm{kW})。由于始终 (P_{b}&lt; P_{L})，相位稳定性得到保证。为了确保束流按照设计的斜坡曲线加速，有一个缓慢的低电平反馈回路，通过调整同步相位角来保持束流在真空室孔径中的正确径向位置。还有一个快速的低电平反馈回路用于阻尼相振荡。在引出时，由于所有束团在同一个回旋圈内从同一位置被踢出，束团将不会看到任何瞬态束流加载电压。</p>
+<p>实际上，在射频谐波 (h &#x3D; 84) 的环中通常只有 (M &#x3D; 80) 个束团，为引出冲击磁铁预留了4个束团空间。在每束团 (6\times 10^{10}) 个质子的强度下，一个束团通过时在18个腔体中的每一个中激发的瞬态束流加载电压为 (V_{i0} &#x3D; q\omega_{r}R_{L} &#x2F; Q_{L} &#x3D; 37.9\mathrm{V})，其中每个腔体 (R_{L} &#x2F; Q_{L}\sim 13\Omega)。根据式(8.111)，最后一个束团和第一个束团经历的束流加载电压差为 (\Delta V_{b} &#x3D; 3.76V_{i0} &#x3D; 142\mathrm{V})。束流间隙在斜坡接近结束时产生，此时射频电压在引出时具有最低值 (305\mathrm{kV})，或</p>
+<p>每个腔体16.9 kV。这相当于 (0.48^{\circ}) 的射频相位误差。通常，引出时的束团半宽度为 (2.8 \mathrm{ns}) 或 (54^{\circ})。因此相位误差相对较小，束团面积因稀释而增加也很小。因此，无需采取任何措施来补偿这种间隙引起的束流加载。</p>
+<h4 id="费米实验室主注入器"><a href="#费米实验室主注入器" class="headerlink" title="费米实验室主注入器"></a>费米实验室主注入器</h4><p>一批84个束团从费米实验室助推器引出并注入费米实验室主注入器。射频频率为 (\omega_{r} &#x2F; (2\pi) &#x3D; 52.8 \mathrm{MHz})，射频谐波数为 (h &#x3D; 588)。每个束团包含 (6 \times 10^{10}) 个粒子。在注入时，射频电压为 (1.2 \mathrm{MV})，束团面积为 (0.15 \mathrm{eV} \cdot \mathrm{s})，半长度为 (28.3 \mathrm{ns})。有 (18 \mathrm{rf}) 个腔体，总 (R_{L} &#x2F; Q_{L} &#x3D; 1.872 \mathrm{k} \Omega)，(Q_{L} &#x3D; 5000)。在第一个束团通过腔体时，在所有腔体中激发的瞬态束流加载电压为 (V_{b} &#x3D; q B \omega_{r} R_{L} &#x2F; Q_{L} &#x3D; 5.46 \mathrm{kV})，其中我们取 (B &#x3D; 0.915)，假设为抛物线分布。在批次中最后一个束团通过时，激发的总束流加载电压变为 (V_{b} &#x3D; 444 \mathrm{kV})，其中我们考虑了衰减减量但失谐设为零。如果有第二批束流从助推器传输过来，这将在一次助推器周期或 (66.7 \mathrm{ms}) 之后发生。在这段时间间隔内，由于腔体的填充时间为 (2 Q_{L} &#x2F; \omega_{r} &#x3D; 30 \mu \mathrm{s})（约2.7圈），已经达到稳态。图8.18显示了这84个束团在第一批、第二批和第三批通过腔体时经历的束流加载电压。最上面的迹线表示达到稳态时看到的电压。最后一个束团和第一个束团看到的束流加载电压差可以从图中读出。也可以用式(8.111)解析计算为 (\Delta V_{b} &#x3D; 388 \mathrm{kV})。实际上，由于腔体的高品质因数，这个差值即使在第一圈中经历的差值也没有太大不同。注入时的设计射频电压为 (V_{\mathrm{rf}} &#x3D; 1.2 \mathrm{MV})。如果设计同步相位 (\phi_{s} &#x3D; 0) 与批次的中间束团同步，则第一个和最后一个束团引入的相位误差为 (\Delta \phi_{s} &#x3D; \pm 9.18^{\circ})。然而，这种大的束流加载电压差不会导致沿束团的能量差。偏相位的束团反而会被驱动进入同步运动。第一个和最后一个束团将具有 (\Delta \phi_{s} &#x3D; \pm 9.18^{\circ}) 的振荡幅度。最终，束团面积将增加。以射频相位测量，注入时束团的半宽度为 (53.8^{\circ})。因此，束团长度将从中间束团向批次的前端和后端线性增加，最大分数增加为 (9.18 &#x2F; 53.8 &#x3D; 17%)。这种增加目前是可以容忍的。有一个快速反馈回路，延迟仅为16个束团间距（300 ns），这意味着</p>
+<center>图8.18：84个束团在第一次、第二次和第三次通过主注入器射频腔时经历的束流加载电压。最上面的迹线显示达到稳态时的束流加载电压。计算中，腔体失谐设为零。</center>
+
+<p>最大束流加载电压差将仅为 (\sim 88 \mathrm{kV})，引入的相位误差将仅为 (\sim \pm 2.1^{\circ})。不幸的是，这个反馈回路大部分时间不工作。</p>
+<p>注意，如果我们希望保持中间束团的发生器电流与射频电压同相，正确的失谐在这里没有帮助。对于批次的一半（42个束团），由于失谐累积的相移约为 (1^{\circ})，因此各个束团的瞬态束流加载电压仍然几乎沿直线相加（练习S.8）。</p>
+<p>有一个升级计划将束团强度提高5倍。瞬态束流加载将变得不可容忍，因为相位误差可能高达 (\Delta \phi_{s} &#x3D; \pm 58^{\circ})。一种补偿方案是前馈。一种方案是用具有相同 (Q_{L}) 但 (R_{L} &#x2F; Q_{L}) 降低5倍的腔体替换所有腔体。束流加载效应将与以前相同。然而，将并联阻抗 (R_{L}) 降低5倍意味着需要更大的发生器电流</p>
+<p>（增加 ( \sqrt{5} &#x3D; 2.2) 倍）才能提供相同的射频功率。</p>
+<p>有一个计划是滑移-堆叠两个助推器批次并将其捕获为84个双倍强度的束团[8]。为了使两系列射频桶能适合主注入器的动量孔径，用于维持束团的射频电压将不得不降低到低于100 kV。相对而言，瞬态束流加载问题变得非常严重。为了控制束流加载，计划如下：</p>
+<ol>
+<li>仅使用18个腔体中的2个或4个来产生所需的射频电压，并降低其余腔体的Q值。一种可能将腔体Q值降低3倍的简单技术是关闭帘栅电压以降低电子管板极电阻。</li>
+<li>将在电阻壁间隙监测到的壁电流信号前馈到腔体驱动器。主环的经验预计可实现流入腔体的有效壁电流减少10倍。</li>
+<li>对所有腔体进行反馈。将与间隙电压成比例的信号放大、反相并加到驱动放大器。基于主环的经验和其他地方取得的结果，可以实现100倍的降低。</li>
+</ol>
+<h4 id="提议的前置助推器"><a href="#提议的前置助推器" class="headerlink" title="提议的前置助推器"></a>提议的前置助推器</h4><p>让我们研究一下提议的费米实验室前置助推器的设计，其周长为158.07 m。它将4个束团（每个包含 (0.25 \times 10^{14}) 个质子）从1 GeV动能加速到3 GeV。由于束流强度高，必须解决空间电荷和束流加载问题。我们希望基于Griffin提出的初步射频系统[13]来研究束流加载和Robinson不稳定性问题。</p>
+<h4 id="斜坡曲线"><a href="#斜坡曲线" class="headerlink" title="斜坡曲线"></a>斜坡曲线</h4><p>由于束流强度高，每个谐波的纵向空间电荷阻抗为 (Z_{||} &#x2F; n_{\mathrm{sch}} \sim - j100 \Omega)。但束流管道不连续性仅贡献约 (Z_{||} &#x2F; n_{\mathrm{ind}} \sim j20 \Omega) 的感应阻抗。空间电荷力将占据旨在聚焦束团的射频腔间隙电压的很大一部分。一种建议是在真空室中插入铁氧体环以抵消这种空间电荷力[14]。在洛斯阿拉莫斯质子存储环进行了铁氧体插入实验，结果令人鼓舞[15]。这里我们假设这种插入将</p>
+<p>过度补偿所有空间电荷力，留下约 (Z_{||} &#x2F; n|_{\mathrm{ind}}\approx j25\Omega) 的感应阻抗。空间电荷的过度补偿将有助于聚束，因此所需的射频电压将更小。</p>
+<p>从1 GeV动能到3 GeV的加速，在4个桶中以15 Hz的重复频率进行，将通过共振斜坡实现。为了降低所需的最大射频电压，加入了约 (3.75%) 的二次谐波。一个典型的斜坡曲线，桶面积随动量二次增加，如图8.19所示，将用作下面分析的参考。如果放宽当前对初始和最终桶面积以及束团面积的选择，二次谐波的比例可以增加。然而，当二次谐波超过 (\sim 12.5%) 时，它只会使斜坡中的射频间隙电压变平，但不会显著降低最大值。</p>
+<h4 id="射频系统"><a href="#射频系统" class="headerlink" title="射频系统"></a>射频系统</h4><p>根据图8.19的斜坡曲线，射频系统的峰值电压为 (V_{\mathrm{rf}}\approx 185\mathrm{kV})。Griffin提议了10个腔体[13]，每个提供最大19.0 kV。每个腔体包含26.8厘米的铁氧体环，内外半径分别为20和35厘米。铁氧体的相对磁导率为 (\mu_{\mathrm{r}} &#x3D; 21)。腔体的电感和电容分别为 (L\sim 0.630\mu \mathrm{H}) 和 (C\sim 820\mathrm{pF})。假设平均</p>
+<center>图8.20：直接连接到射频腔间隙的瞬态束流加载功率四极管，用于前馈等量的负电荷到腔体间隙的下游端，以抵消束流通过时在那里产生的正电荷。</center>
+
+<p>铁氧体损耗为 (134\mathrm{kW &#x2F; m^3})，腔体铁氧体和壁中的耗散将为 (P\sim 14.2\mathrm{kW})。平均储存能量为 (W\sim 0.15\mathrm{J})。因此每个腔体的品质因数为 (Q\sim 459)，并联阻抗 (R_{s}\sim 12.7\mathrm{k}\Omega)。</p>
+<p>由于每个束团包含 (q &#x3D; 4.005\mu \mathrm{C})，瞬态束流加载很大。对于一个束团的通过，(4.005\mu \mathrm{C}) 的正电荷将留在腔体间隙的下游端，产生瞬态束流加载电压 (V_{i0}\sim q &#x2F; C &#x3D; 5.0\mathrm{kV})，其中 (C &#x3D; 820\mathrm{pF}) 是间隙电容。我们从图8.19注意到，斜坡两端的加速间隙电压在每个腔体中仅为约或小于 (10\mathrm{kV})。如果前方束团的尾场没有消失，我们需要将之前所有束团通过的贡献加起来。假设加载品质因数为 (Q_{i} &#x3D; 45)，我们从式(8.72)发现，当失谐角为零时，累积的束流加载电压可以达到 (V_{b} &#x3D; 73\mathrm{kV})（见图8.26）。</p>
+<p>建议使用一个前馈系统，通过一个四极管将等量的负电荷输送到间隙的下游端，以抵消束流通过时在那里产生的正电荷。没有多余的正电荷，就不会再有瞬态束流加载。如图8.20所示。</p>
+<p>这里，我们处于这样一种情况：通过腔体</p>
+<p>间隙的镜像电流 (i_{im}) 不等于束流 (i_{b})。然而，在零失谐或非零失谐情况下，式(8.17)和(8.41)表明，传输到束流加速的发生器功率部分与镜像电流的大小成正比。如果在这个前馈方案中镜像电流变为零，这意味着射频发生器没有向粒子束输送任何功率，尽管束流看到了加速间隙电压。那么，粒子束如何被加速呢？答案很简单，功率来自进行前馈的四极管。这就解释了为什么四极管必须具有高功率。</p>
+<p>实际上，前馈系统并不完美，我们假设抵消率为 (85%)。对于 (\delta) - 函数束流，基频射频分量是56.0 A。因此，流过间隙的剩余镜像电流为 (i_{\mathrm{im}} &#x3D; 8.4) A。为了在稳态下抵消这剩余的 (15%) 的束流加载，腔体必须根据式(8.30)以角度</p>
+<p>[\psi &#x3D; \tan^{-1}\left(\frac{i_{\mathrm{im}}\cos\phi_{s}}{i_{0}}\right)~, \quad (8.112)]</p>
+<p>进行失谐，其中 (\phi_{s}) 是同步角，(\dot{\iota}<em>{0} &#x3D; V</em>{\mathrm{rf}} &#x2F; R_{s}) 是与腔体间隙电压 (V_{\mathrm{rf}}) 同相的腔体电流。对于伴随大并联阻抗的高品质因数 (Q &#x3D; 459)，失谐角将很大。对应于图8.19的斜坡曲线，失谐角在图8.21中以虚线绘制，同时还有同步角和最大腔体间隙电压。我们看到失谐角在 (80^{\circ}) 和 (86^{\circ}) 之间，这太大了。如果安装一个阳极（或阴极跟随器）耗散约为 (131 \mathrm{kW}) 的大功率驱动管，品质因数将降低到加载值 (Q_{L} \sim 45)，并联阻抗降低到加载值 (R_{L} \sim 1.38 \mathrm{k}\Omega)。那么失谐角在斜坡中心减小到 (\psi \sim 29^{\circ})，在两端减小到 (\sim 40^{\circ}) 或 (\sim 56^{\circ})。为了比较，这个角度也在图8.21中以点划线绘制。那么，这个射频系统就变得可行了。</p>
+<h4 id="固定频率射频腔"><a href="#固定频率射频腔" class="headerlink" title="固定频率射频腔"></a>固定频率射频腔</h4><p>现在我们要提出一个问题，是否可能为腔体设置一个固定的谐振频率。一个固定频率的腔体可以是一个非常简单的设备，因为它可能根本不需要任何偏置电流。因此，冷却量可以大大减少甚至不需要。看起来，腔体的谐振频率应该选择为斜坡结束时的射频频率，即 (f_{R} &#x3D; 7.37 \mathrm{MHz})，这样整个斜坡将免受Robinson相振荡不稳定的影响[4]。</p>
+<center>图8.21：高 \(Q = 459\) 和低 \(Q_{L} = 45\) 情况下的失谐角。</center>
+
+<p>然而，失谐将很大。例如，在斜坡开始时，(f_{\mathrm{rf}} &#x3D; 6.64 \mathrm{MHz})，失谐角变为 (\psi &#x3D; 85.2^{\circ})。由于束流加载电压 (V_{\mathrm{im}}) 很小，发生器电压相量 (\tilde{V}<em>{g}) 将非常接近间隙电压相量 (\tilde{V}</em>{\mathrm{rf}})。结果，间隙电压 (\tilde{V}<em>{\mathrm{rf}}) 和发生器电流相量 (\tilde{\gamma}</em>{g}) 之间的角度 (\theta) 将接近失谐角，如图8.22所示。例如，图8.23显示，在斜坡开始时，失谐角为 (\psi &#x3D; 85.2^{\circ})。尽管发生器输送的平均总功率</p>
+<p>[\frac{1}{2}\tilde{\gamma}<em>{g}\cdot \tilde{V}</em>{\mathrm{rf}} &#x3D; \frac{V_{\mathrm{rf}}^{2}}{2R_{L}} +\frac{1}{2}\dot{\gamma}<em>{\mathrm{im}}V</em>{\mathrm{rf}}\cos \phi_{s} \quad (8.113)]</p>
+<p>与 (\theta) 无关，但驱动管的能量容量必须非常大。</p>
+<p>另一种选择是选择腔体的谐振频率为斜坡中部附近的射频频率。那么，当间隙电压较大时，斜坡中部的失谐角 (\psi) 以及因此 (\tilde{V}<em>{\mathrm{rf}}) 和 (\tilde{\gamma}</em>{g}) 之间的角度 (\theta) 将小得多。虽然 (\theta) 在斜坡两端仍将保持较大，但这并不那么重要，因为那里的间隙电压相对较小。图8.25显示了将腔体谐振频率 (f_{R}) 设置为等于斜坡时间13.33 ms时的 (f_{\mathrm{rf}}) 的情况。</p>
+<p>选择 (f_{R}) 是有代价的；即，在斜坡的后半段，当射频频率大于 (f_{R}) 时，会出现Robinson相位不稳定性。</p>
+<center>图8.22：对于固定的腔体谐振频率，每个斜坡时间的失谐角 \(\psi\) 是固定的。当束流加载很小时，间隙电压 \(\tilde{V}_{\mathrm{rf}}\) 和发生器电流 \(\tilde{i}_{g}\) 之间的角度 \(\theta\) 将接近 \(\psi\) 并且会很大。</center>
+
+<center>图8.23：当腔体谐振频率选择为斜坡结束时的射频频率时，失谐角以及腔体间隙电压 \(\tilde{V}_{\mathrm{rf}}\) 和发生器电流 \(\tilde{I}_{g}\) 之间的角度都很大。</center>
+
+<center>图8.24：显示高强度Robinson相稳定性判据在斜坡的前半段满足，但在后半段不满足。曲线上方和垂直线左侧的区域是不稳定的。</center>
+
+<center>图8.25：当腔体谐振频率选择为13.33 ms斜坡中部的射频频率时，尽管失谐角以及腔体间隙电压 \(\tilde{V}_{\mathrm{rf}}\) 和发生器电流 \(\tilde{I}_g\) 之间的角度在斜坡两端都很大，但在间隙电压较大的斜坡中部相对较小。</center>
+
+<p>稳定振荡势阱的充分条件是，从式(8.47)出发，高强度Robinson判据：</p>
+<p>[\frac{V_{\mathrm{br}}}{V_{\mathrm{rf}}} &lt; \frac{\cos\phi_{s}}{\sin\psi\cos\psi}, \quad (8.114)]</p>
+<p>其中 (V_{\mathrm{br}} &#x3D; i_{\mathrm{im}}R_{L}) 是同相束流加载电压。在过渡能量以下，同步角 (\phi_{s}) 在 0 和 (\frac{1}{2}\pi) 之间。对于斜坡的后半段，射频频率变得高于腔体谐振频率，我们有 (\psi &lt; 0)。图8.24绘制了整个斜坡的判据。它显示判据在斜坡的前半段满足得很好，但在后半段不满足。因此，我们必须依靠射频系统中的控制回路来维持相位稳定性。当然，一个用于降低腔体阻抗的低电平反馈回路会有很大帮助。</p>
+<p>即使束流处于振荡运动的势阱中，我们仍然需要担心振荡幅度是增长还是被阻尼。不稳定性来自于这样一个事实：在过渡能量以下，能量较高的粒子具有较高的回旋频率，并看到腔体的较小实阻抗，因此比能量较低的粒子损失更少的能量。因此，同步振幅将增长。换句话说，镜像电流的上同步边带与腔体谐振峰较小实阻抗的相互作用比下同步边带弱。然而，由于加载品质因数 (Q_{L}) 并不小，两个边带处实阻抗的差异仅在射频频率非常接近腔体谐振频率时才显著。因此，我们预计不稳定性将在斜坡后半段仅持续很短的时间。同步振荡振幅的增长速率已被计算出来，等于[2]</p>
+<p>[\frac{1}{\tau} &#x3D; -\frac{i_{\mathrm{im}}\beta\omega_{s}(R_{+} - R_{-})}{2V_{\mathrm{rf}}\cos\phi_{s}}, \quad (8.115)]</p>
+<p>其中</p>
+<p>[R_{+} - R_{-} &#x3D; \mathcal{R}e\left[Z_{\mathrm{cav}}(\omega_{\mathrm{rf}} + \omega_{s}) - Z_{\mathrm{cav}}(\omega_{\mathrm{rf}} - \omega_{s})\right], \quad (8.116)]</p>
+<p>(i_{\mathrm{im}}) 是镜像电流，(\beta) 是相对于光速的速度，(\omega_{s} &#x2F; (2\pi)) 是同步频率，(Z_{\mathrm{cav}}) 是腔体的纵向阻抗。我们从图8.25看到，增长仅发生在几毫秒内，增长时间至少为 (\sim 25) ms。从斜坡时间13.33 ms开始的总积分增长增量为 (\Delta G &#x3D; \int \tau^{- 1}dt &#x3D; 0.131)，总增长为 (e^{\Delta G} - 1 &#x3D; 14.0%)，这是可以接受的。</p>
+<p>最后，让我们计算一个束团看到的包括所有先前束团通过效应的束流加载电压。在这个例子中，对于 (h_{b} &#x3D; 1)，(\delta_{L} \approx \pi h_{b} &#x2F; Q_{L} &#x3D; 0.0698)</p>
+<center>图8.26：(彩色) 瞬态束流加载电压（包括所有先前束团通过） \(\frac{q}{C} (F_{1} + jF_{2})\) 与失谐角 \(\psi\) 的关系图。</center>
+
+<p>表8.1：某些失谐角 (\psi) 值下的 (F_{1}) 和 (F_{2})</p>
+<table>
+<thead>
+<tr>
+<th>ψ</th>
+<th>Ψ &#x3D; δL tan ψ</th>
+<th>F1</th>
+<th>F2</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0°</td>
+<td>0°</td>
+<td>~ 1&#x2F;δL</td>
+<td>0</td>
+</tr>
+<tr>
+<td>84.9°</td>
+<td>45°</td>
+<td>0.12</td>
+<td>1.28</td>
+</tr>
+<tr>
+<td>87.5°</td>
+<td>90°</td>
+<td>~ δL&#x2F;2</td>
+<td>~ 1&#x2F;2</td>
+</tr>
+<tr>
+<td>88.7°</td>
+<td>180°</td>
+<td>~ δL&#x2F;4</td>
+<td>0</td>
+</tr>
+</tbody></table>
+<p>和 (Q_{L} &#x3D; 45)。当失谐角 (\psi &#x3D; 0) 时，(V_{b} \approx V_{i0} &#x2F; (2\delta_{L}))。在其他一些 (\psi) 值下计算了函数 (F_{1}) 和 (F_{2})，列于表8.1并绘制在图8.26中。我们看到，总瞬态束流加载电压 (V_{t}) 随着失谐角 (\psi) 的增加而迅速下降。它大约在 (\sim 88.7^{\circ}) 处消失，之后迅速振荡。然而，选择大的 (\psi) 并不是消除束流加载的好方法，因为通常发生器电流相量 (\tilde{\gamma}<em>{g}) 和射频电压相量 (\tilde{V}</em>{\mathrm{rf}}) 之间的角度会很大，使射频系统效率低下。</p>
+<h3 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h3><p>8.1. 对于存储环中均方根长度为 (\sigma_{\tau}) 的高斯束团，求射频频率处的电流傅里叶分量。给出该分量等于两倍直流电流的条件。</p>
+<p>8.2. 证明当任何带电粒子通过之前腔体内已存在电磁场时的束流加载基本定理。</p>
+<p>8.3. 在第8.2节中，已经推导了过渡能量以下的射频失谐和Robinson稳定性条件。证明在过渡能量以上，根据图8.4的失谐会导致不稳定性。画出过渡能量以上具有稳定射频失谐的新相量图。重新推导过渡能量以上的Robinson高强度稳定性判据。</p>
+<p>8.4. 推导等间距束团多次通过时传输到射频系统的发生器功率式(8.76)。</p>
+<p>8.5. (a) 推导式(8.90)，即位于均方根长度为 (\sigma_{\tau}) 的高斯束团中心前方距离 (\tau) 处的带电粒子看到的束流加载电压。(b) 利用复误差函数的性质，</p>
+<p>[\lim_{\sigma_{\tau}\to 0}w\left(\frac{i\tau}{\sqrt{2}\sigma_{\tau}}\right) &#x3D; \lim_{\sigma_{\tau}\to 0}\frac{2}{\sqrt{\pi}} e^{\tau^{2} &#x2F; (2\sigma_{\tau}^{2})}\int_{\frac{\tau}{\sqrt{2}\sigma_{\tau}}}^{\infty}e^{-t^{2}}d t &#x3D; \left{ \begin{array}{ll}0 &amp; \tau &gt;0,\ 1 &amp; \tau &#x3D; 0,\ 2 &amp; \tau &lt; 0, \end{array} \right. \quad (8.117)]</p>
+<p>推导式(8.92)，即当束团长度缩短到零时，束团头部、中心和尾部看到的瞬态束流加载电压。</p>
+<p>8.6. (1) 推导式(8.94)和(8.95)，即抛物线分布束团中，距束团头部距离 (T) 处的带电粒子看到的瞬态束流加载电压。</p>
+<p>(2) 推导式(8.99)和(8.99)，即余弦平方分布束团中，距束团头部距离 (T) 处的带电粒子看到的瞬态束流加载电压。</p>
+<p>(3) 推导式(8.102)和(8.103)，即余弦分布束团中，距束团头部距离 (T) 处的带电粒子看到的瞬态束流加载电压。</p>
+<p>8.7. 对于射频谐波数为 (h) 的环中一批 (M) 个连续束团，第 (k) 个束团通过腔体间隙时经历的稳态束流加载电压由式(8.5.1)给出。</p>
+<p>(1) 逐桶继续，写出束流串的第一个束团再次通过腔体时经历的束流加载电压。由于此束流加载电压必须等于式(8.5.1)中 (k &#x3D; 1) 给出的值，确定此时腔体中的残余束流加载电压 (V_{0})，并证明它由式(8.110)给出。</p>
+<p>(2) 证明最后一个束团和第一个束团经历的束流加载电压差 (\Delta V_{b}) 由式(8.111)给出。</p>
+<p>(3) 证明当 (M &#x3D; \frac{1}{2} (h + 1)) 时，(\Delta V_{b}) 取得最大值</p>
+<p>[\Delta V_{b} &#x3D; V_{b0}\frac{e^{-\delta_{L}}\left[1 - e^{-\frac{1}{2}(h - 1)\delta_{L}}\right]^{2}}{(1 - e^{-\delta_{L}})(1 - e^{-h\delta_{L}})}. \quad (8.118)]</p>
+<p>8.8. 对于第8.5.3节中描述的费米实验室主注入器中的一批84个束团，</p>
+<p>(1) 计算相对于批次中间束团，要求发生器电流与射频电压同相时的失谐角。</p>
+<p>(2) 计算连续束团的瞬态束流加载电压之间的射频相位滑动，并证明由于高品质因数，批次一半（42个束团）的累积仅为约 (1^{\circ})。</p>
+<p>8.9. 练习8.7也可以在频域中进行。填补以下推导中缺失的步骤。</p>
+<p>(1) 考虑 (M &#x3D; 2m) 个点束团，每个电荷为 (q)，位于环中 (M &#x3D; 2m) 个连续桶内，射频谐波数为 (h)。电流为</p>
+<p>[I(t) &#x3D; q\sum_{n &#x3D; 1}^{m}\delta [t - (n - \textstyle {\frac{1}{2}})T_{b}] + q\sum_{n &#x3D; 1}^{m}\delta [t + (n - \textstyle {\frac{1}{2}})T_{b}]~, \quad (8.119)]</p>
+<p>其中 (T_{b}) 是桶宽度。在频域中，每个回旋谐波处的电流由下式给出</p>
+<p>[I_{p} &#x3D; \frac{1}{T_{0}}\int_{-T_{0} &#x2F; 2}^{T_{0} &#x2F; 2}I(t)e^{-j2\pi pt &#x2F; T_{0}} &#x3D; \frac{2q}{T_{0}}\sum_{n &#x3D; 1}^{m}\cos \frac{2\pi p(n - \frac{1}{2})}{h}~, \quad (8.120)]</p>
+<p>其中 (T_{0} &#x3D; h T_{b}) 是回旋周期，(p) 是从 (- \infty) 到 (+\infty) 的整数。</p>
+<p>(2) 每个谐波处激发的束流加载电压为 (V_{bp} &#x3D; I_{p}Z_{p})，其中腔体的加载阻抗为</p>
+<p>[Z_{p} &#x3D; R_{L}\cos \psi_{p}e^{j\psi_{p}}\qquad \mathrm{with}\qquad \tan \psi_{p} &#x3D; 2Q_{L}\left(\frac{h}{p} -\frac{p}{h}\right)~, \quad (8.121)]</p>
+<p>(R_{L}) 和 (Q_{L}) 是加载并联阻抗和品质因数。</p>
+<p>(3) 考虑到阻抗的对称性，时域中的束流加载电压变为</p>
+<p>[V_{b}(t) &#x3D; \sum_{p}I_{p}\left(\cos^{2}\phi_{p}\cos \frac{2\pi\mu t}{T_{0}} -\cos \phi_{p}\sin \psi_{p}\sin \frac{2\pi\mu t}{T_{0}}\right)~. \quad (8.122)]</p>
+<p>(4) 使用第8.5.3节中主注入器的信息，数值评估并绘制 (I_{p})、(V_{bp}) 和 (V_{b}(t))。</p>
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><p>[1] P.B. Wilson, Fermilab Summer School, 1981, AIP Conference Proceedings, No. 87, 1982, AIP, p.450.<br>[2] 参见例如 H. Wiedemann, Particle Accelerator Physics II, Springer, 1995, p.203.<br>[3] D. Boussard, Beam Loading, Fifth Advanced CERN Accelerator Physics Course, Rhodes, Greece, Sep. 20-Oct. 1, 1993, CERN 95-06, p.415.<br>[4] P.B. Robinson, Stability of Beam in Radiofrequency System, Cambridge Electron Accel. Report CEAI-1010, 1964.<br>[5] E. Raka, RF System Considerations for a Large Hadron Collider, AIP Conference Proc. 184, Physics of Particle Accelerators, ed. M. Month and M. Dienes, AIP, New York, 1989, Vol. 1, p.289.<br>[6] D. Boussard et al., Longitudinal Phenomena in the CERN SPS, IEEE Trans. Nucl. Sc. NS-24 No. 3, 1399 (1977).<br>[7] Conceptual Design Report of PEP-II, An Asymmetric B Factory, June 1993, LBL- PUB-5379, SLAC-418, CALT-68-1869, UCRL-ID-114055, or UC-IIRPA-93-01.<br>[8] J. Dey, J. Steimel, J. Reid, Narrowband Beam Loading Compensation in the Fermilab Main Injector Accelerating Cavities, Proceedings of the 2001 Particle Accelerator Conference, Chicago, June 18-22, 2001, Ed. P. Lucas and S. Webber, p.876; Shekhar Shukla, John Marriner, and James Griffin, Slip Stacking in the Fermilab Main Injector, Proceedings of the Summer Study on the Future of High Energy Physics, Snowmass, July 1-20, 2001.<br>[9] J. Steimel, Summary of RF Cavity Beam Loading Problems and Cures in the CERN PS Complex, unpublished; D. Boussard and G. Lambert, Reduction of the Apparent Impedance of Wide Band Accelerating Cavities by RF Feedback, IEEE Trans. Nucl. Sc. NS- 30 No. 4, 2239 (1983); D. Boussard, Control of Cavities with High Beam Loading, IEEE Trans. Nucl. Sc. NS- 32 No. 5, 1852 (1985); D. Boussard, RF Power Requirements for a High Intensity Proton Collider (Parts 1 and 2), CERN SL&#x2F;91- 16 (RFS), April 1991.<br>[10] F. Pedersen, Beam Loading Effects in the CERN PS Booster, IEEE Trans. Nucl. Sc. NS- 22 No. 3, 1906 (1975); F. Pedersen, A Novel RF Cavity Tuning Feedback Scheme for Heavy Beam Loading, IEEE Trans. Nucl. Sc. NS- 32 No. 5, 2138 (1985).<br>[11] J.E. Griffin, Compensation for Beam Loading in the 400- GeV Fermilab Main Accelerator, IEEE Trans. Nucl. Sc. NS- 22 No. 3, 1910 (1975); D. Wildman, Transient Beam Loading Compensation in the Fermilab Main Ring, IEEE Trans. Nucl. Sc. NS- 32 No. 5, 1910 (1985).<br>[12] Y. Goren and T.F. Wang, Voltage Counter- Phasmg in the SSC Low Energy Booster, Proceedings of the 1993 Particle Accelerator Conference, May 17- 20, 1993, Washington, DC, p. 883.<br>[13] J.E. Griffin, RF System Considerations for a Muon Collider Proton Driver Synchrotrons, Fermilab report FN- 669, 1998.<br>[14] K.Y. Ng and Z.B. Qian, Proc. Phys. at the First Muon Collider and at Front End of a Muon Collider, Fermilab, Batavia, Nov. 6- 9, 1997.<br>[15] J.E. Griffin, K.Y. Ng, Z.B. Qian, and D. Wildman, Experimental Study of Passive Compensation of Space Charge Potential Well Distortion at the Los Alamos National Laboratory Proton Storage Ring, Fermilab Report FN- 661, 1997.</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="Liu Ming WeChat Pay">
+        <span>WeChat Pay</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="Liu Ming Alipay">
+        <span>Alipay</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>Liu Ming
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="http://iuming.github.io/2026/07/14/%E6%9D%9F%E8%85%94%E4%BD%9C%E7%94%A8%E5%92%8C%E9%B2%81%E5%AE%BE%E6%A3%AE%E4%B8%8D%E7%A8%B3%E5%AE%9A%E6%80%A7/" title="束腔作用和鲁宾森不稳定性">http://iuming.github.io/2026/07/14/束腔作用和鲁宾森不稳定性/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/realiuming">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+U5yo-Zxuw1OgbU6P">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </span>
+
+          <img class="social-item-img" src="/images/wechat_channel.jpg">
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/cavity/" rel="tag"><i class="fa fa-tag"></i> cavity</a>
+              <a href="/tags/beam/" rel="tag"><i class="fa fa-tag"></i> beam</a>
+              <a href="/tags/loading/" rel="tag"><i class="fa fa-tag"></i> loading</a>
+          </div>
+
+        
+  <div class="social-like a2a_kit a2a_kit_size_32 a2a_default_style">
+    <a class="a2a_dd" target="_blank" rel="noopener" href="https://www.addtoany.com/share"></a>
+      <a class="a2a_button_facebook"></a>
+      <a class="a2a_button_twitter"></a>
+      <a class="a2a_button_wechat"></a>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/07/14/%E6%9D%9F%E8%85%94%E7%9B%B8%E4%BA%92%E4%BD%9C%E7%94%A8/" rel="prev" title="束腔相互作用">
+                  <i class="fa fa-angle-left"></i> 束腔相互作用
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Ming Liu. All rights reserved.</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL2l1bWluZw==" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.1.0/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/4.23.3/algoliasearch-lite.umd.js" integrity="sha256-1QNshz86RqXe/qsCBldsUu13eAX6n/O98uubKQs87UI=" crossorigin="anonymous"></script><script src="/js/third-party/search/algolia-search.js"></script>
+<script class="next-config" data-name="chatra" type="application/json">{"enable":true,"async":true,"id":"gTXKphrmKGf5QSb5L"}</script>
+<script src="/js/third-party/chat/chatra.js"></script>
+<script async src="https://call.chatra.io/chatra.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.0/pdfobject.min.js","integrity":"sha256-JJZNsid68vnh3/zyj0lY9BN5ynxVX/12XgOa1TlaYN0="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.0/mermaid.min.js","integrity":"sha256-stuqcu2FrjYCXDOytWFA5SoUE/r3nkp6gTglzNSlavU="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+  <script class="next-config" data-name="wavedrom" type="application/json">{"enable":true,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.5.0/wavedrom.min.js","integrity":"sha256-INLAoJc6quTNfiMWkGZniYO2cxE8mHpddnLow1m6RFs="}}</script>
+  <script class="next-config" data-name="wavedrom_skin" type="application/json">{"enable":true,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.5.0/skins/default.js","integrity":"sha256-fduc/Zszk5ezWws2uInY/ALWVmIrmV6VTgXbsYSReFI="}}</script>
+  <script src="/js/third-party/tags/wavedrom.js"></script>
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+  <script src="/js/third-party/addtoany.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":"ture","archive":true,"delay":true,"timeout":3000,"priority":true,"url":"http://iuming.github.io/2026/07/14/%E6%9D%9F%E8%85%94%E4%BD%9C%E7%94%A8%E5%92%8C%E9%B2%81%E5%AE%BE%E6%A3%AE%E4%B8%8D%E7%A8%B3%E5%AE%9A%E6%80%A7/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"realiuming","count":true,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+
+</body>
+</html>
