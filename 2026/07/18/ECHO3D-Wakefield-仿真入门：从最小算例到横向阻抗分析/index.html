@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.2.0">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/manifest.json">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"iuming.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.20.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":null},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":true,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="这篇文章完整记录了使用ECHO3D进行 Wakefield 时域仿真的全过程。文章总结了物理概念、命令行流程和后处理方法，并直接附上了本文实际使用过的输入文件与Python 脚本，方便复现。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ECHO3D Wakefield 仿真入门：从最小算例到横向阻抗分析">
+<meta property="og:url" content="http://iuming.github.io/2026/07/18/ECHO3D-Wakefield-%E4%BB%BF%E7%9C%9F%E5%85%A5%E9%97%A8%EF%BC%9A%E4%BB%8E%E6%9C%80%E5%B0%8F%E7%AE%97%E4%BE%8B%E5%88%B0%E6%A8%AA%E5%90%91%E9%98%BB%E6%8A%97%E5%88%86%E6%9E%90/index.html">
+<meta property="og:site_name" content="REALIUMING&#39;BLOG">
+<meta property="og:description" content="这篇文章完整记录了使用ECHO3D进行 Wakefield 时域仿真的全过程。文章总结了物理概念、命令行流程和后处理方法，并直接附上了本文实际使用过的输入文件与Python 脚本，方便复现。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://github.com/iuming/iuming.github.io/tree/master/Markdown_images/Monitor_N01_official_first_frame.png">
+<meta property="og:image" content="https://github.com/iuming/iuming.github.io/tree/master/Markdown_images/Monitor_N01_official_center_series.png">
+<meta property="og:image" content="https://github.com/iuming/iuming.github.io/tree/master/Markdown_images/Monitor_N01_official.gif">
+<meta property="og:image" content="https://github.com/iuming/iuming.github.io/tree/master/Markdown_images/Monitor_N02_official_first_frame.png">
+<meta property="og:image" content="https://github.com/iuming/iuming.github.io/tree/master/Markdown_images/Monitor_N02_official_center_series.png">
+<meta property="og:image" content="https://github.com/iuming/iuming.github.io/tree/master/Markdown_images/Monitor_N02_xaxis.gif">
+<meta property="og:image" content="https://github.com/iuming/iuming.github.io/tree/master/Markdown_images/wake3Dindirect_plot.png">
+<meta property="og:image" content="https://github.com/iuming/iuming.github.io/tree/master/Markdown_images/Z_longitudinal_estimated.png">
+<meta property="og:image" content="https://github.com/iuming/iuming.github.io/tree/master/Markdown_images/wake_transverse_estimated.png">
+<meta property="og:image" content="https://github.com/iuming/iuming.github.io/tree/master/Markdown_images/Z_transverse_estimated.png">
+<meta property="og:image" content="https://github.com/iuming/iuming.github.io/tree/master/Markdown_images/ECHO3D_compare_longitudinal.png">
+<meta property="og:image" content="https://github.com/iuming/iuming.github.io/tree/master/Markdown_images/ECHO3D_compare_transverse.png">
+<meta property="article:published_time" content="2026-07-18T08:54:17.000Z">
+<meta property="article:modified_time" content="2026-07-18T11:26:45.306Z">
+<meta property="article:author" content="Liu Ming">
+<meta property="article:tag" content="accelerator">
+<meta property="article:tag" content="simulation">
+<meta property="article:tag" content="beam">
+<meta name="twitter:card" content="&lt;twitter:card&gt;">
+<meta name="twitter:image" content="http://iuming.github.io/2026/07/18/ECHO3D-Wakefield-%E4%BB%BF%E7%9C%9F%E5%85%A5%E9%97%A8%EF%BC%9A%E4%BB%8E%E6%9C%80%E5%B0%8F%E7%AE%97%E4%BE%8B%E5%88%B0%E6%A8%AA%E5%90%91%E9%98%BB%E6%8A%97%E5%88%86%E6%9E%90/%3Ctwitter:image%3E">
+<meta name="twitter:creator" content="@&lt;twitter:creator&gt;">
+<meta name="twitter:site" content="<twitter:site>">
+<meta property="fb:admins" content="&lt;fb:admin_id&gt;">
+<meta property="fb:app_id" content="&lt;fb:app_id&gt;">
+
+
+<link rel="canonical" href="http://iuming.github.io/2026/07/18/ECHO3D-Wakefield-%E4%BB%BF%E7%9C%9F%E5%85%A5%E9%97%A8%EF%BC%9A%E4%BB%8E%E6%9C%80%E5%B0%8F%E7%AE%97%E4%BE%8B%E5%88%B0%E6%A8%AA%E5%90%91%E9%98%BB%E6%8A%97%E5%88%86%E6%9E%90/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://iuming.github.io/2026/07/18/ECHO3D-Wakefield-%E4%BB%BF%E7%9C%9F%E5%85%A5%E9%97%A8%EF%BC%9A%E4%BB%8E%E6%9C%80%E5%B0%8F%E7%AE%97%E4%BE%8B%E5%88%B0%E6%A8%AA%E5%90%91%E9%98%BB%E6%8A%97%E5%88%86%E6%9E%90/","path":"2026/07/18/ECHO3D-Wakefield-仿真入门：从最小算例到横向阻抗分析/","title":"ECHO3D Wakefield 仿真入门：从最小算例到横向阻抗分析"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>ECHO3D Wakefield 仿真入门：从最小算例到横向阻抗分析 | REALIUMING'BLOG</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">REALIUMING'BLOG</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">296</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">21</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">126</span></a></li><li class="menu-item menu-item-books"><a href="/book/" rel="section"><i class="fa fa-book fa-fw"></i>books</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fab fa-algolia fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8-ECHO3D"><span class="nav-number">1.</span> <span class="nav-text">为什么使用 ECHO3D</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E6%96%87%E7%9B%AE%E6%A0%87"><span class="nav-number">2.</span> <span class="nav-text">本文目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ECHO3D-%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E4%BD%9C%E6%B5%81"><span class="nav-number">3.</span> <span class="nav-text">ECHO3D 命令行工作流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E7%BA%B5%E5%90%91-wake-%E7%AE%97%E4%BE%8B%EF%BC%9AECHO3D-Minimal"><span class="nav-number">4.</span> <span class="nav-text">最小纵向 wake 算例：ECHO3D_Minimal</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#input-txt"><span class="nav-number">4.1.</span> <span class="nav-text">input.txt</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#geometry-txt"><span class="nav-number">4.2.</span> <span class="nav-text">geometry.txt</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ECHO3D-%E7%9E%AC%E6%80%81%E5%9C%BA%E5%8F%AF%E8%A7%86%E5%8C%96%EF%BC%9A%E6%AD%A3%E7%A1%AE%E8%B7%AF%E7%BA%BF%E6%98%AF-FieldMonitor"><span class="nav-number">5.</span> <span class="nav-text">ECHO3D 瞬态场可视化：正确路线是 FieldMonitor</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E7%94%A8-OutFields-%E4%BD%9C%E4%B8%BA%E4%B8%BB%E8%A6%81%E6%96%B9%E6%A1%88"><span class="nav-number">5.1.</span> <span class="nav-text">为什么不用 OutFields 作为主要方案</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%98%E6%96%B9%E6%89%8B%E5%86%8C%E4%B8%AD-FieldMonitor-%E7%9A%84%E5%85%B3%E9%94%AE%E5%AE%9A%E4%B9%89"><span class="nav-number">6.</span> <span class="nav-text">官方手册中 FieldMonitor 的关键定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%88%91%E5%9C%A8-ECHO3D-Minimal-%E4%B8%AD%E9%87%87%E7%94%A8%E7%9A%84-FieldMonitor-%E9%85%8D%E7%BD%AE"><span class="nav-number">7.</span> <span class="nav-text">我在 ECHO3D_Minimal 中采用的 FieldMonitor 配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B0%E7%9A%84-FieldMonitor-%E8%BE%93%E5%87%BA%E7%BB%93%E6%9E%84"><span class="nav-number">8.</span> <span class="nav-text">新的 FieldMonitor 输出结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Monitor-N01-txt-%E5%A4%B4%E9%83%A8"><span class="nav-number">8.1.</span> <span class="nav-text">Monitor_N01.txt 头部</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Monitor-N02-txt-%E5%A4%B4%E9%83%A8"><span class="nav-number">8.2.</span> <span class="nav-text">Monitor_N02.txt 头部</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E7%90%86%E8%A7%A3-Monitor-N01"><span class="nav-number">9.</span> <span class="nav-text">如何正确理解 Monitor_N01</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C%E5%9B%BE%EF%BC%9AMonitor-N01-%E7%AC%AC%E4%B8%80%E5%B8%A7"><span class="nav-number">9.1.</span> <span class="nav-text">结果图：Monitor_N01 第一帧</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%AD%E5%BF%83%E7%82%B9%E6%97%B6%E5%BA%8F%E6%9B%B2%E7%BA%BF"><span class="nav-number">9.2.</span> <span class="nav-text">中心点时序曲线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9E%AC%E6%80%81-GIF"><span class="nav-number">9.3.</span> <span class="nav-text">瞬态 GIF</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E7%90%86%E8%A7%A3-Monitor-N02"><span class="nav-number">10.</span> <span class="nav-text">如何正确理解 Monitor_N02</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Monitor-N02-%E7%AC%AC%E4%B8%80%E5%B8%A7"><span class="nav-number">10.1.</span> <span class="nav-text">Monitor_N02 第一帧</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%AD%E5%BF%83%E7%82%B9%E6%97%B6%E5%BA%8F%E6%9B%B2%E7%BA%BF-1"><span class="nav-number">10.2.</span> <span class="nav-text">中心点时序曲线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#x-%E8%BD%B4%E6%98%BE%E5%BC%8F%E6%A0%87%E6%B3%A8%E5%8A%A8%E7%94%BB"><span class="nav-number">10.3.</span> <span class="nav-text">x 轴显式标注动画</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Monitor-N01-%E4%B8%8E-Monitor-N02-%E7%9A%84%E7%89%A9%E7%90%86%E5%8C%BA%E5%88%AB"><span class="nav-number">11.</span> <span class="nav-text">Monitor_N01 与 Monitor_N02 的物理区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Monitor-N01-official-gif"><span class="nav-number">11.1.</span> <span class="nav-text">Monitor_N01_official.gif</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Monitor-N02-xaxis-gif"><span class="nav-number">11.2.</span> <span class="nav-text">Monitor_N02_xaxis.gif</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%99%E9%83%A8%E5%88%86%E4%BD%BF%E7%94%A8%E5%88%B0%E7%9A%84%E8%84%9A%E6%9C%AC"><span class="nav-number">12.</span> <span class="nav-text">这部分使用到的脚本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E7%9E%AC%E6%80%81%E5%8F%AF%E8%A7%86%E5%8C%96%E7%9A%84%E4%B8%80%E7%82%B9%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93"><span class="nav-number">13.</span> <span class="nav-text">关于瞬态可视化的一点经验总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E6%9E%90-ECHO3D-%E4%BA%8C%E8%BF%9B%E5%88%B6-wake%EF%BC%9Aparse-wake-py"><span class="nav-number">14.</span> <span class="nav-text">解析 ECHO3D 二进制 wake：parse_wake.py</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%96%B9%E5%BC%8F"><span class="nav-number">14.1.</span> <span class="nav-text">运行方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E7%BA%B5%E5%90%91-wake-%E6%9B%B2%E7%BA%BF%EF%BC%9Aplot-wake-py"><span class="nav-number">15.</span> <span class="nav-text">绘制纵向 wake 曲线：plot_wake.py</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%B0%E7%AE%97%E7%BA%B5%E5%90%91%E9%98%BB%E6%8A%97%E5%92%8C-loss-factor%EF%BC%9Aanalyze-longitudinal-py"><span class="nav-number">16.</span> <span class="nav-text">估算纵向阻抗和 loss factor：analyze_longitudinal.py</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ECHO3D-Minimal-%E7%BB%93%E6%9E%9C"><span class="nav-number">16.1.</span> <span class="nav-text">ECHO3D_Minimal 结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E5%81%8F%E5%BF%83%E6%9D%9F%E6%B5%81%E6%A8%AA%E5%90%91%E7%AE%97%E4%BE%8B%EF%BC%9AECHO3D-Dipole"><span class="nav-number">17.</span> <span class="nav-text">构造偏心束流横向算例：ECHO3D_Dipole</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#input-txt-1"><span class="nav-number">17.1.</span> <span class="nav-text">input.txt</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%B0%E7%AE%97%E6%A8%AA%E5%90%91-wake%E3%80%81%E6%A8%AA%E5%90%91%E9%98%BB%E6%8A%97%E5%92%8C-kick-factor%EF%BC%9Aanalyze-transverse-py"><span class="nav-number">18.</span> <span class="nav-text">估算横向 wake、横向阻抗和 kick factor：analyze_transverse.py</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ECHO3D-Dipole-%E7%BB%93%E6%9E%9C"><span class="nav-number">18.1.</span> <span class="nav-text">ECHO3D_Dipole 结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E6%AF%94%E4%B8%A4%E5%A5%97%E7%AE%97%E4%BE%8B%EF%BC%9Acompare-echo3d-results-py"><span class="nav-number">19.</span> <span class="nav-text">对比两套算例：compare_echo3d_results.py</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E6%96%87%E6%9C%80%E7%BB%88%E7%BB%93%E6%9E%9C%E6%80%BB%E8%A1%A8"><span class="nav-number">20.</span> <span class="nav-text">本文最终结果总表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%BF%99%E4%BA%9B%E7%BB%93%E6%9E%9C"><span class="nav-number">21.</span> <span class="nav-text">如何理解这些结果</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%B5%E5%90%91-wake-potential-W-parallel-s"><span class="nav-number">21.1.</span> <span class="nav-text">纵向 wake potential $W_\parallel(s)$</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%AA%E5%90%91-wake-potential-W-perp-s"><span class="nav-number">21.2.</span> <span class="nav-text">横向 wake potential $W_\perp(s)$</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%B5%E5%90%91%E9%98%BB%E6%8A%97-Z-parallel-omega"><span class="nav-number">21.3.</span> <span class="nav-text">纵向阻抗 $Z_\parallel(\omega)$</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%AA%E5%90%91%E9%98%BB%E6%8A%97-Z-perp-omega"><span class="nav-number">21.4.</span> <span class="nav-text">横向阻抗 $Z_\perp(\omega)$</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#loss-factor"><span class="nav-number">21.5.</span> <span class="nav-text">loss factor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#kick-factor"><span class="nav-number">21.6.</span> <span class="nav-text">kick factor</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A8%E9%83%A8%E6%8E%A8%E8%8D%90%E8%BF%90%E8%A1%8C%E9%A1%BA%E5%BA%8F"><span class="nav-number">22.</span> <span class="nav-text">全部推荐运行顺序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%91%E6%9C%80%E5%B0%8F%E7%BA%B5%E5%90%91-wake-%E7%AE%97%E4%BE%8B"><span class="nav-number">22.1.</span> <span class="nav-text">跑最小纵向 wake 算例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%91%E5%81%8F%E5%BF%83%E6%A8%AA%E5%90%91-wake-%E7%AE%97%E4%BE%8B"><span class="nav-number">22.2.</span> <span class="nav-text">跑偏心横向 wake 算例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E6%80%BB%E8%A1%A8%E5%92%8C%E5%AF%B9%E6%AF%94%E5%9B%BE"><span class="nav-number">22.3.</span> <span class="nav-text">生成总表和对比图</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E6%96%87%E4%BB%B6%E6%80%BB%E8%A7%88"><span class="nav-number">23.</span> <span class="nav-text">输出文件总览</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ECHO3D-Minimal-Results"><span class="nav-number">23.1.</span> <span class="nav-text">ECHO3D_Minimal&#x2F;Results</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ECHO3D-Dipole-Results"><span class="nav-number">23.2.</span> <span class="nav-text">ECHO3D_Dipole&#x2F;Results</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E6%A0%B9%E7%9B%AE%E5%BD%95"><span class="nav-number">23.3.</span> <span class="nav-text">项目根目录</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%99%E5%A5%97%E6%B5%81%E7%A8%8B%E7%9A%84%E5%B1%80%E9%99%90%E6%80%A7"><span class="nav-number">24.</span> <span class="nav-text">这套流程的局限性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E4%B8%80%E6%AD%A5%E5%BB%BA%E8%AE%AE"><span class="nav-number">25.</span> <span class="nav-text">下一步建议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E8%AF%AD"><span class="nav-number">26.</span> <span class="nav-text">结语</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Liu Ming"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Liu Ming</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">126</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">296</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button animated">
+    <button><i class="fa fa-comment"></i>
+      Chat
+    </button>
+  </div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2l1bWluZw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;iuming"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOjUyMDBsaXVtaW5nQGdtYWlsLmNvbQ==" title="E-Mail → mailto:5200liuming@gmail.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vdS8zMTQ3OTEyODky" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;3147912892"><i class="fab fa-weibo fa-fw"></i>Weibo</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9yZWFsaXVtaW5n" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;realiuming"><i class="fab fa-twitter fa-fw"></i>Twitter</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL3JlYWxpdW1pbmc=" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;realiuming"><i class="fab fa-facebook fa-fw"></i>FB Page</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8xMjE4NTI3My9pdW1pbmc=" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;12185273&#x2F;iuming"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly95b3V0dWJlLmNvbS9jaGFubmVsL1VDaUNCSHJ4cDJ4Tlc3T1ZaTlFzZHROdw==" title="YouTube → https:&#x2F;&#x2F;youtube.com&#x2F;channel&#x2F;UCiCBHrxp2xNW7OVZNQsdtNw"><i class="fab fa-youtube fa-fw"></i>YouTube</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9pbnN0YWdyYW0uY29tL3JlYWxpdW1pbmc=" title="Instagram → https:&#x2F;&#x2F;instagram.com&#x2F;realiuming"><i class="fab fa-instagram fa-fw"></i>Instagram</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="c2t5cGU6ODQyNjczNTU2P2NhbGx8Y2hhdA==" title="Skype → skype:842673556?call|chat"><i class="fab fa-skype fa-fw"></i>Skype</span>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="Back to top">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://iuming.github.io/" title="https:&#x2F;&#x2F;iuming.github.io&#x2F;">Title</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://iuming.github.io/2026/07/18/ECHO3D-Wakefield-%E4%BB%BF%E7%9C%9F%E5%85%A5%E9%97%A8%EF%BC%9A%E4%BB%8E%E6%9C%80%E5%B0%8F%E7%AE%97%E4%BE%8B%E5%88%B0%E6%A8%AA%E5%90%91%E9%98%BB%E6%8A%97%E5%88%86%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Liu Ming">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="REALIUMING'BLOG">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="ECHO3D Wakefield 仿真入门：从最小算例到横向阻抗分析 | REALIUMING'BLOG">
+      <meta itemprop="description" content="这篇文章完整记录了使用ECHO3D进行 Wakefield 时域仿真的全过程。文章总结了物理概念、命令行流程和后处理方法，并直接附上了本文实际使用过的输入文件与Python 脚本，方便复现。">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ECHO3D Wakefield 仿真入门：从最小算例到横向阻抗分析
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2026-07-18 16:54:17 / Modified: 19:26:45" itemprop="dateCreated datePublished" datetime="2026-07-18T16:54:17+08:00">2026-07-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/note/" itemprop="url" rel="index"><span itemprop="name">note</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2026/07/18/ECHO3D-Wakefield-%E4%BB%BF%E7%9C%9F%E5%85%A5%E9%97%A8%EF%BC%9A%E4%BB%8E%E6%9C%80%E5%B0%8F%E7%AE%97%E4%BE%8B%E5%88%B0%E6%A8%AA%E5%90%91%E9%98%BB%E6%8A%97%E5%88%86%E6%9E%90/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2026/07/18/ECHO3D-Wakefield-仿真入门：从最小算例到横向阻抗分析/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+            <div class="post-description">这篇文章完整记录了使用ECHO3D进行 Wakefield 时域仿真的全过程。文章总结了物理概念、命令行流程和后处理方法，并直接附上了本文实际使用过的输入文件与Python 脚本，方便复现。</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="为什么使用-ECHO3D"><a href="#为什么使用-ECHO3D" class="headerlink" title="为什么使用 ECHO3D"></a>为什么使用 ECHO3D</h2><p><code>ECHO3D</code> 适合做束流驱动下的时域尾场分析，尤其适合研究：</p>
+<ul>
+<li>纵向 wake potential $W_\parallel(s)$</li>
+<li>横向 wake potential $W_\perp(s)$</li>
+<li>纵向阻抗 $Z_\parallel(\omega)$</li>
+<li>横向阻抗 $Z_\perp(\omega)$</li>
+<li>loss factor</li>
+<li>kick factor</li>
+</ul>
+<p>简单说，<code>ECHO3D</code> 研究的是：</p>
+<ul>
+<li>束流通过结构后，激发出什么尾场</li>
+<li>这些尾场如何影响后续粒子</li>
+<li>结构在频域上有哪些显著阻抗峰</li>
+</ul>
+<h2 id="本文目标"><a href="#本文目标" class="headerlink" title="本文目标"></a>本文目标</h2><p>本文做了两套最小算例：</p>
+<ol>
+<li><strong>轴上束流最小算例</strong>：<code>ECHO3D_Minimal</code><ul>
+<li>用于得到纵向 wake、纵向阻抗和 loss factor</li>
+</ul>
+</li>
+<li><strong>偏心束流最小算例</strong>：<code>ECHO3D_Dipole</code><ul>
+<li>用于得到横向 wake、横向阻抗和 kick factor</li>
+</ul>
+</li>
+</ol>
+<p>同时，还编写了一套 Python 工具链用于：</p>
+<ul>
+<li>解析二进制 wake 结果</li>
+<li>绘制曲线图</li>
+<li>估算阻抗与指标</li>
+<li>生成对比汇总表</li>
+</ul>
+<h2 id="ECHO3D-命令行工作流"><a href="#ECHO3D-命令行工作流" class="headerlink" title="ECHO3D 命令行工作流"></a>ECHO3D 命令行工作流</h2><p>在本文环境中，ECHO3D 的命令行流程是：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Mesher.exe input.txt</span><br><span class="line">InitField.exe input.txt</span><br><span class="line">ECHO3D.exe input.txt</span><br><span class="line">IndirectIntegration.exe input.txt</span><br></pre></td></tr></table></figure>
+
+<p>如果在 Windows + <code>cmd</code> 下运行，最稳妥的调用方式类似：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmd /c &quot;cd /d ECHO3D_Minimal &amp;&amp; &quot;&quot;Mesher.exe&quot;&quot; input.txt &amp;&amp; &quot;&quot;InitField.exe&quot;&quot; input.txt &amp;&amp; &quot;&quot;ECHO3D.exe&quot;&quot; input.txt &amp;&amp; &quot;&quot;IndirectIntegration.exe&quot;&quot; input.txt&quot;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="最小纵向-wake-算例：ECHO3D-Minimal"><a href="#最小纵向-wake-算例：ECHO3D-Minimal" class="headerlink" title="最小纵向 wake 算例：ECHO3D_Minimal"></a>最小纵向 wake 算例：<code>ECHO3D_Minimal</code></h2><p>目录：</p>
+<ul>
+<li><code>ECHO3D_Minimal</code></li>
+</ul>
+<h3 id="input-txt"><a href="#input-txt" class="headerlink" title="input.txt"></a><code>input.txt</code></h3><p>这是最小主输入文件：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">%%%%%%%%%%%%%% minimal ECHO3D input %%%%%%%%%%%%%%%%%</span><br><span class="line"></span><br><span class="line">%%%%%%%%%%%%%% geometry %%%%%%%%%%%%%%%%%</span><br><span class="line"></span><br><span class="line">GeometryFile = &#x27;geometry.txt&#x27;	% [string]</span><br><span class="line">Units = &#x27;mm&#x27;	% [m/cm/mm]</span><br><span class="line">BoundaryConditionsX = [0  0]	% [0-open / 1-electric / 2-PML]</span><br><span class="line">BoundaryConditionsY = [0  1]	% [0-magnetic / 1-electric / 2-PML]</span><br><span class="line">BoundaryConditionsZ = [0  1]	% [0-magnetic / 1-electric / 2-PML]</span><br><span class="line"></span><br><span class="line">%%%%%%%%%%%%%% beam and field %%%%%%%%%%%%%%%%%</span><br><span class="line"></span><br><span class="line">BunchSigma = 1	% [Units]</span><br><span class="line">BunchPosition = [0  0]	% ny nz [mesh steps]</span><br><span class="line">InFieldDir = &#x27;-&#x27;	% [&#x27;free&#x27;- free space / &#x27;-&#x27; -waveguide / string]</span><br><span class="line"></span><br><span class="line">%%%%%%%%%%%%%% mesh %%%%%%%%%%%%%%%%%</span><br><span class="line"></span><br><span class="line">TimeSteps = -1	% [integer, &#x27;-1&#x27;- by definition]</span><br><span class="line">MeshLength = 200	% [integer]</span><br><span class="line">dY = [0 10]	% ymin ymax [Units]</span><br><span class="line">dZ = [0 10]	% zmin zmax [Units]</span><br><span class="line">Steps = [0.2 0.2 0.2]	% dx dy dz [Units]</span><br><span class="line">Tolerance = 0.01	% [float, relative]</span><br><span class="line">PMLDepth = 0	% [integer]</span><br><span class="line">PMLParameters = [1 1]	% sigma a [float, relative]</span><br><span class="line"></span><br><span class="line">%%%%%%%%%%%%%% solver %%%%%%%%%%%%%%%%%</span><br><span class="line"></span><br><span class="line">SolverType = &#x27;impl&#x27;	% [expl / impl]</span><br><span class="line">Conformal = 1	% [0-usc / 1-simple]</span><br><span class="line">Iterations = 0	% [integer]</span><br><span class="line">InitialIterations = 0	% [integer]</span><br><span class="line">Damping = 0	% [float, between 0 and 0.5]</span><br><span class="line">ThreadsNumber=4	% [integer]</span><br><span class="line"></span><br><span class="line">%%%%%%%%%%%%%% monitors %%%%%%%%%%%%%%%%%</span><br><span class="line"></span><br><span class="line">DumpMesh=1	% [0-no/1-yes]</span><br><span class="line">DumpField=1	% [0-no/1-yes]</span><br></pre></td></tr></table></figure>
+
+<h3 id="geometry-txt"><a href="#geometry-txt" class="headerlink" title="geometry.txt"></a><code>geometry.txt</code></h3><p>这是几何定义文件：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Background = 0 0 0 </span><br><span class="line"></span><br><span class="line">%%%%%%%%%%% Materials %%%%%%%%%%%%%%%%%%</span><br><span class="line"></span><br><span class="line">MaterialsNumber = 1</span><br><span class="line">stepout.stl 1 1 0</span><br><span class="line"></span><br><span class="line">%%%%%%%%%%% Meshing parts %%%%%%%%%%%%%%</span><br><span class="line"></span><br><span class="line">MeshParts = 1</span><br><span class="line">body -0.3 0.3</span><br><span class="line"></span><br><span class="line">%%%%%%%%%%% Geometry list %%%%%%%%%%%%%%</span><br><span class="line"></span><br><span class="line">GeometryParts = 1</span><br><span class="line">body 1</span><br></pre></td></tr></table></figure>
+
+<p>这个例子使用的是最简单的圆形 <code>step-out</code> 结构 STL。</p>
+<h2 id="ECHO3D-瞬态场可视化：正确路线是-FieldMonitor"><a href="#ECHO3D-瞬态场可视化：正确路线是-FieldMonitor" class="headerlink" title="ECHO3D 瞬态场可视化：正确路线是 FieldMonitor"></a>ECHO3D 瞬态场可视化：正确路线是 <code>FieldMonitor</code></h2><p>在本文前面的 wake、阻抗、loss factor 和 kick factor 分析之外，如果还想进一步观察：</p>
+<ul>
+<li>束流穿过结构时场分布如何随时间变化</li>
+<li>某个切面上的 <code>Ez</code>、<code>Ex</code> 如何传播</li>
+<li>如何导出可以直接展示的 GIF</li>
+</ul>
+<p>那么更推荐使用 **<code>FieldMonitor</code>**，而不是单纯依赖 <code>DumpField=1</code> 导出的 <code>OutFields/*.bin</code>。</p>
+<h3 id="为什么不用-OutFields-作为主要方案"><a href="#为什么不用-OutFields-作为主要方案" class="headerlink" title="为什么不用 OutFields 作为主要方案"></a>为什么不用 <code>OutFields</code> 作为主要方案</h3><p><code>OutFields</code> 的二进制文件当然包含场信息，但它更偏底层数据块，直接用来做瞬态动画时：</p>
+<ul>
+<li>文件结构不直观</li>
+<li>容易误判维度</li>
+<li>很难第一时间确认哪一维是时间、哪一维是空间</li>
+</ul>
+<p>相反，<code>FieldMonitor</code> 在官方手册中给出了明确的定义、参数和输出格式，更适合作为“瞬态场观察”的主入口。</p>
+<hr>
+<h2 id="官方手册中-FieldMonitor-的关键定义"><a href="#官方手册中-FieldMonitor-的关键定义" class="headerlink" title="官方手册中 FieldMonitor 的关键定义"></a>官方手册中 <code>FieldMonitor</code> 的关键定义</h2><p>在 <code>ECHO3D</code> 章节中，<code>FieldMonitor</code> 的定义为：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FieldMonitor = &#123; F tF x0 x1 y0 y1 z0 z1 s0 s1 N &#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中：</p>
+<ul>
+<li><code>F</code>：场分量，可取 <code>Ex</code> &#x2F; <code>Ey</code> &#x2F; <code>Ez</code> &#x2F; <code>Bx</code> &#x2F; <code>By</code> &#x2F; <code>Bz</code></li>
+<li><code>tF</code>：monitor 类型，可取：<ul>
+<li><code>x</code>：<code>x-time</code> monitor</li>
+<li><code>s</code>：<code>s-time</code> monitor</li>
+</ul>
+</li>
+</ul>
+<p>官方手册对 <code>ECHO3D</code> 的说明里还明确指出：</p>
+<ul>
+<li>束流<strong>只能沿 <code>x</code> 方向传播</strong></li>
+<li><code>s = x - ct</code> 是跟着 bunch 一起移动的局部纵向坐标</li>
+</ul>
+<p>因此：</p>
+<ul>
+<li><code>x-time monitor</code> 更适合看某个 moving-window 里的场如何随 <code>x</code> 演化</li>
+<li><code>s-time monitor</code> 更适合看某个相对 bunch 坐标定义下的场如何变化</li>
+</ul>
+<hr>
+<h2 id="我在-ECHO3D-Minimal-中采用的-FieldMonitor-配置"><a href="#我在-ECHO3D-Minimal-中采用的-FieldMonitor-配置" class="headerlink" title="我在 ECHO3D_Minimal 中采用的 FieldMonitor 配置"></a>我在 <code>ECHO3D_Minimal</code> 中采用的 <code>FieldMonitor</code> 配置</h2><p>为了得到真正可用于瞬态可视化的数据，我最终把最小算例的监视项改成了：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">FieldMonitor = &#123;&#x27;Ez&#x27; 	&#x27;x&#x27; 	20 	100 	0 	10 	0 	10 	0 	100 	1&#125;</span><br><span class="line">FieldMonitor = &#123;&#x27;Ez&#x27; 	&#x27;s&#x27; 	20 	100 	0 	10 	0 	10 	0 	100 	1&#125;</span><br><span class="line">DumpMesh=1	% [0-no/1-yes]</span><br><span class="line">DumpField=1	% [0-no/1-yes]</span><br></pre></td></tr></table></figure>
+
+<p>这次和最初只做 wake 后处理的版本相比，最大的区别在于：</p>
+<ul>
+<li>monitor 不再退化成一条线或一个点</li>
+<li><code>y</code>、<code>z</code> 两个方向都保留了非零范围</li>
+<li>导出的 <code>Monitor_N01.txt</code> &#x2F; <code>Monitor_N02.txt</code> 已经是<strong>真正的大矩阵输出</strong></li>
+</ul>
+<hr>
+<h2 id="新的-FieldMonitor-输出结构"><a href="#新的-FieldMonitor-输出结构" class="headerlink" title="新的 FieldMonitor 输出结构"></a>新的 <code>FieldMonitor</code> 输出结构</h2><p>重新运行 <code>ECHO3D_Minimal</code> 后，<code>Results/</code> 目录中出现了两个关键文件：</p>
+<ul>
+<li><code>Monitor_N01.txt</code></li>
+<li><code>Monitor_N02.txt</code></li>
+</ul>
+<h3 id="Monitor-N01-txt-头部"><a href="#Monitor-N01-txt-头部" class="headerlink" title="Monitor_N01.txt 头部"></a><code>Monitor_N01.txt</code> 头部</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">field Ez</span><br><span class="line">time_mode x</span><br><span class="line">k_ct 105</span><br><span class="line">h_ct 0.0002</span><br><span class="line">ct0 0.0201</span><br><span class="line">k_y 51</span><br><span class="line">h_y 0.0002</span><br><span class="line">y0 0.0</span><br><span class="line">k_z 51</span><br><span class="line">h_z 0.0002</span><br><span class="line">z0 0.0001</span><br><span class="line">k_s 202</span><br><span class="line">h_s 0.0002</span><br></pre></td></tr></table></figure>
+
+<h3 id="Monitor-N02-txt-头部"><a href="#Monitor-N02-txt-头部" class="headerlink" title="Monitor_N02.txt 头部"></a><code>Monitor_N02.txt</code> 头部</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">field Ez</span><br><span class="line">time_mode s</span><br><span class="line">k_ct 205</span><br><span class="line">h_ct 0.0002</span><br><span class="line">ct0 0.0001</span><br><span class="line">k_y 51</span><br><span class="line">h_y 0.0002</span><br><span class="line">y0 0.0</span><br><span class="line">k_z 51</span><br><span class="line">h_z 0.0002</span><br><span class="line">z0 0.0001</span><br><span class="line">k_x 105</span><br><span class="line">h_x 0.0002</span><br><span class="line">x0 0.02</span><br></pre></td></tr></table></figure>
+
+<p>这两个文件不再是单列坐标，而是超大体积的 ASCII 监视矩阵。</p>
+<hr>
+<h2 id="如何正确理解-Monitor-N01"><a href="#如何正确理解-Monitor-N01" class="headerlink" title="如何正确理解 Monitor_N01"></a>如何正确理解 <code>Monitor_N01</code></h2><p>根据实际输出和官方定义，我最终确认：</p>
+<ul>
+<li><code>Monitor_N01</code> 对应 <code>time_mode = x</code></li>
+<li>每一行对应一个时间&#x2F;位置采样</li>
+<li>每一行后面的数据可以重构成一个：</li>
+</ul>
+<p>$$<br>51 \times 51 \times 202<br>$$</p>
+<p>的三维数据块。</p>
+<p>我进一步固定中间 <code>z</code> 截面，提取出：</p>
+<p>$$<br>E_z(y, s; x)<br>$$</p>
+<p>于是可以得到：</p>
+<ul>
+<li>某个固定 <code>z</code> 面上的 <code>y-s</code> 平面图</li>
+<li>该平面随 <code>x</code> &#x2F; 时间推进的动画</li>
+</ul>
+<h3 id="结果图：Monitor-N01-第一帧"><a href="#结果图：Monitor-N01-第一帧" class="headerlink" title="结果图：Monitor_N01 第一帧"></a>结果图：<code>Monitor_N01</code> 第一帧</h3><p><img data-src="https://github.com/iuming/iuming.github.io/tree/master/Markdown_images/Monitor_N01_official_first_frame.png" alt="Monitor N01 first frame"></p>
+<h3 id="中心点时序曲线"><a href="#中心点时序曲线" class="headerlink" title="中心点时序曲线"></a>中心点时序曲线</h3><p><img data-src="https://github.com/iuming/iuming.github.io/tree/master/Markdown_images/Monitor_N01_official_center_series.png" alt="Monitor N01 center series"></p>
+<h3 id="瞬态-GIF"><a href="#瞬态-GIF" class="headerlink" title="瞬态 GIF"></a>瞬态 GIF</h3><p><img data-src="https://github.com/iuming/iuming.github.io/tree/master/Markdown_images/Monitor_N01_official.gif" alt="Monitor N01 official gif"></p>
+<p>这张 GIF 已经相当接近“束流穿过结构时，固定切面上的场随时间变化”的直观展示。</p>
+<hr>
+<h2 id="如何正确理解-Monitor-N02"><a href="#如何正确理解-Monitor-N02" class="headerlink" title="如何正确理解 Monitor_N02"></a>如何正确理解 <code>Monitor_N02</code></h2><p><code>Monitor_N02</code> 对应：</p>
+<ul>
+<li><code>time_mode = s</code></li>
+<li>头部给出 <code>k_x = 105</code></li>
+</ul>
+<p>同样固定中间 <code>z</code> 截面后，我提取出：</p>
+<p>$$<br>E_z(y, x; s)<br>$$</p>
+<p>也就是在某个局部 bunch 坐标条件下，观察 <code>y-x</code> 平面的场分布。</p>
+<h3 id="Monitor-N02-第一帧"><a href="#Monitor-N02-第一帧" class="headerlink" title="Monitor_N02 第一帧"></a><code>Monitor_N02</code> 第一帧</h3><p><img data-src="https://github.com/iuming/iuming.github.io/tree/master/Markdown_images/Monitor_N02_official_first_frame.png" alt="Monitor N02 first frame"></p>
+<h3 id="中心点时序曲线-1"><a href="#中心点时序曲线-1" class="headerlink" title="中心点时序曲线"></a>中心点时序曲线</h3><p><img data-src="https://github.com/iuming/iuming.github.io/tree/master/Markdown_images/Monitor_N02_official_center_series.png" alt="Monitor N02 center series"></p>
+<p>由于前期有较多弱帧，我额外做了一版精简动画，并把横轴直接标成 <code>x [m]</code>：</p>
+<h3 id="x-轴显式标注动画"><a href="#x-轴显式标注动画" class="headerlink" title="x 轴显式标注动画"></a><code>x</code> 轴显式标注动画</h3><p><img data-src="https://github.com/iuming/iuming.github.io/tree/master/Markdown_images/Monitor_N02_xaxis.gif" alt="Monitor N02 x-axis gif"></p>
+<p>这版动画更适合直接展示“束流沿 <code>x</code> 方向传播时，场在 <code>y-x</code> 平面上的变化”。</p>
+<p>从展示效果看：</p>
+<ul>
+<li><code>Monitor_N01_official.gif</code> 更像一个 <code>y-s</code> 时空切片动画</li>
+<li><code>Monitor_N02_xaxis.gif</code> 更适合用来直观展示束流沿 <code>x</code> 方向传播</li>
+</ul>
+<hr>
+<h2 id="Monitor-N01-与-Monitor-N02-的物理区别"><a href="#Monitor-N01-与-Monitor-N02-的物理区别" class="headerlink" title="Monitor_N01 与 Monitor_N02 的物理区别"></a><code>Monitor_N01</code> 与 <code>Monitor_N02</code> 的物理区别</h2><p>可以这样理解：</p>
+<h3 id="Monitor-N01-official-gif"><a href="#Monitor-N01-official-gif" class="headerlink" title="Monitor_N01_official.gif"></a><code>Monitor_N01_official.gif</code></h3><p>更像是在看：</p>
+<p>$$<br>E_z(y,s;x)<br>$$</p>
+<p>适合观察：</p>
+<ul>
+<li>尾场在 <code>s</code> 坐标中的分布</li>
+<li>bunch 头尾附近的时空结构</li>
+</ul>
+<h3 id="Monitor-N02-xaxis-gif"><a href="#Monitor-N02-xaxis-gif" class="headerlink" title="Monitor_N02_xaxis.gif"></a><code>Monitor_N02_xaxis.gif</code></h3><p>更像是在看：</p>
+<p>$$<br>E_z(y,x;s)<br>$$</p>
+<p>适合观察：</p>
+<ul>
+<li>沿束流传播方向 <code>x</code> 的场传播</li>
+<li>更直观的“束流穿过结构”画面</li>
+</ul>
+<p>如果你的目标是做演示或博客展示，我更推荐：</p>
+<ul>
+<li>主图用 <code>Monitor_N02_xaxis.gif</code></li>
+<li>补充图用 <code>Monitor_N01_official.gif</code></li>
+</ul>
+<hr>
+<h2 id="这部分使用到的脚本"><a href="#这部分使用到的脚本" class="headerlink" title="这部分使用到的脚本"></a>这部分使用到的脚本</h2><p>为了完成上述 <code>FieldMonitor</code> 后处理，我新增了以下脚本：</p>
+<ul>
+<li><code>plot_field_monitor_official.py</code></li>
+<li><code>plot_field_monitor_n02_official.py</code></li>
+<li><code>plot_field_monitor_n02_xaxis_gif.py</code></li>
+</ul>
+<p>它们分别用于：</p>
+<ul>
+<li>按官方定义解析 <code>Monitor_N01.txt</code></li>
+<li>按官方定义解析 <code>Monitor_N02.txt</code></li>
+<li>生成横轴标为 <code>x [m]</code> 的 GIF</li>
+</ul>
+<p>在博客中不再贴出完整脚本全文，建议直接结合仓库文件使用。如果需要展示完整代码，可以按需补充到附录。</p>
+<hr>
+<h2 id="关于瞬态可视化的一点经验总结"><a href="#关于瞬态可视化的一点经验总结" class="headerlink" title="关于瞬态可视化的一点经验总结"></a>关于瞬态可视化的一点经验总结</h2><p>这次最大的教训是：</p>
+<ol>
+<li><code>DumpField=1</code> 当然能导出底层场数据，但不一定是做动画的最佳入口</li>
+<li>对于 ECHO3D，<strong>FieldMonitor 才是更适合做瞬态场可视化的正式接口</strong></li>
+<li>先看官方示例，再决定解析方式，能少走很多弯路</li>
+</ol>
+<p>如果后续你想继续优化动画，我建议：</p>
+<ul>
+<li>自动裁剪高场区域</li>
+<li>给每一帧标注真实 <code>x</code> &#x2F; <code>ct</code> &#x2F; <code>s</code> 数值</li>
+<li>导出 MP4 版本</li>
+<li>再尝试其他切片方式，如固定 <code>y</code> 或固定 <code>s</code></li>
+</ul>
+<p>如果是第一次向外展示结果，我建议优先放这两张动画：</p>
+<ul>
+<li><code>Monitor_N01_official.gif</code></li>
+<li><code>Monitor_N02_xaxis.gif</code></li>
+</ul>
+<h2 id="解析-ECHO3D-二进制-wake：parse-wake-py"><a href="#解析-ECHO3D-二进制-wake：parse-wake-py" class="headerlink" title="解析 ECHO3D 二进制 wake：parse_wake.py"></a>解析 ECHO3D 二进制 wake：<code>parse_wake.py</code></h2><p><code>IndirectIntegration.exe</code> 输出的是二进制文件，例如：</p>
+<ul>
+<li><code>wake3D.bin</code></li>
+<li><code>wake3Dindirect.bin</code></li>
+</ul>
+<p>为了把它变成文本曲线，我写了 <code>parse_wake.py</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> annotations</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> struct</span><br><span class="line"><span class="keyword">from</span> pathlib <span class="keyword">import</span> Path</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">parse_wake_file</span>(<span class="params"></span></span><br><span class="line"><span class="params">    bin_path: Path,</span></span><br><span class="line"><span class="params">    out_path: Path,</span></span><br><span class="line"><span class="params">    s0_cm: <span class="built_in">float</span> = -<span class="number">0.48</span>,</span></span><br><span class="line"><span class="params">    ds_cm: <span class="built_in">float</span> = <span class="number">0.02</span>,</span></span><br><span class="line"><span class="params"></span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">    data = bin_path.read_bytes()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(data) &lt; <span class="number">44</span>:</span><br><span class="line">        <span class="keyword">raise</span> ValueError(<span class="string">f&quot;File too small: <span class="subst">&#123;bin_path&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">    n = struct.unpack_from(<span class="string">&#x27;&lt;i&#x27;</span>, data, <span class="number">0</span>)[<span class="number">0</span>]</span><br><span class="line">    ny = struct.unpack_from(<span class="string">&#x27;&lt;i&#x27;</span>, data, <span class="number">4</span>)[<span class="number">0</span>]</span><br><span class="line">    nz = struct.unpack_from(<span class="string">&#x27;&lt;i&#x27;</span>, data, <span class="number">8</span>)[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    values_per_sample = ny * nz</span><br><span class="line">    header_size = <span class="number">44</span></span><br><span class="line">    expected_size = header_size + n * values_per_sample * <span class="number">8</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(data) &lt; expected_size:</span><br><span class="line">        <span class="keyword">raise</span> ValueError(</span><br><span class="line">            <span class="string">f&quot;Unexpected file size for <span class="subst">&#123;bin_path&#125;</span>: &quot;</span></span><br><span class="line">            <span class="string">f&quot;got <span class="subst">&#123;<span class="built_in">len</span>(data)&#125;</span>, expected at least <span class="subst">&#123;expected_size&#125;</span>&quot;</span></span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">    lines: <span class="built_in">list</span>[<span class="built_in">str</span>] = []</span><br><span class="line">    lines.append(<span class="string">f&quot;# Parsed from <span class="subst">&#123;bin_path.name&#125;</span>&quot;</span>)</span><br><span class="line">    lines.append(<span class="string">f&quot;# header: n=<span class="subst">&#123;n&#125;</span>, ny=<span class="subst">&#123;ny&#125;</span>, nz=<span class="subst">&#123;nz&#125;</span>&quot;</span>)</span><br><span class="line">    lines.append(<span class="string">&quot;# Columns: index s_cm wake_avg&quot;</span>)</span><br><span class="line"></span><br><span class="line">    offset = header_size</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">        vals = struct.unpack_from(<span class="string">f&#x27;&lt;<span class="subst">&#123;values_per_sample&#125;</span>d&#x27;</span>, data, offset)</span><br><span class="line">        avg = <span class="built_in">sum</span>(vals) / values_per_sample</span><br><span class="line">        s_cm = s0_cm + i * ds_cm</span><br><span class="line">        lines.append(<span class="string">f&quot;<span class="subst">&#123;i&#125;</span> <span class="subst">&#123;s_cm:<span class="number">.6</span>f&#125;</span> <span class="subst">&#123;avg:<span class="number">.17</span>g&#125;</span>&quot;</span>)</span><br><span class="line">        offset += values_per_sample * <span class="number">8</span></span><br><span class="line"></span><br><span class="line">    out_path.write_text(<span class="string">&quot;\n&quot;</span>.join(lines) + <span class="string">&quot;\n&quot;</span>, encoding=<span class="string">&quot;utf-8&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    base = Path(__file__).resolve().parent</span><br><span class="line">    results = base / <span class="string">&#x27;Results&#x27;</span></span><br><span class="line"></span><br><span class="line">    parse_wake_file(</span><br><span class="line">        results / <span class="string">&#x27;wake3Dindirect.bin&#x27;</span>,</span><br><span class="line">        results / <span class="string">&#x27;wake3Dindirect_parsed.txt&#x27;</span>,</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Done.&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;Output: <span class="subst">&#123;results / <span class="string">&#x27;wake3Dindirect_parsed.txt&#x27;</span>&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="运行方式"><a href="#运行方式" class="headerlink" title="运行方式"></a>运行方式</h3><p>如果 VS Code 已经绑定到 conda 环境 <code>rl</code>，可以直接运行：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python parse_wake.py</span><br></pre></td></tr></table></figure>
+
+<p>输出文件：</p>
+<ul>
+<li><code>Results/wake3Dindirect_parsed.txt</code></li>
+</ul>
+<p>如果你的系统里有多个 Python 环境，也可以把上面的命令替换成你自己的解释器路径，但在博客里推荐统一写成：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python parse_wake.py</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="绘制纵向-wake-曲线：plot-wake-py"><a href="#绘制纵向-wake-曲线：plot-wake-py" class="headerlink" title="绘制纵向 wake 曲线：plot_wake.py"></a>绘制纵向 wake 曲线：<code>plot_wake.py</code></h2><p>为了直接把文本结果画成 PNG，又写了 <code>plot_wake.py</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> annotations</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pathlib <span class="keyword">import</span> Path</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">load_wake_data</span>(<span class="params">file_path: Path</span>) -&gt; <span class="built_in">tuple</span>[<span class="built_in">list</span>[<span class="built_in">float</span>], <span class="built_in">list</span>[<span class="built_in">float</span>]]:</span><br><span class="line">    s_vals: <span class="built_in">list</span>[<span class="built_in">float</span>] = []</span><br><span class="line">    wake_vals: <span class="built_in">list</span>[<span class="built_in">float</span>] = []</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> file_path.read_text(encoding=<span class="string">&#x27;utf-8&#x27;</span>).splitlines():</span><br><span class="line">        line = line.strip()</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> line <span class="keyword">or</span> line.startswith(<span class="string">&#x27;#&#x27;</span>):</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">        parts = line.split()</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(parts) &lt; <span class="number">3</span>:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">        _, s_cm, wake = parts[:<span class="number">3</span>]</span><br><span class="line">        s_vals.append(<span class="built_in">float</span>(s_cm))</span><br><span class="line">        wake_vals.append(<span class="built_in">float</span>(wake))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> s_vals, wake_vals</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>() -&gt; <span class="literal">None</span>:</span><br><span class="line">    base = Path(__file__).resolve().parent</span><br><span class="line">    results_dir = base / <span class="string">&#x27;Results&#x27;</span></span><br><span class="line">    input_file = results_dir / <span class="string">&#x27;wake3Dindirect_parsed.txt&#x27;</span></span><br><span class="line">    output_file = results_dir / <span class="string">&#x27;wake3Dindirect_plot.png&#x27;</span></span><br><span class="line"></span><br><span class="line">    s_vals, wake_vals = load_wake_data(input_file)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> s_vals:</span><br><span class="line">        <span class="keyword">raise</span> ValueError(<span class="string">f&#x27;No data found in <span class="subst">&#123;input_file&#125;</span>&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    plt.figure(figsize=(<span class="number">9</span>, <span class="number">5.5</span>))</span><br><span class="line">    plt.plot(s_vals, wake_vals, linewidth=<span class="number">2</span>, color=<span class="string">&#x27;tab:blue&#x27;</span>, label=<span class="string">&#x27;Wake (indirect)&#x27;</span>)</span><br><span class="line">    plt.axhline(<span class="number">0.0</span>, color=<span class="string">&#x27;black&#x27;</span>, linewidth=<span class="number">1</span>, linestyle=<span class="string">&#x27;--&#x27;</span>)</span><br><span class="line">    plt.axvline(<span class="number">0.0</span>, color=<span class="string">&#x27;gray&#x27;</span>, linewidth=<span class="number">1</span>, linestyle=<span class="string">&#x27;:&#x27;</span>)</span><br><span class="line">    plt.xlabel(<span class="string">&#x27;s [cm]&#x27;</span>)</span><br><span class="line">    plt.ylabel(<span class="string">&#x27;Wake&#x27;</span>)</span><br><span class="line">    plt.title(<span class="string">&#x27;ECHO3D Longitudinal Wake&#x27;</span>)</span><br><span class="line">    plt.grid(<span class="literal">True</span>, linestyle=<span class="string">&#x27;--&#x27;</span>, alpha=<span class="number">0.4</span>)</span><br><span class="line">    plt.legend()</span><br><span class="line">    plt.tight_layout()</span><br><span class="line">    plt.savefig(output_file, dpi=<span class="number">160</span>)</span><br><span class="line">    plt.close()</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Done.&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;Input : <span class="subst">&#123;input_file&#125;</span>&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;Output: <span class="subst">&#123;output_file&#125;</span>&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+
+<p>输出图：</p>
+<ul>
+<li><code>Results/wake3Dindirect_plot.png</code></li>
+</ul>
+<p>对应图像示意：</p>
+<p><img data-src="https://github.com/iuming/iuming.github.io/tree/master/Markdown_images/wake3Dindirect_plot.png" alt="ECHO3D Longitudinal Wake"></p>
+<h2 id="估算纵向阻抗和-loss-factor：analyze-longitudinal-py"><a href="#估算纵向阻抗和-loss-factor：analyze-longitudinal-py" class="headerlink" title="估算纵向阻抗和 loss factor：analyze_longitudinal.py"></a>估算纵向阻抗和 loss factor：<code>analyze_longitudinal.py</code></h2><p>为了从纵向 wake 进一步估算：</p>
+<ul>
+<li>纵向阻抗 $Z_\parallel(\omega)$</li>
+<li>loss factor</li>
+</ul>
+<p>我写了下面这个脚本：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> annotations</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pathlib <span class="keyword">import</span> Path</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">load_wake</span>(<span class="params">file_path: Path</span>) -&gt; <span class="built_in">tuple</span>[np.ndarray, np.ndarray]:</span><br><span class="line">    s_vals = []</span><br><span class="line">    w_vals = []</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> file_path.read_text(encoding=<span class="string">&#x27;utf-8&#x27;</span>).splitlines():</span><br><span class="line">        line = line.strip()</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> line <span class="keyword">or</span> line.startswith(<span class="string">&#x27;#&#x27;</span>):</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        parts = line.split()</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(parts) &lt; <span class="number">3</span>:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        s_vals.append(<span class="built_in">float</span>(parts[<span class="number">1</span>]))</span><br><span class="line">        w_vals.append(<span class="built_in">float</span>(parts[<span class="number">2</span>]))</span><br><span class="line">    <span class="keyword">return</span> np.array(s_vals, dtype=<span class="built_in">float</span>), np.array(w_vals, dtype=<span class="built_in">float</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">gaussian_lambda</span>(<span class="params">s_cm: np.ndarray, sigma_cm: <span class="built_in">float</span></span>) -&gt; np.ndarray:</span><br><span class="line">    norm = <span class="number">1.0</span> / (np.sqrt(<span class="number">2.0</span> * np.pi) * sigma_cm)</span><br><span class="line">    <span class="keyword">return</span> norm * np.exp(-(s_cm**<span class="number">2</span>) / (<span class="number">2.0</span> * sigma_cm**<span class="number">2</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>() -&gt; <span class="literal">None</span>:</span><br><span class="line">    base = Path(__file__).resolve().parent</span><br><span class="line">    results = base / <span class="string">&#x27;Results&#x27;</span></span><br><span class="line">    wake_file = results / <span class="string">&#x27;wake3Dindirect_parsed.txt&#x27;</span></span><br><span class="line"></span><br><span class="line">    s_cm, w = load_wake(wake_file)</span><br><span class="line">    ds_cm = <span class="built_in">float</span>(np.mean(np.diff(s_cm)))</span><br><span class="line">    sigma_cm = <span class="number">0.1</span>  <span class="comment"># BunchSigma=1 mm = 0.1 cm</span></span><br><span class="line"></span><br><span class="line">    lam = gaussian_lambda(s_cm, sigma_cm)</span><br><span class="line">    lam /= np.trapezoid(lam, s_cm)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Loss factor approximation: integral lambda(s) * W_parallel(s) ds</span></span><br><span class="line">    loss_factor = np.trapezoid(lam * w, s_cm)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># FFT-based longitudinal impedance approximation</span></span><br><span class="line">    ds_m = ds_cm * <span class="number">1e-2</span></span><br><span class="line">    c = <span class="number">299792458.0</span></span><br><span class="line">    t_step = ds_m / c</span><br><span class="line">    freqs_hz = np.fft.rfftfreq(<span class="built_in">len</span>(w), d=t_step)</span><br><span class="line">    z_long = np.fft.rfft(w) * ds_m</span><br><span class="line"></span><br><span class="line">    out_txt = results / <span class="string">&#x27;longitudinal_metrics.txt&#x27;</span></span><br><span class="line">    out_txt.write_text(</span><br><span class="line">        <span class="string">&#x27;\n&#x27;</span>.join([</span><br><span class="line">            <span class="string">&#x27;# Longitudinal metrics estimated from wake3Dindirect_parsed.txt&#x27;</span>,</span><br><span class="line">            <span class="string">f&#x27;sigma_cm <span class="subst">&#123;sigma_cm&#125;</span>&#x27;</span>,</span><br><span class="line">            <span class="string">f&#x27;ds_cm <span class="subst">&#123;ds_cm&#125;</span>&#x27;</span>,</span><br><span class="line">            <span class="string">f&#x27;loss_factor_est <span class="subst">&#123;loss_factor:<span class="number">.17</span>g&#125;</span>&#x27;</span>,</span><br><span class="line">            <span class="string">f&#x27;wake_min <span class="subst">&#123;w.<span class="built_in">min</span>():<span class="number">.17</span>g&#125;</span>&#x27;</span>,</span><br><span class="line">            <span class="string">f&#x27;wake_min_s_cm <span class="subst">&#123;s_cm[w.argmin()]:<span class="number">.17</span>g&#125;</span>&#x27;</span>,</span><br><span class="line">            <span class="string">f&#x27;wake_max <span class="subst">&#123;w.<span class="built_in">max</span>():<span class="number">.17</span>g&#125;</span>&#x27;</span>,</span><br><span class="line">            <span class="string">f&#x27;wake_max_s_cm <span class="subst">&#123;s_cm[w.argmax()]:<span class="number">.17</span>g&#125;</span>&#x27;</span>,</span><br><span class="line">        ]) + <span class="string">&#x27;\n&#x27;</span>,</span><br><span class="line">        encoding=<span class="string">&#x27;utf-8&#x27;</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    imp_txt = results / <span class="string">&#x27;Z_longitudinal_estimated.txt&#x27;</span></span><br><span class="line">    <span class="keyword">with</span> imp_txt.<span class="built_in">open</span>(<span class="string">&#x27;w&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        f.write(<span class="string">&#x27;# f_Hz ReZ ImZ AbsZ\n&#x27;</span>)</span><br><span class="line">        <span class="keyword">for</span> ff, zz <span class="keyword">in</span> <span class="built_in">zip</span>(freqs_hz, z_long):</span><br><span class="line">            f.write(<span class="string">f&#x27;<span class="subst">&#123;ff:<span class="number">.17</span>g&#125;</span> <span class="subst">&#123;zz.real:<span class="number">.17</span>g&#125;</span> <span class="subst">&#123;zz.imag:<span class="number">.17</span>g&#125;</span> <span class="subst">&#123;<span class="built_in">abs</span>(zz):<span class="number">.17</span>g&#125;</span>\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    plt.figure(figsize=(<span class="number">9</span>, <span class="number">5.5</span>))</span><br><span class="line">    plt.plot(freqs_hz * <span class="number">1e-9</span>, np.<span class="built_in">abs</span>(z_long), linewidth=<span class="number">1.5</span>)</span><br><span class="line">    plt.xlabel(<span class="string">&#x27;f [GHz]&#x27;</span>)</span><br><span class="line">    plt.ylabel(<span class="string">&#x27;|Z_parallel| [arb.]&#x27;</span>)</span><br><span class="line">    plt.title(<span class="string">&#x27;Estimated Longitudinal Impedance&#x27;</span>)</span><br><span class="line">    plt.grid(<span class="literal">True</span>, linestyle=<span class="string">&#x27;--&#x27;</span>, alpha=<span class="number">0.4</span>)</span><br><span class="line">    plt.tight_layout()</span><br><span class="line">    plt.savefig(results / <span class="string">&#x27;Z_longitudinal_estimated.png&#x27;</span>, dpi=<span class="number">160</span>)</span><br><span class="line">    plt.close()</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Done.&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;Loss factor estimate: <span class="subst">&#123;loss_factor:<span class="number">.6</span>g&#125;</span>&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;Output: <span class="subst">&#123;out_txt&#125;</span>&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;Output: <span class="subst">&#123;imp_txt&#125;</span>&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+
+<h3 id="ECHO3D-Minimal-结果"><a href="#ECHO3D-Minimal-结果" class="headerlink" title="ECHO3D_Minimal 结果"></a><code>ECHO3D_Minimal</code> 结果</h3><p>对于轴上束流最小算例，得到：</p>
+<ul>
+<li><code>loss_factor_est = -14.636628710029601</code></li>
+<li><code>wake_min = -21.328521756987332</code></li>
+<li><code>wake_min_s_cm = 0</code></li>
+<li><code>wake_max = 3.3978856597281952</code></li>
+<li><code>wake_max_s_cm = 0.4</code></li>
+</ul>
+<p>这表明：</p>
+<ul>
+<li>主负峰出现在 $s&#x3D;0$</li>
+<li>后续存在正向回摆和衰减振荡</li>
+</ul>
+<p>对应纵向阻抗图：</p>
+<p><img data-src="https://github.com/iuming/iuming.github.io/tree/master/Markdown_images/Z_longitudinal_estimated.png" alt="Estimated Longitudinal Impedance"></p>
+<h2 id="构造偏心束流横向算例：ECHO3D-Dipole"><a href="#构造偏心束流横向算例：ECHO3D-Dipole" class="headerlink" title="构造偏心束流横向算例：ECHO3D_Dipole"></a>构造偏心束流横向算例：<code>ECHO3D_Dipole</code></h2><p>目录：</p>
+<ul>
+<li><code>ECHO3D_Dipole</code></li>
+</ul>
+<p>这个算例是在 <code>ECHO3D_Minimal</code> 基础上复制出来，并把束流改为偏心注入。</p>
+<h3 id="input-txt-1"><a href="#input-txt-1" class="headerlink" title="input.txt"></a><code>input.txt</code></h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">%%%%%%%%%%%%%% minimal ECHO3D input %%%%%%%%%%%%%%%%%</span><br><span class="line"></span><br><span class="line">%%%%%%%%%%%%%% geometry %%%%%%%%%%%%%%%%%</span><br><span class="line"></span><br><span class="line">GeometryFile = &#x27;geometry.txt&#x27;	% [string]</span><br><span class="line">Units = &#x27;mm&#x27;	% [m/cm/mm]</span><br><span class="line">BoundaryConditionsX = [0  0]	% [0-open / 1-electric / 2-PML]</span><br><span class="line">BoundaryConditionsY = [0  1]	% [0-magnetic / 1-electric / 2-PML]</span><br><span class="line">BoundaryConditionsZ = [0  1]	% [0-magnetic / 1-electric / 2-PML]</span><br><span class="line"></span><br><span class="line">%%%%%%%%%%%%%% beam and field %%%%%%%%%%%%%%%%%</span><br><span class="line"></span><br><span class="line">BunchSigma = 1	% [Units]</span><br><span class="line">BunchPosition = [1  0]	% ny nz [mesh steps]</span><br><span class="line">InFieldDir = &#x27;-&#x27;	% [&#x27;free&#x27;- free space / &#x27;-&#x27; -waveguide / string]</span><br><span class="line"></span><br><span class="line">%%%%%%%%%%%%%% mesh %%%%%%%%%%%%%%%%%</span><br><span class="line"></span><br><span class="line">TimeSteps = -1	% [integer, &#x27;-1&#x27;- by definition]</span><br><span class="line">MeshLength = 200	% [integer]</span><br><span class="line">dY = [0 10]	% ymin ymax [Units]</span><br><span class="line">dZ = [0 10]	% zmin zmax [Units]</span><br><span class="line">Steps = [0.2 0.2 0.2]	% dx dy dz [Units]</span><br><span class="line">Tolerance = 0.01	% [float, relative]</span><br><span class="line">PMLDepth = 0	% [integer]</span><br><span class="line">PMLParameters = [1 1]	% sigma a [float, relative]</span><br><span class="line"></span><br><span class="line">%%%%%%%%%%%%%% solver %%%%%%%%%%%%%%%%%</span><br><span class="line"></span><br><span class="line">SolverType = &#x27;impl&#x27;	% [expl / impl]</span><br><span class="line">Conformal = 1	% [0-usc / 1-simple]</span><br><span class="line">Iterations = 0	% [integer]</span><br><span class="line">InitialIterations = 0	% [integer]</span><br><span class="line">Damping = 0	% [float, between 0 and 0.5]</span><br><span class="line">ThreadsNumber=4	% [integer]</span><br><span class="line"></span><br><span class="line">%%%%%%%%%%%%%% monitors %%%%%%%%%%%%%%%%%</span><br><span class="line"></span><br><span class="line">DumpMesh=0	% [0-no/1-yes]</span><br><span class="line">DumpField=0	% [0-no/1-yes]</span><br><span class="line">WakeMonitor= [-1 1 -1 1]	% ymin ymax zmin zmax [in mesh lines from the bunch position]</span><br></pre></td></tr></table></figure>
+
+<p>和轴上束流相比，关键改动是：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BunchPosition = [1 0]</span><br></pre></td></tr></table></figure>
+
+<p>这会激发横向偶极响应。</p>
+<h2 id="估算横向-wake、横向阻抗和-kick-factor：analyze-transverse-py"><a href="#估算横向-wake、横向阻抗和-kick-factor：analyze-transverse-py" class="headerlink" title="估算横向 wake、横向阻抗和 kick factor：analyze_transverse.py"></a>估算横向 wake、横向阻抗和 kick factor：<code>analyze_transverse.py</code></h2><p>为了从 <code>3×2</code> 的 monitor 网格里构造横向 wake，我写了如下脚本：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> annotations</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> struct</span><br><span class="line"><span class="keyword">from</span> pathlib <span class="keyword">import</span> Path</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">parse_grid</span>(<span class="params">bin_path: Path, s0_cm: <span class="built_in">float</span> = -<span class="number">0.48</span>, ds_cm: <span class="built_in">float</span> = <span class="number">0.02</span></span>):</span><br><span class="line">    data = bin_path.read_bytes()</span><br><span class="line">    n = struct.unpack_from(<span class="string">&#x27;&lt;i&#x27;</span>, data, <span class="number">0</span>)[<span class="number">0</span>]</span><br><span class="line">    ny = struct.unpack_from(<span class="string">&#x27;&lt;i&#x27;</span>, data, <span class="number">4</span>)[<span class="number">0</span>]</span><br><span class="line">    nz = struct.unpack_from(<span class="string">&#x27;&lt;i&#x27;</span>, data, <span class="number">8</span>)[<span class="number">0</span>]</span><br><span class="line">    header_size = <span class="number">44</span></span><br><span class="line">    vals_per_sample = ny * nz</span><br><span class="line">    offset = header_size</span><br><span class="line">    arr = np.empty((n, ny, nz), dtype=<span class="built_in">float</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">        vals = struct.unpack_from(<span class="string">f&#x27;&lt;<span class="subst">&#123;vals_per_sample&#125;</span>d&#x27;</span>, data, offset)</span><br><span class="line">        arr[i, :, :] = np.array(vals, dtype=<span class="built_in">float</span>).reshape((ny, nz))</span><br><span class="line">        offset += vals_per_sample * <span class="number">8</span></span><br><span class="line">    s = s0_cm + np.arange(n, dtype=<span class="built_in">float</span>) * ds_cm</span><br><span class="line">    <span class="keyword">return</span> s, arr</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>() -&gt; <span class="literal">None</span>:</span><br><span class="line">    base = Path(__file__).resolve().parent</span><br><span class="line">    results = base / <span class="string">&#x27;Results&#x27;</span></span><br><span class="line">    s_cm, arr = parse_grid(results / <span class="string">&#x27;wake3Dindirect.bin&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    ny, nz = arr.shape[<span class="number">1</span>], arr.shape[<span class="number">2</span>]</span><br><span class="line">    <span class="comment"># average over z first</span></span><br><span class="line">    yz_avg = arr.mean(axis=<span class="number">2</span>)  <span class="comment"># shape (n, ny)</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># longitudinal component: average over all monitor points</span></span><br><span class="line">    w_long = yz_avg.mean(axis=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># transverse estimate: left-right finite difference if possible</span></span><br><span class="line">    <span class="keyword">if</span> ny &gt;= <span class="number">3</span>:</span><br><span class="line">        left = yz_avg[:, <span class="number">0</span>]</span><br><span class="line">        center = yz_avg[:, <span class="number">1</span>]</span><br><span class="line">        right = yz_avg[:, <span class="number">2</span>]</span><br><span class="line">        <span class="comment"># bunch offset is 1 mesh step in y, mesh step is 0.2 mm = 0.02 cm</span></span><br><span class="line">        dy_cm = <span class="number">0.02</span></span><br><span class="line">        w_trans = (right - left) / (<span class="number">2.0</span> * dy_cm)</span><br><span class="line">    <span class="keyword">elif</span> ny == <span class="number">2</span>:</span><br><span class="line">        dy_cm = <span class="number">0.02</span></span><br><span class="line">        w_trans = (yz_avg[:, <span class="number">1</span>] - yz_avg[:, <span class="number">0</span>]) / dy_cm</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        dy_cm = <span class="number">0.02</span></span><br><span class="line">        w_trans = np.zeros_like(w_long)</span><br><span class="line"></span><br><span class="line">    sigma_cm = <span class="number">0.1</span></span><br><span class="line">    lam = (<span class="number">1.0</span> / (np.sqrt(<span class="number">2.0</span> * np.pi) * sigma_cm)) * np.exp(-(s_cm**<span class="number">2</span>) / (<span class="number">2.0</span> * sigma_cm**<span class="number">2</span>))</span><br><span class="line">    lam /= np.trapezoid(lam, s_cm)</span><br><span class="line"></span><br><span class="line">    kick_factor = np.trapezoid(lam * w_trans, s_cm)</span><br><span class="line"></span><br><span class="line">    ds_m = <span class="built_in">float</span>(np.mean(np.diff(s_cm))) * <span class="number">1e-2</span></span><br><span class="line">    c = <span class="number">299792458.0</span></span><br><span class="line">    dt = ds_m / c</span><br><span class="line">    freqs_hz = np.fft.rfftfreq(<span class="built_in">len</span>(w_trans), d=dt)</span><br><span class="line">    z_trans = np.fft.rfft(w_trans) * ds_m</span><br><span class="line"></span><br><span class="line">    out_txt = results / <span class="string">&#x27;transverse_metrics.txt&#x27;</span></span><br><span class="line">    out_txt.write_text(</span><br><span class="line">        <span class="string">&#x27;\n&#x27;</span>.join([</span><br><span class="line">            <span class="string">&#x27;# Transverse metrics estimated from wake3Dindirect.bin&#x27;</span>,</span><br><span class="line">            <span class="string">f&#x27;ny <span class="subst">&#123;ny&#125;</span>&#x27;</span>,</span><br><span class="line">            <span class="string">f&#x27;nz <span class="subst">&#123;nz&#125;</span>&#x27;</span>,</span><br><span class="line">            <span class="string">f&#x27;kick_factor_est <span class="subst">&#123;kick_factor:<span class="number">.17</span>g&#125;</span>&#x27;</span>,</span><br><span class="line">            <span class="string">f&#x27;wake_trans_min <span class="subst">&#123;w_trans.<span class="built_in">min</span>():<span class="number">.17</span>g&#125;</span>&#x27;</span>,</span><br><span class="line">            <span class="string">f&#x27;wake_trans_min_s_cm <span class="subst">&#123;s_cm[w_trans.argmin()]:<span class="number">.17</span>g&#125;</span>&#x27;</span>,</span><br><span class="line">            <span class="string">f&#x27;wake_trans_max <span class="subst">&#123;w_trans.<span class="built_in">max</span>():<span class="number">.17</span>g&#125;</span>&#x27;</span>,</span><br><span class="line">            <span class="string">f&#x27;wake_trans_max_s_cm <span class="subst">&#123;s_cm[w_trans.argmax()]:<span class="number">.17</span>g&#125;</span>&#x27;</span>,</span><br><span class="line">        ]) + <span class="string">&#x27;\n&#x27;</span>,</span><br><span class="line">        encoding=<span class="string">&#x27;utf-8&#x27;</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    wake_txt = results / <span class="string">&#x27;wake_transverse_estimated.txt&#x27;</span></span><br><span class="line">    <span class="keyword">with</span> wake_txt.<span class="built_in">open</span>(<span class="string">&#x27;w&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        f.write(<span class="string">&#x27;# index s_cm W_trans_est\n&#x27;</span>)</span><br><span class="line">        <span class="keyword">for</span> i, (ss, ww) <span class="keyword">in</span> <span class="built_in">enumerate</span>(<span class="built_in">zip</span>(s_cm, w_trans)):</span><br><span class="line">            f.write(<span class="string">f&#x27;<span class="subst">&#123;i&#125;</span> <span class="subst">&#123;ss:<span class="number">.6</span>f&#125;</span> <span class="subst">&#123;ww:<span class="number">.17</span>g&#125;</span>\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    z_txt = results / <span class="string">&#x27;Z_transverse_estimated.txt&#x27;</span></span><br><span class="line">    <span class="keyword">with</span> z_txt.<span class="built_in">open</span>(<span class="string">&#x27;w&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        f.write(<span class="string">&#x27;# f_Hz ReZ ImZ AbsZ\n&#x27;</span>)</span><br><span class="line">        <span class="keyword">for</span> ff, zz <span class="keyword">in</span> <span class="built_in">zip</span>(freqs_hz, z_trans):</span><br><span class="line">            f.write(<span class="string">f&#x27;<span class="subst">&#123;ff:<span class="number">.17</span>g&#125;</span> <span class="subst">&#123;zz.real:<span class="number">.17</span>g&#125;</span> <span class="subst">&#123;zz.imag:<span class="number">.17</span>g&#125;</span> <span class="subst">&#123;<span class="built_in">abs</span>(zz):<span class="number">.17</span>g&#125;</span>\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    plt.figure(figsize=(<span class="number">9</span>, <span class="number">5.5</span>))</span><br><span class="line">    plt.plot(s_cm, w_trans, linewidth=<span class="number">2</span>, color=<span class="string">&#x27;tab:red&#x27;</span>)</span><br><span class="line">    plt.axhline(<span class="number">0.0</span>, color=<span class="string">&#x27;black&#x27;</span>, linewidth=<span class="number">1</span>, linestyle=<span class="string">&#x27;--&#x27;</span>)</span><br><span class="line">    plt.axvline(<span class="number">0.0</span>, color=<span class="string">&#x27;gray&#x27;</span>, linewidth=<span class="number">1</span>, linestyle=<span class="string">&#x27;:&#x27;</span>)</span><br><span class="line">    plt.xlabel(<span class="string">&#x27;s [cm]&#x27;</span>)</span><br><span class="line">    plt.ylabel(<span class="string">&#x27;W_perp est.&#x27;</span>)</span><br><span class="line">    plt.title(<span class="string">&#x27;Estimated Transverse Wake&#x27;</span>)</span><br><span class="line">    plt.grid(<span class="literal">True</span>, linestyle=<span class="string">&#x27;--&#x27;</span>, alpha=<span class="number">0.4</span>)</span><br><span class="line">    plt.tight_layout()</span><br><span class="line">    plt.savefig(results / <span class="string">&#x27;wake_transverse_estimated.png&#x27;</span>, dpi=<span class="number">160</span>)</span><br><span class="line">    plt.close()</span><br><span class="line"></span><br><span class="line">    plt.figure(figsize=(<span class="number">9</span>, <span class="number">5.5</span>))</span><br><span class="line">    plt.plot(freqs_hz * <span class="number">1e-9</span>, np.<span class="built_in">abs</span>(z_trans), linewidth=<span class="number">1.5</span>, color=<span class="string">&#x27;tab:green&#x27;</span>)</span><br><span class="line">    plt.xlabel(<span class="string">&#x27;f [GHz]&#x27;</span>)</span><br><span class="line">    plt.ylabel(<span class="string">&#x27;|Z_perp| [arb.]&#x27;</span>)</span><br><span class="line">    plt.title(<span class="string">&#x27;Estimated Transverse Impedance&#x27;</span>)</span><br><span class="line">    plt.grid(<span class="literal">True</span>, linestyle=<span class="string">&#x27;--&#x27;</span>, alpha=<span class="number">0.4</span>)</span><br><span class="line">    plt.tight_layout()</span><br><span class="line">    plt.savefig(results / <span class="string">&#x27;Z_transverse_estimated.png&#x27;</span>, dpi=<span class="number">160</span>)</span><br><span class="line">    plt.close()</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Done.&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;Kick factor estimate: <span class="subst">&#123;kick_factor:<span class="number">.6</span>g&#125;</span>&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;Output: <span class="subst">&#123;out_txt&#125;</span>&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;Output: <span class="subst">&#123;wake_txt&#125;</span>&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;Output: <span class="subst">&#123;z_txt&#125;</span>&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+
+<h3 id="ECHO3D-Dipole-结果"><a href="#ECHO3D-Dipole-结果" class="headerlink" title="ECHO3D_Dipole 结果"></a><code>ECHO3D_Dipole</code> 结果</h3><p>得到：</p>
+<ul>
+<li><code>kick_factor_est = 0.4717549321159662</code></li>
+<li><code>wake_trans_min = -64.800902043818539</code></li>
+<li><code>wake_trans_min_s_cm = -0.1</code></li>
+<li><code>wake_trans_max = 72.744079625586437</code></li>
+<li><code>wake_trans_max_s_cm = 0.1</code></li>
+</ul>
+<p>这说明偏心束流已经激发出明显的横向 wake 和横向阻抗。</p>
+<p>对应横向 wake 图：</p>
+<p><img data-src="https://github.com/iuming/iuming.github.io/tree/master/Markdown_images/wake_transverse_estimated.png" alt="Estimated Transverse Wake"></p>
+<p>对应横向阻抗图：</p>
+<p><img data-src="https://github.com/iuming/iuming.github.io/tree/master/Markdown_images/Z_transverse_estimated.png" alt="Estimated Transverse Impedance"></p>
+<h2 id="对比两套算例：compare-echo3d-results-py"><a href="#对比两套算例：compare-echo3d-results-py" class="headerlink" title="对比两套算例：compare_echo3d_results.py"></a>对比两套算例：<code>compare_echo3d_results.py</code></h2><p>为了做总表和对比图，我写了：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> annotations</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pathlib <span class="keyword">import</span> Path</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">ROOT = Path(__file__).resolve().parent</span><br><span class="line">CASES = &#123;</span><br><span class="line">    <span class="string">&#x27;Minimal (on-axis)&#x27;</span>: ROOT / <span class="string">&#x27;ECHO3D_Minimal&#x27;</span> / <span class="string">&#x27;Results&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Dipole (offset)&#x27;</span>: ROOT / <span class="string">&#x27;ECHO3D_Dipole&#x27;</span> / <span class="string">&#x27;Results&#x27;</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">parse_key_value_file</span>(<span class="params">path: Path</span>) -&gt; <span class="built_in">dict</span>[<span class="built_in">str</span>, <span class="built_in">float</span> | <span class="built_in">str</span>]:</span><br><span class="line">    result: <span class="built_in">dict</span>[<span class="built_in">str</span>, <span class="built_in">float</span> | <span class="built_in">str</span>] = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> path.read_text(encoding=<span class="string">&#x27;utf-8&#x27;</span>).splitlines():</span><br><span class="line">        line = line.strip()</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> line <span class="keyword">or</span> line.startswith(<span class="string">&#x27;#&#x27;</span>):</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        parts = line.split(maxsplit=<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(parts) != <span class="number">2</span>:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        key, value = parts</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            result[key] = <span class="built_in">float</span>(value)</span><br><span class="line">        <span class="keyword">except</span> ValueError:</span><br><span class="line">            result[key] = value</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">load_curve</span>(<span class="params">path: Path, s_index: <span class="built_in">int</span>, v_index: <span class="built_in">int</span></span>):</span><br><span class="line">    xs = []</span><br><span class="line">    ys = []</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> path.read_text(encoding=<span class="string">&#x27;utf-8&#x27;</span>).splitlines():</span><br><span class="line">        line = line.strip()</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> line <span class="keyword">or</span> line.startswith(<span class="string">&#x27;#&#x27;</span>):</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        parts = line.split()</span><br><span class="line">        xs.append(<span class="built_in">float</span>(parts[s_index]))</span><br><span class="line">        ys.append(<span class="built_in">float</span>(parts[v_index]))</span><br><span class="line">    <span class="keyword">return</span> xs, ys</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">fmt_num</span>(<span class="params">v: <span class="built_in">float</span> | <span class="built_in">str</span> | <span class="literal">None</span></span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">    <span class="keyword">if</span> v <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;N/A&#x27;</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">isinstance</span>(v, <span class="built_in">str</span>):</span><br><span class="line">        <span class="keyword">return</span> v</span><br><span class="line">    <span class="keyword">if</span> math.isfinite(v):</span><br><span class="line">        <span class="keyword">return</span> <span class="string">f&#x27;<span class="subst">&#123;v:<span class="number">.6</span>g&#125;</span>&#x27;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">str</span>(v)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>() -&gt; <span class="literal">None</span>:</span><br><span class="line">    summary_lines = [<span class="string">&#x27;# ECHO3D comparison summary&#x27;</span>, <span class="string">&#x27;&#x27;</span>]</span><br><span class="line">    rows = []</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> name, results_dir <span class="keyword">in</span> CASES.items():</span><br><span class="line">        long_metrics = parse_key_value_file(results_dir / <span class="string">&#x27;longitudinal_metrics.txt&#x27;</span>)</span><br><span class="line">        trans_metrics_path = results_dir / <span class="string">&#x27;transverse_metrics.txt&#x27;</span></span><br><span class="line">        trans_metrics = parse_key_value_file(trans_metrics_path) <span class="keyword">if</span> trans_metrics_path.exists() <span class="keyword">else</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line">        row = &#123;</span><br><span class="line">            <span class="string">&#x27;case&#x27;</span>: name,</span><br><span class="line">            <span class="string">&#x27;loss_factor&#x27;</span>: long_metrics.get(<span class="string">&#x27;loss_factor_est&#x27;</span>),</span><br><span class="line">            <span class="string">&#x27;wake_long_min&#x27;</span>: long_metrics.get(<span class="string">&#x27;wake_min&#x27;</span>),</span><br><span class="line">            <span class="string">&#x27;wake_long_min_s&#x27;</span>: long_metrics.get(<span class="string">&#x27;wake_min_s_cm&#x27;</span>),</span><br><span class="line">            <span class="string">&#x27;wake_long_max&#x27;</span>: long_metrics.get(<span class="string">&#x27;wake_max&#x27;</span>),</span><br><span class="line">            <span class="string">&#x27;wake_long_max_s&#x27;</span>: long_metrics.get(<span class="string">&#x27;wake_max_s_cm&#x27;</span>),</span><br><span class="line">            <span class="string">&#x27;kick_factor&#x27;</span>: trans_metrics.get(<span class="string">&#x27;kick_factor_est&#x27;</span>, <span class="number">0.0</span>),</span><br><span class="line">            <span class="string">&#x27;wake_trans_min&#x27;</span>: trans_metrics.get(<span class="string">&#x27;wake_trans_min&#x27;</span>, <span class="number">0.0</span>),</span><br><span class="line">            <span class="string">&#x27;wake_trans_min_s&#x27;</span>: trans_metrics.get(<span class="string">&#x27;wake_trans_min_s_cm&#x27;</span>, <span class="number">0.0</span>),</span><br><span class="line">            <span class="string">&#x27;wake_trans_max&#x27;</span>: trans_metrics.get(<span class="string">&#x27;wake_trans_max&#x27;</span>, <span class="number">0.0</span>),</span><br><span class="line">            <span class="string">&#x27;wake_trans_max_s&#x27;</span>: trans_metrics.get(<span class="string">&#x27;wake_trans_max_s_cm&#x27;</span>, <span class="number">0.0</span>),</span><br><span class="line">        &#125;</span><br><span class="line">        rows.append(row)</span><br><span class="line"></span><br><span class="line">    summary_lines.append(<span class="string">&#x27;| Case | loss factor | W_long min | s at min [cm] | W_long max | s at max [cm] | kick factor | W_trans min | s at trans min [cm] | W_trans max | s at trans max [cm] |&#x27;</span>)</span><br><span class="line">    summary_lines.append(<span class="string">&#x27;|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|&#x27;</span>)</span><br><span class="line">    <span class="keyword">for</span> r <span class="keyword">in</span> rows:</span><br><span class="line">        summary_lines.append(</span><br><span class="line">            <span class="string">f&quot;| <span class="subst">&#123;r[<span class="string">&#x27;case&#x27;</span>]&#125;</span> | <span class="subst">&#123;fmt_num(r[<span class="string">&#x27;loss_factor&#x27;</span>])&#125;</span> | <span class="subst">&#123;fmt_num(r[<span class="string">&#x27;wake_long_min&#x27;</span>])&#125;</span> | <span class="subst">&#123;fmt_num(r[<span class="string">&#x27;wake_long_min_s&#x27;</span>])&#125;</span> | <span class="subst">&#123;fmt_num(r[<span class="string">&#x27;wake_long_max&#x27;</span>])&#125;</span> | <span class="subst">&#123;fmt_num(r[<span class="string">&#x27;wake_long_max_s&#x27;</span>])&#125;</span> | <span class="subst">&#123;fmt_num(r[<span class="string">&#x27;kick_factor&#x27;</span>])&#125;</span> | <span class="subst">&#123;fmt_num(r[<span class="string">&#x27;wake_trans_min&#x27;</span>])&#125;</span> | <span class="subst">&#123;fmt_num(r[<span class="string">&#x27;wake_trans_min_s&#x27;</span>])&#125;</span> | <span class="subst">&#123;fmt_num(r[<span class="string">&#x27;wake_trans_max&#x27;</span>])&#125;</span> | <span class="subst">&#123;fmt_num(r[<span class="string">&#x27;wake_trans_max_s&#x27;</span>])&#125;</span> |&quot;</span></span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">    summary_path = ROOT / <span class="string">&#x27;ECHO3D_summary.md&#x27;</span></span><br><span class="line">    summary_path.write_text(<span class="string">&#x27;\n&#x27;</span>.join(summary_lines) + <span class="string">&#x27;\n&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Plot longitudinal wake comparison</span></span><br><span class="line">    plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">    <span class="keyword">for</span> name, results_dir <span class="keyword">in</span> CASES.items():</span><br><span class="line">        x, y = load_curve(results_dir / <span class="string">&#x27;wake3Dindirect_parsed.txt&#x27;</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">        plt.plot(x, y, linewidth=<span class="number">2</span>, label=name)</span><br><span class="line">    plt.axhline(<span class="number">0.0</span>, color=<span class="string">&#x27;black&#x27;</span>, linewidth=<span class="number">1</span>, linestyle=<span class="string">&#x27;--&#x27;</span>)</span><br><span class="line">    plt.axvline(<span class="number">0.0</span>, color=<span class="string">&#x27;gray&#x27;</span>, linewidth=<span class="number">1</span>, linestyle=<span class="string">&#x27;:&#x27;</span>)</span><br><span class="line">    plt.xlabel(<span class="string">&#x27;s [cm]&#x27;</span>)</span><br><span class="line">    plt.ylabel(<span class="string">&#x27;W_parallel&#x27;</span>)</span><br><span class="line">    plt.title(<span class="string">&#x27;Longitudinal Wake Comparison&#x27;</span>)</span><br><span class="line">    plt.grid(<span class="literal">True</span>, linestyle=<span class="string">&#x27;--&#x27;</span>, alpha=<span class="number">0.4</span>)</span><br><span class="line">    plt.legend()</span><br><span class="line">    plt.tight_layout()</span><br><span class="line">    plt.savefig(ROOT / <span class="string">&#x27;ECHO3D_compare_longitudinal.png&#x27;</span>, dpi=<span class="number">160</span>)</span><br><span class="line">    plt.close()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Plot transverse wake comparison where available</span></span><br><span class="line">    plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">    plotted = <span class="literal">False</span></span><br><span class="line">    <span class="keyword">for</span> name, results_dir <span class="keyword">in</span> CASES.items():</span><br><span class="line">        path = results_dir / <span class="string">&#x27;wake_transverse_estimated.txt&#x27;</span></span><br><span class="line">        <span class="keyword">if</span> path.exists():</span><br><span class="line">            x, y = load_curve(path, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">            plt.plot(x, y, linewidth=<span class="number">2</span>, label=name)</span><br><span class="line">            plotted = <span class="literal">True</span></span><br><span class="line">    <span class="keyword">if</span> plotted:</span><br><span class="line">        plt.axhline(<span class="number">0.0</span>, color=<span class="string">&#x27;black&#x27;</span>, linewidth=<span class="number">1</span>, linestyle=<span class="string">&#x27;--&#x27;</span>)</span><br><span class="line">        plt.axvline(<span class="number">0.0</span>, color=<span class="string">&#x27;gray&#x27;</span>, linewidth=<span class="number">1</span>, linestyle=<span class="string">&#x27;:&#x27;</span>)</span><br><span class="line">        plt.xlabel(<span class="string">&#x27;s [cm]&#x27;</span>)</span><br><span class="line">        plt.ylabel(<span class="string">&#x27;W_perp est.&#x27;</span>)</span><br><span class="line">        plt.title(<span class="string">&#x27;Transverse Wake Comparison&#x27;</span>)</span><br><span class="line">        plt.grid(<span class="literal">True</span>, linestyle=<span class="string">&#x27;--&#x27;</span>, alpha=<span class="number">0.4</span>)</span><br><span class="line">        plt.legend()</span><br><span class="line">        plt.tight_layout()</span><br><span class="line">        plt.savefig(ROOT / <span class="string">&#x27;ECHO3D_compare_transverse.png&#x27;</span>, dpi=<span class="number">160</span>)</span><br><span class="line">    plt.close()</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Done.&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;Summary: <span class="subst">&#123;summary_path&#125;</span>&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;Figure : <span class="subst">&#123;ROOT / <span class="string">&quot;ECHO3D_compare_longitudinal.png&quot;</span>&#125;</span>&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;Figure : <span class="subst">&#123;ROOT / <span class="string">&quot;ECHO3D_compare_transverse.png&quot;</span>&#125;</span>&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="本文最终结果总表"><a href="#本文最终结果总表" class="headerlink" title="本文最终结果总表"></a>本文最终结果总表</h2><p>汇总文件：</p>
+<ul>
+<li><code>ECHO3D_summary.md</code></li>
+</ul>
+<p>内容如下：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># ECHO3D comparison summary</span></span><br><span class="line"></span><br><span class="line">| Case | loss factor | W<span class="emphasis">_long min | s at min [cm] | W_</span>long max | s at max [cm] | kick factor | W<span class="emphasis">_trans min | s at trans min [cm] | W_</span>trans max | s at trans max [cm] |</span><br><span class="line">|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|</span><br><span class="line">| Minimal (on-axis) | -14.6366 | -21.3285 | 0 | 3.39789 | 0.4 | 0 | 0 | 0 | 0 | 0 |</span><br><span class="line">| Dipole (offset) | -29.2804 | -42.5884 | 0 | 6.79366 | 0.4 | 0.471755 | -64.8009 | -0.1 | 72.7441 | 0.1 |</span><br></pre></td></tr></table></figure>
+
+<p>纵向 wake 对比图：</p>
+<p><img data-src="https://github.com/iuming/iuming.github.io/tree/master/Markdown_images/ECHO3D_compare_longitudinal.png" alt="Longitudinal Wake Comparison"></p>
+<p>横向 wake 对比图：</p>
+<p><img data-src="https://github.com/iuming/iuming.github.io/tree/master/Markdown_images/ECHO3D_compare_transverse.png" alt="Transverse Wake Comparison"></p>
+<h2 id="如何理解这些结果"><a href="#如何理解这些结果" class="headerlink" title="如何理解这些结果"></a>如何理解这些结果</h2><h3 id="纵向-wake-potential-W-parallel-s"><a href="#纵向-wake-potential-W-parallel-s" class="headerlink" title="纵向 wake potential $W_\parallel(s)$"></a>纵向 wake potential $W_\parallel(s)$</h3><ul>
+<li><code>Minimal (on-axis)</code> 已经有明显纵向 wake</li>
+<li><code>Dipole (offset)</code> 的纵向负峰更深，说明偏心激励下结构响应更强</li>
+</ul>
+<h3 id="横向-wake-potential-W-perp-s"><a href="#横向-wake-potential-W-perp-s" class="headerlink" title="横向 wake potential $W_\perp(s)$"></a>横向 wake potential $W_\perp(s)$</h3><ul>
+<li>轴上束流几乎没有横向响应</li>
+<li>偏心束流后，横向 wake 明显非零</li>
+</ul>
+<h3 id="纵向阻抗-Z-parallel-omega"><a href="#纵向阻抗-Z-parallel-omega" class="headerlink" title="纵向阻抗 $Z_\parallel(\omega)$"></a>纵向阻抗 $Z_\parallel(\omega)$</h3><p>通过对 $W_\parallel(s)$ 做 FFT 得到近似阻抗谱，用于查看结构在不同频率上的纵向响应。</p>
+<h3 id="横向阻抗-Z-perp-omega"><a href="#横向阻抗-Z-perp-omega" class="headerlink" title="横向阻抗 $Z_\perp(\omega)$"></a>横向阻抗 $Z_\perp(\omega)$</h3><p>通过对估算的横向 wake 做 FFT 得到近似横向阻抗谱。</p>
+<h3 id="loss-factor"><a href="#loss-factor" class="headerlink" title="loss factor"></a>loss factor</h3><p>当前结果：</p>
+<ul>
+<li>轴上束流：<code>-14.6366</code></li>
+<li>偏心束流：<code>-29.2804</code></li>
+</ul>
+<p>说明偏心激励时，结构导致的等效能量损失更强。</p>
+<h3 id="kick-factor"><a href="#kick-factor" class="headerlink" title="kick factor"></a>kick factor</h3><p>当前结果：</p>
+<ul>
+<li>轴上束流：<code>0</code></li>
+<li>偏心束流：<code>0.471755</code></li>
+</ul>
+<p>这表示偏心束流通过结构后，对后续粒子存在非零横向踢偏作用。</p>
+<h2 id="全部推荐运行顺序"><a href="#全部推荐运行顺序" class="headerlink" title="全部推荐运行顺序"></a>全部推荐运行顺序</h2><h3 id="跑最小纵向-wake-算例"><a href="#跑最小纵向-wake-算例" class="headerlink" title="跑最小纵向 wake 算例"></a>跑最小纵向 wake 算例</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Mesher.exe input.txt</span><br><span class="line">InitField.exe input.txt</span><br><span class="line">ECHO3D.exe input.txt</span><br><span class="line">IndirectIntegration.exe input.txt</span><br><span class="line">python parse_wake.py</span><br><span class="line">python plot_wake.py</span><br><span class="line">python analyze_longitudinal.py</span><br></pre></td></tr></table></figure>
+
+<h3 id="跑偏心横向-wake-算例"><a href="#跑偏心横向-wake-算例" class="headerlink" title="跑偏心横向 wake 算例"></a>跑偏心横向 wake 算例</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Mesher.exe input.txt</span><br><span class="line">InitField.exe input.txt</span><br><span class="line">ECHO3D.exe input.txt</span><br><span class="line">IndirectIntegration.exe input.txt</span><br><span class="line">python parse_wake.py</span><br><span class="line">python analyze_longitudinal.py</span><br><span class="line">python analyze_transverse.py</span><br></pre></td></tr></table></figure>
+
+<h3 id="生成总表和对比图"><a href="#生成总表和对比图" class="headerlink" title="生成总表和对比图"></a>生成总表和对比图</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python compare_echo3d_results.py</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="输出文件总览"><a href="#输出文件总览" class="headerlink" title="输出文件总览"></a>输出文件总览</h2><h3 id="ECHO3D-Minimal-Results"><a href="#ECHO3D-Minimal-Results" class="headerlink" title="ECHO3D_Minimal/Results"></a><code>ECHO3D_Minimal/Results</code></h3><ul>
+<li><code>wake3Dindirect_parsed.txt</code></li>
+<li><code>wake3Dindirect_plot.png</code></li>
+<li><code>longitudinal_metrics.txt</code></li>
+<li><code>Z_longitudinal_estimated.txt</code></li>
+<li><code>Z_longitudinal_estimated.png</code></li>
+</ul>
+<h3 id="ECHO3D-Dipole-Results"><a href="#ECHO3D-Dipole-Results" class="headerlink" title="ECHO3D_Dipole/Results"></a><code>ECHO3D_Dipole/Results</code></h3><ul>
+<li><code>wake3Dindirect_parsed.txt</code></li>
+<li><code>wake_transverse_estimated.txt</code></li>
+<li><code>wake_transverse_estimated.png</code></li>
+<li><code>transverse_metrics.txt</code></li>
+<li><code>Z_transverse_estimated.txt</code></li>
+<li><code>Z_transverse_estimated.png</code></li>
+<li><code>longitudinal_metrics.txt</code></li>
+<li><code>Z_longitudinal_estimated.txt</code></li>
+</ul>
+<h3 id="项目根目录"><a href="#项目根目录" class="headerlink" title="项目根目录"></a>项目根目录</h3><ul>
+<li><code>compare_echo3d_results.py</code></li>
+<li><code>ECHO3D_summary.md</code></li>
+<li><code>ECHO3D_compare_longitudinal.png</code></li>
+<li><code>ECHO3D_compare_transverse.png</code></li>
+</ul>
+<h2 id="这套流程的局限性"><a href="#这套流程的局限性" class="headerlink" title="这套流程的局限性"></a>这套流程的局限性</h2><p>需要说明的是，本文的很多后处理量是“<strong>工程上可用的近似估算</strong>”，尤其包括：</p>
+<ul>
+<li>二进制 wake 解析</li>
+<li>纵向阻抗 FFT</li>
+<li>横向 wake 差分构造</li>
+<li>横向阻抗估算</li>
+<li>loss factor &#x2F; kick factor 估算</li>
+</ul>
+<p>这些方法适合作为：</p>
+<ul>
+<li>学习 ECHO3D 工作流</li>
+<li>快速建立物理直觉</li>
+<li>做最小验证</li>
+</ul>
+<p>如果后续要进入高精度工程设计，建议进一步：</p>
+<ul>
+<li>查阅 ECHO3D 官方格式说明</li>
+<li>使用更严格的后处理方法</li>
+<li>对比更多 benchmark</li>
+<li>采用更真实的腔体 STL 几何</li>
+</ul>
+<h2 id="下一步建议"><a href="#下一步建议" class="headerlink" title="下一步建议"></a>下一步建议</h2><p>完成这篇文章后，下一步最值得做的事情有三种：</p>
+<ol>
+<li>把当前 <code>step-out</code> 几何替换成自己的 <code>pillbox / 带束管腔体 STL</code></li>
+<li>进一步自动化：把 <code>Mesher → InitField → ECHO3D → IndirectIntegration → Python 后处理</code> 串成一键脚本</li>
+<li>在结果图上增加：<ul>
+<li>峰值标注</li>
+<li>更多物理单位说明</li>
+<li>阻抗峰识别</li>
+</ul>
+</li>
+</ol>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>这套工作流的核心收获是：</p>
+<ul>
+<li>不只是“能跑一个 ECHO3D 示例”</li>
+<li>而是已经建立起一套<strong>完整的命令行 wakefield 仿真与后处理框架</strong></li>
+</ul>
+<p>从这里出发，就可以逐步把最小算例替换成真实腔体结构，进入真正的加速器结构 wakefield 分析。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="Liu Ming WeChat Pay">
+        <span>WeChat Pay</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="Liu Ming Alipay">
+        <span>Alipay</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>Liu Ming
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="http://iuming.github.io/2026/07/18/ECHO3D-Wakefield-%E4%BB%BF%E7%9C%9F%E5%85%A5%E9%97%A8%EF%BC%9A%E4%BB%8E%E6%9C%80%E5%B0%8F%E7%AE%97%E4%BE%8B%E5%88%B0%E6%A8%AA%E5%90%91%E9%98%BB%E6%8A%97%E5%88%86%E6%9E%90/" title="ECHO3D Wakefield 仿真入门：从最小算例到横向阻抗分析">http://iuming.github.io/2026/07/18/ECHO3D-Wakefield-仿真入门：从最小算例到横向阻抗分析/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/realiuming">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+U5yo-Zxuw1OgbU6P">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </span>
+
+          <img class="social-item-img" src="/images/wechat_channel.jpg">
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/accelerator/" rel="tag"><i class="fa fa-tag"></i> accelerator</a>
+              <a href="/tags/simulation/" rel="tag"><i class="fa fa-tag"></i> simulation</a>
+              <a href="/tags/beam/" rel="tag"><i class="fa fa-tag"></i> beam</a>
+          </div>
+
+        
+  <div class="social-like a2a_kit a2a_kit_size_32 a2a_default_style">
+    <a class="a2a_dd" target="_blank" rel="noopener" href="https://www.addtoany.com/share"></a>
+      <a class="a2a_button_facebook"></a>
+      <a class="a2a_button_twitter"></a>
+      <a class="a2a_button_wechat"></a>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/07/14/%E6%9D%9F%E8%85%94%E4%BD%9C%E7%94%A8%E5%92%8C%E9%B2%81%E5%AE%BE%E6%A3%AE%E4%B8%8D%E7%A8%B3%E5%AE%9A%E6%80%A7/" rel="prev" title="束腔作用和鲁宾森不稳定性">
+                  <i class="fa fa-angle-left"></i> 束腔作用和鲁宾森不稳定性
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Ming Liu. All rights reserved.</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL2l1bWluZw==" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.1.0/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/4.23.3/algoliasearch-lite.umd.js" integrity="sha256-1QNshz86RqXe/qsCBldsUu13eAX6n/O98uubKQs87UI=" crossorigin="anonymous"></script><script src="/js/third-party/search/algolia-search.js"></script>
+<script class="next-config" data-name="chatra" type="application/json">{"enable":true,"async":true,"id":"gTXKphrmKGf5QSb5L"}</script>
+<script src="/js/third-party/chat/chatra.js"></script>
+<script async src="https://call.chatra.io/chatra.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.0/pdfobject.min.js","integrity":"sha256-JJZNsid68vnh3/zyj0lY9BN5ynxVX/12XgOa1TlaYN0="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.0/mermaid.min.js","integrity":"sha256-stuqcu2FrjYCXDOytWFA5SoUE/r3nkp6gTglzNSlavU="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+  <script class="next-config" data-name="wavedrom" type="application/json">{"enable":true,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.5.0/wavedrom.min.js","integrity":"sha256-INLAoJc6quTNfiMWkGZniYO2cxE8mHpddnLow1m6RFs="}}</script>
+  <script class="next-config" data-name="wavedrom_skin" type="application/json">{"enable":true,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.5.0/skins/default.js","integrity":"sha256-fduc/Zszk5ezWws2uInY/ALWVmIrmV6VTgXbsYSReFI="}}</script>
+  <script src="/js/third-party/tags/wavedrom.js"></script>
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+  <script src="/js/third-party/addtoany.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":"ture","archive":true,"delay":true,"timeout":3000,"priority":true,"url":"http://iuming.github.io/2026/07/18/ECHO3D-Wakefield-%E4%BB%BF%E7%9C%9F%E5%85%A5%E9%97%A8%EF%BC%9A%E4%BB%8E%E6%9C%80%E5%B0%8F%E7%AE%97%E4%BE%8B%E5%88%B0%E6%A8%AA%E5%90%91%E9%98%BB%E6%8A%97%E5%88%86%E6%9E%90/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"realiuming","count":true,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+
+</body>
+</html>
